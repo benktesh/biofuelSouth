@@ -1,0 +1,98 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Biofuel Decision Support System</title>
+
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/site.css" rel="stylesheet" />
+    <script src="~/Scripts/modernizr-2.6.2.js"></script>
+
+    <!-- RSS FEED Set Up ----->
+    <script type="text/javascript" src="http://www.google.com/jsapi"></script>
+    <script type="text/javascript">google.load("feeds", "1")</script>
+    <!-- End RSS FEED Set Up-->
+    
+    <script>
+        function getRootWebSitePath() {
+            var _location = document.location.toString();
+            var applicationNameIndex = _location.indexOf('/', _location.indexOf('://') + 3);
+            var applicationName = _location.substring(0, applicationNameIndex) + '/';
+            var webFolderIndex = _location.indexOf('/', _location.indexOf(applicationName) + applicationName.length);
+            var webFolderFullPath = _location.substring(0, webFolderIndex);
+
+            return webFolderFullPath;
+        }
+
+        function GoHome() {
+            //  var urlInsert = '@Url.Action("Home")';
+            //  $.get("Home", function () {
+            //  });
+            window.location.href = "../index.html"
+        }
+    </script>
+
+</head>
+<body>
+    <div class="container">
+        <header class="banner">
+            <!-- Header-->
+            <div class="row">
+                <!--Banner -->
+                <div class="col-sm-12 col-lg-12 col-md-12" style="border-bottom:solid; border-bottom-color:blue;">
+                    <a class="usdafunding" href="http://www.nifa.usda.gov" target="_blank" title="USDA NIFA">USDA NIFA</a>
+                    <a href="index.html"><img style="width:100%; " src="~/images/biomassbanner.jpg" alt="Banner Image Logo" class="img-responsive" /></a>
+
+                </div>
+                <!-- End Banner
+                    -->
+
+
+
+            </div>
+            <div class="row">
+                <!-- Menu Content-->
+                <button class="btn btn-primary glyphicons glyphicon-home" id="homeButton" style="margin-left: 0px" onclick="location.href = '/Home/index'"><i class="icon-user icon-white"></i>Home</button>
+                <button class="btn btn-primary" id="dropDownButton" onclick="location.href ='/map'">Maps</button>
+                <button class="btn btn-primary" id="dssButton" onclick="location.href ='/Input'">DSS</button>
+                <button class="btn btn-primary" id="aboutButton">About</button>
+                <button class="btn btn-primary" id="contactButton" onclick="location.href = '/home/contact'">Contact</button>
+                <button class="btn btn-primary" id="helpButton" onclick="location.href = '@Url.Action("help", "Home")'">Help</button>
+                <button class="btn btn-primary" id="bugButton" onclick="location.href = '@Url.Action("GetSotfwareLog", "Home")'">Bug&Enhancement</button>
+            </div> <!-- End Menu Content-->
+        </header> <!-- End Header-->
+        <div class="container body-content">
+            @RenderBody()
+        </div>
+   
+        <footer class="banner">
+            <div id="portal-footer">
+                <p class="footer col-sm-12 col-lg-12 col-md-12">
+                    <a class="usda img-responsive" href="http://www.nifa.usda.gov" target="_blank" title="USDA NIFA">USDA NIFA</a>
+                    <a class="uga img-responsive " href="http://www.uga.edu/" target="_blank" title="University of Georgia">UGA</a>
+                    <a class="au img-responsive" href="http://www.auburn.edu/" target="_blank" title="Auburn University">AU</a>
+                    <a class="ceres img-responsive" href="http://www.ceres.net/" target="_blank" title="Ceres, Inc">CERES</a>
+                    <a class="arborgen img-responsive" href="http://www.arborgen.com" target="_blank" title="ArborGen">ArborGen</a>
+                    <a class="ncsu img-responsive" href="http://www.ncsu.edu/" target="_blank" title="North Carolina State University">NCSU</a>
+                    <a class="ut img-responsive" href="http://www.utk.edu/" target="_blank" title="University of Tennessee">UT</a>
+                </p>
+
+
+            </div>
+        </footer>
+    </div>
+
+    <script src="~/Scripts/jquery-2.1.1.js"></script> 
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+    <script src="~/Scripts/response.js"></script>
+
+    
+    
+   
+
+    @RenderSection("scripts", required: false)
+    @RenderSection("MyScripts", required: false)
+</body>
+</html>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="40598b7026de423a82c9ad1160f31a89" Name="Diagram1" ZoomLevel="71" ShowGrid="true" >
+        <EntityTypeShape EntityType="Model1.Productivity" Width="1.5" PointX="7.875" PointY="2.875" />
+        <EntityTypeShape EntityType="Model1.Crop" Width="1.5" PointX="7.75" PointY="6.125" />
+        <EntityTypeShape EntityType="Model1.Biofuel" Width="1.5" PointX="5.375" PointY="6.25" />
+        <EntityTypeShape EntityType="Model1.Risk" Width="1.5" PointX="0.75" PointY="4.75" />
+        <EntityTypeShape EntityType="Model1.Market" Width="1.5" PointX="3" PointY="4.125" />
+        <EntityTypeShape EntityType="Model1.County" Width="1.5" PointX="5.375" PointY="2.5" />
+        <AssociationConnector Association="Model1.ProductivityCounty" />
+        <AssociationConnector Association="Model1.ProductivityBiomass" />
+        <AssociationConnector Association="Model1.MarketMarket" />
+        <AssociationConnector Association="Model1.MarketBiomass" />
+        <AssociationConnector Association="Model1.MarketBiofuel" />
+        <AssociationConnector Association="Model1.MarketCounty" />
+        <AssociationConnector Association="Model1.RiskMarket" />
+        <EntityTypeShape EntityType="Model1.User" Width="1.5" PointX="10.125" PointY="6.125" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

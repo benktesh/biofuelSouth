@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30723.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BiofuelSouth", "BiofuelSouth\BiofuelSouth.csproj", "{F91033F6-2EB8-4FC2-8611-E977C308FE6F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BiofuelSouthTest", "BiofuelSouthTest\BiofuelSouthTest.csproj", "{DD505AA0-8CF0-457E-A4F8-D38EEB12FFFC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F91033F6-2EB8-4FC2-8611-E977C308FE6F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F91033F6-2EB8-4FC2-8611-E977C308FE6F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F91033F6-2EB8-4FC2-8611-E977C308FE6F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F91033F6-2EB8-4FC2-8611-E977C308FE6F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DD505AA0-8CF0-457E-A4F8-D38EEB12FFFC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD505AA0-8CF0-457E-A4F8-D38EEB12FFFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DD505AA0-8CF0-457E-A4F8-D38EEB12FFFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DD505AA0-8CF0-457E-A4F8-D38EEB12FFFC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

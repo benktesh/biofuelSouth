@@ -1,0 +1,195 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl" Namespace="Model1.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2005">
+        <EntityContainer Name="Model1TargetContainer" >
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="Model1" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="Model1Container" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Productivities" EntityType="Model1.Productivity" />
+          <EntitySet Name="Crops" EntityType="Model1.Crop" />
+          <EntitySet Name="Biofuels" EntityType="Model1.Biofuel" />
+          <EntitySet Name="Risks" EntityType="Model1.Risk" />
+          <EntitySet Name="Markets" EntityType="Model1.Market" />
+          <EntitySet Name="Counties" EntityType="Model1.County" />
+          <AssociationSet Name="ProductivityCounty" Association="Model1.ProductivityCounty">
+            <End Role="Productivity" EntitySet="Productivities" />
+            <End Role="County" EntitySet="Counties" />
+          </AssociationSet>
+          <AssociationSet Name="ProductivityBiomass" Association="Model1.ProductivityBiomass">
+            <End Role="Productivity" EntitySet="Productivities" />
+            <End Role="Biomass" EntitySet="Crops" />
+          </AssociationSet>
+          <AssociationSet Name="MarketMarket" Association="Model1.MarketMarket">
+            <End Role="Market" EntitySet="Markets" />
+            <End Role="Market1" EntitySet="Markets" />
+          </AssociationSet>
+          <AssociationSet Name="MarketBiomass" Association="Model1.MarketBiomass">
+            <End Role="Market" EntitySet="Markets" />
+            <End Role="Biomass" EntitySet="Crops" />
+          </AssociationSet>
+          <AssociationSet Name="MarketBiofuel" Association="Model1.MarketBiofuel">
+            <End Role="Market" EntitySet="Markets" />
+            <End Role="Biofuel" EntitySet="Biofuels" />
+          </AssociationSet>
+          <AssociationSet Name="MarketCounty" Association="Model1.MarketCounty">
+            <End Role="Market" EntitySet="Markets" />
+            <End Role="County" EntitySet="Counties" />
+          </AssociationSet>
+          <AssociationSet Name="RiskMarket" Association="Model1.RiskMarket">
+            <End Role="Risk" EntitySet="Risks" />
+            <End Role="Market" EntitySet="Markets" />
+          </AssociationSet>
+          <EntitySet Name="Users" EntityType="Model1.User" />
+        </EntityContainer>
+        <EntityType Name="Productivity">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CountyID" Type="String" Nullable="false" />
+          <Property Name="BiomassID" Type="String" Nullable="false" />
+          <Property Name="Yield" Type="String" Nullable="false" />
+          <NavigationProperty Name="Counties" Relationship="Model1.ProductivityCounty" FromRole="Productivity" ToRole="County" />
+          <NavigationProperty Name="Biomasses" Relationship="Model1.ProductivityBiomass" FromRole="Productivity" ToRole="Biomass" />
+          <Property Name="Year" Type="String" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Crop">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <Property Name="Description" Type="String" Nullable="false" />
+          <NavigationProperty Name="Productivity" Relationship="Model1.ProductivityBiomass" FromRole="Biomass" ToRole="Productivity" />
+          <NavigationProperty Name="Market" Relationship="Model1.MarketBiomass" FromRole="Biomass" ToRole="Market" />
+        </EntityType>
+        <EntityType Name="Biofuel">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <Property Name="Description" Type="String" Nullable="false" />
+          <NavigationProperty Name="Market" Relationship="Model1.MarketBiofuel" FromRole="Biofuel" ToRole="Market" />
+        </EntityType>
+        <EntityType Name="Risk">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <Property Name="Description" Type="String" Nullable="false" />
+          <Property Name="Type" Type="String" Nullable="false" />
+          <Property Name="Riskscore" Type="String" Nullable="false" />
+          <NavigationProperty Name="Markets" Relationship="Model1.RiskMarket" FromRole="Risk" ToRole="Market" />
+          <Property Name="Year" Type="String" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Market">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Biomass" Type="String" Nullable="false" />
+          <Property Name="Biofuel" Type="String" Nullable="false" />
+          <Property Name="County" Type="String" Nullable="false" />
+          <Property Name="Risk" Type="String" Nullable="false" />
+          <NavigationProperty Name="Markets" Relationship="Model1.MarketMarket" FromRole="Market" ToRole="Market1" />
+          <NavigationProperty Name="Market1" Relationship="Model1.MarketMarket" FromRole="Market1" ToRole="Market" />
+          <NavigationProperty Name="Biomasses" Relationship="Model1.MarketBiomass" FromRole="Market" ToRole="Biomass" />
+          <NavigationProperty Name="Biofuels" Relationship="Model1.MarketBiofuel" FromRole="Market" ToRole="Biofuel" />
+          <NavigationProperty Name="Counties" Relationship="Model1.MarketCounty" FromRole="Market" ToRole="County" />
+          <NavigationProperty Name="Risk1" Relationship="Model1.RiskMarket" FromRole="Market" ToRole="Risk" />
+          <Property Name="Price" Type="String" Nullable="false" />
+          <Property Name="Year" Type="String" Nullable="false" />
+        </EntityType>
+        <EntityType Name="County">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <Property Name="State" Type="String" Nullable="false" />
+          <Property Name="CountyCode" Type="String" Nullable="false" />
+          <Property Name="Lat" Type="String" Nullable="false" />
+          <Property Name="Lon" Type="String" Nullable="false" />
+          <NavigationProperty Name="Productivity" Relationship="Model1.ProductivityCounty" FromRole="County" ToRole="Productivity" />
+          <NavigationProperty Name="Market" Relationship="Model1.MarketCounty" FromRole="County" ToRole="Market" />
+          <Property Name="Boundary" Type="String" Nullable="false" />
+        </EntityType>
+        <Association Name="ProductivityCounty">
+          <End Type="Model1.Productivity" Role="Productivity" Multiplicity="1" />
+          <End Type="Model1.County" Role="County" Multiplicity="*" />
+        </Association>
+        <Association Name="ProductivityBiomass">
+          <End Type="Model1.Productivity" Role="Productivity" Multiplicity="1" />
+          <End Type="Model1.Crop" Role="Biomass" Multiplicity="*" />
+        </Association>
+        <Association Name="MarketMarket">
+          <End Type="Model1.Market" Role="Market" Multiplicity="1" />
+          <End Type="Model1.Market" Role="Market1" Multiplicity="*" />
+        </Association>
+        <Association Name="MarketBiomass">
+          <End Type="Model1.Market" Role="Market" Multiplicity="1" />
+          <End Type="Model1.Crop" Role="Biomass" Multiplicity="*" />
+        </Association>
+        <Association Name="MarketBiofuel">
+          <End Type="Model1.Market" Role="Market" Multiplicity="1" />
+          <End Type="Model1.Biofuel" Role="Biofuel" Multiplicity="*" />
+        </Association>
+        <Association Name="MarketCounty">
+          <End Type="Model1.Market" Role="Market" Multiplicity="1" />
+          <End Type="Model1.County" Role="County" Multiplicity="*" />
+        </Association>
+        <Association Name="RiskMarket">
+          <End Type="Model1.Risk" Role="Risk" Multiplicity="1" />
+          <End Type="Model1.Market" Role="Market" Multiplicity="*" />
+        </Association>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <Property Name="Email" Type="String" Nullable="false" />
+          <Property Name="Phone" Type="String" Nullable="false" />
+          <Property Name="Roles" Type="String" Nullable="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs" Space="C-S">
+        <Alias Key="Model" Value="Model1" />
+        <Alias Key="Target" Value="Model1.Store" />
+        <EntityContainerMapping CdmEntityContainer="Model1Container" StorageEntityContainer="Model1TargetContainer">
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,182 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+/*Change color etc for footer*/
+footer {
+    width: 1200px;
+    padding: 2em 0;
+    margin: 3em 0;
+    border-top: 1px solid #ddd;
+    color: red;
+    text-align:center;
+}
+
+.banner_notused {
+    width: 1200px;
+    background-image: url("/images/biomassbanner.jpg");
+    padding: 2em 0;
+    margin: 3em 0;
+    border-top: 1px solid #ddd;
+    color: red;
+    text-align:center;
+     overflow: hidden;
+            text-indent: 100%;
+            white-space: nowrap;
+            background-repeat: no-repeat;
+}
+
+         .usdafunding {
+            background-image: url("/images/funding.jpg");
+            background-size:contain;
+            display: block;
+            height: 50px;
+            width: 250px;
+            overflow: hidden;
+            text-indent: 100%;
+            white-space: nowrap;
+            background-repeat: no-repeat;
+            float: right;
+          
+        }        
+
+        .footer .usda:hover, .footer .uga:hover, .footer .au:hover, .footer .ceres:hover, .footer .arborgen:hover, .footer .ncsu:hover,  .footer .ut:hover {
+            opacity: 1;
+        }
+
+        .footer .usda {
+            background-image: url("/images/usdahead.jpg");
+            background-size:contain;
+            display: block;
+            height: 50px;
+            width: 125px;
+            overflow: hidden;
+            text-indent: 100%;
+            white-space: nowrap;
+            background-repeat: no-repeat;
+            float: left;
+            opacity: 1;
+            margin-right:auto;
+        }
+
+        .footer .uga {
+            background-image: url("/images/ugahead.jpg");
+            background-size:contain;
+            display: block;
+            height: 50px;
+            width: 150px;
+            overflow: hidden;
+            text-indent: 100%;
+            white-space: nowrap;
+            background-repeat: no-repeat;
+            float: left;
+            opacity: 1;
+            margin-right:auto;
+        }
+
+        footer .au {
+            background-image: url("/images/auhead.jpg");
+            background-size:contain;
+            display: block;
+            height: 50px;
+            width: 125px;
+            overflow: hidden;
+            text-indent: 100%;
+            white-space: nowrap;
+            background-repeat: no-repeat;
+            float: left;
+            opacity: 1;
+            margin-right: 10px;
+            margin-left: 10px;
+           
+        }
+
+        footer .ceres {
+            background-image: url("/images/cereshead.jpg");
+            background-size:contain;
+            display: block;
+            height: 50px;
+            width: 60px;
+            overflow: hidden;
+            text-indent: 100%;
+            white-space: nowrap;
+            background-repeat: no-repeat;
+            float: left;
+            opacity: 1;
+              margin-right: 10px;
+            margin-left: 10px;
+        }
+
+       footer .arborgen {
+            background-image: url("/images/arborgenhead.jpg");
+            background-size:contain;
+            display: block;
+            height: 50px;
+            width: 125px;
+            overflow: hidden;
+            text-indent: 100%;
+            white-space: nowrap;
+            background-repeat: no-repeat;
+            float: left;
+            opacity: 1;
+            margin-right:auto;
+            margin-top: -8px;
+        }
+
+        .footer .ncsu {
+            background-image: url("/images/ncsuhead.jpg");
+            background-size:contain;
+            display: block;
+            height: 50px;
+            width: 125px;
+            overflow: hidden;
+            text-indent: 100%;
+            white-space: nowrap;
+            background-repeat: no-repeat;
+            float: left;
+            opacity: 1;
+            margin-top: 15px;
+            margin-right: 10px;
+            margin-left: 10px;
+        }
+
+         .footer .ut {
+            background-image: url("/images/uthead.jpg");
+            background-size:contain;
+            display: block;
+            height: 50px;
+            width: 125px;
+            overflow: hidden;
+            text-indent: 100%;
+            white-space: nowrap;
+            background-repeat: no-repeat;
+            float: left;
+            opacity: 1;
+            margin-right:auto;
+            margin-top: -2px;
+        }
+
+         .footer {
+             margin-top: 0px;
+             background-position: center;
+             background-size:1200px;
+             position: relative;
+             float: none ;
+             vertical-align: middle;
+             text-align:center
+             
+         }

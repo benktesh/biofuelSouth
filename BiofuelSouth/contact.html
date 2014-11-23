@@ -1,0 +1,181 @@
+﻿<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biofuel Feasibility</title>
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="Content/site.css" rel="stylesheet" />
+    <!-- RSS FEED Set Up ----->
+    <script type="text/javascript" src="http://www.google.com/jsapi"></script>
+
+</head>
+<body>
+    <div class="container">
+
+        <header class="banner">
+            <!-- Header-->
+            <div class="row">
+                <!--Banner-->
+                <div class="col-sm-12 col-lg-12 col-md-12" style="border-bottom:solid; border-bottom-color:blue;">
+                    <a class="usdafunding" href="http://www.nifa.usda.gov" target="_blank" title="USDA NIFA">USDA NIFA</a>
+                    <a href="index.html"><img style="width:100%; " src="/images/biomassbanner.jpg" alt="Banner Image Logo" class="img-responsive" /></a>
+
+                </div>
+                <!-- End Banner-->
+            </div>
+            <div class="row">
+                <!-- Menu Content-->
+
+                <button class="btn btn-primary glyphicons glyphicon-home" id="homeButton" style="margin-left: 0px" onclick="location.href = 'index.html'"><i class="icon-user icon-white"></i>Home</button>
+                <button class="btn btn-primary" id="dropDownButton" onclick="location.href ='/map'">Maps</button>
+                <button class="btn btn-primary" id="dssButton" onclick="location.href ='/Input'">DSS</button>
+                <button class="btn btn-primary" id="aboutButton">About</button>
+                <button class="btn btn-primary" id="contactButton" onclick="location.href = '/home/contact'">Contact</button>
+                <button class="btn btn-primary" id="helpButton" onclick="location.href = '/home/help'">Help</button>
+                <button class="btn btn-primary" id="bugButton" onclick="location.href = '/home/getsotfwarelog'">Bug&Enhancement</button>
+
+
+            </div> <!-- End Menu Content-->
+        </header> <!-- End Header-->
+        <!-- row 2 -->
+        <div class="row">
+            <article class="col-lg-6 col-md-7">
+                <h1>Project Glimples</h1>
+                <div class="row">
+                    <div class="col-xs-6 ">
+                        <div class="thumbnail">
+                            <img src="images/residue.jpg" alt="" class="img-responsive">
+                            <p class="caption">Unused  residues  can be an viable source of biofuel brining economic  benefits too.</p>
+                        </div>
+                    </div>
+                    <div class="col-xs-6">
+                        <div class="thumbnail">
+                            <img src="images/smallwood.jpg" alt="" class="img-responsive">
+                            <p class="caption">Otherwise unused small diameter is seeing market  again.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-6">
+                        <div class="thumbnail">
+                            <img src="images/technology.jpg" alt="" class="img-responsive">
+                            <p class="caption">Biofuel technology is advancing.</p>
+                        </div>
+                    </div>
+                    <div class="col-xs-6">
+                        <div class="thumbnail">
+                            <img src="images/biofuel.jpg" alt="" class="img-responsive">
+                            <p class="caption">Scaling biofuel i.e., from bottle to gas station requires technology as well as raw materials.</p>
+                        </div>
+                    </div>
+                </div>
+            </article>
+            <aside class="col-lg-6 col-md-5">
+                <h3>Contact information</h3>
+                <p>Contact us for any questions. Or use our  form  to provide us  with your comments.</p>
+                <div class="table-responsive">
+                    <table class="table table-condensed table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Phone</th>
+                                <th>Email</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Dr. Poudyal</td>
+                                <td>xxx-xxx-xxxx</td>
+                                <td>npoudyal@utk.edu</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div id="comment">
+                    <form method='post' id="commentForm" action="">
+                        <table class="table table-responsive table-bordered">
+                            <tr><td>Name :<input type='text' id='name' value="" /></td></tr>
+                            <tr><td>Email:<input type='text' id='email' value=""/></td></tr>
+                            <tr><td>Phone:<input type='text' id='phone' value=""/></td></tr>
+                            <tr><td>Comment:<br /><textarea name='comment' id='comment' rows="10" cols ="50"></textarea></td></tr>
+                            <tr><td><input type='submit' value='Submit' /></td></tr>
+                        </table>
+                    </form>
+                </div><!-- end row 2 -->
+            </aside>
+            <footer class="row">
+                <!-- Footer  -->
+                <div class="col-sm-12" style="border-bottom:solid; border-bottom-color:blue; border-top:solid; border-top-color:blue; text-align:center">
+                    <div id="portal-footer">
+                        <p class="footer">
+                            <a class="usda" href="http://www.nifa.usda.gov" target="_blank" title="USDA NIFA">USDA NIFA</a>
+                            <a class="uga" href="http://www.uga.edu/" target="_blank" title="University of Georgia">UGA</a>
+                            <a class="au" href="http://www.auburn.edu/" target="_blank" title="Auburn University">AU</a>
+                            <a class="ceres" href="http://www.ceres.net/" target="_blank" title="Ceres, Inc">CERES</a>
+                            <a class="arborgen" href="http://www.arborgen.com" target="_blank" title="ArborGen">ArborGen</a>
+                            <a class="ncsu" href="http://www.ncsu.edu/" target="_blank" title="North Carolina State University">NCSU</a>
+                            <a class="ut" href="http://www.utk.edu/" target="_blank" title="University of Tennessee">UT</a>
+                        </p>
+
+
+                    </div>
+                
+                 </div>
+           
+             </footer>
+
+
+        </div> <!-- end container -->
+        <!-- javascript -->
+
+        <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+        <script src="Scripts/bootstrap.min.js"></script>
+        <script src="Scripts/custom.js"></script>
+        <script>
+            $(document).ready(function () {
+
+                $('form#commentForm').submit(function () {                   
+                    var $inputs = $('#commentForm :input');
+                    var values = {};
+                    var value = '';
+                    $inputs.each(function () {
+                        values[this.name] = $(this).val();
+                        value = value + $(this).val() + " ";
+                    });
+
+
+                    alert("Comment " + value + "submitted");
+                    console.log(values.toString());
+
+                    
+                    event.preventDefault();
+                });
+
+             
+
+                $('#commentForm1').submit(function () {
+                    // get all the inputs into an array.
+                    
+                    
+
+                    
+                    // not sure if you wanted this, but I thought I'd add it.
+                    // get an associative array of just the values.
+                    var values = {};
+                    $inputs.each(function () {
+                        values[this.name] = $(this).val();
+                    });
+
+                    alert("Comment " + values + "submitted");
+                    event.preventDefault();
+                });
+
+
+            });
+
+
+        </script>
+    </div> <!-- Page  ends ontainer Ends-->
+</body>
+</html>

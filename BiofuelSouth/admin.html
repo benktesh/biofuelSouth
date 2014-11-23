@@ -1,0 +1,102 @@
+﻿<!Doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biofuel Feasibility</title>
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <!-- RSS FEED Set Up ----->
+    <script type="text/javascript" src="http://www.google.com/jsapi"></script>
+    <script type="text/javascript">google.load("feeds", "1")</script>
+    <!-- End RSS FEED Set Up-->
+
+    <script src="Scripts/jquery-1.10.2.js"></script>
+    <script src="Scripts/knockout-3.1.0.js"></script>
+    <link href="css/bootstrap.css" rel="stylesheet" />
+    <script type="text/javascript" src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="Scripts/app.js" defer="defer"></script>
+
+</head>
+<body>
+
+    <div class="container">
+        <header class="banner">
+            <!-- Header-->
+            <div class="row">
+                <!--Banner-->
+                <div class="col-sm-12 col-lg-12 col-md-12" style="border-bottom:solid; border-bottom-color:blue;">
+                    <a href="index.html"><img style="width:100%; " src="images/biomassbanner.jpg" alt="Banner Image Logo" class="img-responsive" /></a>
+                </div> <!-- End Banner-->
+            </div>
+            <div class="row">
+                <!-- Menu Content-->
+
+                <button class="btn btn-primary" id="homeButton" style="margin-left: 0px" onclick="location.href = 'index.html'">Home</button>
+                <button class="btn btn-primary" id="dropDownButton">Menu Items</button>
+                <button class="btn btn-primary" id="aboutButton">About</button>
+                <button class="btn btn-primary" id="contactButton" onclick="location.href = 'contact.html'">Contact</button>
+                <button class="btn btn-primary" id="helpButton">Help</button>
+
+            </div> <!-- End Menu Content-->
+        </header> <!-- End Header-->
+
+        <div class="page-header">
+            <h1>Productivity</h1>
+        </div>
+
+        <div class="row">
+
+            <div class="col-md-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h2 class="panel-title">Productivity</h2>
+                    </div>
+                    <div class="panel-body">
+                        <ul class="list-unstyled" data-bind="foreach: productivity">
+                            <li>
+                                <strong><span data-bind="text: CountyId"></span></strong>: <span data-bind="text: CropType"></span>
+                                <span data-bind="text: Yield"></span>
+                                <small><a href="#">Details</a></small>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="alert alert-danger" data-bind="visible: error"><p data-bind="text: error"></p></div>
+            </div>
+
+            <div class="col-md-4">
+                <!-- TODO: Book details -->
+            </div>
+
+            <div class="col-md-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h2 class="panel-title">Add Productivity</h2>
+                    </div>
+
+                    <div class="panel-body">
+                        <form class="form-horizontal" data-bind="submit: addProductivity">
+                            <div class="form-group" data-bind="with: newProductivity">
+                                <label for="inputCountyId" class="col-sm-3 control-label">CountyId</label>
+                                <div class="col-sm-10">
+                                    <input type="number" class="form-control" id="inputCountyId" data-bind="value:CountyId" />
+                                </div>
+
+                                <label for="inputCropType" class="col-sm-3 control-label">Crop Type</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="inputCropType" data-bind="value:CropType" />
+                                </div>
+                                <label for="inputYield" class="col-sm-3 control-label">Yield(t/ac)</label>
+                                <div class="col-sm-10">
+                                    <input type="number" step="any" class="form-control" id="inputYield" data-bind="value:Yield" />
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-default">Submit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
