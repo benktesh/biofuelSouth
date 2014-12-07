@@ -18,7 +18,7 @@ namespace BiofuelSouth.Controllers
         // GET: /Admin/
         public async Task<ActionResult> Index()
         {
-            return View(await db.Productivity.ToListAsync());
+            return View(await db.Productivities.ToListAsync());
         }
 
         // GET: /Admin/Details/5
@@ -28,7 +28,7 @@ namespace BiofuelSouth.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Productivity productivity = await db.Productivity.FindAsync(id);
+            Productivity productivity = await db.Productivities.FindAsync(id);
             if (productivity == null)
             {
                 return HttpNotFound();
@@ -51,7 +51,7 @@ namespace BiofuelSouth.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Productivity.Add(productivity);
+                db.Productivities.Add(productivity);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
@@ -66,7 +66,7 @@ namespace BiofuelSouth.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Productivity productivity = await db.Productivity.FindAsync(id);
+            Productivity productivity = await db.Productivities.FindAsync(id);
             if (productivity == null)
             {
                 return HttpNotFound();
@@ -97,7 +97,7 @@ namespace BiofuelSouth.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Productivity productivity = await db.Productivity.FindAsync(id);
+            Productivity productivity = await db.Productivities.FindAsync(id);
             if (productivity == null)
             {
                 return HttpNotFound();
@@ -110,8 +110,8 @@ namespace BiofuelSouth.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            Productivity productivity = await db.Productivity.FindAsync(id);
-            db.Productivity.Remove(productivity);
+            Productivity productivity = await db.Productivities.FindAsync(id);
+            db.Productivities.Remove(productivity);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }

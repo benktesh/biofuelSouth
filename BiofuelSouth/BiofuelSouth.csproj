@@ -227,11 +227,20 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Controllers\AdminController.cs" />
-    <Compile Include="Controllers\DataController.cs" />
+    <Compile Include="Controllers\AdminController.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Controllers\DataController.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Controllers\InputController.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Controllers\MapController.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Models\DatabaseContext.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\InputController.cs" />
-    <Compile Include="Controllers\MapController.cs" />
     <Compile Include="Migrations\201408040112136_InitialCreate.cs" />
     <Compile Include="Migrations\201408040112136_InitialCreate.Designer.cs">
       <DependentUpon>201408040112136_InitialCreate.cs</DependentUpon>
@@ -258,7 +267,6 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Constants.cs" />
-    <Compile Include="Models\DatabaseContext.cs" />
     <Compile Include="Controllers\ProductivityController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -289,6 +297,11 @@
     <Content Include="Views\Map\Index.cshtml" />
     <Content Include="Views\Map\productivity.cshtml" />
     <Content Include="Views\Home\Help.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Admin\Details.cshtml" />
+    <Content Include="Views\Admin\Edit.cshtml" />
+    <Content Include="Views\Admin\Create.cshtml" />
+    <Content Include="Views\Admin\Delete.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -298,6 +311,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\yoho\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

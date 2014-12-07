@@ -58,7 +58,7 @@ namespace BiofuelSouth.Models
 
         public double GetAnnualCost()
         {
-            return DataService.GetProductivityPerAcreForCropByGeoId(this.Category, this.County)*this.ProjectSize;  
+            return (DataService.GetCostPerAcreForCropByGeoId(this.Category, this.County) + this.LandCost) * this.ProjectSize;  
         }
 
         public double GetAnnualRevenue()

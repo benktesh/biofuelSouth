@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Text;
+using System.Web.DynamicData;
 using BiofuelSouth.Models;
 
 
-namespace BiofuelSouth.Controllers
+namespace BiofuelSouth.Models
 {
     class DatabaseContext : DbContext
     {
@@ -14,8 +15,11 @@ namespace BiofuelSouth.Controllers
         public DatabaseContext() : base("DefaultConnection")
         {
             var ensureDLLIsCopied = System.Data.Entity.SqlServer.SqlProviderServices.Instance;
+        
+        
         }
-        public DbSet<Productivity> Productivity { get; set; }
+        
+        public DbSet<Productivity> Productivities { get; set; }
         public DbSet<County> County { get; set; }
 
         public System.Data.Entity.DbSet<BiofuelSouth.Models.Input> Inputs { get; set; }

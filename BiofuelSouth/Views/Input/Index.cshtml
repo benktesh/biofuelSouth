@@ -47,7 +47,7 @@
                 <div class="form-group">
                     @Html.LabelFor(model => model.ProjectSize, htmlAttributes: new { @class = "control-label" })
                     <div class="row">
-                        @Html.EditorFor(model => model.ProjectSize, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.EditorFor(model => model.ProjectSize, new { text = 1, htmlAttributes = new { @class = "form-control" } })
                         @Html.ValidationMessageFor(model => model.ProjectSize, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -141,25 +141,32 @@
 
 
                     <div class="row table-bordered">
-                        <h3>Result Summary</h3>
+                        <h3>Productivity and Cost</h3>
                         <div>
-                            Estimated Annual Production (ton): @Model.GetAnnualProductivity() 
+                            Estimated Annual Production: @Model.GetAnnualProductivity().ToString("####.00") ton
                         </div>
                         <div>
-                            Estimated Annual Cost ($): @Model.GetAnnualCost() 
+                            Estimated Annual Cost: @Model.GetAnnualCost().ToString("C")
                         </div>
                         <div>
-                            Estimated Annual Revennue ($): @Model.GetAnnualCost()
-                        </div>
-                        <div>
-                            <h3>Graphical Summary/ChartOutput</h3>
-                            <li>Chart Displaying Average Producitvity and Cost of Various Potential Biofuels in this County</li>
-                            <li>Chart Displaying Trend of cost and production for this crop in the county</li>
-
-                            If the selection is made for the state, the summary is displayed for the state.
-                            Likewise, if the state is not selected, then teh summary for covered state will be displayed.
+                            Estimated Annual Revennue: @Model.GetAnnualRevenue().ToString("C")
                         </div>
                     </div>
+                    <div class="row table-bordered">
+
+                        <h3>Graphical Summary</h3>
+                        <ul>
+                            <li>Chart Displaying Average Productivity and Cost of Various Potential Biofuels in this County</li>
+
+                            <li>Chart Displaying Trend of cost and production for this crop in the county</li>
+                            <li>
+                                If the selection is made for the state, the summary is displayed for the state.
+                                Likewise, if the state is not selected, then teh summary for covered state will be displayed.
+                            </li>
+                        </ul>
+
+                    </div>
+                
 
                     <div class="row table-bordered">
                         <h3>More Information</h3>
@@ -201,7 +208,7 @@
             </div>
         </div>
 
-    </div>
+        </div>
 }
 
 <div>

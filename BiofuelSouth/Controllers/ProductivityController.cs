@@ -32,14 +32,14 @@ namespace BiofuelSouth.Controllers
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-        internal sealed class Configuration : DbMigrationsConfiguration<BiofuelSouth.Controllers.DatabaseContext>
+        internal sealed class Configuration : DbMigrationsConfiguration<BiofuelSouth.Controllers.DbContext>
         {
             public Configuration()
             {
                 AutomaticMigrationsEnabled = true;
             }
 
-            protected override void Seed(BiofuelSouth.Controllers.DatabaseContext context)
+            protected override void Seed(BiofuelSouth.Controllers.DbContext context)
             {
                 //  This method will be called after migrating to the latest version.
 
@@ -115,7 +115,7 @@ namespace BiofuelSouth.Controllers
         public IEnumerable<Productivity> GetProductivities()
         {
             //Debug.WriteLine(db.Productivity);
-            return db.Productivity;
+            return db.Productivities;
         }
         
 
@@ -138,7 +138,7 @@ namespace BiofuelSouth.Controllers
             //Have not found async implemenation solution yet.
             //public async Task<IEnumerable<Productivity>> GetProductivity(int id)
         {
-            var countyProductivity = db.Productivity.Where(p => p.CountyId == id);
+            var countyProductivity = db.Productivities.Where(p => p.GeoId == id);
             return countyProductivity;
             /*
             Productivity productivity = await db.Productivity.FindAsync(id);
@@ -199,7 +199,7 @@ namespace BiofuelSouth.Controllers
                 return BadRequest(ModelState);
             }
 
-            db.Productivity.Add(productivity);
+            db.Productivities.Add(productivity);
             await db.SaveChangesAsync();
 
             return CreatedAtRoute("DefaultApi", new { id = productivity.Id }, productivity);
@@ -209,13 +209,13 @@ namespace BiofuelSouth.Controllers
         [ResponseType(typeof(Productivity))]
         public async Task<IHttpActionResult> DeleteProductivity(int id)
         {
-            Productivity productivity = await db.Productivity.FindAsync(id);
+            Productivity productivity = await db.Productivities.FindAsync(id);
             if (productivity == null)
             {
                 return NotFound();
             }
 
-            db.Productivity.Remove(productivity);
+            db.Productivities.Remove(productivity);
             await db.SaveChangesAsync();
 
             return Ok(productivity);
@@ -232,7 +232,7 @@ namespace BiofuelSouth.Controllers
 
         private bool ProductivityExists(int id)
         {
-            return db.Productivity.Count(e => e.Id == id) > 0;
+            return db.Productivities.Count(e => e.Id == id) > 0;
         }
     }
 }

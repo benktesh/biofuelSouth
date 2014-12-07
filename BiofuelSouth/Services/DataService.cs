@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Data.Entity;
-using System.Web.Mvc;
-using BiofuelSouth.Controllers;
-using DbContext = BiofuelSouth.Models.DataBaseContext;
+using System.Linq;
+using BiofuelSouth.Models;
 
 
 namespace BiofuelSouth.Services
@@ -14,7 +11,7 @@ namespace BiofuelSouth.Services
     {
         public static List<string> GetCounty(String state)
         {
-            using (DbContext db = new DbContext())
+            using (DatabaseContext db = new DatabaseContext())
             {
                 var counties = db.County.Where(p => p.State == state).Select(p=>p.Name).ToList();
                 return counties;
@@ -25,9 +22,10 @@ namespace BiofuelSouth.Services
         public static double GetProductivityPerAcreForCropByGeoId(String category, String geoId)
         {
             int intGeoid = Convert.ToInt32(geoId);
-            using (DbContext db = new DbContext())
+            using (DatabaseContext db = new DatabaseContext())
             {
-                var productivity = db.Productivity.Where(p => p.CountyId == intGeoid && p.CropType.Equals(category)).Select(p=> p.Yield).FirstOrDefault();
+                
+                var productivity = db.Productivities.Where(p => p.GeoId == intGeoid && p.CropType.Equals(category)).Select(p=> p.Yield).FirstOrDefault();
                 return productivity;
             }
         }
@@ -35,9 +33,9 @@ namespace BiofuelSouth.Services
         public static double GetCostPerAcreForCropByGeoId(String category, String geoId)
         {
             int intGeoid = Convert.ToInt32(geoId);
-            using (DbContext db = new DbContext())
+            using (DatabaseContext db = new DatabaseContext())
             {
-                var productivity = db.Productivity.Where(p => p.CountyId == intGeoid && p.CropType.Equals(category)).Select(p => p.Cost).FirstOrDefault();
+                var productivity = db.Productivities.Where(p => p.GeoId == intGeoid && p.CropType.Equals(category)).Select(p => p.Cost).FirstOrDefault();
                 return productivity;
             }
         }

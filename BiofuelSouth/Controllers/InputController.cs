@@ -13,6 +13,7 @@ namespace BiofuelSouth.Controllers
         [HttpGet]
         public ActionResult Index()
         {
+            //Constants.GetValue();
             FillViewBag();
           
             // ViewBag.County = constants.GetCounty();

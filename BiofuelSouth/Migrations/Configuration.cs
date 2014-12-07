@@ -1,3 +1,6 @@
+
+using BiofuelSouth.Models;
+
 namespace BiofuelSouth.Migrations
 {
     using System;
@@ -5,15 +8,15 @@ namespace BiofuelSouth.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<BiofuelSouth.Controllers.DatabaseContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<DatabaseContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
-            ContextKey = "BiofuelSouth.Controllers.DatabaseContext";
+            ContextKey = "BiofuelSouth.Models.DatabaseContext";
         }
 
-        protected override void Seed(BiofuelSouth.Controllers.DatabaseContext context)
+        protected override void Seed(DatabaseContext context)
         {
             //  This method will be called after migrating to the latest version.
 
