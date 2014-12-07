@@ -14,8 +14,8 @@ namespace BiofuelSouthTest
         {
             //String[] Category = new String[] { "Switchgrass", "Miscangthus", "Poplar", "Willow" };
             var testCategory = "Switchgrass".ToUpper();
-            Constants constants = new Constants();
-            var category = constants.GetCategory();
+            
+            var category = Constants.GetCategory();
             category = category.ConvertAll(c => c.ToUpper());
             Assert.IsTrue(category.Contains(testCategory));
         }
@@ -26,8 +26,8 @@ namespace BiofuelSouthTest
 
             //String[] Category = new String[] { "Swtichgrass", "Miscangthus", "Poplar", "Willow" };
             int numberOfCategories = 4;
-            Constants constants = new Constants();
-            var countCategories = constants.GetCategory();
+            
+            var countCategories = Constants.GetCategory();
             Assert.AreEqual(4, countCategories.Count());
 
         }
@@ -35,8 +35,8 @@ namespace BiofuelSouthTest
         [TestMethod]
         public void TestGetStates()
         {
-            Constants constants = new Constants();
-            var states = constants.GetState();
+            
+            var states = Constants.GetState();
             Assert.IsTrue(states.Contains<string>("AL"));
             Assert.IsTrue(states.Contains<string>("AR"));
             Assert.IsTrue(states.Contains<string>("FL"));
@@ -55,8 +55,8 @@ namespace BiofuelSouthTest
         public void TestGetStatesMustFail()
         {
 
-            Constants constants = new Constants();
-            var states = constants.GetState();
+           
+            var states = Constants.GetState();
             var containsAl = states.Contains<string>("CA");
             Assert.IsFalse(containsAl);
         }
@@ -67,8 +67,8 @@ namespace BiofuelSouthTest
             
             DataController dc = new DataController();
 
-            Constants constants = new Constants();
-            var states = constants.GetState();
+            
+            var states = Constants.GetState();
 
             var counties = dc.CountiesForState("AL");
 
@@ -94,12 +94,12 @@ namespace BiofuelSouthTest
                 VA	134
                 WV	55
              * */
-            Constants constants = new Constants();
-            var counties = constants.GetCounty("AL");
+            
+            var counties = Constants.GetCounty("AL");
             Assert.IsNotNull(counties);
             Assert.AreEqual(67, counties.Count());
 
-            counties = constants.GetCounty("TN");
+            counties = Constants.GetCounty("TN");
             Assert.IsNotNull(counties);
             Assert.AreEqual(95, counties.Count());
 
