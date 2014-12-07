@@ -10,7 +10,8 @@ namespace BiofuelSouth.Models
         public int Id { get; set; }
         public int CountyId { get; set; }
         public String CropType { get; set; }
-        public decimal Yield { get; set; }
+        public Double Yield { get; set; }
+        public Double Cost { get; set; }
 
 
     }
