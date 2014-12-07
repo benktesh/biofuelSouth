@@ -13,19 +13,13 @@ namespace BiofuelSouth.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            Constants constants = new Constants();
-
-            var category = constants.GetCategory();
-            category.Insert(0, "Select Category");
-            ViewBag.Category = category;
-
-            var state = constants.GetState();
-            state.Insert(0,"Select State");
-            ViewBag.State = state;
-            
-            
+            FillViewBag();
+          
             // ViewBag.County = constants.GetCounty();
             Input input = new Input();
+            if (ViewBag.input != null)
+                input = ViewBag.input;
+            
             
             return View(input);
         }
@@ -33,8 +27,23 @@ namespace BiofuelSouth.Controllers
         [HttpPost]
         public ActionResult Index(Input input)
         {
+            FillViewBag();
+            ViewBag.Results = true;
             //TODO Do some thing here
+            ViewBag.input = input; 
             return View(input);
+        }
+
+        private void FillViewBag()
+        {
+            
+            var category = Constants.GetCategory();
+            ViewBag.Category = category;
+            var state = Constants.GetState();
+            ViewBag.State = state;
+
+            ViewBag.Results = false;
+
         }
 
     }
