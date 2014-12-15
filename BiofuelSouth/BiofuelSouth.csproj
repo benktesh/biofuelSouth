@@ -91,6 +91,7 @@
     </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Web.DataVisualization" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -230,6 +231,7 @@
     <Compile Include="Controllers\AdminController.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Controllers\ChartController.cs" />
     <Compile Include="Controllers\DataController.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -239,6 +241,11 @@
     <Compile Include="Controllers\MapController.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Migrations\201412150342225_-updateCounties.cs" />
+    <Compile Include="Migrations\201412150342225_-updateCounties.Designer.cs">
+      <DependentUpon>201412150342225_-updateCounties.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Cost.cs" />
     <Compile Include="Models\DatabaseContext.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Migrations\201408040112136_InitialCreate.cs" />
@@ -275,6 +282,7 @@
     <Compile Include="Models\Input.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\Productivity.cs" />
+    <Compile Include="Models\Storage.cs" />
     <Compile Include="ProcessLogic\SwitchGrass.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
@@ -302,6 +310,10 @@
     <Content Include="Views\Admin\Edit.cshtml" />
     <Content Include="Views\Admin\Create.cshtml" />
     <Content Include="Views\Admin\Delete.cshtml" />
+    <Content Include="Views\Input\_productionChart.cshtml" />
+    <Content Include="Views\Input\Storage.cshtml" />
+    <Content Include="Views\Shared\_DSSMenu.cshtml" />
+    <Content Include="Views\Input\_inputResult.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -311,6 +323,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="charts\" />
+    <Folder Include="Views\Chart\" />
     <Folder Include="Views\yoho\" />
   </ItemGroup>
   <ItemGroup>
@@ -334,6 +348,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201411222211298_changeInputModel.resx">
       <DependentUpon>201411222211298_changeInputModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201412150342225_-updateCounties.resx">
+      <DependentUpon>201412150342225_-updateCounties.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
