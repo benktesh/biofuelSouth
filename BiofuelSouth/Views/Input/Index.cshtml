@@ -1,4 +1,5 @@
 ﻿@using System.Collections.Generic
+@using System.Web.Hosting
 @using BiofuelSouth.Models
 @model BiofuelSouth.Models.Input
 
@@ -10,24 +11,13 @@
 @using (Html.BeginForm())
 {
 
-
     @Html.AntiForgeryToken()
-
     <div class="form-horizontal">
         <h4>DSS Input</h4>
+        @Html.Partial("_DSSMenu")
         <div class="row">
-            <!-- Input Column-->
-            <hr />
             <div class="container col-md-4">
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                <div class="form-group">
-                    @Html.LabelFor(model => model.Category, htmlAttributes: new { @class = "control-label" })
-                    <div class="row">
-                        @Html.DropDownListFor(model => model.Category, new SelectList(ViewBag.Category), new { @class = "form-control" })
-                        @Html.ValidationMessageFor(model => model.Category, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-
                 <div class="form-group">
                     @Html.LabelFor(model => model.State, htmlAttributes: new { @class = "control-label" })
                     <div class="row">
@@ -41,6 +31,14 @@
                     <div class="row">
                         @Html.DropDownListFor(model => model.County, new SelectList(new List<string> { "Select County" }), new { @class = "form-control", name = "county", id = "county" })
                         @Html.ValidationMessageFor(model => model.County, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Category, htmlAttributes: new { @class = "control-label" })
+                    <div class="row">
+                        @Html.DropDownListFor(model => model.Category, new SelectList(ViewBag.Category), new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Category, "", new { @class = "text-danger" })
                     </div>
                 </div>
 
@@ -130,90 +128,26 @@
                         @Html.ValidationMessageFor(model => model.EquityLoanInterestRate, "", new { @class = "text-danger" })
                     </div>
                 </div>
-            </div>
-            <!-- Result Column-->
-            <div class="col-md-8">
-                @if (ViewBag.Results)
-                {
-                    <div class="row" id="summaryHead">
-                        <h2>Summay for @Model.Category in @(Constants.CountyName(Model.County)), @Model.State</h2>
-                    </div>
-
-
-                    <div class="row table-bordered">
-                        <h3>Productivity and Cost</h3>
-                        <div>
-                            Estimated Annual Production: @Model.GetAnnualProductivity().ToString("####.00") ton
-                        </div>
-                        <div>
-                            Estimated Annual Cost: @Model.GetAnnualCost().ToString("C")
-                        </div>
-                        <div>
-                            Estimated Annual Revennue: @Model.GetAnnualRevenue().ToString("C")
-                        </div>
-                    </div>
-                    <div class="row table-bordered">
-
-                        <h3>Graphical Summary</h3>
-                        <ul>
-                            <li>Chart Displaying Average Productivity and Cost of Various Potential Biofuels in this County</li>
-
-                            <li>Chart Displaying Trend of cost and production for this crop in the county</li>
-                            <li>
-                                If the selection is made for the state, the summary is displayed for the state.
-                                Likewise, if the state is not selected, then teh summary for covered state will be displayed.
-                            </li>
-                        </ul>
+                <div class="form-group">
+                    <div class="row">
+                        <input type="submit" value="Submit" class="btn btn-default pull-left" />
 
                     </div>
-                
-
-                    <div class="row table-bordered">
-                        <h3>More Information</h3>
-                        <div>
-                            Suggest Some Steps Based on Retrieved Results.
-                        </div>
-
-                    </div>
-
-
-
-
-
-                }
-                else
-                {
-                    <text>
-
-                        <br />Results will be here upon submitting the button. Display Help information about using the DSS.
-                        <br /> User can change the parameter in the left any time, the result will be displayed here.
-
-
-                        <h3>Graphical Summary/ChartOutput</h3>
-                        <li>Chart Displaying Average Producitvity and Cost of Various Potential Biofuels in this County</li>
-                        <li>Chart Displaying Trend of cost and production for this crop in the county</li>
-
-                        If the selection is made for the state, the summary is displayed for the state.
-                        Likewise, if the state is not selected, then teh summary for covered state will be displayed.
-                    </text>
-                }
-            </div>
-        </div>
-        <!-- Buttons and Other Controls-->
-        <div class="row">
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Submit" class="btn btn-default" />
                 </div>
+             
             </div>
-        </div>
+            <!-- Output-->
+
+            <div class="col-md-8">
+                @Html.Partial("_inputResult", Model)
+            </div>
+            
 
         </div>
+    </div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+
 
 @section MyScripts {
 
