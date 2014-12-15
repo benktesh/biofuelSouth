@@ -7,8 +7,10 @@ namespace BiofuelSouth.Migrations
     {
         public override void Up()
         {
+            /*
             AlterColumn("dbo.Counties", "Lat", c => c.Double());
             AlterColumn("dbo.Counties", "Lon", c => c.Double());
+             * */
         }
         
         public override void Down()

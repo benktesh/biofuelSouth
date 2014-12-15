@@ -7,7 +7,9 @@ namespace BiofuelSouth.Migrations
     {
         public override void Up()
         {
+            /*
             AddColumn("dbo.Counties", "GeoID", c => c.String());
+             * */
         }
         
         public override void Down()

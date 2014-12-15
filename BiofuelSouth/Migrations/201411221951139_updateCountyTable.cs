@@ -7,6 +7,7 @@ namespace BiofuelSouth.Migrations
     {
         public override void Up()
         {
+            /*
             CreateTable(
                 "dbo.Inputs",
                 c => new
@@ -28,6 +29,7 @@ namespace BiofuelSouth.Migrations
                         EquityLoanInterestRate = c.Double(nullable: false),
                     })
                 .PrimaryKey(t => t.Id);
+             * */
             
         }
         

@@ -7,8 +7,10 @@ namespace BiofuelSouth.Migrations
     {
         public override void Up()
         {
+            /*
             AddColumn("dbo.Inputs", "County", c => c.String());
             DropColumn("dbo.Inputs", "CountyCode");
+             * */
         }
         
         public override void Down()

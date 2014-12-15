@@ -7,6 +7,7 @@ namespace BiofuelSouth.Migrations
     {
         public override void Up()
         {
+            /*
             CreateTable(
                 "dbo.Counties",
                 c => new
@@ -30,6 +31,7 @@ namespace BiofuelSouth.Migrations
                         Yield = c.Decimal(nullable: false, precision: 18, scale: 2),
                     })
                 .PrimaryKey(t => t.Id);
+             * */
             
         }
         
