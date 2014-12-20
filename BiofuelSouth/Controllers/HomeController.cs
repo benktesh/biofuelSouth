@@ -9,15 +9,13 @@ namespace BiofuelSouth.Controllers
     public class HomeController : Controller
     {
         // GET: Home
-        public void Index()
+        public ActionResult Index()
         {
 
-            
-            Response.Redirect("~/index.html");
+            return View();
+            //Response.Redirect("~/index.html");
             //RedirectToAction("index", "Input");
             //RedirectToAction("Index", "Input");
-
-
         }
 
         public ActionResult GetSotfwareLog()
@@ -34,6 +32,11 @@ namespace BiofuelSouth.Controllers
         public ActionResult Contact()
         {
             return Redirect("~/contact.html");
+        }
+
+        public ActionResult Glossary(String term)
+        {
+            return null;
         }
     }
 }

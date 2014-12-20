@@ -1,0 +1,334 @@
+﻿<div class="container">
+    
+    <div class="row">
+        <!-- Main content-->
+        <!--- This row has three columns. Left is for menu, middle for main materials. right for side banners etc-->
+        <!----The middle pane is futher divided into multiple rows                                               -->
+        <div class="row">
+            <div class="col-lg-4 col-md-4">
+                Forum Feed or Wiki Goes here.
+                <!--
+                <div class="row col-lg-12 col-md-12">
+
+
+                        <h4>Show For All Counties</h4>
+                        <div id="allTable">
+                            <table id="allProductivityTable" class="table-responsive table-striped table-condensed" style="display:none">
+                                <thead>
+                                    <tr>
+                                        <th>SN</th>
+                                        <th>County</th>
+                                        <th>Crop Type</th>
+                                        <th>Yield</th>
+                                        <th>Year</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                        -->
+
+                <h4>Search DSS</h4>
+                <!--                    <select id="StateID" onchange="getComboValue(this)">
+                                            <option id="" value="">Select State</option>
+                                            <option id="AL" value="AL">Alabama</option>
+                                            <option id="FL" value="FL">Florida</option>
+                                            <option id="GA" value="GA">Georgia</option>
+                                            <option id="KY" value="KY">Alabama</option>
+                                            <option id="LA" value="LA">Lousiana</option>
+                                            <option id="MS" value="MS">Mississipi</option>
+                                            <option id="NC" value="NC">North Carolina</option>
+                                            <option id="SC" value="SC">South Carolina</option>
+                                            <option id="TN" value="TN">Tennessee</option>
+                                            <option id="VA" value="VA">Virginia</option>
+
+                                        </select>
+                    <select id="countyid">
+                        <option>Select County</option>
+                    </select>
+                    -->
+
+
+            </div>
+            <!-- The left -->
+
+            <div class="col-lg-5 col-md-5">
+                <div class="row col-lg-12 col-md-12">
+                    This section is placeholder for key information or contact or anything thaty may be of significant interest to the user.
+                    Important informaiton, proven techqniques, prior experience, existing experience about the selection can sit here.
+                    Additionally, any new opportunity or programs that is  relevant  for  specific  selection can be placed here.
+
+                    <div class="row"> &nbsp;</ br> &nbsp;</ br></div>
+                </div>
+                <div class="row col-lg-12 col-md-12">
+                    Attributes such as risk or charts, graphs overlay map </ br>
+                    Bioenergy industries can be makred with links for furtehr information</ br>
+                    Tables can be placed here as well.
+                    <div class="row"> &nbsp;</ br> &nbsp;</ br></div>
+                    <!--Map Element  -->
+                    <div id="map_canvas" style="height:200px"></div>
+                </div>
+            </div> <!-- The Middle -->
+            <div class="col-lg-3 col-md-3">
+                <div id="projectUpdate"></div>
+                <div id="feedUSDA"></div>
+                <div id="feedJob"></div>
+            </div> <!-- The Right -->
+        </div>
+    </div> <!-- End of Main Content -->
+    <!-- Place two empty rows before buttom descriptive narrativer-->
+    <div class="row">
+        &nbsp;<br /> &nbsp; <br />
+    </div>
+    <div class="row">
+        &nbsp;<br /> &nbsp;<br />
+    </div>
+
+    <!-- Bottom narrative text-->
+    <div class="row" style="border-top:solid; border-top-color:blue">
+        <div class="col-lg-4 col-md-4">
+            <h4>Sustaining Biofuel</h4>
+            <p>Sustaining biofuel industry in the South will need adequate supply of biomass feedstock from private land. Considering a majority of forestlands in the region is controlled by millions of private landowners, this could be a challenge as it could mean convincing landowners to adopt new crops or modify their existing land use in favor of desirable feedstock.</p>
+            <p><a href="#">Read more >></a></p>
+            <img src="images/residue.jpg" class="img-responsive img-circle" />
+        </div>
+        <div class="col-lg-4 col-md-4">
+            <h4>Barriers</h4>
+            <p>Studies have shown that landowners consider supplying biomass for energy production so that the nation’s energy dependence on foreign energy sources can be reduced. However, they do not know is what it involves to produce desirable feedstock on their own land, what crops are suitable or feasible, whether and how the financial return from feedstock production compares with their current land rent.</p>
+            <p><a href="#">Read more >></a></p>
+            <img src="images/technology.jpg" class="img-responsive img-circle" />
+        </div>
+        <div class="col-lg-4 col-md-4">
+            <h4>DSS Solution</h4>
+            <p>Landowners make their land use decisions based on the expected financial return and therefore increasing their confidence in feedstock production would involve providing credible information on the costs, benefits, and logistics so they have the opportunity to evaluate what crops are feasible in their land, what logistics might be needed, and how they could help meet their financial objective</p>
+            <p><a href="#">Read more >></a></p>
+            <img src="images/smallwood.jpg" class="img-responsive img-circle" />
+        </div>
+    </div>
+   
+
+    <script type="text/javascript">
+
+        var feedInput = [['http://www.usda.gov/cgi-bin/usdarss.pl?navid=LATEST_RELEASES', "USDA Latest Release", "10"],
+            ['http://www.energy.gov/rss/eere-bioenergy/909946', "US DOE Bioenergy", "10"],
+        ];
+
+        var feedcontainer = document.getElementById("feedUSDA")
+        var feedurl = "http://www.energy.gov/rss/eere-bioenergy/909946"
+        var feedurl = "http://www.usda.gov/cgi-bin/usdarss.pl?navid=LATEST_RELEASES";
+
+        var feedlimit = 10
+        var rssoutput = "<h4>USDA Latest Release</h4>"
+
+        function rssfeedsetup() {
+            var feedpointer = new google.feeds.Feed(feedurl)
+            feedpointer.setNumEntries(feedlimit)
+            feedpointer.load(displayfeed)
+        }
+
+        function displayfeed(result) {
+            if (!result.error) {
+                var thefeeds = result.feed.entries
+                for (var i = 0; i < thefeeds.length; i++)
+                    rssoutput += "<li><a href='" + thefeeds[i].link + "'>" + thefeeds[i].title + "</a></li>"
+                rssoutput += "</ul>"
+                feedcontainer.innerHTML = rssoutput
+            }
+            else
+                alert("Error fetching feeds!")
+        }
+        window.onload = function () {
+            rssfeedsetup()
+        }
+
+
+
+
+    </script>
+    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.0.3.min.js"></script>
+    <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery-ui-map/3.0-rc1/jquery.ui.map.js"></script>
+    <script type="text/javascript" src="http:///maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script>
+        var uri = "api/productivity";
+
+        $(document).ready(function () {
+
+            $('#StateID').change(function () {
+                var selectedState = $('#StateID').select().val();
+                // alert(selectedState);
+                if (selectedState == "")
+                    $('#countyid').prop('disabled', 'disabled');
+
+                if (selectedState != "") {
+                    $('#countyid').prop('disabled', false);
+                    $('#countyid').prop('disabled', false);
+                    $('#countyid')
+                        .find('option')
+                        .remove()
+                        .end()
+                        .append("<option>Select County</option>")
+
+                    //
+                    var AL = ['Autauga', 'Baldwin', 'Barbour', 'Bibb', 'Blount', 'Bullock', 'Butler', 'Calhoun', 'Chambers', 'Cherokee', 'Chilton', 'Choctaw', 'Clarke', 'Clay', 'Cleburne', 'Coffee', 'Colbert', 'Conecuh', 'Coosa', 'Covington', 'Crenshaw', 'Cullman', 'Dale', 'Dallas', 'DeKalb', 'Elmore', 'Escambia', 'Etowah', 'Fayette', 'Franklin', 'Geneva', 'Greene', 'Hale', 'Henry', 'Houston', 'Jackson', 'Jefferson', 'Lamar', 'Lauderdale', 'Lawrence', 'Lee', 'Limestone', 'Lowndes', 'Macon', 'Madison', 'Marengo', 'Marion', 'Marshall', 'Mobile', 'Monroe', 'Montgomery', 'Morgan', 'Perry', 'Pickens', 'Pike', 'Randolph', 'Russell', 'St. Clair', 'Shelby', 'Sumter', 'Talladega', 'Tallapoosa', 'Tuscaloosa', 'Walker', 'Washington', 'Wilcox', 'Winston'];
+                    var FL = ['Alachua', 'Baker', 'Bay', 'Bradford', 'Brevard', 'Broward', 'Calhoun', 'Charlotte', 'Citrus', 'Clay', 'Collier', 'Columbia', 'DeSoto', 'Dixie', 'Duval', 'Escambia', 'Flagler', 'Franklin', 'Gadsden', 'Gilchrist', 'Glades', 'Gulf', 'Hamilton', 'Hardee', 'Hendry', 'Hernando', 'Highlands', 'Hillsborough', 'Holmes', 'Indian River', 'Jackson', 'Jefferson', 'Lafayette', 'Lake', 'Lee', 'Leon', 'Levy', 'Liberty', 'Madison', 'Manatee', 'Marion', 'Martin', 'Miami-Dade', 'Monroe', 'Nassau', 'Okaloosa', 'Okeechobee', 'Orange', 'Osceola', 'Palm Beach', 'Pasco', 'Pinellas', 'Polk', 'Putnam', 'St. Johns', 'St. Lucie', 'Santa Rosa', 'Sarasota', 'Seminole', 'Sumter', 'Suwannee', 'Taylor', 'Union', 'Volusia', 'Wakulla', 'Walton', 'Washington'];
+                    var GA = ['Appling', 'Atkinson', 'Bacon', 'Baker', 'Baldwin', 'Banks', 'Barrow', 'Bartow', 'Ben Hill', 'Berrien', 'Bibb', 'Bleckley', 'Brantley', 'Brooks', 'Bryan', 'Bulloch', 'Burke', 'Butts', 'Calhoun', 'Camden', 'Candler', 'Carroll', 'Catoosa', 'Charlton', 'Chatham', 'Chattahoochee', 'Chattooga', 'Cherokee', 'Clarke', 'Clay', 'Clayton', 'Clinch', 'Cobb', 'Coffee', 'Colquitt', 'Columbia', 'Cook', 'Coweta', 'Crawford', 'Crisp', 'Dade', 'Dawson', 'Decatur', 'DeKalb', 'Dodge', 'Dooly', 'Dougherty', 'Douglas', 'Early', 'Echols', 'Effingham', 'Elbert', 'Emanuel', 'Evans', 'Fannin', 'Fayette', 'Floyd', 'Forsyth', 'Franklin', 'Fulton', 'Gilmer', 'Glascock', 'Glynn', 'Gordon', 'Grady', 'Greene', 'Gwinnett', 'Habersham', 'Hall', 'Hancock', 'Haralson', 'Harris', 'Hart', 'Heard', 'Henry', 'Houston', 'Irwin', 'Jackson', 'Jasper', 'Jeff Davis', 'Jefferson', 'Jenkins', 'Johnson', 'Jones', 'Lamar', 'Lanier', 'Laurens', 'Lee', 'Liberty', 'Lincoln', 'Long', 'Lowndes', 'Lumpkin', 'McDuffie', 'McIntosh', 'Macon', 'Madison', 'Marion', 'Meriwether', 'Miller', 'Mitchell', 'Monroe', 'Montgomery', 'Morgan', 'Murray', 'Muscogee', 'Newton', 'Oconee', 'Oglethorpe', 'Paulding', 'Peach', 'Pickens', 'Pierce', 'Pike', 'Polk', 'Pulaski', 'Putnam', 'Quitman', 'Rabun', 'Randolph', 'Richmond', 'Rockdale', 'Schley', 'Screven', 'Seminole', 'Spalding', 'Stephens', 'Stewart', 'Sumter', 'Talbot', 'Taliaferro', 'Tattnall', 'Taylor', 'Telfair', 'Terrell', 'Thomas', 'Tift', 'Toombs', 'Towns', 'Treutlen', 'Troup', 'Turner', 'Twiggs', 'Union', 'Upson', 'Walker', 'Walton', 'Ware', 'Warren', 'Washington', 'Wayne', 'Webster', 'Wheeler', 'White', 'Whitfield', 'Wilcox', 'Wilkes', 'Wilkinson', 'Worth']
+                    var KY = ['Adair', 'Allen', 'Anderson', 'Ballard', 'Barren', 'Bath', 'Bell', 'Boone', 'Bourbon', 'Boyd', 'Boyle', 'Bracken', 'Breathitt', 'Breckinridge', 'Bullitt', 'Butler', 'Caldwell', 'Calloway', 'Campbell', 'Carlisle', 'Carroll', 'Carter', 'Casey', 'Christian', 'Clark', 'Clay', 'Clinton', 'Crittenden', 'Cumberland', 'Daviess', 'Edmonson', 'Elliott', 'Estill', 'Fayette', 'Fleming', 'Floyd', 'Franklin', 'Fulton', 'Gallatin', 'Garrard', 'Grant', 'Graves', 'Grayson', 'Green', 'Greenup', 'Hancock', 'Hardin', 'Harlan', 'Harrison', 'Hart', 'Henderson', 'Henry', 'Hickman', 'Hopkins', 'Jackson', 'Jefferson', 'Jessamine', 'Johnson', 'Kenton', 'Knott', 'Knox', 'Larue', 'Laurel', 'Lawrence', 'Lee', 'Leslie', 'Letcher', 'Lewis', 'Lincoln', 'Livingston', 'Logan', 'Lyon', 'McCracken', 'McCreary', 'McLean', 'Madison', 'Magoffin', 'Marion', 'Marshall', 'Martin', 'Mason', 'Meade', 'Menifee', 'Mercer', 'Metcalfe', 'Monroe', 'Montgomery', 'Morgan', 'Muhlenberg', 'Nelson', 'Nicholas', 'Ohio', 'Oldham', 'Owen', 'Owsley', 'Pendleton', 'Perry', 'Pike', 'Powell', 'Pulaski', 'Robertson', 'Rockcastle', 'Rowan', 'Russell', 'Scott', 'Shelby', 'Simpson', 'Spencer', 'Taylor', 'Todd', 'Trigg', 'Trimble', 'Union', 'Warren', 'Washington', 'Wayne', 'Webster', 'Whitley', 'Wolfe', 'Woodford']
+                    var Default = ['Counties for the selected State are Not Yet Ready']
+
+                    var countyHolder = "";
+                    switch (selectedState) {
+                        case 'AL':
+                            countyHolder = AL;
+                            break;
+                        case 'FL':
+                            countyHolder = FL;
+                            break;
+                        case 'FL':
+                            countyHolder = GA;
+                            break;
+                        case 'FL':
+                            countyHolder = KY;
+                            break;
+                        default:
+                            countyHolder = Default;
+
+                    }
+                    var option = "";
+                    for (i = 0; i < countyHolder.length; i++) {
+                        option += '<option value="' + countyHolder[i] + '">' + countyHolder[i] + '</option>';
+
+                    }
+                    //alert(option);
+                    $('#countyid').append(option);
+                }
+            });
+
+
+
+            $('#countyId').prop('disabled', 'disabled');
+
+            $('thead').css({ "color": "#fff" }).css({ "background-color": "#428bca", "border-color": "#357ebd" });
+
+            $.getJSON(uri)
+             .done(function (data) {
+                 // On success, 'data' contains a list of products.
+                 console.log(data.toString());
+                 var tbl = "";
+                 $.each(data, function (key, item) {
+                     // Add a list item for the product.
+                     //   $('<li>', { text: formatItem(item) }).appendTo($('#allProductivity'));
+                     tbl += getRow(item);
+                     $('#allProductivityTable tbody').html(tbl);
+                     $('#allProductivityTable').show();
+                 });
+             });
+        });
+
+        function formatItem(item) {
+            return item.CountyId + " - " + item.CropType + ': ' + item.Yield + "tC/ac.";
+        }
+
+        function find() {
+            $('#countyProductivity').empty();
+            var id = $('#countyId').val();
+            $.getJSON(uri + '/' + id)
+                .done(function (data) {
+
+                    if (data.length == 0)
+                        $('<li>', { text: "No informaiton is available for selected county" }).appendTo($("#countyProductivity"));
+                    var tbl = "";
+                    $.each(data, function (key, item) {
+                        // Add a list item for the product.
+                        //$('<li>', { text: formatItem(item) }).appendTo($('#countyProductivity'));
+                        tbl += getRow(item);
+                    });
+                    $('#selectProductivityTable tbody').html(tbl);
+                    $('#selectProductivityTable').show();
+                    //Fix table height if it is more than 8 rows
+                    if (data.length >= 8) {
+                        $('#allTable').css({ "height": "350px", "overflow": "auto" });
+                    }
+
+                });
+        }
+        function getRow(item) {
+
+            return "<tr><td>" + item.Id + "</td><td>" + item.CountyId + "</td><td>" + item.CropType +
+            "</td><td>" + item.Yield + "</td><td>-</td></tr>"
+
+        }
+
+        function updateMap(value) {
+            var a = getLatLonByCountyId(value);
+            if('#map_canvas')
+                $('#map_canvas').gmap('option', 'center', new google.maps.LatLng(a[0], a[1]));
+        }
+
+        function getLatLonByCountyId(id) {
+            var result = []
+            $.each(counties, function (key, item) {
+                if (item.CountyCode == id) {
+                    var lat = item.Lat;
+                    var lon = item.Lon;
+                    result.push(lat);
+                    result.push(lon);
+                    return false;
+                }
+            });
+            return result;
+        }
+
+        function getComboValue(sel) {
+            var value = sel.options[sel.selectedIndex].value;
+            $('#countyProductivity').empty();
+            if (value > 0) {
+                updateMap(value);
+                console.log(value);
+                find();
+            }
+        }
+
+        $('#aboutButton').click(function () {
+            alert("Multiple navigation links that drops down from here will be implemented")
+        })
+
+        $('#helpButton').click(function () {
+            window.location.href = "help.html";
+
+        })
+
+        $('#contactButton').click(function() {
+            window.location.href = "contact.html";
+        });
+
+        $(function () {
+            // Also works with: var yourStartLatLng = '59.3426606750, 18.0736160278';
+            var yourStartLatLng = new google.maps.LatLng(36.1048456, -86.2200095796);
+            if ('#map_canvas')
+                $('#map_canvas').gmap({ 'center': yourStartLatLng, 'zoom': 6 });
+        });
+
+        /*<!-- Temporary Data Source fir counties. To be read from XML */
+        var c1 = $.parseJSON('{"CountyCode": "1", "Name":"Anderson", "State": "TN", "Lat" : "36.1048456", "Lon" : "-84.195796"}')
+        var c2 = $.parseJSON('{"CountyCode": "2", "Name":"Bedford", "State": "TN", "Lat" : "35.5108249", "Lon" : "-86.4500419"}')
+        var c3 = $.parseJSON('{"CountyCode": "3", "Name":"Benton", "State": "TN", "Lat" : "35.1750149", "Lon" : "-84.652623"}')
+
+        var counties = [];
+        counties.push(c1);
+        counties.push(c2);
+        counties.push(c3);
+    </script>
+</div> <!--end of container-->
