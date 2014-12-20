@@ -29,7 +29,7 @@
             //  var urlInsert = '@Url.Action("Home")';
             //  $.get("Home", function () {
             //  });
-            window.location.href = "../index.html"
+            window.location.href = "../index.html";
         }
     </script>
 
@@ -42,24 +42,22 @@
                 <!--Banner -->
                 <div class="col-sm-12 col-lg-12 col-md-12" style="border-bottom:solid; border-bottom-color:blue;">
                     <a class="usdafunding" href="http://www.nifa.usda.gov" target="_blank" title="USDA NIFA">USDA NIFA</a>
-                    <a href="index.html"><img style="width:100%; " src="~/images/biomassbanner.jpg" alt="Banner Image Logo" class="img-responsive" /></a>
+                    <a href='@Url.Action("help", "Home")'><img style="width:100%; " src="~/images/biomassbanner.jpg" alt="Banner Image Logo" class="img-responsive" /></a>
 
                 </div>
-                <!-- End Banner
-                    -->
-
-
-
+                <!-- End Banner -->
             </div>
             <div class="row">
                 <!-- Menu Content-->
-                <button class="btn btn-primary glyphicons glyphicon-home" id="homeButton" style="margin-left: 0px" onclick="location.href = '/Home/index'"><i class="icon-user icon-white"></i>Home</button>
+                <button class="btn btn-primary glyphicons glyphicon-home" id="homeButton" style="margin-left: 0px" onclick="location.href =  '@Url.Action("Index", "Home")'">Home</button>
                 <button class="btn btn-primary" id="dropDownButton" onclick="location.href ='/map'">Maps</button>
                 <button class="btn btn-primary" id="dssButton" onclick="location.href ='/Input'">DSS</button>
                 <button class="btn btn-primary" id="aboutButton">About</button>
                 <button class="btn btn-primary" id="contactButton" onclick="location.href = '/home/contact'">Contact</button>
                 <button class="btn btn-primary" id="helpButton" onclick="location.href = '@Url.Action("help", "Home")'">Help</button>
                 <button class="btn btn-primary" id="bugButton" onclick="location.href = '@Url.Action("GetSotfwareLog", "Home")'">Bug&Enhancement</button>
+                <input type="text" class="form-control" placeholder="Enter a term" name="searchTerm" id="searchTerm" data-val="true" required="required" data-val-regex-pattern="^([A-Za-z0-9])">
+                <button class="btn btn-default" id="searchButton" name="searchButton" type="submit"><i class="glyphicon glyphicon-search"></i></button>
             </div> <!-- End Menu Content-->
         </header> <!-- End Header-->
         <div class="container body-content">
