@@ -37,7 +37,7 @@ namespace BiofuelSouth.Models
         [DisplayName("Duration (years from plantation to harvest")]
         public int ProjectLife {get; set;}  //years
 
-        [DisplayName("Cost of land ($/acre/year")]
+        [DisplayName("Cost of land ($/acre/year)")]
         public double LandCost {get; set;} //$/acre/year
 
         [DisplayName("Annual Administrative Cost($/acre/year)")]
