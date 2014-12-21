@@ -47,31 +47,30 @@
                 </div>
                 <!-- End Banner -->
             </div>
-            <div class="row col-sm-12 col-lg-12 col-md-12">
+            <div class="row">
+                <div class="col-sm-8 col-lg-8 col-md-8 pull-left">
                 <!-- Menu Content-->
-                <div class="input-group">
-                    <form class="navbar-form" role="search" method="POST" action="@Url.Action("Search", "Home")">
-                        
+                <button class="btn btn-primary glyphicon glyphicon-home" id="homeButton" style="margin-left: 0px" onclick="location.href =  '@Url.Action("Index", "Home")'">Home</button>
+                    <button class="btn btn-primary glyphicon" id="dropDownButton" onclick="location.href ='/map'">Maps</button>
+                    <button class="btn btn-primary glyphicon" id="dssButton" onclick="location.href ='/Input'">DSS</button>
+                    <button class="btn btn-primary glyphicon" id="glossaryButton" onclick="location.href = '@Url.Action("Search", "Home")'">Glossary</button>
+                    <button class="btn btn-primary glyphicon" id="aboutButton">About</button>
+                    <button class="btn btn-primary glyphicon" id="contactButton" onclick="location.href = '/home/contact'">Contact</button>
+                    <button class="btn btn-primary glyphicon" id="helpButton" onclick="location.href = '@Url.Action("help", "Home")'">Help</button>
+                    <button class="btn btn-primary glyphicon" id="bugButton" onclick="location.href = '@Url.Action("GetSotfwareLog", "Home")'">Bug&Enhancement</button>
+                </div>
+                <div class="row col-sm-4 col-lg-4 col-md-4 pull-right">
+                    <div id="searchSpace" style="float:right;">
+                        <form class=" navbar-form" style="float:right; margin-top: 0px;" role="search" method="POST" action="@Url.Action("Search", "Home")">
+                            <input type="text" class="form-control" size="50" placeholder="Enter a term" name="term" id="term" />
+                            <button class="btn btn-primary btn-primary glyphicon glyphicon-search" id="searchButton " name="searchButton" type="submit"></button>
+                        </form>
+                    </div>
 
 
-                            <button class="btn btn-primary glyphicon glyphicon-home" id="homeButton" style="margin-left: 0px" onclick="location.href =  '@Url.Action("Index", "Home")'">Home</button>
-                            <button class="btn btn-primary" id="dropDownButton" onclick="location.href ='/map'">Maps</button>
-                            <button class="btn btn-primary" id="dssButton" onclick="location.href ='/Input'">DSS</button>
-                            <button class="btn btn-primary" id="glossaryButton" onclick="location.href = '@Url.Action("SearchEmpty", "Home")'">Glossary</button>
-                            <button class="btn btn-primary" id="aboutButton">About</button>
-                            <button class="btn btn-primary" id="contactButton" onclick="location.href = '/home/contact'">Contact</button>
-                            <button class="btn btn-primary" id="helpButton" onclick="location.href = '@Url.Action("help", "Home")'">Help</button>
-                            <button class="btn btn-primary" id="bugButton" onclick="location.href = '@Url.Action("GetSotfwareLog", "Home")'">Bug&Enhancement</button>
-                            
-                        <div id="searchSpace" style="float: right;">
-                            <input type="text" class="form-control" size="200" placeholder="Enter a term" name="term" id="term" />
-                            <button class="btn btn-default" id="searchButton " name="searchButton" type="submit"><i class="glyphicon glyphicon-search"></i></button>
-                        </div>
 
 
 
-                        
-                    </form>
                 </div>
 
 
