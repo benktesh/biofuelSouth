@@ -40,6 +40,17 @@ namespace BiofuelSouth.Services
             }
         }
 
+        public static List<Glossary> GetGlossary()
+        {
+            using (DatabaseContext db = new DatabaseContext())
+            {
+                var resultList = new List<Glossary>();
+                var result = db.Glossaries.ToList();
+               return result;
+            }
+        }
+    
+
         public static List<Glossary> Search(String term)
         {
             using (DatabaseContext db = new DatabaseContext())
@@ -52,20 +63,28 @@ namespace BiofuelSouth.Services
                 {
                     //Make a new logic
 
-                    result = new Glossary(term, "", "");
+                    result = new Glossary(term, "", "", "");
                     resultList.Add(result);
+                   
                 }
                 else
                 {
+                    resultList.Add(result);
                     //add to result the records for which we have keywords.
                     //1. get keywords for the term -Done
                     //2. parse keywords into list  - Done
                     //3. find all the records where keywords are 'terms'
                     char[] delimiters = new[] { ',', ';' };
-                    IList<String> keywords =
-                        result.keywords.ToLower().Split(delimiters, StringSplitOptions.RemoveEmptyEntries).ToList();
-                    moreResults = db.Glossaries.Where(k => keywords.Contains(k.term.ToLower()));
 
+                    String kw = result.keywords;
+                    if (kw != null)
+                    {
+                        IList<String> keywords =
+                        result.keywords.ToLower().Split(delimiters, StringSplitOptions.RemoveEmptyEntries).ToList();
+                        moreResults = db.Glossaries.Where(k => keywords.Contains(k.term.ToLower()));
+ 
+                    }
+         
                     //add to more results
 
                     //1. find all the records where term is keyword

@@ -1,0 +1,78 @@
+﻿@model IList<Glossary>
+@using BiofuelSouth.Models
+
+
+@{
+    ViewBag.Title = "Search";
+}
+
+<div class="row">
+    <div class="col-lg-9" id="searchDisplay">
+        
+        <div id="searchInstruction">
+            @{
+                if (ViewData["term"].Equals(""))
+                {
+                    
+                    <div>Please enter search term in the bar above or select a term from the list in the right.</div>
+                }
+
+            }
+        </div>
+
+        <div id="searchResult">
+            @{
+                if (Model.First() != null && !Model.First().description.Equals("") && !ViewData["term"].Equals(""))
+                {
+
+                    Glossary result = Model.First();
+                    <div class="resultTerm">@result.term:</div>
+                    <div class="resultDescription">@result.description.</div>
+                    Model.RemoveAt(0);
+                }
+                else
+                {
+                    Model.RemoveAt(0);
+                    if (!ViewData["term"].Equals(""))
+                    {
+
+
+                        <div>No result was found for <strong>@ViewData["term"]</strong>.</div>
+                    }
+                }
+
+            }
+        </div>
+
+        <div id="relatedResults">
+            @{
+
+                if (Model.Any() && !ViewData["term"].Equals(""))
+                {
+                    <div style="font-weight: bold">
+                        Related Information    
+                    </div>
+                    
+                    foreach (Glossary glossary in Model)
+                    {
+                        <div>@glossary.term </div>
+                        <div>@glossary.description</div>
+                    }
+                }
+            }
+        </div>
+    </div>
+    <div class="col-lg-2 pull-right" id="glossaryDisplay">
+        <strong>Glossary</strong>
+        @{
+            var glossaries = (IList<Glossary>)ViewData["glossary"];
+            foreach (var glossary in glossaries)
+            {
+                <div>
+                    <a href='@Url.Action("Search", new { term = @glossary.term })'>@glossary.term</a>
+                </div>
+            }
+        }
+
+    </div>
+</div>

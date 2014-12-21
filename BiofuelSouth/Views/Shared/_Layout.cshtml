@@ -13,7 +13,7 @@
     <script type="text/javascript" src="http://www.google.com/jsapi"></script>
     <script type="text/javascript">google.load("feeds", "1")</script>
     <!-- End RSS FEED Set Up-->
-    
+
     <script>
         function getRootWebSitePath() {
             var _location = document.location.toString();
@@ -47,23 +47,40 @@
                 </div>
                 <!-- End Banner -->
             </div>
-            <div class="row">
+            <div class="row col-sm-12 col-lg-12 col-md-12">
                 <!-- Menu Content-->
-                <button class="btn btn-primary glyphicons glyphicon-home" id="homeButton" style="margin-left: 0px" onclick="location.href =  '@Url.Action("Index", "Home")'">Home</button>
-                <button class="btn btn-primary" id="dropDownButton" onclick="location.href ='/map'">Maps</button>
-                <button class="btn btn-primary" id="dssButton" onclick="location.href ='/Input'">DSS</button>
-                <button class="btn btn-primary" id="aboutButton">About</button>
-                <button class="btn btn-primary" id="contactButton" onclick="location.href = '/home/contact'">Contact</button>
-                <button class="btn btn-primary" id="helpButton" onclick="location.href = '@Url.Action("help", "Home")'">Help</button>
-                <button class="btn btn-primary" id="bugButton" onclick="location.href = '@Url.Action("GetSotfwareLog", "Home")'">Bug&Enhancement</button>
-                <input type="text" class="form-control" placeholder="Enter a term" name="searchTerm" id="searchTerm" data-val="true" required="required" data-val-regex-pattern="^([A-Za-z0-9])">
-                <button class="btn btn-default" id="searchButton" name="searchButton" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+                <div class="input-group">
+                    <form class="navbar-form" role="search" method="POST" action="@Url.Action("Search", "Home")">
+                        
+
+
+                            <button class="btn btn-primary glyphicon glyphicon-home" id="homeButton" style="margin-left: 0px" onclick="location.href =  '@Url.Action("Index", "Home")'">Home</button>
+                            <button class="btn btn-primary" id="dropDownButton" onclick="location.href ='/map'">Maps</button>
+                            <button class="btn btn-primary" id="dssButton" onclick="location.href ='/Input'">DSS</button>
+                            <button class="btn btn-primary" id="glossaryButton" onclick="location.href = '@Url.Action("SearchEmpty", "Home")'">Glossary</button>
+                            <button class="btn btn-primary" id="aboutButton">About</button>
+                            <button class="btn btn-primary" id="contactButton" onclick="location.href = '/home/contact'">Contact</button>
+                            <button class="btn btn-primary" id="helpButton" onclick="location.href = '@Url.Action("help", "Home")'">Help</button>
+                            <button class="btn btn-primary" id="bugButton" onclick="location.href = '@Url.Action("GetSotfwareLog", "Home")'">Bug&Enhancement</button>
+                            
+                        <div id="searchSpace" style="float: right;">
+                            <input type="text" class="form-control" size="200" placeholder="Enter a term" name="term" id="term" />
+                            <button class="btn btn-default" id="searchButton " name="searchButton" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+                        </div>
+
+
+
+                        
+                    </form>
+                </div>
+
+
             </div> <!-- End Menu Content-->
         </header> <!-- End Header-->
         <div class="container body-content">
             @RenderBody()
         </div>
-   
+
         <footer class="banner">
             <div id="portal-footer">
                 <p class="footer col-sm-12 col-lg-12 col-md-12">
@@ -81,14 +98,14 @@
         </footer>
     </div>
 
-    <script src="~/Scripts/jquery-2.1.1.js"></script> 
+    <script src="~/Scripts/jquery-2.1.1.js"></script>
     <script src="~/Scripts/jquery.validate.min.js"></script>
     <script src="~/Scripts/bootstrap.js"></script>
     <script src="~/Scripts/response.js"></script>
 
-    
-    
-   
+
+
+
 
     @RenderSection("scripts", required: false)
     @RenderSection("MyScripts", required: false)
