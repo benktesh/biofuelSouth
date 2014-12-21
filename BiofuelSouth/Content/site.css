@@ -186,3 +186,11 @@ footer {
              text-align:center
              
          }
+
+         .resultTerm {
+             font-weight: bold;
+         }
+
+         .resultDescription {
+             margin-left: 20px;
+         }
