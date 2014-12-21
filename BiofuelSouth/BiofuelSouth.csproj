@@ -20,6 +20,8 @@
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
     <TargetFrameworkProfile />
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -245,6 +247,18 @@
     <Compile Include="Migrations\201412150342225_-updateCounties.Designer.cs">
       <DependentUpon>201412150342225_-updateCounties.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201412202328422_notsure.cs" />
+    <Compile Include="Migrations\201412202328422_notsure.Designer.cs">
+      <DependentUpon>201412202328422_notsure.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201412211422448_glossaryModelChange.cs" />
+    <Compile Include="Migrations\201412211422448_glossaryModelChange.Designer.cs">
+      <DependentUpon>201412211422448_glossaryModelChange.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201412211434572__glossaryUpdate.cs" />
+    <Compile Include="Migrations\201412211434572__glossaryUpdate.Designer.cs">
+      <DependentUpon>201412211434572__glossaryUpdate.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\Cost.cs" />
     <Compile Include="Models\DatabaseContext.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -279,6 +293,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\County.cs" />
+    <Compile Include="Models\Glossary.cs" />
     <Compile Include="Models\Input.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\Productivity.cs" />
@@ -310,10 +325,11 @@
     <Content Include="Views\Admin\Edit.cshtml" />
     <Content Include="Views\Admin\Create.cshtml" />
     <Content Include="Views\Admin\Delete.cshtml" />
-    <Content Include="Views\Input\_productionChart.cshtml" />
     <Content Include="Views\Input\Storage.cshtml" />
     <Content Include="Views\Shared\_DSSMenu.cshtml" />
     <Content Include="Views\Input\_inputResult.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\Search.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -352,6 +368,15 @@
     <EmbeddedResource Include="Migrations\201412150342225_-updateCounties.resx">
       <DependentUpon>201412150342225_-updateCounties.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201412202328422_notsure.resx">
+      <DependentUpon>201412202328422_notsure.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201412211422448_glossaryModelChange.resx">
+      <DependentUpon>201412211422448_glossaryModelChange.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201412211434572__glossaryUpdate.resx">
+      <DependentUpon>201412211434572__glossaryUpdate.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -378,6 +403,13 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
