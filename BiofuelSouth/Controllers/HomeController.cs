@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
+using BiofuelSouth.Models;
+using BiofuelSouth.Services;
 
 namespace BiofuelSouth.Controllers
 {
@@ -34,9 +37,23 @@ namespace BiofuelSouth.Controllers
             return Redirect("~/contact.html");
         }
 
-        public ActionResult Glossary(String term)
+        public ActionResult Search(String term="")
         {
-            return null;
+            ViewData["glossary"] = DataService.GetGlossary();
+            ViewData["term"] = "";
+            IList<Glossary> x = null; 
+            if (term != null)
+            {
+                x = DataService.Search(term);
+                ViewData["term"] = term;
+            }
+            return View(x);
+            
+        }
+
+        public void Glossary()
+        {
+            Search();
         }
     }
 }

@@ -14,12 +14,14 @@ namespace BiofuelSouth.Models
         public string keywords { get; set; }
         public string description { get; set; } 
         public int? counter { get; set; }
+        public string source { get; set; }
 
-        public Glossary(String t, String k, String d)
+        public Glossary(String t, String k, String d, String s)
         {
             this.term = t;
             this.keywords = k;
             this.description = d;
+            this.source = s;
             this.counter = 0; 
         }
 
