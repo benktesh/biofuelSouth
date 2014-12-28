@@ -259,6 +259,10 @@
     <Compile Include="Migrations\201412211434572__glossaryUpdate.Designer.cs">
       <DependentUpon>201412211434572__glossaryUpdate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201412281717306_-updateKW.cs" />
+    <Compile Include="Migrations\201412281717306_-updateKW.Designer.cs">
+      <DependentUpon>201412281717306_-updateKW.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\Cost.cs" />
     <Compile Include="Models\DatabaseContext.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -376,6 +380,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201412211434572__glossaryUpdate.resx">
       <DependentUpon>201412211434572__glossaryUpdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201412281717306_-updateKW.resx">
+      <DependentUpon>201412281717306_-updateKW.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

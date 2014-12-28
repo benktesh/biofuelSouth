@@ -63,12 +63,26 @@ namespace BiofuelSouth.Services
                 {
                     //Make a new logic
 
-                    result = new Glossary(term, "", "", "");
+                    result = new Glossary(term.ToLower(), "", "", "");
+
+                    result.counter = 1;
+                    result.description = "TBI";//TO BE IMPLEMENTED
+                    result.keywords = "TBI";
+                    result.source = "TBI";
+                    db.Glossaries.Add(result);
+                    db.SaveChanges();
                     resultList.Add(result);
                    
                 }
                 else
                 {
+                    if (result.counter == null)
+                    result.counter = 0;
+                    result.counter = result.counter + 1;
+                    db.Entry(result).State = EntityState.Modified;
+                    db.SaveChanges();
+
+              
                     resultList.Add(result);
                     //add to result the records for which we have keywords.
                     //1. get keywords for the term -Done
@@ -97,7 +111,7 @@ namespace BiofuelSouth.Services
 
 
                 resultList.AddRange(moreResults);
-
+                
                 return resultList;
 
             }
