@@ -28,7 +28,7 @@ namespace BiofuelSouth.Controllers
             int[] xValues = Enumerable.Range(1, data.Length).ToArray();
             var chart = new Chart(600, 300);
             chart.AddSeries(
-                chartType: "Line",
+                chartType: "Bar",
             
                 name: chartName, 
                 xValue: xValues,  
