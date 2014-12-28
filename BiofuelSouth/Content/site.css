@@ -24,9 +24,9 @@ textarea {
 
 /*Change color etc for footer*/
 footer {
-    width: 1200px;
-    padding: 2em 0;
-    margin: 3em 0;
+   
+    padding: 1em 0;
+    margin: 1em 0;
     border-top: 1px solid #ddd;
     color: red;
     text-align:center;
