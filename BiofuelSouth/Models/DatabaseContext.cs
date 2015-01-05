@@ -22,7 +22,8 @@ namespace BiofuelSouth.Models
         public DbSet<Productivity> Productivities { get; set; }
         public DbSet<County> County { get; set; }
         public DbSet<Glossary> Glossaries { get; set; }
-
+        public DbSet<FeedBack> FeedBacks { get; set; }
+    
         public System.Data.Entity.DbSet<BiofuelSouth.Models.Input> Inputs { get; set; }
     }
 
