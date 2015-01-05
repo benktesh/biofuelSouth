@@ -26,6 +26,27 @@ namespace BiofuelSouth.Controllers
             return Redirect("https://docs.google.com/spreadsheets/d/1tW4cMUo6uoi6o9ZsvCx8myMz5J7CTEOC_YOzdYPKRQ0/edit?usp=sharing");
         }
 
+        [HttpGet]
+        public ActionResult FeedBack()
+        {
+            FeedBack fb = new FeedBack();
+            //Save feedback
+            //Send email to client acknowledging receipt of the feedback
+            //Send email to Resource about the new Feedback
+            return View(fb);
+        }
+
+        [HttpPost]
+        public ActionResult FeedBack(FeedBack fb)
+        {
+            fb.Date = DateTime.UtcNow;
+            DataService.SaveFeedback(fb);
+            //Save feedback
+            //Send email to client acknowledging receipt of the feedback
+            //Send email to Resource about the new Feedback
+            return View(fb);
+        }
+
         public ActionResult Help()
         {
 
