@@ -49,7 +49,15 @@ namespace BiofuelSouth.Services
                return result;
             }
         }
-    
+
+        public static void SaveFeedback(FeedBack fb)
+        {
+            
+            using (DatabaseContext db = new DatabaseContext())
+            {
+                db.FeedBacks.Add(fb);
+            }
+        }
 
         public static List<Glossary> Search(String term)
         {
