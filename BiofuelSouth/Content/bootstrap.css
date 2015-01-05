@@ -5872,7 +5872,7 @@ body.modal-open,
   left: 0;
   z-index: 1010;
   display: none;
-  max-width: 276px;
+  max-width: 600px;
   padding: 1px;
   text-align: left;
   white-space: normal;
@@ -5898,7 +5898,7 @@ body.modal-open,
 }
 
 .popover.left {
-  margin-left: -10px;
+  margin-left: 150px;
 }
 
 .popover-title {
