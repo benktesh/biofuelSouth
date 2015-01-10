@@ -13,20 +13,21 @@ namespace BiofuelSouth.Models
     public static class Constants
     {
 
-        public static List<string> GetCategory()
+        public static IEnumerable<SelectListItem> GetCategory()
         {
-            //TODO could change this to make database driven call.
-            String[] Category = new String[] { "Select Category", "Switchgrass", "Miscanthus", "Poplar", "Willow" };
-            return Category.ToList();
+            IList<SelectListItem> items = new List<SelectListItem>
+            {
+                new SelectListItem{Text = "Switchgrass", Value = "Switchgrass"},
+                new SelectListItem{Text = "Miscanthus", Value = "Miscanthus"},
+                new SelectListItem{Text = "Poplar", Value = "Poplar"},
+                new SelectListItem{Text = "Willow", Value = "Willow"}
+            };
+            return items;
         }
 
-        public static List<string> GetState()
-        {
-            String[] State = new String[] { "Select State", "TN", "AL", "LA", "AR", "FL", "GA", "KY", "MS", "NC", "SC", "TX", "VA" };
-            //TODO could change this to make database driven call.
 
-            return State.ToList();
-        }
+
+
 
         public static IEnumerable<string> GetCounty(String state)
         {
@@ -106,6 +107,25 @@ namespace BiofuelSouth.Models
             };
             return items;
         }
+        public static IEnumerable<SelectListItem> GetState()
+        {
+            IList<SelectListItem> items = new List<SelectListItem>
+            {
+                new SelectListItem {Text = "AL", Value = "AL"},
+                new SelectListItem {Text = "AR", Value = "AR"},
+                new SelectListItem {Text = "FL", Value = "FL"},
+                new SelectListItem {Text = "GA", Value = "GA"},
+                new SelectListItem {Text = "KY", Value = "KY"},
+                new SelectListItem {Text = "MS", Value = "MS"},
+                new SelectListItem {Text = "NC", Value = "NC"},
+                new SelectListItem {Text = "SC", Value = "SC"},
+                new SelectListItem {Text = "TN", Value = "TN"},
+                new SelectListItem {Text = "TX", Value = "TX"},
+                new SelectListItem {Text = "VA", Value = "VA"}
+            };
+            return items;
+        }
+
         /// <summary>
         /// Currenlty switchgrass is hardcoded.
         /// </summary>
