@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Linq.Expressions;
+using System.Text;
 using System.Web.Mvc;
 using BiofuelSouth.Models;
 using BiofuelSouth.Services;
@@ -41,6 +43,17 @@ namespace BiofuelSouth.Controllers
         {
             fb.Date = DateTime.UtcNow;
             DataService.SaveFeedback(fb);
+
+            StringBuilder msgBody = new StringBuilder();
+
+            msgBody.Append("Dear " + fb.Name + "," +"\n");
+            msgBody.Append("Thank you for contacting us. Your feedback is important to us. If your feedback (as shown below) requires response from us, you will be contacted by one of our team members.\n\n");
+            msgBody.Append("The Biofuel South DSS Team.\n\n" +
+
+            "------------Your Feedback ----------------\n\n" + fb.Message);
+
+            EMailService.SendEmail(msgBody.ToString(), fb.Email, "Feedback received at Biofuel DSS.");
+            
             //Save feedback
             //Send email to client acknowledging receipt of the feedback
             //Send email to Resource about the new Feedback
@@ -55,7 +68,7 @@ namespace BiofuelSouth.Controllers
 
         public ActionResult Contact()
         {
-            return Redirect("~/contact.html");
+            return FeedBack();
         }
 
         public ActionResult Search(String term="")
