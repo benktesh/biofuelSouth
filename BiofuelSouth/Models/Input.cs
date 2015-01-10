@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
 using System.Linq;
 using System.Web;
@@ -12,22 +13,28 @@ namespace BiofuelSouth.Models
     {
         public Input()
         {
-            ProjectSize = 100;
-            ProjectLife = 10;
-            Category = "Switchgrass";
-            State = "AL";
-            County = "01001";
+            //ProjectSize = 100;
+           // ProjectLife = 10;
+          //  Category = "Switchgrass";
+          //  State = "AL";
+          //  County = "01001";
             StorageRequirement = new Storage();
         }
         public int Id { get; set; }
 
-        [DisplayName("Biofuel Category")]
-        public String Category { get; set; }
 
+        [Required]
+        public String State { get; set; }
+
+        [Required]
         [DisplayName("Name of County")]
         public string County { get; set; }
 
-        public String State { get; set; }
+
+        [Required]
+        [DisplayName("Biofuel Category")]
+        public String Category { get; set; }
+
         [DisplayName("Size of Project (acre)")]
         public double ProjectSize {get; set;}
 
