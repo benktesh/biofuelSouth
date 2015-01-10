@@ -85,6 +85,18 @@ namespace BiofuelSouth.Controllers
             
         }
 
+        public JsonResult GetListOfWords(string key)
+        {
+            var result = DataService.GetAllTerms(key);
+            return new JsonResult
+            {
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet,
+                Data = result
+            };
+
+
+        }
+
         public void Glossary()
         {
             Search();

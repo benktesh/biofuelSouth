@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Web.Http.Results;
+using System.Web.Mvc;
 using BiofuelSouth.Models;
 
 
@@ -57,6 +59,31 @@ namespace BiofuelSouth.Services
             {
                 db.FeedBacks.Add(fb);
             }
+        }
+
+        public static IList<String> GetAllTerms(string key)
+        {
+            using (DatabaseContext db = new DatabaseContext())
+            {
+               
+                if (key == null || key.Equals("") || key.Equals("All"))
+                {
+                    return db.Glossaries.Select(p => p.term).ToList();
+                }
+
+                
+                key = key.Replace("-", null);
+
+                var result = new List<String>();
+                foreach (var element in key.ToCharArray())
+                {
+                    String startWith = element.ToString().ToLower();
+                    result.AddRange(db.Glossaries.Select(p => p.term).Where(d => d.ToLower().StartsWith(startWith)));
+                }
+
+                return result;
+            }
+
         }
 
         public static List<Glossary> Search(String term)

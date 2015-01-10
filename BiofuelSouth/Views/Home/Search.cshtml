@@ -1,5 +1,6 @@
 ﻿@model IList<Glossary>
 @using BiofuelSouth.Models
+@using BiofuelSouth.Services
 
 
 @{
@@ -73,26 +74,78 @@
 
                 if (Model.Any() && !ViewData["term"].Equals(""))
                 {
-                    <div style="font-weight: bold">
-                        Related Information    
+                    <br />
+                    <div style="font-weight: bold;">
+                        Related Terms  
                     </div>
-
+                    @:<div class="pull-left">
+  
                     foreach (Glossary glossary in Model)
                     {
-                        @*<div>@glossary.term </div>
-                            <div>@glossary.description</div>*@
-    <div>
-        <a href='@Url.Action("Search", new { term = @glossary.term })'>@glossary.term</a>
-    </div>
+
+                        <a href='@Url.Action("Search", new { term = @glossary.term })'>@glossary.term</a>
+
                     }
+                    @:</div>
                 }
-}
+            }
+        </div>
+        <br />
+        <hr />
+        <div id="GlossaryWords">
+            
+            @{
+                var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+                var result1 = new List<string>();
+                int breakPoint = 3;
+                result1.Add("All");
+                for (int i = 0; i < chars.Length; i = i + breakPoint)
+                {
+                    if (i + breakPoint >= chars.Length)
+                    {
+                        breakPoint = (chars.Length - i);
+                    }
+
+                    var temp = chars.Substring(i, breakPoint);
+
+                    for (int j = temp.Length - 1; j > 0; j--)
+                    {
+                        temp = temp.Insert(j, "-");
+                    }
+                    result1.Add(temp);
+                }
+
+                result1.Add("0-9");
+                result1.Add("#*%&");
+                <div>
+                    @foreach (var temp in result1)
+                    {
+                        <a href="" onclick="GetWordList(event); return false;" class="btn btn-default" id='@temp'>@temp</a>
+                    }
+                </div>
+                <div id="listOfWord">
+                    @{
+                        var results = DataService.GetAllTerms("");
+                        string formattedResult = "";
+                        foreach (var word in results)
+                        {
+                            if (word.Length > 0)
+                            {
+                                <a href='@Url.Action("Search", new { term = @word })'>@word</a>
+                                @:&nbsp;
+                            }
+
+                        }
+                    }
+                </div>
+            }
+
         </div>
     </div>
     <div class="col-lg-2 pull-right" id="glossaryDisplay">
         <strong>Top searches</strong>
         @{
-            var glossaries = (IList<Glossary>)ViewData["glossary"];
+    var glossaries = (IList<Glossary>)ViewData["glossary"];
             glossaries = glossaries.OrderByDescending(p => p.counter).Take(20).ToList();
             foreach (var glossary in glossaries)
             {
@@ -104,3 +157,37 @@
 
     </div>
 </div>
+
+<script>
+    function GetWordList(event) {
+        var sender = $(event.target).attr('id');
+        $.ajax({
+            async: true,
+            url: '@(Url.Action("GetListOfWords","Home"))',
+            data: {
+                key: sender
+            },
+            type: "get",
+            datatype: "json",
+            success: function (results) {
+                var formattedResult = "";
+                for (i = 0; i < results.length; i++) {
+                    formattedResult = formattedResult + '<a href="" ' + results[i] + '>' + results[i] + "</a> ";
+                }
+                if (formattedResult.length == 0) {
+                    formattedResult = "Not Found";
+                }
+                $('#listOfWord').html(formattedResult);
+            },
+            error: function () {
+                alert('Could not get result from our server. Please try again later.');
+            }
+        });
+
+
+
+
+
+    }
+
+</script>
