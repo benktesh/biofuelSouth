@@ -20,22 +20,22 @@
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 <div class="form-group">
                     @Html.LabelFor(model => model.State, htmlAttributes: new { @class = "control-label" })
-                    <a href="#" rel="popover" class="" data-toggle="popover" tabindex="0" data-trigger="focus" 
+                    <a href="#" rel="popover" class="" data-toggle="popover" tabindex="0" data-trigger="focus"
                        data-placement="center" title="State" data-content="<p>State of the production of biofuel crop.</p>">
-                         <span class="glyphicon glyphicon-question-sign"></span>Help
-                    </a>
+                         <span class="glyphicon glyphicon-question-sign"></span></a>
                     <div class="row">
-                        @Html.DropDownListFor(model => model.State, new SelectList(ViewBag.State), new { @class = "form-control", id = "state" })
-                        @Html.ValidationMessageFor(model => model.State, "", new { @class = "text-danger" })
-                    </div>
+                        
+                        
+                            @Html.DropDownListFor(model => model.State, (List<SelectListItem>)ViewBag.State, "Select State", new { @class = "form-control", id = "state" })
+                            @Html.ValidationMessageFor(model => model.State, "", new { @class = "text-danger" })
+</div>
                 </div>
 
                 <div class="form-group">
                     @Html.LabelFor(model => model.County, htmlAttributes: new { @class = "control-label" })
                     <a href="#" rel="popover" class="" data-toggle="popover" tabindex="0" data-trigger="focus"
                        data-placement="center" title="County" data-content="<p>County of production.</p>">
-                         <span class="glyphicon glyphicon-question-sign"></span>Help
-                    </a>
+                         <span class="glyphicon glyphicon-question-sign"></span></a>
                     <div class="row">
                         @Html.DropDownListFor(model => model.County, new SelectList(new List<string> { "Select County" }), new { @class = "form-control", name = "county", id = "county" })
                         @Html.ValidationMessageFor(model => model.County, "", new { @class = "text-danger" })
@@ -47,9 +47,9 @@
                     
                     <a href="#" rel="popover" class="" data-toggle="popover" tabindex="0" data-trigger="focus"
                        data-placement="center" title="Crop category" data-content="<p>Select the type of biofuel crops. If you do not find a crop in the list, please contact us.</p>">
-                         <span class="glyphicon glyphicon-question-sign">Help</span></a>
+                         <span class="glyphicon glyphicon-question-sign"></span></a>
                     <div class="row">
-                        @Html.DropDownListFor(model => model.Category, new SelectList(ViewBag.Category), new { @class = "form-control" })
+                        @Html.DropDownListFor(model => model.Category, (List<SelectListItem>)ViewBag.Category, "Select Crop Category", new { @class = "form-control" })
                         @Html.ValidationMessageFor(model => model.Category, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -57,11 +57,10 @@
                 <div class="form-group">
                     @Html.LabelFor(model => model.ProjectSize, htmlAttributes: new { @class = "control-label" })
                     <a href="#" rel="popover" class="" data-toggle="popover" tabindex="0" data-trigger="focus"
-                       data-placement="center" title="Help" data-content="<p>Enter size of the potential project. The area must be in acres. If you do not yet know the size, use any reasonable acre. By default it will be 1.</p>">
-                         <span class="glyphicon glyphicon-question-sign"></span>Help
-                    </a>
+                       data-placement="center" title="Help" data-content="<p>Enter size of the potential project. The area must be in acres. If you do not yet know the size, use any reasonable acre.</p>">
+                         <span class="glyphicon glyphicon-question-sign"></span></a>
                     <div class="row">
-                        @Html.EditorFor(model => model.ProjectSize, new { text = 1, htmlAttributes = new { @class = "form-control" } })
+                        @Html.TextBoxFor(model => model.ProjectSize, new { type = "number", min="1",  @class = "form-control" })
                         @Html.ValidationMessageFor(model => model.ProjectSize, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -75,10 +74,9 @@
                     Interest rates often change as a result of inflation and financial poslies. For example, 
                     if a lender (such as a bank) charges a customer $75 in a year on a loan of $1000, then the interest rate would be 75/1000 *100% = 7.5%.
                     Read more: http://www.investorwords.com/2539/interest_rate.html#ixzz3NsD6A9ff </p>">
-                         <span class="glyphicon glyphicon-question-sign"></span>Help
-                    </a>
+                         <span class="glyphicon glyphicon-question-sign"></span></a>
                     <div class="row">
-                        @Html.EditorFor(model => model.InterestRate, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.TextBoxFor(model => model.InterestRate, new { type = "number", @class = "form-control" })
                         @Html.ValidationMessageFor(model => model.InterestRate, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -88,10 +86,9 @@
                    <a href="#" rel="popover" class="" data-toggle="popover" tabindex="0" data-trigger="focus"
                        data-placement="left" title="Project Duration" data-content="<p>Duration of project expressed as total number of years 
                     between first plantation and final harvest with intermediate harvests in between.</p>">
-                         <span class="glyphicon glyphicon-question-sign"></span>Help
-                    </a>
+                         <span class="glyphicon glyphicon-question-sign"></span></a>
                     <div class="row">
-                        @Html.EditorFor(model => model.ProjectLife, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.TextBoxFor(model => model.ProjectLife, new { @class = "form-control", type="number", min="1" })
                         @Html.ValidationMessageFor(model => model.ProjectLife, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -100,8 +97,7 @@
                     @Html.LabelFor(model => model.LandCost, htmlAttributes: new { @class = "control-label" })
                     <a href="#" rel="popover" class="" data-toggle="popover" tabindex="0" data-trigger="focus"
                        data-placement="left" title="Land Cost" data-content="<p>Annual cost of land expressed as  $/acre/year.</p>">
-                         <span class="glyphicon glyphicon-question-sign"></span>Help
-                    </a>
+                         <span class="glyphicon glyphicon-question-sign"></span></a>
                     <div class="row">
                         @Html.EditorFor(model => model.LandCost, new { htmlAttributes = new { @class = "form-control" } })
                         @Html.ValidationMessageFor(model => model.LandCost, "", new { @class = "text-danger" })
@@ -112,8 +108,7 @@
                     @Html.LabelFor(model => model.AdministrativeCost, htmlAttributes: new { @class = "control-label" })
                     <a href="#" rel="popover" class="" data-toggle="popover" tabindex="0" data-trigger="focus"
                        data-placement="left" title="Administrative Cost" data-content="<p>Recurring administrative cost. The default is shown in the fom if avaialble.</p>">
-                         <span class="glyphicon glyphicon-question-sign"></span>Help
-                    </a>
+                         <span class="glyphicon glyphicon-question-sign"></span></a>
                     <div class="row">
                         @Html.EditorFor(model => model.AdministrativeCost, new { htmlAttributes = new { @class = "form-control" } })
                         @Html.ValidationMessageFor(model => model.AdministrativeCost, "", new { @class = "text-danger" })
@@ -124,8 +119,7 @@
                     @Html.LabelFor(model => model.IncentivePayment, htmlAttributes: new { @class = "control-label" })
                     <a href="#" rel="popover" class="" data-toggle="popover" tabindex="0" data-trigger="focus"
                        data-placement="left" title="Incentive Payment" data-content="<p>Any incentive payment rate.</p>">
-                         <span class="glyphicon glyphicon-question-sign"></span>Help
-                    </a>
+                         <span class="glyphicon glyphicon-question-sign"></span></a>
                     <div class="row">
                         @Html.EditorFor(model => model.IncentivePayment, new { htmlAttributes = new { @class = "form-control" } })
                         @Html.ValidationMessageFor(model => model.IncentivePayment, "", new { @class = "text-danger" })
@@ -136,8 +130,7 @@
                     @Html.LabelFor(model => model.YearsOfIncentivePayment, htmlAttributes: new { @class = "control-label" })
                     <a href="#" rel="popover" class="" data-toggle="popover" tabindex="0" data-trigger="focus"
                        data-placement="left" title="Years of Incentive Payment" data-content="<p>Years of incentive paymement.</p>">
-                         <span class="glyphicon glyphicon-question-sign"></span>Help
-                    </a>
+                         <span class="glyphicon glyphicon-question-sign"></span></a>
                     <div class="row">
                         @Html.EditorFor(model => model.YearsOfIncentivePayment, new { htmlAttributes = new { @class = "form-control" } })
                         @Html.ValidationMessageFor(model => model.YearsOfIncentivePayment, "", new { @class = "text-danger" })
@@ -148,8 +141,7 @@
                     @Html.LabelFor(model => model.BiomassPriceAtFarmGate, htmlAttributes: new { @class = "control-label" })
                     <a href="#" rel="popover" class="" data-toggle="popover" tabindex="0" data-trigger="focus"
                        data-placement="left" title="Farm Gate Price" data-content="<p>The price of the product at which it is sold by the farm (the farm gate price).</p>">
-                         <span class="glyphicon glyphicon-question-sign"></span>Help
-                    </a>
+                         <span class="glyphicon glyphicon-question-sign"></span></a>
                     <div class="row">
                         @Html.EditorFor(model => model.BiomassPriceAtFarmGate, new { htmlAttributes = new { @class = "form-control" } })
                         @Html.ValidationMessageFor(model => model.BiomassPriceAtFarmGate, "", new { @class = "text-danger" })
@@ -162,8 +154,7 @@
                        data-placement="left" title="Available Equity" data-content="<p>Equity is the interest or value that the owner has in real estate over and above liens against it.
                     You can estimate the available equity using this formula: </p><p>
                     Available Equity = Market Value - Total Loans</p>">
-                         <span class="glyphicon glyphicon-question-sign"></span>Help
-                    </a>
+                         <span class="glyphicon glyphicon-question-sign"></span></a>
                     <div class="row">
                         @Html.EditorFor(model => model.AvailableEquity, new { htmlAttributes = new { @class = "form-control" } })
                         @Html.ValidationMessageFor(model => model.AvailableEquity, "", new { @class = "text-danger" })
@@ -178,8 +169,7 @@
                         the quantity of cash distributed by the lender.
                     <p>
                     Available Equity = Market Value - Total Loans</p>">
-                       <span class="glyphicon glyphicon-question-sign">Help</span>
-                    </a>
+                       <span class="glyphicon glyphicon-question-sign"></span></a>
                     
                     
                     <div class="row">
@@ -194,8 +184,7 @@
                     <a href="#" rel="popover" class="" data-toggle="popover" tabindex="0" data-trigger="focus" data-placement="left"
                        title="Loan Amount"
                        data-content="<p> The amount specified in the contract that the borrower agrees to pay back for equity loan.</p>">
-                        <span class="glyphicon glyphicon-question-sign">Help</span>
-                    </a>
+                        <span class="glyphicon glyphicon-question-sign"></span></a>
                     <div class="row">
                         @Html.EditorFor(model => model.EquityLoanInterestRate, new { htmlAttributes = new { @class = "form-control" } })
                         @Html.ValidationMessageFor(model => model.EquityLoanInterestRate, "", new { @class = "text-danger" })
@@ -203,7 +192,8 @@
                 </div>
                 <div class="form-group">
                     <div class="row">
-                        <input type="submit" value="Submit" class="btn btn-default pull-left" />
+                        <button type="reset" value="Reset" class="btn btn-default">Reset</button>&nbsp;&nbsp;
+                        <input type="submit" value="Submit" class="btn btn-default" />
 
                     </div>
                 </div>
@@ -228,7 +218,7 @@
         //http://www.codeproject.com/Articles/730953/Cascading-Dropdown-List-With-MVC-LINQ-to-SQL-and-A
         $(document).ready(function () {
 
-            test();
+            
             $("#county").prop("disabled", true);
 
             if ($('#state').val() != "Select State") {
