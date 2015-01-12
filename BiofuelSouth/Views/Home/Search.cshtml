@@ -26,20 +26,20 @@
                 if (Model.Count > 0)
                 {
 
-                    if (Model.First() != null && !Model.First().description.Equals("TBI") && !ViewData["term"].Equals(""))
+                    if (Model.First() != null && !Model.First().Description.Equals("TBI") && !ViewData["term"].Equals(""))
                     {
 
                         Glossary result = Model.First();
-                        <div class="resultTerm">@result.term:</div>
-                        <div class="resultDescription">@result.description.</div>
+                        <div class="resultTerm">@result.Term:</div>
+                        <div class="resultDescription">@result.Description.</div>
                         <br />
-                        <div class="resultHirarchy">[@result.counter]</div>
-                        <div class="resultSource">More Information: @result.source</div>
+                        <div class="resultHirarchy">[@result.Counter]</div>
+                        <div class="resultSource">More Information: @result.Source</div>
                         Model.RemoveAt(0);
                     }
-                    else if (Model.First() != null && Model.First().description.Equals("TBI") && !ViewData["term"].Equals(""))
+                    else if (Model.First() != null && Model.First().Description.Equals("TBI") && !ViewData["term"].Equals(""))
                     {
-                        var i = Model.First().counter;
+                        var i = Model.First().Counter;
                         if (i != null)
                         {
                             var counter = (int) i; 
@@ -83,7 +83,7 @@
                     foreach (Glossary glossary in Model)
                     {
 
-                        <a href='@Url.Action("Search", new { term = @glossary.term })'>@glossary.term</a>
+                        <a href='@Url.Action("Search", new { term = @glossary.Term })'>@glossary.Term</a>
 
                     }
                     @:</div>
@@ -146,11 +146,11 @@
         <strong>Top searches</strong>
         @{
     var glossaries = (IList<Glossary>)ViewData["glossary"];
-            glossaries = glossaries.OrderByDescending(p => p.counter).Take(20).ToList();
+            glossaries = glossaries.OrderByDescending(p => p.Counter).Take(20).ToList();
             foreach (var glossary in glossaries)
             {
                 <div>
-                    <a href='@Url.Action("Search", new { term = @glossary.term })'>@glossary.term</a>
+                    <a href='@Url.Action("Search", new { term = @glossary.Term })'>@glossary.Term</a>
                 </div>
             }
         }

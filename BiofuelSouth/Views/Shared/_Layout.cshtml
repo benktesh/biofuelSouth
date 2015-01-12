@@ -26,10 +26,10 @@
         }
 
         function GoHome() {
-            //  var urlInsert = '@Url.Action("Home")';
+           
             //  $.get("Home", function () {
             //  });
-            window.location.href = "../index.html";
+            window.location.href = "../Home/index.html";
         }
     </script>
 
@@ -50,7 +50,7 @@
             <div class="row">
                 <div class="col-sm-8 col-lg-8 col-md-8 pull-left">
                 <!-- Menu Content-->
-                <button class="btn btn-primary glyphicon glyphicon-home" id="homeButton" style="margin-left: 0px" onclick="location.href =  '@Url.Action("Index", "Home")'">Home</button>
+                <button class="btn btn-primary glyphicon glyphicon-home" id="homeButton" style="margin-left: 0" onclick="location.href =  '@Url.Action("Index", "Home")'">Home</button>
                     <button class="btn btn-primary glyphicon" id="dropDownButton" onclick="location.href ='/map'">Maps</button>
                     <button class="btn btn-primary glyphicon" id="dssButton" onclick="location.href ='/Input'">DSS</button>
                     <button class="btn btn-primary glyphicon" id="glossaryButton" onclick="location.href = '@Url.Action("Search", "Home")'">Glossary</button>
@@ -61,7 +61,7 @@
                 </div>
                 <div class="row col-sm-4 col-lg-4 col-md-4 pull-right">
                     <div id="searchSpace" style="float:right;">
-                        <form class=" navbar-form" style="float:right; margin-top: 0px;" role="search" method="POST" action="@Url.Action("Search", "Home")">
+                        <form class=" navbar-form" style="float:right; margin-top: 0;" role="search" method="POST" action="@Url.Action("Search", "Home")">
                             <input type="text" class="form-control" size="50" placeholder="Enter a term" name="term" id="term" />
                             <button class="btn btn-primary btn-primary glyphicon glyphicon-search" id="searchButton " name="searchButton" type="submit"></button>
                         </form>
@@ -115,7 +115,7 @@
 
 
 
-    @RenderSection("scripts", required: false)
-    @RenderSection("MyScripts", required: false)
+    @RenderSection("scripts", false)
+    @RenderSection("MyScripts", false)
 </body>
 </html>

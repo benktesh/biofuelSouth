@@ -1,6 +1,5 @@
 namespace BiofuelSouth.Migrations
 {
-    using System;
     using System.Data.Entity.Migrations;
     
     public partial class updateFeedback : DbMigration
@@ -11,7 +10,7 @@ namespace BiofuelSouth.Migrations
                 "dbo.FeedBacks",
                 c => new
                     {
-                        Id = c.Int(nullable: false, identity: true),
+                        Id = c.Int(false, true),
                         Date = c.DateTime(),
                         Name = c.String(),
                         Email = c.String(),

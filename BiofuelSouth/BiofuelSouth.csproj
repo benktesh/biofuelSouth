@@ -157,7 +157,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="admin.html" />
-    <Content Include="contact.html" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\site.css" />
@@ -188,7 +187,6 @@
     <Content Include="images\usdahead.jpg" />
     <Content Include="images\uthead.jpg" />
     <Content Include="images\waste.jpg" />
-    <Content Include="index.html" />
     <Content Include="InstallationDummyFile.txt" />
     <Content Include="mapDemo.html" />
     <Content Include="product.html" />
@@ -204,6 +202,7 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\biofuelSouth.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\custom.js" />
@@ -263,6 +262,14 @@
     <Compile Include="Migrations\201412281717306_-updateKW.Designer.cs">
       <DependentUpon>201412281717306_-updateKW.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201501042335421_%27updateFeedback%27.cs" />
+    <Compile Include="Migrations\201501042335421_%27updateFeedback%27.Designer.cs">
+      <DependentUpon>201501042335421_%27updateFeedback%27.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201501101459271_updateModel.cs" />
+    <Compile Include="Migrations\201501101459271_updateModel.Designer.cs">
+      <DependentUpon>201501101459271_updateModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\Cost.cs" />
     <Compile Include="Models\DatabaseContext.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -297,6 +304,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\County.cs" />
+    <Compile Include="Models\FeedBack.cs" />
     <Compile Include="Models\Glossary.cs" />
     <Compile Include="Models\Input.cs" />
     <Compile Include="Models\Product.cs" />
@@ -310,6 +318,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="Services\DataService.cs" />
+    <Compile Include="Services\EmailService.cs" />
     <Compile Include="Settings.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -334,6 +343,7 @@
     <Content Include="Views\Input\_inputResult.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\Search.cshtml" />
+    <Content Include="Views\Home\FeedBack.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -383,6 +393,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201412281717306_-updateKW.resx">
       <DependentUpon>201412281717306_-updateKW.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201501042335421_%27updateFeedback%27.resx">
+      <DependentUpon>201501042335421_%27updateFeedback%27.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201501101459271_updateModel.resx">
+      <DependentUpon>201501101459271_updateModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

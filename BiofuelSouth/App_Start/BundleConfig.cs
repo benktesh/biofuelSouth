@@ -1,5 +1,4 @@
-﻿using System.Web;
-using System.Web.Optimization;
+﻿using System.Web.Optimization;
 
 namespace WebApplication1
 {
@@ -11,7 +10,8 @@ namespace WebApplication1
 
 
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/jquery-{version}.js"
+                        "~/Scripts/jquery-{version}.js",
+                         "~/Scripts/biofuelSouth.js"
                         ));
 
             // Use the development version of Modernizr to develop with and learn from. Then, when you're

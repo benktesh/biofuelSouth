@@ -1,6 +1,5 @@
 namespace BiofuelSouth.Migrations
 {
-    using System;
     using System.Data.Entity.Migrations;
     
     public partial class makesLatLonNullable : DbMigration
@@ -15,8 +14,8 @@ namespace BiofuelSouth.Migrations
         
         public override void Down()
         {
-            AlterColumn("dbo.Counties", "Lon", c => c.Double(nullable: false));
-            AlterColumn("dbo.Counties", "Lat", c => c.Double(nullable: false));
+            AlterColumn("dbo.Counties", "Lon", c => c.Double(false));
+            AlterColumn("dbo.Counties", "Lat", c => c.Double(false));
         }
     }
 }

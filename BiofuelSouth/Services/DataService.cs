@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Globalization;
 using System.Linq;
-using System.Web.Http.Results;
-using System.Web.Mvc;
 using BiofuelSouth.Models;
 
 
@@ -46,7 +45,7 @@ namespace BiofuelSouth.Services
         {
             using (DatabaseContext db = new DatabaseContext())
             {
-                var resultList = new List<Glossary>();
+               
                 var result = db.Glossaries.ToList();
                return result;
             }
@@ -68,7 +67,7 @@ namespace BiofuelSouth.Services
                
                 if (key == null || key.Equals("") || key.Equals("All"))
                 {
-                    return db.Glossaries.Select(p => p.term).ToList();
+                    return db.Glossaries.Select(p => p.Term).ToList();
                 }
 
                 
@@ -77,8 +76,8 @@ namespace BiofuelSouth.Services
                 var result = new List<String>();
                 foreach (var element in key.ToCharArray())
                 {
-                    String startWith = element.ToString().ToLower();
-                    result.AddRange(db.Glossaries.Select(p => p.term).Where(d => d.ToLower().StartsWith(startWith)));
+                    String startWith = element.ToString(CultureInfo.InvariantCulture).ToLower();
+                    result.AddRange(db.Glossaries.Select(p => p.Term).Where(d => d.ToLower().StartsWith(startWith)));
                 }
 
                 return result;
@@ -91,19 +90,18 @@ namespace BiofuelSouth.Services
             using (DatabaseContext db = new DatabaseContext())
             {
                 var resultList = new List<Glossary>();
-                var result = db.Glossaries.FirstOrDefault(p => p.term.Equals(term, StringComparison.InvariantCultureIgnoreCase));
+                var result = db.Glossaries.FirstOrDefault(p => p.Term.Equals(term, StringComparison.InvariantCultureIgnoreCase));
                 IEnumerable<Glossary> moreResults = new List<Glossary>();
-                IEnumerable<Glossary> evenMoreResults = new List<Glossary>();
                 if (result == null)
                 {
                     //Make a new logic
 
                     result = new Glossary(term.ToLower(), "", "", "");
 
-                    result.counter = 1;
-                    result.description = "TBI";//TO BE IMPLEMENTED
-                    result.keywords = "TBI";
-                    result.source = "TBI";
+                    result.Counter = 1;
+                    result.Description = "TBI";//TO BE IMPLEMENTED
+                    result.Keywords = "TBI";
+                    result.Source = "TBI";
                     db.Glossaries.Add(result);
                     db.SaveChanges();
                     resultList.Add(result);
@@ -111,9 +109,9 @@ namespace BiofuelSouth.Services
                 }
                 else
                 {
-                    if (result.counter == null)
-                    result.counter = 0;
-                    result.counter = result.counter + 1;
+                    if (result.Counter == null)
+                    result.Counter = 0;
+                    result.Counter = result.Counter + 1;
                     db.Entry(result).State = EntityState.Modified;
                     db.SaveChanges();
 
@@ -123,24 +121,24 @@ namespace BiofuelSouth.Services
                     //1. get keywords for the term -Done
                     //2. parse keywords into list  - Done
                     //3. find all the records where keywords are 'terms'
-                    char[] delimiters = new[] { ',', ';' };
+                    char[] delimiters = { ',', ';' };
 
-                    String kw = result.keywords;
+                    String kw = result.Keywords;
                     if (kw != null)
                     {
                         IList<String> keywords =
-                        result.keywords.ToLower().Split(delimiters, StringSplitOptions.RemoveEmptyEntries).ToList();
-                        moreResults = db.Glossaries.Where(k => keywords.Contains(k.term.ToLower()));
+                        result.Keywords.ToLower().Split(delimiters, StringSplitOptions.RemoveEmptyEntries).ToList();
+                        moreResults = db.Glossaries.Where(k => keywords.Contains(k.Term.ToLower()));
  
                     }
          
                     //add to more results
 
                     //1. find all the records where term is keyword
-                    evenMoreResults = db.Glossaries.Where(k => k.keywords.ToLower().Contains(term.ToLower()));
+                    IEnumerable<Glossary> evenMoreResults = db.Glossaries.Where(k => k.Keywords.ToLower().Contains(term.ToLower()));
 
                     //Merge results
-                    moreResults = moreResults.Union(evenMoreResults).OrderBy(x => x.term);
+                    moreResults = moreResults.Union(evenMoreResults).OrderBy(x => x.Term);
 
                 }
 

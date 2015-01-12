@@ -1,6 +1,5 @@
 namespace BiofuelSouth.Migrations
 {
-    using System;
     using System.Data.Entity.Migrations;
     
     public partial class notsure : DbMigration
@@ -11,7 +10,7 @@ namespace BiofuelSouth.Migrations
                 "dbo.Glossaries",
                 c => new
                     {
-                        term = c.String(nullable: false, maxLength: 128),
+                        term = c.String(false, 128),
                         keywords = c.String(),
                         description = c.String(),
                         counter = c.Int(),

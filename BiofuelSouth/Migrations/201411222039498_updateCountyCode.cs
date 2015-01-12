@@ -1,6 +1,5 @@
 namespace BiofuelSouth.Migrations
 {
-    using System;
     using System.Data.Entity.Migrations;
     
     public partial class updateCountyCode : DbMigration
@@ -14,7 +13,7 @@ namespace BiofuelSouth.Migrations
         
         public override void Down()
         {
-            AlterColumn("dbo.Counties", "CountyCode", c => c.Int(nullable: false));
+            AlterColumn("dbo.Counties", "CountyCode", c => c.Int(false));
         }
     }
 }

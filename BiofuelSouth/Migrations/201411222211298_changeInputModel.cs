@@ -1,6 +1,5 @@
 namespace BiofuelSouth.Migrations
 {
-    using System;
     using System.Data.Entity.Migrations;
     
     public partial class changeInputModel : DbMigration
@@ -15,7 +14,7 @@ namespace BiofuelSouth.Migrations
         
         public override void Down()
         {
-            AddColumn("dbo.Inputs", "CountyCode", c => c.Int(nullable: false));
+            AddColumn("dbo.Inputs", "CountyCode", c => c.Int(false));
             DropColumn("dbo.Inputs", "County");
         }
     }

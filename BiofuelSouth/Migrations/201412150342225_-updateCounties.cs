@@ -1,16 +1,15 @@
 namespace BiofuelSouth.Migrations
 {
-    using System;
     using System.Data.Entity.Migrations;
     
     public partial class updateCounties : DbMigration
     {
         public override void Up()
         {
-            AddColumn("dbo.Inputs", "StorageRequirement_RequireStorage", c => c.Boolean(nullable: false));
-            AddColumn("dbo.Inputs", "StorageRequirement_StorageTime", c => c.Double(nullable: false));
-            AddColumn("dbo.Inputs", "StorageRequirement_PercentDirectlyToPlantGate", c => c.Double(nullable: false));
-            AddColumn("dbo.Inputs", "StorageRequirement_PercentStored", c => c.Double(nullable: false));
+            AddColumn("dbo.Inputs", "StorageRequirement_RequireStorage", c => c.Boolean(false));
+            AddColumn("dbo.Inputs", "StorageRequirement_StorageTime", c => c.Double(false));
+            AddColumn("dbo.Inputs", "StorageRequirement_PercentDirectlyToPlantGate", c => c.Double(false));
+            AddColumn("dbo.Inputs", "StorageRequirement_PercentStored", c => c.Double(false));
             AddColumn("dbo.Inputs", "StorageRequirement_StorageMethod", c => c.String());
            // AddColumn("dbo.Productivities", "GeoId", c => c.Int(nullable: false));
            // AddColumn("dbo.Productivities", "Cost", c => c.Double(nullable: false));
@@ -1357,8 +1356,8 @@ SET IDENTITY_INSERT [dbo].[Counties] OFF
         
         public override void Down()
         {
-            AddColumn("dbo.Productivities", "CountyId", c => c.Int(nullable: false));
-            AlterColumn("dbo.Productivities", "Yield", c => c.Decimal(nullable: false, precision: 18, scale: 2));
+            AddColumn("dbo.Productivities", "CountyId", c => c.Int(false));
+            AlterColumn("dbo.Productivities", "Yield", c => c.Decimal(false, 18, 2));
             DropColumn("dbo.Productivities", "Cost");
             DropColumn("dbo.Productivities", "GeoId");
             DropColumn("dbo.Inputs", "StorageRequirement_StorageMethod");

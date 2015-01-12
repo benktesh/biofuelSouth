@@ -1,16 +1,12 @@
 ﻿using System.Data.Entity;
-using System.Data.Entity.Migrations;
-using BiofuelSouth.App_Start;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Web;
+using BiofuelSouth.App_Start;
 using System.Web.Http;
 using System.Web.Routing;
 
 namespace BiofuelSouth
 {
-    public class WebApiApplication : System.Web.HttpApplication
+    public class WebApiApplication : HttpApplication
     {
         protected void Application_Start()
         {

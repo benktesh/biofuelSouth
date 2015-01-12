@@ -2,11 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
-using BiofuelSouth.Models;
-using BiofuelSouth.ProcessLogic;
 using BiofuelSouth.Services;
-using System.Data.Entity;
-using Microsoft.Ajax.Utilities;
 
 namespace BiofuelSouth.Models
 {
@@ -51,8 +47,8 @@ namespace BiofuelSouth.Models
 
         public static double GetValue()
         {
-            int intGeoid = 37163;
-            string category = "Switchgrass";
+            const int intGeoid = 37163;
+            const string category = "Switchgrass";
             using (DatabaseContext db = new DatabaseContext())
             {
 
@@ -132,7 +128,7 @@ namespace BiofuelSouth.Models
         /// <returns></returns>
         public static IEnumerable<SelectListItem> GetStorageMethod()
         {
-            String cropType = "Switchgrass";
+            const string cropType = "Switchgrass";
             switch (cropType)
             {
                 case "Switchgrass":

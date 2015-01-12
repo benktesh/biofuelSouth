@@ -54,9 +54,10 @@ footer {
             width: 250px;
             overflow: hidden;
             text-indent: 100%;
-            white-space: nowrap;
+            white-space: normal;
             background-repeat: no-repeat;
             float: right;
+            margin-bottom: 0;
           
         }        
 
@@ -177,7 +178,7 @@ footer {
         }
 
          .footer {
-             margin-top: 0px;
+             margin-top: 0;
              background-position: center;
              background-size:1200px;
              position: relative;

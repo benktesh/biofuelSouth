@@ -6,7 +6,7 @@
     <table>
         <tr>
             <td>
-                <label for="Select Map">Select map</label>
+                <label for="SelectedMapType Map">Select map</label>
                 <select id="SelectedMapType" name="SelectedMapType">
                     <option value="yieldmap">Yield Map</option>
                     <option value="costmap">Cost Map</option>
@@ -43,7 +43,7 @@
 @section MyScripts {
 
     <script>
-        var productyield = ['<iframe width="800" height="600" scrolling="no" frameborder="1" src="https://www.google.com/fusiontables/embedviz?q=select+col11+from+1dYCpUm_bwDqN4MybPQVjPmkHMPOsYw--Fau1IQZM&amp;viz=MAP&amp;h=false&amp;lat=36.10&amp;lng=-86.22055982637162&amp;t=1&amp;z=7&amp;l=col11&amp;y=2&amp;tmplt=2&amp;hml=KML"></iframe>', '<iframe width="800" height="600" scrolling="no" frameborder="no" src="https://www.google.com/fusiontables/embedviz?q=select+col11%3E%3E1+from+1tlr9ZXczB9JIz3gk9182vjGisXhUGkoh-PJyRq-v+where+col1%3E%3E0+in+(&#39;AL&#39;%2C+&#39;FL&#39;%2C+&#39;GA&#39;%2C+&#39;KY&#39;%2C+&#39;MS&#39;%2C+&#39;NC&#39;%2C+&#39;SC&#39;%2C+&#39;TN&#39;%2C+&#39;VA&#39;%2C+&#39;WV&#39;)&amp;viz=MAP&amp;h=false&amp;lat=36.10&amp;lng=-86.22&amp;t=1&amp;z=5&amp;l=col11%3E%3E1&amp;y=2&amp;tmplt=2&amp;hml=KML"></iframe>', '<iframe width="800" height="600" scrolling="no" frameborder="no" src="https://www.google.com/fusiontables/embedviz?q=select+col11%3E%3E1+from+1wQeB5JzUQRbGbw6di06YBYVH8akVQj6xIP3S9OCV+where+col1%3E%3E0+in+(&#39;AL&#39;%2C+&#39;FL&#39;%2C+&#39;GA&#39;%2C+&#39;KY&#39;%2C+&#39;MS&#39;%2C+&#39;NC&#39;%2C+&#39;SC&#39;%2C+&#39;TN&#39;%2C+&#39;VA&#39;%2C+&#39;WV&#39;)&amp;viz=MAP&amp;h=false&amp;lat=36.10&amp;lng=-86.22&amp;t=1&amp;z=5&amp;l=col11%3E%3E1&amp;y=2&amp;tmplt=2&amp;hml=KML"></iframe>']
+        var productyield = ['<iframe width="800" height="600" scrolling="no" frameborder="1" src="https://www.google.com/fusiontables/embedviz?q=select+col11+from+1dYCpUm_bwDqN4MybPQVjPmkHMPOsYw--Fau1IQZM&amp;viz=MAP&amp;h=false&amp;lat=36.10&amp;lng=-86.22055982637162&amp;t=1&amp;z=7&amp;l=col11&amp;y=2&amp;tmplt=2&amp;hml=KML"></iframe>', '<iframe width="800" height="600" scrolling="no" frameborder="no" src="https://www.google.com/fusiontables/embedviz?q=select+col11%3E%3E1+from+1tlr9ZXczB9JIz3gk9182vjGisXhUGkoh-PJyRq-v+where+col1%3E%3E0+in+(&#39;AL&#39;%2C+&#39;FL&#39;%2C+&#39;GA&#39;%2C+&#39;KY&#39;%2C+&#39;MS&#39;%2C+&#39;NC&#39;%2C+&#39;SC&#39;%2C+&#39;TN&#39;%2C+&#39;VA&#39;%2C+&#39;WV&#39;)&amp;viz=MAP&amp;h=false&amp;lat=36.10&amp;lng=-86.22&amp;t=1&amp;z=5&amp;l=col11%3E%3E1&amp;y=2&amp;tmplt=2&amp;hml=KML"></iframe>', '<iframe width="800" height="600" scrolling="no" frameborder="no" src="https://www.google.com/fusiontables/embedviz?q=select+col11%3E%3E1+from+1wQeB5JzUQRbGbw6di06YBYVH8akVQj6xIP3S9OCV+where+col1%3E%3E0+in+(&#39;AL&#39;%2C+&#39;FL&#39;%2C+&#39;GA&#39;%2C+&#39;KY&#39;%2C+&#39;MS&#39;%2C+&#39;NC&#39;%2C+&#39;SC&#39;%2C+&#39;TN&#39;%2C+&#39;VA&#39;%2C+&#39;WV&#39;)&amp;viz=MAP&amp;h=false&amp;lat=36.10&amp;lng=-86.22&amp;t=1&amp;z=5&amp;l=col11%3E%3E1&amp;y=2&amp;tmplt=2&amp;hml=KML"></iframe>'];
         var productcost = ['<iframe width="800" height="600" scrolling="no" frameborder="1" src="https://www.google.com/fusiontables/embedviz?q=select+col11+from+1dYCpUm_bwDqN4MybPQVjPmkHMPOsYw--Fau1IQZM&amp;viz=MAP&amp;h=false&amp;lat=36.10&amp;lng=-86.22055982637162&amp;t=1&amp;z=7&amp;l=col11&amp;y=2&amp;tmplt=2&amp;hml=KML"></iframe>', '<iframe width="800" height="600" scrolling="no" frameborder="1"   src="https://www.google.com/fusiontables/embedviz?q=select+col11%3E%3E1+from+1tlr9ZXczB9JIz3gk9182vjGisXhUGkoh-PJyRq-v+where+col1%3E%3E0+in+(&#39;AL&#39;%2C+&#39;FL&#39;%2C+&#39;GA&#39;%2C+&#39;KY&#39;%2C+&#39;MS&#39;%2C+&#39;NC&#39;%2C+&#39;SC&#39;%2C+&#39;TN&#39;%2C+&#39;VA&#39;%2C+&#39;WV&#39;)&amp;viz=MAP&amp;h=false&amp;lat=36.10&amp;lng=-86.22&amp;t=1&amp;z=5&amp;l=col11%3E%3E1&amp;y=2&amp;tmplt=2&amp;hml=KML"></iframe>', '<iframe width="800" height="600" scrolling="no" frameborder="no" src="https://www.google.com/fusiontables/embedviz?q=select+col11%3E%3E1+from+1u0UNsOicvEJ7tyvKyRcXZ-jsH9Srcen9fqK8Y4xl+where+col1%3E%3E0+in+(&#39;AL&#39;%2C+&#39;FL&#39;%2C+&#39;GA&#39;%2C+&#39;KY&#39;%2C+&#39;MS&#39;%2C+&#39;NC&#39;%2C+&#39;SC&#39;%2C+&#39;TN&#39;%2C+&#39;VA&#39;%2C+&#39;WV&#39;)&amp;viz=MAP&amp;h=false&amp;lat=36.10&amp;lng=-86.22&amp;t=1&amp;z=5&amp;l=col11%3E%3E1&amp;y=2&amp;tmplt=2&amp;hml=GEOCODABLE"></iframe>'];
         var iframe = $('#mapelement');
         $('#SelectedMapType').change(function() {
@@ -63,9 +63,7 @@
 
         $('#SelectedCrop').change(function() {
             $('#SelectedMapType').change();
-        })
-
-
+        });
         $(document).ready(function() {
             $('#SelectedMapType').change();
 

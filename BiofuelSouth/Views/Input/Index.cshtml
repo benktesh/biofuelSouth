@@ -1,7 +1,4 @@
-﻿@using System.Collections.Generic
-@using System.Web.Hosting
-@using BiofuelSouth.Models
-@model BiofuelSouth.Models.Input
+﻿@model BiofuelSouth.Models.Input
 
 
 
@@ -19,7 +16,7 @@
             <div class="container col-md-4">
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 <div class="form-group">
-                    @Html.LabelFor(model => model.State, htmlAttributes: new { @class = "control-label" })
+                    @Html.LabelFor(model => model.State, new { @class = "control-label" })
                     <a href="#" rel="popover" class="" data-toggle="popover" tabindex="0" data-trigger="focus"
                        data-placement="center" title="State" data-content="<p>State of the production of biofuel crop.</p>">
                          <span class="glyphicon glyphicon-question-sign"></span></a>
@@ -32,7 +29,7 @@
                 </div>
 
                 <div class="form-group">
-                    @Html.LabelFor(model => model.County, htmlAttributes: new { @class = "control-label" })
+                    @Html.LabelFor(model => model.County, new { @class = "control-label" })
                     <a href="#" rel="popover" class="" data-toggle="popover" tabindex="0" data-trigger="focus"
                        data-placement="center" title="County" data-content="<p>County of production.</p>">
                          <span class="glyphicon glyphicon-question-sign"></span></a>
@@ -43,7 +40,7 @@
                 </div>
 
                 <div class="form-group">
-                    @Html.LabelFor(model => model.Category, htmlAttributes: new { @class = "control-label" })&nbsp;
+                    @Html.LabelFor(model => model.Category, new { @class = "control-label" })&nbsp;
                     
                     <a href="#" rel="popover" class="" data-toggle="popover" tabindex="0" data-trigger="focus"
                        data-placement="center" title="Crop category" data-content="<p>Select the type of biofuel crops. If you do not find a crop in the list, please contact us.</p>">
@@ -55,7 +52,7 @@
                 </div>
 
                 <div class="form-group">
-                    @Html.LabelFor(model => model.ProjectSize, htmlAttributes: new { @class = "control-label" })
+                    @Html.LabelFor(model => model.ProjectSize, new { @class = "control-label" })
                     <a href="#" rel="popover" class="" data-toggle="popover" tabindex="0" data-trigger="focus"
                        data-placement="center" title="Help" data-content="<p>Enter size of the potential project. The area must be in acres. If you do not yet know the size, use any reasonable acre.</p>">
                          <span class="glyphicon glyphicon-question-sign"></span></a>
@@ -66,7 +63,7 @@
                 </div>
 
                 <div class="form-group">
-                    @Html.LabelFor(model => model.InterestRate, htmlAttributes: new { @class = "control-label" })
+                    @Html.LabelFor(model => model.InterestRate, new { @class = "control-label" })
                     <a href="#" rel="popover" class="" data-toggle="popover" tabindex="0" data-trigger="focus"
                        data-placement="center" title="Interest Rate" data-content="<p>If the project relies on financing, enter interest rate. 
                        An interest rate is a rate which is charged or paid for the use of money and is often expressed as an annual percentage of the principal. 
@@ -82,7 +79,7 @@
                 </div>
 
                 <div class="form-group">
-                    @Html.LabelFor(model => model.ProjectLife, htmlAttributes: new { @class = "control-label" })
+                    @Html.LabelFor(model => model.ProjectLife, new { @class = "control-label" })
                    <a href="#" rel="popover" class="" data-toggle="popover" tabindex="0" data-trigger="focus"
                        data-placement="left" title="Project Duration" data-content="<p>Duration of project expressed as total number of years 
                     between first plantation and final harvest with intermediate harvests in between.</p>">
@@ -94,7 +91,7 @@
                 </div>
 
                 <div class="form-group">
-                    @Html.LabelFor(model => model.LandCost, htmlAttributes: new { @class = "control-label" })
+                    @Html.LabelFor(model => model.LandCost, new { @class = "control-label" })
                     <a href="#" rel="popover" class="" data-toggle="popover" tabindex="0" data-trigger="focus"
                        data-placement="left" title="Land Cost" data-content="<p>Annual cost of land expressed as  $/acre/year.</p>">
                          <span class="glyphicon glyphicon-question-sign"></span></a>
@@ -105,7 +102,7 @@
                 </div>
 
                 <div class="form-group">
-                    @Html.LabelFor(model => model.AdministrativeCost, htmlAttributes: new { @class = "control-label" })
+                    @Html.LabelFor(model => model.AdministrativeCost, new { @class = "control-label" })
                     <a href="#" rel="popover" class="" data-toggle="popover" tabindex="0" data-trigger="focus"
                        data-placement="left" title="Administrative Cost" data-content="<p>Recurring administrative cost. The default is shown in the fom if avaialble.</p>">
                          <span class="glyphicon glyphicon-question-sign"></span></a>
@@ -116,7 +113,7 @@
                 </div>
 
                 <div class="form-group">
-                    @Html.LabelFor(model => model.IncentivePayment, htmlAttributes: new { @class = "control-label" })
+                    @Html.LabelFor(model => model.IncentivePayment, new { @class = "control-label" })
                     <a href="#" rel="popover" class="" data-toggle="popover" tabindex="0" data-trigger="focus"
                        data-placement="left" title="Incentive Payment" data-content="<p>Any incentive payment rate.</p>">
                          <span class="glyphicon glyphicon-question-sign"></span></a>
@@ -127,7 +124,7 @@
                 </div>
 
                 <div class="form-group">
-                    @Html.LabelFor(model => model.YearsOfIncentivePayment, htmlAttributes: new { @class = "control-label" })
+                    @Html.LabelFor(model => model.YearsOfIncentivePayment, new { @class = "control-label" })
                     <a href="#" rel="popover" class="" data-toggle="popover" tabindex="0" data-trigger="focus"
                        data-placement="left" title="Years of Incentive Payment" data-content="<p>Years of incentive paymement.</p>">
                          <span class="glyphicon glyphicon-question-sign"></span></a>
@@ -138,7 +135,7 @@
                 </div>
 
                 <div class="form-group">
-                    @Html.LabelFor(model => model.BiomassPriceAtFarmGate, htmlAttributes: new { @class = "control-label" })
+                    @Html.LabelFor(model => model.BiomassPriceAtFarmGate, new { @class = "control-label" })
                     <a href="#" rel="popover" class="" data-toggle="popover" tabindex="0" data-trigger="focus"
                        data-placement="left" title="Farm Gate Price" data-content="<p>The price of the product at which it is sold by the farm (the farm gate price).</p>">
                          <span class="glyphicon glyphicon-question-sign"></span></a>
@@ -149,7 +146,7 @@
                 </div>
 
                 <div class="form-group">
-                    @Html.LabelFor(model => model.AvailableEquity, htmlAttributes: new { @class = "control-label" })
+                    @Html.LabelFor(model => model.AvailableEquity, new { @class = "control-label" })
                     <a href="#" rel="popover" class="" data-toggle="popover" tabindex="0" data-trigger="focus"
                        data-placement="left" title="Available Equity" data-content="<p>Equity is the interest or value that the owner has in real estate over and above liens against it.
                     You can estimate the available equity using this formula: </p><p>
@@ -161,7 +158,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    @Html.LabelFor(model => model.LoanAmount, htmlAttributes: new { @class = "control-label" })
+                    @Html.LabelFor(model => model.LoanAmount, new { @class = "control-label" })
                     <a href="#" rel="popover" class="" data-toggle="popover" tabindex="0" data-trigger="focus" data-placement="left"
                        title="Loan Amount"
                        data-content="<p> The amount specified in the contract that the borrower agrees to pay back.
@@ -179,7 +176,7 @@
                 </div>
 
                 <div class="form-group">
-                    @Html.LabelFor(model => model.EquityLoanInterestRate, htmlAttributes: new { @class = "control-label" })
+                    @Html.LabelFor(model => model.EquityLoanInterestRate, new { @class = "control-label" })
                     
                     <a href="#" rel="popover" class="" data-toggle="popover" tabindex="0" data-trigger="focus" data-placement="left"
                        title="Loan Amount"

@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Text;
-using System.Web.DynamicData;
-using BiofuelSouth.Models;
+﻿using System.Data.Entity;
+using System.Data.Entity.SqlServer;
 
 
 namespace BiofuelSouth.Models
@@ -14,7 +9,7 @@ namespace BiofuelSouth.Models
 
         public DatabaseContext() : base("DefaultConnection")
         {
-            var ensureDLLIsCopied = System.Data.Entity.SqlServer.SqlProviderServices.Instance;
+            var ensureDLLIsCopied = SqlProviderServices.Instance;
         
         
         }
@@ -24,7 +19,7 @@ namespace BiofuelSouth.Models
         public DbSet<Glossary> Glossaries { get; set; }
         public DbSet<FeedBack> FeedBacks { get; set; }
     
-        public System.Data.Entity.DbSet<BiofuelSouth.Models.Input> Inputs { get; set; }
+        public DbSet<Input> Inputs { get; set; }
     }
 
 

@@ -1,6 +1,5 @@
-﻿@using System.Web.Hosting
-@using BiofuelSouth.Models
-@model BiofuelSouth.Models.Input
+﻿@using BiofuelSouth.Models
+@model Input
 
 @if (ViewBag.Results)
 {
@@ -85,7 +84,7 @@
         <div id="chart">
             @{
 
-                string url = Url.Action("ShowChart", "Chart", new { @cacheKey = ViewBag.cacheKey });
+                string url = Url.Action("ShowChart", "Chart", new {ViewBag.cacheKey });
                 <img src="@url" alt="Chart Summary" />
             }
         </div>
