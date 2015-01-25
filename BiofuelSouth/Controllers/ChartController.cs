@@ -16,13 +16,15 @@ namespace BiofuelSouth.Controllers
             int[] xValues = Enumerable.Range(1, data.Length).ToArray();
             var chart = new Chart(600, 300);
             chart.AddSeries(
-                chartType: "Bar",
+                //chartType: "Column",
             
                 name: chartName, 
-                xValue: xValues,  
+               xValue: xValues,  
+               
                 yValues: data);
+            chart.SetXAxis("Year", 0, data.Length+.75);
             chart.AddTitle(chartName);
-            chart.SetXAxis("Year");
+            //chart.SetXAxis("Year");
             chart.SetYAxis("Net Annual Production (tons)");
 
             chart.SaveToCache(cacheKey, 1);
