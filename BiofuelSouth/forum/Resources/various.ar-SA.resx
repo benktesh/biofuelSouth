@@ -1,0 +1,429 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="RememberMe" xml:space="preserve">
+    <value>تذكرني</value>
+  </data>
+  <data name="LostPassword" xml:space="preserve">
+    <value>فقدت كلمة السر</value>
+  </data>
+  <data name="StopWatchingForum" xml:space="preserve">
+    <value>وقف يراقب هذا المنتدى</value>
+  </data>
+  <data name="ProfileSaved" xml:space="preserve">
+    <value>لمحة المحفوظة</value>
+  </data>
+  <data name="Wrote" xml:space="preserve">
+    <value>كتب</value>
+  </data>
+  <data name="ErrorBigPictureDimensions" xml:space="preserve">
+    <value>أبعاد الصورة هي كبيرة جدا</value>
+  </data>
+  <data name="ErrorIntegratedUserName" xml:space="preserve">
+    <value>ولا يسمح للمستخدمين لتغيير أسماء لهم عند المتكاملة للمصادقة على</value>
+  </data>
+  <data name="Psw" xml:space="preserve">
+    <value>psw :</value>
+  </data>
+  <data name="WhatsGoingOn" xml:space="preserve">
+    <value>ما الذي يجري</value>
+  </data>
+  <data name="Add" xml:space="preserve">
+    <value>إضافة</value>
+  </data>
+  <data name="NewPrivateMsgs" xml:space="preserve">
+    <value>الجديد من الرسائل الخاصة</value>
+  </data>
+  <data name="LoggedInAs" xml:space="preserve">
+    <value>كما يسجل في</value>
+  </data>
+  <data name="MyProfile" xml:space="preserve">
+    <value>صورتي</value>
+  </data>
+  <data name="Guests" xml:space="preserve">
+    <value>ضيوف</value>
+  </data>
+  <data name="Smilies" xml:space="preserve">
+    <value>ابتسامات</value>
+  </data>
+  <data name="LastLogonDate" xml:space="preserve">
+    <value>آخر موعد لتسجيل الدخول</value>
+  </data>
+  <data name="ActivationEmailBody" xml:space="preserve">
+    <value>يرجى التحقق من منتداك التسجيل عن طريق النقر على الرابط أدناه.</value>
+  </data>
+  <data name="EnabledUsers" xml:space="preserve">
+    <value>المعوقين المستخدمين</value>
+  </data>
+  <data name="ErrorWrongOldPassword" xml:space="preserve">
+    <value>كلمة المرور القديمة غير صحيحة.</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>بحث</value>
+  </data>
+  <data name="ActivationError" xml:space="preserve">
+    <value>خطأ! لم يتم تنشيط -- رمز الخطأ أو اسم المستخدم</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>حذف</value>
+  </data>
+  <data name="PasswordChanged" xml:space="preserve">
+    <value>تغيير كلمة المرور</value>
+  </data>
+  <data name="Home" xml:space="preserve">
+    <value>منزل</value>
+  </data>
+  <data name="AddMessage" xml:space="preserve">
+    <value>إضافة رسالة</value>
+  </data>
+  <data name="LoginError" xml:space="preserve">
+    <value>اسم المستخدم غير صحيح أو كلمة المرور</value>
+  </data>
+  <data name="AnotherFile" xml:space="preserve">
+    <value>ملف آخر...</value>
+  </data>
+  <data name="Posts" xml:space="preserve">
+    <value>وظائف</value>
+  </data>
+  <data name="NoForums" xml:space="preserve">
+    <value>لا المحافل تم إنشاؤها بعد. اتصل بمسؤول المنتدى.</value>
+  </data>
+  <data name="From" xml:space="preserve">
+    <value>من</value>
+  </data>
+  <data name="ThreadUpdatedEmailBody" xml:space="preserve">
+    <value>كنت مشتركا في موضوع النقاش ، الذي تم تحديثه. زيارة لعرض التحديثات</value>
+  </data>
+  <data name="LostPasswordEmailBody" xml:space="preserve">
+    <value>أنت أو شخص آخر طلب {0} منتدى استعادة كلمة السر. اسم المستخدم : {1} كلمة السر الجديدة : {2} {3}</value>
+  </data>
+  <data name="Register" xml:space="preserve">
+    <value>سجل</value>
+  </data>
+  <data name="AddNewForum" xml:space="preserve">
+    <value>إضافة منتدى جديد :</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>البريد الإلكتروني :</value>
+  </data>
+  <data name="NewThreadEmailBody" xml:space="preserve">
+    <value>كنت مشتركا للمنتدى ، وهو موضوع جديد يتم إنشاؤه لعرض هذه الزيارة التحديثات</value>
+  </data>
+  <data name="Users" xml:space="preserve">
+    <value>شاهد</value>
+  </data>
+  <data name="CreateAPoll" xml:space="preserve">
+    <value>إنشاء استطلاع</value>
+  </data>
+  <data name="Forums" xml:space="preserve">
+    <value>المنتديات</value>
+  </data>
+  <data name="ErrorNotPictureFile" xml:space="preserve">
+    <value>ليس ملف صورة</value>
+  </data>
+  <data name="ManuallyAddingUserDescription" xml:space="preserve">
+    <value>استخدام هذه الصفحة لإضافة مستخدم جديد يدويا ، دون الحاجة للذهاب للمستخدم من خلال عملية التسجيل</value>
+  </data>
+  <data name="UserSuccessfullyCreated" xml:space="preserve">
+    <value>مستخدم إنشاء بنجاح!</value>
+  </data>
+  <data name="ThreadUpdatedEmailSubject" xml:space="preserve">
+    <value>منتدى الإعلام. الخيط تحديثها.</value>
+  </data>
+  <data name="User" xml:space="preserve">
+    <value>مستخدم :</value>
+  </data>
+  <data name="Username" xml:space="preserve">
+    <value>اسم المستخدم :</value>
+  </data>
+  <data name="Administrator" xml:space="preserve">
+    <value>مسؤول</value>
+  </data>
+  <data name="NoForumsFound" xml:space="preserve">
+    <value>لا المحافل وجدت.</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>كلمة السر :</value>
+  </data>
+  <data name="ErrorUserExists" xml:space="preserve">
+    <value>المستخدم &lt;b&gt;{0}&lt;/b&gt; موجودة أصلا.</value>
+  </data>
+  <data name="RecentPosts" xml:space="preserve">
+    <value>المشاركات الأخيرة</value>
+  </data>
+  <data name="ErrorPasswordsDoNotMatch" xml:space="preserve">
+    <value>جديدة لا تتطابق كلمات المرور.</value>
+  </data>
+  <data name="SendAPrivateMessage" xml:space="preserve">
+    <value>إرسال رسالة خاصة</value>
+  </data>
+  <data name="Pages" xml:space="preserve">
+    <value>صفحات :</value>
+  </data>
+  <data name="PleaseLoginRegisterToCreateTopic" xml:space="preserve">
+    <value>الرجاء الدخول أو &lt;a href="register.aspx"&gt;التسجيل&lt;/a&gt; لإنشاء موضوع</value>
+  </data>
+  <data name="MoreSmilies" xml:space="preserve">
+    <value>المزيد من الإبتسامات</value>
+  </data>
+  <data name="Homepage" xml:space="preserve">
+    <value>الصفحة الأولى :</value>
+  </data>
+  <data name="PollOption" xml:space="preserve">
+    <value>استطلاع الخيار</value>
+  </data>
+  <data name="YouHave" xml:space="preserve">
+    <value>لديك</value>
+  </data>
+  <data name="StopWatchingForumPosts" xml:space="preserve">
+    <value>التوقف عن مشاهدة هذا المنتدى &lt;b&gt;للوظائف&lt;/b&gt;</value>
+  </data>
+  <data name="UserNotFoundOrYouLoggedOut" xml:space="preserve">
+    <value>لم يتم العثور على دليل أو انك لم تقم بتسجيل الدخول في</value>
+  </data>
+  <data name="ErrorBigAvatar" xml:space="preserve">
+    <value>تجسد الآلهة حجم الملف كبير جدا</value>
+  </data>
+  <data name="WelcomeEmailBody" xml:space="preserve">
+    <value>أرحب في المحافل</value>
+  </data>
+  <data name="Attachments" xml:space="preserve">
+    <value>المرفقات :</value>
+  </data>
+  <data name="UsersOnline" xml:space="preserve">
+    <value>مستخدمي الانترنت</value>
+  </data>
+  <data name="SelectCategory" xml:space="preserve">
+    <value>حدد فئة من هذه القائمة :</value>
+  </data>
+  <data name="PollQuestion" xml:space="preserve">
+    <value>استطلاع السؤال</value>
+  </data>
+  <data name="SendMessage" xml:space="preserve">
+    <value>أرسل رسالة</value>
+  </data>
+  <data name="Members" xml:space="preserve">
+    <value>أعضاء</value>
+  </data>
+  <data name="LatestPost" xml:space="preserve">
+    <value>آخر مشاركة</value>
+  </data>
+  <data name="ManuallyAddingUser" xml:space="preserve">
+    <value>يدويا إضافة مستخدم</value>
+  </data>
+  <data name="ForumCategory" xml:space="preserve">
+    <value>منتدى الفئة :</value>
+  </data>
+  <data name="MaxAttachSize" xml:space="preserve">
+    <value>أقصى حجم المرفق</value>
+  </data>
+  <data name="WatchForPosts" xml:space="preserve">
+    <value>مشاهدة هذا المنتدى &lt;b&gt;للوظائف&lt;/b&gt; الجديدة</value>
+  </data>
+  <data name="NewThreadEmailSubject" xml:space="preserve">
+    <value>منتدى الإعلام. الجديد موضوع في المنتدى.</value>
+  </data>
+  <data name="WatchForTopics" xml:space="preserve">
+    <value>مشاهدة هذا المنتدى لمواضيع جديدة</value>
+  </data>
+  <data name="OrEnterNew" xml:space="preserve">
+    <value>أو أدخل قيمة جديدة :</value>
+  </data>
+  <data name="UnreadTopics" xml:space="preserve">
+    <value>المواضيع غير المقروءة</value>
+  </data>
+  <data name="SignOut" xml:space="preserve">
+    <value>تسجيل الخروج</value>
+  </data>
+  <data name="RecentTopics" xml:space="preserve">
+    <value>المواضيع الأخيرة</value>
+  </data>
+  <data name="NotifyMeOnReply" xml:space="preserve">
+    <value>يخطر لي عند الرد يتم نشر</value>
+  </data>
+  <data name="NewPersonalSubject" xml:space="preserve">
+    <value>منتدى الإعلام. رسالة شخصية جديدة.</value>
+  </data>
+  <data name="ActivationSuccess" xml:space="preserve">
+    <value>تفعيل ناجحة. انكم مدعوون الى الدخول</value>
+  </data>
+  <data name="ReplyWithQuote" xml:space="preserve">
+    <value>• الرد مع الاقتباس</value>
+  </data>
+  <data name="OnlineUsers" xml:space="preserve">
+    <value>مستخدمي الانترنت</value>
+  </data>
+  <data name="Preview" xml:space="preserve">
+    <value>معاينة</value>
+  </data>
+  <data name="DisabledUsers" xml:space="preserve">
+    <value>المعوقين المستخدمين</value>
+  </data>
+  <data name="Subject" xml:space="preserve">
+    <value>الموضوع :</value>
+  </data>
+  <data name="NewTopic" xml:space="preserve">
+    <value>موضوع جديد</value>
+  </data>
+  <data name="Views" xml:space="preserve">
+    <value>آراء</value>
+  </data>
+  <data name="SubForums" xml:space="preserve">
+    <value>الأقسام الفرعية</value>
+  </data>
+  <data name="WelcomeEmailSubject" xml:space="preserve">
+    <value>مرحبا بكم في المحافل. حسابك قد تم تفعيلها ، فلا تتردد في زيارة للمنتدى :</value>
+  </data>
+  <data name="AttachmFiles" xml:space="preserve">
+    <value>إرفاق ملفات</value>
+  </data>
+  <data name="Threads" xml:space="preserve">
+    <value>مواضيع</value>
+  </data>
+  <data name="PreviousMessagesInTopic" xml:space="preserve">
+    <value>الرسائل السابقة في هذا الموضوع :</value>
+  </data>
+  <data name="AccessToForumDenied" xml:space="preserve">
+    <value>الوصول إلى هذا المنتدى هو مقيد</value>
+  </data>
+  <data name="AddAnOption" xml:space="preserve">
+    <value>إضافة خيار</value>
+  </data>
+  <data name="NewPersonalEmailBody" xml:space="preserve">
+    <value>لديك رسالة شخصية جديدة (ليالي لعرض هذه الزيارة التحديثات</value>
+  </data>
+  <data name="Guest" xml:space="preserve">
+    <value>ضيف</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>إلغاء</value>
+  </data>
+  <data name="RegisteredSince" xml:space="preserve">
+    <value>مسجلة منذ</value>
+  </data>
+  <data name="ActivationEmailSubject" xml:space="preserve">
+    <value>تنشيط العضوية.</value>
+  </data>
+  <data name="UserAlreadyExists" xml:space="preserve">
+    <value>المستخدم موجود بالفعل!</value>
+  </data>
+  <data name="NewUser" xml:space="preserve">
+    <value>مستخدم جديد</value>
+  </data>
+</root>

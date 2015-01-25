@@ -1,0 +1,429 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="RememberMe" xml:space="preserve">
+    <value>onthou mij</value>
+  </data>
+  <data name="LostPassword" xml:space="preserve">
+    <value>wachtwoord vergeten</value>
+  </data>
+  <data name="StopWatchingForum" xml:space="preserve">
+    <value>hou dit forum niet meer in de gaten</value>
+  </data>
+  <data name="ProfileSaved" xml:space="preserve">
+    <value>Profiel opgeslagen</value>
+  </data>
+  <data name="Wrote" xml:space="preserve">
+    <value>wrote</value>
+  </data>
+  <data name="ErrorBigPictureDimensions" xml:space="preserve">
+    <value>Foto afmetingen zijn te groot</value>
+  </data>
+  <data name="ErrorIntegratedUserName" xml:space="preserve">
+    <value>Gebruikers zijn niet toegestaan om hen gebruikersnamen veranderen wanneer geïntegreerde authenticatie is ON</value>
+  </data>
+  <data name="Psw" xml:space="preserve">
+    <value>ww:</value>
+  </data>
+  <data name="WhatsGoingOn" xml:space="preserve">
+    <value>Wat gebeurd er</value>
+  </data>
+  <data name="Add" xml:space="preserve">
+    <value>Toevoegen</value>
+  </data>
+  <data name="NewPrivateMsgs" xml:space="preserve">
+    <value>nieuwe prive berichten</value>
+  </data>
+  <data name="LoggedInAs" xml:space="preserve">
+    <value>Ingelogd als</value>
+  </data>
+  <data name="MyProfile" xml:space="preserve">
+    <value>Mijn profiel</value>
+  </data>
+  <data name="Guests" xml:space="preserve">
+    <value>Gasten</value>
+  </data>
+  <data name="Smilies" xml:space="preserve">
+    <value>smilies</value>
+  </data>
+  <data name="LastLogonDate" xml:space="preserve">
+    <value>Laatste logon datum</value>
+  </data>
+  <data name="ActivationEmailBody" xml:space="preserve">
+    <value>Controleer uw forum registratie door te klikken op de link hieronder.</value>
+  </data>
+  <data name="EnabledUsers" xml:space="preserve">
+    <value>Gebruikers met een handicap</value>
+  </data>
+  <data name="ErrorWrongOldPassword" xml:space="preserve">
+    <value>Het oude wachtwoord is onjuist.</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>Zoek</value>
+  </data>
+  <data name="ActivationError" xml:space="preserve">
+    <value>FOUT! Niet geactiveerd - verkeerde code of gebruikersnaam</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>verwijderen</value>
+  </data>
+  <data name="PasswordChanged" xml:space="preserve">
+    <value>Wachtwoord wijzigen</value>
+  </data>
+  <data name="Home" xml:space="preserve">
+    <value>Startpagina</value>
+  </data>
+  <data name="AddMessage" xml:space="preserve">
+    <value>nieuw bericht</value>
+  </data>
+  <data name="LoginError" xml:space="preserve">
+    <value>verkeerde gebruikersnaam/wachtwoord</value>
+  </data>
+  <data name="AnotherFile" xml:space="preserve">
+    <value>nog een bestand...</value>
+  </data>
+  <data name="Posts" xml:space="preserve">
+    <value>Posts</value>
+  </data>
+  <data name="NoForums" xml:space="preserve">
+    <value>Er zijn nog geen forums gecreeerd. Neem contact op met de administrateur.</value>
+  </data>
+  <data name="From" xml:space="preserve">
+    <value>van</value>
+  </data>
+  <data name="ThreadUpdatedEmailBody" xml:space="preserve">
+    <value>U bent ingeschreven voor een discussie draad, die is bijgewerkt.</value>
+  </data>
+  <data name="LostPasswordEmailBody" xml:space="preserve">
+    <value>U of iemand anders gevraagd om een {0} forum wachtwoord herstel. Gebruikersnaam: {1} Uw nieuwe wachtwoord: {2} {3}</value>
+  </data>
+  <data name="Register" xml:space="preserve">
+    <value>registreer</value>
+  </data>
+  <data name="AddNewForum" xml:space="preserve">
+    <value>Voeg een nieuw forum:</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>Email:</value>
+  </data>
+  <data name="NewThreadEmailBody" xml:space="preserve">
+    <value>U bent geabonneerd op een forum, een nieuw onderwerp is gemaakt.</value>
+  </data>
+  <data name="Users" xml:space="preserve">
+    <value>Gebruikers</value>
+  </data>
+  <data name="CreateAPoll" xml:space="preserve">
+    <value>een poll</value>
+  </data>
+  <data name="Forums" xml:space="preserve">
+    <value>Forums</value>
+  </data>
+  <data name="ErrorNotPictureFile" xml:space="preserve">
+    <value>Niet een afbeeldingsbestand</value>
+  </data>
+  <data name="ManuallyAddingUserDescription" xml:space="preserve">
+    <value>Gebruik deze pagina om het toevoegen van nieuwe gebruiker handmatig, zonder dat een gebruiker te gaan via de registraion proces</value>
+  </data>
+  <data name="UserSuccessfullyCreated" xml:space="preserve">
+    <value>Gebruikers succes aangemaakt!</value>
+  </data>
+  <data name="ThreadUpdatedEmailSubject" xml:space="preserve">
+    <value>Forum aanmelding. Thread bijgewerkt.</value>
+  </data>
+  <data name="User" xml:space="preserve">
+    <value>gebruiker:</value>
+  </data>
+  <data name="Username" xml:space="preserve">
+    <value>Gebruikersnaam:</value>
+  </data>
+  <data name="Administrator" xml:space="preserve">
+    <value>Administrateur</value>
+  </data>
+  <data name="NoForumsFound" xml:space="preserve">
+    <value>Geen fora gevonden.</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Wachtwoord:</value>
+  </data>
+  <data name="ErrorUserExists" xml:space="preserve">
+    <value>User &lt;b&gt;{0}&lt;/b&gt; bestaat reeds.</value>
+  </data>
+  <data name="RecentPosts" xml:space="preserve">
+    <value>recente berichten</value>
+  </data>
+  <data name="ErrorPasswordsDoNotMatch" xml:space="preserve">
+    <value>Nieuwe wachtwoorden komen niet overeen.</value>
+  </data>
+  <data name="SendAPrivateMessage" xml:space="preserve">
+    <value>Verzend een prive bericht</value>
+  </data>
+  <data name="Pages" xml:space="preserve">
+    <value>pagina's:</value>
+  </data>
+  <data name="PleaseLoginRegisterToCreateTopic" xml:space="preserve">
+    <value>gelieve aan te melden of te &lt;a href="register.aspx"&gt;registreren&lt;/a&gt; om een onderwerp te creëren</value>
+  </data>
+  <data name="MoreSmilies" xml:space="preserve">
+    <value>meer smilies</value>
+  </data>
+  <data name="Homepage" xml:space="preserve">
+    <value>Homepage:</value>
+  </data>
+  <data name="PollOption" xml:space="preserve">
+    <value>Poll optie</value>
+  </data>
+  <data name="YouHave" xml:space="preserve">
+    <value>U</value>
+  </data>
+  <data name="StopWatchingForumPosts" xml:space="preserve">
+    <value>stoppen met het kijken naar dit forum voor &lt;b&gt;berichten&lt;/b&gt;</value>
+  </data>
+  <data name="UserNotFoundOrYouLoggedOut" xml:space="preserve">
+    <value>Gebruiker niet gevonden of u bent niet ingelogd</value>
+  </data>
+  <data name="ErrorBigAvatar" xml:space="preserve">
+    <value>De avatar bestandsgrootte is te groot</value>
+  </data>
+  <data name="WelcomeEmailBody" xml:space="preserve">
+    <value>Welkom op de forums</value>
+  </data>
+  <data name="Attachments" xml:space="preserve">
+    <value>Bijlage:</value>
+  </data>
+  <data name="UsersOnline" xml:space="preserve">
+    <value>Gebruikers online</value>
+  </data>
+  <data name="SelectCategory" xml:space="preserve">
+    <value>selecteer een groep uit deze lijst:</value>
+  </data>
+  <data name="PollQuestion" xml:space="preserve">
+    <value>Pollvraag</value>
+  </data>
+  <data name="SendMessage" xml:space="preserve">
+    <value>Verzend een prive bericht</value>
+  </data>
+  <data name="Members" xml:space="preserve">
+    <value>Leden</value>
+  </data>
+  <data name="LatestPost" xml:space="preserve">
+    <value>Laatste bericht</value>
+  </data>
+  <data name="ManuallyAddingUser" xml:space="preserve">
+    <value>Handmatig toevoegen van een gebruiker</value>
+  </data>
+  <data name="ForumCategory" xml:space="preserve">
+    <value>Forum groep:</value>
+  </data>
+  <data name="MaxAttachSize" xml:space="preserve">
+    <value>Maximale grootte van bijlagen</value>
+  </data>
+  <data name="WatchForPosts" xml:space="preserve">
+    <value>kijk dit forum voor nieuwe &lt;b&gt;berichten&lt;/b&gt;</value>
+  </data>
+  <data name="NewThreadEmailSubject" xml:space="preserve">
+    <value>Forum aanmelding. Nieuw onderwerp in een forum.</value>
+  </data>
+  <data name="WatchForTopics" xml:space="preserve">
+    <value>hou dit forum in de gaten voor nieuwe onderwerpen</value>
+  </data>
+  <data name="OrEnterNew" xml:space="preserve">
+    <value>of geef een nieuwe waarde:</value>
+  </data>
+  <data name="UnreadTopics" xml:space="preserve">
+    <value>ongelezen onderwerpen</value>
+  </data>
+  <data name="SignOut" xml:space="preserve">
+    <value>uitloggen</value>
+  </data>
+  <data name="RecentTopics" xml:space="preserve">
+    <value>recente onderwerpen</value>
+  </data>
+  <data name="NotifyMeOnReply" xml:space="preserve">
+    <value>Hou me op de hoogte als er een nieuw antwoord wordt geplaatst</value>
+  </data>
+  <data name="NewPersonalSubject" xml:space="preserve">
+    <value>Forum aanmelding. Nieuwe persoonlijke boodschap.</value>
+  </data>
+  <data name="ActivationSuccess" xml:space="preserve">
+    <value>Activering succesvol. U bent van harte welkom om in te loggen</value>
+  </data>
+  <data name="ReplyWithQuote" xml:space="preserve">
+    <value>&amp;bull; antwoord met een citering</value>
+  </data>
+  <data name="OnlineUsers" xml:space="preserve">
+    <value>Online gebruikers</value>
+  </data>
+  <data name="Preview" xml:space="preserve">
+    <value>voorbeeld</value>
+  </data>
+  <data name="DisabledUsers" xml:space="preserve">
+    <value>Gebruikers met een handicap</value>
+  </data>
+  <data name="Subject" xml:space="preserve">
+    <value>Onderwerp:</value>
+  </data>
+  <data name="NewTopic" xml:space="preserve">
+    <value>nieuw onderwerp</value>
+  </data>
+  <data name="Views" xml:space="preserve">
+    <value>Gelezen</value>
+  </data>
+  <data name="SubForums" xml:space="preserve">
+    <value>Sub-Forums</value>
+  </data>
+  <data name="WelcomeEmailSubject" xml:space="preserve">
+    <value>Welkom bij onze forums. Uw account is geactiveerd, aarzel dan niet om het forum te bezoeken:</value>
+  </data>
+  <data name="AttachmFiles" xml:space="preserve">
+    <value>voeg bestanden toe</value>
+  </data>
+  <data name="Threads" xml:space="preserve">
+    <value>Onderwerpen</value>
+  </data>
+  <data name="PreviousMessagesInTopic" xml:space="preserve">
+    <value>Vorige berichten in dit onderwerp:</value>
+  </data>
+  <data name="AccessToForumDenied" xml:space="preserve">
+    <value>Toegang tot dit forum is beperkt</value>
+  </data>
+  <data name="AddAnOption" xml:space="preserve">
+    <value>voeg een optie</value>
+  </data>
+  <data name="NewPersonalEmailBody" xml:space="preserve">
+    <value>U hebt nieuwe persoonlijke bericht (en). Om de updates te bezoeken</value>
+  </data>
+  <data name="Guest" xml:space="preserve">
+    <value>Guest</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>annuleer</value>
+  </data>
+  <data name="RegisteredSince" xml:space="preserve">
+    <value>Geregistreerd sinds</value>
+  </data>
+  <data name="ActivationEmailSubject" xml:space="preserve">
+    <value>Activeer uw lidmaatschap.</value>
+  </data>
+  <data name="UserAlreadyExists" xml:space="preserve">
+    <value>Gebruiker bestaat al!</value>
+  </data>
+  <data name="NewUser" xml:space="preserve">
+    <value>Nieuwe gebruiker</value>
+  </data>
+</root>

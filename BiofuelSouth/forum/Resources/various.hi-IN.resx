@@ -1,0 +1,444 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="RememberMe" xml:space="preserve">
+    <value>मुझे याद रखना</value>
+  </data>
+  <data name="LostPassword" xml:space="preserve">
+    <value>पासवर्ड खो गया</value>
+  </data>
+  <data name="StopWatchingForum" xml:space="preserve">
+    <value>इस मंच को देखना बंद करे</value>
+  </data>
+  <data name="ProfileSaved" xml:space="preserve">
+    <value>प्रोफाइल सेव की जा चुकी है</value>
+  </data>
+  <data name="Wrote" xml:space="preserve">
+    <value>लिखा था</value>
+  </data>
+  <data name="ErrorBigPictureDimensions" xml:space="preserve">
+    <value>चित्र आयाम बहुत बड़ा है</value>
+  </data>
+  <data name="ErrorIntegratedUserName" xml:space="preserve">
+    <value>जब इंतेग्रतेद औठेन्तिक्षण ऑन हो तब  यूज़र अपने यूज़र नेम को नहीं बदल सकते</value>
+  </data>
+  <data name="Psw" xml:space="preserve">
+    <value>पासवर्ड:</value>
+  </data>
+  <data name="WhatsGoingOn" xml:space="preserve">
+    <value>क्या हो रहा है</value>
+  </data>
+  <data name="Add" xml:space="preserve">
+    <value>जोड़े</value>
+  </data>
+  <data name="NewPrivateMsgs" xml:space="preserve">
+    <value>नए निजी संदेश</value>
+  </data>
+  <data name="LoggedInAs" xml:space="preserve">
+    <value>के रूप में लॉग इन</value>
+  </data>
+  <data name="MyProfile" xml:space="preserve">
+    <value>मेरी प्रोफाइल</value>
+  </data>
+  <data name="Guests" xml:space="preserve">
+    <value>मेहमान</value>
+  </data>
+  <data name="Smilies" xml:space="preserve">
+    <value>स्मैलीस</value>
+  </data>
+  <data name="LastLogonDate" xml:space="preserve">
+    <value>अंतिम लॉग इन तारीख</value>
+  </data>
+  <data name="ActivationEmailBody" xml:space="preserve">
+    <value>कृपया नीचे दिए गए लिंक पर क्लिक करके अपने मंच पंजीकरण सत्यापित करें.</value>
+  </data>
+  <data name="EnabledUsers" xml:space="preserve">
+    <value>निष्क्रिय किया उपयोक्ता</value>
+  </data>
+  <data name="ErrorWrongOldPassword" xml:space="preserve">
+    <value>पुराना पासवर्ड गलत है.</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>खोज</value>
+  </data>
+  <data name="ActivationError" xml:space="preserve">
+    <value>भूल! सक्रिय नहीं हुआ  - गलत कोड या यसेरनेम</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>मिटाना</value>
+  </data>
+  <data name="PasswordChanged" xml:space="preserve">
+    <value>पासवर्ड परिवर्तित</value>
+  </data>
+  <data name="Home" xml:space="preserve">
+    <value>होम</value>
+  </data>
+  <data name="AddMessage" xml:space="preserve">
+    <value>संदेश जोड़ें</value>
+  </data>
+  <data name="LoginError" xml:space="preserve">
+    <value>गलत यूज़रनेम / पासवर्ड</value>
+  </data>
+  <data name="AnotherFile" xml:space="preserve">
+    <value>एक अन्य फ़ाइल …</value>
+  </data>
+  <data name="Posts" xml:space="preserve">
+    <value>पोस्ट</value>
+  </data>
+  <data name="NoForums" xml:space="preserve">
+    <value>अभी तक कोई मंच नहीं बना. मंच व्यवस्थापक से संपर्क करें</value>
+  </data>
+  <data name="From" xml:space="preserve">
+    <value>से</value>
+  </data>
+  <data name="ThreadUpdatedEmailBody" xml:space="preserve">
+    <value>आप  के चर्चा थ्रेड के सदस्य हो जो अपडेट किया गया है
+
+
+उपडेट्स को देकने के लिए विसीट करे</value>
+  </data>
+  <data name="LostPasswordEmailBody" xml:space="preserve">
+    <value>आप या किसी और ने {0} मंच पासवर्ड ढूंढ़ ने  के लिए कहा. 
+
+यूजर नाम: {1}
+आपका नया पासवर्ड: {2}
+
+
+{3}</value>
+  </data>
+  <data name="Register" xml:space="preserve">
+    <value>रेगिस्टर</value>
+  </data>
+  <data name="AddNewForum" xml:space="preserve">
+    <value>एक नया फोरम जोड़ें</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>ईमेल:</value>
+  </data>
+  <data name="NewThreadEmailBody" xml:space="preserve">
+    <value>आप एक मंच के सदस्य हो, नया विषय बनाया गया है
+
+
+उपडेट्स को देकने के लिए विसीट करे</value>
+  </data>
+  <data name="Users" xml:space="preserve">
+    <value>यूज़र</value>
+  </data>
+  <data name="CreateAPoll" xml:space="preserve">
+    <value>नया पोल तैयार  करे</value>
+  </data>
+  <data name="Forums" xml:space="preserve">
+    <value>फोरम</value>
+  </data>
+  <data name="ErrorNotPictureFile" xml:space="preserve">
+    <value>यह तस्वीर फ़ाइल नहीं है</value>
+  </data>
+  <data name="ManuallyAddingUserDescription" xml:space="preserve">
+    <value>इस पन्ने का प्रयोग एक नया यूजर जोड़ने के लिए मैन्युअल रूप से बिना यूजर को पंजीकरण प्रक्रिया भेज के करे</value>
+  </data>
+  <data name="UserSuccessfullyCreated" xml:space="preserve">
+    <value>यूजर सफलतापूर्वक बनाया!</value>
+  </data>
+  <data name="ThreadUpdatedEmailSubject" xml:space="preserve">
+    <value>फोरम अधिसूचना. थ्रेड अपडेट.</value>
+  </data>
+  <data name="User" xml:space="preserve">
+    <value>यूजर नाम:</value>
+  </data>
+  <data name="Username" xml:space="preserve">
+    <value>यूजर नाम:</value>
+  </data>
+  <data name="Administrator" xml:space="preserve">
+    <value>ऐडमिनिस्ट्रेटर</value>
+  </data>
+  <data name="NoForumsFound" xml:space="preserve">
+    <value>कोई भी फोरम नहीं मिले</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>पासवर्ड:</value>
+  </data>
+  <data name="ErrorUserExists" xml:space="preserve">
+    <value>यूज़र &lt;b&gt;{0}&lt;/b&gt; पहले से मौजूद है</value>
+  </data>
+  <data name="RecentPosts" xml:space="preserve">
+    <value>हाल ही की पोस्ट</value>
+  </data>
+  <data name="ErrorPasswordsDoNotMatch" xml:space="preserve">
+    <value>नए पासवर्ड मैच नहीं होते.</value>
+  </data>
+  <data name="SendAPrivateMessage" xml:space="preserve">
+    <value>एक निजी संदेश भेजें</value>
+  </data>
+  <data name="Pages" xml:space="preserve">
+    <value>पृष्ठ:</value>
+  </data>
+  <data name="PleaseLoginRegisterToCreateTopic" xml:space="preserve">
+    <value>लॉगिन या &lt;a कृपया href="register.aspx"&gt; &lt;पंजीकरण करे / a&gt; विषय बनाने के लिए</value>
+  </data>
+  <data name="MoreSmilies" xml:space="preserve">
+    <value>अधिक स्मैलीस</value>
+  </data>
+  <data name="Homepage" xml:space="preserve">
+    <value>होमपेज:</value>
+  </data>
+  <data name="PollOption" xml:space="preserve">
+    <value>सर्वेक्षण  का विकल्प</value>
+  </data>
+  <data name="YouHave" xml:space="preserve">
+    <value>तुह्मारे पास है</value>
+  </data>
+  <data name="StopWatchingForumPosts" xml:space="preserve">
+    <value>&lt;b&gt;पदों&lt;/b&gt; के लिए इस मंच देख रहा बंद</value>
+  </data>
+  <data name="UserNotFoundOrYouLoggedOut" xml:space="preserve">
+    <value>यूजर नहीं मिला या आपने  लोगिन नहीं किया है</value>
+  </data>
+  <data name="ErrorBigAvatar" xml:space="preserve">
+    <value>अवतार फ़ाइल की साइज़ बहुत बड़ी है</value>
+  </data>
+  <data name="WelcomeEmailBody" xml:space="preserve">
+    <value>मंचों में आपका स्वागत है</value>
+  </data>
+  <data name="Attachments" xml:space="preserve">
+    <value>संलग्नक:</value>
+  </data>
+  <data name="UsersOnline" xml:space="preserve">
+    <value>यूज़र्स ऑनलाइन</value>
+  </data>
+  <data name="SelectCategory" xml:space="preserve">
+    <value>इस सूची में से एक वर्ग चुनें:</value>
+  </data>
+  <data name="PollQuestion" xml:space="preserve">
+    <value>सर्वेक्षण प्रश्न</value>
+  </data>
+  <data name="SendMessage" xml:space="preserve">
+    <value>संदेश भेजें</value>
+  </data>
+  <data name="Members" xml:space="preserve">
+    <value>सदस्य</value>
+  </data>
+  <data name="LatestPost" xml:space="preserve">
+    <value>हाल ही की पोस्ट</value>
+  </data>
+  <data name="ManuallyAddingUser" xml:space="preserve">
+    <value>मैन्युअल रूप से एक  यूजर को जोड़े</value>
+  </data>
+  <data name="ForumCategory" xml:space="preserve">
+    <value>फोरम श्रेणी:</value>
+  </data>
+  <data name="MaxAttachSize" xml:space="preserve">
+    <value>अधिकतम संलग्नक आकार</value>
+  </data>
+  <data name="WatchForPosts" xml:space="preserve">
+    <value>&lt;b&gt;पदों&lt;/b&gt; के लिए नए मंच घड़ी यह</value>
+  </data>
+  <data name="NewThreadEmailSubject" xml:space="preserve">
+    <value>फोरम अधिसूचना. मंच में नया विषय.</value>
+  </data>
+  <data name="WatchForTopics" xml:space="preserve">
+    <value>नए विषयों के लिए इस मंच को देखे</value>
+  </data>
+  <data name="OrEnterNew" xml:space="preserve">
+    <value>या एक नया मान दर्ज करें:</value>
+  </data>
+  <data name="UnreadTopics" xml:space="preserve">
+    <value>अपठित विषयों</value>
+  </data>
+  <data name="SignOut" xml:space="preserve">
+    <value>साइन आउट</value>
+  </data>
+  <data name="RecentTopics" xml:space="preserve">
+    <value>हाल ही के विषय</value>
+  </data>
+  <data name="NotifyMeOnReply" xml:space="preserve">
+    <value>मुझे सूचित करें जब एक उत्तर पोस्ट किया जाए</value>
+  </data>
+  <data name="NewPersonalSubject" xml:space="preserve">
+    <value>फोरम अधिसूचना. नई व्यक्तिगत संदेश.</value>
+  </data>
+  <data name="ActivationSuccess" xml:space="preserve">
+    <value>सक्रियण सफल हुआ| आपका स्वागत है</value>
+  </data>
+  <data name="ReplyWithQuote" xml:space="preserve">
+    <value>&amp;bull; बोली के साथ उत्तर दे</value>
+  </data>
+  <data name="OnlineUsers" xml:space="preserve">
+    <value>ऑनलाइन उपयोगकर्ता</value>
+  </data>
+  <data name="Preview" xml:space="preserve">
+    <value>पूर्वावलोकन</value>
+  </data>
+  <data name="DisabledUsers" xml:space="preserve">
+    <value>निष्क्रिय किया उपयोक्ता</value>
+  </data>
+  <data name="Subject" xml:space="preserve">
+    <value>विषय:</value>
+  </data>
+  <data name="NewTopic" xml:space="preserve">
+    <value>नए विषय</value>
+  </data>
+  <data name="Views" xml:space="preserve">
+    <value>व्यू</value>
+  </data>
+  <data name="SubForums" xml:space="preserve">
+    <value>उप मंच</value>
+  </data>
+  <data name="WelcomeEmailSubject" xml:space="preserve">
+    <value>हमारे मंचों में आपका स्वागत है. आपका खता सक्रिय कर दिया गया है, कृपया मंच में बेझिझक  जाइए</value>
+  </data>
+  <data name="AttachmFiles" xml:space="preserve">
+    <value>संलग्न फाइल</value>
+  </data>
+  <data name="Threads" xml:space="preserve">
+    <value>धागे</value>
+  </data>
+  <data name="PreviousMessagesInTopic" xml:space="preserve">
+    <value>विषय के पिछले संदेश:</value>
+  </data>
+  <data name="AccessToForumDenied" xml:space="preserve">
+    <value>इस मंच का उपयोग प्रतिबंधित है</value>
+  </data>
+  <data name="AddAnOption" xml:space="preserve">
+    <value>एक विकल्प जोड़ें</value>
+  </data>
+  <data name="NewPersonalEmailBody" xml:space="preserve">
+    <value>आप के लिए निजी संदेश है
+
+
+उपडेट्स को देकने के लिए विसीट करे</value>
+  </data>
+  <data name="Guest" xml:space="preserve">
+    <value>मेहमान</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>रद्द करें</value>
+  </data>
+  <data name="RegisteredSince" xml:space="preserve">
+    <value>तारीख के बाद से पंजीकृत</value>
+  </data>
+  <data name="ActivationEmailSubject" xml:space="preserve">
+    <value>अपनी सदस्यता सक्रिय करें.</value>
+  </data>
+  <data name="UserAlreadyExists" xml:space="preserve">
+    <value>यूजर पहले से मौजूद है!</value>
+  </data>
+  <data name="NewUser" xml:space="preserve">
+    <value>नया यूजर</value>
+  </data>
+</root>
