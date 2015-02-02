@@ -67,6 +67,11 @@ namespace BiofuelSouth.Controllers
             return FeedBack();
         }
 
+        public ActionResult About()
+        {
+            return View();
+        }
+
         public ActionResult Search(String term="")
         {
             ViewData["glossary"] = DataService.GetGlossary();
