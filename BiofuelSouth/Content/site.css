@@ -85,7 +85,7 @@ footer {
             background-size:contain;
             display: block;
             height: 50px;
-            width: 150px;
+            width: 120px;
             overflow: hidden;
             text-indent: 100%;
             white-space: nowrap;
@@ -100,7 +100,7 @@ footer {
             background-size:contain;
             display: block;
             height: 50px;
-            width: 125px;
+            width: 120px;
             overflow: hidden;
             text-indent: 100%;
             white-space: nowrap;
@@ -124,7 +124,7 @@ footer {
             background-repeat: no-repeat;
             float: left;
             opacity: 1;
-              margin-right: 10px;
+            
             margin-left: 10px;
         }
 
@@ -133,7 +133,7 @@ footer {
             background-size:contain;
             display: block;
             height: 50px;
-            width: 125px;
+            width: 120px;
             overflow: hidden;
             text-indent: 100%;
             white-space: nowrap;
@@ -149,16 +149,14 @@ footer {
             background-size:contain;
             display: block;
             height: 50px;
-            width: 125px;
+            width: 110px;
             overflow: hidden;
             text-indent: 100%;
             white-space: nowrap;
             background-repeat: no-repeat;
-            float: left;
             opacity: 1;
             margin-top: 15px;
-            margin-right: 10px;
-            margin-left: 10px;
+            
         }
 
          .footer .ut {
@@ -166,7 +164,7 @@ footer {
             background-size:contain;
             display: block;
             height: 50px;
-            width: 125px;
+            width: 110px;
             overflow: hidden;
             text-indent: 100%;
             white-space: nowrap;
@@ -174,7 +172,7 @@ footer {
             float: left;
             opacity: 1;
             margin-right:auto;
-            margin-top: -2px;
+            margin-top: 0px;
         }
 
          .footer {
@@ -195,3 +193,7 @@ footer {
          .resultDescription {
              margin-left: 20px;
          }
+
+         .th {
+   text-align: center;   
+}
