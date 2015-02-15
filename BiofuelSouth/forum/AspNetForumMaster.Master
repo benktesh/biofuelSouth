@@ -30,9 +30,9 @@
 			<div class="innercontainer">
 			<ul>
 			    
-			    <% if(!string.IsNullOrEmpty(Settings.TitleLink)) { %>
-			<%--	<li class="backtowebsite mobilehidden"><a href="<%= aspnetforum.Utils.Settings.TitleLink %>"><%= aspnetforum.Resources.various.BackToWebSite %></a></li> <% } %>--%>
-				    	<li class="backtowebsite mobilehidden"><a href="<%= aspnetforum.Utils.Settings.TitleLink %>"><%= "Back to DSS" %></a></li> <% } %>
+			    <%--<% if(!string.IsNullOrEmpty(Settings.TitleLink)) { %>
+			<li class="backtowebsite mobilehidden"><a href="<%= aspnetforum.Utils.Settings.TitleLink %>"><%= aspnetforum.Resources.various.BackToWebSite %></a></li> <% } %>
+				 --%>
 			    
 				<li><a href="recenttopics.aspx"> <%= aspnetforum.Resources.various.RecentTopics %></a></li>
 				<li><a href="recent.aspx"><%= aspnetforum.Resources.various.RecentPosts %></a></li>
@@ -50,7 +50,13 @@
 
 		<div class="header">
 			<div class="innercontainer">
-			<h1><a href="../home/"><%= aspnetforum.Utils.Settings.ForumTitle %></a></h1>
+			    <div class ="backtowebsite">
+			        <h1>
+			    <a href="<%= aspnetforum.Utils.Settings.TitleLink %>"><%= aspnetforum.Resources.various.BackToWebSite %></a>
+                  </h1>
+			    </div>
+			
+                	
 				<div id="curuserTable" runat="server" class="logininfo" enableviewstate="false">
 					<div class="curUserInfo">
 						<span style="text-align:left">
