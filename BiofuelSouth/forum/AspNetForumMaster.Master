@@ -29,8 +29,11 @@
 		<div class="topheader" enableviewstate="false" runat="server" id="divHeader">
 			<div class="innercontainer">
 			<ul>
-				<% if(!string.IsNullOrEmpty(Settings.TitleLink)) { %>
-				<li class="backtowebsite mobilehidden"><a href="<%= aspnetforum.Utils.Settings.TitleLink %>"><%= aspnetforum.Resources.various.BackToWebSite %></a></li> <% } %>
+			    
+			    <% if(!string.IsNullOrEmpty(Settings.TitleLink)) { %>
+			<%--	<li class="backtowebsite mobilehidden"><a href="<%= aspnetforum.Utils.Settings.TitleLink %>"><%= aspnetforum.Resources.various.BackToWebSite %></a></li> <% } %>--%>
+				    	<li class="backtowebsite mobilehidden"><a href="<%= aspnetforum.Utils.Settings.TitleLink %>"><%= "Back to DSS" %></a></li> <% } %>
+			    
 				<li><a href="recenttopics.aspx"> <%= aspnetforum.Resources.various.RecentTopics %></a></li>
 				<li><a href="recent.aspx"><%= aspnetforum.Resources.various.RecentPosts %></a></li>
 				<li><a href="search.aspx"><%= aspnetforum.Resources.various.Search %></a></li>
@@ -47,7 +50,7 @@
 
 		<div class="header">
 			<div class="innercontainer">
-			<h1><a href="default.aspx"><%= aspnetforum.Utils.Settings.ForumTitle %></a></h1>
+			<h1><a href="../home/"><%= aspnetforum.Utils.Settings.ForumTitle %></a></h1>
 				<div id="curuserTable" runat="server" class="logininfo" enableviewstate="false">
 					<div class="curUserInfo">
 						<span style="text-align:left">
@@ -134,6 +137,14 @@
 
 	<div id="fb-root"></div>
 	<script type="text/javascript">
+
+	    $(document).ready(function () {
+
+	        $("#trialdiv").slideUp();
+	        $.post("ajaxutils.ashx", { mode: "HideTrialBar" });
+
+	    });
+
 	    window.fbAsyncInit = function () {
 	        FB.init({ appId: '<%= aspnetforum.Utils.Settings.FacebookAppID %>', status: true, cookie: true, xfbml: true, oauth: true });
 	    };
