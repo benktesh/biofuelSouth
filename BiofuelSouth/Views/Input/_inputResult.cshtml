@@ -9,7 +9,7 @@
     <div class="row table-bordered">
         <h3>Productivity and Cost</h3>
         <div>
-            
+
             <table class="table table-responsive table-bordered table-striped">
 
                 <thead>
@@ -39,15 +39,17 @@
                             <td>@Math.Round(a, 0)</td>
                         }
                     </tr>
+
                     <tr>
                         <td>
                             Estimated Annual Loss From Storage (tons/year)
                         </td>
-                        @foreach (var a in Model.GetAnnualProductionList())
+                        @foreach (var a in Model.GetGrossProductionList())
                         {
-                            <td>@Math.Round(a * Model.GetStorageLossFactor() * Model.StorageRequirement.PercentStored/Model.ProjectSize, 0)</td>
+                            <td>@Math.Round(a * Model.GetStorageLossFactor() *Model.StorageRequirement.StorageTime/200* Model.StorageRequirement.PercentStored /100, 0)</td>
                         }
                     </tr>
+   
                 }
 
                 <tr>
@@ -85,8 +87,8 @@
         <div id="chart">
             @{
 
-                string url = Url.Action("ShowChart", "Chart", new {ViewBag.cacheKey });
-                <img src="@url" alt="Chart Summary" />
+    string url = Url.Action("ShowChart", "Chart", new { ViewBag.cacheKey });
+    <img src="@url" alt="Chart Summary" />
             }
         </div>
 
@@ -94,7 +96,7 @@
     <div class="row table-bordered">
         <h3>Assumptions and Parameters</h3>
         <div>
-           Default values in use.
+            Default values in use.
         </div>
 
     </div>
@@ -117,6 +119,6 @@ else
             <li>Use the 'Green' Buttons to Select Model Components</li>
             <li>In each page, enter modify parameter in the left. Click submit to update the results.</li>
         </ul>
-       
+
     </text>
 }
