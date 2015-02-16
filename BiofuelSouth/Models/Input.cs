@@ -3,23 +3,16 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using BiofuelSouth.Services;
 
 namespace BiofuelSouth.Models
 {
     public class Input
     {
-        public Input()
-        {
-            //ProjectSize = 100;
-           // ProjectLife = 10;
-          //  Category = "Switchgrass";
-          //  State = "AL";
-          //  County = "01001";
-            StorageRequirement = new Storage();
-        }
-        public int Id { get; set; }
 
+   
+        public int Id { get; set; }
 
         [Required]
         public String State { get; set; }
@@ -36,37 +29,19 @@ namespace BiofuelSouth.Models
         [DisplayName("Size of Project (acre)")]
         public double ProjectSize {get; set;}
 
-        [DisplayName("Financial Interest Rate(%)")]
-        public double InterestRate { get; set; }
-        
         [DisplayName("Duration (years from plantation to harvest")]
         public int ProjectLife {get; set;}  //years
 
-        [DisplayName("Cost of land ($/acre/year)")]
-        public double LandCost {get; set;} //$/acre/year
-
-        [DisplayName("Annual Administrative Cost($/acre/year)")]
-        public double AdministrativeCost {get; set;} //$/acre/year
-
-        [DisplayName("Incentive Payment($/acre/year)")]
-        public double IncentivePayment {get; set;} //$/acre/year
-        
-        [DisplayName("Years of Incentive Payment (i.e., number of years)")]
-        public int YearsOfIncentivePayment {get; set; } //$acres/yearC:\Users\Benktesh\Documents\Visual Studio 2013\Projects\BiofuelSouthSolution\BiofuelSouth\Models\Input.cs
-
         [DisplayName("Biomass Price at Farm Gate ($/green ton)")]
-        public double BiomassPriceAtFarmGate {get; set;} //$/ton
+        public double BiomassPriceAtFarmGate { get; set; } //$/ton
 
-        [DisplayName("Available Equity ($)")]
-        public double AvailableEquity {get; set;} //$
 
-        [DisplayName("Loan Amount ($) (expected or current)")]
-        public double LoanAmount {get; set;} //$
-
-        [DisplayName("Equity Loan Interest Rate (% e.g. 4.05)")]
-        public double EquityLoanInterestRate {get; set;} //% (decimal fraction)
+        [DisplayName("Cost of land ($/acre/year)")]
+        public double LandCost { get; set; } //$/acre/year
 
         public Storage StorageRequirement { get; set; }
+
+        public Financial Finance { get; set; }
 
         public double GetAnnualProductivity()
         {
@@ -99,7 +74,7 @@ namespace BiofuelSouth.Models
             var taper = Constants.GetProductivityTaper("Switchgrass");
             List<double> annualProductivity = new List<double>();
             double storageLossFactor = 0;
-            if (StorageRequirement.RequireStorage)
+            if (StorageRequirement != null && StorageRequirement.RequireStorage)
                 storageLossFactor = GetStorageLossFactor()*StorageRequirement.PercentStored/100;
 
             double StandardAnnualProduction = GetAnnualProductivity()*(1 - storageLossFactor); //Annual Productivity is = Pruduction * (1 - loss factor)
@@ -143,6 +118,8 @@ namespace BiofuelSouth.Models
 
         public Double GetStorageLossFactor()
         {
+            if (StorageRequirement == null)
+                return 0;
             Double days = StorageRequirement.StorageTime;
             if (days == 0.0)
                 return 0; 
@@ -150,8 +127,6 @@ namespace BiofuelSouth.Models
             double storageLossValue = Constants.GetStorageLoss(storagemethod, "Switchgrass");
             return days/200*storageLossValue/100;
         }
-
-
 
     }
 }
