@@ -23,23 +23,9 @@ namespace BiofuelSouth.Controllers
             else
             {
                 input = TempData["input"] as Input;
-
-
             }
             TempData.Keep();
-            //Constants.GetValue();
-            
           
-            // ViewBag.County = constants.GetCounty();
-            
-            //if (ViewBag.input != null)
-            //    input = ViewBag.input;
-            //else
-            //{
-            //    ViewBag.input = input; 
-            //}
-            
-            
             return View(input);
         }
 
@@ -47,17 +33,13 @@ namespace BiofuelSouth.Controllers
         public ActionResult Index(Input ip)
         {
             
-            
-            
-            
-           
             //TODO Do some thing here
             if (ip.StorageRequirement != null && ip.StorageRequirement.StorageTime > 0)
             {
                 ip.StorageRequirement.RequireStorage = true;
             }
             
-            
+     
                 FillViewBag();
             
             if (ModelState.IsValid)
@@ -83,8 +65,8 @@ namespace BiofuelSouth.Controllers
 
         }
 
-        [HttpGet]
-        public ActionResult Storage()
+        [Obsolete]
+        public ActionResult Storage1()
         {
             FillViewBag();
             var ip = TempData["input"] as Input;
@@ -97,9 +79,19 @@ namespace BiofuelSouth.Controllers
             
         }
 
-        [HttpPost]
-        public ActionResult Storage(Input ip)
+        
+        public ActionResult Storage(Input ip =null)
         {
+            if (ip == null)
+                return RedirectToAction("Input");
+            if (!ModelState.IsValid)
+                return View(ip);
+            if (ip.StorageRequirement == null)
+            {
+                ip.StorageRequirement = new Storage();
+                
+            }
+                
             FillViewBag();
             if (ModelState.IsValid)
             {
