@@ -1,17 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Text;
 using System.Web.Mvc;
 using BiofuelSouth.Models;
 using BiofuelSouth.Services;
+using log4net;
 
 namespace BiofuelSouth.Controllers
 {
     public class HomeController : Controller
     {
+        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         // GET: Home
         public ActionResult Index()
         {
+            Log.Info(Request.UserHostAddress);
 
             return View();
             //Response.Redirect("~/index.html");

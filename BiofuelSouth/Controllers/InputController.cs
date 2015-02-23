@@ -1,17 +1,20 @@
 ﻿using System;
 using System.Linq;
+using System.Reflection;
 using System.Web.Mvc;
 using BiofuelSouth.Models;
+using log4net;
 using Microsoft.Ajax.Utilities;
 
 namespace BiofuelSouth.Controllers
 {
     public class InputController : Controller
     {
+        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         //private Input input = new Input();
         // GET: Input
         [HttpGet]
-        public ActionResult Index()
+        public ActionResult Index1()
         {
             var input = new Input();
             FillViewBag();
@@ -29,10 +32,26 @@ namespace BiofuelSouth.Controllers
             return View(input);
         }
 
-        [HttpPost]
-        public ActionResult Index(Input ip)
+        //[HttpPost]
+        public ActionResult Index(Input ip= null)
         {
-            
+
+            if (ip == null)
+            {
+                ip = new Input();
+                FillViewBag();
+                if (TempData["input"] == null)
+                {
+                    TempData["input"] = ip;
+
+                }
+                else
+                {
+                    ip = TempData["input"] as Input;
+                }
+                TempData.Keep();
+            }
+                
             //TODO Do some thing here
             if (ip.StorageRequirement != null && ip.StorageRequirement.StorageTime > 0)
             {
@@ -84,13 +103,20 @@ namespace BiofuelSouth.Controllers
         {
             if (ip == null)
                 return RedirectToAction("Input");
-            if (!ModelState.IsValid)
-                return View(ip);
+
             if (ip.StorageRequirement == null)
             {
                 ip.StorageRequirement = new Storage();
-                
+                ModelState.Clear();
+
             }
+            else
+            {
+                if (!ModelState.IsValid)
+                    return View(ip);
+
+            }
+               
                 
             FillViewBag();
             if (ModelState.IsValid)
