@@ -657,6 +657,7 @@
       <DependentUpon>201502152328011_changeFinancialModel.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\Cost.cs" />
+    <Compile Include="Models\CountyData.cs" />
     <Compile Include="Models\DatabaseContext.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Migrations\201408040112136_InitialCreate.cs" />

@@ -197,3 +197,14 @@ footer {
          .th {
    text-align: center;   
 }
+
+ .text-danger {
+    font-size: .85em;
+}
+
+ .required {
+  color: #b94a48;
+  font-size: .85em;
+  padding-left: 5px;
+  padding-right: 5px;
+}

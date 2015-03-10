@@ -11,20 +11,34 @@ namespace BiofuelSouth.Controllers
     {
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
-        public ActionResult  CountiesForState(string state)
+        public ActionResult  CountiesForState(string state = "ALL")
         {
             
             try
             {
-                DatabaseContext db = new DatabaseContext();
-                var counties = db.County.Where(p => p.State == state);
-                var result = (from s in counties
-                    select new
+                using (DatabaseContext db = new DatabaseContext())
+                {
+
+                    IQueryable<County> counties = db.County;
+
+                    if (state != "ALL")
                     {
-                        id = s.CountyCode,
-                        name = s.Name
-                    }).ToList();
-                return Json(result, JsonRequestBehavior.AllowGet);
+                        counties = db.County.Where(p => p.State == state);
+                    }
+                    
+
+
+                    var result = (from s in counties
+                                  select new
+                                  {
+                                      id = s.CountyCode,
+                                      name = s.Name
+                                  }).ToList();
+                    return Json(result, JsonRequestBehavior.AllowGet);
+                    
+                }
+               // DatabaseContext db = new DatabaseContext();
+              
             }
             catch (Exception exception)
             {

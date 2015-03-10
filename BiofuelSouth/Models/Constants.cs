@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Resources;
 using System.Web.Mvc;
 using BiofuelSouth.Services;
 
 namespace BiofuelSouth.Models
 {
-    public static class Constants
+    public static partial class Constants
     {
 
         public static IEnumerable<SelectListItem> GetCategory()
@@ -89,6 +90,15 @@ namespace BiofuelSouth.Models
                     return new List<double> { 1 };
             }
         }
+
+        public static IEnumerable<SelectListItem> GetCountySelectList(String state = null)
+        {
+            IList<SelectListItem> items = null;
+            IList<County> countyList = DataService.GetCountyData(state ?? "ALL");
+
+            return countyList.Select(c => new SelectListItem() { Text = c.Name, Value = c.GeoID});
+        }
+              
 
         public static IEnumerable<SelectListItem> GetProvincesList()
         {

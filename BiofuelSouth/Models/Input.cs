@@ -29,10 +29,10 @@ namespace BiofuelSouth.Models
         [DisplayName("Size of Project (acre)")]
         public double ProjectSize {get; set;}
 
-        [DisplayName("Duration (years from plantation to harvest")]
+        [DisplayName("Years (From plantation to harvest")]
         public int ProjectLife {get; set;}  //years
 
-        [DisplayName("Biomass Price at Farm Gate ($/green ton)")]
+        [DisplayName("Farm Gate Price ($/dry ton)")]
         public double BiomassPriceAtFarmGate { get; set; } //$/ton
 
 

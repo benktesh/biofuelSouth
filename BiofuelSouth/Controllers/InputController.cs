@@ -35,11 +35,12 @@ namespace BiofuelSouth.Controllers
         //[HttpPost]
         public ActionResult Index(Input ip= null)
         {
+            ModelState.Clear();
 
-            if (ip == null)
+            if (ip == null || ip.ProjectLife == 0 )
             {
-                ip = new Input();
                 FillViewBag();
+                ip = new Input();
                 if (TempData["input"] == null)
                 {
                     TempData["input"] = ip;
@@ -50,6 +51,8 @@ namespace BiofuelSouth.Controllers
                     ip = TempData["input"] as Input;
                 }
                 TempData.Keep();
+                
+                return View(ip);
             }
                 
             //TODO Do some thing here
@@ -98,11 +101,19 @@ namespace BiofuelSouth.Controllers
             
         }
 
-        
+        public ActionResult Financial(Input ip = null)
+        {
+            if (ip == null || ip.County == null)
+                return RedirectToAction("Index");
+            return RedirectToAction("Index");
+
+          //TODO if financial is not needed, redirect to index
+        }
+
         public ActionResult Storage(Input ip =null)
         {
-            if (ip == null)
-                return RedirectToAction("Input");
+            if (ip == null || ip.County == null)
+                return RedirectToAction("Index");
 
             if (ip.StorageRequirement == null)
             {

@@ -18,12 +18,13 @@
                     @Html.Partial("_inputPartial")
                 </div>
                 <div class="form-group">
-                    @Html.LabelFor(model => model.StorageRequirement.StorageTime, new { @class = "control-label" })
-                    <a href="#" rel="popover" class="" data-toggle="popover" tabindex="0" data-trigger="focus"
-                       data-placement="left" title="Storage Time" data-content="<p>Number of days harvested biomass crop require storage facility. 
+                   
+                    <div class="row">
+                        @Html.LabelFor(model => model.StorageRequirement.StorageTime, new { @class = "control-label" })<span class="required">Required</span>
+                        <a href="#" rel="popover" class="" data-toggle="popover" tabindex="0" data-trigger="focus"
+                           data-placement="left" title="Storage Time" data-content="<p>Number of days harvested biomass crop require storage facility.
                     The maximum number of days for storage is 200 days. </p>">
                         <span class="glyphicon glyphicon-question-sign"></span></a>
-                    <div class="row">
                         @Html.TextBoxFor(model => model.StorageRequirement.StorageTime, new { @class = "form-control" })
                         @Html.ValidationMessageFor(model => model.StorageRequirement.StorageTime, "", new { @class = "text-danger" })
                     </div>
@@ -39,23 +40,25 @@
     *@
 
                 <div class="form-group">
-                    @Html.LabelFor(model => model.StorageRequirement.PercentStored, new { @class = "control-label" })
-                    <a href="#" rel="popover" class="" data-toggle="popover" tabindex="0" data-trigger="focus"
-                       data-placement="left" title="Storage Percent" data-content="<p>Proportion of harvested crop requiring storage. 
+                    <div class="row">
+                        @Html.LabelFor(model => model.StorageRequirement.PercentStored, new { @class = "control-label" })<span class="required">Required</span>
+                        <a href="#" rel="popover" class="" data-toggle="popover" tabindex="0" data-trigger="focus"
+                           data-placement="left" title="Storage Percent" data-content="<p>Proportion of harvested crop requiring storage.
                        For example, out of the 100 tons of crop harvested, if only 20 tons require storage while rest of the 80 tons are sold at the time of harvest, then
                     proportion requiring storage can be calculated as 20/100*100% = 20%.</p>"><span class="glyphicon glyphicon-question-sign"></span></a>
-                    <div class="row">
+
                         @Html.TextBoxFor(model => model.StorageRequirement.PercentStored, new { @class = "form-control" })
                         @Html.ValidationMessageFor(model => model.StorageRequirement.PercentStored, "", new { @class = "text-danger" })
                     </div>
                 </div>
 
                 <div class="form-group">
-                    @Html.LabelFor(model => model.StorageRequirement.StorageMethod, new { @class = "control-label" })
-                    <a href="#" rel="popover" class="" data-toggle="popover" tabindex="0" data-trigger="focus"
-                       data-placement="left" title="Storage Percent" data-content="<p>After-harvest storage methods of switchgrass and other perennial grasses grown for biofuel have a significant effect on the profitability and success of an enterprise. Depending on how it's harvested, feedstock can be stored as round or square dry bales, or as a moist product in bunkers or silo bags.</p>">
-                        <span class="glyphicon glyphicon-question-sign"></span></a>
+
                     <div class="row">
+                        @Html.LabelFor(model => model.StorageRequirement.StorageMethod, new { @class = "control-label" })<span class="required">Required</span>
+                        <a href="#" rel="popover" class="" data-toggle="popover" tabindex="0" data-trigger="focus"
+                           data-placement="left" title="Storage Percent" data-content="<p>After-harvest storage methods of switchgrass and other perennial grasses grown for biofuel have a significant effect on the profitability and success of an enterprise. Depending on how it's harvested, feedstock can be stored as round or square dry bales, or as a moist product in bunkers or silo bags.</p>">
+                        <span class="glyphicon glyphicon-question-sign"></span></a>
                         @Html.DropDownListFor(model => model.StorageRequirement.StorageMethod, (List<SelectListItem>)ViewBag.StorageMethod, "Select Storage Method", new { @class = "form-control" })
                         @Html.ValidationMessageFor(model => model.StorageRequirement.StorageMethod, "", new { @class = "text-danger" })
                     </div>

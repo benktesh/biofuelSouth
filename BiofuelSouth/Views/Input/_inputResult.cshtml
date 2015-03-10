@@ -4,7 +4,7 @@
 @if (ViewBag.Results)
 {
     <div class="row" id="summaryHead">
-        <h2>Summay for @Model.Category in @(Constants.CountyName(Model.County)), @Model.State</h2>
+        <h2>Summary for @Model.Category in @(Constants.CountyName(Model.County)), @Model.State</h2>
     </div>
     <div class="row table-bordered">
         <h3>Productivity and Cost</h3>
@@ -66,20 +66,24 @@
 
         </div>
         <p>
-            <div>
-                Estimated Net Annual Production (tons): @Math.Round(Model.GetAnnualProductionList().Average(), 0)
+            @if (Model.ProjectLife > 0 )
+            {
 
-            </div>
-            <div>
-                Estimated Net Production (tons): @Math.Round(Model.GetAnnualProductionList().Sum(), 0)
+                <div>
+                    Estimated Net Annual Production (tons): @Math.Round(Model.GetAnnualProductionList().Average(), 0)
 
-            </div>
-            <div>
-                Estimated Annual Cost: @Model.GetAnnualCost().ToString("C")
-            </div>
-            <div>
-                Estimated Annual Revennue: @Model.GetAnnualRevenue().ToString("C")
-            </div>
+                </div>
+                <div>
+                    Estimated Net Production (tons): @Math.Round(Model.GetAnnualProductionList().Sum(), 0)
+
+                </div>
+                <div>
+                    Estimated Annual Cost: @Model.GetAnnualCost().ToString("C")
+                </div>
+                <div>
+                    Estimated Annual Revennue: @Model.GetAnnualRevenue().ToString("C")
+                </div>
+            }
         </p>
     </div>
     <div class="row table-bordered">

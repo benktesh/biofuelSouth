@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Globalization;
 using System.Linq;
+using System.Web.Helpers;
+using System.Web.Mvc;
 using BiofuelSouth.Models;
 
 
@@ -14,10 +16,26 @@ namespace BiofuelSouth.Services
         {
             using (DatabaseContext db = new DatabaseContext())
             {
-                var counties = db.County.Where(p => p.State == state).Select(p => p.Name).ToList();
-                return counties;
+                
+                return  db.County.Where(p => p.State == state).Select(p => p.Name).ToList();
+                
             }
         }
+
+        public static List<County> GetCountyData(string selectedCategory = "ALL")
+        {
+            using (var db = new DatabaseContext())
+            {
+                if (selectedCategory == "ALL")
+                {
+                    var data = db.County.ToList();
+                    return data; 
+
+                }
+                return db.County.Where(p => p.State == selectedCategory).ToList();
+            }
+        }
+
 
 
         public static double GetProductivityPerAcreForCropByGeoId(String category, String geoId)
