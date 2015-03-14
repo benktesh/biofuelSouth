@@ -535,6 +535,7 @@
     <Content Include="images\biomassbanner.jpg" />
     <Content Include="images\cereshead.jpg" />
     <Content Include="images\funding.jpg" />
+    <Content Include="images\funding.png" />
     <Content Include="images\ibssparnershiplogo.png" />
     <Content Include="images\ncsuhead.jpg" />
     <Content Include="images\nifa.gif" />

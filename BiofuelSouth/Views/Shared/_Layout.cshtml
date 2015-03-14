@@ -35,15 +35,15 @@
 
     </script>
     <script>
-    (function (i, s, o, g, r, a, m) {
-        i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
-            (i[r].q = i[r].q || []).push(arguments)
-        }, i[r].l = 1 * new Date(); a = s.createElement(o),
-        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
-    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date(); a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
 
-    ga('create', 'UA-58510159-2', 'auto');
-    ga('send', 'pageview');
+        ga('create', 'UA-58510159-2', 'auto');
+        ga('send', 'pageview');
 
     </script>
 </head>
@@ -51,19 +51,22 @@
     <div class="container">
         <header class="banner">
             <!-- Header-->
+            <div class="col-sm-12 col-lg-12 col-md-12 profile-img" style="border-bottom:solid; border-bottom-color:blue;">
+                <a href="http://www.nifa.usda.gov" target="_blank" title="USDA NIFA"><img src="~/images/funding.png" class="img-responsive img-rounded img-on-top"></a>
+                <a href='@Url.Action("Index", "Home")'>
+                    <img src="~/images/biomassbanner.jpg" alt="Banner Image Logo" class="img-responsive" />
+                </a>
+
+            </div>
             <div class="row">
                 <!--Banner -->
-                <div class="col-sm-12 col-lg-12 col-md-12" style="border-bottom:solid; border-bottom-color:blue;">
-                    <a class="usdafunding" href="http://www.nifa.usda.gov" target="_blank" title="USDA NIFA"></a>
-                    <a href='@Url.Action("help", "Home")'><img style="margin-top:0; padding-top: 0; width:100%; " src="~/images/biomassbanner.jpg" alt="Banner Image Logo" class="img-responsive" /></a>
-
-                </div>
+                <!--http://s24.postimg.org/on764040x/image.pnghttp://s9.postimg.org/41fwo4k4v/pro.png -->
                 <!-- End Banner -->
             </div>
             <div class="row">
                 <div class="col-sm-8 col-lg-8 col-md-8 pull-left">
-                <!-- Menu Content-->
-                <button class="btn btn-primary glyphicon glyphicon-home" id="homeButton" style="margin-left: 0" onclick="location.href =  '@Url.Action("Index", "Home")'">Home</button>
+                    <!-- Menu Content-->
+                    <button class="btn btn-primary glyphicon glyphicon-home" id="homeButton" style="margin-left: 0" onclick="location.href =  '@Url.Action("Index", "Home")'">Home</button>
                     <button class="btn btn-primary glyphicon" id="dropDownButton" onclick="location.href ='/map'">Maps</button>
                     <button class="btn btn-primary glyphicon" id="dssButton" onclick="location.href ='/Input'">DSS</button>
                     <button class="btn btn-primary glyphicon" id="glossaryButton" onclick="location.href = '@Url.Action("Search", "Home")'">Glossary</button>
@@ -93,33 +96,36 @@
         <div class="container body-content">
             @RenderBody()
         </div>
-        <footer>
-            <div id="portal-footer" class="row footer">
+        
+        <div class="row">
+            <footer>
+                <div id="footer" class="footer">
 
-                <div class="col-lg-1 col-sm-1 col-md-1 ">
-                    <a class="usda img-responsive" href="http://www.nifa.usda.gov" target="_blank" title="USDA NIFA">USDA NIFA</a>
-                </div>
-                <div class="col-lg-2 col-sm-2 col-md-2 ">
-                    <a class="uga img-responsive " href="http://www.uga.edu/" target="_blank" title="University of Georgia">UGA</a>
-                </div>
+                    <div class="col-lg-1 col-sm-1 col-md-1 ">
+                        <a class="usda img-responsive" href="http://www.nifa.usda.gov" target="_blank" title="USDA NIFA">USDA NIFA</a>
+                    </div>
+                    <div class="col-lg-2 col-sm-2 col-md-2 ">
+                        <a class="uga img-responsive " href="http://www.uga.edu/" target="_blank" title="University of Georgia">UGA</a>
+                    </div>
 
-                <div class="col-lg-2 col-sm-2 col-md-2 ">
-                    <a class="au img-responsive" href="http://www.auburn.edu/" target="_blank" title="Auburn University">AU</a>
+                    <div class="col-lg-2 col-sm-2 col-md-2 ">
+                        <a class="au img-responsive" href="http://www.auburn.edu/" target="_blank" title="Auburn University">AU</a>
+                    </div>
+                    <div class="col-lg-1 col-sm-1 col-md-1 ">
+                        <a class="ceres img-responsive" href="http://www.ceres.net/" target="_blank" title="Ceres, Inc">CERES</a>
+                    </div>
+                    <div class="col-lg-2 col-sm-2 col-md-2 ">
+                        <a class="arborgen img-responsive" href="http://www.arborgen.com//" target="_blank" title="Arborgen, Inc">ARBORGEN</a>
+                    </div>
+                    <div class="col-lg-2 col-sm-2 col-md-2 ">
+                        <a class="ncsu img-responsive" href="http://www.ncsu.edu/" target="_blank" title="North Carolina State University">NCSU</a>
+                    </div>
+                    <div class="col-lg-2 col-sm-2 col-md-2 ">
+                        <a class="ut img-responsive" href="http://www.utk.edu/" target="_blank" title="University of Tennessee">UT</a>
+                    </div>
                 </div>
-                <div class="col-lg-1 col-sm-1 col-md-1 ">
-                    <a class="ceres img-responsive" href="http://www.ceres.net/" target="_blank" title="Ceres, Inc">CERES</a>
-                </div>
-                <div class="col-lg-2 col-sm-2 col-md-2 ">
-                    <a class="arborgen img-responsive" href="http://www.arborgen.com//" target="_blank" title="Arborgen, Inc">ARBORGEN</a>
-                </div>
-                <div class="col-lg-2 col-sm-2 col-md-2 ">
-                    <a class="ncsu img-responsive" href="http://www.ncsu.edu/" target="_blank" title="North Carolina State University">NCSU</a>
-                </div>
-                <div class="col-lg-2 col-sm-2 col-md-2 ">
-                    <a class="ut img-responsive" href="http://www.utk.edu/" target="_blank" title="University of Tennessee">UT</a>
-                </div>
-            </div>
-        </footer>
+            </footer>
+    </div>
     </div>
 
     <script src="~/Scripts/jquery-2.1.1.js"></script>
@@ -128,7 +134,20 @@
     <script src="~/Scripts/response.js"></script>
     <script src="~/Scripts/biofuelSouth.js"></script>
 
-
+    <script>
+        (window).bind("load", function () {
+            var footer = $("#footer");
+            var pos = footer.position();
+            var height = $(window).height();
+            height = height - pos.top;
+            height = height - footer.height();
+            if (height > 0) {
+                footer.css({
+                    'margin-top': height + 'px'
+                });
+            }
+        });
+    </script>
 
 
 
