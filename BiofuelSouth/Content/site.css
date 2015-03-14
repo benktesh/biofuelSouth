@@ -13,6 +13,18 @@
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
+    padding-top: 150px;
+}
+
+.nav {
+    height: 150px;
+}
+
+#footer {
+    background-color: #f8f8f8;
+    margin-bottom: -1px;
+ 
+
 }
 
 /* Set width on the form input elements since they're 100% wide by default */
@@ -22,28 +34,31 @@ textarea {
     max-width: 280px;
 }
 
-/*Change color etc for footer*/
-footer {
-   
-    padding: 1em 0;
-    margin: 1em 0;
-    border-top: 1px solid #ddd;
-    color: red;
-    text-align:center;
-}
+#logoContainer {
+  height: 60px;
+  text-align: justify;
+  
+  font-size: 0.1px; /* IE 9 & 10 don't like font-size: 0; */
+  min-width: 600px;
+    z-index: 100;
+    margin-bottom: 5px;
 
-.banner_notused {
-    width: 1200px;
-    background-image: url("/images/biomassbanner.jpg");
-    padding: 2em 0;
-    margin: 3em 0;
-    border-top: 1px solid #ddd;
-    color: red;
-    text-align:center;
-     overflow: hidden;
-            text-indent: 100%;
-            white-space: nowrap;
-            background-repeat: no-repeat;
+}
+#logoContainer div {
+
+  height: 50px;
+  display: inline-block;
+  background: #f8f8f8;
+}
+#logoContainer:after {
+  content: '';
+  width: 100%; /* Ensures there are at least 2 lines of text, so justification works */
+  display: inline-block;
+}
+   
+
+.searchbar {
+    padding: 0; 
 }
 
          .usdafunding {
@@ -61,11 +76,7 @@ footer {
           
         }        
 
-        .footer .usda:hover, .footer .uga:hover, .footer .au:hover, .footer .ceres:hover, .footer .arborgen:hover, .footer .ncsu:hover,  .footer .ut:hover {
-            opacity: 1;
-        }
-
-        .footer .usda {
+        .usda {
             background-image: url("/images/usdahead.jpg");
             background-size:contain;
             display: block;
@@ -82,7 +93,7 @@ footer {
             margin-right:auto;
         }
 
-        .footer .uga {
+        .uga {
             background-image: url("/images/ugahead.jpg");
             background-size:contain;
             display: block;
@@ -95,10 +106,10 @@ footer {
             float: left;
             opacity: 1;
             margin-right:auto;
-            margin-top: -5%;
+            margin-top: -1%;
         }
 
-        footer .au {
+        .au {
             background-image: url("/images/auhead.jpg");
             background-size:contain;
             display: block;
@@ -110,28 +121,28 @@ footer {
             background-repeat: no-repeat;
             
             opacity: 1;
-            margin-top: -5%;
+     
 
            
         }
 
-        footer .ceres {
+        .ceres {
             background-image: url("/images/cereshead.jpg");
             background-size:contain;
             display: block;
             height: 50px;
-            width: 100%;
+            width: 90%;
             overflow: hidden;
             text-indent: 100%;
             white-space: nowrap;
             background-repeat: no-repeat;
             
             opacity: 1;
-            margin-top: -10%;
+            margin-top: -5%;
             
         }
 
-       footer .arborgen {
+         .arborgen {
             background-image: url("/images/arborgenhead.jpg");
             background-size:contain;
             display: block;
@@ -144,53 +155,51 @@ footer {
             float: left;
             opacity: 1;
             margin-right:auto;
-            margin-top: -5%;
+   
         
         }
 
-        .footer .ncsu {
+        .ncsu {
             background-image: url("/images/ncsuhead.jpg");
             background-size:contain;
             display: block;
-            height: 50px;
-            width: 100%;
-            overflow: hidden;
+    
+               overflow: hidden;
             text-indent: 100%;
             white-space: nowrap;
             background-repeat: no-repeat;
-            opacity: 1;
-            margin-top: 10%;
+            margin-top: 15%;
+            
             
             
         }
 
-         .footer .ut {
+         .ut {
             background-image: url("/images/uthead.jpg");
             background-size:contain;
             display: block;
-            height: 50px;
-            width: 100%;
             overflow: hidden;
             text-indent: 100%;
             white-space: nowrap;
             background-repeat: no-repeat;
             float: left;
             opacity: 1;
+            margin-top: 5%;
             
         }
 
-         .footer {
-             margin-top: 0;
-             background-position: center;
-             background-size:100%;
-             
-             float: none ;
-             vertical-align: middle;
-             text-align:center
-             
-         }
+         
+    
+ 
 
 
+.body-content {
+    margin-bottom: 80px;
+}
+
+
+ 
+      
 
 
 
@@ -220,6 +229,7 @@ footer {
 
   .profile-img {
       width: 100%;
+      height: 5%;
 position: relative;
 margin-top:-10px; padding-top: 0;width: 100%;padding-right: 0;padding-left: 0;padding-bottom: 0;
 }

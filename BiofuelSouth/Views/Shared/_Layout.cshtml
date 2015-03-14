@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - Biofuel Decision Support System</title>
+    <title>@ViewBag.Title Biofuel Decision Support System</title>
 
     <link href="~/Content/bootstrap.css" rel="stylesheet" />
     <link href="~/Content/site.css" rel="stylesheet" />
@@ -25,16 +25,6 @@
             return webFolderFullPath;
         }
 
-        function GoHome() {
-           
-            //  $.get("Home", function () {
-            //  });
-            window.location.href = "../Home/index.html";
-        }
-
-
-    </script>
-    <script>
         (function (i, s, o, g, r, a, m) {
             i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
                 (i[r].q = i[r].q || []).push(arguments)
@@ -44,62 +34,97 @@
 
         ga('create', 'UA-58510159-2', 'auto');
         ga('send', 'pageview');
-
     </script>
 </head>
-<body>
-    <div class="container">
-        <header class="banner">
-            <!-- Header-->
-            <div class="col-sm-12 col-lg-12 col-md-12 profile-img" style="border-bottom:solid; border-bottom-color:blue;">
-                <a href="http://www.nifa.usda.gov" target="_blank" title="USDA NIFA"><img src="~/images/funding.png" class="img-responsive img-rounded img-on-top"></a>
-                <a href='@Url.Action("Index", "Home")'>
-                    <img src="~/images/biomassbanner.jpg" alt="Banner Image Logo" class="img-responsive" />
-                </a>
+<body id="page-top">
+    <!--Navigation-->
 
+    <nav class="navbar navbar-default  navbar-fixed-top">
+        <div class="container">
+
+            <div class="row profile-img" style="border-bottom:solid; border-bottom-color:blue;">
+                <a href="http://www.nifa.usda.gov" target="_blank" title="USDA NIFA"><img src="~/images/funding.png" class="img-responsive img-rounded img-on-top"></a>
+                <a href='@Url.Action("Index", "Home")'><img src="~/images/biomassbanner.jpg" alt="Banner Image Logo" class="img-responsive" /></a>
             </div>
             <div class="row">
-                <!--Banner -->
-                <!--http://s24.postimg.org/on764040x/image.pnghttp://s9.postimg.org/41fwo4k4v/pro.png -->
-                <!-- End Banner -->
-            </div>
-            <div class="row">
-                <div class="col-sm-8 col-lg-8 col-md-8 pull-left">
-                    <!-- Menu Content-->
-                    <button class="btn btn-primary glyphicon glyphicon-home" id="homeButton" style="margin-left: 0" onclick="location.href =  '@Url.Action("Index", "Home")'">Home</button>
-                    <button class="btn btn-primary glyphicon" id="dropDownButton" onclick="location.href ='/map'">Maps</button>
-                    <button class="btn btn-primary glyphicon" id="dssButton" onclick="location.href ='/Input'">DSS</button>
-                    <button class="btn btn-primary glyphicon" id="glossaryButton" onclick="location.href = '@Url.Action("Search", "Home")'">Glossary</button>
-                    <button class="btn btn-primary glyphicon" id="aboutButton" onclick="location.href = '@Url.Action("About", "Home")'">About</button>
-                    <button class="btn btn-primary glyphicon" id="contactButton" onclick="location.href = '@Url.Action("FeedBack", "Home")'">Contact</button>
-                    <button class="btn btn-primary glyphicon" id="helpButton" onclick="location.href = '@Url.Action("help", "Home")'">Help</button>
-                    <button class="btn btn-primary glyphicon" id="bugButton" onclick="location.href = '@Url.Action("GetSotfwareLog", "Home")'">Bug&Enhancement</button>
-                    <button class="btn btn-primary glyphicon" id="forumButton" onclick="location.href = '/forum'">Forum</button>
-                </div>
-                <div class="row col-sm-4 col-lg-4 col-md-4 pull-right">
+                <button class="btn btn-primary glyphicon glyphicon-home" id="homeButton" style="margin-left: 0; margin-bottom: 0;" onclick="location.href =  '@Url.Action("Index", "Home")'">Home</button>
+                <button class="btn btn-primary glyphicon" id="dropDownButton" onclick="location.href ='/map'">Maps</button>
+                <button class="btn btn-primary glyphicon" id="dssButton" onclick="location.href ='/Input'">DSS</button>
+                <button class="btn btn-primary glyphicon" id="glossaryButton" onclick="location.href = '@Url.Action("Search", "Home")'">Glossary</button>
+                <button class="btn btn-primary glyphicon" id="aboutButton" onclick="location.href = '@Url.Action("About", "Home")'">About</button>
+                <button class="btn btn-primary glyphicon" id="contactButton" onclick="location.href = '@Url.Action("FeedBack", "Home")'">Contact</button>
+                <button class="btn btn-primary glyphicon" id="helpButton" onclick="location.href = '@Url.Action("help", "Home")'">Help</button>
+                <button class="btn btn-primary glyphicon" id="bugButton" onclick="location.href = '@Url.Action("GetSotfwareLog", "Home")'">Bug&Enhancement</button>
+                <button class="btn btn-primary glyphicon" id="forumButton" onclick="location.href = '/forum'">Forum</button>
+                <div class="pull-right">
                     <div id="searchSpace" style="float:right;">
                         <form class=" navbar-form" style="float:right; margin-top: 0;" role="search" method="POST" action="@Url.Action("Search", "Home")">
                             <input type="text" class="form-control" size="50" placeholder="Enter a term" name="term" id="term" />
-                            <button class="btn btn-primary btn-primary glyphicon glyphicon-search" id="searchButton " name="searchButton" type="submit"></button>
+                            <button class="btn btn-primary btn-primary glyphicon glyphicon-search searchbar" id="searchButton " name="searchButton" type="submit"></button>
                         </form>
                     </div>
+                </div>
+            </div>
+        </div> <!-- End Menu Content-->
+
+    </nav>
 
 
 
+    <div class="container body-content">
+        <div class="row">
+            <div class="col-lg-12">
+                @RenderBody()
+            </div>
+
+        </div>
+    </div>
+
+
+
+    <div class="scroll-top page-scroll visible-xs visible sm">
+        <a class="btn btn-primary" href="#page-top">
+            <i class="glyphicon-circle-arrow-up"></i>
+        </a>
+    </div>
+
+    <footer id="" class="footer">
+        <div class="navbar navbar-fixed-bottom navbar-collapse collapse" id="footer">
+            <div class="container">
+                <div class="img-responsive">
+                    <div class="row" id="logoContainer">
+
+                        <div>
+                            <a href="http://www.nifa.usda.gov" target="_blank" title="University of Georgia"> <img src="~/images/usdahead.jpg" /></a>
+                        </div>
+                        <div>
+                            <a href="http://www.uga.edu/" target="_blank" title="University of Georgia"><img src="~/images/ugahead.jpg" /></a>
+                        </div>
+                        <div>
+                            <a href="http://www.auburn.edu/" target="_blank" title="Auburn University"><img src="~/images/auhead.jpg" /></a>
+                        </div>
+                        <div>
+                            <a href="http://www.ceres.net/" target="_blank" title="Ceres, Inc"><img src="~/images/cereshead.jpg" /></a>
+                        </div>
+                        <div>
+                            <a href="http://www.arborgen.com//" target="_blank" title="Arborgen, Inc"><img src="~/images/arborgenhead.png" /></a>
+                        </div>
+                        <div>
+                            <a href="http://www.ncsu.edu/" target="_blank" title="NCSU"><img src="~/images/ncsuhead.jpg" /></a>
+                        </div>
+                        <div>
+                            <a href="http://www.utk.edu/" target="_blank" title="University of Tennessee"><img src="~/images/uthead.jpg" /></a>
+                        </div>
+                    </div>
 
 
                 </div>
 
 
-            </div> <!-- End Menu Content-->
-        </header> <!-- End Header-->
-        <div class="container body-content">
-            @RenderBody()
-        </div>
-        
-        <div class="row">
-            <footer>
-                <div id="footer" class="footer">
+
+
+                <div class="row" hidden="hidden">
+
 
                     <div class="col-lg-1 col-sm-1 col-md-1 ">
                         <a class="usda img-responsive" href="http://www.nifa.usda.gov" target="_blank" title="USDA NIFA">USDA NIFA</a>
@@ -109,7 +134,7 @@
                     </div>
 
                     <div class="col-lg-2 col-sm-2 col-md-2 ">
-                        <a class="au img-responsive" href="http://www.auburn.edu/" target="_blank" title="Auburn University">AU</a>
+
                     </div>
                     <div class="col-lg-1 col-sm-1 col-md-1 ">
                         <a class="ceres img-responsive" href="http://www.ceres.net/" target="_blank" title="Ceres, Inc">CERES</a>
@@ -118,36 +143,27 @@
                         <a class="arborgen img-responsive" href="http://www.arborgen.com//" target="_blank" title="Arborgen, Inc">ARBORGEN</a>
                     </div>
                     <div class="col-lg-2 col-sm-2 col-md-2 ">
-                        <a class="ncsu img-responsive" href="http://www.ncsu.edu/" target="_blank" title="North Carolina State University">NCSU</a>
+                        <a class="ncsu img-responsive" href="http://www.ncsu.edu/" target="_blank" title="NCSU">NCSU</a>
                     </div>
                     <div class="col-lg-2 col-sm-2 col-md-2 ">
                         <a class="ut img-responsive" href="http://www.utk.edu/" target="_blank" title="University of Tennessee">UT</a>
                     </div>
                 </div>
-            </footer>
-    </div>
-    </div>
+            </div>
+
+
+        </div>
+        </div>
+    </footer>
+
+
+
 
     <script src="~/Scripts/jquery-2.1.1.js"></script>
     <script src="~/Scripts/jquery.validate.min.js"></script>
     <script src="~/Scripts/bootstrap.js"></script>
     <script src="~/Scripts/response.js"></script>
     <script src="~/Scripts/biofuelSouth.js"></script>
-
-    <script>
-        (window).bind("load", function () {
-            var footer = $("#footer");
-            var pos = footer.position();
-            var height = $(window).height();
-            height = height - pos.top;
-            height = height - footer.height();
-            if (height > 0) {
-                footer.css({
-                    'margin-top': height + 'px'
-                });
-            }
-        });
-    </script>
 
 
 
