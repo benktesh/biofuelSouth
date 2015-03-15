@@ -661,6 +661,34 @@
     <Compile Include="Migrations\201503150404304_changesStorageAndGeneralModel.Designer.cs">
       <DependentUpon>201503150404304_changesStorageAndGeneralModel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201503151341382_UpdateFinancialModel.cs" />
+    <Compile Include="Migrations\201503151341382_UpdateFinancialModel.Designer.cs">
+      <DependentUpon>201503151341382_UpdateFinancialModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201503151354486_ChangesStorageRequirementVariable.cs" />
+    <Compile Include="Migrations\201503151354486_ChangesStorageRequirementVariable.Designer.cs">
+      <DependentUpon>201503151354486_ChangesStorageRequirementVariable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201503151406348_dbChange.cs" />
+    <Compile Include="Migrations\201503151406348_dbChange.Designer.cs">
+      <DependentUpon>201503151406348_dbChange.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201503151446225_anotherModelChange.cs" />
+    <Compile Include="Migrations\201503151446225_anotherModelChange.Designer.cs">
+      <DependentUpon>201503151446225_anotherModelChange.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201503151519519_AnotherChange.cs" />
+    <Compile Include="Migrations\201503151519519_AnotherChange.Designer.cs">
+      <DependentUpon>201503151519519_AnotherChange.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201503151613539_AnotherChange1.cs" />
+    <Compile Include="Migrations\201503151613539_AnotherChange1.Designer.cs">
+      <DependentUpon>201503151613539_AnotherChange1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201503151635062_ChangesInputModel.cs" />
+    <Compile Include="Migrations\201503151635062_ChangesInputModel.Designer.cs">
+      <DependentUpon>201503151635062_ChangesInputModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\Cost.cs" />
     <Compile Include="Models\CountyData.cs" />
     <Compile Include="Models\DatabaseContext.cs" />
@@ -740,8 +768,9 @@
     <Content Include="Views\Home\FeedBack.cshtml" />
     <Content Include="Views\Input\_inputPartial.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Input\_financial.cshtml" />
+    <Content Include="Views\Input\Financial.cshtml" />
     <Content Include="Views\Input\General.cshtml" />
+    <Content Include="Views\Input\Result.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1097,6 +1126,27 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201503150404304_changesStorageAndGeneralModel.resx">
       <DependentUpon>201503150404304_changesStorageAndGeneralModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201503151341382_UpdateFinancialModel.resx">
+      <DependentUpon>201503151341382_UpdateFinancialModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201503151354486_ChangesStorageRequirementVariable.resx">
+      <DependentUpon>201503151354486_ChangesStorageRequirementVariable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201503151406348_dbChange.resx">
+      <DependentUpon>201503151406348_dbChange.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201503151446225_anotherModelChange.resx">
+      <DependentUpon>201503151446225_anotherModelChange.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201503151519519_AnotherChange.resx">
+      <DependentUpon>201503151519519_AnotherChange.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201503151613539_AnotherChange1.resx">
+      <DependentUpon>201503151613539_AnotherChange1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201503151635062_ChangesInputModel.resx">
+      <DependentUpon>201503151635062_ChangesInputModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
