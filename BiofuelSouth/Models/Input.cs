@@ -11,35 +11,39 @@ namespace BiofuelSouth.Models
     public class Input
     {
 
-   
         public int Id { get; set; }
 
         [Required]
         public String State { get; set; }
 
         [Required]
-        [DisplayName("Name of County")]
+        [DisplayName(@"Name of County")]
         public string County { get; set; }
 
 
         [Required]
-        [DisplayName("Biofuel Category")]
+        [DisplayName(@"Biofuel Category")]
         public String Category { get; set; }
 
-        [DisplayName("Size of Project (acre)")]
+        [DisplayName(@"Size of Project (acre)")]
         public double ProjectSize {get; set;}
 
-        [DisplayName("Years (From plantation to harvest")]
+        [DisplayName(@"Years (From plantation to harvest")]
         public int ProjectLife {get; set;}  //years
 
-        [DisplayName("Farm Gate Price ($/dry ton)")]
+        [DisplayName(@"Farm Gate Price ($/dry ton)")]
         public double BiomassPriceAtFarmGate { get; set; } //$/ton
 
 
-        [DisplayName("Cost of land ($/acre/year)")]
+        [DisplayName(@"Cost of land ($/acre/year)")]
         public double LandCost { get; set; } //$/acre/year
 
-        public Storage StorageRequirement { get; set; }
+        public bool? ModelStorage { get; set; }
+        public bool? ModelFinancial { get; set; }
+
+        public General General { get; set; }
+
+        public Storage Storage { get; set; }
 
         public Financial Finance { get; set; }
 
@@ -74,8 +78,8 @@ namespace BiofuelSouth.Models
             var taper = Constants.GetProductivityTaper("Switchgrass");
             List<double> annualProductivity = new List<double>();
             double storageLossFactor = 0;
-            if (StorageRequirement != null && StorageRequirement.RequireStorage)
-                storageLossFactor = GetStorageLossFactor()*StorageRequirement.PercentStored/100;
+            if (Storage != null && Storage.RequireStorage)
+                storageLossFactor = GetStorageLossFactor()*Storage.PercentStored/100;
 
             double StandardAnnualProduction = GetAnnualProductivity()*(1 - storageLossFactor); //Annual Productivity is = Pruduction * (1 - loss factor)
             for (int i = 0; i < ProjectLife; i++)
@@ -118,12 +122,12 @@ namespace BiofuelSouth.Models
 
         public Double GetStorageLossFactor()
         {
-            if (StorageRequirement == null)
+            if (Storage == null)
                 return 0;
-            Double days = StorageRequirement.StorageTime;
+            Double days = Storage.StorageTime;
             if (days == 0.0)
                 return 0; 
-            int storagemethod = Convert.ToInt32(StorageRequirement.StorageMethod);
+            int storagemethod = Convert.ToInt32(Storage.StorageMethod);
             double storageLossValue = Constants.GetStorageLoss(storagemethod, "Switchgrass");
             return days/200*storageLossValue/100;
         }
