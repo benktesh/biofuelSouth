@@ -113,6 +113,17 @@ namespace BiofuelSouth.Models
             };
             return items;
         }
+
+        public static IEnumerable<SelectListItem> GetYesNo()
+        {
+              IList<SelectListItem> items = new List<SelectListItem>
+            {
+                new SelectListItem {Text = "Yes", Value = "true"},
+                new SelectListItem {Text = "No", Value = "false"},
+             };
+              return items;
+        }
+
         public static IEnumerable<SelectListItem> GetState()
         {
             IList<SelectListItem> items = new List<SelectListItem>
