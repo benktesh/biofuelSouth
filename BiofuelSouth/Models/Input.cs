@@ -13,57 +13,59 @@ namespace BiofuelSouth.Models
 
         public int Id { get; set; }
 
-        [Required]
-        public String State { get; set; }
+        //[Required]
+        //public String State { get; set; }
 
-        [Required]
-        [DisplayName(@"Name of County")]
-        public string County { get; set; }
-
-
-        [Required]
-        [DisplayName(@"Biofuel Category")]
-        public String Category { get; set; }
-
-        [DisplayName(@"Size of Project (acre)")]
-        public double ProjectSize {get; set;}
-
-        [DisplayName(@"Years (From plantation to harvest")]
-        public int ProjectLife {get; set;}  //years
-
-        [DisplayName(@"Farm Gate Price ($/dry ton)")]
-        public double BiomassPriceAtFarmGate { get; set; } //$/ton
+        //[Required]
+        //[DisplayName(@"Name of County")]
+        //public string County { get; set; }
 
 
-        [DisplayName(@"Cost of land ($/acre/year)")]
-        public double LandCost { get; set; } //$/acre/year
+        //[Required]
+        //[DisplayName(@"Biofuel Category")]
+        //public String Category { get; set; }
 
-        public bool? ModelStorage { get; set; }
-        public bool? ModelFinancial { get; set; }
+        //[DisplayName(@"Size of Project (acre)")]
+        //public double ProjectSize {get; set;}
+
+        //[DisplayName(@"Years (From plantation to harvest")]
+        //public int ProjectLife {get; set;}  //years
+
+        //[DisplayName(@"Farm Gate Price ($/dry ton)")]
+        //public double BiomassPriceAtFarmGate { get; set; } //$/ton
+
+
+        //[DisplayName(@"Cost of land ($/acre/year)")]
+        //public double LandCost { get; set; } //$/acre/year
+
+        //public bool? ModelStorage { get; set; }
+        //public bool? ModelFinancial { get; set; }
 
         public General General { get; set; }
 
         public Storage Storage { get; set; }
 
-        public Financial Finance { get; set; }
+        public Financial Financial { get; set; }
+
+        //TODO Move everythign to resultmanagement
 
         public double GetAnnualProductivity()
         {
-            return DataService.GetProductivityPerAcreForCropByGeoId(Category, County)*ProjectSize;  
+            return DataService.GetProductivityPerAcreForCropByGeoId(General.Category, General.County)*General.ProjectSize;  
         }
 
         public double GetAnnualCost()
         {
-            return (DataService.GetCostPerAcreForCropByGeoId(Category, County) + LandCost) * ProjectSize;  
+            return (DataService.GetCostPerAcreForCropByGeoId(General.Category, General.County) + General.LandCost) * General.ProjectSize;  
         }
 
         public double GetAnnualRevenue()
         {
-            if (Convert.ToInt32(BiomassPriceAtFarmGate) == 0)
+            if (Convert.ToInt32(General.BiomassPriceAtFarmGate) == 0)
             {
-                BiomassPriceAtFarmGate = Constants.GetFarmGatePrice(Category); 
+                General.BiomassPriceAtFarmGate = Constants.GetFarmGatePrice(General.Category); 
             }
-            return GetAnnualProductivity()*BiomassPriceAtFarmGate;  
+            return GetAnnualProductivity() * General.BiomassPriceAtFarmGate;  
         }
         /// <summary>
         /// The method returns an array of annual productivity
@@ -78,11 +80,11 @@ namespace BiofuelSouth.Models
             var taper = Constants.GetProductivityTaper("Switchgrass");
             List<double> annualProductivity = new List<double>();
             double storageLossFactor = 0;
-            if (Storage != null && Storage.RequireStorage)
+            if (Storage != null && Storage.RequireStorage != null && (bool) Storage.RequireStorage)
                 storageLossFactor = GetStorageLossFactor()*Storage.PercentStored/100;
 
             double StandardAnnualProduction = GetAnnualProductivity()*(1 - storageLossFactor); //Annual Productivity is = Pruduction * (1 - loss factor)
-            for (int i = 0; i < ProjectLife; i++)
+            for (int i = 0; i < General.ProjectLife; i++)
             {
                 if (i < taper.Count)
                 {
@@ -103,7 +105,7 @@ namespace BiofuelSouth.Models
             var taper = Constants.GetProductivityTaper("Switchgrass");
             List<double> annualProductivity = new List<double>();
              double StandardAnnualProduction = GetAnnualProductivity(); //Annual Productivity is = Pruduction * (1 - loss factor)
-            for (int i = 0; i < ProjectLife; i++)
+             for (int i = 0; i < General.ProjectLife; i++)
             {
                 if (i < taper.Count)
                 {
