@@ -46,7 +46,7 @@
                         </td>
                         @foreach (var a in Model.GetGrossProductionList())
                         {
-                            <td>@Math.Round(a * Model.GetStorageLossFactor() *Model.StorageRequirement.StorageTime/200* Model.StorageRequirement.PercentStored /100, 0)</td>
+                            <td>@Math.Round(a * Model.GetStorageLossFactor() *Model.Storage.StorageTime/200* Model.Storage.PercentStored /100, 0)</td>
                         }
                     </tr>
    
