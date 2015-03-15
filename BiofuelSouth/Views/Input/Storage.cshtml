@@ -9,75 +9,84 @@
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>DSS Input</h4>
+
         @*@Html.Partial("_DSSMenu")*@
         <div class="row">
-            
-            <div class="container col-md-4">
+
+            <div class="container col-md-9">
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 @*<div id="hiddenInput" hidden="hidden">
-                    @Html.Partial("_inputPartial")
-                </div>*@
-                
+                @Html.Partial("_inputPartial")
+            </div>*@
 
-                <div class="form-group">
-                   
-                    <div class="row">
-                        @Html.LabelFor(model => model.StorageTime, new { @class = "control-label" })<span class="required">Required</span>
+                <div class="row">
+                    <div class="col-md-5 form-group">
+                        @Html.LabelFor(model => model.RequireStorage, new { @class = "control-label" })
                         <a href="#" rel="popover" class="" data-toggle="popover" tabindex="0" data-trigger="focus"
-                           data-placement="left" title="Storage Time" data-content="<p>Number of days harvested biomass crop require storage facility.
-                    The maximum number of days for storage is 200 days. </p>">
-                        <span class="glyphicon glyphicon-question-sign"></span></a>
-                        @Html.TextBoxFor(model => model.StorageTime, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(model => model.StorageTime, "", new { @class = "text-danger" })
+                           data-placement="center" title="Require Finance" data-content="<p>If the project require
+                            storage, select Yes. Or select No if storage is not required. </p>">
+                            <span class="glyphicon glyphicon-question-sign"></span></a>
+                        <span class="required">Required </span>
+
+                        @Html.DropDownListFor(x => x.RequireStorage, Constants.GetYesNo(), "Select", new { @class = "form-control", required = "required" })
+                        @Html.ValidationMessageFor(model => model.RequireStorage, "", new { @class = "text-danger" })
                     </div>
                 </div>
-                @*
-    <div class="form-group">
-        @Html.LabelFor(model => model.Storage.PercentDirectlyToPlantGate, htmlAttributes: new { @class = "control-label" })
-        <div class="row">
-            @Html.TextBoxFor(model => model.Storage.PercentDirectlyToPlantGate, htmlAttributes: new { @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.Storage.PercentDirectlyToPlantGate, "", new { @class = "text-danger" })
-        </div>
-    </div>
-    *@
 
-                <div class="form-group">
-                    <div class="row">
-                        @Html.LabelFor(model => model.PercentStored, new { @class = "control-label" })<span class="required">Required</span>
-                        <a href="#" rel="popover" class="" data-toggle="popover" tabindex="0" data-trigger="focus"
-                           data-placement="left" title="Storage Percent" data-content="<p>Proportion of harvested crop requiring storage.
+
+                <div class="row" id="storageParameter" hidden="hidden">
+                    <div class="col-md-4">
+                        <div class="form-group">
+
+                            @Html.LabelFor(model => model.StorageTime, new { @class = "control-label" })<span class="required">Required</span>
+                            <a href="#" rel="popover" class="" data-toggle="popover" tabindex="0" data-trigger="focus"
+                               data-placement="left" title="Storage Time" data-content="<p>Number of days harvested biomass crop require storage facility.
+                    The maximum number of days for storage is 200 days. </p>">
+                                <span class="glyphicon glyphicon-question-sign"></span></a>
+                            @Html.TextBoxFor(model => model.StorageTime, new { @class = "form-control", @Value="" })
+                            @Html.ValidationMessageFor(model => model.StorageTime, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+
+                            @Html.LabelFor(model => model.PercentStored, new { @class = "control-label" })<span class="required">Required</span>
+                            <a href="#" rel="popover" class="" data-toggle="popover" tabindex="0" data-trigger="focus"
+                               data-placement="left" title="Storage Percent" data-content="<p>Proportion of harvested crop requiring storage.
                        For example, out of the 100 tons of crop harvested, if only 20 tons require storage while rest of the 80 tons are sold at the time of harvest, then
                     proportion requiring storage can be calculated as 20/100*100% = 20%.</p>"><span class="glyphicon glyphicon-question-sign"></span></a>
 
-                        @Html.TextBoxFor(model => model.PercentStored, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(model => model.PercentStored, "", new { @class = "text-danger" })
+                            @Html.TextBoxFor(model => model.PercentStored, new { @class = "form-control", @Value=""})
+                            @Html.ValidationMessageFor(model => model.PercentStored, "", new { @class = "text-danger" })
+                        </div>
                     </div>
-                </div>
 
-                <div class="form-group">
-
-                    <div class="row">
-                        @Html.LabelFor(model => model.StorageMethod, new { @class = "control-label" })<span class="required">Required</span>
-                        <a href="#" rel="popover" class="" data-toggle="popover" tabindex="0" data-trigger="focus"
-                           data-placement="left" title="Storage Percent" data-content="<p>After-harvest storage methods of switchgrass and other perennial grasses grown for biofuel have a significant effect on the profitability and success of an enterprise. Depending on how it's harvested, feedstock can be stored as round or square dry bales, or as a moist product in bunkers or silo bags.</p>">
-                        <span class="glyphicon glyphicon-question-sign"></span></a>
-                        @Html.DropDownListFor(model => model.StorageMethod, Constants.GetStorageMethod(), "Select Storage Method", new { @class = "form-control" })
-                        @Html.ValidationMessageFor(model => model.StorageMethod, "", new { @class = "text-danger" })
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            
+                                @Html.LabelFor(model => model.StorageMethod, new { @class = "control-label" })<span class="required">Required</span>
+                                <a href="#" rel="popover" class="" data-toggle="popover" tabindex="0" data-trigger="focus"
+                                   data-placement="left" title="Storage Percent" data-content="<p>After-harvest storage methods of switchgrass and other perennial grasses grown for biofuel have a significant effect on the profitability and success of an enterprise. Depending on how it's harvested, feedstock can be stored as round or square dry bales, or as a moist product in bunkers or silo bags.</p>">
+                            <span class="glyphicon glyphicon-question-sign"></span></a>
+                                @Html.DropDownListFor(model => model.StorageMethod, Constants.GetStorageMethod(), "Select Method", new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.StorageMethod, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
                     </div>
-                </div>
-                
-                <div class="form-group">
-                    <div class="row">
+
+                <div class="row">
+                    <div class="form-group col-md-6">
                         <button type="reset" value="Reset" class="btn btn-default">Reset</button>&nbsp;&nbsp;
                         <input type="submit" value="Submit" class="btn btn-default" />
                     </div>
                 </div>
 
             </div>
-            @*<div class="col-md-8">
-                @Html.Partial("_inputResult", Model)
-            </div>*@
+         
+            <div class="col-md-3">
+                <h4>DSS Input: Storage Parameters</h4>
+                TBD: Instruction and Steps
+            </div>
 
         </div>
 
@@ -95,7 +104,10 @@
             if ($('#state').val() != "Select State") {
                 $("#county").prop("disabled", false);
                 populateCounty();
+
             }
+
+            $('#RequireStorage').change();
 
 
             $("#state").change(function () {
@@ -132,6 +144,21 @@
                 }
             });
         }
+
+
+        $('#RequireStorage').change(function () {
+
+            // alert($('#RequireFinance').val());
+            if ($('#RequireStorage').val() == 'true') {
+                //alert($('#RequireFinance').val());
+                $('#storageParameter').show();
+            } else {
+                $('#storageParameter').hide();
+            }
+        });
+
+
+
     </script>
 
 
