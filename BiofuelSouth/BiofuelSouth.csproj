@@ -657,6 +657,10 @@
     <Compile Include="Migrations\201502152328011_changeFinancialModel.Designer.cs">
       <DependentUpon>201502152328011_changeFinancialModel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201503150404304_changesStorageAndGeneralModel.cs" />
+    <Compile Include="Migrations\201503150404304_changesStorageAndGeneralModel.Designer.cs">
+      <DependentUpon>201503150404304_changesStorageAndGeneralModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\Cost.cs" />
     <Compile Include="Models\CountyData.cs" />
     <Compile Include="Models\DatabaseContext.cs" />
@@ -694,6 +698,7 @@
     <Compile Include="Models\County.cs" />
     <Compile Include="Models\FeedBack.cs" />
     <Compile Include="Models\Financial.cs" />
+    <Compile Include="Models\General.cs" />
     <Compile Include="Models\Glossary.cs" />
     <Compile Include="Models\Input.cs" />
     <Compile Include="Models\Product.cs" />
@@ -736,6 +741,7 @@
     <Content Include="Views\Input\_inputPartial.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Input\_financial.cshtml" />
+    <Content Include="Views\Input\General.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1088,6 +1094,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201502152328011_changeFinancialModel.resx">
       <DependentUpon>201502152328011_changeFinancialModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201503150404304_changesStorageAndGeneralModel.resx">
+      <DependentUpon>201503150404304_changesStorageAndGeneralModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
