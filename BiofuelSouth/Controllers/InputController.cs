@@ -35,30 +35,30 @@ namespace BiofuelSouth.Controllers
         //[HttpPost]
         public ActionResult Index(Input ip= null)
         {
+
+            //create a session variable
+
             ModelState.Clear();
 
-            if (ip == null || ip.ProjectLife == 0 )
+            if (ip == null || ip.ProjectLife == 0)
             {
                 FillViewBag();
-                ip = new Input();
-                if (TempData["input"] == null)
-                {
-                    TempData["input"] = ip;
+                //ip = new Input();
+                //ip.General = new General();
+                //Session["Input"] = ip;
 
-                }
-                else
-                {
-                    ip = TempData["input"] as Input;
-                }
-                TempData.Keep();
-                
-                return View(ip);
+                //return View(ip);
+                return RedirectToAction("General");
+            }
+            else
+            {
+                Session["Input"] = ip; 
             }
                 
             //TODO Do some thing here
-            if (ip.StorageRequirement != null && ip.StorageRequirement.StorageTime > 0)
+            if (ip.Storage != null && ip.Storage.StorageTime > 0)
             {
-                ip.StorageRequirement.RequireStorage = true;
+                ip.Storage.RequireStorage = true;
             }
             
      
@@ -74,6 +74,40 @@ namespace BiofuelSouth.Controllers
             }
             return View(ip);
         }
+
+        
+        public ActionResult General(General general=null)
+        {
+            
+            if (general == null || general.State == null)
+            {
+                general = new General();
+                Input ip = (Input) Session["Input"];
+                if (ip == null)
+                    ip = new Input();
+                ip.General = general;
+                Session["Input"] = ip; 
+                return View();
+            }
+            else
+            {
+                if (!ModelState.IsValid)
+                {
+                    return View();
+                }
+                else
+                {
+                    ModelState.Clear();
+                    Input ip = (Input)Session["Input"];
+                    ip.General = general;
+                    Session["Input"] = ip;
+                    return RedirectToAction("Storage");
+                }
+            }
+        }
+
+      
+        
 
         private void FillViewBag()
         {
@@ -110,14 +144,47 @@ namespace BiofuelSouth.Controllers
           //TODO if financial is not needed, redirect to index
         }
 
-        public ActionResult Storage(Input ip =null)
+        public ActionResult Storage(Storage storage=null)
         {
-            if (ip == null || ip.County == null)
-                return RedirectToAction("Index");
 
-            if (ip.StorageRequirement == null)
+            if (storage == null)
             {
-                ip.StorageRequirement = new Storage();
+               storage = new Storage();
+            }
+            Input ip = (Input)Session["Input"];
+            if (ip == null)
+            {
+                return RedirectToAction("Index");
+            }
+            if (ip.Storage == null)
+            {
+                ip.Storage = storage;
+            }
+            ip.Storage = storage;
+            Session["Input"] = ip;
+
+            return View(storage);
+
+
+            if (ip == null || ip.General == null)
+            {
+                return RedirectToAction("Index");
+            }
+
+            if (ip.Storage == null)
+            {
+                ip.Storage = new Storage();
+                return View();
+            }
+            
+
+
+            if (ip == null || ip.County == null)
+                
+
+            if (ip.Storage == null)
+            {
+                ip.Storage = new Storage();
                 ModelState.Clear();
 
             }
@@ -132,8 +199,8 @@ namespace BiofuelSouth.Controllers
             FillViewBag();
             if (ModelState.IsValid)
             {
-                if (ip.StorageRequirement.StorageTime > 0)
-                    ip.StorageRequirement.RequireStorage = true;
+                if (ip.Storage.StorageTime > 0)
+                    ip.Storage.RequireStorage = true;
                 ViewBag.Results = true;
                 PostSubmit(ip, "Annual Production");
                 ViewBag.input = ip;
@@ -149,15 +216,15 @@ namespace BiofuelSouth.Controllers
                 
             }
 
-            if (ip.StorageRequirement == null)
+            if (ip.Storage == null)
             {
-                ip.StorageRequirement = new Storage {RequireStorage = false};
+                ip.Storage = new Storage {RequireStorage = false};
                 
                 return View(ip);
             }
                 
-            if (ip.StorageRequirement.StorageTime > 0)
-                ip.StorageRequirement.RequireStorage = true;
+            if (ip.Storage.StorageTime > 0)
+                ip.Storage.RequireStorage = true;
             
             ViewBag.Results = true;
             PostSubmit(ip, "Annual Production");
