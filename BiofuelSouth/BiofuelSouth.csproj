@@ -771,6 +771,8 @@
     <Content Include="Views\Input\Financial.cshtml" />
     <Content Include="Views\Input\General.cshtml" />
     <Content Include="Views\Input\Result.cshtml" />
+    <Content Include="Views\Shared\_Disclaimer.cshtml" />
+    <Content Include="Views\Home\Factsheet.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
