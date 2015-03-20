@@ -266,7 +266,12 @@ namespace BiofuelSouth.Controllers
             {
                 if (((bool)!financial.RequireFinance) || ((bool)financial.RequireFinance && ModelState.IsValid))
                 {
-                    return RedirectToAction("Result", ip);
+
+                    PostSubmit(ip, "Annual Production");
+                    TempData["input"] = ip;
+                    TempData.Keep();
+                    ViewBag.Results = true;
+                    return View("Result", ip);
                 }
 
 
