@@ -67,6 +67,11 @@ namespace BiofuelSouth.Controllers
             return View();
         }
 
+        public ActionResult Factsheet()
+        {
+            return View();
+        }
+
         public ActionResult Contact()
         {
             return FeedBack();
