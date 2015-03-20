@@ -18,7 +18,6 @@ namespace BiofuelSouth.Models
         [DisplayName(@"Name of County")]
         public string County { get; set; }
 
-
         [Required]
         [DisplayName(@"Biofuel Category")]
         public String Category { get; set; }
@@ -26,7 +25,8 @@ namespace BiofuelSouth.Models
         [DisplayName(@"Size of Project (acre)")]
         public double ProjectSize { get; set; }
 
-        [DisplayName(@"Years (From plantation to harvest")]
+        [DisplayName(@"Years (From plantation to harvest)")]
+        [Range(1,100)]
         public int ProjectLife { get; set; }  //years
 
         [DisplayName(@"Farm Gate Price ($/dry ton)")]

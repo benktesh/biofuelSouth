@@ -20,7 +20,7 @@ namespace BiofuelSouth.Models
         public bool? RequireStorage { get; set; } //true if storage is required, false if not.
 
         [Range(0, 200)]
-        [DisplayName(@"Storage Days)")]
+        [DisplayName(@"Storage Days")]
         [Required]
         public Double StorageTime { get; set; } //number of days, Max 200 days;
         [Range(0,100)]
