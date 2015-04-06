@@ -11,30 +11,74 @@ namespace BiofuelSouth.Controllers
     public class InputController : Controller
     {
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
-        //private Input input = new Input();
-        // GET: Input
-        [HttpGet]
-        public ActionResult Index1()
+
+
+        private General GetGeneralTest()
         {
-            var input = new Input();
-            FillViewBag();
-            if (TempData["input"] == null)
-            {   
-                TempData["input"] = input;
-              
-            }
-            else
-            {
-                input = TempData["input"] as Input;
-            }
-            TempData.Keep();
-          
-            return View(input);
+            var g = new General();
+            g.Category = "Switchgrass";
+            g.State = "AL";
+            g.County = "01001";
+            g.ProjectSize = 100;
+            g.ProjectLife = 10;
+            g.BiomassPriceAtFarmGate = 100;
+            g.LandCost = 20;
+            return g;
+
         }
+
+        private Storage GetStorageTest()
+        {
+            var g = new Storage();
+            g.PercentStored = 100;  
+            g.RequireStorage = true; 
+            g.StorageTime = 200; 
+            g.StorageMethod = "1"; 
+            return g;
+
+        }
+
+        private Financial GetFinancialTest()
+        {
+            var f = new Financial();
+            f.RequireFinance = true;
+            f.LoanAmount = 1000;
+            f.InterestRate = Constants.GetAvgInterestRate();
+            f.EquityLoanInterestRate = 8;
+            f.AdministrativeCost = 100;
+            f.AvailableEquity = 1000;
+            f.LoanAmount = 10000;
+            f.IncentivePayment = 0; 
+            f.YearsOfIncentivePayment = 0; 
+            
+            return f; 
+
+        }
+
 
         //[HttpPost]
         public ActionResult Index(Input ip= null)
         {
+
+            //TODO - Testing financials -
+            /*
+            ip = (Input)Session["Input"];
+            ip = new Input();
+            General general = GetGeneralTest();
+            Storage storage = GetStorageTest();
+            Financial financial = GetFinancialTest();
+            
+
+            ip.General = general;
+            ip.Storage = storage;
+            ip.Financial = financial;
+    
+            Session["Input"] = ip;
+
+            return RedirectToAction("Financial", financial);
+
+            */
+
             ip = null;
             Session["Input"] = ip; 
 
@@ -69,7 +113,7 @@ namespace BiofuelSouth.Controllers
             
             if (ModelState.IsValid)
             {
-                PostSubmit(ip, "Annual Production");
+                PostSubmit(ip);
                 TempData["input"] = ip;
                 TempData.Keep();
                 ViewBag.Results = true;
@@ -267,7 +311,7 @@ namespace BiofuelSouth.Controllers
                 if (((bool)!financial.RequireFinance) || ((bool)financial.RequireFinance && ModelState.IsValid))
                 {
 
-                    PostSubmit(ip, "Annual Production");
+                    PostSubmit(ip);
                     TempData["input"] = ip;
                     TempData.Keep();
                     ViewBag.Results = true;
@@ -302,12 +346,30 @@ namespace BiofuelSouth.Controllers
             return View(ip);
         }
 
-        private void PostSubmit(Input ip, String chartName)
+        private void PostSubmit(Input ip)
         {
-            string cacheKey = Guid.NewGuid().ToString();
+            var c = new ChartController();
+           var revenueCachekey = Guid.NewGuid().ToString();
+            ViewBag.RevenueCachekey = revenueCachekey;
+            //c.GenerateCostRevenueChart(costRevenueCachekey, ip.GetRevenues().Select(m => m.TotalRevenue).ToArray(), "Cost and Revenue");
+            var rev = ip.GetRevenues().Select(m => m.TotalRevenue).ToArray();
+            c.GenerateChart(revenueCachekey, rev, "Revenue");
+
+            var cacheKey = Guid.NewGuid().ToString();
             ViewBag.cacheKey = cacheKey;
             var cc = new ChartController();
-            cc.GenerateChart(cacheKey, ip.GetAnnualProductionList().ToArray(), chartName);
+            cc.GenerateChart(cacheKey, ip.GetAnnualProductionList().ToArray(), "Annual Production");
+
+
+            cacheKey = Guid.NewGuid().ToString();
+            ViewBag.cacheKey1 = cacheKey;
+            cc.GenerateCostRevenueChart(cacheKey, ip, "Cost and Revenue");
+
+
+
+           // cc.GenerateChart(cacheKey, rev, "Annual Production");
+
+            
 
         }
 
