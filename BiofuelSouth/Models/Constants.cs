@@ -124,6 +124,12 @@ namespace BiofuelSouth.Models
               return items;
         }
 
+        public static double GetAvgInterestRate()
+        {
+            //TODO Call IRA Data to get this value here
+            return 1.84;
+        }
+
         public static IEnumerable<SelectListItem> GetState()
         {
             IList<SelectListItem> items = new List<SelectListItem>
