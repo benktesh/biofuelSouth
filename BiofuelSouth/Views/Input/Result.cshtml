@@ -1,12 +1,9 @@
 ﻿@using BiofuelSouth.Models
-@model BiofuelSouth.Models.Input
+@model Input
 
 @{
     ViewBag.Title = "title";
-    if (Model.General.ProjectLife >= 10)
-    {
-        Model.General.ProjectLife = 10; 
-    }
+    var mergeCol = @Model.General.ProjectLife+1;
 
 }
 
@@ -22,7 +19,7 @@
 
     <div class="row">
 
-        <div class="col-md-3 col-lg-4 bg-info">
+        <div class="col-md-2 col-lg-3 bg-info">
             <p>
                 @if (Model.General.ProjectLife > 0)
                 {
@@ -39,14 +36,24 @@
                         Estimated Annual Cost: @Model.GetAnnualCost().ToString("C")
                     </div>
                     <div>
-                        Estimated Annual Revennue: @Model.GetAnnualRevenue().ToString("C")
+                        @{
+                    var annualRevennue = (Model.GetAnnualProductionList().Average() * Model.General.BiomassPriceAtFarmGate);
+                        }
+                        Estimated Annual Revennue: @annualRevennue.ToString("C")
+
+                    </div>
+
+                    <div>
+                        NPV: @Model.GetNPV().ToString("C")
                     </div>
                 }
             </p>
             <p>
                 <h3>Assumptions and Parameters</h3>
                 <div>
-                    TBD: State all the defualt values used.
+                    TBD: State all the defualt values used. <br />
+                    Biomass Price: @Model.General.BiomassPriceAtFarmGate.ToString("C0") <br />
+                    Project Size: @Model.General.ProjectSize.ToString("##,###") <br />
                 </div>
                 <div class="text-danger">
                     TBD: The current result does not include financials.
@@ -63,8 +70,8 @@
             </p>
         </div>
 
-        <div class="col-md-9 col-lg-8">
-            <strong>Productivity and Cost</strong>
+        <div class="col-md-10 col-lg-9">
+            <strong>Estimated Production, Cost and Revenue</strong>
             <table class="table table-responsive table-bordered table-striped">
                 <thead>
                     <tr>
@@ -85,22 +92,29 @@
                 @if (Model.GetStorageLossFactor() > 0)
                 {
                     <tr>
+                        <td colspan="@mergeCol" class="mergeCol">Production</td>
+                    </tr>
+                    <tr>
                         <td>
-                            Estimated Gross Annual Production (tons/year)
+                            Gross Production (tons/year)
                         </td>
                         @foreach (var a in Model.GetGrossProductionList())
                         {
-                            <td>@Math.Round(a, 0)</td>
+                            <td>@String.Format("{0:#,###,###}", Math.Round(a, 0))</td>
                         }
                     </tr>
 
                     <tr>
+                        <td colspan="@mergeCol" class="mergeCol">Storage</td>
+                    </tr>
+
+                    <tr>
                         <td>
-                            Estimated Annual Loss From Storage (tons/year)
+                            Storage Loss (tons/year)
                         </td>
                         @foreach (var a in Model.GetGrossProductionList())
                         {
-                            <td>@Math.Round(a * Model.GetStorageLossFactor() * Model.Storage.StorageTime / 200 * Model.Storage.PercentStored / 100, 0)</td>
+                            <td>@String.Format("{0:#,###,###}", Math.Round(a * Model.GetStorageLossFactor() * Model.Storage.StorageTime / 200 * Model.Storage.PercentStored / 100, 0))</td>
                         }
                     </tr>
 
@@ -108,23 +122,76 @@
 
                 <tr>
                     <td>
-                        Estimated Net Annual Production (tons/year)
+                        Net Production (tons/year)
                     </td>
                     @foreach (var a in Model.GetAnnualProductionList())
                     {
-                        <td>@Math.Round(a, 0)</td>
+                        <td>@String.Format("{0:#,###,###}", Math.Round(a, 0))</td>
                     }
+                </tr>
+                <tr>
+                    <td colspan="@mergeCol" class="mergeCol">Cost and Revenue</td>
+                </tr>
+                <tr>
+                    <td>
+                        Revenue ($)
+                    </td>
+                    @foreach (var a in Model.GetRevenues())
+                    {
+                        <td>@String.Format("{0:#,###,###}", Math.Round(a.TotalRevenue, 0))</td>
+
+                    }
+
+                </tr>
+                <tr>
+                    <td>
+                        Cost ($)
+                    </td>
+                    @foreach (var a in Model.GetExpenditures())
+                    {
+
+                        <td>@String.Format("{0:#,###,###}", @Math.Round(a.TotalExpenses, 0))</td>
+                    }
+
+                </tr>
+                <tr>
+                    <td>
+                        CashFlow ($)
+                    </td>
+                    @foreach (var a in Model.GetCashFlow())
+                    {
+                        <td> @String.Format("{0:#,###,###}", @Math.Round(a, 0))</td>
+                    }
+
                 </tr>
 
             </table>
-
-            <div id="chart">
-                @{
-
-                    string url = Url.Action("ShowChart", "Chart", new { ViewBag.cacheKey });
-                    <img src="@url" class="img-responsive" alt="Chart Summary" />
-                }
+            
+            <div id="chartButton">
+                <input type="checkbox" id="showProductivity" name="showProductivity" checked> Display Productivity Chart
+                <input type="checkbox" id="showCostRevenue" name="showCostRevenue" checked> Display Cost/Revenue Chart 
             </div>
+      
+               
+                    <div id="AnnualProductionChart">
+                        @{
+                            string urlAnnualProduction = Url.Action("ShowChart", "Chart", new { @cacheKey = ViewBag.cacheKey });
+                            <img src="@urlAnnualProduction" class="img-responsive" alt="Annual Production Chart" />
+
+                        }                       
+                        
+                    </div>
+                    <div id="CostRevenueChart">
+                        @{
+                            string urlAnnualProduction1 = Url.Action("ShowChart", "Chart", new { @cacheKey = ViewBag.cacheKey1 });
+                            <img src="@urlAnnualProduction1" class="img-responsive" alt="Revenue Chart" />
+                        }
+                        
+                    </div>
+                   
+
+
+      
 
         </div>
 
@@ -133,5 +200,22 @@
     @Html.Partial("_Disclaimer")
 </div>
 
+<script>
+    $(document).ready(function() {
+        $('#showProductivity').change(function() {
+            if ($(this).is(':checked')) {
+                $('#AnnualProductionChart').show();
+            } else {
+                $('#AnnualProductionChart').hide();
+            };
+        });
 
-
+        $('#showCostRevenue').change(function () {
+            if ($(this).is(':checked')) {
+                $('#CostRevenueChart').show();
+            } else {
+                $('#CostRevenueChart').hide();
+            };
+        });
+    });
+</script>

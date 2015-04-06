@@ -1,15 +1,21 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.Remoting.Messaging;
+using System.Web.Mvc;
 using BiofuelSouth.Services;
+using log4net;
 
 namespace BiofuelSouth.Models
 {
     public class Input
     {
+        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
         public int Id { get; set; }
 
@@ -49,14 +55,120 @@ namespace BiofuelSouth.Models
 
         //TODO Move everythign to resultmanagement
 
+        /*
+         * 
+         * Cashflow model:
+         * Row[0]
+         * Row[1]
+         * Row[2]
+         * */
+
+        public double[] GetCashFlow()
+        {
+            int duration = General.ProjectLife;
+            var cashFlow = new double[duration];
+
+            //for each year
+            //estimate expesese
+            var expenses = GetExpenditures();
+            var revenues = GetRevenues();
+           
+            //estimate reveneue
+            //get net and insert into cashflow
+            for (int i = 0; i < duration; i++)
+            {
+                cashFlow[i] = -expenses[i].TotalExpenses + revenues[i].TotalRevenue;
+            }
+            
+            return cashFlow;
+        }
+
+        public Double GetNPV()
+        {
+            var cashFlow = GetCashFlow();
+            var npv = Microsoft.VisualBasic.Financial.NPV(Financial.InterestRate, ref cashFlow);
+            return npv;
+        }
+       
+        public  List<Expenditure> GetExpenditures()
+        {
+            List<Expenditure> expenses = new List<Expenditure>();
+            try
+            {
+                int duration = General.ProjectLife;
+                for (int i = 0; i < duration; i++)
+                {
+                    Expenditure expenditure = new Expenditure();
+                    expenditure.Year = i;
+                    expenditure.AdministrativeCost = Financial.AdministrativeCost;
+                    expenditure.LandCost = General.LandCost;
+                    expenditure.ProductionCost = GetCostPerAcre();
+                    expenditure.TotalExpenses = expenditure.AdministrativeCost + expenditure.LandCost + expenditure.ProductionCost;
+                    expenditure.TotalExpenses = expenditure.TotalExpenses*General.ProjectSize;
+                    expenses.Add(expenditure);
+
+                    //Add interests
+                }
+            }
+            catch (Exception exception)
+            {
+                Log.Error("Expenses cannot be calculated");
+            }
+            return expenses;
+        }
+
+        public IList<Revenue> GetRevenues()
+        {
+            List<Revenue> revenues = new List<Revenue>();
+            try
+            {
+                var production = GetAnnualProductionList();
+                int duration = General.ProjectLife;
+                for (int i = 0; i < duration; i++)
+                {
+                    Revenue revenue = new Revenue();
+                    revenue.Year = i;
+                    revenue.IncentivePayments = 0; 
+                    //if the current year is less than the years of incenptive payments, then there is a incentivepayment revenue;
+                    if (i < Financial.YearsOfIncentivePayment)
+                    {
+                        revenue.IncentivePayments = Financial.IncentivePayment;
+                    }
+                    revenue.BiomassPrice = production[i]; 
+                    revenue.TotalRevenue = (revenue.IncentivePayments + revenue.BiomassPrice)*General.ProjectSize;
+
+                    revenues.Add(revenue);
+                }
+            }
+            catch (Exception exception)
+            {
+                Log.Error("Revenues cannot be calcualted");
+            }
+            return revenues;
+        } 
+
         public double GetAnnualProductivity()
         {
             return DataService.GetProductivityPerAcreForCropByGeoId(General.Category, General.County)*General.ProjectSize;  
         }
 
+        public double GetCostPerAcre()
+        {
+            return (DataService.GetCostPerAcreForCropByGeoId(General.Category, General.County));
+        }
+
         public double GetAnnualCost()
         {
             return (DataService.GetCostPerAcreForCropByGeoId(General.Category, General.County) + General.LandCost) * General.ProjectSize;  
+        }
+
+        public double GetBiomassPrice()
+        {
+            if (Convert.ToInt32(General.BiomassPriceAtFarmGate) == 0)
+            {
+                General.BiomassPriceAtFarmGate = Constants.GetFarmGatePrice(General.Category);
+            }
+            return General.BiomassPriceAtFarmGate;
         }
 
         public double GetAnnualRevenue()
@@ -99,6 +211,8 @@ namespace BiofuelSouth.Models
             }
             return annualProductivity;
         }
+
+
 
         public IList<double> GetGrossProductionList()
         {
