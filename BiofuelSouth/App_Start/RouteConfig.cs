@@ -11,6 +11,12 @@ namespace BiofuelSouth.App_Start
 
             routes.MapRoute("Default", "{controller}/{action}/{id}", new { controller = "Home", action = "Index", id = UrlParameter.Optional }, new[] { "BiofuelSouth.Controllers" }
             );
+
+            routes.MapRoute(
+    "Glossary",
+    "Admin/{Glossary}/{adminToken}",
+    new { controller = "Admin", action = "Glossary", token = "" }
+);
         }
     }
 }

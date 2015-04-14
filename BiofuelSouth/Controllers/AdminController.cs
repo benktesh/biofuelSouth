@@ -1,8 +1,13 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Data.Entity;
 using System.Threading.Tasks;
 using System.Net;
+using System.Web.Http;
 using System.Web.Mvc;
+using System.Web.Routing;
 using BiofuelSouth.Models;
+using BiofuelSouth.Services;
+using Microsoft.Ajax.Utilities;
 
 namespace BiofuelSouth.Controllers
 {
@@ -10,6 +15,20 @@ namespace BiofuelSouth.Controllers
     {
         private DatabaseContext db = new DatabaseContext();
 
+        //http://localhost:51444/admin/glossary?adminToken=1Afe36fa-e1f3-406b-9c73-914ec23ec2be
+
+        public ActionResult Glossary(Guid? adminToken)
+        {
+            var result = DataService.VerifyToken(adminToken);
+           
+            if (result)
+            {
+                Session["AdminToken"] = adminToken; 
+                return RedirectToAction("Create", "Glossary");
+            }
+            string msg = "Token could not be verified. Please try again.";
+            return View("Error", (object) msg);
+        }
         // GET: /Admin/
         public async Task<ActionResult> Index()
         {
@@ -40,7 +59,7 @@ namespace BiofuelSouth.Controllers
         // POST: /Admin/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
+        [System.Web.Mvc.HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create([Bind(Include="Id,CountyId,CropType,Yield")] Productivity productivity)
         {
@@ -72,7 +91,7 @@ namespace BiofuelSouth.Controllers
         // POST: /Admin/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
+        [System.Web.Mvc.HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit([Bind(Include="Id,CountyId,CropType,Yield")] Productivity productivity)
         {
@@ -101,7 +120,7 @@ namespace BiofuelSouth.Controllers
         }
 
         // POST: /Admin/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [System.Web.Mvc.HttpPost, System.Web.Mvc.ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
@@ -119,5 +138,29 @@ namespace BiofuelSouth.Controllers
             }
             base.Dispose(disposing);
         }
+
+        public ActionResult Error(String msg)
+        {
+            return View((object) msg);
+            
+        }
+
+        public ActionResult Dashboard(Guid? adminToken = null)
+        {
+            if (adminToken != null)
+            {
+                if (DataService.VerifyToken(adminToken))
+                {
+                    Session["AdminToken"] = adminToken;
+                }
+                else
+                {
+                    Session["AdminToken"] = null;
+                }
+                
+            }
+            return View();
+        }
+
     }
 }

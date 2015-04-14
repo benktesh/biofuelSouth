@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Globalization;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using System.Web.Helpers;
 using System.Web.Mvc;
 using BiofuelSouth.Models;
@@ -20,6 +21,18 @@ namespace BiofuelSouth.Services
                 return  db.County.Where(p => p.State == state).Select(p => p.Name).ToList();
                 
             }
+        }
+
+        //TODO 
+        /// <summary>
+        /// This method needs to call database. For now, a hardcoded value is used.
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns>
+        public static bool VerifyToken(Guid? x)
+        {
+            return x.Equals(Guid.Parse("1afe36fa-e1f3-406b-9c73-914ec23ec2be"));  
+                
         }
 
         public static List<County> GetCountyData(string selectedCategory = "ALL")
@@ -75,6 +88,7 @@ namespace BiofuelSouth.Services
             using (DatabaseContext db = new DatabaseContext())
             {
                 db.FeedBacks.Add(fb);
+                db.SaveChanges();
             }
         }
 
@@ -101,6 +115,19 @@ namespace BiofuelSouth.Services
                 return result;
             }
 
+        }
+
+        public static void SaveGlossary(Glossary gm)
+        {
+
+            using (DatabaseContext db = new DatabaseContext())
+            {
+                gm.Created = DateTime.UtcNow;
+                db.Glossaries.Add(gm);
+                db.SaveChanges();
+
+            }
+ 
         }
 
         public static List<Glossary> Search(String term)

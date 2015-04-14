@@ -13,6 +13,11 @@ namespace BiofuelSouth.Models
         public string Description { get; set; } 
         public int? Counter { get; set; }
         public string Source { get; set; }
+        public string ModifiedBy { get; set; }
+        public string CreatedBy { get; set; }
+        public DateTime? Created { get; set; }
+        public DateTime? Modified { get; set; }
+        public int? IsDirty { get; set;  }
 
         public Glossary(String t, String k, String d, String s)
         {
@@ -25,8 +30,8 @@ namespace BiofuelSouth.Models
 
         public Glossary()
         {
-          
         }
+
 
 
     }

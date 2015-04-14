@@ -77,6 +77,7 @@
       <HintPath>..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
@@ -615,6 +616,7 @@
     <Compile Include="Controllers\DataController.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Controllers\GlossaryController.cs" />
     <Compile Include="Controllers\InputController.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -689,6 +691,11 @@
     <Compile Include="Migrations\201503151635062_ChangesInputModel.Designer.cs">
       <DependentUpon>201503151635062_ChangesInputModel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201504140250462_ChangesGlossary.cs" />
+    <Compile Include="Migrations\201504140250462_ChangesGlossary.Designer.cs">
+      <DependentUpon>201504140250462_ChangesGlossary.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Cashflow.cs" />
     <Compile Include="Models\Cost.cs" />
     <Compile Include="Models\CountyData.cs" />
     <Compile Include="Models\DatabaseContext.cs" />
@@ -742,6 +749,7 @@
     <Compile Include="Services\DataService.cs" />
     <Compile Include="Services\EmailService.cs" />
     <Compile Include="Settings.cs" />
+    <Compile Include="ViewModels\GlossaryViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -773,6 +781,9 @@
     <Content Include="Views\Input\Result.cshtml" />
     <Content Include="Views\Shared\_Disclaimer.cshtml" />
     <Content Include="Views\Home\Factsheet.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Admin\Glossary.cshtml" />
+    <Content Include="Views\Glossary\Create.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1149,6 +1160,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201503151635062_ChangesInputModel.resx">
       <DependentUpon>201503151635062_ChangesInputModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504140250462_ChangesGlossary.resx">
+      <DependentUpon>201504140250462_ChangesGlossary.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
