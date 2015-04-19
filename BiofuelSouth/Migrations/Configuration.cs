@@ -1,5 +1,8 @@
 
+using System.Linq;
+using System.Web.WebPages;
 using BiofuelSouth.Models;
+using Microsoft.Ajax.Utilities;
 
 namespace BiofuelSouth.Migrations
 {
@@ -15,6 +18,9 @@ namespace BiofuelSouth.Migrations
 
         protected override void Seed(DatabaseContext context)
         {
+            //Clean up all empty glossaries
+            var allEmpty = context.Glossaries.Where(m => m.Term.Length == 0);
+            context.Glossaries.RemoveRange(allEmpty);
             //  This method will be called after migrating to the latest version.
 
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 

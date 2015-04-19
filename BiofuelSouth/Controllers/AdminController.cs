@@ -17,16 +17,24 @@ namespace BiofuelSouth.Controllers
 
         //http://localhost:51444/admin/glossary?adminToken=1Afe36fa-e1f3-406b-9c73-914ec23ec2be
 
+        
+        
         public ActionResult Glossary(Guid? adminToken)
         {
+            if (adminToken == null)
+            {
+                ViewBag.AlertMessage = "Please enter admin token.";
+                //return View("Token");
+            }
+
             var result = DataService.VerifyToken(adminToken);
            
             if (result)
             {
                 Session["AdminToken"] = adminToken; 
-                return RedirectToAction("Create", "Glossary");
+                return RedirectToAction("Index", "Glossary");
             }
-            string msg = "Token could not be verified. Please try again.";
+            var msg = "Token could not be verified. Please try again.";
             return View("Error", (object) msg);
         }
         // GET: /Admin/
@@ -42,7 +50,7 @@ namespace BiofuelSouth.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Productivity productivity = await db.Productivities.FindAsync(id);
+            var productivity = await db.Productivities.FindAsync(id);
             if (productivity == null)
             {
                 return HttpNotFound();
@@ -80,7 +88,7 @@ namespace BiofuelSouth.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Productivity productivity = await db.Productivities.FindAsync(id);
+            var productivity = await db.Productivities.FindAsync(id);
             if (productivity == null)
             {
                 return HttpNotFound();
@@ -111,7 +119,7 @@ namespace BiofuelSouth.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Productivity productivity = await db.Productivities.FindAsync(id);
+            var productivity = await db.Productivities.FindAsync(id);
             if (productivity == null)
             {
                 return HttpNotFound();
@@ -124,7 +132,7 @@ namespace BiofuelSouth.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            Productivity productivity = await db.Productivities.FindAsync(id);
+            var productivity = await db.Productivities.FindAsync(id);
             db.Productivities.Remove(productivity);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");

@@ -14,13 +14,9 @@ namespace BiofuelSouth.Controllers
         // GET: Glossary
         public ActionResult Index()
         {
-            return View();
-        }
-
-        // GET: Glossary/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
+            ViewBag.AdminToken = (Guid)Session["AdminToken"];
+            var glossaries = DataService.GetGlossary();
+            return View(glossaries);
         }
 
         // GET: Glossary/Create
@@ -38,10 +34,13 @@ namespace BiofuelSouth.Controllers
         {
             try
             {
+                if (!ModelState.IsValid)
+                    return View();
+
                 var result = DataService.VerifyToken(gvm.AdminToken);
                 if (!result)
                 {
-                    string msg = "Token could not be verified. Please try again.";
+                    var msg = "Token could not be verified. Please try again.";
                     return View("Error", (object) msg);
                 }
 
@@ -71,48 +70,88 @@ namespace BiofuelSouth.Controllers
             }
         }
 
-        // GET: Glossary/Edit/5
-        public ActionResult Edit(int id)
+
+        private GlossaryViewModel ToGlossaryViewModel(Glossary g)
         {
-            return View();
+            var gvm = new GlossaryViewModel();
+
+            gvm.Term = g.Term;
+            gvm.Description = g.Description;
+            gvm.Source = g.Source;
+            gvm.Keywords = g.Keywords;
+            gvm.AdminToken = (Guid)Session["AdminToken"];
+
+            return gvm;
+        }
+
+        private Glossary ToGlossary(GlossaryViewModel gvm)
+        {
+            var gm = new Glossary();
+            gm.Term = gvm.Term;
+            gm.Description = gvm.Description;
+            gm.Source = gvm.Source;
+            gm.Counter = 0;
+            gm.Keywords = gvm.Keywords;
+            gm.IsDirty = 1;
+            gm.CreatedBy = gvm.AdminToken.ToString();
+
+
+            return gm;
+        }
+
+
+        // GET: Glossary/Edit/5
+        public ActionResult Edit(string term, Guid adminToken)
+        {
+            if (DataService.VerifyToken(adminToken))
+            {
+                var g = DataService.GetGlossary(term);
+                var gvm = ToGlossaryViewModel(g);
+                return View(gvm);
+                
+            }
+            ViewBag.ErrorMessage = "Token could not be verified. Please try again.";
+            return RedirectToAction("Glossary", "Admin");
+            
         }
 
         // POST: Glossary/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(GlossaryViewModel gvm)
         {
-            try
-            {
-                // TODO: Add update logic here
+            if (!ModelState.IsValid)
+                return View(gvm);
 
-                return RedirectToAction("Index");
-            }
-            catch
+            if (DataService.VerifyToken(gvm.AdminToken))
             {
-                return View();
+
+
+                try
+                {
+                    DataService.UpdateGlossary(gvm);
+                    // TODO: Add update logic here
+
+                    return RedirectToAction("Index");
+                }
+                catch
+                {
+                    return View();
+                }
             }
+            return View("Error", (Object) "Invalid Admin Token.");
         }
 
         // GET: Glossary/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult Delete(string term, Guid adminToken)
         {
-            return View();
+            if (DataService.VerifyToken(adminToken))
+            {
+                DataService.DeleteGlossary(term);
+            }
+
+            return RedirectToAction("Index");
+            
         }
 
-        // POST: Glossary/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
     }
 }

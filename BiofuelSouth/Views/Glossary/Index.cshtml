@@ -1,0 +1,107 @@
+﻿@model IEnumerable<BiofuelSouth.Models.Glossary>
+
+@{
+    ViewBag.Title = "Index";
+    var AdminToken = (Guid)@ViewBag.AdminToken;
+    Html.EnableClientValidation();
+    Html.EnableUnobtrusiveJavaScript();
+}
+
+    <h2>Glossary Editor</h2>
+
+    <p class="pull-right">
+        <a href="@Url.Action("Create")">
+            <i class="glyphicon glyphicon-plus"></i>
+            Create New
+        </a>
+
+    </p>
+
+<table class="table" style="width:100%">
+    <tr>
+
+        <th>
+            @Html.DisplayNameFor(model => model.Term)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        @*<th >
+                    @Html.DisplayNameFor(model => model.Counter)
+                </th>*@
+
+        @*<th>
+                    @Html.DisplayNameFor(model => model.ModifiedBy)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CreatedBy)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Created)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Modified)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.IsDirty)
+                </th>*@
+        <th style="width:15%">Action</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td class="col-md-2">
+                @Html.DisplayFor(modelItem => item.Term)
+            </td>
+            <td class="col-md-8">
+                <b>Keywords:</b> @Html.DisplayFor(modelItem => item.Keywords)
+                <br />
+                <b>Description:</b>@Html.DisplayFor(modelItem => item.Description)
+                <br />
+                <b>Source:</b> @Html.DisplayFor(modelItem => item.Source)
+                <br />
+                <b>Lookups:</b> @Html.DisplayFor(modelItem => item.Counter)
+            </td>
+
+            @*<td>
+                        @Html.DisplayFor(modelItem => item.ModifiedBy)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CreatedBy)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Created)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Modified)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IsDirty)
+                    </td>*@
+            <td class="col-md-2">
+                    
+                <a href="@Url.Action("Edit", new { term = item.Term, adminToken = @AdminToken })">
+                    <i class="glyphicon glyphicon glyphicon-edit"></i>
+                    Edit
+                </a> |
+                    
+                <a href="@Url.Action("Delete", new { term = item.Term, adminToken = @AdminToken })">
+                    <i class="glyphicon glyphicon glyphicon-floppy-remove"></i>
+                    Delete
+                </a> 
+            </td>
+        </tr>
+    }
+       
+
+</table>
+    <hr/>
+<p class="pull-right">
+    <a href="@Url.Action("Create")">
+        <i class="glyphicon glyphicon-plus"></i>
+        Create New
+    </a>
+
+</p>
+

@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Migrations;
 using System.Globalization;
 using System.Linq;
 using System.Runtime.Remoting.Messaging;
 using System.Web.Helpers;
 using System.Web.Mvc;
 using BiofuelSouth.Models;
+using BiofuelSouth.ViewModels;
 
 
 namespace BiofuelSouth.Services
@@ -15,7 +17,7 @@ namespace BiofuelSouth.Services
     {
         public static List<string> GetCounty(String state)
         {
-            using (DatabaseContext db = new DatabaseContext())
+            using (var db = new DatabaseContext())
             {
                 
                 return  db.County.Where(p => p.State == state).Select(p => p.Name).ToList();
@@ -53,8 +55,8 @@ namespace BiofuelSouth.Services
 
         public static double GetProductivityPerAcreForCropByGeoId(String category, String geoId)
         {
-            int intGeoid = Convert.ToInt32(geoId);
-            using (DatabaseContext db = new DatabaseContext())
+            var intGeoid = Convert.ToInt32(geoId);
+            using (var db = new DatabaseContext())
             {
 
                 var productivity = db.Productivities.Where(p => p.GeoId == intGeoid && p.CropType.Equals(category)).Select(p => p.Yield).FirstOrDefault();
@@ -64,17 +66,30 @@ namespace BiofuelSouth.Services
 
         public static double GetCostPerAcreForCropByGeoId(String category, String geoId)
         {
-            int intGeoid = Convert.ToInt32(geoId);
-            using (DatabaseContext db = new DatabaseContext())
+            var intGeoid = Convert.ToInt32(geoId);
+            using (var db = new DatabaseContext())
             {
                 var productivity = db.Productivities.Where(p => p.GeoId == intGeoid && p.CropType.Equals(category)).Select(p => p.Cost).FirstOrDefault();
                 return productivity;
             }
         }
 
+
+        public static Glossary GetGlossary(String term)
+        {
+            using (var db = new DatabaseContext())
+            {
+
+                var result = db.Glossaries.FirstOrDefault(m => m.Term.Equals(
+                    term, StringComparison.InvariantCultureIgnoreCase)); 
+                return result;
+            }
+        }
+
+
         public static List<Glossary> GetGlossary()
         {
-            using (DatabaseContext db = new DatabaseContext())
+            using (var db = new DatabaseContext())
             {
                
                 var result = db.Glossaries.ToList();
@@ -85,7 +100,7 @@ namespace BiofuelSouth.Services
         public static void SaveFeedback(FeedBack fb)
         {
             
-            using (DatabaseContext db = new DatabaseContext())
+            using (var db = new DatabaseContext())
             {
                 db.FeedBacks.Add(fb);
                 db.SaveChanges();
@@ -94,7 +109,7 @@ namespace BiofuelSouth.Services
 
         public static IList<String> GetAllTerms(string key)
         {
-            using (DatabaseContext db = new DatabaseContext())
+            using (var db = new DatabaseContext())
             {
                
                 if (key == null || key.Equals("") || key.Equals("All"))
@@ -108,7 +123,7 @@ namespace BiofuelSouth.Services
                 var result = new List<String>();
                 foreach (var element in key.ToCharArray())
                 {
-                    String startWith = element.ToString(CultureInfo.InvariantCulture).ToLower();
+                    var startWith = element.ToString(CultureInfo.InvariantCulture).ToLower();
                     result.AddRange(db.Glossaries.Select(p => p.Term).Where(d => d.ToLower().StartsWith(startWith)));
                 }
 
@@ -120,7 +135,7 @@ namespace BiofuelSouth.Services
         public static void SaveGlossary(Glossary gm)
         {
 
-            using (DatabaseContext db = new DatabaseContext())
+            using (var db = new DatabaseContext())
             {
                 gm.Created = DateTime.UtcNow;
                 db.Glossaries.Add(gm);
@@ -130,9 +145,41 @@ namespace BiofuelSouth.Services
  
         }
 
+        public static void UpdateGlossary(GlossaryViewModel gvm)
+        {
+            using (var db = new DatabaseContext())
+            {
+                var glossary = db.Glossaries.FirstOrDefault(b => b.Term.ToLower() == gvm.Term.ToLower());
+
+                if (glossary != null)
+                {
+                    glossary.Keywords = gvm.Keywords;
+                    glossary.Description = gvm.Description;
+                    glossary.Source = gvm.Source;
+                    glossary.ModifiedBy = gvm.AdminToken.ToString();
+                    glossary.Modified = DateTime.UtcNow;
+
+                    db.Glossaries.AddOrUpdate(glossary);
+                    db.SaveChanges();
+                    
+                }
+              
+            }
+        }
+
+        public static void DeleteGlossary(string term)
+        {
+            using (var db = new DatabaseContext())
+            {
+                db.Glossaries.Remove(db.Glossaries.FirstOrDefault(b => b.Term.Equals(term, StringComparison.InvariantCultureIgnoreCase)));
+
+                
+            }
+        }
+
         public static List<Glossary> Search(String term)
         {
-            using (DatabaseContext db = new DatabaseContext())
+            using (var db = new DatabaseContext())
             {
                 var resultList = new List<Glossary>();
                 var result = db.Glossaries.FirstOrDefault(p => p.Term.Equals(term, StringComparison.InvariantCultureIgnoreCase));
@@ -168,7 +215,7 @@ namespace BiofuelSouth.Services
                     //3. find all the records where keywords are 'terms'
                     char[] delimiters = { ',', ';' };
 
-                    String kw = result.Keywords;
+                    var kw = result.Keywords;
                     if (kw != null)
                     {
                         IList<String> keywords =

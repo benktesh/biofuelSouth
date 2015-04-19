@@ -784,6 +784,11 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Admin\Glossary.cshtml" />
     <Content Include="Views\Glossary\Create.cshtml" />
+    <Content Include="Views\Glossary\Index.cshtml" />
+    <Content Include="Views\Shared\Token.cshtml" />
+    <Content Include="Views\Glossary\Edit.cshtml">
+      <SubType>Code</SubType>
+    </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
