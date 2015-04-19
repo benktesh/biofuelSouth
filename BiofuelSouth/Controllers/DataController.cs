@@ -16,7 +16,7 @@ namespace BiofuelSouth.Controllers
             
             try
             {
-                using (DatabaseContext db = new DatabaseContext())
+                using (var db = new DatabaseContext())
                 {
 
                     IQueryable<County> counties = db.County;

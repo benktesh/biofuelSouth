@@ -19,7 +19,7 @@
                     </tr>
                     <tr>
                         @{
-    for (int i = 0; i < Model.ProjectLife; i++)
+    for (var i = 0; i < Model.ProjectLife; i++)
     {
         <th>@(i + 1)</th>
     }
@@ -91,7 +91,7 @@
         <div id="chart">
             @{
 
-    string url = Url.Action("ShowChart", "Chart", new { ViewBag.cacheKey });
+    var url = Url.Action("ShowChart", "Chart", new { ViewBag.cacheKey });
     <img src="@url" alt="Chart Summary" />
             }
         </div>

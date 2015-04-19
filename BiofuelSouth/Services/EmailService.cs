@@ -42,11 +42,11 @@ namespace BiofuelSouth.Services
         public static void SendEmail(String messageBody, string toEmail, string subjectLine)
         {
             //For test, this email is being sent to local test account anyway.
-            string fromEmail = ConfigurationManager.AppSettings["FromEmailId"];
-            string password = ConfigurationManager.AppSettings["FromEmailPassword"];
-            string smtpHost = ConfigurationManager.AppSettings["SMTPHost"];
-            string port = ConfigurationManager.AppSettings["Port"];
-            string enableSsl = ConfigurationManager.AppSettings["EnableSsl"];
+            var fromEmail = ConfigurationManager.AppSettings["FromEmailId"];
+            var password = ConfigurationManager.AppSettings["FromEmailPassword"];
+            var smtpHost = ConfigurationManager.AppSettings["SMTPHost"];
+            var port = ConfigurationManager.AppSettings["Port"];
+            var enableSsl = ConfigurationManager.AppSettings["EnableSsl"];
 
             using (var message = new MailMessage(fromEmail, toEmail))
             {
@@ -74,7 +74,7 @@ namespace BiofuelSouth.Services
                 }
                 catch (SmtpFailedRecipientException ex)
                 {
-                    string msg = (ex.StackTrace + "\n\t" + message.To + " \n" + message.Body);
+                    var msg = (ex.StackTrace + "\n\t" + message.To + " \n" + message.Body);
                     Debug.Print(msg);
 
                     //Logger.Error(msg);
@@ -82,7 +82,7 @@ namespace BiofuelSouth.Services
                 }
                 catch (Exception ex)
                 {
-                    string msg = (ex.StackTrace + " test\n\t" + message.To + " \n" + message.Body);
+                    var msg = (ex.StackTrace + " test\n\t" + message.To + " \n" + message.Body);
                     Debug.Print(msg);
                     //Logger.Error(msg);
                     

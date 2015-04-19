@@ -38,7 +38,7 @@ namespace BiofuelSouth.Models
 
         public static String CountyName(String geoId)
         {
-            using (DatabaseContext db = new DatabaseContext())
+            using (var db = new DatabaseContext())
             {
                 var county = db.County.Where(c => c.GeoID == geoId).Select(a => a.Name).FirstOrDefault();
                 return county;
@@ -50,7 +50,7 @@ namespace BiofuelSouth.Models
         {
             const int intGeoid = 37163;
             const string category = "Switchgrass";
-            using (DatabaseContext db = new DatabaseContext())
+            using (var db = new DatabaseContext())
             {
 
                 var productivity = db.Productivities.Where(p => p.GeoId == intGeoid && p.CropType.Equals(category)).Select(p => p.Yield).FirstOrDefault();
@@ -181,7 +181,7 @@ namespace BiofuelSouth.Models
 
         public static Double GetStorageLoss(int storageMethod, string cropType)
         {
-            Double result = 0.0;
+            var result = 0.0;
 
             cropType = "SwitchGrass";
             if (cropType.ToLower().Equals("switchgrass"))

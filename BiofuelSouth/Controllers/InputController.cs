@@ -125,7 +125,7 @@ namespace BiofuelSouth.Controllers
         
         public ActionResult General(General general=null)
         {
-            Input ip = (Input)Session["Input"];
+            var ip = (Input)Session["Input"];
             if (ip == null)
             {
                 ModelState.Clear();
@@ -187,7 +187,7 @@ namespace BiofuelSouth.Controllers
 
         public ActionResult Storage(Storage storage=null)
         {
-            Input ip = (Input)Session["Input"];
+            var ip = (Input)Session["Input"];
             if (ip == null)
             {
                 return RedirectToAction("Index");
@@ -296,7 +296,7 @@ namespace BiofuelSouth.Controllers
 
         public ActionResult Financial(Financial financial = null)
         {
-            Input ip = (Input)Session["Input"];
+            var ip = (Input)Session["Input"];
             if (ip == null)
             {
                 return RedirectToAction("Index");

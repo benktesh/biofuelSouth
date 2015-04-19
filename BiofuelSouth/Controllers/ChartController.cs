@@ -14,7 +14,7 @@ namespace BiofuelSouth.Controllers
     {
       public void GenerateChart(string cacheKey, Double[] data, String chartName)
         {
-            int[] xValues = Enumerable.Range(1, data.Length).ToArray();
+            var xValues = Enumerable.Range(1, data.Length).ToArray();
             var chart = new Chart(600, 300);
             chart.AddSeries(
                 chartType: "Column",
@@ -31,7 +31,7 @@ namespace BiofuelSouth.Controllers
         {
         
             var data = ip.GetRevenues().Select(m => m.TotalRevenue).ToArray();
-            int[] xValues = Enumerable.Range(1, data.Length).ToArray();
+            var xValues = Enumerable.Range(1, data.Length).ToArray();
 
             var chart = new Chart(600, 300);
             chart.AddSeries(
@@ -60,7 +60,7 @@ namespace BiofuelSouth.Controllers
 
         public void GetCostRevenueChart(string cachekey, Input ip, String chartName)
         {
-            int[] xValues = Enumerable.Range(1, ip.General.ProjectLife).ToArray();
+            var xValues = Enumerable.Range(1, ip.General.ProjectLife).ToArray();
             var revenues = ip.GetRevenues().Select(m => m.TotalRevenue).ToArray();
             var chart = new Chart(600, 300);
             chart.AddSeries(

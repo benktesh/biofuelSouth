@@ -29,7 +29,7 @@
                     if (Model.First() != null && !Model.First().Description.Equals("TBI") && !ViewData["term"].Equals(""))
                     {
 
-                        Glossary result = Model.First();
+                        var result = Model.First();
                         <div class="resultTerm">@result.Term:</div>
                         <div class="resultDescription">@result.Description.</div>
                         <br />
@@ -80,7 +80,7 @@
                     </div>
                     @:<div class="pull-left">
   
-                    foreach (Glossary glossary in Model)
+                    foreach (var glossary in Model)
                     {
 
                         <a href='@Url.Action("Search", new { term = @glossary.Term })'>@glossary.Term</a>
@@ -97,9 +97,9 @@
             @{
                 var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
                 var result1 = new List<string>();
-                int breakPoint = 3;
+                var breakPoint = 3;
                 result1.Add("All");
-                for (int i = 0; i < chars.Length; i = i + breakPoint)
+                for (var i = 0; i < chars.Length; i = i + breakPoint)
                 {
                     if (i + breakPoint >= chars.Length)
                     {
@@ -108,7 +108,7 @@
 
                     var temp = chars.Substring(i, breakPoint);
 
-                    for (int j = temp.Length - 1; j > 0; j--)
+                    for (var j = temp.Length - 1; j > 0; j--)
                     {
                         temp = temp.Insert(j, "-");
                     }
@@ -126,7 +126,7 @@
                 <div id="listOfWord">
                     @{
                         var results = DataService.GetAllTerms("");
-                        string formattedResult = "";
+                        var formattedResult = "";
                         foreach (var word in results)
                         {
                             if (word.Length > 0)

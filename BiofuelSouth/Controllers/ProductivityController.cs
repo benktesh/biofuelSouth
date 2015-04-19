@@ -203,7 +203,7 @@ namespace BiofuelSouth.Controllers
         [ResponseType(typeof(Productivity))]
         public async Task<IHttpActionResult> DeleteProductivity(int id)
         {
-            Productivity productivity = await db.Productivities.FindAsync(id);
+            var productivity = await db.Productivities.FindAsync(id);
             if (productivity == null)
             {
                 return NotFound();

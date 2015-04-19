@@ -32,7 +32,7 @@ namespace BiofuelSouth.Controllers
         [HttpGet]
         public ActionResult FeedBack()
         {
-            FeedBack fb = new FeedBack();
+            var fb = new FeedBack();
             //Save feedback
             //Send email to client acknowledging receipt of the feedback
             //Send email to Resource about the new Feedback
@@ -45,7 +45,7 @@ namespace BiofuelSouth.Controllers
             fb.Date = DateTime.UtcNow;
             DataService.SaveFeedback(fb);
 
-            StringBuilder msgBody = new StringBuilder();
+            var msgBody = new StringBuilder();
 
             msgBody.Append("Dear " + fb.Name + "," + "\n");
             msgBody.Append("Thank you for contacting us. Your feedback is important to us. If your feedback (as shown below) requires response from us, you will be contacted by one of our team members.\n\n");

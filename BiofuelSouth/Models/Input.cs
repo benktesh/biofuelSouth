@@ -65,7 +65,7 @@ namespace BiofuelSouth.Models
 
         public double[] GetCashFlow()
         {
-            int duration = General.ProjectLife;
+            var duration = General.ProjectLife;
             var cashFlow = new double[duration];
 
             //for each year
@@ -75,7 +75,7 @@ namespace BiofuelSouth.Models
            
             //estimate reveneue
             //get net and insert into cashflow
-            for (int i = 0; i < duration; i++)
+            for (var i = 0; i < duration; i++)
             {
                 cashFlow[i] = -expenses[i].TotalExpenses + revenues[i].TotalRevenue;
             }
@@ -92,13 +92,13 @@ namespace BiofuelSouth.Models
        
         public  List<Expenditure> GetExpenditures()
         {
-            List<Expenditure> expenses = new List<Expenditure>();
+            var expenses = new List<Expenditure>();
             try
             {
-                int duration = General.ProjectLife;
-                for (int i = 0; i < duration; i++)
+                var duration = General.ProjectLife;
+                for (var i = 0; i < duration; i++)
                 {
-                    Expenditure expenditure = new Expenditure();
+                    var expenditure = new Expenditure();
                     expenditure.Year = i;
                     expenditure.AdministrativeCost = Financial.AdministrativeCost;
                     expenditure.LandCost = General.LandCost;
@@ -119,14 +119,14 @@ namespace BiofuelSouth.Models
 
         public IList<Revenue> GetRevenues()
         {
-            List<Revenue> revenues = new List<Revenue>();
+            var revenues = new List<Revenue>();
             try
             {
                 var production = GetAnnualProductionList();
-                int duration = General.ProjectLife;
-                for (int i = 0; i < duration; i++)
+                var duration = General.ProjectLife;
+                for (var i = 0; i < duration; i++)
                 {
-                    Revenue revenue = new Revenue();
+                    var revenue = new Revenue();
                     revenue.Year = i;
                     revenue.IncentivePayments = 0; 
                     //if the current year is less than the years of incenptive payments, then there is a incentivepayment revenue;
@@ -190,13 +190,13 @@ namespace BiofuelSouth.Models
         public IList<double> GetAnnualProductionList()
         {
             var taper = Constants.GetProductivityTaper("Switchgrass");
-            List<double> annualProductivity = new List<double>();
+            var annualProductivity = new List<double>();
             double storageLossFactor = 0;
             if (Storage != null && Storage.RequireStorage != null && (bool) Storage.RequireStorage)
                 storageLossFactor = GetStorageLossFactor()*Storage.PercentStored/100;
 
-            double StandardAnnualProduction = GetAnnualProductivity()*(1 - storageLossFactor); //Annual Productivity is = Pruduction * (1 - loss factor)
-            for (int i = 0; i < General.ProjectLife; i++)
+            var StandardAnnualProduction = GetAnnualProductivity()*(1 - storageLossFactor); //Annual Productivity is = Pruduction * (1 - loss factor)
+            for (var i = 0; i < General.ProjectLife; i++)
             {
                 if (i < taper.Count)
                 {
@@ -217,9 +217,9 @@ namespace BiofuelSouth.Models
         public IList<double> GetGrossProductionList()
         {
             var taper = Constants.GetProductivityTaper("Switchgrass");
-            List<double> annualProductivity = new List<double>();
+            var annualProductivity = new List<double>();
              double StandardAnnualProduction = GetAnnualProductivity(); //Annual Productivity is = Pruduction * (1 - loss factor)
-             for (int i = 0; i < General.ProjectLife; i++)
+             for (var i = 0; i < General.ProjectLife; i++)
             {
                 if (i < taper.Count)
                 {
@@ -240,11 +240,11 @@ namespace BiofuelSouth.Models
         {
             if (Storage == null)
                 return 0;
-            Double days = Storage.StorageTime;
+            var days = Storage.StorageTime;
             if (days == 0.0)
                 return 0; 
-            int storagemethod = Convert.ToInt32(Storage.StorageMethod);
-            double storageLossValue = Constants.GetStorageLoss(storagemethod, "Switchgrass");
+            var storagemethod = Convert.ToInt32(Storage.StorageMethod);
+            var storageLossValue = Constants.GetStorageLoss(storagemethod, "Switchgrass");
             return days/200*storageLossValue/100;
         }
 
