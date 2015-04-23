@@ -1,8 +1,6 @@
 
 using System.Linq;
-using System.Web.WebPages;
 using BiofuelSouth.Models;
-using Microsoft.Ajax.Utilities;
 
 namespace BiofuelSouth.Migrations
 {
@@ -21,6 +19,7 @@ namespace BiofuelSouth.Migrations
             //Clean up all empty glossaries
             var allEmpty = context.Glossaries.Where(m => m.Term.Length == 0);
             context.Glossaries.RemoveRange(allEmpty);
+            context.SaveChanges();
             //  This method will be called after migrating to the latest version.
 
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 

@@ -172,7 +172,7 @@ namespace BiofuelSouth.Services
             using (var db = new DatabaseContext())
             {
                 db.Glossaries.Remove(db.Glossaries.FirstOrDefault(b => b.Term.Equals(term, StringComparison.InvariantCultureIgnoreCase)));
-
+                db.SaveChanges();
                 
             }
         }
