@@ -1,6 +1,8 @@
 
+using System;
 using System.Linq;
 using BiofuelSouth.Models;
+using Microsoft.Ajax.Utilities;
 
 namespace BiofuelSouth.Migrations
 {
@@ -20,6 +22,18 @@ namespace BiofuelSouth.Migrations
             var allEmpty = context.Glossaries.Where(m => m.Term.Length == 0);
             context.Glossaries.RemoveRange(allEmpty);
             context.SaveChanges();
+
+            var glossaries = context.Glossaries.Where(m => m.Id == null);
+            foreach (var g in glossaries)
+            {
+                g.Id = Guid.NewGuid();
+                
+            }
+
+
+           
+            context.SaveChanges();
+
             //  This method will be called after migrating to the latest version.
 
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
