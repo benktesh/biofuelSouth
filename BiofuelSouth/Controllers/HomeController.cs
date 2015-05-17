@@ -24,6 +24,13 @@ namespace BiofuelSouth.Controllers
             //RedirectToAction("Index", "Input");
         }
 
+        public ActionResult AskExpert()
+        {
+
+            return View();
+
+        }
+
         public ActionResult GetSotfwareLog()
         {
             return Redirect("https://docs.google.com/spreadsheets/d/1tW4cMUo6uoi6o9ZsvCx8myMz5J7CTEOC_YOzdYPKRQ0/edit?usp=sharing");

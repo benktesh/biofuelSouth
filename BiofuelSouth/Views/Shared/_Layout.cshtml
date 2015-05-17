@@ -58,7 +58,8 @@
                     <a class="btn btn-default " id="contactButton" href='@Url.Action("FeedBack", "Home")'>Contact</a>
                     <a class="btn btn-default " id="helpButton" href='@Url.Action("help", "Home")'>Help</a>
                     <a class="btn btn-default " id="bugButton" href='@Url.Action("GetSotfwareLog", "Home")'>Bug&Enhancement</a>
-                    <a class="btn btn-default " id="forumButton" href='/forum'>Forum</a>
+                <a class="btn btn-default " id="forumButton" href='/forum'>Forum</a>
+                <a href='@Url.Action("AskExpert", "Home")' class="btn btn-default">Ask Expert</a>
 
  <form class="navbar-form" style="float:right; margin-top: 0; margin-bottom:0; margin-left: 0; margin-right: 0; padding:0;" role="search" method="POST" action="@Url.Action("Search", "Home")">
      <input type="text" class="input-sm" style="margin:2px; padding:0;" size="20" placeholder="Enter a term" name="term" id="term" />
