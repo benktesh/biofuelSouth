@@ -4,27 +4,26 @@
         <div class="col-lg-10 col-md-10 col-sm-10">
             <div class="row">
                 <legend>Sustaining Biofuel</legend>
+                
+                <div class="col-xs-12 col-sm-5 col-md-6 col-lg-6 pull-right">
+                    @Html.Partial("_Banner")
+                </div>
                 <p>
                     Sustaining biofuel industry in the South will need adequate supply of biomass feedstock from private land. Considering a majority of forestlands in the region is controlled by millions of private landowners, this could be a challenge as it could mean convincing landowners to adopt new crops or modify their existing land use in favor of desirable feedstock.
                 </p>
-
+        
+               
                 <p>Studies have shown that landowners consider supplying biomass for energy production so that the nation’s energy dependence on foreign energy sources can be reduced. However, they do not know is what it involves to produce desirable feedstock on their own land, what crops are suitable or feasible, whether and how the financial return from feedstock production compares with their current land rent.</p>
                 
-
-
-                <legend>Biomass Decision Support System</legend>
+            <legend>Biomass Decision Support System</legend>
                 <p>
-
-
                     Landowners make their land use decisions based on the expected financial return and therefore increasing
                     their confidence in feedstock production would involve providing credible information on the costs, benefits,
                     and logistics so they have the opportunity to evaluate what crops are feasible in their land, what logistics
                     might be needed, and how they could help meet their financial objective
                 </p>
 
-                <div class="col-xs-12 col-sm-4 col-md-4 col-lg-5 pull-right">
-                    <img src="~/images/bail.jpg" class="img-responsive col-xs-12 col-sm-9 col-md-8 col-lg-7 pull-right" />
-                </div>
+               
                 <p>
                     The Biomass Decision Support System (BDSS) is a user-friendly, web-based system that provides a collection of tools to help biomass crop growers in their crop production decisions. Tools presented in this system combine scientific models with market data to show the expected costs and financial returns from growing alternative feedstock crops that are suggested feasible in landowners’ area of interest. The interactive tool allows landowners to manipulate input variables (e.g. land area available, feed crop of choice) to analyze the sensitivity of cost and income in various decision scenarios. The BDSS also features local information on market risk and opportunities, government incentives regarding biomass cropping, and highlights extension/outreach contacts in landowners’ region to seek further assistance in biomass feedstock cropping.
                 </p>
@@ -65,23 +64,23 @@
     var feedurl = "http://www.usda.gov/cgi-bin/usdarss.pl?navid=LATEST_RELEASES";
 
     var feedlimit = 5;
-    var rssoutput = "<h4>USDA Latest Release</h4>"
+    var rssoutput = "<h4>USDA Latest Release</h4>";
 
     function rssfeedsetup() {
-        var feedpointer = new google.feeds.Feed(feedurl)
-        feedpointer.setNumEntries(feedlimit)
-        feedpointer.load(displayfeed)
+        var feedpointer = new google.feeds.Feed(feedurl);
+        feedpointer.setNumEntries(feedlimit);
+        feedpointer.load(displayfeed);
     }
 
     function displayfeed(result) {
         if (!result.error) {
-            var thefeeds = result.feed.entries
+            var thefeeds = result.feed.entries;
             for (var i = 0; i < thefeeds.length; i++)
-                rssoutput += "<li><a href='" + thefeeds[i].link + "'>" + thefeeds[i].title + "</a></li>"
-            rssoutput += "</ul>"
+                rssoutput += "<li><a href='" + thefeeds[i].link + "'>" + thefeeds[i].title + "</a></li>";
+            rssoutput += "</ul>";
             feedcontainer.innerHTML = rssoutput;
         } else
-            alert("Error fetching feeds!");
+            rssoutput += rssoutput + ("Latest release from usda could not be retrieved!");
     }
     window.onload = function () {
         rssfeedsetup();

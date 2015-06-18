@@ -4,6 +4,7 @@ using System.Linq;
 using System.Resources;
 using System.Web.Mvc;
 using BiofuelSouth.Services;
+using BiofuelSouth.ViewModels;
 
 namespace BiofuelSouth.Models
 {
@@ -177,6 +178,59 @@ namespace BiofuelSouth.Models
                 default:
                     return null;
             }
+        }
+
+        public static Decimal GetDefaultStorageCost(StorageMethod storageMethod, CropType cropType, int days = 1)
+        {
+            //assumtion - 10lbs/sqft
+            //4 ft diamater, 5 ft height = 62 cft. ft.
+            //thus one round bale weigh about 630 lbs
+            //one stack cann contain 3780 lbs ir 1.89 lbs
+            //one stack needs a tarp of size 15x5 sq. feet
+            //75 sq. feet of tarp per 
+            //cost of tarp sq. feet .15 or $11.25
+            // $5.95/ton
+
+            
+            //For rectangular
+            //8 x 5 ft. x 5 = 200 cft
+            //when stacked = 1200 cft.
+            //or 12000 lbs = 6 tons
+            //needs about 200 sq. ft of tarp [40 ft long and 5 ft wide for one stack] or $30
+            //tarp cost per ton = $5/ton
+
+            //Fixed cost
+            //Pallet cost - about 25 cents per sq. ft. or $ 15 per stack for round and $30 per stack rect.
+            //http://www.recycle.net/cgi-bin/exview.cgi?w=01&sc=1101&st=LA
+            //http://ag-econ.ncsu.edu/sites/ag-econ.ncsu.edu/files/extension/budgets/forage/ForageBudHayFromStoragePrint08-848.pdf
+            //Gravel cost
+            //.75 cents sq foot
+
+            if (CropType.Switchgrass == cropType)
+            {
+                switch (storageMethod)
+                {
+                    case StorageMethod.RoundTarpPallet:
+                        return 300/365 * days;
+                    case StorageMethod.RoundTarpGravel:
+                        return 300 / 365 * days;
+                    case StorageMethod.RoundTarpBareGroud:
+                        return 300 / 365 * days;
+                    case StorageMethod.RoundPalletNoTarp:
+                        return 300 / 365 * days;
+                    case StorageMethod.RoundGravelNoTarp:
+                        return 300 / 365 * days;
+                    case StorageMethod.RoundBareGroundNoTarp:
+                        return 300 / 365 * days;
+                    case StorageMethod.RectangularTarpPallet:
+                        return 300 / 365 * days;
+                    case StorageMethod.RectangularNoTarp:
+                        return 300 / 365 * days;
+                    case StorageMethod.RectangularGravelNoTarp:
+                        return 300 / 365 * days;
+                }
+            }
+            return -9;
         }
 
         public static Double GetStorageLoss(int storageMethod, string cropType)

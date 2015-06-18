@@ -8,18 +8,20 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    @Html.HiddenFor(m => m.AdminToken)
+   
 
     <div class="form-horizontal">
 
       <h4>Add to Glossary</h4>
-      
+       
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        
+       
         <div class="form-group">
             @Html.LabelFor(model => model.Term, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DisplayFor(model => model.Term, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.Term, new { htmlAttributes = new { @class = "form-control" } })
             </div>
         </div>
 
@@ -51,6 +53,14 @@
             <div class="col-md-10">
                 @Html.EditorFor(model => model.AdminToken, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.AdminToken, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        
+        <div class="form-group hidden">
+            @Html.LabelFor(model => model.MId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.MId, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.MId, "", new { @class = "text-danger" })
             </div>
         </div>
 
