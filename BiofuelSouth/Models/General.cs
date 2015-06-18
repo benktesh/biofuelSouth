@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace BiofuelSouth.Models
 {
@@ -35,6 +36,9 @@ namespace BiofuelSouth.Models
 
         [DisplayName(@"Cost of land ($/acre/year)")]
         public double LandCost { get; set; } //$/acre/year
+
+        public IEnumerable<SelectListItem> CountyList { get; set;  }
+        public IEnumerable<SelectListItem> StateList { get; set; } 
 
     }
 }

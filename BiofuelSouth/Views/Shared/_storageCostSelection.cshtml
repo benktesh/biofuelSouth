@@ -1,0 +1,44 @@
+﻿@using BiofuelSouth.Models
+@model BiofuelSouth.Models.Storage
+
+
+<div class="">
+    @Html.LabelFor(m => m.CostOption, new { @class = "control-label" })
+    @Html.DropDownListFor(m => m.CostOption, EnumHelper.GetSelectList(typeof(CostEstimationOption)), "Select", new { @class = "form-control" })
+    @Html.ValidationMessageFor(m => m.CostOption)
+</div>
+<div id="UserSupplyStorageCost">
+    @Html.LabelFor(m => m.UserEstimatedCost, new { @class = "control-label" })
+    @Html.TextBoxFor(m => m.UserEstimatedCost, new { @class = "form-control" })
+    @Html.ValidationMessageFor(m => m.UserEstimatedCost)
+</div>
+    <div id="UserSupplyMaterialCost">
+        <div class="form-group">
+            @Html.LabelFor(m => m.TarpCost, new { @class = "control-label" })
+            @Html.TextBoxFor(m => m.TarpCost, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.TarpCost)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.PalletCost, new { @class = "control-label" })
+            @Html.TextBoxFor(m => m.PalletCost, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.PalletCost)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.GravelCost, new { @class = "control-label" })
+            @Html.TextBoxFor(m => m.GravelCost, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.GravelCost)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.LaborCost, new { @class = "control-label" })
+            @Html.TextBoxFor(m => m.LaborCost, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.LaborCost)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.LandCost, new { @class = "control-label" })
+            @Html.TextBoxFor(m => m.LandCost, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.LandCost)
+        </div>
+
+    </div>
+
+

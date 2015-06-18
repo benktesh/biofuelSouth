@@ -64,16 +64,18 @@
                     <div class="col-md-3">
                         <div class="form-group">
                             
-                                @Html.LabelFor(model => model.StorageMethod, new { @class = "control-label" })<span class="required">Required</span>
-                                <a href="#" rel="popover" class="" data-toggle="popover" tabindex="0" data-trigger="focus"
-                                   data-placement="left" title="Storage Percent" data-content="<p>After-harvest storage methods of switchgrass and other perennial grasses grown for biofuel have a significant effect on the profitability and success of an enterprise. Depending on how it's harvested, feedstock can be stored as round or square dry bales, or as a moist product in bunkers or silo bags.</p>">
-                            <span class="glyphicon glyphicon-question-sign"></span></a>
-                                @Html.DropDownListFor(model => model.StorageMethod, Constants.GetStorageMethod(), "Select Method", new { @class = "form-control" })
-                                @Html.ValidationMessageFor(model => model.StorageMethod, "", new { @class = "text-danger" })
-                            </div>
+                            @Html.LabelFor(model => model.StorageMethod, new { @class = "control-label" })<span class="required">Required</span>
+                            <a href="#" rel="popover" class="" data-toggle="popover" tabindex="0" data-trigger="focus"
+                               data-placement="left" title="Storage Percent" data-content="<p>After-harvest storage methods of switchgrass and other perennial grasses grown for biofuel have a significant effect on the profitability and success of an enterprise. Depending on how it's harvested, feedstock can be stored as round or square dry bales, or as a moist product in bunkers or silo bags.</p>">
+                                <span class="glyphicon glyphicon-question-sign"></span></a>
+                            @Html.DropDownListFor(model => model.StorageMethod, Constants.GetStorageMethod(), "Select Method", new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.StorageMethod, "", new { @class = "text-danger" })
                         </div>
                     </div>
+                    @Html.Partial("_storageCostSelection", Model)
 
+                </div>
+               
                 <div class="row">
                     <div class="form-group col-md-6">
                         <button type="reset" value="Reset" class="btn btn-default">Reset</button>&nbsp;&nbsp;
@@ -108,6 +110,7 @@
             }
 
             $('#RequireStorage').change();
+            $('#CostOption').change();
 
 
             $("#state").change(function () {
@@ -145,6 +148,22 @@
             });
         }
 
+        $('#CostOption').on("change", function() {
+            if (this.value == 1) {
+                $('#UserSupplyStorageCost').show();
+
+            } else {
+                $('#UserSupplyStorageCost').hide();
+                
+            }
+            if (this.value == 2) {
+                $('#UserSupplyMaterialCost').show();
+
+            } else {
+                $('#UserSupplyMaterialCost').hide();
+
+            }
+        });
 
         $('#RequireStorage').change(function () {
 

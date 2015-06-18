@@ -79,8 +79,14 @@ namespace BiofuelSouth.Controllers
 
             */
 
-            ip = null;
+            if (ip == null)
+            {
+                ip = new Input();
+            }
             Session["Input"] = ip; 
+
+            PopulateHelpers(ip);
+
 
             return RedirectToAction("General");
             //create a session variable
@@ -132,6 +138,8 @@ namespace BiofuelSouth.Controllers
                 ip = new Input();
             }
             
+            PopulateHelpers(ip);
+
             if (general == null || general.State == null)
             {
              
@@ -139,8 +147,9 @@ namespace BiofuelSouth.Controllers
             
                     
                 ip.General = general;
-                Session["Input"] = ip; 
-                return View();
+                Session["Input"] = ip;
+                PopulateHelpers(ip);
+                return View(ip.General);
             }
             else
             {
@@ -373,5 +382,15 @@ namespace BiofuelSouth.Controllers
 
         }
 
+        private void PopulateHelpers(Input model)
+        {
+            
+            model.General.CountyList = Constants.GetCountySelectList(model.General.State);
+            model.General.StateList = Constants.GetState(); 
+
+        }
+
     }
+
+
 }
