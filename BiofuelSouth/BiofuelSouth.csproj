@@ -164,6 +164,7 @@
     <Content Include="admin.html" />
     <Content Include="bin\Antlr3.Runtime.dll" />
     <Content Include="bin\aspnetforum.dll" />
+    <Content Include="bin\aspnetforum.resources.dll" />
     <Content Include="bin\BiofuelSouth.dll" />
     <Content Include="bin\BiofuelSouth.dll.CodeAnalysisLog.xml" />
     <Content Include="bin\BiofuelSouth.pdb" />
@@ -531,6 +532,9 @@
     <Content Include="images\arborgenhead.png" />
     <Content Include="images\auhead.jpg" />
     <Content Include="images\bail.jpg" />
+    <Content Include="images\banner-biorefinery.jpg" />
+    <Content Include="images\banner-hay.jpg" />
+    <Content Include="images\banner-woody-crop.jpg" />
     <Content Include="images\banner_nifa.gif" />
     <Content Include="images\biofuel.jpg" />
     <Content Include="images\biomassbanner.jpg" />
@@ -552,6 +556,7 @@
     <Content Include="index.html" />
     <Content Include="InstallationDummyFile.txt" />
     <Content Include="mapDemo.html" />
+    <Content Include="Migrations\Readme.txt" />
     <Content Include="product.html" />
     <Content Include="Scripts\app.js" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -691,9 +696,21 @@
     <Compile Include="Migrations\201503151635062_ChangesInputModel.Designer.cs">
       <DependentUpon>201503151635062_ChangesInputModel.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201504140250462_ChangesGlossary.cs" />
-    <Compile Include="Migrations\201504140250462_ChangesGlossary.Designer.cs">
-      <DependentUpon>201504140250462_ChangesGlossary.cs</DependentUpon>
+    <Compile Include="Migrations\201504251816083_ReviseGlossary.cs" />
+    <Compile Include="Migrations\201504251816083_ReviseGlossary.Designer.cs">
+      <DependentUpon>201504251816083_ReviseGlossary.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201504251958328_CleanupGlossary.cs" />
+    <Compile Include="Migrations\201504251958328_CleanupGlossary.Designer.cs">
+      <DependentUpon>201504251958328_CleanupGlossary.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201505040810445_AnotherChange2.cs" />
+    <Compile Include="Migrations\201505040810445_AnotherChange2.Designer.cs">
+      <DependentUpon>201505040810445_AnotherChange2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201506181215131_AddsStorageCost.cs" />
+    <Compile Include="Migrations\201506181215131_AddsStorageCost.Designer.cs">
+      <DependentUpon>201506181215131_AddsStorageCost.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\Cashflow.cs" />
     <Compile Include="Models\Cost.cs" />
@@ -731,10 +748,12 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\County.cs" />
+    <Compile Include="Models\Enums.cs" />
     <Compile Include="Models\FeedBack.cs" />
     <Compile Include="Models\Financial.cs" />
     <Compile Include="Models\General.cs" />
     <Compile Include="Models\Glossary.cs" />
+    <Compile Include="Models\GlossaryEntity.cs" />
     <Compile Include="Models\Input.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\Productivity.cs" />
@@ -750,9 +769,12 @@
     <Compile Include="Services\EmailService.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="ViewModels\GlossaryViewModel.cs" />
+    <Compile Include="ViewModels\StorageCostModel.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="packages.config" />
+    <Content Include="packages.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
@@ -789,6 +811,10 @@
     <Content Include="Views\Glossary\Edit.cshtml">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="Views\Shared\_Banner.cshtml" />
+    <Content Include="Views\Home\AskExpert.cshtml" />
+    <Content Include="Views\Input\_moreinformation.cshtml" />
+    <Content Include="Views\Shared\_storageCostSelection.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -799,7 +825,6 @@
   <ItemGroup>
     <Folder Include="App_Data\forumavatars\" />
     <Folder Include="App_Data\forumicons\" />
-    <Folder Include="bin\bin\ar-SA\" />
     <Folder Include="charts\" />
     <Folder Include="forum\Jitbit.Utils\" />
     <Folder Include="Views\Chart\" />
@@ -1166,8 +1191,17 @@
     <EmbeddedResource Include="Migrations\201503151635062_ChangesInputModel.resx">
       <DependentUpon>201503151635062_ChangesInputModel.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201504140250462_ChangesGlossary.resx">
-      <DependentUpon>201504140250462_ChangesGlossary.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201504251816083_ReviseGlossary.resx">
+      <DependentUpon>201504251816083_ReviseGlossary.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504251958328_CleanupGlossary.resx">
+      <DependentUpon>201504251958328_CleanupGlossary.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201505040810445_AnotherChange2.resx">
+      <DependentUpon>201505040810445_AnotherChange2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201506181215131_AddsStorageCost.resx">
+      <DependentUpon>201506181215131_AddsStorageCost.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

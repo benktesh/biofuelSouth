@@ -19,6 +19,13 @@ namespace BiofuelSouth.Models
 
         public int Id { get; set; }
 
+        public Input()
+        {
+            General = new General();
+            Storage = new Storage();
+            Financial = new Financial();
+        }
+
         //[Required]
         //public String State { get; set; }
 

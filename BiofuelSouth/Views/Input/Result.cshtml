@@ -3,7 +3,7 @@
 
 @{
     ViewBag.Title = "title";
-    var mergeCol = @Model.General.ProjectLife+1;
+    var mergeCol = @Model.General.ProjectLife + 1;
 
 }
 
@@ -25,33 +25,33 @@
                 {
 
                     <div>
-                        Estimated Net Annual Production (tons): @Math.Round(Model.GetAnnualProductionList().Average(), 0)
+                        Est. Net Annual Production (tons): @Math.Round(Model.GetAnnualProductionList().Average(), 0).ToString("###,###.##")
 
                     </div>
                     <div>
-                        Estimated Net Production (tons): @Math.Round(Model.GetAnnualProductionList().Sum(), 0)
+                        Est. Net Production (tons): @Math.Round(Model.GetAnnualProductionList().Sum(), 0).ToString("###,###")
 
                     </div>
                     <div>
-                        Estimated Annual Cost: @Model.GetAnnualCost().ToString("C")
+                        Est. Annual Cost: @Model.GetAnnualCost().ToString("C0")
                     </div>
                     <div>
                         @{
                     var annualRevennue = (Model.GetAnnualProductionList().Average() * Model.General.BiomassPriceAtFarmGate);
                         }
-                        Estimated Annual Revennue: @annualRevennue.ToString("C")
+                        Est. Annual Revennue: @annualRevennue.ToString("C0")
 
                     </div>
 
                     <div>
-                        NPV: @Model.GetNPV().ToString("C")
+                        NPV: @Model.GetNPV().ToString("C0")
                     </div>
                 }
             </p>
             <p>
                 <h3>Assumptions and Parameters</h3>
                 <div>
-                    TBD: State all the defualt values used. <br />
+                    <div class="text-danger"> TBD state all the defualt values used. <br /> </div>
                     Biomass Price: @Model.General.BiomassPriceAtFarmGate.ToString("C0") <br />
                     Project Size: @Model.General.ProjectSize.ToString("##,###") <br />
                 </div>
@@ -59,15 +59,11 @@
                     TBD: The current result does not include financials.
                 </div>
             </p>
-            <p>
-                <h3>More Information</h3>
-                <div>
-                    TBD: Suggest further steps based on resutls. For example tranportation, near by facilities etc.
-                </div>
-                <div>
-                    TBD: Show all the relevant contacts applicable for the results (e.g. FSA, etc)
-                </div>
-            </p>
+            <div id="moreinformation">
+               @Html.Partial("_moreinformation")
+            </div>
+
+
         </div>
 
         <div class="col-md-10 col-lg-9">
@@ -166,32 +162,32 @@
                 </tr>
 
             </table>
-            
+
             <div id="chartButton">
                 <input type="checkbox" id="showProductivity" name="showProductivity" checked> Display Productivity Chart
-                <input type="checkbox" id="showCostRevenue" name="showCostRevenue" checked> Display Cost/Revenue Chart 
+                <input type="checkbox" id="showCostRevenue" name="showCostRevenue" checked> Display Cost/Revenue Chart
             </div>
-      
-               
-                    <div id="AnnualProductionChart">
-                        @{
-                            var urlAnnualProduction = Url.Action("ShowChart", "Chart", new { @cacheKey = ViewBag.cacheKey });
-                            <img src="@urlAnnualProduction" class="img-responsive" alt="Annual Production Chart" />
-
-                        }                       
-                        
-                    </div>
-                    <div id="CostRevenueChart">
-                        @{
-                            var urlAnnualProduction1 = Url.Action("ShowChart", "Chart", new { @cacheKey = ViewBag.cacheKey1 });
-                            <img src="@urlAnnualProduction1" class="img-responsive" alt="Revenue Chart" />
-                        }
-                        
-                    </div>
-                   
 
 
-      
+            <div id="AnnualProductionChart">
+                @{
+                    var urlAnnualProduction = Url.Action("ShowChart", "Chart", new { @cacheKey = ViewBag.cacheKey });
+                    <img src="@urlAnnualProduction" class="img-responsive" alt="Annual Production Chart" />
+
+                }
+
+            </div>
+            <div id="CostRevenueChart">
+                @{
+                    var urlAnnualProduction1 = Url.Action("ShowChart", "Chart", new { @cacheKey = ViewBag.cacheKey1 });
+                    <img src="@urlAnnualProduction1" class="img-responsive" alt="Revenue Chart" />
+                }
+
+            </div>
+
+
+
+
 
         </div>
 
@@ -199,23 +195,24 @@
 
     @Html.Partial("_Disclaimer")
 </div>
+@section MyScripts {
+    <script>
+        $(document).ready(function() {
+            $('#showProductivity').change(function() {
+                if ($(this).is(':checked')) {
+                    $('#AnnualProductionChart').show();
+                } else {
+                    $('#AnnualProductionChart').hide();
+                };
+            });
 
-<script>
-    $(document).ready(function() {
-        $('#showProductivity').change(function() {
-            if ($(this).is(':checked')) {
-                $('#AnnualProductionChart').show();
-            } else {
-                $('#AnnualProductionChart').hide();
-            };
+            $('#showCostRevenue').change(function() {
+                if ($(this).is(':checked')) {
+                    $('#CostRevenueChart').show();
+                } else {
+                    $('#CostRevenueChart').hide();
+                };
+            });
         });
-
-        $('#showCostRevenue').change(function () {
-            if ($(this).is(':checked')) {
-                $('#CostRevenueChart').show();
-            } else {
-                $('#CostRevenueChart').hide();
-            };
-        });
-    });
-</script>
+    </script>
+}
