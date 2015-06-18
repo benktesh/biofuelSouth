@@ -86,6 +86,25 @@ namespace BiofuelSouth.Services
             }
         }
 
+        public static Glossary GetGlossaryById(Guid id)
+        {
+            using (var db = new DatabaseContext())
+            {
+
+                var result = db.Glossaries.FirstOrDefault(m => m.Id == id);
+                return result;
+            }
+        }
+
+        public static void DeleteGlossary(Guid id)
+        {
+            using (var db = new DatabaseContext())
+            {
+                db.Glossaries.Remove(db.Glossaries.FirstOrDefault(b => b.Id == id));  
+                db.SaveChanges();
+            }
+        }
+
 
         public static List<Glossary> GetGlossary()
         {
@@ -149,10 +168,11 @@ namespace BiofuelSouth.Services
         {
             using (var db = new DatabaseContext())
             {
-                var glossary = db.Glossaries.FirstOrDefault(b => b.Term.ToLower() == gvm.Term.ToLower());
+                var glossary = db.Glossaries.FirstOrDefault(b => b.Id == gvm.MId);
 
                 if (glossary != null)
                 {
+                    glossary.Term = gvm.Term;
                     glossary.Keywords = gvm.Keywords;
                     glossary.Description = gvm.Description;
                     glossary.Source = gvm.Source;

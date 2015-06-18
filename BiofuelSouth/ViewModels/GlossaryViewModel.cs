@@ -20,5 +20,7 @@ namespace BiofuelSouth.ViewModels
 
         public Guid AdminToken { get; set;  }
 
+        public Guid MId { get; set; }
+
     }
 }

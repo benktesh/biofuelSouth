@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using BiofuelSouth.Models;
 using BiofuelSouth.Services;
@@ -16,7 +14,7 @@ namespace BiofuelSouth.Controllers
         {
             ViewBag.AdminToken = (Guid)Session["AdminToken"];
             var glossaries = DataService.GetGlossary();
-            return View(glossaries);
+            return View(glossaries.OrderBy(m=>m.Term));
         }
 
         // GET: Glossary/Create
@@ -57,7 +55,7 @@ namespace BiofuelSouth.Controllers
                 DataService.SaveGlossary(gm);
                 // TODO: Add insert logic here
 
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index"); 
             }
             catch (System.Data.SqlClient.SqlException ex)
             {
@@ -74,12 +72,18 @@ namespace BiofuelSouth.Controllers
         private GlossaryViewModel ToGlossaryViewModel(Glossary g)
         {
             var gvm = new GlossaryViewModel();
-
-            gvm.Term = g.Term;
-            gvm.Description = g.Description;
-            gvm.Source = g.Source;
-            gvm.Keywords = g.Keywords;
+           
+            {
+                
+// ReSharper disable once PossibleInvalidOperationException
+                gvm.MId = (Guid) g.Id;
+                gvm.Term = g.Term;
+                gvm.Description = g.Description;
+                gvm.Source = g.Source;
+                gvm.Keywords = g.Keywords;
+            }
             gvm.AdminToken = (Guid)Session["AdminToken"];
+            
 
             return gvm;
         }
@@ -87,6 +91,14 @@ namespace BiofuelSouth.Controllers
         private Glossary ToGlossary(GlossaryViewModel gvm)
         {
             var gm = new Glossary();
+            if (gvm.MId == null)
+            {
+                gm.Id = Guid.NewGuid();
+            }
+            else
+            {
+                gm.Id = gvm.MId; 
+            }
             gm.Term = gvm.Term;
             gm.Description = gvm.Description;
             gm.Source = gvm.Source;
@@ -101,11 +113,12 @@ namespace BiofuelSouth.Controllers
 
 
         // GET: Glossary/Edit/5
-        public ActionResult Edit(string term, Guid adminToken)
+        [HttpGet]
+        public ActionResult Edit(Guid id, Guid adminToken)
         {
             if (DataService.VerifyToken(adminToken))
             {
-                var g = DataService.GetGlossary(term);
+                var g = DataService.GetGlossaryById(id);
                 var gvm = ToGlossaryViewModel(g);
                 return View(gvm);
                 
@@ -121,7 +134,7 @@ namespace BiofuelSouth.Controllers
         {
             if (!ModelState.IsValid)
                 return View(gvm);
-
+            
             if (DataService.VerifyToken(gvm.AdminToken))
             {
 
@@ -142,7 +155,8 @@ namespace BiofuelSouth.Controllers
         }
 
         // GET: Glossary/Delete/5
-        public ActionResult Delete(string term, Guid adminToken)
+        [Obsolete]
+        public ActionResult NDelete(String term, Guid adminToken)
         {
             if (DataService.VerifyToken(adminToken))
             {
@@ -151,6 +165,18 @@ namespace BiofuelSouth.Controllers
 
             return RedirectToAction("Index");
             
+        }
+
+        // GET: Glossary/Delete/5
+        public ActionResult Delete(Guid id, Guid adminToken)
+        {
+            if (DataService.VerifyToken(adminToken))
+            {
+                DataService.DeleteGlossary(id);
+            }
+
+            return RedirectToAction("Index");
+
         }
 
     }

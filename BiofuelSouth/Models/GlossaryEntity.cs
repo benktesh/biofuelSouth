@@ -1,42 +1,40 @@
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System;
-
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using System.Web;
 
 namespace BiofuelSouth.Models
 {
-
-    public class Glossary
+    public class GlossaryEntity
     {
-        
+        [Key]
+        [Index(IsClustered = true, IsUnique = true)]
+        public Guid Id { get; set; }
         public string Term { get; set; }
         public string Keywords { get; set; }
-        public string Description { get; set; } 
+        public string Description { get; set; }
         public int? Counter { get; set; }
         public string Source { get; set; }
         public string ModifiedBy { get; set; }
         public string CreatedBy { get; set; }
         public DateTime? Created { get; set; }
         public DateTime? Modified { get; set; }
-        public int? IsDirty { get; set;  }
-        [Key]
-        public Guid Id { get; set; }
+        public int? IsDirty { get; set; }
 
-        public Glossary(String t, String k, String d, String s)
+         public GlossaryEntity(String t, String k, String d, String s)
         {
+            Id = new Guid();
             Term = t;
             Keywords = k;
             Description = d;
             Source = s;
             Counter = 0; 
-            Id = Guid.NewGuid();
         }
 
-        public Glossary()
+        public GlossaryEntity()
         {
-            Id = Guid.NewGuid();
         }
-
-
-
     }
 }
