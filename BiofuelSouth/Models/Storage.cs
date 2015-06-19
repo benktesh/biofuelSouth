@@ -40,29 +40,29 @@ namespace BiofuelSouth.Models
         public String StorageMethod { get; set; } //Storage methods.
 
          [Required]
-        [DisplayName(@"Select Cost Estimation")]
+        [DisplayName(@"Select Cost Parameters")]
          public int CostOption { get; set;  }
 
         //default values needs to be supplied.
          [Display(Name = @"Storage Cost Assumptions")]
          public String Description { get; set; }
 
-         [Display(Name = @"Cost of Pallet ($/sq.ft")]
+         [Display(Name = @"Cost of Pallet ($/sq.ft)")]
          public Decimal PalletCost { get; set; }
 
-         [Display(Name = @"Cost of Tarp ($/sq.ft")]
+         [Display(Name = @"Cost of Tarp ($/sq.ft)")]
          public Decimal TarpCost { get; set; }
 
-         [Display(Name = @"Cost of Gravel ($/sq.ft")]
+         [Display(Name = @"Cost of Gravel ($/sq.ft)")]
          public Decimal GravelCost { get; set; }
 
-         [Display(Name = @"Local labor cost for storage($/sq.ft")]
+         [Display(Name = @"Labor cost ($/sq.ft)")]
          public Decimal LaborCost { get; set; }
 
-         [Display(Name = @"Land cost of storage. ($/sq.ft")]
+         [Display(Name = @"Land cost ($/sq.ft")]
          public Decimal LandCost { get; set; }
 
-         [Display(Name = @"Enter your estimated cost for storage in $/ton/year")]
+         [Display(Name = @"Enter estimated storage cost in $/ton/year")]
          public Decimal UserEstimatedCost { get; set; }
 
     }
