@@ -12,7 +12,12 @@ namespace BiofuelSouth.Models
         {
             StorageTime = 0.0;
             PercentDirectlyToPlantGate = 0.0;
-            PercentStored = 0.0; 
+            PercentStored = 0.0;
+            GravelCost = StorageCostParameter.GravelCostSqFt;
+            TarpCost = StorageCostParameter.TarpCostSqFt;
+            PalletCost = StorageCostParameter.PalletCostSqFt;
+            LandCost = StorageCostParameter.LandCostYear;
+            LaborCost = StorageCostParameter.LaborCostHour;
         }
 
         [Required]
@@ -54,7 +59,7 @@ namespace BiofuelSouth.Models
          [Display(Name = @"Local labor cost for storage($/sq.ft")]
          public Decimal LaborCost { get; set; }
 
-         [Display(Name = @"Land cost of storage. Include any additional cost of sheds.($/sq.ft")]
+         [Display(Name = @"Land cost of storage. ($/sq.ft")]
          public Decimal LandCost { get; set; }
 
          [Display(Name = @"Enter your estimated cost for storage in $/ton/year")]

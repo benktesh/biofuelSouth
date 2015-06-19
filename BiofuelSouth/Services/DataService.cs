@@ -8,6 +8,7 @@ using System.Runtime.Remoting.Messaging;
 using System.Web.Helpers;
 using System.Web.Mvc;
 using BiofuelSouth.Models;
+using BiofuelSouth.Models.Entity;
 using BiofuelSouth.ViewModels;
 
 
@@ -15,6 +16,18 @@ namespace BiofuelSouth.Services
 {
     public static class DataService
     {
+
+        public static List<LookUpEntity> GetLookUps(string group = null)
+        {
+            using (var db = new DatabaseContext())
+            {
+                if (!string.IsNullOrEmpty(group))
+                return db.LookUps.Where(p => p.LookUpGroup == group).ToList();
+                return db.LookUps.ToList();
+            }
+            
+        }
+
         public static List<string> GetCounty(String state)
         {
             using (var db = new DatabaseContext())

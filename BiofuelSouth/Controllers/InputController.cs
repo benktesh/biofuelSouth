@@ -142,7 +142,8 @@ namespace BiofuelSouth.Controllers
 
             if (general == null || general.State == null)
             {
-             
+
+                ModelState.Clear();
                 general = new General();
             
                     
