@@ -2,6 +2,7 @@
 using System;
 using System.Linq;
 using BiofuelSouth.Models;
+using BiofuelSouth.Models.Entity;
 using Microsoft.Ajax.Utilities;
 
 namespace BiofuelSouth.Migrations
@@ -46,6 +47,75 @@ namespace BiofuelSouth.Migrations
             //      new Person { FullName = "Rowan Miller" }
             //    );
             //
+
+            var x = new LookUpEntity();
+            x.Name = @"Tarp Cost $/sq ft";
+            x.Label = @"$ 0.15/sq ft";
+            x.Value = Convert.ToString(0.15);
+            x.LookUpGroup = LookupGroup.StorageCostParameter;
+            x.SortOrder = 1;
+
+            context.LookUps.AddOrUpdate(
+
+                new LookUpEntity
+                {
+                    Id = Guid.NewGuid(),
+                    Name = @"Tarp Cost $/sq ft",
+                    Label = @"$ 0.15/sq ft",
+                    Value = Convert.ToString(0.15),
+                    LookUpGroup = LookupGroup.StorageCostParameter,
+                    Description = @"Storing switchgrass",
+                    SortOrder = 1
+                },
+                 new LookUpEntity
+                {
+                    Id = Guid.NewGuid(),
+                    Name = @"Pallet Cost $/sq ft",
+                    Label = @"$ 0.25/sq ft",
+                    Value = Convert.ToString(0.15),
+                    LookUpGroup = LookupGroup.StorageCostParameter,
+                    Description = @"Storing switchgrass",
+                    SortOrder = 1
+                },
+
+                      new LookUpEntity
+                {
+                    Id = Guid.NewGuid(),
+                    Name = @"Gravel Cost $/sq ft",
+                    Label = @"$ 0.75/sq ft",
+                    Value = Convert.ToString(0.15),
+                    LookUpGroup = LookupGroup.StorageCostParameter,
+                    Description = @"Storing switchgrass",
+                    SortOrder = 1
+                },
+
+                      new LookUpEntity
+                      {
+                          Id = Guid.NewGuid(),
+                          Name = @"Labor Cost $/sq ft",
+                          Label = @"$ 10/sq ft",
+                          Value = Convert.ToString(0.15),
+                          LookUpGroup = LookupGroup.StorageCostParameter,
+                          Description = @"Storing switchgrass",
+                          SortOrder = 1
+                      },
+                           new LookUpEntity
+                           {
+                               Id = Guid.NewGuid(),
+                               Name = @"Land Cost $/sq ft",
+                               Label = @"$ 10/sq ft",
+                               Value = Convert.ToString(0.15),
+                               LookUpGroup = LookupGroup.StorageCostParameter,
+                               Description = @"Storing switchgrass",
+                               SortOrder = 1
+                           }
+
+
+                );
+            context.LookUps.AddOrUpdate(x);
+            context.SaveChanges();
+
+
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System.Data.Entity;
 using System.Data.Entity.SqlServer;
+using BiofuelSouth.Models.Entity;
 
 
 namespace BiofuelSouth.Models
@@ -10,8 +11,6 @@ namespace BiofuelSouth.Models
         public DatabaseContext() : base("DefaultConnection")
         {
             var ensureDLLIsCopied = SqlProviderServices.Instance;
-        
-        
         }
         
         public DbSet<Productivity> Productivities { get; set; }
@@ -20,7 +19,8 @@ namespace BiofuelSouth.Models
         public DbSet<FeedBack> FeedBacks { get; set; }
     
         public DbSet<Input> Inputs { get; set; }
+        public DbSet<LookUpEntity> LookUps { get; set; }
     }
 
-
+ 
 }

@@ -712,6 +712,10 @@
     <Compile Include="Migrations\201506181215131_AddsStorageCost.Designer.cs">
       <DependentUpon>201506181215131_AddsStorageCost.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201506190022078_AddsLookupTable.cs" />
+    <Compile Include="Migrations\201506190022078_AddsLookupTable.Designer.cs">
+      <DependentUpon>201506190022078_AddsLookupTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\Cashflow.cs" />
     <Compile Include="Models\Cost.cs" />
     <Compile Include="Models\CountyData.cs" />
@@ -748,6 +752,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\County.cs" />
+    <Compile Include="Models\Entity\LookUpEntity.cs" />
     <Compile Include="Models\Enums.cs" />
     <Compile Include="Models\FeedBack.cs" />
     <Compile Include="Models\Financial.cs" />
@@ -757,6 +762,7 @@
     <Compile Include="Models\Input.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\Productivity.cs" />
+    <Compile Include="Models\Resources.cs" />
     <Compile Include="Models\Storage.cs" />
     <Compile Include="ProcessLogic\SwitchGrass.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -1202,6 +1208,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201506181215131_AddsStorageCost.resx">
       <DependentUpon>201506181215131_AddsStorageCost.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201506190022078_AddsLookupTable.resx">
+      <DependentUpon>201506190022078_AddsLookupTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
