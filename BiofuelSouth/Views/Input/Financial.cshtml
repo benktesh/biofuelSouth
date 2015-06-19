@@ -12,13 +12,13 @@
 
     @Html.AntiForgeryToken()
     <div class="form-horizontal">
-        
+
         @*@Html.Partial("_DSSMenu")*@
         <div class="row">
             @*<h4>DSS Input: Financial Parameters</h4>*@
             <div class="container col-md-9 col-lg-9">
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                
+
                 <div class="row">
                     <div class="col-md-6 form-group">
                         @Html.LabelFor(model => model.RequireFinance, new { @class = "control-label" })
@@ -38,10 +38,12 @@
 
 
                 <div id="financialParameter" hidden="hidden" class="row">
-                    <div class="col-md-4  form-group">
-                        @Html.LabelFor(model => model.InterestRate, new { @class = "control-label" })
-                        <a href="#" rel="popover" class="" data-toggle="popover" tabindex="0" data-trigger="focus"
-                           data-placement="center" title="Interest Rate" data-content="<p>If the project relies on financing, enter interest rate.
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.InterestRate, new { @class = "control-label" })
+                            <a href="#" rel="popover" class="" data-toggle="popover" tabindex="0" data-trigger="focus"
+                               data-placement="center" title="Interest Rate" data-content="<p>If the project relies on financing, enter interest rate.
                        An interest rate is a rate which is charged or paid for the use of money and is often expressed as an annual percentage of the principal.
                         It is calculated by dividing the amount of interest by the amount of principal.
                     Interest rates often change as a result of inflation and financial poslies. For example,
@@ -49,63 +51,76 @@
                     Read more: http://www.investorwords.com/2539/interest_rate.html#ixzz3NsD6A9ff </p>">
                             <span class="glyphicon glyphicon-question-sign"></span></a>
 
-                        @Html.TextBoxFor(model => model.InterestRate, new { min = "0", step = "any", @class = "form-control", @Value = @Constants.GetAvgInterestRate() })
-                        @Html.ValidationMessageFor(model => model.InterestRate, "", new { @class = "text-danger" })
+                            @Html.TextBoxFor(model => model.InterestRate, new { min = "0", step = "any", @class = "form-control", @Value = @Constants.GetAvgInterestRate() })
+                            @Html.ValidationMessageFor(model => model.InterestRate, "", new { @class = "text-danger" })
+
+                        </div>
+
+
 
                     </div>
 
-
-
-                    <div class="col-md-4  form-group">
-                        @Html.LabelFor(model => model.AdministrativeCost, new { @class = "control-label" })
-                        <a href="#" rel="popover" class="" data-toggle="popover" tabindex="0" data-trigger="focus"
-                           data-placement="left" title="Administrative Cost" data-content="<p>Recurring administrative cost. The default is shown in the fom if avaialble.</p>">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.AdministrativeCost, new { @class = "control-label" })
+                            <a href="#" rel="popover" class="" data-toggle="popover" tabindex="0" data-trigger="focus"
+                               data-placement="left" title="Administrative Cost" data-content="<p>Recurring administrative cost. The default is shown in the fom if avaialble.</p>">
                             <span class="glyphicon glyphicon-question-sign"></span></a>
 
-                        @Html.EditorFor(model => model.AdministrativeCost, new { htmlAttributes = new { @class = "form-control" , @Value="" } })
-                        @Html.ValidationMessageFor(model => model.AdministrativeCost, "", new { @class = "text-danger" })
+                            @Html.EditorFor(model => model.AdministrativeCost, new { htmlAttributes = new { @class = "form-control", @Value = "" } })
+                            @Html.ValidationMessageFor(model => model.AdministrativeCost, "", new { @class = "text-danger" })
+
+                        </div>
+
 
                     </div>
 
-                    <div class="col-md-4 form-group">
-                        @Html.LabelFor(model => model.IncentivePayment, new { @class = "control-label" })
-                        <a href="#" rel="popover" class="" data-toggle="popover" tabindex="0" data-trigger="focus"
-                           data-placement="left" title="Incentive Payment" data-content="<p>Any incentive payment rate.</p>">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.IncentivePayment, new { @class = "control-label" })
+                            <a href="#" rel="popover" class="" data-toggle="popover" tabindex="0" data-trigger="focus"
+                               data-placement="left" title="Incentive Payment" data-content="<p>Any incentive payment rate.</p>">
                             <span class="glyphicon glyphicon-question-sign"></span></a>
 
-                        @Html.EditorFor(model => model.IncentivePayment, new { htmlAttributes = new { @class = "form-control" ,@Value=""} })
-                        @Html.ValidationMessageFor(model => model.IncentivePayment, "", new { @class = "text-danger" })
+                            @Html.EditorFor(model => model.IncentivePayment, new { htmlAttributes = new { @class = "form-control", @Value = "" } })
+                            @Html.ValidationMessageFor(model => model.IncentivePayment, "", new { @class = "text-danger" })
 
+                        </div>
                     </div>
 
-                    <div class="col-md-4 form-group">
-                        @Html.LabelFor(model => model.YearsOfIncentivePayment, new { @class = "control-label" })
-                        <a href="#" rel="popover" class="" data-toggle="popover" tabindex="0" data-trigger="focus"
-                           data-placement="left" title="Years of Incentive Payment" data-content="<p>Years of incentive paymement.</p>">
-                            <span class="glyphicon glyphicon-question-sign"></span></a>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.YearsOfIncentivePayment, new { @class = "control-label" })
+                            <a href="#" rel="popover" class="" data-toggle="popover" tabindex="0" data-trigger="focus"
+                               data-placement="left" title="Years of Incentive Payment" data-content="<p>Years of incentive paymement.</p>">
+                                <span class="glyphicon glyphicon-question-sign"></span></a>
 
-                        @Html.EditorFor(model => model.YearsOfIncentivePayment, new { htmlAttributes = new { @class = "form-control", @Value="" } })
-                        @Html.ValidationMessageFor(model => model.YearsOfIncentivePayment, "", new { @class = "text-danger" })
+                            @Html.EditorFor(model => model.YearsOfIncentivePayment, new { htmlAttributes = new { @class = "form-control", @Value = "" } })
+                            @Html.ValidationMessageFor(model => model.YearsOfIncentivePayment, "", new { @class = "text-danger" })
 
+                        </div>
                     </div>
 
-                    <div class=" col-md-4 form-group">
-                        @Html.LabelFor(model => model.AvailableEquity, new { @class = "control-label" })
-                        <a href="#" rel="popover" class="" data-toggle="popover" tabindex="0" data-trigger="focus"
-                           data-placement="left" title="Available Equity" data-content="<p>Equity is the interest or value that the owner has in real estate over and above liens against it.
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.AvailableEquity, new { @class = "control-label" })
+                            <a href="#" rel="popover" class="" data-toggle="popover" tabindex="0" data-trigger="focus"
+                               data-placement="left" title="Available Equity" data-content="<p>Equity is the interest or value that the owner has in real estate over and above liens against it.
                     You can estimate the available equity using this formula: </p><p>
                     Available Equity = Market Value - Total Loans</p>">
-                            <span class="glyphicon glyphicon-question-sign"></span></a>
+                                <span class="glyphicon glyphicon-question-sign"></span></a>
 
-                        @Html.EditorFor(model => model.AvailableEquity, new { htmlAttributes = new { @class = "form-control" ,@Value="" } })
-                        @Html.ValidationMessageFor(model => model.AvailableEquity, "", new { @class = "text-danger" })
+                            @Html.EditorFor(model => model.AvailableEquity, new { htmlAttributes = new { @class = "form-control", @Value = "" } })
+                            @Html.ValidationMessageFor(model => model.AvailableEquity, "", new { @class = "text-danger" })
 
+                        </div>
                     </div>
-                    <div class="col-md-4 form-group">
-                        @Html.LabelFor(model => model.LoanAmount, new { @class = "control-label" })
-                        <a href="#" rel="popover" class="" data-toggle="popover" tabindex="0" data-trigger="focus" data-placement="left"
-                           title="Loan Amount"
-                           data-content="<p> The amount specified in the contract that the borrower agrees to pay back.
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.LoanAmount, new { @class = "control-label" })
+                            <a href="#" rel="popover" class="" data-toggle="popover" tabindex="0" data-trigger="focus" data-placement="left"
+                               title="Loan Amount"
+                               data-content="<p> The amount specified in the contract that the borrower agrees to pay back.
                         The amount of points included and various other costs make the loan amount different from
                         the quantity of cash distributed by the lender.
                     <p>
@@ -114,9 +129,9 @@
 
 
 
-                        @Html.EditorFor(model => model.LoanAmount, new { htmlAttributes = new { @class = "form-control", @Value="" } })
-                        @Html.ValidationMessageFor(model => model.LoanAmount, "", new { @class = "text-danger" })
-
+                            @Html.EditorFor(model => model.LoanAmount, new { htmlAttributes = new { @class = "form-control", @Value = "" } })
+                            @Html.ValidationMessageFor(model => model.LoanAmount, "", new { @class = "text-danger" })
+                        </div>
                     </div>
 
                     <div class="col-md-4 form-group">
@@ -127,7 +142,7 @@
                            data-content="<p> The amount specified in the contract that the borrower agrees to pay back for equity loan.</p>">
                             <span class="glyphicon glyphicon-question-sign"></span></a>
 
-                        @Html.EditorFor(model => model.EquityLoanInterestRate, new { htmlAttributes = new { @class = "form-control", @Value="" } })
+                        @Html.EditorFor(model => model.EquityLoanInterestRate, new { htmlAttributes = new { @class = "form-control", @Value = "" } })
                         @Html.ValidationMessageFor(model => model.EquityLoanInterestRate, "", new { @class = "text-danger" })
 
                     </div>
@@ -164,8 +179,8 @@
 
 @section MyScripts {
     <script>
-        
-        $('document').ready(function() {
+
+        $('document').ready(function () {
             $('#RequireFinance').change();
         })
         $('#RequireFinance').change(function () {
