@@ -154,6 +154,10 @@ namespace BiofuelSouth.Models
             return revenues;
         } 
 
+        /// <summary>
+        /// Returns total annual production for the project size;
+        /// </summary>
+        /// <returns></returns>
         public double GetAnnualProductivity()
         {
             return DataService.GetProductivityPerAcreForCropByGeoId(General.Category, General.County)*General.ProjectSize;  

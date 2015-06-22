@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Resources;
 using System.Web.Mvc;
 using BiofuelSouth.Services;
 using BiofuelSouth.ViewModels;
+using Microsoft.Ajax.Utilities;
 
 namespace BiofuelSouth.Models
 {
@@ -180,16 +182,41 @@ namespace BiofuelSouth.Models
             }
         }
 
-        public static Decimal GetDefaultStorageCost(StorageMethod storageMethod, CropType cropType, int days = 1)
+        public static Decimal GetDefaultStorageCost(Input input)
         {
-            //assumtion - 10lbs/sqft
-            //4 ft diamater, 5 ft height = 62 cft. ft.
+
+            var  cropType = (CropType) Enum.Parse(typeof(CropType), input.General.Category);
+            var storageMethod =
+                (ViewModels.StorageMethod) Enum.Parse(typeof (StorageMethod), input.Storage.StorageMethod);
+
+
+
+            var estimate = input.GetAnnualProductivity();
+            var cftVolume = estimate/ Convert.ToDouble(ConfigurationManager.AppSettings.Get("WeightToVolumeRatio"));
+            var numberOfBales = -1;
+            var weightRoundBale = 650;
+            var weightRectangaleBale = 2000;
+            var baleRoundPerStack = 6; 
+
+            //assumtion - 10lbs/cft
+            //4 ft diamater, 5 ft height = 62 cft. ft. [pi*D2/4 *H]
             //thus one round bale weigh about 630 lbs
             //one stack cann contain 3780 lbs ir 1.89 lbs
             //one stack needs a tarp of size 15x5 sq. feet
             //75 sq. feet of tarp per 
             //cost of tarp sq. feet .15 or $11.25
             // $5.95/ton
+
+
+            //every 72 months
+            //2% additional cost
+            //minimum 1 bale
+
+            //if production is greater than 3780 one rate
+            //if production is less than 3780 then another rate
+            //for round
+
+
 
             
             //For rectangular
@@ -206,31 +233,67 @@ namespace BiofuelSouth.Models
             //Gravel cost
             //.75 cents sq foot
 
-            if (CropType.Switchgrass == cropType)
+            double gravelCost = 0;
+            double palletCost = 0;
+            double tarpCost = 0;
+            decimal annualStorageCost = -9; 
+            //If user has supplied flat cost, then storage cost per year from user is used.
+            if (input.Storage.CostOption == (int) CostEstimationOption.UserSupplyStorageCost)
             {
-                switch (storageMethod)
-                {
-                    case StorageMethod.RoundTarpPallet:
-                        return 300/365 * days;
-                    case StorageMethod.RoundTarpGravel:
-                        return 300 / 365 * days;
-                    case StorageMethod.RoundTarpBareGroud:
-                        return 300 / 365 * days;
-                    case StorageMethod.RoundPalletNoTarp:
-                        return 300 / 365 * days;
-                    case StorageMethod.RoundGravelNoTarp:
-                        return 300 / 365 * days;
-                    case StorageMethod.RoundBareGroundNoTarp:
-                        return 300 / 365 * days;
-                    case StorageMethod.RectangularTarpPallet:
-                        return 300 / 365 * days;
-                    case StorageMethod.RectangularNoTarp:
-                        return 300 / 365 * days;
-                    case StorageMethod.RectangularGravelNoTarp:
-                        return 300 / 365 * days;
-                }
+                annualStorageCost =  input.Storage.UserEstimatedCost; 
+                
             }
-            return -9;
+
+            if (input.Storage.CostOption == (int) CostEstimationOption.Default ||
+                input.Storage.CostOption == (int) CostEstimationOption.UserSupplyMaterialCost)
+            {
+
+                if (CropType.Switchgrass == cropType)
+                {
+                    switch (storageMethod)
+                    {
+                        case StorageMethod.RoundTarpPallet:
+                        {
+
+                            var baleCount  = estimate/weightRoundBale;
+                            var stack = (int) baleCount/baleRoundPerStack;
+                         
+
+                        }
+
+                        case StorageMethod.RoundTarpGravel:
+                            return 300/365*days;
+                        case StorageMethod.RoundTarpBareGroud:
+                            return 300/365*days;
+                        case StorageMethod.RoundPalletNoTarp:
+                            return 300/365*days;
+                        case StorageMethod.RoundGravelNoTarp:
+                            return 300/365*days;
+                        case StorageMethod.RoundBareGroundNoTarp:
+                            return 300/365*days;
+                        case StorageMethod.RectangularTarpPallet:
+                            return 300/365*days;
+                        case StorageMethod.RectangularNoTarp:
+                            return 300/365*days;
+                        case StorageMethod.RectangularGravelNoTarp:
+                            return 300/365*days;
+                    }
+                }
+
+                return -9;
+            }
+
+            return annualStorageCost; 
+        }
+
+        private static decimal GetRoundBaleStorageCost(Input input)
+        {
+            return 0; 
+        }
+
+        private static decimal GetRectBaleStorageCost(Input input)
+        {
+            return 0; 
         }
 
         public static Double GetStorageLoss(int storageMethod, string cropType)
