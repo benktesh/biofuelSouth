@@ -238,70 +238,7 @@ namespace BiofuelSouth.Controllers
             return View(storage);
 
 
-            //if (ip == null || ip.General == null)
-            //{
-            //    return RedirectToAction("Index");
-            //}
 
-            //if (ip.Storage == null)
-            //{
-            //    ip.Storage = new Storage();
-            //    return View();
-            //}
-            
-
-
-            //if (ip == null || ip.County == null)
-                
-
-            //if (ip.Storage == null)
-            //{
-            //    ip.Storage = new Storage();
-            //    ModelState.Clear();
-
-            //}
-            //else
-            //{
-            //    if (!ModelState.IsValid)
-            //        return View(ip);
-
-            //}
-               
-                
-            //FillViewBag();
-            //if (ModelState.IsValid)
-            //{
-            //    if (ip.Storage.StorageTime > 0)
-            //        ip.Storage.RequireStorage = true;
-            //    ViewBag.Results = true;
-            //    PostSubmit(ip, "Annual Production");
-            //    ViewBag.input = ip;
-            //    TempData["input"] = ip;
-            //    TempData.Keep();
-            //}
-
-            //return View(ip);
-
-            //if (ip.State == null)
-            //{
-            //    return Index();
-                
-            //}
-
-            //if (ip.Storage == null)
-            //{
-            //    ip.Storage = new Storage {RequireStorage = false};
-                
-            //    return View(ip);
-            //}
-                
-            //if (ip.Storage.StorageTime > 0)
-            //    ip.Storage.RequireStorage = true;
-            
-            //ViewBag.Results = true;
-            //PostSubmit(ip, "Annual Production");
-            //ViewBag.input = ip;
-            //return View(ip);
         }
 
         public ActionResult Financial(Financial financial = null)
@@ -328,14 +265,10 @@ namespace BiofuelSouth.Controllers
                     return View("Result", ip);
                 }
 
-
                 return View(financial);
-
-
             }
 
     
-
             if (financial == null)
             {
                 financial = new Financial();
@@ -374,12 +307,7 @@ namespace BiofuelSouth.Controllers
             cacheKey = Guid.NewGuid().ToString();
             ViewBag.cacheKey1 = cacheKey;
             cc.GenerateCostRevenueChart(cacheKey, ip, "Cost and Revenue");
-
-
-
-           // cc.GenerateChart(cacheKey, rev, "Annual Production");
-
-            
+           
 
         }
 
