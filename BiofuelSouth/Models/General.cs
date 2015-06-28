@@ -21,7 +21,7 @@ namespace BiofuelSouth.Models
 
         [Required]
         [DisplayName(@"Biofuel Category")]
-        public String Category { get; set; }
+        public string Category { get; set; }
 
         [DisplayName(@"Size of Project (acre)")]
         public double ProjectSize { get; set; }

@@ -16,8 +16,8 @@ namespace BiofuelSouth.Models
             GravelCost = StorageCostParameter.GravelCostSqFt;
             TarpCost = StorageCostParameter.TarpCostSqFt;
             PalletCost = StorageCostParameter.PalletCostSqFt;
-            LandCost = StorageCostParameter.LandCostYear;
-            LaborCost = StorageCostParameter.LaborCostHour;
+            LandCost = (double) StorageCostParameter.LandCostYear;
+            LaborCost = (double) StorageCostParameter.LaborCostHour;
         }
 
         [Required]
@@ -57,10 +57,10 @@ namespace BiofuelSouth.Models
          public Decimal GravelCost { get; set; }
 
          [Display(Name = @"Labor cost ($/sq.ft)")]
-         public Decimal LaborCost { get; set; }
+         public double? LaborCost { get; set; }
 
          [Display(Name = @"Land cost ($/sq.ft")]
-         public Decimal LandCost { get; set; }
+         public double? LandCost { get; set; }
 
          [Display(Name = @"Enter estimated storage cost in $/ton/year")]
          public Decimal UserEstimatedCost { get; set; }

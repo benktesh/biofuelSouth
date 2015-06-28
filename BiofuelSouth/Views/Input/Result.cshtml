@@ -152,6 +152,17 @@
                 </tr>
                 <tr>
                     <td>
+                        Storage Cost ($)
+                    </td>
+                    @foreach (var a in Model.GetExpenditures())
+                    {
+
+                        <td>@String.Format("{0:#,###,###}", @Math.Round(a.StorageCost, 0))</td>
+                    }
+
+                </tr>
+                <tr>
+                    <td>
                         CashFlow ($)
                     </td>
                     @foreach (var a in Model.GetCashFlow())

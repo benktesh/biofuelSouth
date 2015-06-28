@@ -100,6 +100,8 @@ namespace BiofuelSouth.Models
         public  List<Expenditure> GetExpenditures()
         {
             var expenses = new List<Expenditure>();
+            var storageCost = Constants.GetStorageCost(this);
+
             try
             {
                 var duration = General.ProjectLife;
@@ -110,8 +112,9 @@ namespace BiofuelSouth.Models
                     expenditure.AdministrativeCost = Financial.AdministrativeCost;
                     expenditure.LandCost = General.LandCost;
                     expenditure.ProductionCost = GetCostPerAcre();
+                    expenditure.StorageCost = storageCost[i];
                     expenditure.TotalExpenses = expenditure.AdministrativeCost + expenditure.LandCost + expenditure.ProductionCost;
-                    expenditure.TotalExpenses = expenditure.TotalExpenses*General.ProjectSize;
+                    expenditure.TotalExpenses = expenditure.TotalExpenses * General.ProjectSize + expenditure.StorageCost;
                     expenses.Add(expenditure);
 
                     //Add interests

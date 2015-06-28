@@ -19,4 +19,10 @@ namespace BiofuelSouth.Models
         UserSupplyStorageCost = 1,
         UserSupplyMaterialCost = 2
     }
+
+    public enum BaleType
+    {
+        Round,
+        Rectangular
+    }
 }
