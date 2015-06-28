@@ -18,7 +18,7 @@ namespace BiofuelSouth.Models
         public DbSet<Glossary> Glossaries { get; set; }
         public DbSet<FeedBack> FeedBacks { get; set; }
     
-        public DbSet<Input> Inputs { get; set; }
+        //public DbSet<Input> Inputs { get; set; }
         public DbSet<LookUpEntity> LookUps { get; set; }
     }
 

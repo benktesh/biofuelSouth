@@ -716,6 +716,10 @@
     <Compile Include="Migrations\201506190022078_AddsLookupTable.Designer.cs">
       <DependentUpon>201506190022078_AddsLookupTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201506281329140_RemovesInputTableFromDB.cs" />
+    <Compile Include="Migrations\201506281329140_RemovesInputTableFromDB.Designer.cs">
+      <DependentUpon>201506281329140_RemovesInputTableFromDB.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\Cashflow.cs" />
     <Compile Include="Models\Cost.cs" />
     <Compile Include="Models\CountyData.cs" />
@@ -1211,6 +1215,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201506190022078_AddsLookupTable.resx">
       <DependentUpon>201506190022078_AddsLookupTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201506281329140_RemovesInputTableFromDB.resx">
+      <DependentUpon>201506281329140_RemovesInputTableFromDB.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
