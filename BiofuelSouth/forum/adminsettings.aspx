@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MaintainScrollPositionOnPostback="true" MasterPageFile="AspNetForumMaster.Master" AutoEventWireup="true" EnableEventValidation="false" CodeBehind="adminsettings.aspx.cs" Inherits="aspnetforum.adminsettings" culture="auto" meta:resourcekey="PageResource1" %>
+<%@ Import Namespace="aspnetforum.Utils" %>
 <%@ Register TagPrefix="cc" Namespace="aspnetforum" Assembly="aspnetforum" %>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="AspNetForumContentPlaceHolder" runat="server">
@@ -13,7 +14,7 @@
 		<asp:BoundColumn Visible="False" DataField="CfgKey" ReadOnly="true"></asp:BoundColumn>
 		<asp:TemplateColumn>
 			<HeaderTemplate>Setting name and description</HeaderTemplate>
-			<ItemTemplate><b><%# Eval("CfgKey")%></b>. <%# aspnetforum.Utils.DbAwareSettings.Current.GetDescription(Eval("CfgKey").ToString()).Replace("\n", "<br/>") %></ItemTemplate>
+			<ItemTemplate><b><%# Eval("CfgKey")%></b>. <%# DbAwareSettings.Current.GetDescription(Eval("CfgKey").ToString()).Replace("\n", "<br/>") %></ItemTemplate>
 		</asp:TemplateColumn>
 		<asp:TemplateColumn ItemStyle-Wrap="false">
 			<HeaderTemplate>Current value</HeaderTemplate>

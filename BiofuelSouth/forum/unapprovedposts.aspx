@@ -15,12 +15,12 @@
 			<td style="width:120px" rowspan="2">
 				<span class="gray"><%# ToAgoString((DateTime)Eval("CreationDate")) %>
 				<br />Topic:</span>
-				<a href='<%# aspnetforum.Utils.Various.GetTopicURL(Eval("TopicID"), Eval("Subject")) %>'><b><%# Eval("Subject") %></b></a>
+				<a href='<%# Various.GetTopicURL(Eval("TopicID"), Eval("Subject")) %>'><b><%# Eval("Subject") %></b></a>
 				<br /><br />
 				<%# aspnetforum.Utils.User.DisplayUserInfo(Eval("UserID"), Eval("UserName"), Eval("PostsCount"), Eval("AvatarFileName"), Eval("LastName"))%>
 			</td>
 			<td style="border-bottom:none;">
-				<%# aspnetforum.Utils.Formatting.FormatMessageHTML(Eval("Body").ToString())%>
+				<%# Formatting.FormatMessageHTML(Eval("Body").ToString())%>
 			</td>
 		</tr>
 		<tr <%# Container.ItemType == ListItemType.AlternatingItem ? " class='altItem'" : "" %>>

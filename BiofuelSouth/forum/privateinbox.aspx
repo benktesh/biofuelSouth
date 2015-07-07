@@ -1,5 +1,6 @@
 ﻿<%@ Page language="c#" Codebehind="privateinbox.aspx.cs" AutoEventWireup="True" Inherits="aspnetforum.privateinbox" MasterPageFile="AspNetForumMaster.Master" %>
 <%@ Import Namespace="aspnetforum.Resources" %>
+<%@ Import Namespace="aspnetforum.Utils" %>
 
 <asp:Content ContentPlaceHolderID="AspNetForumContentPlaceHolder" ID="AspNetForumContent" runat="server">
 <div class="location">
@@ -62,8 +63,8 @@
 				<div class="mobileshown">
 					<%# aspnetforum.Utils.User.DisplayUserInfo(Eval("UserID"), Eval("UserName"), null, Eval("AvatarFileName"), Eval("FirstName"), Eval("LastName"))%>
 				</div>
-				<%# aspnetforum.Utils.Formatting.FormatMessageHTML(Eval("Body").ToString())%>
-				<%# aspnetforum.Utils.Formatting.FormatSignature(Eval("Signature").ToString())%>
+				<%# Formatting.FormatMessageHTML(Eval("Body").ToString())%>
+				<%# Formatting.FormatSignature(Eval("Signature").ToString())%>
 				<asp:Repeater ID="rptFiles" runat="server">
 				<HeaderTemplate>
 					<br /><br />
@@ -72,7 +73,7 @@
 				</HeaderTemplate>
 				<ItemTemplate>
 					<a href='getattachment.ashx?personal=1&fileid=<%# Eval("FileID") %>'>
-					<%# aspnetforum.Utils.Attachments.GetThumbnail(Eval("FileName").ToString(), Convert.ToInt32(Eval("UserID"))) %>
+					<%# Attachments.GetThumbnail(Eval("FileName").ToString(), Convert.ToInt32(Eval("UserID"))) %>
 					<%# Eval("FileName") %></a><br />
 				</ItemTemplate>
 				<FooterTemplate></div></FooterTemplate>

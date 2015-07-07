@@ -1,4 +1,5 @@
 <%@ Page Title="Recent messages" language="c#" Codebehind="recent.aspx.cs" AutoEventWireup="True" Inherits="aspnetforum.recent" MasterPageFile="AspNetForumMaster.Master" %>
+<%@ Import Namespace="aspnetforum.Resources" %>
 <%@ Register TagPrefix="cc" TagName="RecentPosts" Src="recentposts.ascx" %>
 
 <asp:Content ContentPlaceHolderID="ContentPlaceHolderHEAD" ID="AspNetForumHead" runat="server">
@@ -7,7 +8,7 @@
 
 <asp:Content ContentPlaceHolderID="AspNetForumContentPlaceHolder" ID="AspNetForumContent" runat="server">
 <div class="location">
-	<h2><a href="default.aspx"><%= aspnetforum.Resources.various.Home %></a></h2>
+	<h2><a href="default.aspx"><%= various.Home %></a></h2>
 </div>
 
 <cc:RecentPosts id="recentPosts" runat="server"></cc:RecentPosts>

@@ -1,4 +1,6 @@
 <%@ Page Title="Search" language="c#" Codebehind="search.aspx.cs" AutoEventWireup="True" Inherits="aspnetforum.search" MasterPageFile="AspNetForumMaster.Master" %>
+<%@ Import Namespace="aspnetforum.Resources" %>
+<%@ Import Namespace="aspnetforum.Utils" %>
 
 <asp:Content ContentPlaceHolderID="ContentPlaceHolderHEAD" runat="server">
 <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/themes/ui-lightness/jquery-ui.css" type="text/css" rel="Stylesheet" />
@@ -70,18 +72,18 @@ function ValidateSearch(source, arguments)
 <asp:repeater id="rptTopicsList" runat="server" EnableViewState="False">
 <HeaderTemplate>
 	<table width="100%" class="roundedborder biglist">
-	<tr><th></th><th><%= aspnetforum.Resources.various.LatestPost %></th></tr>
+	<tr><th></th><th><%= various.LatestPost %></th></tr>
 	<tbody>
 </HeaderTemplate>
 <ItemTemplate>
 	<tr <%# Container.ItemType == ListItemType.AlternatingItem ? " class='altItem'" : "" %>>
-		<td width="70%"><h2><a href='<%# aspnetforum.Utils.Various.GetTopicURL(Eval("TopicID"), Eval("Subject")) %>'>
+		<td width="70%"><h2><a href='<%# Various.GetTopicURL(Eval("TopicID"), Eval("Subject")) %>'>
 					<%# Eval("Subject") %>
 				</a>
 			</h2>
 		</td>
 		<td width="30%" style="white-space:nowrap" class="gray">
-			<%# aspnetforum.Utils.Topic.GetTopicInfoBMessageyID(Eval("LastMessageID"), Eval("Subject"), Eval("RepliesCount") as int?, Cmd) %>
+			<%# Topic.GetTopicInfoBMessageyID(Eval("LastMessageID"), Eval("Subject"), Eval("RepliesCount") as int?, Cmd) %>
 		</td>
 	</tr>
 </ItemTemplate>

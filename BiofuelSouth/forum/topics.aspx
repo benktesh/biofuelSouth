@@ -1,5 +1,7 @@
 ﻿<%@ Page language="c#" Codebehind="topics.aspx.cs" EnableViewState="false" AutoEventWireup="True" Inherits="aspnetforum.topics" MasterPageFile="AspNetForumMaster.Master" %>
+<%@ Import Namespace="aspnetforum" %>
 <%@ Import Namespace="aspnetforum.Resources" %>
+<%@ Import Namespace="aspnetforum.Utils" %>
 
 <asp:Content ContentPlaceHolderID="ContentPlaceHolderHEAD" ID="AspNetForumHead" runat="server">
 <link rel="alternate" type="application/rss+xml" title="topics in this forum" id="rssDiscoverLink" runat="server" />
@@ -40,16 +42,16 @@
 	</HeaderTemplate>
 	<ItemTemplate>
 		<tr <%# Container.ItemType == ListItemType.AlternatingItem ? " class='altItem'" : "" %> >
-			<td align="center" style="width:10%;border-right:none;"><img alt="" src="<%# aspnetforum.forums.GetForumIcon(Eval("IconFile")) %>" height="32" width="32" /></td>
+			<td align="center" style="width:10%;border-right:none;"><img alt="" src="<%# forums.GetForumIcon(Eval("IconFile")) %>" height="32" width="32" /></td>
 			<td style="width:55%;border-left:none"><h2>
-				<a href='<%# aspnetforum.Utils.Various.GetForumURL(Eval("ForumID"), Eval("Title")) %>'><%# Eval("Title") %></a>
+				<a href='<%# Various.GetForumURL(Eval("ForumID"), Eval("Title")) %>'><%# Eval("Title") %></a>
 				</h2>
 				<span class="gray2"><%# Eval("Description") %></span>
 			</td>
 			<td width="50" class="gray2" style="text-align: center">
 				<%# Eval("Topics") %></td>
 			<td style="white-space:nowrap" class="gray2">
-				<%# aspnetforum.Utils.Topic.GetTopicInfoBMessageyID(Eval("LatestMessageID"), Cmd)%></td>
+				<%# Topic.GetTopicInfoBMessageyID(Eval("LatestMessageID"), Cmd)%></td>
 		</tr>
 	</ItemTemplate>
 	<FooterTemplate>
@@ -89,7 +91,7 @@
 						<asp:LinkButton OnClientClick="if(!confirm('Are you sure?')) return false;" ToolTip="delete" id="btnModeratorDelete" Runat="server" Visible="False" CommandName="delete" CommandArgument='<%# Eval("TopicID") %>'><img src="images/delete-topic.png" /></asp:LinkButton>
 					</span>
 					<h2>
-						<a href='<%# aspnetforum.Utils.Various.GetTopicURL(Eval("TopicID"), Eval("Subject")) %>'>
+						<a href='<%# Various.GetTopicURL(Eval("TopicID"), Eval("Subject")) %>'>
 							<%# Eval("Subject") %>
 						</a>
 					</h2>
@@ -99,7 +101,7 @@
 						<%# DisplayUserName(Eval("UserName"), Eval("UserID"), Eval("FirstName"), Eval("LastName"))%></span>
 				</td>
 				<td style="white-space:nowrap;text-align: center" class="gray">
-					<%# aspnetforum.Utils.Message.FormatMessageInfo(Eval("LastMessageID"), Eval("TopicID"), Eval("LastUserID"), Eval("LastUserName"), Eval("LastFirstName"), Eval("LastLastName"), Eval("Subject"), Eval("CreationDate"), Eval("Messages") as int?, Eval("Body"))%></td>
+					<%# Message.FormatMessageInfo(Eval("LastMessageID"), Eval("TopicID"), Eval("LastUserID"), Eval("LastUserName"), Eval("LastFirstName"), Eval("LastLastName"), Eval("Subject"), Eval("CreationDate"), Eval("Messages") as int?, Eval("Body"))%></td>
 				<td class="gray2 mobilehidden" style="text-align: center">
 					<%# Eval("ViewsCount") %></td>
 				<td class="gray2" style="text-align: center">

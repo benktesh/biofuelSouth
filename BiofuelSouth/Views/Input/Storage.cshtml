@@ -1,5 +1,5 @@
 ﻿@using BiofuelSouth.Models
-@model BiofuelSouth.Models.Storage
+@model Storage
 
 @{
     ViewBag.Title = "Index";
@@ -164,7 +164,7 @@
                     $("#county").prop("disabled", false);
                 },
 
-                error: function (xhr, ajaxOptions, thrownError) {
+                error: function () {
                     alert('Failed to retrieve county.');
                     $("#county").prop("disabled", true);
                 }

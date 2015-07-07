@@ -1,5 +1,5 @@
 ﻿@using BiofuelSouth.Models
-@model BiofuelSouth.Models.Input
+@model Input
 
 
 
@@ -17,66 +17,66 @@
 
             <div class="col-md-4">
                 <div class="form-group">
-                    @Html.LabelFor(model => model.State, new { @class = "control-label" })<span class="required">Required</span>
+                    @Html.LabelFor(model => model.General.State, new { @class = "control-label" })<span class="required">Required</span>
                     <a href="#" rel="popover" class="" data-toggle="popover" tabindex="0" data-trigger="focus"
                        data-placement="center" title="State" data-content="<p>State of the production of biofuel crop.</p>"><span class="glyphicon glyphicon-question-sign"></span></a>
-                    @Html.DropDownListFor(model => model.State, Constants.GetState(), "Select State", new { @class = "form-control", id = "state" })
-                    @Html.ValidationMessageFor(model => model.State, "", new { @class = "text-danger" })
+                    @Html.DropDownListFor(model => model.General.State, Constants.GetState(), "Select State", new { @class = "form-control", id = "state" })
+                    @Html.ValidationMessageFor(model => model.General.State, "", new { @class = "text-danger" })
                 </div>
 
                 <div class="form-group">
-                    @Html.LabelFor(model => model.County, new { @class = "control-label" })<span class="required">Required</span>
+                    @Html.LabelFor(model => model.General.County, new { @class = "control-label" })<span class="required">Required</span>
                     <a href="#" rel="popover" class="" data-toggle="popover" tabindex="0" data-trigger="focus"
                        data-placement="center" title="County" data-content="<p>County of production.</p>">
                         <span class="glyphicon glyphicon-question-sign"></span></a>
 
                     @{
-    var state = Model.State;
+    var state = Model.General.State;
                     }
-                    @Html.DropDownListFor(model => model.County, Constants.GetCountySelectList(@state), "Select County", new { @class = "form-control", name = "county", id = "county" })
-                    @Html.ValidationMessageFor(model => model.County, "", new { @class = "text-danger" })
+                    @Html.DropDownListFor(model => model.General.County, Constants.GetCountySelectList(@state), "Select County", new { @class = "form-control", name = "county", id = "county" })
+                    @Html.ValidationMessageFor(model => model.General.County, "", new { @class = "text-danger" })
                 </div>
 
 
                 <div class="form-group">
-                    @Html.LabelFor(model => model.Category, new { @class = "control-label" })<span class="required">Required</span>
+                    @Html.LabelFor(model => model.General.Category, new { @class = "control-label" })<span class="required">Required</span>
                     <a href="#" rel="popover" class="" data-toggle="popover" tabindex="0" data-trigger="focus"
                        data-placement="center" title="Crop category" data-content="<p>Select the type of biofuel crops. If you do not find a crop in the list, please contact us.</p>">
                             <span class="glyphicon glyphicon-question-sign"></span></a>
-                    @Html.DropDownListFor(model => model.Category, (List<SelectListItem>)ViewBag.Category, "Select Crop Category", new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.Category, "", new { @class = "text-danger" })
+                    @Html.DropDownListFor(model => model.General.Category, (List<SelectListItem>)ViewBag.Category, "Select Crop Category", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.General.Category, "", new { @class = "text-danger" })
                 </div>
 
                 <div class="form-group">
 
 
-                    @Html.LabelFor(model => model.ProjectSize, new { @class = "control-label" })<span class="required">Required</span>
+                    @Html.LabelFor(model => model.General.ProjectSize, new { @class = "control-label" })<span class="required">Required</span>
                     <a href="#" rel="popover" class="" data-toggle="popover" tabindex="0" data-trigger="focus"
                        data-placement="center" title="Help" data-content="<p>Enter size of the potential project. The area must be in acres. If you do not yet know the size, use any reasonable acre.</p>">
                             <span class="glyphicon glyphicon-question-sign"></span></a>
-                    @Html.TextBoxFor(model => model.ProjectSize, new { type = "number", min = "1", @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.ProjectSize, "", new { @class = "text-danger" })
+                    @Html.TextBoxFor(model => model.General.ProjectSize, new { type = "number", min = "1", @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.General.ProjectSize, "", new { @class = "text-danger" })
                 </div>
 
                 <div class="form-group">
 
-                    @Html.LabelFor(model => model.ProjectLife, new { @class = "control-label" })<span class="required">Required</span>
+                    @Html.LabelFor(model => model.General.ProjectLife, new { @class = "control-label" })<span class="required">Required</span>
                     <a href="#" rel="popover" class="" data-toggle="popover" tabindex="0" data-trigger="focus"
                        data-placement="left" title="Project Duration" data-content="<p>Duration of project expressed as total number of years
                     between first plantation and final harvest with intermediate harvests in between. The number must a whole number i.e. 1 or 2 or 10 for a year.</p>">
                             <span class="glyphicon glyphicon-question-sign"></span></a>
-                    @Html.TextBoxFor(model => model.ProjectLife, new { @class = "form-control", type = "number", min = "1" })
-                    @Html.ValidationMessageFor(model => model.ProjectLife, "", new { @class = "text-danger" })
+                    @Html.TextBoxFor(model => model.General.ProjectLife, new { @class = "form-control", type = "number", min = "1" })
+                    @Html.ValidationMessageFor(model => model.General.ProjectLife, "", new { @class = "text-danger" })
                 </div>
 
                 <div class="form-group">
 
-                    @Html.LabelFor(model => model.BiomassPriceAtFarmGate, new { @class = "control-label" })
+                    @Html.LabelFor(model => model.General.BiomassPriceAtFarmGate, new { @class = "control-label" })
                     <a href="#" rel="popover" class="" data-toggle="popover" tabindex="0" data-trigger="focus"
                        data-placement="left" title="Farm Gate Price" data-content="<p>The price of the product at which it is sold by the farm (the farm gate price).</p>">
                             <span class="glyphicon glyphicon-question-sign"></span></a>
-                    @Html.EditorFor(model => model.BiomassPriceAtFarmGate, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.BiomassPriceAtFarmGate, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.General.BiomassPriceAtFarmGate, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.General.BiomassPriceAtFarmGate, "", new { @class = "text-danger" })
                 </div>
 
                 <div class="form-group">
@@ -85,8 +85,8 @@
                     <a href="#" rel="popover" class="" data-toggle="popover" tabindex="0" data-trigger="focus"
                        data-placement="left" title="Land Cost" data-content="<p>Annual cost of land expressed as  $/acre/year.</p>">
                             <span class="glyphicon glyphicon-question-sign"></span></a>
-                    @Html.EditorFor(model => model.LandCost, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.LandCost, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.General.LandCost, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.General.LandCost, "", new { @class = "text-danger" })
                 </div>
             </div>
 

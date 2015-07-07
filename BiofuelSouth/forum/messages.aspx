@@ -1,5 +1,6 @@
 <%@ Page language="c#" Codebehind="messages.aspx.cs" AutoEventWireup="True" Inherits="aspnetforum.messages" MasterPageFile="AspNetForumMaster.Master" %>
 <%@ Import Namespace="aspnetforum.Resources" %>
+<%@ Import Namespace="aspnetforum.Utils" %>
 
 <asp:Content ContentPlaceHolderID="ContentPlaceHolderHEAD" ID="AspNetForumHead" runat="server">
 <link rel="alternate" type="application/rss+xml" title="topics in this forum" id="rssDiscoverLink" runat="server" />
@@ -82,7 +83,7 @@
 				<%# aspnetforum.Utils.User.DisplayUserInfo(Eval("UserID"), Eval("UserName"), Eval("PostsCount"), Eval("AvatarFileName"), _forumID, Eval("FirstName"), Eval("LastName"), Eval("UseGravatar"), Eval("Email"))%>
 			</div>
 			<asp:Literal ID="ltrBody" runat="server"></asp:Literal>
-			<%# aspnetforum.Utils.Formatting.FormatSignature(Eval("Signature").ToString())%>
+			<%# Formatting.FormatSignature(Eval("Signature").ToString())%>
 			<asp:Repeater ID="rptFiles" runat="server">
 			<HeaderTemplate>
 				<br /><br />
@@ -91,7 +92,7 @@
 			</HeaderTemplate>
 			<ItemTemplate>
 				<a href='getattachment.ashx?fileid=<%# Eval("FileID") %>'>
-				<%# aspnetforum.Utils.Attachments.GetThumbnail(Eval("FileName").ToString(), Convert.ToInt32(Eval("UserID"))) %>
+				<%# Attachments.GetThumbnail(Eval("FileName").ToString(), Convert.ToInt32(Eval("UserID"))) %>
 				<%# Eval("FileName") %></a><br />
 			</ItemTemplate>
 			<FooterTemplate></div></FooterTemplate>

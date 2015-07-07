@@ -1,4 +1,5 @@
 <%@ Page language="c#" Codebehind="viewprofile.aspx.cs" EnableViewState="false" AutoEventWireup="True" Inherits="aspnetforum.viewprofile" MasterPageFile="aspnetforummaster.master" %>
+<%@ Import Namespace="aspnetforum.Utils" %>
 <asp:Content ContentPlaceHolderID="AspNetForumContentPlaceHolder" ID="AspNetForumContent" runat="server">
 	<div class="location">
 	<h2><asp:Label id="lblUser" runat="server" meta:resourcekey="lblUserResource1"></asp:Label>
@@ -75,7 +76,7 @@
 
 	<div class="usertools">
 		<asp:Button id="btnEditUser" runat="server" Text="edit..." meta:resourcekey="btnEditUserResource1"></asp:Button>
-		<% if(aspnetforum.Utils.User.CurrentUserID!=0 && aspnetforum.Utils.Settings.EnablePrivateMessaging) { %>
+		<% if(aspnetforum.Utils.User.CurrentUserID!=0 && Settings.EnablePrivateMessaging) { %>
 			<button type="button" onclick="document.location='addprivatemsg.aspx?ToUserID=<%= _userId %>'"><asp:Label ID="Label5" runat="server" meta:resourcekey="Label5Resource1">Send a private message</asp:Label>...</button>
 		<% } %>
 		<asp:Button CssClass="greybutton" id="btnDelUser" runat="server" Text="delete this user" onclick="btnDelUser_Click" OnClientClick="return confirm('are you sure?')" meta:resourcekey="btnDelUserResource1"></asp:Button>

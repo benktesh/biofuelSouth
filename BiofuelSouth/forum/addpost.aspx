@@ -1,5 +1,6 @@
 <%@ Page language="c#" Codebehind="addpost.aspx.cs" EnableEventValidation="false" validateRequest="false" AutoEventWireup="True" Inherits="aspnetforum.addpost" MasterPageFile="AspNetForumMaster.Master" %>
 <%@ Import Namespace="aspnetforum.Resources" %>
+<%@ Import Namespace="aspnetforum.Utils" %>
 <asp:Content ID="ContentHead" runat="server" ContentPlaceHolderID="ContentPlaceHolderHEAD">
 <link href="editor.css" rel="Stylesheet" type="text/css" />
 </asp:Content>
@@ -125,7 +126,7 @@
 	</HeaderTemplate>
 	<ItemTemplate>
 		<tr><td valign="top" style="width:120px"><b><%# Eval("UserName") %></b><br /><%# ToAgoString((DateTime)Eval("CreationDate"))%></td>
-		<td><%# aspnetforum.Utils.Formatting.FormatMessageHTML(Eval("Body").ToString())%></td></tr>
+		<td><%# Formatting.FormatMessageHTML(Eval("Body").ToString())%></td></tr>
 	</ItemTemplate>
 	<FooterTemplate></table></FooterTemplate>
 </asp:Repeater>

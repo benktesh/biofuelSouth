@@ -1,10 +1,11 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="adminonlineusers.aspx.cs" Inherits="aspnetforum.adminonlineusers" MasterPageFile="AspNetForumMaster.Master" %>
+<%@ Import Namespace="aspnetforum.Resources" %>
 
 <asp:Content runat="server" ContentPlaceHolderID="AspNetForumContentPlaceHolder">
 
 <table cellpadding="7">
 	<tr>
-		<th><%= aspnetforum.Resources.various.OnlineUsers %></th>
+		<th><%= various.OnlineUsers %></th>
 		<th>Current URL</th>
 		<th>Last seen</th>
 	</tr>

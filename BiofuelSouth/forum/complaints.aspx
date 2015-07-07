@@ -24,7 +24,7 @@
 			</tr>
 			<tr valign="top">
 				<td>
-					topic: <a href='<%# aspnetforum.Utils.Various.GetTopicURL(Eval("TopicID"), Eval("Subject")) %>'>
+					topic: <a href='<%# Various.GetTopicURL(Eval("TopicID"), Eval("Subject")) %>'>
 						<b><%# Eval("Subject") %></b></a>
 					<br/><br/>
 					<%# aspnetforum.Utils.User.DisplayUserInfo(Eval("UserID"), Eval("UserName"), Eval("PostsCount"), Eval("AvatarFileName"), Eval("FirstName"), Eval("LastName"))%>
@@ -38,7 +38,7 @@
 				    </b>
 				    </span>
 				    <hr />
-					<%# aspnetforum.Utils.Formatting.FormatMessageHTML(Eval("Body").ToString())%>
+					<%# Formatting.FormatMessageHTML(Eval("Body").ToString())%>
 				</td>
 			</tr>
 		</ItemTemplate>

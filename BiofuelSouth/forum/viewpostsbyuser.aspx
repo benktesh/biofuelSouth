@@ -1,4 +1,5 @@
 <%@ Page Title="View User Profile" language="c#" Codebehind="viewpostsbyuser.aspx.cs" AutoEventWireup="True" Inherits="aspnetforum.viewpostsbyuser" MasterPageFile="aspnetforummaster.master" %>
+<%@ Import Namespace="aspnetforum.Utils" %>
 <asp:Content ContentPlaceHolderID="AspNetForumContentPlaceHolder" ID="AspNetForumContent" runat="server">
     <div class="location">
 	<h2><asp:Label id="lblUser" runat="server" Font-Bold="True" meta:resourcekey="lblUserResource1"></asp:Label></h2>
@@ -14,11 +15,11 @@
 				        <span class="gray">
 				        <%# ToAgoString((DateTime)Eval("CreationDate"))%><br />
 				        Topic:</span>
-				        <a href='<%# aspnetforum.Utils.Various.GetTopicURL(Eval("TopicID"), Eval("Subject")) %>'><strong><%# Eval("Subject") %></strong></a>
+				        <a href='<%# Various.GetTopicURL(Eval("TopicID"), Eval("Subject")) %>'><strong><%# Eval("Subject") %></strong></a>
 				        <br/><br/>
 				        <%# aspnetforum.Utils.User.DisplayUserInfo(userID, userName, null, avatarFileName, firstName, lastName)%>
 			        </td>
-				    <td><%# aspnetforum.Utils.Formatting.FormatMessageHTML(Eval("Body").ToString())%></td>
+				    <td><%# Formatting.FormatMessageHTML(Eval("Body").ToString())%></td>
 			    </tr>
 		    </ItemTemplate>
 		    <FooterTemplate>

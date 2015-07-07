@@ -1,5 +1,7 @@
 <%@ Master Language="C#" AutoEventWireup="true" CodeBehind="AspNetForumMaster.master.cs" Inherits="aspnetforum.AspNetForumMaster" %>
 
+<%@ Import Namespace="aspnetforum" %>
+<%@ Import Namespace="aspnetforum.Resources" %>
 <%@ Import Namespace="aspnetforum.Utils" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -83,12 +85,12 @@
 			<li class="backtowebsite mobilehidden"><a href="<%= aspnetforum.Utils.Settings.TitleLink %>"><%= aspnetforum.Resources.various.BackToWebSite %></a></li> <% } %>
                                     --%>
 
-                                    <li><a href="recenttopics.aspx"><%= aspnetforum.Resources.various.RecentTopics %></a></li>
-                                    <li><a href="recent.aspx"><%= aspnetforum.Resources.various.RecentPosts %></a></li>
-                                    <li><a href="search.aspx"><%= aspnetforum.Resources.various.Search %></a></li>
-                                    <li id="usersLink" runat="server" enableviewstate="false" class="mobilehidden"><a href="users.aspx"><%= aspnetforum.Resources.various.Users %></a></li>
-                                    <li id="adminLink" runat="server" enableviewstate="false" class="mobilehidden"><a href="admin.aspx"><%= aspnetforum.Resources.various.Administrator %></a></li>
-                                    <% if (aspnetforum.Utils.User.IsCurrentUserModerator())
+                                    <li><a href="recenttopics.aspx"><%= various.RecentTopics %></a></li>
+                                    <li><a href="recent.aspx"><%= various.RecentPosts %></a></li>
+                                    <li><a href="search.aspx"><%= various.Search %></a></li>
+                                    <li id="usersLink" runat="server" enableviewstate="false" class="mobilehidden"><a href="users.aspx"><%= various.Users %></a></li>
+                                    <li id="adminLink" runat="server" enableviewstate="false" class="mobilehidden"><a href="admin.aspx"><%= various.Administrator %></a></li>
+                                    <% if (User.IsCurrentUserModerator())
                                        { %>
                                     <li class="mobilehidden"><a href="unapprovedposts.aspx">Moderator <%= ModeratorCount > 0 ? "(" + ModeratorCount + ")" : "" %> </a></li>
                                     <% } %>
@@ -103,7 +105,7 @@
                             <div class="innercontainer">
                                 <div class="backtowebsite">
                                     <h1>
-                                        <a href="<%= aspnetforum.Utils.Settings.TitleLink %>"><%= aspnetforum.Resources.various.BackToWebSite %></a>
+                                        <a href="<%= Settings.TitleLink %>"><%= various.BackToWebSite %></a>
                                     </h1>
                                 </div>
 
@@ -114,8 +116,8 @@
                                             <img runat="server" id="imgAvatar" class="avatar" enableviewstate="false" src="images/guestavatar.gif" onerror="this.src='images/guestavatar.gif'" alt="guest avatar" style="float: left; margin-right: 5px; width: 32px; height: 32px; border-radius: 32px" />
                                             <a href="" id="viewProfileLink" class="curUsername" runat="server" title="edit my profile" enableviewstate="false"></a>
                                             <br />
-                                            <span class="mobilehidden"><a href="editprofile.aspx"><%= aspnetforum.Resources.various.MyProfile %></a> |</span>
-                                            <a href="logout.aspx" id="logoutLink" runat="server" enableviewstate="false"><%= aspnetforum.Resources.various.SignOut %></a>
+                                            <span class="mobilehidden"><a href="editprofile.aspx"><%= various.MyProfile %></a> |</span>
+                                            <a href="logout.aspx" id="logoutLink" runat="server" enableviewstate="false"><%= various.SignOut %></a>
                                         </span>
                                     </div>
 
@@ -123,12 +125,12 @@
                                         <a href="updatedtopics.aspx">
                                             <img src="images/unreadtopics.png" alt="topics" />
                                             <span runat="server" id="spanNumUnreadThreads" enableviewstate="false"></span>
-                                            <%= aspnetforum.Resources.various.UnreadTopics %>
+                                            <%= various.UnreadTopics %>
                                         </a>
                                         <a href="privateinbox.aspx">
                                             <img src="images/unreadmessages.png" alt="inbox" />
                                             <span runat="server" id="spanNumMsgs" enableviewstate="false"></span>
-                                            <span><%= aspnetforum.Resources.various.Messages %></span>
+                                            <span><%= various.Messages %></span>
                                         </a>
                                     </div>
 
@@ -137,14 +139,14 @@
                                 <!-- comment (or remove) the following section if you use single sign-on programmatically (and you don't need login-password inputs etc)-->
                                 <div id="loginTable" runat="server" class="logininfo" enableviewstate="false">
                                     <div style="margin-top: 20px;" class="mobilehidden">
-                                        <a href="register.aspx" class="registerLink"><%= aspnetforum.Resources.various.Register %></a><br />
-                                        <a href="lostpassword.aspx" class="lostpswLink"><%= aspnetforum.Resources.various.LostPassword %></a>
+                                        <a href="register.aspx" class="registerLink"><%= various.Register %></a><br />
+                                        <a href="lostpassword.aspx" class="lostpswLink"><%= various.LostPassword %></a>
                                     </div>
                                     <div>
                                         <input type="text" id="LoginName" name="LoginName" class="headerinput" placeholder="username" onkeypress="return EnterKeyToButton('loginbutton');" />
                                         <input type="password" id="Password" class="headerinput" placeholder="password" name="Password" onkeypress="return EnterKeyToButton('loginbutton');" />
-                                        <asp:Label ID="lblLoginErr" runat="server" Visible="false" EnableViewState="false" ForeColor="#ffa2a2"><%= aspnetforum.Resources.various.LoginError %></asp:Label>
-                                        <input name="rememberme" style="display: none" onkeypress="return EnterKeyToButton('loginbutton');" id="rememberme" type="checkbox" value="1" checked="checked" style="padding-left: 0px; margin-left: 0px" /><label style="display: none" for="rememberme"><%= aspnetforum.Resources.various.RememberMe %></label>
+                                        <asp:Label ID="lblLoginErr" runat="server" Visible="false" EnableViewState="false" ForeColor="#ffa2a2"><%= various.LoginError %></asp:Label>
+                                        <input name="rememberme" style="display: none" onkeypress="return EnterKeyToButton('loginbutton');" id="rememberme" type="checkbox" value="1" checked="checked" style="padding-left: 0px; margin-left: 0px" /><label style="display: none" for="rememberme"><%= various.RememberMe %></label>
                                         <input name="loginbutton" id="loginbutton" type="submit" class="headerinput" value="login" />
 
 
@@ -159,7 +161,7 @@
                             </div>
                         </div>
 
-                        <% if (aspnetforum.Utils.User.CurrentUserID != 0 && Page is aspnetforum.AdminForumPage)
+                        <% if (User.CurrentUserID != 0 && Page is AdminForumPage)
                            { %>
                         <!-- admin menu -->
                         <div class="topheader" style="margin-bottom: 10px">
@@ -226,7 +228,7 @@
         });
 
         window.fbAsyncInit = function () {
-            FB.init({ appId: '<%= aspnetforum.Utils.Settings.FacebookAppID %>', status: true, cookie: true, xfbml: true, oauth: true });
+            FB.init({ appId: '<%= Settings.FacebookAppID %>', status: true, cookie: true, xfbml: true, oauth: true });
         };
         (function () {
             var e = document.createElement('script'); e.async = true;

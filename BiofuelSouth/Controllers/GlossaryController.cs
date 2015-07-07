@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web.Mvc;
 using BiofuelSouth.Models;
@@ -57,7 +58,7 @@ namespace BiofuelSouth.Controllers
 
                 return RedirectToAction("Index"); 
             }
-            catch (System.Data.SqlClient.SqlException ex)
+            catch (SqlException ex)
             {
                 
                  return View("Error", (Object) ex.Message);

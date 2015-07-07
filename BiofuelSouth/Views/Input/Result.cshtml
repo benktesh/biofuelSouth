@@ -88,6 +88,7 @@
                 @if (Model.GetStorageLossFactor() > 0)
                 {
                     <tr>
+                        @* ReSharper disable once UnknownCssClass *@
                         <td colspan="@mergeCol" class="mergeCol">Production</td>
                     </tr>
                     <tr>
@@ -182,7 +183,7 @@
 
             <div id="AnnualProductionChart">
                 @{
-                    var urlAnnualProduction = Url.Action("ShowChart", "Chart", new { @cacheKey = ViewBag.cacheKey });
+                    var urlAnnualProduction = Url.Action("ShowChart", "Chart", new {ViewBag.cacheKey });
                     <img src="@urlAnnualProduction" class="img-responsive" alt="Annual Production Chart" />
 
                 }
