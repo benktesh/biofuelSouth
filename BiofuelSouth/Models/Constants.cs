@@ -5,12 +5,14 @@ using System.Linq;
 using System.Web.Mvc;
 using BiofuelSouth.Services;
 using BiofuelSouth.ViewModels;
-using Microsoft.Ajax.Utilities;
 
 namespace BiofuelSouth.Models
 {
     public static partial class Constants
     {
+
+        // Weigth of bale for miscanthus was same as for the weight of switchgrass
+        //http://miscanthus.illinois.edu/symposium/2009/jan_13/10_Ulrich.pdf
         private const Double WeightBaleRound = 650;
         private const Double WeightBaleRect = 2000;
         private const int BalePerStack = 6;
@@ -170,12 +172,13 @@ namespace BiofuelSouth.Models
         /// Currenlty switchgrass is hardcoded.
         /// </summary>
         /// <returns></returns>
-        public static IEnumerable<SelectListItem> GetStorageMethod()
+        public static IEnumerable<SelectListItem> GetStorageMethod(string cropType = "Switchgrass")
         {
-            const string cropType = "Switchgrass";
+            
             switch (cropType)
             {
                 case "Switchgrass":
+                case "Miscanthus":
                     IList<SelectListItem> items = new List<SelectListItem>
                     {   //Round
                         new SelectListItem {Text = @"Round Tarp and Pallet", Value = "1"},
@@ -219,9 +222,8 @@ namespace BiofuelSouth.Models
             }
 
 
-            double baleCount = 0;
+            double baleCount;
             double stack = 0;
-            double partial = 0;
             if (baleType == BaleType.Round)
             {
                 baleCount = estimate / WeightBaleRound;
@@ -251,10 +253,10 @@ namespace BiofuelSouth.Models
         /// <returns></returns>
         public static double GetBaleStorageLandCost(double estimate, BaleType baleType, double annualStorageLandCost)
         {
-            double baleCount = 0;
+            double baleCount;
             // double stack = 0;
             //  double partial = 0;
-            double stroageSqFt = 0;
+            double stroageSqFt;
             if (baleType == BaleType.Round)
             {
                 baleCount = estimate / WeightBaleRound;
@@ -282,7 +284,7 @@ namespace BiofuelSouth.Models
 
             var cropType = (CropType)Enum.Parse(typeof(CropType), input.General.Category);
             var storageMethod =
-                (ViewModels.StorageMethod)Enum.Parse(typeof(StorageMethod), input.Storage.StorageMethod);
+                (StorageMethod)Enum.Parse(typeof(StorageMethod), input.Storage.StorageMethod);
 
             var estimate = input.GetAnnualProductivity();
             var cftVolume = estimate / Convert.ToDouble(ConfigurationManager.AppSettings.Get("WeightToVolumeRatio"));
@@ -383,7 +385,7 @@ namespace BiofuelSouth.Models
             if (input.Storage.CostOption == (int)CostEstimationOption.Default || input.Storage.CostOption == (int)CostEstimationOption.UserSupplyMaterialCost)
             {
 
-                if (CropType.Switchgrass == cropType)
+                if ((CropType.Switchgrass == cropType) || (CropType.Miscanthus == cropType))
                 {
                     switch (storageMethod)
                     {
@@ -501,20 +503,7 @@ namespace BiofuelSouth.Models
 
         }
 
-        /*
-                private static decimal GetRoundBaleStorageCost(Input input)
-                {
-                    return 0;
-                }
-        */
-
-        /*
-                private static decimal GetRectBaleStorageCost(Input input)
-                {
-                    return 0;
-                }
-        */
-
+        
         public static Double GetStorageLoss(int storageMethod, string cropType = null)
         {
             var result = 0.0;
@@ -523,7 +512,7 @@ namespace BiofuelSouth.Models
                 cropType = "SwitchGrass";
             }
 
-            if (cropType.ToLower().Equals("switchgrass"))
+            if (cropType.ToLower().Equals("switchgrass") || cropType.ToLower().Equals("miscanthus"))
             {
 
                 switch (storageMethod)
