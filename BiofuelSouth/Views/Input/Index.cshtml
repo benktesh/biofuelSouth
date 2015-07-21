@@ -81,7 +81,7 @@
 
                 <div class="form-group">
 
-                    @Html.LabelFor(model => model.LandCost, new { @class = "control-label" })
+                    @Html.LabelFor(model => model.General.LandCost, new { @class = "control-label" })
                     <a href="#" rel="popover" class="" data-toggle="popover" tabindex="0" data-trigger="focus"
                        data-placement="left" title="Land Cost" data-content="<p>Annual cost of land expressed as  $/acre/year.</p>">
                             <span class="glyphicon glyphicon-question-sign"></span></a>
@@ -207,9 +207,9 @@
                     $('#county').val(selectedValue).change();
                 },
 
-                error: function (xhr, ajaxOptions, thrownError) {
+                error: function (ajaxOptions, thrownError) {
                     alert('Failed to retrieve county.');
-                    $("#county").prop("disabled", true);
+                    $("#county").attr("disabled", true);
                 }
             });
         }
