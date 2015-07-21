@@ -34,9 +34,10 @@ namespace BiofuelSouth.Models
         [Range(0, 100)]
         [Required]
         [DisplayName(@"Percent Requiring Storage")]
+        
         public Double PercentStored { get; set; } //proportion requiring storage
-         [DisplayName(@"Method")]
-         [Required]
+        [DisplayName(@"Method")]
+        [Required]
         public String StorageMethod { get; set; } //Storage methods.
 
          [Required]

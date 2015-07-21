@@ -186,29 +186,30 @@ namespace BiofuelSouth.Controllers
 
 
 
-        //public ActionResult Financial(Input ip = null)
-        //{
-        //    if (ip == null || ip.County == null)
-        //        return RedirectToAction("Index");
-        //    return RedirectToAction("Index");
-
-        //  //TODO if financial is not needed, redirect to index
-        //}
-
-        public ActionResult Storage(Storage storage=null)
+     public ActionResult Storage(Storage storage=null)
         {
             var ip = (Input)Session["Input"];
             if (ip == null)
             {
                 return RedirectToAction("Index");
             }
+            if (storage == null)
+                storage = new Storage();
+         
             ip.Storage = storage;
             Session["Input"] = ip;
 
             //If storage is not null or storage is skipped then go to financial steps
 
+         if (ip.General.Category == CropType.Poplar.ToString())
+         {
+             storage.RequireStorage = false;
+         }
+
             if (storage != null && (storage.RequireStorage != null)) //This is post back
             {
+               
+                
                 if ((bool) !storage.RequireStorage)
                 {
                     return RedirectToAction("Financial");

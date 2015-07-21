@@ -9,7 +9,7 @@ namespace BiofuelSouth.Models
     {
         Switchgrass,
         Miscanthus,
-        YelloPoplar,
+        Poplar,
         Willow
     }
 

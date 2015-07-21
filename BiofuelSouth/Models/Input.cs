@@ -112,7 +112,15 @@ namespace BiofuelSouth.Models
                     expenditure.AdministrativeCost = Financial.AdministrativeCost;
                     expenditure.LandCost = General.LandCost;
                     expenditure.ProductionCost = GetCostPerAcre();
-                    expenditure.StorageCost = storageCost[i];
+                    if (storageCost != null)
+                    {
+                        expenditure.StorageCost = storageCost[i];
+                    }
+                    else
+                    {
+                        expenditure.StorageCost = 0; 
+                    }
+                    
                     expenditure.TotalExpenses = expenditure.AdministrativeCost + expenditure.LandCost + expenditure.ProductionCost;
                     expenditure.TotalExpenses = expenditure.TotalExpenses * General.ProjectSize + expenditure.StorageCost;
                     expenses.Add(expenditure);

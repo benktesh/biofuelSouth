@@ -281,11 +281,25 @@ namespace BiofuelSouth.Models
 
         public static IList<double> GetStorageCost(Input input)
         {
+            
 
             var cropType = (CropType)Enum.Parse(typeof(CropType), input.General.Category);
-            var storageMethod =
+            //Return null if crop types are not miscanthus or switchgrass
+
+            if (CropType.Switchgrass != cropType || CropType.Miscanthus != cropType)
+            {
+                return null;
+            }
+           
+
+            StorageMethod storageMethod = 0;
+            if (input.Storage.StorageMethod != null)
+            {
+                storageMethod =
                 (StorageMethod)Enum.Parse(typeof(StorageMethod), input.Storage.StorageMethod);
 
+            }
+            
             var estimate = input.GetAnnualProductivity();
             var cftVolume = estimate / Convert.ToDouble(ConfigurationManager.AppSettings.Get("WeightToVolumeRatio"));
             var numberOfBales = -1;

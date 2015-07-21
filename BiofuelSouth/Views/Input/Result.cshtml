@@ -7,6 +7,12 @@
 
 }
 
+<style>
+    .strongrow {
+      
+        font-weight: bold;
+    }
+</style>
 <div class="container">
 
 
@@ -25,11 +31,11 @@
                 {
 
                     <div>
-                        Est. Net Annual Production (tons): @Math.Round(Model.GetAnnualProductionList().Average(), 0).ToString("###,###.##")
+                        Est. Net Annual Production (ton): @Math.Round(Model.GetAnnualProductionList().Average(), 0).ToString("###,###.##")
 
                     </div>
                     <div>
-                        Est. Net Production (tons): @Math.Round(Model.GetAnnualProductionList().Sum(), 0).ToString("###,###")
+                        Est. Net Production (ton): @Math.Round(Model.GetAnnualProductionList().Sum(), 0).ToString("###,###")
 
                     </div>
                     <div>
@@ -52,11 +58,13 @@
                 <h3>Assumptions and Parameters</h3>
                 <div>
                     <div class="text-danger"> TBD state all the defualt values used. <br /> </div>
-                    Biomass Price: @Model.General.BiomassPriceAtFarmGate.ToString("C0") <br />
-                    Project Size: @Model.General.ProjectSize.ToString("##,###") <br />
+                    Biomass Price: @Model.General.BiomassPriceAtFarmGate.ToString("C0") per ton <br />
+                    Project Size: @Model.General.ProjectSize.ToString("##,###") Acre<br />
+                    
+                    Land Cost: @Model.General.LandCost.ToString("C0") per Acre <br /> 
                 </div>
                 <div class="text-danger">
-                    TBD: The current result does not include financials.
+                    
                 </div>
             </p>
             <div id="moreinformation">
@@ -93,7 +101,7 @@
                     </tr>
                     <tr>
                         <td>
-                            Gross Production (tons/year)
+                            Gross Production (ton/year)
                         </td>
                         @foreach (var a in Model.GetGrossProductionList())
                         {
@@ -107,7 +115,7 @@
 
                     <tr>
                         <td>
-                            Storage Loss (tons/year)
+                            Storage Loss (ton/year)
                         </td>
                         @foreach (var a in Model.GetGrossProductionList())
                         {
@@ -119,7 +127,7 @@
 
                 <tr>
                     <td>
-                        Net Production (tons/year)
+                        Net Production (ton/year)
                     </td>
                     @foreach (var a in Model.GetAnnualProductionList())
                     {
@@ -129,7 +137,7 @@
                 <tr>
                     <td colspan="@mergeCol" class="mergeCol">Cost and Revenue</td>
                 </tr>
-                <tr>
+                <tr bgcolor="blue" class="strongrow">
                     <td>
                         Revenue ($)
                     </td>
@@ -140,7 +148,7 @@
                     }
 
                 </tr>
-                <tr>
+                <tr class="strongrow">
                     <td>
                         Cost ($)
                     </td>
@@ -151,18 +159,23 @@
                     }
 
                 </tr>
-                <tr>
-                    <td>
-                        Storage Cost ($)
-                    </td>
-                    @foreach (var a in Model.GetExpenditures())
-                    {
+                @if (Model.Storage.RequireStorage.GetValueOrDefault())
+                {
+                    <tr>
+                        <td>
+                            Storage Cost ($)
+                        </td>
+                        @foreach (var a in Model.GetExpenditures())
+                        {
 
-                        <td>@String.Format("{0:#,###,###}", @Math.Round(a.StorageCost, 0))</td>
-                    }
+                            <td>@String.Format("{0:#,###,###}", @Math.Round(a.StorageCost, 0))</td>
+                        }
 
-                </tr>
-                <tr>
+                    </tr>
+
+                }
+               
+                <tr class="strongrow">
                     <td>
                         CashFlow ($)
                     </td>
