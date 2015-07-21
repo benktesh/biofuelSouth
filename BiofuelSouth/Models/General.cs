@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using BiofuelSouth.Resources;
 
 namespace BiofuelSouth.Models
 {
@@ -13,6 +14,7 @@ namespace BiofuelSouth.Models
         public int Id { get; set; }
 
         [Required]
+        [Tooltip("Name of State")]
         public String State { get; set; }
 
         [Required]

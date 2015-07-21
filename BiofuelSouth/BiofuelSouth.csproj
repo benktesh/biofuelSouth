@@ -775,6 +775,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="Resources\ToolTipAttribute.cs" />
     <Compile Include="Services\DataService.cs" />
     <Compile Include="Services\EmailService.cs" />
     <Compile Include="Settings.cs" />

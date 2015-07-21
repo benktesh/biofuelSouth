@@ -3,6 +3,7 @@ using System.Collections;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
+using BiofuelSouth.Resources;
 
 namespace BiofuelSouth.Models
 {
@@ -34,6 +35,7 @@ namespace BiofuelSouth.Models
         [Range(0, 100)]
         [Required]
         [DisplayName(@"Percent Requiring Storage")]
+        
         
         public Double PercentStored { get; set; } //proportion requiring storage
         [DisplayName(@"Method")]

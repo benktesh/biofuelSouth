@@ -152,7 +152,7 @@ namespace BiofuelSouth.Models
                     {
                         revenue.IncentivePayments = Financial.IncentivePayment;
                     }
-                    revenue.BiomassPrice = production[i]; 
+                    revenue.BiomassPrice = production[i] * GetBiomassPrice(); 
                     revenue.TotalRevenue = (revenue.IncentivePayments + revenue.BiomassPrice)*General.ProjectSize;
 
                     revenues.Add(revenue);
