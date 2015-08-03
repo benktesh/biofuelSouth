@@ -1,13 +1,7 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
-using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
-using System.Runtime.Remoting.Messaging;
-using System.Web.Mvc;
 using BiofuelSouth.Services;
 using log4net;
 
@@ -90,7 +84,7 @@ namespace BiofuelSouth.Models
             return cashFlow;
         }
 
-        public Double GetNPV()
+        public Double GetNpv()
         {
             var cashFlow = GetCashFlow();
             var npv = Microsoft.VisualBasic.Financial.NPV(Financial.InterestRate, ref cashFlow);
@@ -128,7 +122,7 @@ namespace BiofuelSouth.Models
                     //Add interests
                 }
             }
-            catch (Exception exception)
+            catch (Exception)
             {
                 Log.Error("Expenses cannot be calculated");
             }
@@ -158,7 +152,7 @@ namespace BiofuelSouth.Models
                     revenues.Add(revenue);
                 }
             }
-            catch (Exception exception)
+            catch (Exception)
             {
                 Log.Error("Revenues cannot be calcualted");
             }
@@ -217,18 +211,18 @@ namespace BiofuelSouth.Models
             if (Storage != null && Storage.RequireStorage != null && (bool) Storage.RequireStorage)
                 storageLossFactor = GetStorageLossFactor()*Storage.PercentStored/100;
 
-            var StandardAnnualProduction = GetAnnualProductivity()*(1 - storageLossFactor); //Annual Productivity is = Pruduction * (1 - loss factor)
+            var standardAnnualProduction = GetAnnualProductivity()*(1 - storageLossFactor); //Annual Productivity is = Pruduction * (1 - loss factor)
             for (var i = 0; i < General.ProjectLife; i++)
             {
                 if (i < taper.Count)
                 {
                     var taperValue = taper.ElementAt(i);
-                    var delta = StandardAnnualProduction * taperValue;
+                    var delta = standardAnnualProduction * taperValue;
                     annualProductivity.Add(delta);
                 }
                 else
                 {
-                    annualProductivity.Add(StandardAnnualProduction);
+                    annualProductivity.Add(standardAnnualProduction);
                 }
             }
             return annualProductivity;
@@ -240,13 +234,13 @@ namespace BiofuelSouth.Models
         {
             var taper = Constants.GetProductivityTaper("Switchgrass");
             var annualProductivity = new List<double>();
-             double StandardAnnualProduction = GetAnnualProductivity(); //Annual Productivity is = Pruduction * (1 - loss factor)
+             double standardAnnualProduction = GetAnnualProductivity(); //Annual Productivity is = Pruduction * (1 - loss factor)
              for (var i = 0; i < General.ProjectLife; i++)
             {
                 if (i < taper.Count)
                 {
                     var taperValue = taper.ElementAt(i);
-                    var delta = StandardAnnualProduction * taperValue;
+                    var delta = standardAnnualProduction * taperValue;
                     annualProductivity.Add(delta);
                 }
                 else
@@ -263,7 +257,7 @@ namespace BiofuelSouth.Models
             if (Storage == null)
                 return 0;
             var days = Storage.StorageTime;
-            if (days == 0.0)
+            if (Math.Abs(days) < 1)
                 return 0; 
             var storagemethod = Convert.ToInt32(Storage.StorageMethod);
             var storageLossValue = Constants.GetStorageLoss(storagemethod, "Switchgrass");

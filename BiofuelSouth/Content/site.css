@@ -4,27 +4,28 @@
 }
 
 .btn-dss {
-  color: #fff;
-  background-color: #008000;
-  border-color: #357ebd;
+    color: #fff;
+    background-color: #008000;
+    border-color: #357ebd;
 }
 
 /* Set padding to keep content from hitting the edges */
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
-    padding-top: 150px;
+    padding-top: 135px;
 }
 
 .nav {
-    height: 150px;
+    height: 35px;
 }
 
+.input-sm {
+    margin-right: 0;
+}
 #footer {
     background-color: #f8f8f8;
     margin-bottom: -1px;
- 
-
 }
 
 /* Set width on the form input elements since they're 100% wide by default */
@@ -40,162 +41,152 @@ textarea {
 
 
 #logoContainer {
-  height: 60px;
-  text-align: justify;
-  
-  font-size: 0.1px; /* IE 9 & 10 don't like font-size: 0; */
-  min-width: 600px;
+    height: 60px;
+    text-align: justify;
+    font-size: 0.1px; /* IE 9 & 10 don't like font-size: 0; */
+    min-width: 600px;
     z-index: 100;
     margin-bottom: 5px;
+}
 
-}
-#logoContainer div {
+    #logoContainer div {
+        height: 50px;
+        display: inline-block;
+        background: #f8f8f8;
+    }
 
-  height: 50px;
-  display: inline-block;
-  background: #f8f8f8;
+    #logoContainer:after {
+        content: '';
+        width: 100%; /* Ensures there are at least 2 lines of text, so justification works */
+        display: inline-block;
+    }
+
+
+.navbar-inner {
+    background-image: url('../../images/biomassbanner.jpg');
+    height: 80px;
+    width: 1800px;
 }
-#logoContainer:after {
-  content: '';
-  width: 100%; /* Ensures there are at least 2 lines of text, so justification works */
-  display: inline-block;
-}
-   
+
 
 .searchbar {
-    padding: 0; 
+    padding: 0;
 }
 
-         .usdafunding {
-            background-image: url("/images/funding.jpg");
-            background-size:contain;
-            display: block;
-            height: 50px;
-            width: 250px;
-            overflow: hidden;
-            text-indent: 100%;
-            white-space: normal;
-            background-repeat: no-repeat;
-            float: right;
-            margin-bottom: 0;
-          
-        }        
+.usdafunding {
+    background-image: url("/images/funding.jpg");
+    background-size: contain;
+    display: block;
+    height: 50px;
+    width: 250px;
+    overflow: hidden;
+    text-indent: 100%;
+    white-space: normal;
+    background-repeat: no-repeat;
+    float: right;
+    margin-bottom: 0;
+}
 
-        .usda {
-            background-image: url("/images/usdahead.jpg");
-            background-size:contain;
-            display: block;
-            height: 200px;
-            width: 100%;
-            
-            
-            overflow: hidden;
-            text-indent: 100%;
-            white-space: nowrap;
-            background-repeat: no-repeat;
-            float: left;
-            opacity: 1;
-            margin-right:auto;
-        }
+.usda {
+    background-image: url("/images/usdahead.jpg");
+    background-size: contain;
+    display: block;
+    height: 200px;
+    width: 100%;
+    overflow: hidden;
+    text-indent: 100%;
+    white-space: nowrap;
+    background-repeat: no-repeat;
+    float: left;
+    opacity: 1;
+    margin-right: auto;
+}
 
-        .uga {
-            background-image: url("/images/ugahead.jpg");
-            background-size:contain;
-            display: block;
-            height: 50px;
-            width: 100%;
-            overflow: hidden;
-            text-indent: 100%;
-            white-space: nowrap;
-            background-repeat: no-repeat;
-            float: left;
-            opacity: 1;
-            margin-right:auto;
-            margin-top: -1%;
-        }
+.uga {
+    background-image: url("/images/ugahead.jpg");
+    background-size: contain;
+    display: block;
+    height: 50px;
+    width: 100%;
+    overflow: hidden;
+    text-indent: 100%;
+    white-space: nowrap;
+    background-repeat: no-repeat;
+    float: left;
+    opacity: 1;
+    margin-right: auto;
+    margin-top: -1%;
+}
 
-        .au {
-            background-image: url("/images/auhead.jpg");
-            background-size:contain;
-            display: block;
-            height: 50px;
-            width: 100%;
-            overflow: hidden;
-            text-indent: 100%;
-            white-space: nowrap;
-            background-repeat: no-repeat;
-            
-            opacity: 1;
-     
+.au {
+    background-image: url("/images/auhead.jpg");
+    background-size: contain;
+    display: block;
+    height: 50px;
+    width: 100%;
+    overflow: hidden;
+    text-indent: 100%;
+    white-space: nowrap;
+    background-repeat: no-repeat;
+    opacity: 1;
+}
 
-           
-        }
+.ceres {
+    background-image: url("/images/cereshead.jpg");
+    background-size: contain;
+    display: block;
+    height: 50px;
+    width: 90%;
+    overflow: hidden;
+    text-indent: 100%;
+    white-space: nowrap;
+    background-repeat: no-repeat;
+    opacity: 1;
+    margin-top: -5%;
+}
 
-        .ceres {
-            background-image: url("/images/cereshead.jpg");
-            background-size:contain;
-            display: block;
-            height: 50px;
-            width: 90%;
-            overflow: hidden;
-            text-indent: 100%;
-            white-space: nowrap;
-            background-repeat: no-repeat;
-            
-            opacity: 1;
-            margin-top: -5%;
-            
-        }
+.arborgen {
+    background-image: url("/images/arborgenhead.jpg");
+    background-size: contain;
+    display: block;
+    height: 50px;
+    width: 100%;
+    overflow: hidden;
+    text-indent: 100%;
+    white-space: nowrap;
+    background-repeat: no-repeat;
+    float: left;
+    opacity: 1;
+    margin-right: auto;
+}
 
-         .arborgen {
-            background-image: url("/images/arborgenhead.jpg");
-            background-size:contain;
-            display: block;
-            height: 50px;
-            width: 100%;
-            overflow: hidden;
-            text-indent: 100%;
-            white-space: nowrap;
-            background-repeat: no-repeat;
-            float: left;
-            opacity: 1;
-            margin-right:auto;
-   
-        
-        }
+.ncsu {
+    background-image: url("/images/ncsuhead.jpg");
+    background-size: contain;
+    display: block;
+    overflow: hidden;
+    text-indent: 100%;
+    white-space: nowrap;
+    background-repeat: no-repeat;
+    margin-top: 15%;
+}
 
-        .ncsu {
-            background-image: url("/images/ncsuhead.jpg");
-            background-size:contain;
-            display: block;
-    
-               overflow: hidden;
-            text-indent: 100%;
-            white-space: nowrap;
-            background-repeat: no-repeat;
-            margin-top: 15%;
-            
-            
-            
-        }
+.ut {
+    background-image: url("/images/uthead.jpg");
+    background-size: contain;
+    display: block;
+    overflow: hidden;
+    text-indent: 100%;
+    white-space: nowrap;
+    background-repeat: no-repeat;
+    float: left;
+    opacity: 1;
+    margin-top: 5%;
+}
 
-         .ut {
-            background-image: url("/images/uthead.jpg");
-            background-size:contain;
-            display: block;
-            overflow: hidden;
-            text-indent: 100%;
-            white-space: nowrap;
-            background-repeat: no-repeat;
-            float: left;
-            opacity: 1;
-            margin-top: 5%;
-            
-        }
 
-         
-    
- 
+
+
 
 
 .body-content {
@@ -203,76 +194,80 @@ textarea {
 }
 
 
- 
-      
 
 
 
-         .resultTerm {
-             font-weight: bold;
-         }
 
-         .resultDescription {
-             margin-left: 20px;
-         }
 
-         .th {
-   text-align: center;   
+.resultTerm {
+    font-weight: bold;
 }
 
- .text-danger {
+.resultDescription {
+    margin-left: 20px;
+}
+
+.th {
+    text-align: center;
+}
+
+.text-danger {
     font-size: .85em;
 }
 
- .required {
-  color: #b94a48;
-  font-size: .85em;
-  padding-left: 5px;
-  padding-right: 5px;
+.required {
+    color: #b94a48;
+    font-size: .85em;
+    padding-left: 5px;
+    padding-right: 5px;
 }
 
 
-  .profile-img {
-      width: 100%;
-      height: 5%;
-position: relative;
-margin-top:-10px; padding-top: 0;width: 100%;padding-right: 0;padding-left: 0;padding-bottom: 0;
+.profile-img {
+    width: 100%;
+    height: 5%;
+    position: relative;
+    margin-top: -10px;
+    padding-top: 0;
+    width: 100%;
+    padding-right: 0;
+    padding-left: 0;
+    padding-bottom: 0;
 }
 
 .img-responsive {
-width:100%;
-height:auto;
+    width: 100%;
+    height: auto;
 }
 
 .header-image {
-position:relative;
+    position: relative;
 }
 
 .img-on-top {
-position:absolute;
-z-index:100;
-right:1px;
-top: 10px;
-
-width: 15%;
+    position: absolute;
+    z-index: 100;
+    right: 1px;
+    top: 5px;
+    width: 15%;
 }
 
 .post-content {
-     background: none repeat scroll 0 0 #FFFFFF;
+    background: none repeat scroll 0 0 #FFFFFF;
     opacity: 0.3;
-
-    top:20px;
-    left: 100px; 
+    top: 20px;
+    left: 100px;
     color: blue;
     position: absolute;
 }
 
 .google-maps {
-        position: relative;
-        padding-bottom: 75%; /*// This is the aspect ratio*/
-        height: 0;
-        overflow: hidden;
-    }
+    position: relative;
+    padding-bottom: 75%; /*// This is the aspect ratio*/
+    height: 0;
+    overflow: hidden;
+}
+
     .google-maps iframe {
         position: absolute;
         top: 0;
