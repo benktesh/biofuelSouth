@@ -114,7 +114,7 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
                         <li><a href='@Url.Action("Index", "Home")'>Home</a></li>
-                        <li><a href='@Url.Action("Index", "Input")'>DSS</a></li>
+                        <li><a href='@Url.Action("General", "Input")'>DSS</a></li>
                         <li><a href="/map" id="dropDownButton">Maps</a></li>
                         <li><a id="glossaryButton" href='@Url.Action("Search", "Home")'>Glossary</a></li>
 
@@ -154,7 +154,7 @@
                     @*<a href='@Url.Action("Index", "Home")'><img src="~/images/biomassbanner.jpg" alt="Banner Image Logo" class="img-responsive" /></a>*@
 
                    
-                    <form class="navbar-form zero-right-margin" style="float:right; margin-top: 0; margin-bottom:0; margin-left: 0; margin-right: 0; padding:0;" role="search" method="POST" action="@Url.Action("Search", "Home")">
+                    <form class="navbar-form zero-right-margin" style="float:right; margin-top: 3px; margin-bottom:0; margin-left: 0; margin-right: 0; padding:0;" role="search" method="POST" action="@Url.Action("Search", "Home")">
                         <input type="text" class="input-sm" style="margin:2px; padding:0;" size="20" placeholder="Enter a term" name="term" id="term" />
                         <button class="btn btn-default glyphicon glyphicon-search zero-right-margin" id="searchButton " name="searchButton" type="submit"></button>
                     </form>

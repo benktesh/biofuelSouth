@@ -13,7 +13,7 @@
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
-    padding-top: 145px;
+    padding-top: 120px;
 }
 
 .nav {
@@ -23,6 +23,7 @@
 .zero-right-margin {
     margin-right: 0;
 }
+
 #footer {
     background-color: #f8f8f8;
     margin-bottom: -1px;
@@ -44,6 +45,10 @@ textarea {
     height: 60px;
     text-align: justify;
     font-size: 0.1px; /* IE 9 & 10 don't like font-size: 0; */
+    -moz-min-width: 600px;
+    -ms-min-width: 600px;
+    -o-min-width: 600px;
+    -webkit-min-width: 600px;
     min-width: 600px;
     z-index: 100;
     margin-bottom: 5px;
@@ -63,9 +68,9 @@ textarea {
 
 
 .navbar-inner {
-    background-image: url('../../images/biomassbanner.jpg');
+    background-image: url('../images/biomassbanner.jpg');
+    background-repeat: -x;
     height: 80px;
-    width: 1800px;
 }
 
 
@@ -274,4 +279,9 @@ textarea {
         left: 0;
         width: 100% !important;
         height: 100% !important;
+    }
+
+
+     .strongrow {
+        font-weight: bold;
     }
