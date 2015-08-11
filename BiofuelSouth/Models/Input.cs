@@ -67,7 +67,7 @@ namespace BiofuelSouth.Models
         public double[] GetCashFlow()
         {
             var duration = General.ProjectLife;
-            var cashFlow = new double[duration];
+            var cashFlow = new double[duration.GetValueOrDefault()];
 
             //for each year
             //estimate expesese
@@ -104,7 +104,7 @@ namespace BiofuelSouth.Models
                     var expenditure = new Expenditure();
                     expenditure.Year = i;
                     expenditure.AdministrativeCost = Financial.AdministrativeCost;
-                    expenditure.LandCost = General.LandCost;
+                    expenditure.LandCost = General.LandCost.GetValueOrDefault();
                     expenditure.ProductionCost = GetCostPerAcre();
                     if (storageCost != null)
                     {
@@ -116,7 +116,8 @@ namespace BiofuelSouth.Models
                     }
                     
                     expenditure.TotalExpenses = expenditure.AdministrativeCost + expenditure.LandCost + expenditure.ProductionCost;
-                    expenditure.TotalExpenses = expenditure.TotalExpenses * General.ProjectSize + expenditure.StorageCost;
+                    expenditure.TotalExpenses = expenditure.TotalExpenses * General.ProjectSize.GetValueOrDefault() + expenditure.StorageCost
+                        + Financial.LoanAmount*(Financial.EquityLoanInterestRate/100);
                     expenses.Add(expenditure);
 
                     //Add interests
@@ -128,6 +129,8 @@ namespace BiofuelSouth.Models
             }
             return expenses;
         }
+
+      
 
         public IList<Revenue> GetRevenues()
         {
@@ -144,10 +147,10 @@ namespace BiofuelSouth.Models
                     //if the current year is less than the years of incenptive payments, then there is a incentivepayment revenue;
                     if (i < Financial.YearsOfIncentivePayment)
                     {
-                        revenue.IncentivePayments = Financial.IncentivePayment;
+                        revenue.IncentivePayments = Financial.IncentivePayment * General.ProjectSize.GetValueOrDefault();
                     }
                     revenue.BiomassPrice = production[i] * GetBiomassPrice(); 
-                    revenue.TotalRevenue = (revenue.IncentivePayments + revenue.BiomassPrice)*General.ProjectSize;
+                    revenue.TotalRevenue = (revenue.IncentivePayments + revenue.BiomassPrice);
 
                     revenues.Add(revenue);
                 }
@@ -165,7 +168,7 @@ namespace BiofuelSouth.Models
         /// <returns></returns>
         public double GetAnnualProductivity()
         {
-            return DataService.GetProductivityPerAcreForCropByGeoId(General.Category, General.County)*General.ProjectSize;  
+            return DataService.GetProductivityPerAcreForCropByGeoId(General.Category, General.County)*General.ProjectSize.GetValueOrDefault();  
         }
 
         public double GetCostPerAcre()
@@ -175,7 +178,7 @@ namespace BiofuelSouth.Models
 
         public double GetAnnualCost()
         {
-            return (DataService.GetCostPerAcreForCropByGeoId(General.Category, General.County) + General.LandCost) * General.ProjectSize;  
+            return (DataService.GetCostPerAcreForCropByGeoId(General.Category, General.County) + General.LandCost.GetValueOrDefault()) * General.ProjectSize.GetValueOrDefault();  
         }
 
         public double GetBiomassPrice()
@@ -184,7 +187,7 @@ namespace BiofuelSouth.Models
             {
                 General.BiomassPriceAtFarmGate = Constants.GetFarmGatePrice(General.Category);
             }
-            return General.BiomassPriceAtFarmGate;
+            return General.BiomassPriceAtFarmGate.GetValueOrDefault();
         }
 
         public double GetAnnualRevenue()
@@ -193,7 +196,7 @@ namespace BiofuelSouth.Models
             {
                 General.BiomassPriceAtFarmGate = Constants.GetFarmGatePrice(General.Category); 
             }
-            return GetAnnualProductivity() * General.BiomassPriceAtFarmGate;  
+            return GetAnnualProductivity() * General.BiomassPriceAtFarmGate.GetValueOrDefault();  
         }
         /// <summary>
         /// The method returns an array of annual productivity

@@ -16,17 +16,17 @@ namespace BiofuelSouth.Models
         public Cashflow(Input input)
         {
             
-            Duration = input.General.ProjectLife;
+            Duration = input.General.ProjectLife.GetValueOrDefault();
 
             _expenditure.AdministrativeCost = input.Financial.AdministrativeCost;
-            _expenditure.LandCost = input.General.LandCost;
+            _expenditure.LandCost = input.General.LandCost.GetValueOrDefault();
             _expenditure.PlantingAndEstablishmentCost = 0;  
             _expenditure.StandMaintenanceCost = 0;
             _expenditure.HarvestCost = 0;
             _expenditure.StorageCost = 0; 
             _expenditure.TransportationCost = 0;
 
-            _revenue.BiomassPrice = input.General.BiomassPriceAtFarmGate;
+            _revenue.BiomassPrice = input.General.BiomassPriceAtFarmGate.GetValueOrDefault();
             _revenue.IncentivePayments = input.Financial.IncentivePayment;
 
 
@@ -68,6 +68,8 @@ namespace BiofuelSouth.Models
 
         //if used, do not use admin, plantation, and maintenance cost
         public double ProductionCost { get; set; }
+
+        public double InterestCost { get; set; }
 
         public double AdministrativeCost { get; set; }
         public double PlantingAndEstablishmentCost { get; set; }

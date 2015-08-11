@@ -1,18 +1,16 @@
 ﻿using System;
 using System.Linq;
-using System.Reflection;
 using System.Web.Mvc;
 using BiofuelSouth.Models;
-using log4net;
-using Microsoft.Ajax.Utilities;
 
 namespace BiofuelSouth.Controllers
 {
     public class InputController : Controller
     {
-        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+        //private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
 
+/*
         private General GetGeneralTest()
         {
             var g = new General();
@@ -26,7 +24,9 @@ namespace BiofuelSouth.Controllers
             return g;
 
         }
+*/
 
+/*
         private Storage GetStorageTest()
         {
             var g = new Storage();
@@ -37,7 +37,9 @@ namespace BiofuelSouth.Controllers
             return g;
 
         }
+*/
 
+/*
         private Financial GetFinancialTest()
         {
             var f = new Financial();
@@ -54,11 +56,25 @@ namespace BiofuelSouth.Controllers
             return f; 
 
         }
+*/
 
+        [HttpGet]
+        public ActionResult Index()
+        {
+            Input ip = new Input();
+            Session["Input"] = ip;
+            PopulateHelpers(ip);
+            return RedirectToAction("General");
 
-        //[HttpPost]
+        }
+
+        [HttpPost]
         public ActionResult Index(Input ip= null)
         {
+            if (!ModelState.IsValid)
+            {
+                return RedirectToAction("Index");
+            }
 
             //TODO - Testing financials -
             /*
@@ -87,7 +103,7 @@ namespace BiofuelSouth.Controllers
 
             PopulateHelpers(ip);
 
-
+            ModelState.Clear();
             return RedirectToAction("General");
             //create a session variable
 
@@ -109,6 +125,7 @@ namespace BiofuelSouth.Controllers
             //}
                 
             //TODO Do some thing here
+/*
             if (ip.Storage != null && ip.Storage.StorageTime > 0)
             {
                 ip.Storage.RequireStorage = true;
@@ -126,6 +143,7 @@ namespace BiofuelSouth.Controllers
                 
             }
             return View(ip);
+*/
         }
 
         
@@ -136,42 +154,42 @@ namespace BiofuelSouth.Controllers
             {
                 ModelState.Clear();
                 ip = new Input();
-            }
-            
-            PopulateHelpers(ip);
-
-            if (general == null || general.State == null)
-            {
-
-                ModelState.Clear();
-                general = new General();
-            
-                    
-                ip.General = general;
-                Session["Input"] = ip;
+                ip.General = new General();
                 PopulateHelpers(ip);
+                Session["Input"] = ip; 
                 return View(ip.General);
             }
-            else
+
+            if (!ModelState.IsValid)
             {
-                if (!ModelState.IsValid)
-                {
-                    return View();
-                }
-                else
-                {
-                    ModelState.Clear();
-                    ip = (Input)Session["Input"];
-                    ip.General = general;
-                    Session["Input"] = ip;
-                    return RedirectToAction("Storage");
-                }
+                ip.General = general;
+                PopulateHelpers(ip);
+                Session["Input"] = ip; 
+                return View(ip.General);
             }
+           
+            //if (general == null || general.State == null)
+            //{
+
+            //    general = new General();
+            //    ip.General = general;
+            //    Session["Input"] = ip;
+            //    PopulateHelpers(ip);
+            //    return View(ip.General);
+            //}
+
+           
+            ModelState.Clear();
+            ip = (Input)Session["Input"];
+            ip.General = general;
+            Session["Input"] = ip;
+            return RedirectToAction("Storage");
         }
 
       
         
 
+/*
         private void FillViewBag()
         {
             
@@ -183,6 +201,7 @@ namespace BiofuelSouth.Controllers
             ViewBag.StorageMethod = Constants.GetStorageMethod();
 
         }
+*/
 
 
 
@@ -206,7 +225,7 @@ namespace BiofuelSouth.Controllers
              storage.RequireStorage = false;
          }
 
-            if (storage != null && (storage.RequireStorage != null)) //This is post back
+            if (storage.RequireStorage != null) //This is post back
             {
                
                 
@@ -256,9 +275,15 @@ namespace BiofuelSouth.Controllers
 
             if (financial != null && (financial.RequireFinance != null)) //This is post back
             {
-                if (((bool)!financial.RequireFinance) || ((bool)financial.RequireFinance && ModelState.IsValid))
+                if (!financial.RequireFinance.GetValueOrDefault())
                 {
+                    ip.Financial = new Financial();
+                    financial = new Financial(); 
+                }
 
+                if ((!financial.RequireFinance.GetValueOrDefault()) || (financial.RequireFinance.GetValueOrDefault() && ModelState.IsValid))
+                {
+                    
                     PostSubmit(ip);
                     TempData["input"] = ip;
                     TempData.Keep();
@@ -303,12 +328,9 @@ namespace BiofuelSouth.Controllers
             ViewBag.cacheKey = cacheKey;
             var cc = new ChartController();
             cc.GenerateChart(cacheKey, ip.GetAnnualProductionList().ToArray(), "Annual Production");
-
-
             cacheKey = Guid.NewGuid().ToString();
             ViewBag.cacheKey1 = cacheKey;
             cc.GenerateCostRevenueChart(cacheKey, ip, "Cost and Revenue");
-           
 
         }
 

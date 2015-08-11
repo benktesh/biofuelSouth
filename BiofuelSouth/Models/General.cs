@@ -26,21 +26,31 @@ namespace BiofuelSouth.Models
         public string Category { get; set; }
 
         [DisplayName(@"Size of Project (acre)")]
-        public double ProjectSize { get; set; }
+        [Required]
+        public double? ProjectSize { get; set; }
 
         [DisplayName(@"Years (From plantation to harvest)")]
         [Range(1,100)]
-        public int ProjectLife { get; set; }  //years
+        [Required]
+        public int? ProjectLife { get; set; }  //years
 
         [DisplayName(@"Farm Gate Price ($/dry ton)")]
-        public double BiomassPriceAtFarmGate { get; set; } //$/ton
+        [Required]
+        public double? BiomassPriceAtFarmGate { get; set; } //$/ton
 
 
         [DisplayName(@"Cost of land ($/acre/year)")]
-        public double LandCost { get; set; } //$/acre/year
+        [Required]
+        
+        public double? LandCost { get; set; } //$/acre/year
 
         public IEnumerable<SelectListItem> CountyList { get; set;  }
-        public IEnumerable<SelectListItem> StateList { get; set; } 
+        public IEnumerable<SelectListItem> StateList { get; set; }
 
+        public General()
+        {
+            ProjectLife = 10;
+            LandCost = 80;
+        }
     }
 }

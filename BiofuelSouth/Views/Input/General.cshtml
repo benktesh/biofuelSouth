@@ -1,5 +1,4 @@
 ﻿@using BiofuelSouth.Models
-@using BiofuelSouth.Resources
 @model General
 
 @using (Html.BeginForm())
@@ -27,15 +26,6 @@
                     <a href="#" rel="popover" class="" data-toggle="popover" tabindex="0" data-trigger="focus"
                        data-placement="center" title="County" data-content="<p>County of production.</p>">
                         <span class="glyphicon glyphicon-question-sign"></span></a>
-
-                    @{
-                        var state = "";
-                        if (Model != null && Model.State != null)
-                        {
-                            state = Model.State;
-                        }
-
-                    }
                     @Html.DropDownListFor(model => model.County, Model.CountyList, "Select County", new { @class = "form-control", name = "county", id = "county" })
                     @Html.ValidationMessageFor(model => model.County, "", new { @class = "text-danger" })
                 </div>
@@ -124,7 +114,9 @@
 
 
 @section MyScripts {
-
+   
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/jqueryval")
     <script type="text/javascript">
         //http://www.codeproject.com/Articles/730953/Cascading-Dropdown-List-With-MVC-LINQ-to-SQL-and-A
         $(document).ready(function () {
@@ -179,7 +171,6 @@
                 $('#county').attr('disabled', true);
                 $('#county'), attr('selectedIndex', 0);
                 state = "ALL";
-
             }
             $.ajax({
                 url: "/data/CountiesForState",
@@ -197,7 +188,7 @@
                     $('#county').val(selectedValue).change();
                 },
 
-                error: function (xhr, ajaxOptions, thrownError) {
+                error: function () {
                     alert('Failed to retrieve county.');
                     $("#county").prop("disabled", true);
                 }

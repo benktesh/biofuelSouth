@@ -345,7 +345,7 @@ namespace BiofuelSouth.Models
             //81 per 6 bales
             //27 per bale
 
-            decimal annualStorageCost = -9;
+            decimal annualStorageCost;
 
 
             double baleCount = estimate / WeightBaleRound;
@@ -379,7 +379,7 @@ namespace BiofuelSouth.Models
 
             if (input.General != null)
             {
-                annualizedStorageCost = new double[input.General.ProjectLife];
+                annualizedStorageCost = new double[input.General.ProjectLife.GetValueOrDefault()];
             }
             else
                 annualizedStorageCost = new double[10];
@@ -408,7 +408,6 @@ namespace BiofuelSouth.Models
                                 oneTimeCost = palletCostRound + tarpCostRound;
                                 requiresTarp = true;
                                 requiresPallet = true;
-                                requiresGravel = false;
                                 break;
                             }
 
@@ -465,7 +464,7 @@ namespace BiofuelSouth.Models
                             baleType = BaleType.Rectangular;
                             break;
                     }
-                    annualizedStorageCost = GetAnnualStorageCost(oneTimeCost, input.General.ProjectLife);
+                    annualizedStorageCost = GetAnnualStorageCost(oneTimeCost, input.General.ProjectLife.GetValueOrDefault());
 
                     //Add land and labor cost
                     var annualProduction = input.GetAnnualProductionList();

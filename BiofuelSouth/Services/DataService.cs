@@ -70,7 +70,7 @@ namespace BiofuelSouth.Services
             {
 
                 var productivity = db.Productivities.Where(p => p.GeoId == intGeoid && p.CropType.Equals(category)).Select(p => p.Yield).FirstOrDefault();
-                return productivity;
+                return productivity*0.446; //MG/ha -> t/acre
             }
         }
 
@@ -80,7 +80,7 @@ namespace BiofuelSouth.Services
             using (var db = new DatabaseContext())
             {
                 var productivity = db.Productivities.Where(p => p.GeoId == intGeoid && p.CropType.Equals(category)).Select(p => p.Cost).FirstOrDefault();
-                return productivity;
+                return productivity/2.471 ; //conver to $/ha -> $/acre
             }
         }
 
@@ -146,7 +146,6 @@ namespace BiofuelSouth.Services
                     return db.Glossaries.Select(p => p.Term).ToList();
                 }
 
-                
                 key = key.Replace("-", null);
 
                 var result = new List<String>();
