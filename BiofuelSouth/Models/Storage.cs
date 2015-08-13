@@ -59,10 +59,10 @@ namespace BiofuelSouth.Models
          [Display(Name = @"Cost of Gravel ($/sq.ft)")]
          public Decimal GravelCost { get; set; }
 
-         [Display(Name = @"Labor cost ($/sq.ft)")]
+         [Display(Name = @"Labor cost ($/hour)")]
          public double? LaborCost { get; set; }
 
-         [Display(Name = @"Land cost ($/sq.ft")]
+         [Display(Name = @"Land cost ($/ac/year")]
          public double? LandCost { get; set; }
 
          [Display(Name = @"Enter estimated storage cost in $/ton/year")]

@@ -27,7 +27,7 @@
 
                     <div>
                         Est. Annual Production:
-                        @Math.Round(Model.GetAnnualProductionList().Average(), 0).ToString("###,###.##") ton/acre
+                        @Math.Round(Model.GetAnnualProductionList().Average(), 0).ToString("###,###.##") ton
 
                     </div>
                     <div>
@@ -57,7 +57,7 @@
             <p>
                 <h3>Assumptions and Parameters</h3>
 
-                <div class="text-danger"> TBD state all the defualt values used. <br /> </div>
+                <div class="text-danger"> TBD state all the default values used. <br /> </div>
                 <div>
                     Biomass Price: @Model.General.BiomassPriceAtFarmGate.GetValueOrDefault().ToString("C0") per ton
                 </div>
