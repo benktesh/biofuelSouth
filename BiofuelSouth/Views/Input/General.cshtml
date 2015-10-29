@@ -119,6 +119,12 @@
 @Scripts.Render("~/bundles/jqueryval")
     <script type="text/javascript">
         //http://www.codeproject.com/Articles/730953/Cascading-Dropdown-List-With-MVC-LINQ-to-SQL-and-A
+
+
+
+
+
+
         $(document).ready(function () {
 
 
@@ -136,6 +142,26 @@
                 populateCounty();
             }
 
+
+            $('#Category').change(function () {
+  
+                var selectedCrop = $('#Category').val();
+                if (selectedCrop === 'Switchgrass') {
+                    $('#BiomassPriceAtFarmGate').val('65');
+                }
+                else if (selectedCrop === 'Miscanthus') {
+                    $('#BiomassPriceAtFarmGate').val('45');
+                }
+                else if (selectedCrop === 'Poplar') {
+                    $('#BiomassPriceAtFarmGate').val('30');
+                }
+                else if (selectedCrop === 'Willow') {
+                    $('#BiomassPriceAtFarmGate').val('30');
+                }
+                else if (selectedCrop === 'Pine') {
+                    $('#BiomassPriceAtFarmGate').val('30');
+                }
+            });
 
             $('#state').change(function () {
                 // alert('yes');
@@ -194,6 +220,8 @@
                 }
             });
         }
+
+        
     </script>
 
 
