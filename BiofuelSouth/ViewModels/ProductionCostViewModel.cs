@@ -1,8 +1,9 @@
-﻿ using System;
- using System.Collections.Generic;
- using System.ComponentModel.DataAnnotations;
- using System.Diagnostics.Eventing.Reader;
- using BiofuelSouth.Enum;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.Eventing.Reader;
+using System.Linq;
+using BiofuelSouth.Enum;
 
 namespace BiofuelSouth.Models
 {
@@ -11,7 +12,7 @@ namespace BiofuelSouth.Models
     {
         public ProductionCostType ProductionCostType { get; set; }
 
-        public bool IsRequired { get; set;  }
+        public bool IsRequired { get; set; }
 
         [Display(Name = @"Production Cost ($/acre)")]
         public decimal? Amount { get; set; }
@@ -22,7 +23,7 @@ namespace BiofuelSouth.Models
         public ProductionCost()
         {
             Unit = "$/acre";
-       } 
+        }
 
     }
     public class ProductionCostViewModel
@@ -46,7 +47,7 @@ namespace BiofuelSouth.Models
                     return false;
                 }
                 return true;
-            } 
+            }
         }
 
         public List<ProductionCost> ProductionCosts { get; set; }
@@ -54,7 +55,25 @@ namespace BiofuelSouth.Models
         public ProductionCostViewModel()
         {
             CropType = CropType.Switchgrass;
-            ProductionCosts = new List<ProductionCost>(); 
+            ProductionCosts = new List<ProductionCost>();
+        }
+
+        public decimal TotalProductionCost
+        {
+            get
+            {
+                if (UseCustom && ProductionCosts.Any())
+                {
+
+                    decimal amount = ProductionCosts.Aggregate<ProductionCost, decimal>(0,
+                        (current, c) => current + c.Amount.GetValueOrDefault());
+                    return amount;
+                }
+
+                return Amount;
+
+            }
+
         }
     }
 }
