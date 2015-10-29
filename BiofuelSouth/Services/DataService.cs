@@ -4,6 +4,7 @@ using System.Data.Entity;
 using System.Data.Entity.Migrations;
 using System.Globalization;
 using System.Linq;
+using BiofuelSouth.Enum;
 using BiofuelSouth.Models;
 using BiofuelSouth.Models.Entity;
 using BiofuelSouth.ViewModels;
@@ -63,23 +64,33 @@ namespace BiofuelSouth.Services
 
 
 
-        public static double GetProductivityPerAcreForCropByGeoId(String category, String geoId)
+        public static double GetProductivityPerAcreForCropByGeoId(CropType cropType, String geoId)
         {
             var intGeoid = Convert.ToInt32(geoId);
             using (var db = new DatabaseContext())
             {
+                if (cropType == CropType.Pine)
+                {
+                    return 12.9; //Dickens (2011)
+                }
 
-                var productivity = db.Productivities.Where(p => p.GeoId == intGeoid && p.CropType.Equals(category)).Select(p => p.Yield).FirstOrDefault();
+                var productivity = db.Productivities.Where(p => p.GeoId == intGeoid && p.CropType == cropType).Select(p => p.Yield).FirstOrDefault();
                 return productivity*0.446; //MG/ha -> t/acre
             }
         }
 
-        public static double GetCostPerAcreForCropByGeoId(String category, String geoId)
+        public static double GetCostPerAcreForCropByGeoId(CropType cropType, String geoId)
         {
+            
             var intGeoid = Convert.ToInt32(geoId);
             using (var db = new DatabaseContext())
             {
-                var productivity = db.Productivities.Where(p => p.GeoId == intGeoid && p.CropType.Equals(category)).Select(p => p.Cost).FirstOrDefault();
+                if (cropType == CropType.Pine || cropType == CropType.Willow || cropType == CropType.Poplar)
+                {
+                    return 30; //Dickens (2011)
+                }
+
+                var productivity = db.Productivities.Where(p => p.GeoId == intGeoid && p.CropType == cropType).Select(p => p.Cost).FirstOrDefault();
                 return productivity/2.471 ; //conver to $/ha -> $/acre
             }
         }

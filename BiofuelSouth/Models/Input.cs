@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection;
 using BiofuelSouth.Services;
 using log4net;
+using LogManager = log4net.LogManager;
 
 namespace BiofuelSouth.Models
 {
@@ -18,41 +19,17 @@ namespace BiofuelSouth.Models
             General = new General();
             Storage = new Storage();
             Financial = new Financial();
+            ProductionCost = new ProductionCostViewModel();
         }
 
-        //[Required]
-        //public String State { get; set; }
-
-        //[Required]
-        //[DisplayName(@"Name of County")]
-        //public string County { get; set; }
-
-
-        //[Required]
-        //[DisplayName(@"Biofuel Category")]
-        //public String Category { get; set; }
-
-        //[DisplayName(@"Size of Project (acre)")]
-        //public double ProjectSize {get; set;}
-
-        //[DisplayName(@"Years (From plantation to harvest")]
-        //public int ProjectLife {get; set;}  //years
-
-        //[DisplayName(@"Farm Gate Price ($/dry ton)")]
-        //public double BiomassPriceAtFarmGate { get; set; } //$/ton
-
-
-        //[DisplayName(@"Cost of land ($/acre/year)")]
-        //public double LandCost { get; set; } //$/acre/year
-
-        //public bool? ModelStorage { get; set; }
-        //public bool? ModelFinancial { get; set; }
-
+      
         public General General { get; set; }
 
         public Storage Storage { get; set; }
 
         public Financial Financial { get; set; }
+
+        public ProductionCostViewModel ProductionCost { get; set; }
 
         //TODO Move everythign to resultmanagement
 

@@ -3,6 +3,7 @@
 <%@ Import Namespace="aspnetforum.Resources" %>
 <%@ Import  Namespace="aspnetforum.Utils" %>
 
+
 <asp:repeater id="rptMessagesList" runat="server" EnableViewState="False" OnItemDataBound="rptMessagesList_ItemDataBound">
 	<HeaderTemplate>
 		<table width="100%" cellpadding="19" class="roundedborder postlist">

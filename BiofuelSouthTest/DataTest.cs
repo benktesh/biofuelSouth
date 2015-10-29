@@ -1,7 +1,6 @@
 ﻿using System.Linq;
 using BiofuelSouth.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using BiofuelSouth.Models;
 
 
 namespace BiofuelSouthTest

@@ -3,26 +3,11 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using BiofuelSouth.Enum;
 using BiofuelSouth.Models;
 
 namespace BiofuelSouth.ViewModels
 {
-    public enum StorageMethod
-    {
-        RoundTarpPallet,
-        RoundTarpGravel,
-        RoundTarpBareGroud,
-        RoundPalletNoTarp,
-        RoundGravelNoTarp,
-        RoundBareGroundNoTarp,
-        RectangularTarpPallet,
-        RectangularTarpGravel,
-        RectangularNoTarp,
-        RectangularGravelNoTarp
-    }
-
-    
-   
     public class StorageCostModel
     {
         public StorageMethod storageMethod { get; set; }

@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using BiofuelSouth.Enum;
 using BiofuelSouth.Resources;
 
 namespace BiofuelSouth.Models
@@ -23,7 +24,7 @@ namespace BiofuelSouth.Models
 
         [Required]
         [DisplayName(@"Biofuel Category")]
-        public string Category { get; set; }
+        public CropType Category { get; set; }
 
         [DisplayName(@"Size of Project (acre)")]
         [Required]

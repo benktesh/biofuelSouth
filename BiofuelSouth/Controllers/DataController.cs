@@ -4,12 +4,15 @@ using System.Reflection;
 using System.Web.Mvc;
 using BiofuelSouth.Models;
 using log4net;
+using LogManager = log4net.LogManager;
 
 namespace BiofuelSouth.Controllers
 {
     public class DataController :Controller
     {
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+
+      
 
         public ActionResult  CountiesForState(string state = "ALL")
         {

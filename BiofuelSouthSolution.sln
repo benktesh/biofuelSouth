@@ -1,11 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.30723.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BiofuelSouth", "BiofuelSouth\BiofuelSouth.csproj", "{F91033F6-2EB8-4FC2-8611-E977C308FE6F}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BiofuelSouthTest", "BiofuelSouthTest\BiofuelSouthTest.csproj", "{DD505AA0-8CF0-457E-A4F8-D38EEB12FFFC}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{D3AF9295-6CDF-4BB9-A9A1-A25DED632CB6}"
 	ProjectSection(SolutionItems) = preProject
@@ -17,17 +15,20 @@ EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
 		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{F91033F6-2EB8-4FC2-8611-E977C308FE6F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F91033F6-2EB8-4FC2-8611-E977C308FE6F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F91033F6-2EB8-4FC2-8611-E977C308FE6F}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{F91033F6-2EB8-4FC2-8611-E977C308FE6F}.Debug|x64.ActiveCfg = Debug|x64
+		{F91033F6-2EB8-4FC2-8611-E977C308FE6F}.Debug|x64.Build.0 = Debug|x64
 		{F91033F6-2EB8-4FC2-8611-E977C308FE6F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F91033F6-2EB8-4FC2-8611-E977C308FE6F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DD505AA0-8CF0-457E-A4F8-D38EEB12FFFC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DD505AA0-8CF0-457E-A4F8-D38EEB12FFFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DD505AA0-8CF0-457E-A4F8-D38EEB12FFFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DD505AA0-8CF0-457E-A4F8-D38EEB12FFFC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F91033F6-2EB8-4FC2-8611-E977C308FE6F}.Release|x64.ActiveCfg = Release|x64
+		{F91033F6-2EB8-4FC2-8611-E977C308FE6F}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

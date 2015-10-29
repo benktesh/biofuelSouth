@@ -12,7 +12,7 @@ using BiofuelSouth.Models;
 
 namespace BiofuelSouth.Controllers
 {
-    [RoutePrefix("api/productivity")]
+    [System.Web.Mvc.RoutePrefix("api/productivity")]
     public class ProductivityController : ApiController
 
     {
@@ -129,7 +129,7 @@ namespace BiofuelSouth.Controllers
         */
 
         // GET api/Productivity/5
-        [Route("{id:int}")]
+        [System.Web.Http.Route("{id:int}")]
         [ResponseType(typeof(Productivity))]
         public IEnumerable<Productivity> GetProductivity(int id)
             //Have not found async implemenation solution yet.

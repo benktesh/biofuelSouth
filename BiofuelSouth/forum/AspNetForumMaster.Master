@@ -3,8 +3,9 @@
 <%@ Import Namespace="aspnetforum" %>
 <%@ Import Namespace="aspnetforum.Resources" %>
 <%@ Import Namespace="aspnetforum.Utils" %>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<%--<html xmlns="http://www.w3.org/1999/xhtml">--%>
 <head runat="server">
     <title></title>
     <link href="aspnetforum.css" rel="Stylesheet" type="text/css" />
@@ -90,7 +91,7 @@
                                     <li><a href="search.aspx"><%= various.Search %></a></li>
                                     <li id="usersLink" runat="server" enableviewstate="false" class="mobilehidden"><a href="users.aspx"><%= various.Users %></a></li>
                                     <li id="adminLink" runat="server" enableviewstate="false" class="mobilehidden"><a href="admin.aspx"><%= various.Administrator %></a></li>
-                                    <% if (User.IsCurrentUserModerator())
+                                    <% if (aspnetforum.Utils.User.IsCurrentUserModerator())
                                        { %>
                                     <li class="mobilehidden"><a href="unapprovedposts.aspx">Moderator <%= ModeratorCount > 0 ? "(" + ModeratorCount + ")" : "" %> </a></li>
                                     <% } %>
@@ -161,7 +162,7 @@
                             </div>
                         </div>
 
-                        <% if (User.CurrentUserID != 0 && Page is AdminForumPage)
+                        <% if (aspnetforum.Utils.User.CurrentUserID != 0 && Page is AdminForumPage)
                            { %>
                         <!-- admin menu -->
                         <div class="topheader" style="margin-bottom: 10px">

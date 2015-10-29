@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using System.Web.Mvc;
+using BiofuelSouth.Enum;
 using BiofuelSouth.Services;
 using BiofuelSouth.ViewModels;
 
@@ -37,7 +38,8 @@ namespace BiofuelSouth.Models
                 new SelectListItem{Text = @"Switchgrass", Value = "Switchgrass"},
                 new SelectListItem{Text = @"Miscanthus", Value = "Miscanthus"},
                 new SelectListItem{Text = @"Poplar", Value = "Poplar"},
-                new SelectListItem{Text = @"Willow", Value = "Willow"}
+                new SelectListItem{Text = @"Willow", Value = "Willow"},
+                new SelectListItem {Text = @"Pine", Value = "Pine" }
             };
             return items;
         }
@@ -80,18 +82,20 @@ namespace BiofuelSouth.Models
         }
 
         //Method to return an average price of farm gate price for a crop type
-        public static double GetFarmGatePrice(String cropType)
+        public static double GetFarmGatePrice(CropType cropType)
         {
             switch (cropType)
             {
-                case "Switchgrass":
+                case CropType.Switchgrass:
                     return 65.0; // http://www.uky.edu/Ag/CCD/introsheets/switchgrass.pdf
-                case "Miscanthus":
+                case CropType.Miscanthus:
                     return 45.0; //http://pubs.cas.psu.edu/FreePubs/PDFs/ee0081.pdf
-                case "Poplar":
-                    return 50.0;
-                case "Willow":
-                    return 50.0;
+                case CropType.Poplar:
+                    return 30.0;
+                case CropType.Willow:
+                    return 30.0;
+                case CropType.Pine:
+                    return 30.0; 
                 default:
                     return -999.99;
 
@@ -223,7 +227,6 @@ namespace BiofuelSouth.Models
 
 
             double baleCount;
-            double stack = 0;
             if (baleType == BaleType.Round)
             {
                 baleCount = estimate / WeightBaleRound;
@@ -281,9 +284,9 @@ namespace BiofuelSouth.Models
 
         public static IList<double> GetStorageCost(Input input)
         {
-            
 
-            var cropType = (CropType)Enum.Parse(typeof(CropType), input.General.Category);
+
+            var cropType = input.General.Category; 
             //Return null if crop types are not miscanthus or switchgrass
 
             if (CropType.Switchgrass != cropType || CropType.Miscanthus != cropType)
@@ -292,21 +295,14 @@ namespace BiofuelSouth.Models
             }
            
 
-            StorageMethod storageMethod = 0;
-            if (input.Storage.StorageMethod != null)
-            {
-                storageMethod =
-                (StorageMethod)Enum.Parse(typeof(StorageMethod), input.Storage.StorageMethod);
+            StorageMethod storageMethod = 
+                    input.Storage.StorageMethod;
 
-            }
-            
             var estimate = input.GetAnnualProductivity();
             var cftVolume = estimate / Convert.ToDouble(ConfigurationManager.AppSettings.Get("WeightToVolumeRatio"));
-            var numberOfBales = -1;
 
-            bool requiresGravel = false;
-            bool requiresPallet = false;
-            bool requiresTarp = false;
+            var requiresPallet = false;
+            var requiresTarp = false;
             BaleType baleType = BaleType.Round;
 
 
@@ -415,52 +411,44 @@ namespace BiofuelSouth.Models
                             oneTimeCost = gravelCostRound + tarpCostRound;
                             requiresTarp = true;
                             requiresPallet = true;
-                            requiresGravel = false;
                             break;
                         case StorageMethod.RoundTarpBareGroud:
                             oneTimeCost = tarpCostRound;
                             requiresTarp = true;
                             requiresPallet = false;
-                            requiresGravel = false;
                             break;
                         case StorageMethod.RoundPalletNoTarp:
                             oneTimeCost = palletCostRound;
                             requiresTarp = false;
                             requiresPallet = true;
-                            requiresGravel = false;
                             break;
                         case StorageMethod.RoundGravelNoTarp:
                             oneTimeCost = gravelCostRound;
                             requiresTarp = false;
                             requiresPallet = false;
-                            requiresGravel = true;
                             break;
                         case StorageMethod.RoundBareGroundNoTarp:
                             oneTimeCost = gravelCostRound;
                             requiresTarp = false;
                             requiresPallet = false;
-                            requiresGravel = false;
 
                             break;
                         case StorageMethod.RectangularTarpPallet:
                             oneTimeCost = palletCostRect + tarpCostRect;
                             requiresTarp = true;
                             requiresPallet = true;
-                            requiresGravel = false;
                             baleType = BaleType.Rectangular;
                             break;
                         case StorageMethod.RectangularNoTarp:
                             oneTimeCost = 0;
                             requiresTarp = false;
                             requiresPallet = false;
-                            requiresGravel = false;
                             baleType = BaleType.Rectangular;
                             break;
                         case StorageMethod.RectangularGravelNoTarp:
                             oneTimeCost = gravelCostRect;
                             requiresTarp = false;
                             requiresPallet = false;
-                            requiresGravel = true;
                             baleType = BaleType.Rectangular;
                             break;
                     }

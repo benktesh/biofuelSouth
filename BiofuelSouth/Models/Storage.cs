@@ -3,6 +3,7 @@ using System.Collections;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
+using BiofuelSouth.Enum;
 using BiofuelSouth.Resources;
 
 namespace BiofuelSouth.Models
@@ -40,7 +41,7 @@ namespace BiofuelSouth.Models
         public Double PercentStored { get; set; } //proportion requiring storage
         [DisplayName(@"Method")]
         [Required]
-        public String StorageMethod { get; set; } //Storage methods.
+        public StorageMethod StorageMethod { get; set; } //Storage methods.
 
          [Required]
         [DisplayName(@"Select Cost Parameters")]

@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Drawing;
 using System.Linq;
 using System.Web.Mvc;
-using System.Web.UI.DataVisualization.Charting;
 using BiofuelSouth.Models;
-using Microsoft.Ajax.Utilities;
 using Chart = System.Web.Helpers.Chart;
 
 
