@@ -185,9 +185,6 @@ namespace BiofuelSouth.Controllers
 
             ModelState.Clear();
             return View(storage);
-
-
-
         }
 
         [HttpGet]
@@ -203,7 +200,10 @@ namespace BiofuelSouth.Controllers
             {
                 var input =  (Input)Session["Input"];
                 input.ProductionCost = model; 
-                return RedirectToAction("Storage");
+
+                if(input.General.Category == CropType.Miscanthus || input.General.Category == CropType.Switchgrass)
+                    return RedirectToAction("Storage");
+                return RedirectToAction("Financial");
             }
             PopulateHelpers(model);
             return View("_productionCost", model);
