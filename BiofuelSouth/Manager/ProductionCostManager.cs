@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using BiofuelSouth.Enum;
 using BiofuelSouth.Models;
 using BiofuelSouth.Services;
@@ -125,10 +122,10 @@ namespace BiofuelSouth.Manager
 
         private ProductionCostViewModel GetMiscanthusProductionCost(ProductionCostViewModel productionCostViewModel)
         {
-            productionCostViewModel.Amount = (decimal)(DataService.GetCostPerAcreForCropByGeoId(CropType.Miscanthus,
+            productionCostViewModel.Amount = (decimal) Math.Round((DataService.GetCostPerAcreForCropByGeoId(CropType.Miscanthus,
                 productionCostViewModel.County) * DataService.GetProductivityPerAcreForCropByGeoId(
                                                             CropType.Miscanthus,
-                                                            productionCostViewModel.County));
+                                                            productionCostViewModel.County)),0);
 
             productionCostViewModel.ProductionCosts.Add(new ProductionCost
             {
@@ -171,11 +168,11 @@ namespace BiofuelSouth.Manager
 
         private ProductionCostViewModel GetSwitchgrassProductionCost(ProductionCostViewModel productionCostViewModel)
         {
-            productionCostViewModel.Amount = (decimal)(
+            productionCostViewModel.Amount = (decimal) Math.Round((
                 DataService.GetCostPerAcreForCropByGeoId(CropType.Switchgrass,
                     productionCostViewModel.County) *
                 DataService.GetProductivityPerAcreForCropByGeoId(CropType.Switchgrass,
-                    productionCostViewModel.County));
+                    productionCostViewModel.County)),0);
 
             productionCostViewModel.ProductionCosts.Add(new ProductionCost
             {

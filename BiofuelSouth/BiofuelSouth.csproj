@@ -63,9 +63,9 @@
     </PublishDatabaseSettings>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Antlr3.Runtime">
-      <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Antlr3.Runtime, Version=3.4.1.9004, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
@@ -150,7 +150,7 @@
       <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="System.Web.Optimization, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+    <Reference Include="System.Web.Optimization">
       <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
       <Private>True</Private>
     </Reference>
@@ -226,8 +226,6 @@
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\custom.css" />
-    <Content Include="css\bootstrap.css" />
-    <Content Include="css\bootstrap.min.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="forum\!!!README-asp-net-forum-software-guide.htm" />
     <Content Include="forum\!!folders.gif" />
@@ -601,9 +599,8 @@
     </Content>
     <Content Include="bin\BiofuelSouth.dll.config" />
     <Content Include="bin\BiofuelSouth.dll.lastcodeanalysissucceeded" />
-    <None Include="Properties\PublishProfiles\biofuelsouth %282%29.pubxml" />
-    <None Include="Properties\PublishProfiles\biofuelsouth %283%29.pubxml" />
-    <None Include="Properties\PublishProfiles\biofuelsouth.pubxml" />
+    <None Include="Properties\PublishProfiles\biofuelsouth - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\biofuelsouth - Web Deploy.pubxml" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -625,7 +622,7 @@
     <Content Include="Scripts\knockout-3.1.0.debug.js" />
     <Content Include="Scripts\knockout-3.1.0.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
-    <Content Include="Scripts\response.js" />
+    <Content Include="Scripts\respond.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>

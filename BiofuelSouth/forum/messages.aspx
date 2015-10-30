@@ -1,5 +1,4 @@
 <%@ Page language="c#" Codebehind="messages.aspx.cs" AutoEventWireup="True" Inherits="aspnetforum.messages" MasterPageFile="AspNetForumMaster.Master" %>
-<%@ Import Namespace="aspnetforum.Resources" %>
 <%@ Import Namespace="aspnetforum.Utils" %>
 
 <asp:Content ContentPlaceHolderID="ContentPlaceHolderHEAD" ID="AspNetForumHead" runat="server">

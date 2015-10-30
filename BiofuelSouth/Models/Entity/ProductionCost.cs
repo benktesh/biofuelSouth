@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace BiofuelSouth.Models.Entity
+﻿namespace BiofuelSouth.Models.Entity
 {
     public class ProductionCost
     {

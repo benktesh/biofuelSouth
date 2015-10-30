@@ -12,13 +12,12 @@
 
             <div class="col-md-8 col-lg-8">
                 <div class="col-md-6 form-group">
-                    @Html.LabelFor(model => model.State, new { @class = "control-label" })<span class="required">Required</span>
-                    <a href="#" rel="popover" class="" data-toggle="popover" tabindex="0" data-trigger="focus"
-                       data-placement="center" title="State" data-content="<p>State of the production of biofuel crop.</p>">
+                    @Html.LabelFor(model => model.State, new {@class = "control-label"})<span class="required">Required</span>
+                    <a class="" data-content="<p>State of the production of biofuel crop.</p>" data-placement="center" data-toggle="popover" data-trigger="focus" href="#" rel="popover" tabindex="0" title="State">
                         <span class="glyphicon glyphicon-question-sign"></span>
                     </a>
-                    @Html.DropDownListFor(model => model.State, Model.StateList, "Select State", new { @class = "form-control", id = "state" })
-                    @Html.ValidationMessageFor(model => model.State, "", new { @class = "text-danger" })
+                    @Html.DropDownListFor(model => model.State, Model.StateList, "Select State", new {@class = "form-control", id = "state"})
+                    @Html.ValidationMessageFor(model => model.State, "", new {@class = "text-danger"})
                 </div>
 
                 <div class="col-md-6 form-group">
@@ -120,23 +119,9 @@
     <script type="text/javascript">
         //http://www.codeproject.com/Articles/730953/Cascading-Dropdown-List-With-MVC-LINQ-to-SQL-and-A
 
-
-
-
-
-
         $(document).ready(function () {
 
-
-            //State and county selection logic:
-            /*
-
-            If state selected is null, then disable the country.
-            */
-
-            //  $("#county").attr("disabled", true);
-
-            if ($('#state').val() != "") {
+            if ($('#state').val() !== "") {
                 $("#county").attr("disabled", false);
                 $('#county').attr('selectedIndex', 0);
                 populateCounty();
@@ -165,16 +150,15 @@
 
             $('#state').change(function () {
                 // alert('yes');
-                if ($('#state').val() == "") {
+                if ($('#state').val() === "") {
                    
                     //    alert('Please select state first');
                     $('#county').attr('selectedIndex', 0);
-
                 }
 
             });
             $("#state").change(function () {
-                if ($("#state").val() != "Select County") {
+                if ($("#state").val() !== "Select County") {
                     populateCounty();
                 }
 
@@ -193,7 +177,7 @@
             var ddlCounty = $("#county");
             var state = $("#state").val();
          
-            if (state == "") {
+            if (state === "") {
                 $('#county').attr('disabled', true);
                 $('#county'), attr('selectedIndex', 0);
                 state = "ALL";
@@ -220,11 +204,7 @@
                 }
             });
         }
-
-        
     </script>
-
-
 
 }
 

@@ -5,7 +5,6 @@ using System.Linq;
 using System.Web.Mvc;
 using BiofuelSouth.Enum;
 using BiofuelSouth.Services;
-using BiofuelSouth.ViewModels;
 
 namespace BiofuelSouth.Models
 {
