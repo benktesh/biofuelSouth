@@ -31,11 +31,20 @@
         @if (Model.CanCustomize)
         {
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-8">
                 <div class="form-group">
-                    <div class="checkbox">
-                        @Html.LabelFor(model => model.UseCustom, htmlAttributes: new {@class = "control-label"})
-                        @Html.CheckBoxFor(model => model.UseCustom)
+                    <div class="">
+                       
+                       @Html.CheckBoxFor(model => model.UseCustom)
+                        @Html.LabelFor(model => model.UseCustom, new { @class = "control-label" })
+
+
+                        <a href="#" rel="popover" class="" data-toggle="popover" tabindex="0" data-trigger="focus"
+                           data-placement="center" title="Cost" data-content="<p>Production cost can be customized by 
+                        entering costs for various components.</p>">
+                            <span class="glyphicon glyphicon-question-sign"></span>
+                        </a>
+                        
                         @Html.ValidationMessageFor(model => model.UseCustom, "", new {@class = "text-danger"})
 
                     </div>

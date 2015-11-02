@@ -34,7 +34,7 @@ namespace BiofuelSouth.Models
         [Display(Name = @"Production Cost ($/acre)")]
         public Decimal Amount { get; set; }
 
-        [Display(Name = @"Customize the Production Cost")]
+        [Display(Name = @"Customize Cost")]
         public bool UseCustom { get; set; }
 
         public bool CanCustomize
