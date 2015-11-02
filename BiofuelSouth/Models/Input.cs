@@ -31,15 +31,7 @@ namespace BiofuelSouth.Models
 
         public ProductionCostViewModel ProductionCost { get; set; }
 
-        //TODO Move everythign to resultmanagement
-
-        /*
-         * 
-         * Cashflow model:
-         * Row[0]
-         * Row[1]
-         * Row[2]
-         * */
+      
 
         public double[] GetCashFlow()
         {
@@ -150,11 +142,20 @@ namespace BiofuelSouth.Models
 
         public double GetCostPerAcre()
         {
+            if (ProductionCost.TotalProductionCost > 0)
+                return (double) ProductionCost.TotalProductionCost;
             return (DataService.GetCostPerAcreForCropByGeoId(General.Category, General.County));
         }
 
+        /// <summary>
+        /// Provides Total Annual Cost i.e.[ per acre cost of production + land cost ] * project size
+        /// </summary>
+        /// <returns></returns>
         public double GetAnnualCost()
         {
+            if (ProductionCost.TotalProductionCost > 0)
+                return ((double)(ProductionCost.TotalProductionCost) + General.LandCost.GetValueOrDefault()) * 
+                    General.ProjectSize.GetValueOrDefault();
             return (DataService.GetCostPerAcreForCropByGeoId(General.Category, General.County) + General.LandCost.GetValueOrDefault()) * General.ProjectSize.GetValueOrDefault();  
         }
 
