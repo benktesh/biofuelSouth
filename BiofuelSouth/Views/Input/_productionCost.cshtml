@@ -3,95 +3,115 @@
 
 @using (Html.BeginForm())
 {
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     @Html.AntiForgeryToken()
-
-    <div class="form-horizontal">
-        <h4>Production Costs</h4>
-        <hr/>
-        @Html.ValidationSummary(true, "", new {@class = "text-danger"})
-
-        <div id="defaultProductionCost">
-
-            <div class="row">
-                <!--- This is default cost-->
-                <div class="col-md-6">
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.Amount, new {@class = "control-label"})
-                        <a href="#" rel="popover" class="" data-toggle="popover" tabindex="0" data-trigger="focus"
-                           data-placement="center" title="Cost" data-content="<p>Cost of production from planting to final harvest for one rotation. Includes costs for site preparation, plantation, intermediate treatments to harvesting.</p>">
-                        <span class="glyphicon glyphicon-question-sign"></span>
-                    </a>
-                        @Html.TextBoxFor(model => model.Amount, new {@class = "form-control"})
-                        @Html.ValidationMessageFor(model => model.Amount)
+    <div class="row">
+        <div class="col-md-8">
+            <div class="form-horizontal">
+                <div class="row">
+                    <div class="col-md-6 form-group">
+                        <h4>Production Costs</h4>
                     </div>
                 </div>
-            </div>
-        </div>
-
-        @if (Model.CanCustomize)
-        {
-        <div class="row">
-            <div class="col-md-8">
-                <div class="form-group">
-                    <div class="">
-                       
-                       @Html.CheckBoxFor(model => model.UseCustom)
-                        @Html.LabelFor(model => model.UseCustom, new { @class = "control-label" })
-
-
-                        <a href="#" rel="popover" class="" data-toggle="popover" tabindex="0" data-trigger="focus"
-                           data-placement="center" title="Cost" data-content="<p>Production cost can be customized by 
-                        entering costs for various components.</p>">
-                            <span class="glyphicon glyphicon-question-sign"></span>
-                        </a>
-                        
-                        @Html.ValidationMessageFor(model => model.UseCustom, "", new {@class = "text-danger"})
-
+                <div id="defaultProductionCost">
+                    <div class="row">
+                        <!--- This is default cost-->
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Amount, new {@class = "control-label"})
+                                <a href="#" rel="popover" class="" data-toggle="popover" tabindex="0" data-trigger="focus"
+                                   data-placement="center" title="Cost" data-content="<p>Cost of production from planting to final harvest for one rotation. Includes costs for site preparation, plantation, intermediate treatments to harvesting.</p>">
+                                    <span class="glyphicon glyphicon-question-sign"></span>
+                                </a>
+                                @Html.TextBoxFor(model => model.Amount, new {@class = "form-control"})
+                                @Html.ValidationMessageFor(model => model.Amount)
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
-        <div class="row">
 
-            <div id="CustomProductionCost" style="display: none;">
-                @if (Model.ProductionCosts.Any())
+                @if (Model.CanCustomize)
                 {
-                    <table class="table table-striped">
-                        <thead>
-                        <tr>
-                            <th>Production Cost Type</th>
-                            <th>@Html.LabelFor(m => m.Amount)</th>
-                        </tr>
-                        </thead>
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <div class="">
 
-                        <tbody>
+                                    @Html.CheckBoxFor(model => model.UseCustom)
+                                    @Html.LabelFor(model => model.UseCustom, new {@class = "control-label"})
 
-                        @foreach (var c in Model.ProductionCosts)
-                        {
-                            <tr>
-                                <td>@c.ProductionCostType</td>
 
-                                <td>@Html.TextBoxFor(m => c.Amount)</td>
-                            </tr>
+                                    <a href="#" rel="popover" class="" data-toggle="popover" tabindex="0" data-trigger="focus"
+                                       data-placement="center" title="Cost" data-content="<p>Production cost can be customized by
+                        entering costs for various components.</p>">
+                                        <span class="glyphicon glyphicon-question-sign"></span>
+                                    </a>
 
-                        }
-                        </tbody>
-                    </table>
+                                    @Html.ValidationMessageFor(model => model.UseCustom, "", new {@class = "text-danger"})
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+
+                        <div id="CustomProductionCost" style="display: none;">
+                            @if (Model.ProductionCosts.Any())
+                            {
+                                <table class="table table-striped">
+                                    <thead>
+                                    <tr>
+                                        <th>Production Cost Type</th>
+                                        <th>@Html.LabelFor(m => m.Amount)</th>
+                                    </tr>
+                                    </thead>
+
+                                    <tbody>
+
+                                    @foreach (var c in Model.ProductionCosts)
+                                    {
+                                        <tr>
+                                            <td>@c.ProductionCostType</td>
+
+                                            <td>@Html.TextBoxFor(m => c.Amount)</td>
+                                        </tr>
+
+                                    }
+                                    </tbody>
+                                </table>
+                            }
+
+                        </div>
+
+                    </div>
                 }
-
-            </div>
-
-        </div>
-        }
-        <div class="row">
-            <div class="form-group">
-                <div class="col-md-6">
-                    <input type="submit" value="Submit" class="btn btn-default" />
+                <div class="row">
+                    <div class="form-group">
+                        <div class="col-md-6">
+                            <input type="submit" value="Submit" class="btn btn-default"/>
+                        </div>
+                    </div>
                 </div>
             </div>
+        </div>
+        <div class="col-md-4 for-group">
+            <h4>Instructions</h4>
+            <ul>
+                <li>Default values for production cost include costs from planting to final harvest for one rotation for an acre </li>
+                <li>If crop is planted and harvested in 3 years, then production cost includes costs for the three years for an acre.</li>
+              
+                @if (Model.CanCustomize)
+                {
+                    <li>For certain crops, the production cost can be customized by checking 'Customize Cost'.</li>
+                    <li>Individual costs for site preparation planting, thinning, harvesting and custodial management can be entered during customization step.</li>
+                    <li>Cost must be for one rotation. For example, if multiple thinning is conducted, then add up all the thinning costs for one roation. </li>
+                    <li>Any cost not captured can be added to 'Custodial Management' cost. Example of such costs include cost of pesticide, cost of prescribed burning, cost of fertilization etc.</li>
+                }
+                
+                <li>Locally available accurate values can be used instead of defaults in all cases.</li>
+            </ul>
         </div>
     </div>
-
 }
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
