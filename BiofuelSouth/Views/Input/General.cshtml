@@ -1,6 +1,9 @@
 ﻿@using BiofuelSouth.Models
 @model General
 
+    @{
+        ViewBag.Title = "BDSS: Biofuel Decision Support System";
+    }
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
