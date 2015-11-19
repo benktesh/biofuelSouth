@@ -1,124 +1,120 @@
 ﻿@using BiofuelSouth.Models
 @model General
 
-    @{
-        ViewBag.Title = "BDSS: Biofuel Decision Support System";
-    }
+@{
+    ViewBag.Title = "BDSS: Biofuel Decision Support System";
+}
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    <div class="form-horizontal">
-        <div class="row">
-            <h4>DSS Input</h4>
-            @*@Html.Partial("_DSSMenu")*@
 
-            <div class="col-md-8 col-lg-8">
-                <div class="col-md-6 form-group">
-                    @Html.LabelFor(model => model.State, new {@class = "control-label"})<span class="required">Required</span>
-                    <a class="" data-content="<p>State of the production of biofuel crop.</p>" data-placement="center" data-toggle="popover" data-trigger="focus" href="#" rel="popover" tabindex="0" title="State">
-                        <span class="glyphicon glyphicon-question-sign"></span>
-                    </a>
-                    @Html.DropDownListFor(model => model.State, Model.StateList, "Select State", new {@class = "form-control", id = "state"})
-                    @Html.ValidationMessageFor(model => model.State, "", new {@class = "text-danger"})
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="form-horizontal">
+                <div class="row">
+                    <div class="col-md-6 form-group">
+                        <h4>DSS Input</h4>
+                    </div>
                 </div>
+                <div class="row">
+                    <div class="col-md-6 form-group">
 
-                <div class="col-md-6 form-group">
-                    @Html.LabelFor(model => model.County, new { @class = "control-label" })<span class="required">Required</span>
-                    <a href="#" rel="popover" class="" data-toggle="popover" tabindex="0" data-trigger="focus"
-                       data-placement="center" title="County" data-content="<p>County of production.</p>">
-                        <span class="glyphicon glyphicon-question-sign"></span></a>
-                    @Html.DropDownListFor(model => model.County, Model.CountyList, "Select County", new { @class = "form-control", name = "county", id = "county" })
-                    @Html.ValidationMessageFor(model => model.County, "", new { @class = "text-danger" })
-                </div>
-
-
-
-
-
-                <div class="col-md-6 form-group">
-                    @Html.LabelFor(model => model.Category, new { @class = "control-label" })<span class="required">Required</span>
-                    <a href="#" rel="popover" class="" data-toggle="popover" tabindex="0" data-trigger="focus"
-                       data-placement="center" title="Crop category" data-content="<p>Select the type of biofuel crops. If you do not find a crop in the list, please contact us.</p>">
+                        @Html.LabelFor(model => model.State, new {@class = "control-label"})<span class="required">Required</span>
+                        <a class="" data-content="<p>State of the production of biofuel crop.</p>" data-placement="center" data-toggle="popover" data-trigger="focus" href="#" rel="popover" tabindex="0" title="State">
+                            <span class="glyphicon glyphicon-question-sign"></span>
+                        </a>
+                        @Html.DropDownListFor(model => model.State, Model.StateList, "Select State", new {@class = "form-control", id = "state"})
+                        @Html.ValidationMessageFor(model => model.State, "", new {@class = "text-danger"})
+                    </div>
+                    <div class="col-md-6 form-group">
+                        @Html.LabelFor(model => model.County, new {@class = "control-label"})<span class="required">Required</span>
+                        <a href="#" rel="popover" class="" data-toggle="popover" tabindex="0" data-trigger="focus"
+                           data-placement="center" title="County" data-content="<p>County of production.</p>">
                             <span class="glyphicon glyphicon-question-sign"></span></a>
-                    @Html.DropDownListFor(model => model.Category, Constants.GetCategory(), "Select Crop Category", new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.Category, "", new { @class = "text-danger" })
-                </div>
-
-                <div class="col-md-6 form-group">
+                        @Html.DropDownListFor(model => model.County, Model.CountyList, "Select County", new {@class = "form-control", name = "county", id = "county"})
+                        @Html.ValidationMessageFor(model => model.County, "", new {@class = "text-danger"})
+                    </div>
 
 
-                    @Html.LabelFor(model => model.ProjectSize, new { @class = "control-label" })<span class="required">Required</span>
-                    <a href="#" rel="popover" class="" data-toggle="popover" tabindex="0" data-trigger="focus"
-                       data-placement="center" title="Help" data-content="<p>Enter size of the potential project. The area must be in acres. If you do not yet know the size, use any reasonable acre.</p>">
+                    <div class="col-md-6 form-group">
+                        @Html.LabelFor(model => model.Category, new {@class = "control-label"})<span class="required">Required</span>
+                        <a href="#" rel="popover" class="" data-toggle="popover" tabindex="0" data-trigger="focus"
+                           data-placement="center" title="Crop category" data-content="<p>Select the type of biofuel crops. If you do not find a crop in the list, please contact us.</p>">
                             <span class="glyphicon glyphicon-question-sign"></span></a>
-                    @Html.TextBoxFor(model => model.ProjectSize, new { type = "number", min = "1", @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.ProjectSize, "", new { @class = "text-danger" })
-                </div>
+                        @Html.DropDownListFor(model => model.Category, Constants.GetCategory(), "Select Crop Category", new {@class = "form-control"})
+                        @Html.ValidationMessageFor(model => model.Category, "", new {@class = "text-danger"})
+                    </div>
+                    <div class="col-md-6 form-group">
 
-                <div class="col-md-6 form-group">
-
-                    @Html.LabelFor(model => model.ProjectLife, new { @class = "control-label" })<span class="required">Required</span>
-                    <a href="#" rel="popover" class="" data-toggle="popover" tabindex="0" data-trigger="focus"
-                       data-placement="left" title="Project Duration" data-content="<p>Duration of project expressed as total number of years
+                        @Html.LabelFor(model => model.ProjectSize, new {@class = "control-label"})<span class="required">Required</span>
+                        <a href="#" rel="popover" class="" data-toggle="popover" tabindex="0" data-trigger="focus"
+                           data-placement="center" title="Help" data-content="<p>Enter size of the potential project. The area must be in acres. If you do not yet know the size, use any reasonable acre.</p>">
+                            <span class="glyphicon glyphicon-question-sign"></span></a>
+                        @Html.TextBoxFor(model => model.ProjectSize, new {type = "number", min = "1", @class = "form-control"})
+                        @Html.ValidationMessageFor(model => model.ProjectSize, "", new {@class = "text-danger"})
+                    </div>
+                    <div class="col-md-6 form-group">
+                        @Html.LabelFor(model => model.ProjectLife, new {@class = "control-label"})<span class="required">Required</span>
+                        <a href="#" rel="popover" class="" data-toggle="popover" tabindex="0" data-trigger="focus"
+                           data-placement="left" title="Project Duration" data-content="<p>Duration of project expressed as total number of years
                     between first plantation and final harvest with intermediate harvests in between. The number must a whole number i.e. 1 or 2 or 10 for a year.</p>">
                             <span class="glyphicon glyphicon-question-sign"></span></a>
-                    @Html.TextBoxFor(model => model.ProjectLife, new { @class = "form-control", type = "number", min = "1" })
-                    @Html.ValidationMessageFor(model => model.ProjectLife, "", new { @class = "text-danger" })
-                </div>
-
-                <div class="col-md-6 form-group">
-
-                    @Html.LabelFor(model => model.BiomassPriceAtFarmGate, new { @class = "control-label" })
-                    <a href="#" rel="popover" class="" data-toggle="popover" tabindex="0" data-trigger="focus"
-                       data-placement="left" title="Farm Gate Price" data-content="<p>The price of the product at which it is sold by the farm (the farm gate price).</p>">
+                        @Html.TextBoxFor(model => model.ProjectLife, new {@class = "form-control", type = "number", min = "1"})
+                        @Html.ValidationMessageFor(model => model.ProjectLife, "", new {@class = "text-danger"})
+                    </div>
+                    <div class="col-md-6 form-group">
+                        @Html.LabelFor(model => model.BiomassPriceAtFarmGate, new {@class = "control-label"})
+                        <a href="#" rel="popover" class="" data-toggle="popover" tabindex="0" data-trigger="focus"
+                           data-placement="left" title="Farm Gate Price" data-content="<p>The price of the product at which it is sold by the farm (the farm gate price).</p>">
                             <span class="glyphicon glyphicon-question-sign"></span></a>
-                    @Html.EditorFor(model => model.BiomassPriceAtFarmGate, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.BiomassPriceAtFarmGate, "", new { @class = "text-danger" })
-                </div>
-
-                <div class="col-md-6 form-group">
-
-                    @Html.LabelFor(model => model.LandCost, new { @class = "control-label" })<span class="required">Required</span>
-                    <a href="#" rel="popover" class="" data-toggle="popover" tabindex="0" data-trigger="focus"
-                       data-placement="left" title="Land Cost" data-content="<p>Annual cost of land expressed as  $/acre/year.</p>">
+                        @Html.EditorFor(model => model.BiomassPriceAtFarmGate, new {htmlAttributes = new {@class = "form-control"}})
+                        @Html.ValidationMessageFor(model => model.BiomassPriceAtFarmGate, "", new {@class = "text-danger"})
+                    </div>
+                    <div class="col-md-6 form-group">
+                        @Html.LabelFor(model => model.LandCost, new {@class = "control-label"})<span class="required">Required</span>
+                        <a href="#" rel="popover" class="" data-toggle="popover" tabindex="0" data-trigger="focus"
+                           data-placement="left" title="Land Cost" data-content="<p>Annual cost of land expressed as  $/acre/year.</p>">
                             <span class="glyphicon glyphicon-question-sign"></span></a>
-                    @Html.EditorFor(model => model.LandCost, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.LandCost, "", new { @class = "text-danger" })
+                        @Html.EditorFor(model => model.LandCost, new {htmlAttributes = new {@class = "form-control"}})
+                        @Html.ValidationMessageFor(model => model.LandCost, "", new {@class = "text-danger"})
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 form-group pull-left">
+                        <button type="reset" value="Reset" class="btn btn-default">Reset</button>&nbsp;&nbsp;
+                        <input type="submit" value="Submit" class="btn btn-default"/>
+                    </div>
                 </div>
             </div>
+        </div>
 
-
-
-            <!-- Output-->
-
-            <div class="col-md-4 form-group">
-                <h3>Instructions</h3>
-                <ul>
-                    <li>Use the Buttons to Select Model Components</li>
-                    <li>In each page, enter modify parameter in the left. Click submit to update the results.</li>
-                    <li>The buttons will be enabled/disabled based on applicability.</li>
-                    <li>The buttons may be disabled until applicable parameters are completed (TO BE COMPLETED).</li>
-                </ul>
-            </div>
-
+        <!-- Output-->
+        <div class="col-md-4">
+            <h4>Instructions</h4>
+            <ul>
+                <li>This step is the first step to run Biofuel Decision Support Step</li>
+                <li>Start with selecting a State. If one State is not listed, the BDSS is not available for that state. </li>
+                <li>
+                    Upson State selection, available counties will be populated in the County. If one or more County is not avaialble, the BDSS currently does not have enough information for that county.
+                    In such cases, selecting a neighboring county is suggested.
+                </li>
+                <li>Select crop category. BDSS can support a number of crops and new crop categories are added as need arises.</li>
+                <li>Years from plantation to harvest and farm gate price are provided with some default values. </li>
+                <li>The default values for years from plantation to harvest and farm gate price change if the crop type is changed. </li>
+                <li>The default values for cost of land is provided for reference.</li>
+                <li>Locally available accurate values can be used instead of defaults in all cases.</li>
+            </ul>
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-8 col-lg-8 form-group pull-right">
-            <button type="reset" value="Reset" class="btn btn-default">Reset</button>&nbsp;&nbsp;
-            <input type="submit" value="Submit" class="btn btn-default" />
 
-        </div>
-    </div>
 }
 
-
-
 @section MyScripts {
-   
-@Scripts.Render("~/bundles/jquery")
-@Scripts.Render("~/bundles/jqueryval")
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
     <script type="text/javascript">
         //http://www.codeproject.com/Articles/730953/Cascading-Dropdown-List-With-MVC-LINQ-to-SQL-and-A
 
@@ -132,7 +128,7 @@
 
 
             $('#Category').change(function () {
-  
+
                 var selectedCrop = $('#Category').val();
                 if (selectedCrop === 'Switchgrass') {
                     $('#BiomassPriceAtFarmGate').val('65');
@@ -154,7 +150,7 @@
             $('#state').change(function () {
                 // alert('yes');
                 if ($('#state').val() === "") {
-                   
+
                     //    alert('Please select state first');
                     $('#county').attr('selectedIndex', 0);
                 }
@@ -173,13 +169,13 @@
 
         function populateCounty() {
             var selectedValue = $('#county').val();
-        
+
 
             // return false;
             //alert("getting couty");
             var ddlCounty = $("#county");
             var state = $("#state").val();
-         
+
             if (state === "") {
                 $('#county').attr('disabled', true);
                 $('#county'), attr('selectedIndex', 0);
@@ -208,6 +204,4 @@
             });
         }
     </script>
-
 }
-
