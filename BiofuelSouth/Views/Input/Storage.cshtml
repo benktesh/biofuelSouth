@@ -1,4 +1,5 @@
-﻿@using BiofuelSouth.Models
+﻿@using BiofuelSouth.Enum
+@using BiofuelSouth.Models
 @model Storage
 
 @{
@@ -13,14 +14,11 @@
         @*@Html.Partial("_DSSMenu")*@
         <div class="row">
 
-            <div class="container col-md-9">
+            <div class="container col-md-8">
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                @*<div id="hiddenInput" hidden="hidden">
-                @Html.Partial("_inputPartial")
-            </div>*@
 
                 <div class="row">
-                    <div class="col-md-5 form-group">
+                    <div class="col-md-6 form-group">
                         @Html.LabelFor(model => model.RequireStorage, new { @class = "control-label" })
                         <a href="#" rel="popover" class="" data-toggle="popover" tabindex="0" data-trigger="focus"
                            data-placement="center" title="Require Finance" data-content="<p>If the project require
@@ -31,11 +29,14 @@
                         @Html.DropDownListFor(x => x.RequireStorage, Constants.GetYesNo(), "Select", new { @class = "form-control", required = "required" })
                         @Html.ValidationMessageFor(model => model.RequireStorage, "", new { @class = "text-danger" })
                     </div>
+
+                    <div class="col-md-8"></div>
                 </div>
 
                 <div id="storageParameter" hidden="hidden">
                     <div class="row">
-                        <div class="col-md-4">
+
+                        <div class="col-xs-6">
                             <div class="form-group">
 
                                 @Html.LabelFor(model => model.StorageTime, new { @class = "control-label" })<span class="required">Required</span>
@@ -47,7 +48,7 @@
                                 @Html.ValidationMessageFor(model => model.StorageTime, "", new { @class = "text-danger" })
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-xs-6">
                             <div class="form-group">
 
                                 @Html.LabelFor(model => model.PercentStored, new { @class = "control-label" })<span class="required">Required</span>
@@ -61,44 +62,32 @@
                             </div>
                         </div>
 
-                        <div class="col-md-3">
+                        <div class="col-xs-6">
                             <div class="form-group">
 
                                 @Html.LabelFor(model => model.StorageMethod, new { @class = "control-label" })<span class="required">Required</span>
                                 <a href="#" rel="popover" class="" data-toggle="popover" tabindex="0" data-trigger="focus"
                                    data-placement="left" title="Storage Percent" data-content="<p>After-harvest storage methods of switchgrass and other perennial grasses grown for biofuel have a significant effect on the profitability and success of an enterprise. Depending on how it's harvested, feedstock can be stored as round or square dry bales, or as a moist product in bunkers or silo bags.</p>">
-                                <span class="glyphicon glyphicon-question-sign"></span></a>
+                                    <span class="glyphicon glyphicon-question-sign"></span></a>
                                 @Html.DropDownListFor(model => model.StorageMethod, Constants.GetStorageMethod(), "Select Method", new { @class = "form-control" })
                                 @Html.ValidationMessageFor(model => model.StorageMethod, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="col-xs-6">
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.CostOption, new { @class = "control-label" }) <span class="required">Required</span>
+                                @Html.DropDownListFor(m => m.CostOption, EnumHelper.GetSelectList(typeof(CostEstimationOption)), "Select", new { @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.CostOption, "", new { @class = "text-danger" })
                             </div>
                         </div>
                     </div>
 
                     <div class="">
-
-                        @*<div class="col-md-4">
-                            <div class="form-group">
-                                @Html.LabelFor(m => m.CostOption, new { @class = "control-label" })
-                                @Html.DropDownListFor(m => m.CostOption, EnumHelper.GetSelectList(typeof(CostEstimationOption)), "Select", new { @class = "form-control" })
-                                @Html.ValidationMessageFor(m => m.CostOption)
-                            </div>
-                        </div>
-
-                        <div id="UserSupplyStorageCost">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    @Html.LabelFor(m => m.UserEstimatedCost, new { @class = "control-label" })
-                                    @Html.TextBoxFor(m => m.UserEstimatedCost, new { @class = "form-control" })
-                                    @Html.ValidationMessageFor(m => m.UserEstimatedCost)
-                                </div>
-                            </div>
-                        </div>*@
-
                         @Html.Partial("_storageCostSelection", Model)
-
                     </div>
                 </div>
-               
+
                 <div class="row">
                     <div class="form-group col-md-6">
                         <button type="reset" value="Reset" class="btn btn-default">Reset</button>&nbsp;&nbsp;
@@ -107,10 +96,25 @@
                 </div>
 
             </div>
-         
-            <div class="col-md-3">
-                <h4>DSS Input: Storage Parameters</h4>
-                TBD: Instruction and Steps
+
+            <div class="col-md-4">
+                <h4>Instructions: Storage</h4>
+                <p>
+                    Storage of crop may not be always necessary. For example, woody crops may not require storage.
+                </p>
+                <p>
+                    For storage, methods applicable for agricultural crop storage are used for non-woody crops.
+                    User may select from round or rectangular bale, with or without tarp and gravel, pallet or bare ground.
+
+                </p>
+                <p>
+                    Please specify if storage is needed or not.
+                </p>
+                <p>
+                    If it is needed, then enter number of days of storage, percent of total harvest requiring storage and storage method.
+                </p>
+
+                <p> A system generated cost can be accepted, or a lump sum storage cost can be entered or materials costs can be entered to derive the storage cost for a selected method. </p>
             </div>
 
         </div>
@@ -171,13 +175,13 @@
             });
         }
 
-        $('#CostOption').on("change", function() {
+        $('#CostOption').on("change", function () {
             if (this.value == 1) {
                 $('#UserSupplyStorageCost').show();
 
             } else {
                 $('#UserSupplyStorageCost').hide();
-                
+
             }
             if (this.value == 2) {
                 $('#UserSupplyMaterialCost').show();

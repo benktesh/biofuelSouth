@@ -1,4 +1,5 @@
-﻿@model BiofuelSouth.Models.ProductionCostViewModel
+﻿@using BiofuelSouth.Services
+@model BiofuelSouth.Models.ProductionCostViewModel
 
 
 @using (Html.BeginForm())
@@ -95,21 +96,31 @@
             </div>
         </div>
         <div class="col-md-4 for-group">
-            <h4>Instructions</h4>
-            <ul>
-                <li>Default values for production cost include costs from planting to final harvest for one rotation for an acre </li>
-                <li>If crop is planted and harvested in 3 years, then production cost includes costs for the three years for an acre.</li>
+            <h4>Instructions: Production Cost</h4>
+            
+                <p>Default values for production cost include costs from planting to final harvest for one rotation for an acre </p>
+                <p>If crop is planted and harvested in 3 years, then production cost includes costs for the three years for an acre.</p>
               
                 @if (Model.CanCustomize)
                 {
-                    <li>For certain crops, the production cost can be customized by checking 'Customize Cost'.</li>
-                    <li>Individual costs for site preparation planting, thinning, harvesting and custodial management can be entered during customization step.</li>
-                    <li>Cost must be for one rotation. For example, if multiple thinning is conducted, then add up all the thinning costs for one roation. </li>
-                    <li>Any cost not captured can be added to 'Custodial Management' cost. Example of such costs include cost of pesticide, cost of prescribed burning, cost of fertilization etc.</li>
+                    <p>For certain crops, the production cost can be customized by checking 'Customize Cost'.</p>
+                    <p>Individual costs for site preparation planting, thinning, harvesting and custodial management can be entered during customization step.</p>
+                    <p>Cost must be for one rotation. For example, if multiple thinning is conducted, then add up all the thinning costs for one roation. </p>
+                    <p>Any cost not captured can be added to 'Custodial Management' cost. Example of such costs include cost of pesticide, cost of prescribed burning, cost of fertilization etc.</p>
                 }
-                
-                <li>Locally available accurate values can be used instead of defaults in all cases.</li>
-            </ul>
+
+                @{
+                    var rotation = CropAttribute.GetRoationYears(Model.CropType);
+                    var instructions = CropAttribute.GetRotationYearInstruction(Model.CropType);
+
+                    <p>Roation year for @Model.CropType is @rotation years.</p>
+                    foreach (var ins in instructions)
+                    {
+                        <p>@ins</p>
+                    }
+                }
+            <p>Locally available accurate values can be used instead of defaults in all cases.</p>
+            
         </div>
     </div>
 }

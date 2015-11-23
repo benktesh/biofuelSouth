@@ -3,19 +3,10 @@
 @model Storage
 
 
-<div class="row">
-    <div class="col-md-4">
-        <div class="form-group">
-            @Html.LabelFor(m => m.CostOption, new { @class = "control-label" }) <span class="required">Required</span>
-            @Html.DropDownListFor(m => m.CostOption, EnumHelper.GetSelectList(typeof(CostEstimationOption)), "Select", new { @class = "form-control" })
-            @Html.ValidationMessageFor(m => m.CostOption, "", new { @class = "text-danger" })
-        </div>
-    </div>
-</div>
 
 <div class="row">
     <div id="UserSupplyStorageCost">
-        <div class="col-md-6">
+        <div class="col-xs-6">
             <div class="form-group">
                 @Html.LabelFor(m => m.UserEstimatedCost, new { @class = "control-label" })<span class="required">Required</span>
                 @Html.TextBoxFor(m => m.UserEstimatedCost, new { @class = "form-control" })
@@ -30,35 +21,35 @@
     <div id="UserSupplyMaterialCost">
         <strong>Please modify any of the cost below:</strong> 
         <br/>
-        <div class="col-md-4">
+        <div class="col-xs-6">
             <div class="form-group">
                 @Html.LabelFor(m => m.TarpCost, new { @class = "control-label" }) <span class="required">Required</span>
                 @Html.TextBoxFor(m => m.TarpCost, new { @class = "form-control" })
                 @Html.ValidationMessageFor(m => m.TarpCost, "", new { @class = "text-danger" })
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-xs-6">
             <div class="form-group">
                 @Html.LabelFor(m => m.PalletCost, new { @class = "control-label" }) <span class="required">Required</span>
                 @Html.TextBoxFor(m => m.PalletCost, new { @class = "form-control" })
                 @Html.ValidationMessageFor(m => m.PalletCost, "", new { @class = "text-danger" })
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-xs-6">
             <div class="form-group">
                 @Html.LabelFor(m => m.GravelCost, new { @class = "control-label" }) <span class="required">Required</span>
                 @Html.TextBoxFor(m => m.GravelCost, new { @class = "form-control" })
                 @Html.ValidationMessageFor(m => m.GravelCost, "", new { @class = "text-danger" })
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-xs-6">
             <div class="form-group">
                 @Html.LabelFor(m => m.LaborCost, new { @class = "control-label" }) <span class="required">Required</span>
                 @Html.TextBoxFor(m => m.LaborCost, new { @class = "form-control" })
                 @Html.ValidationMessageFor(m => m.LaborCost, "", new { @class = "text-danger" })
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-xs-6">
             <div class="form-group">
                 @Html.LabelFor(m => m.LandCost, new { @class = "control-label" }) <span class="required">Required</span>
                 @Html.TextBoxFor(m => m.LandCost, new { @class = "form-control" })
