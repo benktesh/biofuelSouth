@@ -28,7 +28,7 @@ namespace BiofuelSouth.Models
         [Required]
         public double? ProjectSize { get; set; }
 
-        [DisplayName(@"Years (From plantation to harvest)")]
+        [DisplayName(@"Years (From Duation)")]
         [Range(1,100)]
         [Required]
         public int? ProjectLife { get; set; }  //years
