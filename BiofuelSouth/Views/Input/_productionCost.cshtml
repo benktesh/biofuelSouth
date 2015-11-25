@@ -111,7 +111,7 @@
 
                 @{
                     var rotation = CropAttribute.GetRoationYears(Model.CropType);
-                    var instructions = CropAttribute.GetRotationYearInstruction(Model.CropType);
+                    var instructions = InstructionService.GetRotationYearInstruction(Model.CropType);
 
                     <p>Roation year for @Model.CropType is @rotation years.</p>
                     foreach (var ins in instructions)
