@@ -793,6 +793,7 @@
     <Compile Include="Models\Input.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Services\CropAttribute.cs" />
+    <Compile Include="Services\InstructionService.cs" />
     <Compile Include="ViewModels\ProductionCostViewModel.cs" />
     <Compile Include="Models\Productivity.cs" />
     <Compile Include="Models\Resources.cs" />
