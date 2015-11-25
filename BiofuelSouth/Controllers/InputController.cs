@@ -95,32 +95,17 @@ namespace BiofuelSouth.Controllers
         public ActionResult General()
         {
             var ip = new Input();
-                PopulateHelpers(ip);
-                Session["Input"] = ip;
-                return View(ip.General);
-            
-
-            //if (!ModelState.IsValid)
-            //{
-            //    ip.General = general;
-            //    PopulateHelpers(ip);
-            //    Session["Input"] = ip;
-            //    return View(ip.General);
-            //}
-
-            //ModelState.Clear();
-            //ip = (Input)Session["Input"];
-            //ip.General = general;
-            //Session["Input"] = ip;
-            //return RedirectToAction("Storage");
+            PopulateHelpers(ip);
+            Session["Input"] = ip;
+            return View(ip.General);
         }
 
         [HttpPost]
         public ActionResult General(General general)
         {
-           
+
             if (!ModelState.IsValid)
-            {   
+            {
                 PopulateHelpers(general);
                 return View(general);
             }
@@ -133,7 +118,7 @@ namespace BiofuelSouth.Controllers
 
         }
 
-        
+
         public ActionResult Storage(Storage storage = null)
         {
             var ip = (Input)Session["Input"];
@@ -190,7 +175,7 @@ namespace BiofuelSouth.Controllers
         [HttpGet]
         public ActionResult GetProductionCost()
         {
-            return View("_productionCost", GetProductionCostViewModel()); 
+            return View("_productionCost", GetProductionCostViewModel());
         }
 
         [HttpPost]
@@ -198,10 +183,10 @@ namespace BiofuelSouth.Controllers
         {
             if (ModelState.IsValid)
             {
-                var input =  (Input)Session["Input"];
-                input.ProductionCost = model; 
+                var input = (Input)Session["Input"];
+                input.ProductionCost = model;
 
-                if(input.General.Category == CropType.Miscanthus || input.General.Category == CropType.Switchgrass)
+                if (input.General.Category == CropType.Miscanthus || input.General.Category == CropType.Switchgrass)
                     return RedirectToAction("Storage");
                 return RedirectToAction("Financial");
             }
@@ -213,8 +198,8 @@ namespace BiofuelSouth.Controllers
         {
             ProductionCostManager pcm = new ProductionCostManager();
 
-            var input = (Input) Session["Input"];
-            return pcm.GetProductionCost(new ProductionCostViewModel {CropType = input.General.Category, County = input.General.County});
+            var input = (Input)Session["Input"];
+            return pcm.GetProductionCost(new ProductionCostViewModel { CropType = input.General.Category, County = input.General.County });
         }
         public ActionResult Financial(Financial financial = null)
         {
@@ -307,7 +292,7 @@ namespace BiofuelSouth.Controllers
 
         private void PopulateHelpers(ProductionCostViewModel model)
         {
-            
+
         }
 
 

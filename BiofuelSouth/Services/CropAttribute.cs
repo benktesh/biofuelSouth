@@ -23,6 +23,24 @@ namespace BiofuelSouth.Services
                     return 10;
             }
         }
-        
+
+        public static IList<double> GetProductivityTaper(CropType cropType)
+        {
+            switch (cropType)
+            {
+                case CropType.Switchgrass:
+                case CropType.Miscanthus:
+                    return new List<double> { 0.25, 0.5, 1 };
+                case CropType.Pine:
+                    return new List<double> { 0.80, 1 };
+                case CropType.Poplar:
+                case CropType.Willow:
+                    return new List<double> { 0.80, 1 };
+
+                default:
+                    return new List<double> { 1 };
+            }
+        }
+
     }
 }
