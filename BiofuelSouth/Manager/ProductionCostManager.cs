@@ -30,6 +30,7 @@ namespace BiofuelSouth.Manager
                 case CropType.Poplar:
                     return GetPoplarProductionCost(productionCostViewModel);
                 case CropType.Willow:
+                    return GetWillowProductionCost(productionCostViewModel);
                 case CropType.Pine:
                     return GetPineProductionCost(productionCostViewModel);
             }
@@ -211,5 +212,48 @@ namespace BiofuelSouth.Manager
 
             return productionCostViewModel;
         }
+
+        private ProductionCostViewModel GetWillowProductionCost(ProductionCostViewModel productionCostViewModel)
+        {
+            productionCostViewModel.Amount = 657;
+            productionCostViewModel.ProductionCosts.Add(new ProductionCost
+            {
+                ProductionCostType = ProductionCostType.SitePreparation,
+                IsRequired = true,
+                Amount = 168,
+            });
+
+            productionCostViewModel.ProductionCosts.Add(new ProductionCost
+            {
+                ProductionCostType = ProductionCostType.Planting,
+                IsRequired = true,
+                Amount = 81
+            });
+
+            productionCostViewModel.ProductionCosts.Add(new ProductionCost
+            {
+                ProductionCostType = ProductionCostType.Thinning,
+                IsRequired = true,
+                Amount = 50,
+            });
+
+            productionCostViewModel.ProductionCosts.Add(new ProductionCost
+            {
+                ProductionCostType = ProductionCostType.Harvesting,
+                IsRequired = true,
+                Amount = 350,
+            });
+
+            productionCostViewModel.ProductionCosts.Add(new ProductionCost
+            {
+                ProductionCostType = ProductionCostType.CustodialManagement,
+                IsRequired = true,
+                Amount = 6,
+            });
+
+            return productionCostViewModel;
+
+        }
+
     }
 }

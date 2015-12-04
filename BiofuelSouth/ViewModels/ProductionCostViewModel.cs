@@ -53,7 +53,7 @@ namespace BiofuelSouth.Models
 
         public ProductionCostViewModel()
         {
-            CropType = CropType.Switchgrass;
+            //CropType = CropType.Switchgrass;
             ProductionCosts = new List<ProductionCost>();
         }
 
