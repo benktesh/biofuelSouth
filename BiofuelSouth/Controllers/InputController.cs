@@ -175,16 +175,19 @@ namespace BiofuelSouth.Controllers
         [HttpGet]
         public ActionResult GetProductionCost()
         {
-            return View("_productionCost", GetProductionCostViewModel());
+            var model = GetProductionCostViewModel(); 
+            return View("_productionCost", model);
         }
 
         [HttpPost]
-        public ActionResult GetProductionCost(ProductionCostViewModel model)
+        [ValidateAntiForgeryToken]
+        public ActionResult UpdateProductionCost(ProductionCostViewModel model)
         {
             if (ModelState.IsValid)
             {
                 var input = (Input)Session["Input"];
                 input.ProductionCost = model;
+                Session["Input"] = input;
 
                 if (input.General.Category == CropType.Miscanthus || input.General.Category == CropType.Switchgrass)
                     return RedirectToAction("Storage");
@@ -225,7 +228,7 @@ namespace BiofuelSouth.Controllers
                 {
 
                     PostSubmit(ip);
-                    TempData["input"] = ip;
+                    TempData["Input"] = ip;
                     TempData.Keep();
                     ViewBag.Results = true;
                     return View("Result", ip);
@@ -264,13 +267,19 @@ namespace BiofuelSouth.Controllers
             var rev = ip.GetRevenues().Select(m => m.TotalRevenue).ToArray();
             c.GenerateChart(revenueCachekey, rev, "Revenue");
 
+            var AnnualProd = ip.GetAnnualProductionList().ToArray();
             var cacheKey = Guid.NewGuid().ToString();
             ViewBag.cacheKey = cacheKey;
             var cc = new ChartController();
-            cc.GenerateChart(cacheKey, ip.GetAnnualProductionList().ToArray(), "Annual Production");
+            cc.GenerateChart(cacheKey, AnnualProd, "Annual Production");
+
             cacheKey = Guid.NewGuid().ToString();
             ViewBag.cacheKey1 = cacheKey;
             cc.GenerateCostRevenueChart(cacheKey, ip, "Cost and Revenue");
+
+            cacheKey = Guid.NewGuid().ToString();
+            ViewBag.cacheKey3 = cacheKey;
+            cc.GenerateColumnChart(cacheKey, ip.GetCashFlow(), "Cash Flow", "Year ", "$");
 
         }
 
