@@ -6,6 +6,7 @@
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <%--<html xmlns="http://www.w3.org/1999/xhtml">--%>
+<html>
 <head runat="server">
     <title></title>
     <link href="aspnetforum.css" rel="Stylesheet" type="text/css" />
@@ -214,7 +215,13 @@
 
     <script type="text/javascript">
         function EnterKeyToButton(buttonId) {
-            if (event.which || event.keyCode) { if ((event.which == 13) || (event.keyCode == 13)) { document.getElementById(buttonId).click(); return false; } } else { return true };
+            if (event.which || event.keyCode) {
+                if ((event.which === 13) || (event.keyCode === 13))
+                { document.getElementById(buttonId).click(); return false; }
+            }
+            else
+                return true;
+            
         }
     </script>
 
