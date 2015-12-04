@@ -205,10 +205,21 @@
         </table>
 
         <div id="chartButton">
+            <input type="checkbox" id="showCashFlow" name="showCashFlow" checked> Display CashFlow Chart
             <input type="checkbox" id="showProductivity" name="showProductivity" checked> Display Productivity Chart
             <input type="checkbox" id="showCostRevenue" name="showCostRevenue" checked> Display Cost/Revenue Chart
         </div>
 
+        <div id="CashFlowChart">
+            @{
+                
+
+                var urlcashflow = Url.Action("ShowChart", "Chart", new { @cacheKey = ViewBag.cacheKey3 });
+                <img src="@urlcashflow" class="img-responsive" alt="CashFlow Chart" />
+
+            }
+
+        </div>
 
         <div id="AnnualProductionChart">
             @{
@@ -239,6 +250,16 @@
 @section MyScripts {
     <script>
         $(document).ready(function () {
+
+            $('#showCashFlow').change(function () {
+
+                if ($(this).is(':checked')) {
+                    $('#CashFlowChart').show();
+                } else {
+                    $('#CashFlowChart').hide();
+                };
+            });
+
             $('#showProductivity').change(function () {
                 if ($(this).is(':checked')) {
                     $('#AnnualProductionChart').show();
