@@ -650,6 +650,7 @@
     <Compile Include="Enum\StorageMethod.cs" />
     <Compile Include="Manager\PriceManager.cs" />
     <Compile Include="Manager\ProductionCostManager.cs" />
+    <Compile Include="Manager\ResultManager.cs" />
     <Compile Include="Migrations\201412150342225_-updateCounties.cs" />
     <Compile Include="Migrations\201412150342225_-updateCounties.Designer.cs">
       <DependentUpon>201412150342225_-updateCounties.cs</DependentUpon>
@@ -861,6 +862,7 @@
     <Content Include="Views\Input\Wizard.cshtml" />
     <Content Include="Views\Input\GetProductionCost.cshtml" />
     <None Include="Views\Input\_productionCost.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\ProductionCost.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
