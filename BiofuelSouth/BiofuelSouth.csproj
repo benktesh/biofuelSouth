@@ -836,7 +836,6 @@
     <Content Include="Views\Admin\Delete.cshtml" />
     <Content Include="Views\Input\Storage.cshtml" />
     <Content Include="Views\Shared\_DSSMenu.cshtml" />
-    <Content Include="Views\Input\_inputResult.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\Search.cshtml" />
     <Content Include="Views\Home\FeedBack.cshtml" />

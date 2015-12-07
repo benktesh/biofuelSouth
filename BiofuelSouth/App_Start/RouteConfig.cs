@@ -1,7 +1,7 @@
 ﻿using System.Web.Mvc;
 using System.Web.Routing;
 
-namespace BiofuelSouth.App_Start
+namespace BiofuelSouth
 {
     public class RouteConfig
     {
