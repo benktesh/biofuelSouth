@@ -2146,6 +2146,7 @@
       <button type="button" class="flash-close js-flash-close js-ajax-error-dismiss" aria-label="Dismiss error">
         <span class="octicon octicon-x"></span>
       </button>
+// ReSharper disable once WrongExpressionStatement
       Something went wrong with that request. Please try again.
     </div>
 
@@ -2154,7 +2155,9 @@
       <script async="async" crossorigin="anonymous" integrity="sha256-eSjpWA/TKkgDQdFQdoHY0N17+7t0VV2E/KC7IFY1S8o=" src="https://assets-cdn.github.com/assets/github-7928e9580fd32a480341d1507681d8d0dd7bfbbb74555d84fca0bb2056354bca.js"></script>
       
       
+// ReSharper disable Es6Feature
     <div class="js-stale-session-flash stale-session-flash flash flash-warn flash-banner hidden">
+// ReSharper restore Es6Feature
       <span class="octicon octicon-alert"></span>
       <span class="signed-in-tab-flash">You signed in with another tab or window. <a href="">Reload</a> to refresh your session.</span>
       <span class="signed-out-tab-flash">You signed out in another tab or window. <a href="">Reload</a> to refresh your session.</span>
