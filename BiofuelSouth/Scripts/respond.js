@@ -2135,12 +2135,6 @@
   </div>
 </div>
 
-
-
-    
-    
-    
-
     <div id="ajax-error-message" class="flash flash-error">
       <span class="octicon octicon-alert"></span>
       <button type="button" class="flash-close js-flash-close js-ajax-error-dismiss" aria-label="Dismiss error">

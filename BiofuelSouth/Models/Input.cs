@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using BiofuelSouth.Enum;
+using BiofuelSouth.Manager;
 using BiofuelSouth.Services;
 using log4net;
 using LogManager = log4net.LogManager;
@@ -90,7 +91,6 @@ namespace BiofuelSouth.Models
                                                 + Financial.LoanAmount*(Financial.EquityLoanInterestRate/100);
                     expenses.Add(expenditure);
 
-                    //Add interests
                 }
             }
             catch (Exception ex)
@@ -182,6 +182,7 @@ namespace BiofuelSouth.Models
 
         public IList<double> GetAnnualProductionCosts()
         {
+            
             var rotation = CropAttribute.GetRoationYears(General.Category);
             var duration = General.ProjectLife ?? 10;
 
@@ -251,15 +252,17 @@ namespace BiofuelSouth.Models
                 {
                     annualProductionCost.Add(standardAnnualCost * (double)(SitePlantationFactor + CustodialFactor));
                 }
-
-                if (i > 0 && (i + 1) % rotation == 0)
+                else if (i > 0 && (i + 1) % rotation == 0)
                 {
                     annualProductionCost.Add(standardAnnualCost * (double)(HarvestFactor + CustodialFactor));
                 }
-
-                if (i > 0 && (i + 1) % thinningYear == 0)
+                else if (i > 0 && (i + 1)%thinningYear == 0)
                 {
-                    annualProductionCost.Add(standardAnnualCost * (double)(ThinningFactor + CustodialFactor));
+                    annualProductionCost.Add(standardAnnualCost*(double) (ThinningFactor + CustodialFactor));
+                }
+                else
+                {
+                    annualProductionCost.Add(standardAnnualCost * (double)(CustodialFactor));
                 }
             }
 
@@ -277,12 +280,20 @@ namespace BiofuelSouth.Models
         public IList<double> GetYields(List<double> annualProductivity)
         {
             var rotation = CropAttribute.GetRoationYears(General.Category);
+            //for annual crops return the original productivity
+            if (rotation == 1)
+            {
+                return annualProductivity; 
+            }
+            
+            
             if (General.ProjectLife <= rotation)
             {
                 return annualProductivity;
 
             }
 
+            //get the lenght of harvst cycle and repeat
             var cycleYield = annualProductivity.Take(rotation).ToList();
 
             annualProductivity.Clear();
@@ -305,6 +316,9 @@ namespace BiofuelSouth.Models
         /// <returns></returns>
         public IList<double> GetAnnualProductionList()
         {
+
+            
+
             var taper = CropAttribute.GetProductivityTaper(General.Category);
             var annualProductivity = new List<double>();
             double storageLossFactor = 0;

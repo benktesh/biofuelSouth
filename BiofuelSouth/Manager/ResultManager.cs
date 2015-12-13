@@ -81,7 +81,7 @@ namespace BiofuelSouth.Manager
         public IList<double> GetAnnualProductionCosts()
         {
             var rotation = CropAttribute.GetRoationYears(General.Category);
-            var duration = General.ProjectLife ?? 10;
+            General.ProjectLife = General.ProjectLife ?? 10;
 
 
             var annualProductionCost = new List<double>();
