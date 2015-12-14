@@ -24,6 +24,14 @@ namespace BiofuelSouth.Services
             }
         }
 
+        public static int? GetThinningYear(CropType crop)
+        {
+            if (crop == CropType.Pine)
+            {
+                return 5;
+            }
+           return null; 
+        }
         public static IList<double> GetProductivityTaper(CropType cropType)
         {
             switch (cropType)
