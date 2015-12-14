@@ -197,10 +197,10 @@ namespace BiofuelSouth.Models
             }
 
             decimal SitePlantationFactor = 0.38M;
+            
             decimal ThinningFactor = 0.10M;
             decimal HarvestFactor = 0.50M;
             decimal CustodialFactor = 0.02M;
-
 
             if (ProductionCost.UseCustom && ProductionCost.ProductionCosts.Any())
             {
@@ -243,24 +243,27 @@ namespace BiofuelSouth.Models
             //.10 for thinnin
             //.50 for harvesting
             //.02 custodial management
-
             var thinningYear = (int)Math.Ceiling(rotation / 2.0);
-
+           
             for (var i = 0; i < General.ProjectLife; i++)
             {
-                if (i % rotation == 0)
+                if (i % rotation == 0) //plantation
                 {
                     annualProductionCost.Add(standardAnnualCost * (double)(SitePlantationFactor + CustodialFactor));
+                   
                 }
-                else if (i > 0 && (i + 1) % rotation == 0)
+                else if (i > 0 && (i + 1) % rotation == 0) //harvest
                 {
                     annualProductionCost.Add(standardAnnualCost * (double)(HarvestFactor + CustodialFactor));
+                   
                 }
-                else if (i > 0 && (i + 1)%thinningYear == 0)
+               
+                else if((i > 0 && ((i + 1)%thinningYear == 0) || ((i % rotation)+1)%thinningYear ==0)) //thinning
                 {
                     annualProductionCost.Add(standardAnnualCost*(double) (ThinningFactor + CustodialFactor));
+                    
                 }
-                else
+                else //customdial
                 {
                     annualProductionCost.Add(standardAnnualCost * (double)(CustodialFactor));
                 }
