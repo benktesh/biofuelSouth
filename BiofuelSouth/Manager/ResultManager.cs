@@ -6,6 +6,7 @@ using System.Web;
 using BiofuelSouth.Enum;
 using BiofuelSouth.Models;
 using BiofuelSouth.Services;
+using BiofuelSouth.ViewModels;
 using log4net;
 using Microsoft.VisualBasic.Logging;
 
@@ -59,7 +60,7 @@ namespace BiofuelSouth.Manager
                         ProductionCost = annualProductionCosts[i]
                     };
 
-                    expenditure.StorageCost = storageCost != null ? storageCost[i] : 0;
+                    expenditure.StorageCost = storageCost != null && storageCost.Any() ? storageCost[i] : 0;
 
                     expenditure.TotalExpenses = expenditure.AdministrativeCost + expenditure.LandCost +
                                                 expenditure.ProductionCost;
@@ -168,5 +169,10 @@ namespace BiofuelSouth.Manager
 
         }
 
+        public ResultViewModel GetResultViewModel()
+        {
+            var vm = new ResultViewModel();
+            return vm;
+        }
     }
 }
