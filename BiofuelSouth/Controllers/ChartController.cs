@@ -35,9 +35,12 @@ namespace BiofuelSouth.Controllers
                 xValue: xValues,
                 
             yValues: data);
+
+            chart.AddSeries(chartType: "line", yValues: Enumerable.Repeat(0, data.Length).ToArray());
             chart.SetXAxis(xLabel + " ", 0, data.Length + .75);
+            
             chart.AddTitle(chartName);
-            chart.SetYAxis(yLabel + " ", Math.Round(data.Min(),0), Math.Round(data.Max(),0));
+            //chart.SetYAxis(yLabel + " ", Math.Round(data.Min(),0), Math.Round(data.Max(),0));
             chart.SaveToCache(cacheKey, ChartCacheMinute);
         }
 
