@@ -63,6 +63,15 @@ namespace BiofuelSouth.Services
         }
 
 
+        //based on dickens 2011
+  //      the two eucalyptus species(31.9 and 35.5 tons/ac/yr), respectively E.grandis and E. amplifolia
+//loblolly pine (12.9 tons/ac/yr), 
+//hybrid poplar(7.6 tons/ac/yr), 
+//cottonwood(7.2 tons/ac/yr), 
+//sycamore(6.6 tons/ac/yr),
+//slash pine(6.5 tons/ac/yr), 
+//sweetgum(4.2 tons/ac/yr). 
+
 
         public static double GetProductivityPerAcreForCropByGeoId(CropType cropType, String geoId)
         {
@@ -73,6 +82,16 @@ namespace BiofuelSouth.Services
                 {
                     return 12.9; //Dickens (2011)
                 }
+                else if (cropType == CropType.Poplar)
+                {
+                    return 7.6; 
+                }
+                else if (cropType == CropType.Willow)
+                {
+                    return 15.0; 
+                }
+
+                
 
                 var productivity = db.Productivities.Where(p => p.GeoId == intGeoid && p.CropType == cropType).Select(p => p.Yield).FirstOrDefault();
                 return productivity*0.446; //MG/ha -> t/acre
