@@ -14,7 +14,7 @@ namespace BiofuelSouth.ViewModels
 
         public Financial FinancialView { get; set; }
 
-        public ResultsViewModel ResultsView { get; set; }
+        public ResultViewModel ResultView { get; set; }
         
         public WizardViewModel()
         {
@@ -23,7 +23,7 @@ namespace BiofuelSouth.ViewModels
             ProductionCostView = new ProductionCostViewModel();
             StorageView = new StorageCostModel();
             FinancialView = new Financial();
-            ResultsView = new ResultsViewModel();
+            ResultView = new ResultViewModel();
 
         }
     }

@@ -253,9 +253,12 @@ namespace BiofuelSouth.Controllers
 
         }
 
-        public ActionResult Result(Input ip)
+        public ActionResult Result()
         {
-            return View(ip);
+            var vm = new ResultManager(Session["input"] as Input );
+            //TODO Replacethis with resultviewmodel
+           
+            return View(Session["input"] as Input);
         }
 
         private void PostSubmit(Input ip)

@@ -169,9 +169,21 @@ namespace BiofuelSouth.Manager
 
         }
 
+
+        public string BiomassPriceAtFarmGate => $"{General.BiomassPriceAtFarmGate.GetValueOrDefault().ToString("C0")} per ton";
+
+        public string ProjectSize => $"{General.ProjectSize.GetValueOrDefault().ToString("##,###")} Acre";
+
+        public string LandCost => $"{General.LandCost.GetValueOrDefault().ToString("C0")} per Acre";
+
         public ResultViewModel GetResultViewModel()
         {
             var vm = new ResultViewModel();
+            vm.CountyName = Constants.CountyName(General.County);
+            vm.CropType = General.Category;
+            vm.StateCode = General.State;
+            vm.RequireStorage = Storage.RequireStorage.GetValueOrDefault();
+           
             return vm;
         }
     }

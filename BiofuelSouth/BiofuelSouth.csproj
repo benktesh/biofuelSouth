@@ -811,7 +811,7 @@
     <Compile Include="Services\EmailService.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="ViewModels\GlossaryViewModel.cs" />
-    <Compile Include="ViewModels\ResultsViewModel.cs" />
+    <Compile Include="ViewModels\ResultViewModel.cs" />
     <Compile Include="ViewModels\StorageCostModel.cs" />
     <Compile Include="ViewModels\WizardViewModel.cs" />
   </ItemGroup>
@@ -859,6 +859,7 @@
     <Content Include="Views\Shared\_storageCostSelection.cshtml" />
     <Content Include="Views\Input\Wizard.cshtml" />
     <Content Include="Views\Input\GetProductionCost.cshtml" />
+    <Content Include="Views\Input\Results.cshtml" />
     <None Include="Views\Input\_productionCost.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\ProductionCost.cshtml" />
     <None Include="Web.Debug.config">

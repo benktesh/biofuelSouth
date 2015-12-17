@@ -32,6 +32,23 @@ namespace BiofuelSouth.Services
             }
            return null; 
         }
+
+        public static bool CanCoppice(CropType cropType)
+        {
+            switch (cropType)
+            {
+                case CropType.Switchgrass:
+                case CropType.Miscanthus:
+                case CropType.Pine:
+                case CropType.Willow:
+                    return false;
+                case CropType.Poplar:
+                    return true; 
+                default:
+                    return false;
+            }
+
+        }
         public static IList<double> GetProductivityTaper(CropType cropType)
         {
             switch (cropType)

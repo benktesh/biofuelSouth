@@ -1,0 +1,264 @@
+﻿@model BiofuelSouth.ViewModels.ResultViewModel
+
+@{
+    ViewBag.Title = "BDSS: Biofuel Decision Support System";
+    var mergeCol = @Model.ProjectLife + 1;
+
+}
+
+
+
+
+<div class="row">
+    <div class="col-sm-12">
+        <h2>Summary for @Model.CropType in @(Model.CountyName) , @Model.StateCode</h2>
+    </div>
+
+</div>
+
+<div class="row">
+    <div class="col-md-2 col-lg-3 bg-info">
+        <div class="alert-success">
+            <h3>Summary</h3>
+            <p>
+                @if (Model.ProjectLife > 0)
+                {
+                    <div>
+                        Est. Annual Production:
+                        @Math.Round(Model.ProductionList.Average(), 0).ToString("###,###.##") ton
+                    </div>
+                    <div>
+                        Est. Net Production: @Model.AnnualProduction ton
+                    </div>
+                    <div>
+                        Est. Annual Cost: @Model.AnnualCost
+                    </div>
+                    <div>
+                        Est. Annual Revenue: @Model.AnnualRevenue
+                    </div>
+
+                    <div>
+                        NPV: @Model.NPV
+                    </div>
+                }
+            </p>
+        </div>
+        <div class="alert-success">
+            <p>
+                <h3>Assumptions and Parameters</h3>
+
+                <div class="text-danger"> TBD state all the default values used. <br /> </div>
+                <div> Biomass Price: @Model.BiomassPriceAtFarmGate </div>
+                <div> Project Size: @Model.ProjectSize </div>
+                <div> Land Cost: @Model.LandCost </div>
+                <div>
+                    Average Cost Per Acre: @Model.AverageCostPerAcre
+                    @*@(Math.Round(Model.GetAnnualCost() / Model.General.ProjectSize.GetValueOrDefault(), 0).ToString("C0")) per acre*@
+                </div>
+                <div>
+                    Average Production Per Acre: @Model.AverageProdutivityPerAcre
+                    @*@Math.Round(Model.GetAnnualProductionList().Average() / Model.General.ProjectSize.GetValueOrDefault(), 0).ToString("###,###.##") ton/acre*@
+                </div>
+
+            </p>
+        </div>
+        <div class="alert-success">
+            <div id="moreinformation">
+                @Html.Partial("_moreinformation")
+            </div>
+
+
+        </div>
+    </div>
+
+    <div class="col-md-10 col-lg-9">
+        <strong>Estimated Production, Cost and Revenue</strong>
+        <table class="table table-responsive table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th rowspan="2">Description</th>
+                    <th colspan="10">Year</th>
+                </tr>
+                <tr>
+                    @{
+                        for (var i = 0; i < Model.ProjectLife; i++)
+                        {
+                            <th>@(i + 1)</th>
+                        }
+                    }
+                </tr>
+            </thead>
+
+
+            @if (Model.RequireStorage)
+            {
+                <tr>
+                    @* ReSharper disable once UnknownCssClass *@
+                    <td colspan="@mergeCol" class="mergeCol">Production</td>
+                </tr>
+                <tr>
+                    <td>
+                        Gross Production (ton/year)
+                    </td>
+                    @foreach (var a in Model.ProductionList)
+                    {
+                        <td>@String.Format("{0:#,###,###}", Math.Round(a, 0))</td>
+                    }
+                </tr>
+
+                <tr>
+                    @* ReSharper disable once UnknownCssClass *@
+                    <td colspan="@mergeCol" class="mergeCol">Storage</td>
+                </tr>
+
+                <tr>
+                    <td>
+                        Storage Loss (ton/year)
+                    </td>
+                    @foreach (var a in Model.ProductionList)
+                    {
+                        <td>@String.Format("{0:#,###,###}", Math.Round(a * Model.StorageLossFactor * Model.StorageTime / 200 * Model.StoragePercent / 100, 0))</td>
+                    }
+                </tr>
+
+            }
+
+            <tr>
+                <td>
+                    Net Production (ton/year)
+                </td>
+                @foreach (var a in Model.ProductionList)
+                {
+                    <td>@String.Format("{0:#,###,###}", Math.Round(a, 0))</td>
+                }
+            </tr>
+            <tr>
+                @* ReSharper disable UnknownCssClass *@
+                <td colspan="@mergeCol" class="mergeCol">Cost and Revenue</td>
+                @* ReSharper restore UnknownCssClass *@
+            </tr>
+            <tr bgcolor="blue" class="strongrow">
+                <td>
+                    Revenue ($)
+                </td>
+                @foreach (var a in Model.RevenueList)
+                {
+                    <td>@String.Format("{0:#,###,###}", Math.Round(a, 0))</td>
+
+                }
+
+            </tr>
+            <tr class="strongrow">
+                <td>
+                    Cost ($)
+                </td>
+                @foreach (var a in Model.CostList)
+                {
+
+                    <td>@String.Format("{0:#,###,###}", @Math.Round(a, 0))</td>
+                }
+
+            </tr>
+            @if (Model.RequireStorage)
+            {
+                <tr>
+                    <td>
+                        Storage Cost ($)
+                    </td>
+                    @foreach (var a in Model.StorageCostList)
+                    {
+
+                        <td>@String.Format("{0:#,###,###}", @Math.Round(a, 0))</td>
+                    }
+
+                </tr>
+
+            }
+
+            <tr class="strongrow">
+                <td>
+                    CashFlow ($)
+                </td>
+                @foreach (var a in Model.CashFlow)
+                {
+                    <td> @String.Format("{0:#,###,###}", @Math.Round(a, 0))</td>
+                }
+
+            </tr>
+
+        </table>
+
+        <div id="chartButton">
+            <input type="checkbox" id="showCashFlow" name="showCashFlow" checked> Display CashFlow Chart
+            <input type="checkbox" id="showProductivity" name="showProductivity" checked> Display Productivity Chart
+            <input type="checkbox" id="showCostRevenue" name="showCostRevenue" checked> Display Cost/Revenue Chart
+        </div>
+
+        <div id="CashFlowChart">
+            @{
+
+
+                var urlcashflow = Url.Action("ShowChart", "Chart", new { @cacheKey = ViewBag.cacheKey3 });
+                <img src="@urlcashflow" class="img-responsive" alt="CashFlow Chart" />
+
+            }
+
+        </div>
+
+        <div id="AnnualProductionChart">
+            @{
+                var urlAnnualProduction = Url.Action("ShowChart", "Chart", new { ViewBag.cacheKey });
+                <img src="@urlAnnualProduction" class="img-responsive" alt="Annual Production Chart" />
+
+            }
+
+        </div>
+        <div id="CostRevenueChart">
+            @{
+                var urlAnnualProduction1 = Url.Action("ShowChart", "Chart", new { @cacheKey = ViewBag.cacheKey1 });
+                <img src="@urlAnnualProduction1" class="img-responsive" alt="Revenue Chart" />
+            }
+
+        </div>
+
+
+
+
+
+    </div>
+
+</div>
+
+@Html.Partial("_Disclaimer")
+
+@section MyScripts {
+    <script>
+        $(document).ready(function () {
+
+            $('#showCashFlow').change(function () {
+
+                if ($(this).is(':checked')) {
+                    $('#CashFlowChart').show();
+                } else {
+                    $('#CashFlowChart').hide();
+                };
+            });
+
+            $('#showProductivity').change(function () {
+                if ($(this).is(':checked')) {
+                    $('#AnnualProductionChart').show();
+                } else {
+                    $('#AnnualProductionChart').hide();
+                };
+            });
+
+            $('#showCostRevenue').change(function () {
+                if ($(this).is(':checked')) {
+                    $('#CostRevenueChart').show();
+                } else {
+                    $('#CostRevenueChart').hide();
+                };
+            });
+        });
+    </script>
+}
