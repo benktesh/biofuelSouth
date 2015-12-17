@@ -11,6 +11,8 @@ namespace BiofuelSouth.Models
     {
         public ProductionCostType ProductionCostType { get; set; }
 
+        public int? ImplementationYearOnCycle { get; set; }
+
         public bool IsRequired { get; set; }
 
         [Display(Name = @"Production Cost ($/acre)")]
@@ -32,7 +34,7 @@ namespace BiofuelSouth.Models
         public string County { get; set; }
 
         [Display(Name = @"Production Cost ($/acre)")]
-        public Decimal Amount { get; set; }
+        public decimal? Amount { get; set; }
 
         [Display(Name = @"Customize Cost")]
         public bool UseCustom { get; set; }
@@ -69,10 +71,9 @@ namespace BiofuelSouth.Models
                     return amount;
                 }
 
-                return Amount;
-
+                if (Amount != null) return (decimal) Amount;
+                return 0;
             }
-
         }
     }
 }
