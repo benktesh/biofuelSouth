@@ -20,6 +20,7 @@
                         <option value="miscanthus">Miscanthus</option>
                         <option value="poplar">Poplar</option>
                         <option value="willow">Willow</option>
+                        <option value="Pine">Pine</option>
                     </select>
                 </td>
             </tr>
@@ -43,8 +44,6 @@
 @section MyScripts {
 
     <script>
-
-
         var switchgrassYieldFrame =
             '<iframe width="800" height="600" scrolling="no" frameborder="no" src="https://www.google.com/fusiontables/embedviz?q=select+col11%3E%3E1+from+1kD5w9t0iW_iVftzLag5aBAWh3PCK3On9zKFKVi9n+where+col1%3E%3E0+in+(&#39;AL&#39;%2C+&#39;AR&#39;%2C+&#39;FL&#39;%2C+&#39;GA&#39;%2C+&#39;KY&#39;%2C+&#39;LA&#39;%2C+&#39;MS&#39;%2C+&#39;NC&#39;%2C+&#39;SC&#39;%2C+&#39;TN&#39;%2C+&#39;TX&#39;%2C+&#39;VA&#39;)&amp;viz=MAP&amp;h=false&amp;lat=31.995958181131257&amp;lng=-83.71763842302317&amp;t=1&amp;z=6&amp;l=col11%3E%3E1&amp;y=2&amp;tmplt=2&amp;hml=KML"></iframe>';
         var miscanthusYieldFrame =
@@ -64,14 +63,32 @@
         $('#SelectedMapType').change(function() {
             //the prop method retrieves the selected index. Adding 1 to that index increment the value by 1
             //This index can then be used in retrivieing links for maps where a blank map lives at index '0'
+
+
+
+            
+
             var cropIndex = $('#SelectedCrop').prop("selectedIndex") + 1;
             var selectedMapType = $('#SelectedMapType').val();
             var iframe = $('#mapelement');
             iframe.html("");
             if (selectedMapType === "yieldmap") {
                 iframe.html(productyield[cropIndex]);
+
+                $("#SelectedCrop option[value='Pine']").attr("disabled", "disabled");
             } else if (selectedMapType === "costmap") {
                 iframe.html(productcost[cropIndex]);
+                
+             
+
+                $("#SelectedCrop option[value='willow']").attr("disabled", "disabled");
+                $("#SelectedCrop option[value='poplar']").attr("disabled", "disabled");
+
+                $("#SelectedCrop option[value='Pine']").attr("disabled", "disabled");
+
+
+
+
             }
 
         });
