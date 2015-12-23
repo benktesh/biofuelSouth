@@ -1,4 +1,6 @@
-﻿@model BiofuelSouth.Models.ProductionCost
+﻿@using BiofuelSouth.Enum
+@using BiofuelSouth.Helpers
+@model BiofuelSouth.Models.ProductionCost
 
 
 
@@ -9,7 +11,7 @@
 
 
 <tr>
-    <td>@Model.ProductionCostType</td>
+    <td>@Model.ProductionCostType.GetDisplayName()</td>
     @Html.HiddenFor(m=>m.ProductionCostType)
     <td>@Html.TextBoxFor(m => m.Amount)</td>
 </tr>
