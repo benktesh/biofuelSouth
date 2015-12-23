@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Web.Security;
 using BiofuelSouth.Enum;
 
 namespace BiofuelSouth.Models
@@ -16,6 +17,7 @@ namespace BiofuelSouth.Models
         public bool IsRequired { get; set; }
 
         [Display(Name = @"Production Cost ($/acre)")]
+        [DisplayFormat(DataFormatString = "{0:C}")]
         public decimal? Amount { get; set; }
 
         [Display(Name = @"Unit")]
@@ -34,6 +36,7 @@ namespace BiofuelSouth.Models
         public string County { get; set; }
 
         [Display(Name = @"Production Cost ($/acre)")]
+        [DisplayFormat(DataFormatString = "{0:C}")]
         public decimal? Amount { get; set; }
 
         [Display(Name = @"Customize Cost")]

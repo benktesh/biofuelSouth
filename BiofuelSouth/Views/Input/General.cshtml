@@ -1,8 +1,9 @@
 ﻿@using BiofuelSouth.Models
+@using BiofuelSouth.Resources
 @model General
 
 @{
-    ViewBag.Title = "BDSS: Biofuel Decision Support System";
+    ViewBag.Title = String.Format("Project Information: {0}", GeneralResource.DSS_Tittle_Display); 
 }
 @using (Html.BeginForm())
 {

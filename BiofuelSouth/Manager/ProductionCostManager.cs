@@ -40,8 +40,7 @@ namespace BiofuelSouth.Manager
 
         private ProductionCostViewModel GetPineProductionCost(ProductionCostViewModel productionCostViewModel)
         {
-            productionCostViewModel.Amount = 657;
-
+            
             productionCostViewModel.ProductionCosts.Add(new ProductionCost
             {
                 ProductionCostType = ProductionCostType.SitePreparation,
@@ -99,13 +98,6 @@ namespace BiofuelSouth.Manager
                 Amount = 81
             });
 
-            productionCostViewModel.ProductionCosts.Add(new ProductionCost
-            {
-                ProductionCostType = ProductionCostType.Thinning,
-                IsRequired = true,
-                ImplementationYearOnCycle = 2,
-                Amount = 0,
-            });
 
             productionCostViewModel.ProductionCosts.Add(new ProductionCost
             {
@@ -137,37 +129,9 @@ namespace BiofuelSouth.Manager
 
             productionCostViewModel.ProductionCosts.Add(new ProductionCost
             {
-                ProductionCostType = ProductionCostType.SitePreparation,
+                ProductionCostType = ProductionCostType.AnnualLumpsum,
                 IsRequired = true,
-                Amount = 168,
-            });
-
-            productionCostViewModel.ProductionCosts.Add(new ProductionCost
-            {
-                ProductionCostType = ProductionCostType.Planting,
-                IsRequired = true,
-                Amount = 81
-            });
-
-            productionCostViewModel.ProductionCosts.Add(new ProductionCost
-            {
-                ProductionCostType = ProductionCostType.Thinning,
-                IsRequired = true,
-                Amount = 50,
-            });
-
-            productionCostViewModel.ProductionCosts.Add(new ProductionCost
-            {
-                ProductionCostType = ProductionCostType.Harvesting,
-                IsRequired = true,
-                Amount = 350,
-            });
-
-            productionCostViewModel.ProductionCosts.Add(new ProductionCost
-            {
-                ProductionCostType = ProductionCostType.CustodialManagement,
-                IsRequired = true,
-                Amount = 6,
+                Amount = productionCostViewModel.Amount,
             });
 
             return productionCostViewModel;
@@ -184,39 +148,10 @@ namespace BiofuelSouth.Manager
 
             productionCostViewModel.ProductionCosts.Add(new ProductionCost
             {
-                ProductionCostType = ProductionCostType.SitePreparation,
+                ProductionCostType = ProductionCostType.AnnualLumpsum,
                 IsRequired = true,
-                Amount = 168,
+                Amount = productionCostViewModel.Amount,
             });
-
-            productionCostViewModel.ProductionCosts.Add(new ProductionCost
-            {
-                ProductionCostType = ProductionCostType.Planting,
-                IsRequired = true,
-                Amount = 81
-            });
-
-            productionCostViewModel.ProductionCosts.Add(new ProductionCost
-            {
-                ProductionCostType = ProductionCostType.Thinning,
-                IsRequired = true,
-                Amount = 50,
-            });
-
-            productionCostViewModel.ProductionCosts.Add(new ProductionCost
-            {
-                ProductionCostType = ProductionCostType.Harvesting,
-                IsRequired = true,
-                Amount = 350,
-            });
-
-            productionCostViewModel.ProductionCosts.Add(new ProductionCost
-            {
-                ProductionCostType = ProductionCostType.CustodialManagement,
-                IsRequired = true,
-                Amount = 6,
-            });
-
 
             return productionCostViewModel;
         }
@@ -238,12 +173,12 @@ namespace BiofuelSouth.Manager
                 Amount = 81
             });
 
-            productionCostViewModel.ProductionCosts.Add(new ProductionCost
-            {
-                ProductionCostType = ProductionCostType.Thinning,
-                IsRequired = true,
-                Amount = 0,
-            });
+            //productionCostViewModel.ProductionCosts.Add(new ProductionCost
+            //{
+            //    ProductionCostType = ProductionCostType.Thinning,
+            //    IsRequired = true,
+            //    Amount = 0,
+            //});
 
             productionCostViewModel.ProductionCosts.Add(new ProductionCost
             {

@@ -199,40 +199,47 @@ namespace BiofuelSouth.Models
             decimal HarvestFactor = 0.50M;
             decimal CustodialFactor = 0.02M;
 
-            if (ProductionCost.UseCustom && ProductionCost.ProductionCosts.Any())
+            if (ProductionCost.CanCustomize && ProductionCost.ProductionCosts.Any())
             {
                 var total = ProductionCost.TotalProductionCost;
                 var o3 = ProductionCost.ProductionCosts.Where(
                     m =>
                         m.ProductionCostType == ProductionCostType.Planting ||
-                        m.ProductionCostType == ProductionCostType.SitePreparation).Sum(m => m.Amount) / total;
+                        m.ProductionCostType == ProductionCostType.SitePreparation).Sum(m => m.Amount)/total;
                 if (o3 != null)
                     SitePlantationFactor =
-                        (decimal)o3;
+                        (decimal) o3;
 
                 var o2 = ProductionCost.ProductionCosts.Where(
                     m =>
-                        m.ProductionCostType == ProductionCostType.CustodialManagement).Sum(m => m.Amount) / total;
+                        m.ProductionCostType == ProductionCostType.CustodialManagement).Sum(m => m.Amount)/total;
                 if (o2 !=
                     null)
                     ThinningFactor =
-                        (decimal)o2;
+                        (decimal) o2;
 
                 var o = ProductionCost.ProductionCosts.Where(
                     m =>
-                        m.ProductionCostType == ProductionCostType.Harvesting).Sum(m => m.Amount) / total;
+                        m.ProductionCostType == ProductionCostType.Harvesting).Sum(m => m.Amount)/total;
                 if (o != null)
                     HarvestFactor =
-                        (decimal)o;
+                        (decimal) o;
 
                 var o1 = ProductionCost.ProductionCosts.Where(
                     m =>
-                        m.ProductionCostType == ProductionCostType.CustodialManagement).Sum(m => m.Amount) / total;
+                        m.ProductionCostType == ProductionCostType.CustodialManagement).Sum(m => m.Amount)/total;
                 if (o1 !=
                     null)
                     CustodialFactor =
-                        (decimal)o1;
+                        (decimal) o1;
                 Log.Info("Custom cost included");
+            }
+            else
+            {
+                SitePlantationFactor = 0.0M;
+                ThinningFactor = 0.0M;
+                HarvestFactor = 0.0M;
+                CustodialFactor = 1.0M;
             }
 
             //user factor
@@ -246,6 +253,7 @@ namespace BiofuelSouth.Models
 
             for (var i = 0; i < General.ProjectLife; i++)
             {
+
                 if (i % rotation == 0) //plantation
                 {
                     if (CropAttribute.CanCoppice(General.Category) && i > 0)

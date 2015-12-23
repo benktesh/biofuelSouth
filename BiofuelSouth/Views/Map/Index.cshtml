@@ -1,43 +1,70 @@
-﻿<br />
+﻿@using BiofuelSouth.Resources
+@{
+    ViewBag.Title = GeneralResource.Application_Title_Display;
+}
+<br />
 <div class="row">
-    <div class="col-sm-12 col-lg-12 col-md-12">
+    <div class="col-xs-9">
         <table>
             <tr>
                 <td>
-                    <label>Select map</label>
-                    <select id="SelectedMapType" name="SelectedMapType">
-                        <option value="yieldmap">Yield Map</option>
-                        <option value="costmap">Cost Map</option>
-                        <option value="leastcostcropmap" disabled>Least Cost Crop Map</option>
-                    </select>
+                    <div class="form-group">
+                        @Html.Label("Select Map")
+                        <select id="SelectedMapType" class="form-control" name="SelectedMapType">
+                            <option value="yieldmap">Yield Map</option>
+                            <option value="costmap">Cost Map</option>
+                            <option value="leastcostcropmap" disabled>Least Cost Crop Map</option>
+                        </select>
+
+                    </div>
                 </td>
             </tr>
             <tr>
                 <td>
-                    <label>Select a crop</label>
-                    <select id="SelectedCrop" name="SelectedCrop">
-                        <option value="switchgrass">Switchgrass</option>
-                        <option value="miscanthus">Miscanthus</option>
-                        <option value="poplar">Poplar</option>
-                        <option value="willow">Willow</option>
-                        <option value="Pine">Pine</option>
-                    </select>
+                    <div class="form-group">
+                        @Html.Label("Select a crop")
+                        <select id="SelectedCrop" class="form-control" name="SelectedCrop">
+                            <option value="switchgrass">Switchgrass</option>
+                            <option value="miscanthus">Miscanthus</option>
+                            <option value="poplar">Poplar</option>
+                            <option value="willow">Willow</option>
+                            <option value="Pine">Pine</option>
+                        </select>
+                    </div>
                 </td>
             </tr>
             <tr>
                 <td>
-                    <div id="mapelement">
-                        Maps goes here
+                    <div class="form-group">
+                        <div id="mapelement">
+                            Maps goes here
+                        </div>
                     </div>
                     <!-- EMPTY FRAME https://www.google.com/fusiontables/embedviz?q=select+col11+from+1dYCpUm_bwDqN4MybPQVjPmkHMPOsYw--Fau1IQZM&amp;viz=MAP&amp;h=false&amp;lat=36.10&amp;lng=-86.22055982637162&amp;t=1&amp;z=7&amp;l=col11&amp;y=2&amp;tmplt=2&amp;hml=KML
-                        <iframe id="mapelement" width="800" height="600" scrolling="no" frameborder="1" src="https://www.google.com/fusiontables/embedviz?q=select+col11%3E%3E1+from+1tlr9ZXczB9JIz3gk9182vjGisXhUGkoh-PJyRq-v&amp;viz=MAP&amp;h=false&amp;lat=36.10&amp;lng=-86.40296572047234&amp;t=1&amp;z=5&amp;l=col11%3E%3E1&amp;y=2&amp;tmplt=2&amp;hml=KML"></iframe>
+                    <iframe id="mapelement" width="800" height="600" scrolling="no" frameborder="1" src="https://www.google.com/fusiontables/embedviz?q=select+col11%3E%3E1+from+1tlr9ZXczB9JIz3gk9182vjGisXhUGkoh-PJyRq-v&amp;viz=MAP&amp;h=false&amp;lat=36.10&amp;lng=-86.40296572047234&amp;t=1&amp;z=5&amp;l=col11%3E%3E1&amp;y=2&amp;tmplt=2&amp;hml=KML"></iframe>
 
-                        <iframe id=" mapelement" width="800" height="600" scrolling="no" frameborder="no" src="https://www.google.com/fusiontables/embedviz?q=select+col11%3E%3E1+from+1tlr9ZXczB9JIz3gk9182vjGisXhUGkoh-PJyRq-v&amp;viz=MAP&amp;h=false&amp;lat=36.10&amp;lng=-86.40296572047234&amp;t=1&amp;z=5&amp;l=col11%3E%3E1&amp;y=2&amp;tmplt=2&amp;hml=KML"></iframe>
+                    <iframe id=" mapelement" width="800" height="600" scrolling="no" frameborder="no" src="https://www.google.com/fusiontables/embedviz?q=select+col11%3E%3E1+from+1tlr9ZXczB9JIz3gk9182vjGisXhUGkoh-PJyRq-v&amp;viz=MAP&amp;h=false&amp;lat=36.10&amp;lng=-86.40296572047234&amp;t=1&amp;z=5&amp;l=col11%3E%3E1&amp;y=2&amp;tmplt=2&amp;hml=KML"></iframe>
                     -->
                 </td>
             </tr>
         </table>
-    </div> 
+    </div>
+    <div class="col-xs-3">
+        <h4>Instructions: Spatial Maps</h4>
+
+        <p>County level patial maps of cost and yields can be visualized for various crops by making appropriate selection for map type and crop.</p>
+        <p>The least cost map shows the type of crop that is least costly to be produced at a particular location.</p>
+        <p>These maps are prepared by interpolating available productivity and cost information from available data. @*(Miguez et al. 2012, LeBauer et al. 2010, Wang et al. 2013).*@
+        </p>
+        <p>At present, maps of production are available for switchgrass, miscanthus, poplar and willow, whereas the maps of costs are also available for the former two.
+        </p><p>Yield map pine and cost maps for pine, poplar and willow are not yet available at county level spatial scale and therefore, the respective links are disabled</p>
+
+        @*Dan Wang, David LeBauer, and Michael Dietze 2013. Predicting yields of short-rotation hybrid poplar (Populus spp.) for the United States through model–data synthesis. Ecological Applications 23:944–958. http://dx.doi.org/10.1890/12-0854.1
+    LeBauer, David, Michael Dietze, Rob Kooper, Steven Long, Patrick Mulrooney, Gareth Scott Rohde, Dan Wang (2010). Biofuel Ecophysiological Traits and Yields Database (BETYdb), Energy Biosciences Institute, University of Illinois at Urbana-Champaign. doi:10.13012/J8H41PB9
+    Miguez, F. E., Maughan, M., Bollero, G. A., & Long, S. P. (2012). Modeling spatial and dynamic variation in growth, yield, and yield stability of the bioenergy crops Miscanthus× giganteus and Panicum virgatum across the conterminous United States. Gcb Bioenergy, 4(5), 509-520. http://dx.doi.org/10.1111/j.1757-1707.2011.01150.x
+        *@
+
+    </div>
 </div>
 
 
@@ -48,11 +75,11 @@
             '<iframe width="800" height="600" scrolling="no" frameborder="no" src="https://www.google.com/fusiontables/embedviz?q=select+col11%3E%3E1+from+1kD5w9t0iW_iVftzLag5aBAWh3PCK3On9zKFKVi9n+where+col1%3E%3E0+in+(&#39;AL&#39;%2C+&#39;AR&#39;%2C+&#39;FL&#39;%2C+&#39;GA&#39;%2C+&#39;KY&#39;%2C+&#39;LA&#39;%2C+&#39;MS&#39;%2C+&#39;NC&#39;%2C+&#39;SC&#39;%2C+&#39;TN&#39;%2C+&#39;TX&#39;%2C+&#39;VA&#39;)&amp;viz=MAP&amp;h=false&amp;lat=31.995958181131257&amp;lng=-83.71763842302317&amp;t=1&amp;z=6&amp;l=col11%3E%3E1&amp;y=2&amp;tmplt=2&amp;hml=KML"></iframe>';
         var miscanthusYieldFrame =
             '<iframe width="800" height="600" scrolling="no" frameborder="no" src="https://www.google.com/fusiontables/embedviz?q=select+col11%3E%3E1+from+1wQeB5JzUQRbGbw6di06YBYVH8akVQj6xIP3S9OCV+where+col1%3E%3E0+in+(&#39;AL&#39;%2C+&#39;AR&#39;%2C+&#39;FL&#39;%2C+&#39;GA&#39;%2C+&#39;KY&#39;%2C+&#39;LA&#39;%2C+&#39;MS&#39;%2C+&#39;NC&#39;%2C+&#39;SC&#39;%2C+&#39;TN&#39;%2C+&#39;TX&#39;%2C+&#39;VA&#39;)&amp;viz=MAP&amp;h=false&amp;lat=31.995958181131257&amp;lng=-83.71763842302317&amp;t=1&amp;z=6&amp;l=col11%3E%3E1&amp;y=2&amp;tmplt=2&amp;hml=KML"></iframe>';
-        var poplarYieldFrame = 
+        var poplarYieldFrame =
             '<iframe width="800" height="600" scrolling="no" frameborder="no" src="https://www.google.com/fusiontables/embedviz?q=select+col11%3E%3E1+from+1wQeB5JzUQRbGbw6di06YBYVH8akVQj6xIP3S9OCV+where+col1%3E%3E0+in+(&#39;AL&#39;%2C+&#39;AR&#39;%2C+&#39;FL&#39;%2C+&#39;GA&#39;%2C+&#39;KY&#39;%2C+&#39;LA&#39;%2C+&#39;MS&#39;%2C+&#39;NC&#39;%2C+&#39;SC&#39;%2C+&#39;TN&#39;%2C+&#39;TX&#39;%2C+&#39;VA&#39;)&amp;viz=MAP&amp;h=false&amp;lat=31.995958181131257&amp;lng=-83.71763842302317&amp;t=1&amp;z=6&amp;l=col11%3E%3E1&amp;y=3&amp;tmplt=3&amp;hml=KML"></iframe>';
-        var willowYieldFrame = 
+        var willowYieldFrame =
              '<iframe width="800" height="600" scrolling="no" frameborder="no" src="https://www.google.com/fusiontables/embedviz?q=select+col11%3E%3E1+from+1wQeB5JzUQRbGbw6di06YBYVH8akVQj6xIP3S9OCV+where+col1%3E%3E0+in+(&#39;AL&#39;%2C+&#39;AR&#39;%2C+&#39;FL&#39;%2C+&#39;GA&#39;%2C+&#39;KY&#39;%2C+&#39;LA&#39;%2C+&#39;MS&#39;%2C+&#39;NC&#39;%2C+&#39;SC&#39;%2C+&#39;TN&#39;%2C+&#39;TX&#39;%2C+&#39;VA&#39;)&amp;viz=MAP&amp;h=false&amp;lat=31.995958181131257&amp;lng=-83.71763842302317&amp;t=1&amp;z=6&amp;l=col11%3E%3E1&amp;y=4&amp;tmplt=4&amp;hml=KML"></iframe>';
-        
+
         var productyield = ['<iframe width="800" height="600" scrolling="no" frameborder="no" src="https://www.google.com/fusiontables/embedviz?q=select+col11+from+1dYCpUm_bwDqN4MybPQVjPmkHMPOsYw--Fau1IQZM&amp;viz=MAP&amp;h=false&amp;lat=36.10&amp;lng=-86.22055982637162&amp;t=1&amp;z=7&amp;l=col11&amp;y=2&amp;tmplt=2&amp;hml=KML"></iframe>', switchgrassYieldFrame, miscanthusYieldFrame, poplarYieldFrame, willowYieldFrame];
 
         var productcost = ['<iframe width="800" height="600" scrolling="no" frameborder="no" src="https://www.google.com/fusiontables/embedviz?q=select+col11+from+1dYCpUm_bwDqN4MybPQVjPmkHMPOsYw--Fau1IQZM&amp;viz=MAP&amp;h=false&amp;lat=36.10&amp;lng=-86.22055982637162&amp;t=1&amp;z=7&amp;l=col11&amp;y=2&amp;tmplt=2&amp;hml=KML"></iframe>',
@@ -60,13 +87,13 @@
             '<iframe width="800" height="600" scrolling="no" frameborder="no"   src="https://www.google.com/fusiontables/embedviz?q=select+col11%3E%3E1+from+1u0UNsOicvEJ7tyvKyRcXZ-jsH9Srcen9fqK8Y4xl+where+col1%3E%3E0+in+(&#39;AL&#39;%2C+&#39;AR&#39;%2C+&#39;FL&#39;%2C+&#39;GA&#39;%2C+&#39;KY&#39;%2C+&#39;LA&#39;%2C+&#39;MS&#39;%2C+&#39;NC&#39;%2C+&#39;SC&#39;%2C+&#39;TN&#39;%2C+&#39;TX&#39;%2C+&#39;VA&#39;)&amp;viz=MAP&amp;h=false&amp;lat=31.995958181131257&amp;lng=-83.71763842302317&amp;t=1&amp;z=6&amp;l=col11%3E%3E1&amp;y=2&amp;tmplt=2&amp;hml=KML"></iframe>'];
 
         var iframe = $('#mapelement');
-        $('#SelectedMapType').change(function() {
+        $('#SelectedMapType').change(function () {
             //the prop method retrieves the selected index. Adding 1 to that index increment the value by 1
             //This index can then be used in retrivieing links for maps where a blank map lives at index '0'
 
 
 
-            
+
 
             var cropIndex = $('#SelectedCrop').prop("selectedIndex") + 1;
             var selectedMapType = $('#SelectedMapType').val();
@@ -78,8 +105,8 @@
                 $("#SelectedCrop option[value='Pine']").attr("disabled", "disabled");
             } else if (selectedMapType === "costmap") {
                 iframe.html(productcost[cropIndex]);
-                
-             
+
+
 
                 $("#SelectedCrop option[value='willow']").attr("disabled", "disabled");
                 $("#SelectedCrop option[value='poplar']").attr("disabled", "disabled");
@@ -93,10 +120,10 @@
 
         });
 
-        $('#SelectedCrop').change(function() {
+        $('#SelectedCrop').change(function () {
             $('#SelectedMapType').change();
         });
-        $(document).ready(function() {
+        $(document).ready(function () {
             $('#SelectedMapType').change();
 
         });

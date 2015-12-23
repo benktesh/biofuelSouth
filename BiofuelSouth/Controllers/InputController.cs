@@ -185,7 +185,13 @@ namespace BiofuelSouth.Controllers
         {
             if (ModelState.IsValid)
             {
-                var input = (Input)Session["Input"];
+
+                model.UseCustom = true;
+                if (model.CropType == CropType.Miscanthus || model.CropType == CropType.Switchgrass)
+                {
+                    model.UseCustom = false;
+                }
+                    var input = (Input)Session["Input"];
                 input.ProductionCost = model;
                 Session["Input"] = input;
 
@@ -202,7 +208,7 @@ namespace BiofuelSouth.Controllers
             ProductionCostManager pcm = new ProductionCostManager();
 
             var input = (Input)Session["Input"];
-            return pcm.GetProductionCost(new ProductionCostViewModel { CropType = input.General.Category, County = input.General.County });
+            return pcm.GetProductionCost(new ProductionCostViewModel { CropType = input.General.Category, County = input.General.County, UseCustom = true});
         }
         public ActionResult Financial(Financial financial = null)
         {

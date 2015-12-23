@@ -1,8 +1,9 @@
 ﻿@using BiofuelSouth.Models
+@using BiofuelSouth.Resources
 @model Input
 
 @{
-    ViewBag.Title = "BDSS: Biofuel Decision Support System";
+    ViewBag.Title = string.Format("Results: {0}", GeneralResource.DSS_Tittle_Display); 
     var mergeCol = @Model.General.ProjectLife + 1;
 
 }

@@ -1,20 +1,19 @@
 ﻿@using BiofuelSouth.Enum
 @using BiofuelSouth.Models
+@using BiofuelSouth.Resources
 @model Storage
 
 @{
     var pageMain = "Storage Information";
-    ViewBag.Title = String.Format("{0}:{1}", pageMain, "Storage Information: Biofuel Decision Support System");
+    ViewBag.Title = String.Format("{0}:{1}", pageMain, GeneralResource.DSS_Tittle_Display);
 }
+
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-
-        @*@Html.Partial("_DSSMenu")*@
         <div class="row">
-
             <div class="container col-md-8">
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 <div class="row">
