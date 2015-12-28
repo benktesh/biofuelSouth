@@ -35,13 +35,13 @@ namespace BiofuelSouth.Models
 
         [DisplayName(@"Farm Gate Price ($/dry ton)")]
         [Required]
-        public double? BiomassPriceAtFarmGate { get; set; } //$/ton
+        public decimal? BiomassPriceAtFarmGate { get; set; } //$/ton
 
 
         [DisplayName(@"Cost of land ($/acre/year)")]
         [Required]
         
-        public double? LandCost { get; set; } //$/acre/year
+        public decimal? LandCost { get; set; } //$/acre/year
 
         public IEnumerable<SelectListItem> CountyList { get; set;  }
         public IEnumerable<SelectListItem> StateList { get; set; }

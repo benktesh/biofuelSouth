@@ -81,22 +81,22 @@ namespace BiofuelSouth.Models
         }
 
         //Method to return an average price of farm gate price for a crop type
-        public static double GetFarmGatePrice(CropType cropType)
+        public static decimal GetFarmGatePrice(CropType cropType)
         {
             switch (cropType)
             {
                 case CropType.Switchgrass:
-                    return 65.0; // http://www.uky.edu/Ag/CCD/introsheets/switchgrass.pdf
+                    return 65.0M; // http://www.uky.edu/Ag/CCD/introsheets/switchgrass.pdf
                 case CropType.Miscanthus:
-                    return 45.0; //http://pubs.cas.psu.edu/FreePubs/PDFs/ee0081.pdf
+                    return 45.0M; //http://pubs.cas.psu.edu/FreePubs/PDFs/ee0081.pdf
                 case CropType.Poplar:
-                    return 30.0;
+                    return 30.0M;
                 case CropType.Willow:
-                    return 30.0;
+                    return 30.0M;
                 case CropType.Pine:
-                    return 30.0; 
+                    return 30.0M; 
                 default:
-                    return -999.99;
+                    return -999.99M;
 
             }
 

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using BiofuelSouth.Enum;
-using BiofuelSouth.Manager;
 using BiofuelSouth.Services;
 using log4net;
 using LogManager = log4net.LogManager;
@@ -36,7 +35,7 @@ namespace BiofuelSouth.Models
         public double[] GetCashFlow()
         {
             var duration = General.ProjectLife;
-            var cashFlow = new double[duration.GetValueOrDefault()];
+            double[] cashFlow = new double[duration.GetValueOrDefault()];
 
             //for each year
             //estimate expesese
@@ -47,7 +46,7 @@ namespace BiofuelSouth.Models
             //get net and insert into cashflow
             for (var i = 0; i < duration; i++)
             {
-                cashFlow[i] = -expenses[i].TotalExpenses + revenues[i].TotalRevenue;
+                cashFlow[i] = (double) (-expenses[i].TotalExpenses + revenues[i].TotalRevenue);
             }
 
             return cashFlow;
@@ -66,8 +65,7 @@ namespace BiofuelSouth.Models
             var storageCost = Constants.GetStorageCost(this);
 
             try
-            {
-                var rotation = CropAttribute.GetRoationYears(General.Category);
+            { 
                 var duration = General.ProjectLife ?? 10;
                 var annualProductionCosts = GetAnnualProductionCosts();
                 for (var i = 0; i < duration; i++)
@@ -77,16 +75,16 @@ namespace BiofuelSouth.Models
                         Year = i,
                         AdministrativeCost = Financial.AdministrativeCost,
                         LandCost = General.LandCost.GetValueOrDefault(),
-                        ProductionCost = annualProductionCosts[i]
+                        ProductionCost = (decimal) annualProductionCosts[i]
                     };
 
-                    expenditure.StorageCost = storageCost != null ? storageCost[i] : 0;
+                    expenditure.StorageCost = (decimal) (storageCost != null ? storageCost[i] : 0);
 
                     expenditure.TotalExpenses = expenditure.AdministrativeCost + expenditure.LandCost +
                                                 expenditure.ProductionCost;
-                    expenditure.TotalExpenses = expenditure.TotalExpenses*General.ProjectSize.GetValueOrDefault() +
+                    expenditure.TotalExpenses = expenditure.TotalExpenses*(decimal) General.ProjectSize.GetValueOrDefault() +
                                                 expenditure.StorageCost
-                                                + Financial.LoanAmount*(Financial.EquityLoanInterestRate/100);
+                                                + Financial.LoanAmount*(decimal) (Financial.EquityLoanInterestRate/100);
                     expenses.Add(expenditure);
 
                 }
@@ -116,9 +114,9 @@ namespace BiofuelSouth.Models
                     //if the current year is less than the years of incenptive payments, then there is a incentivepayment revenue;
                     if (i < Financial.YearsOfIncentivePayment)
                     {
-                        revenue.IncentivePayments = Financial.IncentivePayment * General.ProjectSize.GetValueOrDefault();
+                        revenue.IncentivePayments = Financial.IncentivePayment * (decimal) General.ProjectSize.GetValueOrDefault();
                     }
-                    revenue.BiomassPrice = production[i] * GetBiomassPrice();
+                    revenue.BiomassPrice = (decimal) (production[i] * (double) GetBiomassPrice());
                     revenue.TotalRevenue = (revenue.IncentivePayments + revenue.BiomassPrice);
 
                     revenues.Add(revenue);
@@ -135,9 +133,9 @@ namespace BiofuelSouth.Models
         /// Returns total annual production for the project si;
         /// </summary>
         /// <returns></returns>
-        public double GetAnnualProductivity()
+        public decimal GetAnnualProductivity()
         {
-            return DataService.GetProductivityPerAcreForCropByGeoId(General.Category, General.County) * General.ProjectSize.GetValueOrDefault();
+            return (decimal) (DataService.GetProductivityPerAcreForCropByGeoId(General.Category, General.County) * General.ProjectSize.GetValueOrDefault());
         }
 
         public double GetCostPerAcre()
@@ -154,12 +152,12 @@ namespace BiofuelSouth.Models
         public double GetAnnualCost()
         {
             if (ProductionCost.TotalProductionCost > 0)
-                return ((double)(ProductionCost.TotalProductionCost) + General.LandCost.GetValueOrDefault()) *
+                return ((double)(ProductionCost.TotalProductionCost) + (double) General.LandCost.GetValueOrDefault()) *
                     General.ProjectSize.GetValueOrDefault();
-            return (DataService.GetCostPerAcreForCropByGeoId(General.Category, General.County) + General.LandCost.GetValueOrDefault()) * General.ProjectSize.GetValueOrDefault();
+            return (DataService.GetCostPerAcreForCropByGeoId(General.Category, General.County) + (double) General.LandCost.GetValueOrDefault()) * General.ProjectSize.GetValueOrDefault();
         }
 
-        public double GetBiomassPrice()
+        public decimal GetBiomassPrice()
         {
             if (Convert.ToInt32(General.BiomassPriceAtFarmGate) == 0)
             {
@@ -174,7 +172,7 @@ namespace BiofuelSouth.Models
             {
                 General.BiomassPriceAtFarmGate = Constants.GetFarmGatePrice(General.Category);
             }
-            return GetAnnualProductivity() * General.BiomassPriceAtFarmGate.GetValueOrDefault();
+            return (double) (GetAnnualProductivity() * General.BiomassPriceAtFarmGate.GetValueOrDefault());
         }
 
 
@@ -182,7 +180,6 @@ namespace BiofuelSouth.Models
         {
             
             var rotation = CropAttribute.GetRoationYears(General.Category);
-            var duration = General.ProjectLife ?? 10;
 
 
             var annualProductionCost = new List<double>();
@@ -191,13 +188,19 @@ namespace BiofuelSouth.Models
 
             if (rotation == 1)
             {
-                annualProductionCost.Select(c => { c = standardAnnualCost; return c; }).ToList();
+                // ReSharper disable once RedundantAssignment
+                annualProductionCost.Select(delegate(double c)
+                {
+                    c = standardAnnualCost;
+                    return c;
+                    // ReSharper disable once ReturnValueOfPureMethodIsNotUsed
+                }).ToList();
             }
 
-            decimal SitePlantationFactor = 0.38M;
-            decimal ThinningFactor = 0.10M;
-            decimal HarvestFactor = 0.50M;
-            decimal CustodialFactor = 0.02M;
+            decimal sitePlantationFactor = 0.38M;
+            decimal thinningFactor = 0.10M;
+            decimal harvestFactor = 0.50M;
+            decimal custodialFactor = 0.02M;
 
             if (ProductionCost.CanCustomize && ProductionCost.ProductionCosts.Any())
             {
@@ -207,7 +210,7 @@ namespace BiofuelSouth.Models
                         m.ProductionCostType == ProductionCostType.Planting ||
                         m.ProductionCostType == ProductionCostType.SitePreparation).Sum(m => m.Amount)/total;
                 if (o3 != null)
-                    SitePlantationFactor =
+                    sitePlantationFactor =
                         (decimal) o3;
 
                 var o2 = ProductionCost.ProductionCosts.Where(
@@ -215,14 +218,14 @@ namespace BiofuelSouth.Models
                         m.ProductionCostType == ProductionCostType.CustodialManagement).Sum(m => m.Amount)/total;
                 if (o2 !=
                     null)
-                    ThinningFactor =
+                    thinningFactor =
                         (decimal) o2;
 
                 var o = ProductionCost.ProductionCosts.Where(
                     m =>
                         m.ProductionCostType == ProductionCostType.Harvesting).Sum(m => m.Amount)/total;
                 if (o != null)
-                    HarvestFactor =
+                    harvestFactor =
                         (decimal) o;
 
                 var o1 = ProductionCost.ProductionCosts.Where(
@@ -230,16 +233,16 @@ namespace BiofuelSouth.Models
                         m.ProductionCostType == ProductionCostType.CustodialManagement).Sum(m => m.Amount)/total;
                 if (o1 !=
                     null)
-                    CustodialFactor =
+                    custodialFactor =
                         (decimal) o1;
                 Log.Info("Custom cost included");
             }
             else
             {
-                SitePlantationFactor = 0.0M;
-                ThinningFactor = 0.0M;
-                HarvestFactor = 0.0M;
-                CustodialFactor = 1.0M;
+                sitePlantationFactor = 0.0M;
+                thinningFactor = 0.0M;
+                harvestFactor = 0.0M;
+                custodialFactor = 1.0M;
             }
 
             //user factor
@@ -258,26 +261,26 @@ namespace BiofuelSouth.Models
                 {
                     if (CropAttribute.CanCoppice(General.Category) && i > 0)
                     {
-                        SitePlantationFactor = 0; 
+                        sitePlantationFactor = 0; 
                     }
-                    annualProductionCost.Add(standardAnnualCost * (double)(SitePlantationFactor + CustodialFactor));
+                    annualProductionCost.Add(standardAnnualCost * (double)(sitePlantationFactor + custodialFactor));
                    
                    
                 }
                 else if (i > 0 && (i + 1) % rotation == 0) //harvest
                 {
-                    annualProductionCost.Add(standardAnnualCost * (double)(HarvestFactor + CustodialFactor));
+                    annualProductionCost.Add(standardAnnualCost * (double)(harvestFactor + custodialFactor));
                    
                 }
                
                 else if(thinningYear !=null && (i > 0 && ((i + 1)%thinningYear == 0) || ((i % rotation)+1)%thinningYear ==0)) //thinning
                 {
-                    annualProductionCost.Add(standardAnnualCost*(double) (ThinningFactor + CustodialFactor));
+                    annualProductionCost.Add(standardAnnualCost*(double) (thinningFactor + custodialFactor));
                     
                 }
                 else //customdial
                 {
-                    annualProductionCost.Add(standardAnnualCost * (double)(CustodialFactor));
+                    annualProductionCost.Add(standardAnnualCost * (double)(custodialFactor));
                 }
             }
 
@@ -340,18 +343,18 @@ namespace BiofuelSouth.Models
             if (Storage != null && Storage.RequireStorage != null && (bool)Storage.RequireStorage)
                 storageLossFactor = GetStorageLossFactor() * Storage.PercentStored / 100;
 
-            var standardAnnualProduction = GetAnnualProductivity() * (1 - storageLossFactor); //Annual Productivity is = Pruduction * (1 - loss factor)
+            var standardAnnualProduction = GetAnnualProductivity() * (decimal) (1 - storageLossFactor); //Annual Productivity is = Pruduction * (1 - loss factor)
             for (var i = 0; i < General.ProjectLife; i++)
             {
                 if (i < taper.Count)
                 {
                     var taperValue = taper.ElementAt(i);
-                    var delta = standardAnnualProduction * taperValue;
+                    double delta = (double) (standardAnnualProduction * (decimal) taperValue);
                     annualProductivity.Add(delta);
                 }
                 else
                 {
-                    annualProductivity.Add(standardAnnualProduction);
+                    annualProductivity.Add((double) standardAnnualProduction);
                 }
             }
 
@@ -364,7 +367,7 @@ namespace BiofuelSouth.Models
         {
             var taper = CropAttribute.GetProductivityTaper(General.Category);
             var annualProductivity = new List<double>();
-            double standardAnnualProduction = GetAnnualProductivity(); //Annual Productivity is = Pruduction * (1 - loss factor)
+            double standardAnnualProduction = (double) GetAnnualProductivity(); //Annual Productivity is = Pruduction * (1 - loss factor)
             for (var i = 0; i < General.ProjectLife; i++)
             {
                 if (i < taper.Count)
@@ -375,7 +378,7 @@ namespace BiofuelSouth.Models
                 }
                 else
                 {
-                    annualProductivity.Add(GetAnnualProductivity());
+                    annualProductivity.Add((double) GetAnnualProductivity());
                 }
             }
             return annualProductivity;

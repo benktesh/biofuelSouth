@@ -17,17 +17,15 @@ namespace BiofuelSouth.Models
 
         [DisplayName(@"Administrative Cost($/acre/year)")]
         [Required]
-        public double AdministrativeCost { get; set; } //$/acre/year
+        public decimal AdministrativeCost { get; set; } //$/acre/year
 
         [DisplayName(@"Incentive Payment($/acre/year)")]
         [Required]
-        public double IncentivePayment { get; set; } //$/acre/year
+        public decimal IncentivePayment { get; set; } //$/acre/year
 
         [DisplayName(@"No. of Years of Payment")]
         [Required]
         public int YearsOfIncentivePayment { get; set; } //$acres/yearC:\Users\Benktesh\Documents\Visual Studio 2013\Projects\BiofuelSouthSolution\BiofuelSouth\Models\Input.cs
-
-
 
         [DisplayName(@"Available Equity ($)")]
         [Required]
@@ -35,7 +33,7 @@ namespace BiofuelSouth.Models
 
         [DisplayName(@"Loan Amount ($)")]
         [Required]
-        public double LoanAmount { get; set; } //$
+        public decimal LoanAmount { get; set; } //$
 
         [DisplayName(@"Equity Loan Interest Rate (%)")]
         [Required]
