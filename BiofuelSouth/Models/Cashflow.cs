@@ -63,28 +63,28 @@ namespace BiofuelSouth.Models
     public class Expenditure
     {
         public double Year { get; set;  }
-        public double LandCost { get; set; }
+        public decimal LandCost { get; set; }
 
         //if used, do not use admin, plantation, and maintenance cost
-        public double ProductionCost { get; set; }
+        public decimal ProductionCost { get; set; }
 
-        public double InterestCost { get; set; }
+        public decimal InterestCost { get; set; }
 
-        public double AdministrativeCost { get; set; }
-        public double PlantingAndEstablishmentCost { get; set; }
-        public double StandMaintenanceCost { get; set; }
-        public double HarvestCost { get; set; }
+        public decimal AdministrativeCost { get; set; }
+        public decimal PlantingAndEstablishmentCost { get; set; }
+        public decimal StandMaintenanceCost { get; set; }
+        public decimal HarvestCost { get; set; }
 
-        public double StorageCost { get; set; }
-        public double TransportationCost { get; set; }
-        public double TotalExpenses { get; set; }
+        public decimal StorageCost { get; set; }
+        public decimal TransportationCost { get; set; }
+        public decimal TotalExpenses { get; set; }
     }
 
     public class Revenue
     {
         public double Year { get; set; }
-        public double IncentivePayments { get; set; }
-        public double BiomassPrice { get; set; }
-        public double TotalRevenue { get; set; }
+        public decimal IncentivePayments { get; set; }
+        public decimal BiomassPrice { get; set; }
+        public decimal TotalRevenue { get; set; }
     }
 }
