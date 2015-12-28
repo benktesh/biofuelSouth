@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.EnterpriseServices.Internal;
 using System.Linq;
 using System.Reflection;
 using System.Web;
+using BiofuelSouth.Controllers;
 using BiofuelSouth.Enum;
 using BiofuelSouth.Models;
 using BiofuelSouth.Services;
@@ -18,20 +20,132 @@ namespace BiofuelSouth.Manager
 
         private Input Input { get; }
 
-        private General General { get;  }
+        private General General { get; }
 
-        private Storage Storage { get;  } 
-        private Financial Financial { get;  }
-        private ProductionCostViewModel ProductionCost { get;  } 
+        private Storage Storage { get; }
+        private Financial Financial { get; }
+        private ProductionCostViewModel ProductionCost { get; }
 
-        public ResultManager(Input input)
+        private ResultViewModel vm { get; set; }
+
+
+        private IList<Revenue> Revenues { get; set; }
+        private decimal BiomassPriceAtFarmGate { get; set; }
+
+    public ResultManager(Input input)
         {
             Input = Input;
             General = Input.General;
             Storage = Input.Storage;
             Financial = Input.Financial;
             ProductionCost = Input.ProductionCost; 
+
+            vm = new ResultViewModel();
+        // Set properties for calculations
+
+        vm.BiomassPriceAtFarmGate = BiomassPriceAtFarmGate;
+        vm.CashFlow = GetCashFlow();
+
+        //set all view model properties
         }
+
+        public ResultViewModel GetResult()
+        {
+            vm.CashFlow = GetCashFlow();
+
+            vm.BiomassPriceAtFarmGate = $"{BiomassPriceAtFarmGate.ToString("C0")} per ton";
+            vm.ProjectSize = $"{General.ProjectSize.GetValueOrDefault().ToString("##,###")} Acre";
+            vm.LandCost = $"{General.LandCost.GetValueOrDefault().ToString("C0")} per Acre";
+            return vm;
+        }
+
+        private decimal GetBiomassPrice()
+        {
+            if (Convert.ToInt32(General.BiomassPriceAtFarmGate) == 0)
+            {
+                General.BiomassPriceAtFarmGate = Constants.GetFarmGatePrice(General.Category);
+            }
+            return (decimal) General.BiomassPriceAtFarmGate.GetValueOrDefault();
+        }
+
+
+        private IList<Revenue> GetRevenues()
+        {
+            var revenues = new List<Revenue>();
+            try
+            {
+                var production = GetAnnualProductionList();
+                var duration = General.ProjectLife;
+                for (var i = 0; i < duration; i++)
+                {
+                    var revenue = new Revenue();
+                    revenue.Year = i;
+                    revenue.IncentivePayments = 0;
+                    //if the current year is less than the years of incenptive payments, then there is a incentivepayment revenue;
+                    if (i < Financial.YearsOfIncentivePayment)
+                    {
+                        revenue.IncentivePayments = Financial.IncentivePayment * General.ProjectSize.GetValueOrDefault();
+                    }
+                    revenue.BiomassPrice = production[i] * GetBiomassPrice();
+                    revenue.TotalRevenue = (revenue.IncentivePayments + revenue.BiomassPrice);
+
+                    revenues.Add(revenue);
+                }
+            }
+            catch (Exception)
+            {
+                Log.Error("Revenues cannot be calcualted");
+            }
+            return revenues;
+        }
+        private List<decimal> GetCashFlow()
+        {
+            var duration = General.ProjectLife;
+            var cashFlow = new List<decimal>();  
+            //for each year
+            //estimate expesese
+            var expenses = GetExpenditures();
+            var revenues = GetRevenues();
+
+            //estimate reveneue
+            //get net and insert into cashflow
+            for (var i = 0; i < duration; i++)
+            {
+               var calc = -expenses[i].TotalExpenses + revenues[i].TotalRevenue;
+                cashFlow.Add((decimal) calc);
+            }
+            return cashFlow;
+
+        }
+        private List<Revenue> GetRevenue()
+        {
+            var revenues = new List<Revenue>();
+            try
+            {
+                var production = GetAnnualProductionList();
+                var duration = General.ProjectLife;
+                for (var i = 0; i < duration; i++)
+                {
+                    var revenue = new Revenue();
+                    revenue.Year = i;
+                    revenue.IncentivePayments = 0;
+                    //if the current year is less than the years of incenptive payments, then there is a incentivepayment revenue;
+                    if (i < Financial.YearsOfIncentivePayment)
+                    {
+                        revenue.IncentivePayments = Financial.IncentivePayment * General.ProjectSize.GetValueOrDefault();
+                    }
+                    revenue.BiomassPrice = production[i] * GetBiomassPrice();
+                    revenue.TotalRevenue = (revenue.IncentivePayments + revenue.BiomassPrice);
+
+                    revenues.Add(revenue);
+                }
+            }
+            catch (Exception)
+            {
+                Log.Error("Revenues cannot be calcualted");
+            }
+            return revenues;
+        } 
 
         public double GetCostPerAcre()
         {
@@ -170,7 +284,7 @@ namespace BiofuelSouth.Manager
         }
 
 
-        public string BiomassPriceAtFarmGate => $"{General.BiomassPriceAtFarmGate.GetValueOrDefault().ToString("C0")} per ton";
+       
 
         public string ProjectSize => $"{General.ProjectSize.GetValueOrDefault().ToString("##,###")} Acre";
 
@@ -184,7 +298,39 @@ namespace BiofuelSouth.Manager
             vm.StateCode = General.State;
             vm.RequireStorage = Storage.RequireStorage.GetValueOrDefault();
            
+
+            //populate values.
+            //make chart
+
             return vm;
+        }
+
+        public void PrepareChart(ResultViewModel vm)
+        {
+            //make cachekey and load to viewmodel
+            var c = new ChartController();
+            var revenueCachekey = Guid.NewGuid().ToString();
+
+            vm.ChartKeys.Add(ChartType.Revenue, revenueCachekey);
+            
+            //c.GenerateCostRevenueChart(costRevenueCachekey, ip.GetRevenues().Select(m => m.TotalRevenue).ToArray(), "Cost and Revenue");
+            var rev = ip.GetRevenues().Select(m => m.TotalRevenue).ToArray();
+            c.GenerateChart(revenueCachekey, rev, "Revenue");
+
+            var AnnualProd = ip.GetAnnualProductionList().ToArray();
+            var cacheKey = Guid.NewGuid().ToString();
+            ViewBag.cacheKey = cacheKey;
+            var cc = new ChartController();
+            cc.GenerateChart(cacheKey, AnnualProd, "Annual Production");
+
+            cacheKey = Guid.NewGuid().ToString();
+            ViewBag.cacheKey1 = cacheKey;
+            cc.GenerateCostRevenueChart(cacheKey, ip, "Cost and Revenue");
+
+            cacheKey = Guid.NewGuid().ToString();
+            ViewBag.cacheKey3 = cacheKey;
+            cc.GenerateColumnChart(cacheKey, ip.GetCashFlow(), "Cash Flow", "Year ", "$");
+
         }
     }
 }

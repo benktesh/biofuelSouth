@@ -503,7 +503,57 @@ namespace BiofuelSouth.Models
 
         }
 
-        
+        public static Double GetStorageLoss(int  storageMethod, CropType cropType = CropType.Switchgrass)
+        {
+            var result = 0.0;
+           
+
+            if (cropType == CropType.Switchgrass || cropType == CropType.Miscanthus)
+            {
+
+                switch (storageMethod)
+                {
+                    case 1:
+                        result = 1.0;
+                        break;
+                    case 2:
+                        result = 8.5;
+                        break;
+                    case 3:
+                        result = 7.0;
+                        break;
+                    case 4:
+                        result = 18.2;
+                        break;
+                    case 5:
+                        result = 16.6;
+                        break;
+                    case 6:
+                        result = 12.8;
+                        break;
+                    case 11:
+                        result = 13.7;
+                        break;
+                    case 12:
+                        result = 28.0;
+                        break;
+                    case 13:
+                        result = 48.0;
+                        break;
+                    case 14:
+                        result = 57.1;
+                        break;
+                    default:
+                        result = 0;
+                        break;
+                }
+
+            }
+
+            return result;
+        }
+
+
         public static Double GetStorageLoss(int storageMethod, string cropType = null)
         {
             var result = 0.0;

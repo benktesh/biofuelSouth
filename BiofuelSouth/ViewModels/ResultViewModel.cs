@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
@@ -58,9 +59,10 @@ namespace BiofuelSouth.ViewModels
         #endregion
 
         #region Assumption
-        public decimal BiomassPriceAtFarmGate { get; set; }
-        public double ProjectSize { get; set; }
-        public double LandCost { get; set; }
+        public string BiomassPriceAtFarmGate { get; set; }
+        public string ProjectSize { get; set; }
+        public string LandCost { get; set; }
+
         public double AverageAnnualCost { get; set; }
         public double AverageAnnualYield { get; set; }
         #endregion
@@ -73,6 +75,8 @@ namespace BiofuelSouth.ViewModels
         public List<double> LandCotList { get; set; }
         public List<double> ProductionCostList { get; set; }
         public List<decimal> CashFlow { get; set; }
+
+        public Dictionary<ChartType, string> ChartKeys { get; set; }  //actualy string of guid is the value 
         #endregion
     }
 }
