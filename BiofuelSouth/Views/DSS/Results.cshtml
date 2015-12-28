@@ -1,4 +1,5 @@
-﻿@model BiofuelSouth.ViewModels.ResultViewModel
+﻿@using BiofuelSouth.Enum
+@model BiofuelSouth.ViewModels.ResultViewModel
 
 @{
     ViewBag.Title = "BDSS: Biofuel Decision Support System";
@@ -194,38 +195,33 @@
             <input type="checkbox" id="showCostRevenue" name="showCostRevenue" checked> Display Cost/Revenue Chart
         </div>
 
-        <div id="CashFlowChart">
-            @{
-
-
-                var urlcashflow = Url.Action("ShowChart", "Chart", new { @cacheKey = ViewBag.cacheKey3 });
-                <img src="@urlcashflow" class="img-responsive" alt="CashFlow Chart" />
-
+        @foreach (var key in Model.ChartKeys)
+        {
+            if (key.Key == ChartType.CashFLow)
+            {
+                var urlcashflow = Url.Action("ShowChart", "Chart", new { @cacheKey = @key.Value });
+                <div id="CashFlowChart">
+                    <img src="@urlcashflow" class="img-responsive" alt="CashFlow Chart" />
+                </div>
+            }
+            else if (key.Key == ChartType.Production)
+            {
+                var urlAnnualProduction = Url.Action("ShowChart", "Chart", new { @key.Value });
+                <div id="AnnualProductionChart">
+                    <img src="@urlAnnualProduction" class="img-responsive" alt="Annual Production Chart" />
+                </div>
+            }
+            else if (key.Key == ChartType.Revenue)
+            {
+                var urlAnnualProduction1 = Url.Action("ShowChart", "Chart", new { @cacheKey = @key.Value });
+                <div id="CostRevenueChart">
+                    <img src="@urlAnnualProduction1" class="img-responsive" alt="Revenue Chart" />
+                </div>
             }
 
-        </div>
-
-        <div id="AnnualProductionChart">
-            @{
-                var urlAnnualProduction = Url.Action("ShowChart", "Chart", new { ViewBag.cacheKey });
-                <img src="@urlAnnualProduction" class="img-responsive" alt="Annual Production Chart" />
-
-            }
+        }
 
         </div>
-        <div id="CostRevenueChart">
-            @{
-                var urlAnnualProduction1 = Url.Action("ShowChart", "Chart", new { @cacheKey = ViewBag.cacheKey1 });
-                <img src="@urlAnnualProduction1" class="img-responsive" alt="Revenue Chart" />
-            }
-
-        </div>
-
-
-
-
-
-    </div>
 
 </div>
 
