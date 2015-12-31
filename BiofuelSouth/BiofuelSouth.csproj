@@ -640,12 +640,13 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Controllers\GlossaryController.cs" />
-    <Compile Include="Controllers\InputController.cs">
+    <Compile Include="Controllers\DSSController.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Controllers\MapController.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Enum\ChartType.cs" />
     <Compile Include="Enum\ProductionCostType.cs" />
     <Compile Include="Enum\StorageMethod.cs" />
     <Compile Include="Helpers\EnumExtensions.cs" />
@@ -830,7 +831,7 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Input\Index.cshtml" />
+    <Content Include="Views\DSS\Index.cshtml" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\Map\Index.cshtml" />
     <Content Include="Views\Map\productivity.cshtml" />
@@ -840,15 +841,15 @@
     <Content Include="Views\Admin\Edit.cshtml" />
     <Content Include="Views\Admin\Create.cshtml" />
     <Content Include="Views\Admin\Delete.cshtml" />
-    <Content Include="Views\Input\Storage.cshtml" />
+    <Content Include="Views\DSS\Storage.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\Search.cshtml" />
     <Content Include="Views\Home\FeedBack.cshtml" />
-    <Content Include="Views\Input\_inputPartial.cshtml" />
+    <Content Include="Views\DSS\_inputPartial.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Input\Financial.cshtml" />
-    <Content Include="Views\Input\General.cshtml" />
-    <Content Include="Views\Input\Result.cshtml" />
+    <Content Include="Views\DSS\Financial.cshtml" />
+    <Content Include="Views\DSS\General.cshtml" />
+    <Content Include="Views\DSS\Result.cshtml" />
     <Content Include="Views\Shared\_Disclaimer.cshtml" />
     <Content Include="Views\Home\Factsheet.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
@@ -861,12 +862,12 @@
     </Content>
     <Content Include="Views\Shared\_Banner.cshtml" />
     <Content Include="Views\Home\AskExpert.cshtml" />
-    <Content Include="Views\Input\_moreinformation.cshtml" />
+    <Content Include="Views\DSS\_moreinformation.cshtml" />
     <Content Include="Views\Shared\_storageCostSelection.cshtml" />
-    <Content Include="Views\Input\Wizard.cshtml" />
-    <Content Include="Views\Input\GetProductionCost.cshtml" />
-    <Content Include="Views\Input\Results.cshtml" />
-    <None Include="Views\Input\_productionCost.cshtml" />
+    <Content Include="Views\DSS\Wizard.cshtml" />
+    <Content Include="Views\DSS\GetProductionCost.cshtml" />
+    <Content Include="Views\DSS\Results.cshtml" />
+    <None Include="Views\DSS\_productionCost.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\ProductionCost.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

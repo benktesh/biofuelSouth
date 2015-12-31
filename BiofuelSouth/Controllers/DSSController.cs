@@ -8,7 +8,7 @@ using BiofuelSouth.ViewModels;
 
 namespace BiofuelSouth.Controllers
 {
-    public class InputController : Controller
+    public class DSSController : Controller
     {
         //private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 

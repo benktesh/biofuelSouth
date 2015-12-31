@@ -26,8 +26,9 @@ namespace BiofuelSouth.Manager
         private Financial Financial { get; }
         private ProductionCostViewModel ProductionCost { get; }
 
-        private ResultViewModel vm { get; set; }
+        private List<double> Productions { get; set; }
 
+        private ResultViewModel vm { get; set; }
 
         private IList<Revenue> Revenues { get; set; }
         private decimal BiomassPriceAtFarmGate { get; set; }
@@ -43,22 +44,93 @@ namespace BiofuelSouth.Manager
             vm = new ResultViewModel();
         // Set properties for calculations
 
-        vm.BiomassPriceAtFarmGate = BiomassPriceAtFarmGate;
-        vm.CashFlow = GetCashFlow();
+            BiomassPriceAtFarmGate = GetBiomassPrice();
+
+            Revenues = GetRevenues();
+            Productions = GetAnnualProductionList();
 
         //set all view model properties
         }
 
-        public ResultViewModel GetResult()
+        private Double GetStorageLossFactor()
         {
-            vm.CashFlow = GetCashFlow();
+            if (Storage == null)
+                return 0;
+            var days = Storage.StorageTime;
+            if (Math.Abs(days) < 1)
+                return 0;
+            var storagemethod = Convert.ToInt32(Storage.StorageMethod);
+            var storageLossValue = Constants.GetStorageLoss(storagemethod, General.Category);
+            return days / 200 * storageLossValue / 100;
+        }
+        private List<double> GetYields(List<double> annualProductivity)
+        {
+            var rotation = CropAttribute.GetRoationYears(General.Category);
+            //for annual crops return the original productivity
+            if (rotation == 1)
+            {
+                return annualProductivity;
+            }
 
-            vm.BiomassPriceAtFarmGate = $"{BiomassPriceAtFarmGate.ToString("C0")} per ton";
-            vm.ProjectSize = $"{General.ProjectSize.GetValueOrDefault().ToString("##,###")} Acre";
-            vm.LandCost = $"{General.LandCost.GetValueOrDefault().ToString("C0")} per Acre";
-            return vm;
+
+            if (General.ProjectLife <= rotation)
+            {
+                return annualProductivity;
+
+            }
+
+            //get the lenght of harvst cycle and repeat
+            var cycleYield = annualProductivity.Take(rotation).ToList();
+
+            annualProductivity.Clear();
+            var projectLife = General.ProjectLife ?? 10;
+
+            for (int x = 0; x < projectLife; x = x + rotation)
+            {
+                var trim = x + cycleYield.Count < projectLife ? cycleYield.Count : projectLife - x;
+                annualProductivity.AddRange(cycleYield.Take(trim));
+            }
+
+            return annualProductivity;
+
+        }
+        private List<double> GetAnnualProductionList()
+        {
+
+            var taper = CropAttribute.GetProductivityTaper(General.Category);
+            var annualProductivity = new List<double>();
+            double storageLossFactor = 0;
+            if (Storage != null && Storage.RequireStorage != null && (bool)Storage.RequireStorage)
+                storageLossFactor = GetStorageLossFactor() * Storage.PercentStored / 100;
+
+            var standardAnnualProduction = GetAnnualProductivity() * (1 - storageLossFactor); //Annual Productivity is = Pruduction * (1 - loss factor)
+            for (var i = 0; i < General.ProjectLife; i++)
+            {
+                if (i < taper.Count)
+                {
+                    var taperValue = taper.ElementAt(i);
+                    var delta = standardAnnualProduction * taperValue;
+                    annualProductivity.Add(delta);
+                }
+                else
+                {
+                    annualProductivity.Add(standardAnnualProduction);
+                }
+            }
+
+            return GetYields(annualProductivity);
+
+
         }
 
+        /// <summary>
+        /// Returns total annual production for the project si;
+        /// </summary>
+        /// <returns></returns>
+        private double GetAnnualProductivity()
+        {
+            return DataService.GetProductivityPerAcreForCropByGeoId(General.Category, General.County) * General.ProjectSize.GetValueOrDefault();
+        }
         private decimal GetBiomassPrice()
         {
             if (Convert.ToInt32(General.BiomassPriceAtFarmGate) == 0)
@@ -68,13 +140,12 @@ namespace BiofuelSouth.Manager
             return (decimal) General.BiomassPriceAtFarmGate.GetValueOrDefault();
         }
 
-
         private IList<Revenue> GetRevenues()
         {
             var revenues = new List<Revenue>();
             try
             {
-                var production = GetAnnualProductionList();
+               
                 var duration = General.ProjectLife;
                 for (var i = 0; i < duration; i++)
                 {
@@ -84,9 +155,9 @@ namespace BiofuelSouth.Manager
                     //if the current year is less than the years of incenptive payments, then there is a incentivepayment revenue;
                     if (i < Financial.YearsOfIncentivePayment)
                     {
-                        revenue.IncentivePayments = Financial.IncentivePayment * General.ProjectSize.GetValueOrDefault();
+                        revenue.IncentivePayments = (decimal) (Financial.IncentivePayment * General.ProjectSize.GetValueOrDefault());
                     }
-                    revenue.BiomassPrice = production[i] * GetBiomassPrice();
+                    revenue.BiomassPrice = Production[i] * BiomassPriceAtFarmGate;
                     revenue.TotalRevenue = (revenue.IncentivePayments + revenue.BiomassPrice);
 
                     revenues.Add(revenue);
@@ -117,36 +188,7 @@ namespace BiofuelSouth.Manager
             return cashFlow;
 
         }
-        private List<Revenue> GetRevenue()
-        {
-            var revenues = new List<Revenue>();
-            try
-            {
-                var production = GetAnnualProductionList();
-                var duration = General.ProjectLife;
-                for (var i = 0; i < duration; i++)
-                {
-                    var revenue = new Revenue();
-                    revenue.Year = i;
-                    revenue.IncentivePayments = 0;
-                    //if the current year is less than the years of incenptive payments, then there is a incentivepayment revenue;
-                    if (i < Financial.YearsOfIncentivePayment)
-                    {
-                        revenue.IncentivePayments = Financial.IncentivePayment * General.ProjectSize.GetValueOrDefault();
-                    }
-                    revenue.BiomassPrice = production[i] * GetBiomassPrice();
-                    revenue.TotalRevenue = (revenue.IncentivePayments + revenue.BiomassPrice);
-
-                    revenues.Add(revenue);
-                }
-            }
-            catch (Exception)
-            {
-                Log.Error("Revenues cannot be calcualted");
-            }
-            return revenues;
-        } 
-
+    
         public double GetCostPerAcre()
         {
             if (ProductionCost.TotalProductionCost > 0)
@@ -283,16 +325,14 @@ namespace BiofuelSouth.Manager
 
         }
 
-
-       
-
-        public string ProjectSize => $"{General.ProjectSize.GetValueOrDefault().ToString("##,###")} Acre";
-
-        public string LandCost => $"{General.LandCost.GetValueOrDefault().ToString("C0")} per Acre";
-
         public ResultViewModel GetResultViewModel()
         {
-            var vm = new ResultViewModel();
+            vm.CashFlow = GetCashFlow();
+     
+            vm.BiomassPriceAtFarmGate = $"{BiomassPriceAtFarmGate.ToString("C0")} per ton";
+            vm.ProjectSize = $"{General.ProjectSize.GetValueOrDefault().ToString("##,###")} Acre";
+            vm.LandCost = $"{General.LandCost.GetValueOrDefault().ToString("C0")} per Acre";
+
             vm.CountyName = Constants.CountyName(General.County);
             vm.CropType = General.Category;
             vm.StateCode = General.State;
