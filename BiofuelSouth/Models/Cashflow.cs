@@ -82,6 +82,12 @@ namespace BiofuelSouth.Models
 
     public class Revenue
     {
+        public Revenue()
+        {
+            IncentivePayments = 0m;
+            TotalRevenue = 0m;
+            BiomassPrice = 0m;
+        }
         public double Year { get; set; }
         public decimal IncentivePayments { get; set; }
         public decimal BiomassPrice { get; set; }

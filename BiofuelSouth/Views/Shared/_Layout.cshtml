@@ -41,55 +41,6 @@
 </head>
 <body id="page-top">
     <!--Navigation-->
-    @*
-        <nav class="navbar navbar-default  navbar-fixed-top">
-            <div class="container">
-                <div class="row profile-img" style="border-bottom:solid; border-bottom-color:blue;">
-                    <a href="http://www.nifa.usda.gov" target="_blank" title="USDA NIFA"><img src="~/images/funding.png" class="img-responsive img-rounded img-on-top"></a>
-                    <a href='@Url.Action("Index", "Home")'><img src="~/images/biomassbanner.jpg" alt="Banner Image Logo" class="img-responsive" /></a>
-
-
-                    <a href='@Url.Action("Index", "Home")' class="btn btn-default">Home</a>
-                    <a href='@Url.Action("Index", "Input")' class="btn btn-default">DSS</a>
-                    <a href="/map" class="btn btn-default" id="dropDownButton">Maps</a>
-                    <a class="btn btn-default " id="glossaryButton" href='@Url.Action("Search", "Home")'>Glossary</a>
-
-                    <a class="btn btn-default " id="aboutButton" href='@Url.Action("About", "Home")'>About</a>
-                    <a class="btn btn-default " id="contactButton" href='@Url.Action("FeedBack", "Home")'>Contact</a>
-                    <a class="btn btn-default " id="helpButton" href='@Url.Action("help", "Home")'>Help</a>
-                    <a class="btn btn-default " id="bugButton" href='@Url.Action("GetSotfwareLog", "Home")'>Bug&Enhancement</a>
-                    <a class="btn btn-default " id="forumButton" href='/forum'>Forum</a>
-                    <a href='@Url.Action("AskExpert", "Home")' class="btn btn-default">Ask Expert</a>
-
-                    <form class="navbar-form" style="float:right; margin-top: 0; margin-bottom:0; margin-left: 0; margin-right: 0; padding:0;" role="search" method="POST" action="@Url.Action("Search", "Home")">
-                        <input type="text" class="input-sm" style="margin:2px; padding:0;" size="20" placeholder="Enter a term" name="term" id="term" />
-                        <button class="btn btn-default glyphicon glyphicon-search" id="searchButton " name="searchButton" type="submit"></button>
-                    </form>
-
-                </div>
-                <div class="row" hidden="">
-
-                    <button class="btn btn-primary glyphicon glyphicon-home" id="homeButton" style="margin-left: 0; margin-bottom: 0;" onclick="location.href =  '@Url.Action("Index", "Home")'">Home</button>
-                    <button class="btn btn-primary glyphicon" id="dropDownButton" onclick="location.href ='/map'">Maps</button>
-                    <button class="btn btn-primary glyphicon" id="dssButton" onclick="location.href ='/Input'">DSS</button>
-                    <button class="btn btn-primary glyphicon" id="glossaryButton" onclick="location.href = '@Url.Action("Search", "Home")'">Glossary</button>
-                    <button class="btn btn-primary glyphicon" id="aboutButton" onclick="location.href = '@Url.Action("About", "Home")'">About</button>
-                    <button class="btn btn-primary glyphicon" id="contactButton" onclick="location.href = '@Url.Action("FeedBack", "Home")'">Contact</button>
-                    <button class="btn btn-primary glyphicon" id="helpButton" onclick="location.href = '@Url.Action("help", "Home")'">Help</button>
-                    <button class="btn btn-primary glyphicon" id="bugButton" onclick="location.href = '@Url.Action("GetSotfwareLog", "Home")'">Bug&Enhancement</button>
-                    <button class="btn btn-primary glyphicon" id="forumButton" onclick="location.href = '/forum'">Forum</button>
-
-                    <form class=" navbar-form" style="float:right; margin-top: 0; margin-bottom:0" role="search" method="POST" action="@Url.Action("Search", "Home")">
-                        <input type="text" class="form-control" size="50" placeholder="Enter a term" name="term" id="term" />
-                        <button class="btn btn-primary btn-primary glyphicon glyphicon-search" style="margin-right: 15px;" id="searchButton " name="searchButton" type="submit"></button>
-                    </form>
-
-
-                </div>
-            </div> <!-- End Menu Content-->
-
-        </nav>
-    *@
     <nav class="navbar navbar-default navbar-fixed-top">
      
             <div class="navbar-inner">
@@ -107,14 +58,14 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    @*<a class="navbar-brand" href="#">Brand</a>*@
+                   
                 </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
                         <li><a href='@Url.Action("Index", "Home")'>Home</a></li>
-                        <li><a href='@Url.Action("General", "Input")'>DSS</a></li>
+                        <li><a href='@Url.Action("General", "DSS")'>DSS</a></li>
                         <li><a href="/map" id="dropDownButton">Maps</a></li>
                         <li><a id="glossaryButton" href='@Url.Action("Search", "Home")'>Glossary</a></li>
 

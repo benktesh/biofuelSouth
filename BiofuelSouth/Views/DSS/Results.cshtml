@@ -118,7 +118,7 @@
                     </td>
                     @foreach (var a in Model.ProductionList)
                     {
-                        <td>@String.Format("{0:#,###,###}", Math.Round(a * Model.StorageLossFactor * Model.StorageTime / 200 * Model.StoragePercent / 100, 0))</td>
+                        <td>@String.Format("{0:#,###,###}", Math.Round(a * (decimal) Model.StorageLossFactor * (decimal) Model.StorageTime / 200 * (decimal) Model.StoragePercent / 100, 0))</td>
                     }
                 </tr>
 
@@ -197,7 +197,7 @@
 
         @foreach (var key in Model.ChartKeys)
         {
-            if (key.Key == ChartType.CashFLow)
+            if (key.Key == ChartType.CashFlow)
             {
                 var urlcashflow = Url.Action("ShowChart", "Chart", new { @cacheKey = @key.Value });
                 <div id="CashFlowChart">
@@ -206,12 +206,12 @@
             }
             else if (key.Key == ChartType.Production)
             {
-                var urlAnnualProduction = Url.Action("ShowChart", "Chart", new { @key.Value });
+                var urlAnnualProduction = Url.Action("ShowChart", "Chart", new { @cacheKey = @key.Value });
                 <div id="AnnualProductionChart">
                     <img src="@urlAnnualProduction" class="img-responsive" alt="Annual Production Chart" />
                 </div>
             }
-            else if (key.Key == ChartType.Revenue)
+            else if (key.Key == ChartType.CostRevenue)
             {
                 var urlAnnualProduction1 = Url.Action("ShowChart", "Chart", new { @cacheKey = @key.Value });
                 <div id="CostRevenueChart">

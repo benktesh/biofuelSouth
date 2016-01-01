@@ -12,12 +12,12 @@ namespace BiofuelSouth.ViewModels
 
         public ResultViewModel()
         {
-            ProductionList = new List<double> { 0 };
-            RevenueList = new List<double> { 0 };
-            CostList = new List<double> { 0 };
-            StorageCostList = new List<double> { 0 };
-            LandCotList = new List<double> { 0 };
-            ProductionCostList = new List<double> { 0 };
+            ProductionList = new List<decimal> { 0 };
+            RevenueList = new List<decimal> { 0 };
+            CostList = new List<decimal> { 0 };
+            StorageCostList = new List<decimal> { 0 };
+            LandCostList = new List<decimal> { 0 };
+            ProductionCostList = new List<decimal> { 0 };
             CashFlow = new List<decimal> { 0 };
 
         }
@@ -68,12 +68,12 @@ namespace BiofuelSouth.ViewModels
         #endregion
 
         #region dss-result
-        public List<double> ProductionList { get; set; }
-        public List<double> RevenueList { get; set; }
-        public List<double> CostList { get; set; }
-        public List<double> StorageCostList { get; set; }
-        public List<double> LandCotList { get; set; }
-        public List<double> ProductionCostList { get; set; }
+        public List<decimal> ProductionList { get; set; }
+        public List<decimal> RevenueList { get; set; }
+        public List<decimal> CostList { get; set; }
+        public List<decimal> StorageCostList { get; set; }
+        public List<decimal> LandCostList { get; set; }
+        public List<decimal> ProductionCostList { get; set; }
         public List<decimal> CashFlow { get; set; }
 
         public Dictionary<ChartType, string> ChartKeys { get; set; }  //actualy string of guid is the value 

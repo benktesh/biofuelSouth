@@ -7,8 +7,8 @@ namespace BiofuelSouth.Enum
 {
     public enum ChartType
     {
-        CashFLow,
+        CashFlow,
         Production,
-        Revenue,
+        CostRevenue,
     }
 }

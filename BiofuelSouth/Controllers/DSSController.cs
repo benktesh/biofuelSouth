@@ -226,13 +226,15 @@ namespace BiofuelSouth.Controllers
             {
                 if (!financial.RequireFinance.GetValueOrDefault())
                 {
-                    ip.Financial = new Financial();
+                    
                     financial = new Financial();
+                    ip.Financial = financial; 
                 }
 
                 if ((!financial.RequireFinance.GetValueOrDefault()) || (financial.RequireFinance.GetValueOrDefault() && ModelState.IsValid))
                 {
 
+                    return RedirectToAction("Results");
                     PostSubmit(ip);
                     TempData["Input"] = ip;
                     TempData.Keep();
@@ -259,6 +261,16 @@ namespace BiofuelSouth.Controllers
 
         }
 
+
+        public ActionResult Results()
+        {
+            var vm = new ResultManager(Session["input"] as Input);
+
+            return View("Results", vm.GetResultViewModel());
+            
+
+        }
+
         public ActionResult Result()
         {
             var vm = new ResultManager(Session["input"] as Input );
@@ -280,7 +292,7 @@ namespace BiofuelSouth.Controllers
             var cacheKey = Guid.NewGuid().ToString();
             ViewBag.cacheKey = cacheKey;
             var cc = new ChartController();
-            cc.GenerateChart(cacheKey, AnnualProd, "Annual Production");
+            cc.GenerateChart(cacheKey, AnnualProd.Select(m=> (decimal)m).ToArray(), "Annual Production");
 
             cacheKey = Guid.NewGuid().ToString();
             ViewBag.cacheKey1 = cacheKey;
@@ -288,7 +300,7 @@ namespace BiofuelSouth.Controllers
 
             cacheKey = Guid.NewGuid().ToString();
             ViewBag.cacheKey3 = cacheKey;
-            cc.GenerateColumnChart(cacheKey, ip.GetCashFlow(), "Cash Flow", "Year ", "$");
+            cc.GenerateColumnChart(cacheKey, ip.GetCashFlow().Select(m=>(decimal)m).ToArray(), "Cash Flow", "Year ", "$");
 
         }
 

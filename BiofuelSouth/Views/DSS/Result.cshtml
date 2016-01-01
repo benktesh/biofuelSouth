@@ -42,7 +42,7 @@
 
                     <div>
                         @{
-                    var annualRevenue = (Model.GetAnnualProductionList().Average() * Model.General.BiomassPriceAtFarmGate);
+                    var annualRevenue = ((decimal) Model.GetAnnualProductionList().Average() * Model.General.BiomassPriceAtFarmGate);
                         }
                         Est. Annual Revenue: @annualRevenue.GetValueOrDefault().ToString("C0")
 

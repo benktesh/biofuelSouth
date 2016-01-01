@@ -13,21 +13,21 @@ namespace BiofuelSouth.Models
 
         // Weigth of bale for miscanthus was same as for the weight of switchgrass
         //http://miscanthus.illinois.edu/symposium/2009/jan_13/10_Ulrich.pdf
-        private const Double WeightBaleRound = 650;
-        private const Double WeightBaleRect = 2000;
+        private const decimal WeightBaleRound = 650;
+        private const decimal WeightBaleRect = 2000;
         private const int BalePerStack = 6;
 
 
-        private const double SqFtPerBaleRound = 36.0;
-        private const double SqFtPerBaleRect = 60.0;
+        private const decimal SqFtPerBaleRound = 36.0m;
+        private const decimal SqFtPerBaleRect = 60.0m;
 
-        private const double TarpSqFtPerStackRound = 108;
-        private const double GravelSqFtPerStackRound = 108;
-        private const double PalletSqFtPerStackRound = 108;
+        private const decimal TarpSqFtPerStackRound = 108;
+        private const decimal GravelSqFtPerStackRound = 108;
+        private const decimal PalletSqFtPerStackRound = 108;
 
-        private const double TarpSqFtPerStackRect = 180;
-        private const double GravelSqFtPerStackRect = 180;
-        private const double PalletSqFtPerStackRect = 180;
+        private const decimal TarpSqFtPerStackRect = 180;
+        private const decimal GravelSqFtPerStackRect = 180;
+        private const decimal PalletSqFtPerStackRect = 180;
 
 
         public static IEnumerable<SelectListItem> GetCategory()
@@ -204,7 +204,7 @@ namespace BiofuelSouth.Models
 
 
 
-        public static double GetBaleStorageLaborCost(double estimate, BaleType baleType, double hourlyCost, bool hasTarp = false, bool hasPallet = false)
+        public static decimal GetBaleStorageLaborCost(decimal estimate, BaleType baleType, decimal hourlyCost, bool hasTarp = false, bool hasPallet = false)
         {
 
             int totalLabor = 0;
@@ -225,7 +225,7 @@ namespace BiofuelSouth.Models
             }
 
 
-            double baleCount;
+            decimal baleCount;
             if (baleType == BaleType.Round)
             {
                 baleCount = estimate / WeightBaleRound;
@@ -242,7 +242,7 @@ namespace BiofuelSouth.Models
 
             }
 
-            double laborCost = baleCount / BalePerStack * hourlyCost / 2 * totalLabor;     // half and hour to set one stack x total Labor cost (one for tarp and another for pallet)
+            decimal laborCost = baleCount / BalePerStack * hourlyCost / 2 * totalLabor;     // half and hour to set one stack x total Labor cost (one for tarp and another for pallet)
 
             return laborCost;
         }
@@ -253,12 +253,12 @@ namespace BiofuelSouth.Models
         /// <param name="baleType">Round or Rectangular</param>
         /// <param name="annualStorageLandCost">Annual Storage Area Land Rental Cost in $/Acre/Year. No Minimum.</param>
         /// <returns></returns>
-        public static double GetBaleStorageLandCost(double estimate, BaleType baleType, double annualStorageLandCost)
+        public static decimal GetBaleStorageLandCost(decimal estimate, BaleType baleType, decimal annualStorageLandCost)
         {
-            double baleCount;
+            decimal baleCount;
             // double stack = 0;
             //  double partial = 0;
-            double stroageSqFt;
+            decimal stroageSqFt;
             if (baleType == BaleType.Round)
             {
                 baleCount = estimate / WeightBaleRound;
@@ -275,13 +275,13 @@ namespace BiofuelSouth.Models
             {
                 return 0;
             }
-            double landCost = baleCount / BalePerStack * stroageSqFt * 1.10 * 0.000022956841138659 * annualStorageLandCost; //expand area of gravel by 10 % X 1/X land Cost per acre
+            decimal landCost = baleCount / BalePerStack * stroageSqFt * 1.10m * 0.000022956841138659m * annualStorageLandCost; //expand area of gravel by 10 % X 1/X land Cost per acre
 
             return landCost;
         }
 
 
-        public static IList<double> GetStorageCost(Input input)
+        public static IList<decimal> GetStorageCost(Input input)
         {
 
 
@@ -298,7 +298,7 @@ namespace BiofuelSouth.Models
                     input.Storage.StorageMethod;
 
             var estimate = input.GetAnnualProductivity();
-            var cftVolume = estimate / Convert.ToDouble(ConfigurationManager.AppSettings.Get("WeightToVolumeRatio"));
+            var cftVolume = estimate / Convert.ToDecimal(ConfigurationManager.AppSettings.Get("WeightToVolumeRatio"));
 
             var requiresPallet = false;
             var requiresTarp = false;
@@ -343,41 +343,41 @@ namespace BiofuelSouth.Models
             decimal annualStorageCost;
 
 
-            double baleCount = estimate / WeightBaleRound;
-            double stack = Math.Floor(baleCount / BalePerStack);
-            double partial = baleCount % BalePerStack;
+            decimal baleCount = estimate / WeightBaleRound;
+            decimal stack = Math.Floor(baleCount / BalePerStack);
+            decimal partial = baleCount % BalePerStack;
 
-            double baleCountRect = estimate / WeightBaleRect;
-            double stackRect = Math.Floor(baleCountRect / BalePerStack); //bale per stack is always 6.
-            double partialRect = baleCountRect % BalePerStack;
+            decimal baleCountRect = estimate / WeightBaleRect;
+            decimal stackRect = Math.Floor(baleCountRect / BalePerStack); //bale per stack is always 6.
+            decimal partialRect = baleCountRect % BalePerStack;
 
-            double tarpSqFtCost = (double)input.Storage.TarpCost;
-            double gravelSqFtCost = (double)input.Storage.GravelCost;
-            double palletSqFtCost = (double)input.Storage.PalletCost;
+            decimal tarpSqFtCost = (decimal)input.Storage.TarpCost;
+            decimal gravelSqFtCost = (decimal)input.Storage.GravelCost;
+            decimal palletSqFtCost = (decimal)input.Storage.PalletCost;
 
 
 
             //labor costs are fixed. No labor for gravel setting. Half an hour cost for tarp and pallet
             //Land costs are Annual
-      
-            double gravelCostRound = stack * GravelSqFtPerStackRound * gravelSqFtCost + partial * SqFtPerBaleRound * gravelSqFtCost;
-            double palletCostRound = stack * PalletSqFtPerStackRound * palletSqFtCost + partial * SqFtPerBaleRound * palletSqFtCost;
-            double tarpCostRound = stack * TarpSqFtPerStackRound * tarpSqFtCost + partial * SqFtPerBaleRound * tarpSqFtCost;
 
-            double gravelCostRect = stackRect * GravelSqFtPerStackRect * gravelSqFtCost + partialRect * SqFtPerBaleRect * gravelSqFtCost;
-            double palletCostRect = stackRect * PalletSqFtPerStackRect * palletSqFtCost + partialRect * SqFtPerBaleRect * palletSqFtCost;
-            double tarpCostRect = stackRect * TarpSqFtPerStackRect * tarpSqFtCost + partialRect * SqFtPerBaleRect * tarpSqFtCost;
+            decimal gravelCostRound = stack * GravelSqFtPerStackRound * gravelSqFtCost + partial * SqFtPerBaleRound * gravelSqFtCost;
+            decimal palletCostRound = stack * PalletSqFtPerStackRound * palletSqFtCost + partial * SqFtPerBaleRound * palletSqFtCost;
+            decimal tarpCostRound = stack * TarpSqFtPerStackRound * tarpSqFtCost + partial * SqFtPerBaleRound * tarpSqFtCost;
+
+            decimal gravelCostRect = stackRect * GravelSqFtPerStackRect * gravelSqFtCost + partialRect * SqFtPerBaleRect * gravelSqFtCost;
+            decimal palletCostRect = stackRect * PalletSqFtPerStackRect * palletSqFtCost + partialRect * SqFtPerBaleRect * palletSqFtCost;
+            decimal tarpCostRect = stackRect * TarpSqFtPerStackRect * tarpSqFtCost + partialRect * SqFtPerBaleRect * tarpSqFtCost;
 
 
-            double oneTimeCost = 0;
-            IList<double> annualizedStorageCost = null;
+            decimal oneTimeCost = 0;
+            IList<decimal> annualizedStorageCost = null;
 
             if (input.General != null)
             {
-                annualizedStorageCost = new double[input.General.ProjectLife.GetValueOrDefault()];
+                annualizedStorageCost = new decimal[input.General.ProjectLife.GetValueOrDefault()];
             }
             else
-                annualizedStorageCost = new double[10];
+                annualizedStorageCost = new decimal[10];
             //If user has supplied flat cost, then storage cost per year from user is used.
             if (input.Storage.CostOption == (int)CostEstimationOption.UserSupplyStorageCost)
             {
@@ -385,7 +385,7 @@ namespace BiofuelSouth.Models
 
                 for (int i = 0; i < annualizedStorageCost.Count(); i++)
                 {
-                    annualizedStorageCost[i] = (double) annualStorageCost;
+                    annualizedStorageCost[i] = (decimal) annualStorageCost;
                 }
 
                 return annualizedStorageCost; 
@@ -458,8 +458,8 @@ namespace BiofuelSouth.Models
 
                     for (int i = 0; i < annualizedStorageCost.Count(); i++)
                     {
-                        double laborCost = GetBaleStorageLaborCost(annualProduction[i] * input.Storage.PercentStored / 100, baleType, input.Storage.LaborCost.GetValueOrDefault(), requiresTarp, requiresPallet);
-                        double landCost = GetBaleStorageLandCost(annualProduction[i] * input.Storage.PercentStored / 100, baleType, input.Storage.LandCost.GetValueOrDefault());
+                        decimal laborCost = GetBaleStorageLaborCost((decimal) (annualProduction[i] * input.Storage.PercentStored / 100), baleType, (decimal) input.Storage.LaborCost.GetValueOrDefault(), requiresTarp, requiresPallet);
+                        decimal landCost = GetBaleStorageLandCost((decimal) (annualProduction[i] * input.Storage.PercentStored / 100), baleType, (decimal) input.Storage.LandCost.GetValueOrDefault());
 
                         annualizedStorageCost[i] = annualizedStorageCost[i] + laborCost + landCost;
                     }
@@ -471,15 +471,15 @@ namespace BiofuelSouth.Models
             return annualizedStorageCost; 
         }
 
-        private static IList<double> GetAnnualStorageCost(double oneTimeCost, int projectLife = 10)
+        private static IList<decimal> GetAnnualStorageCost(decimal oneTimeCost, int projectLife = 10)
         {
 
-            IList<double> annualizedStorageCost = new double[projectLife];
+            IList<decimal> annualizedStorageCost = new decimal[projectLife];
             //First year one time cost
             //year 2 - 5, put two percent of the annual cost
             //every 6th years, annualCost + 8% and then continue to two percent
             var tempOneTimeCost = oneTimeCost;
-            const double percentIncrement = 0.02;
+            const decimal percentIncrement = 0.02m;
             for (int i = 0; i < projectLife; i++)
             {
                 if (i == 0)
@@ -503,9 +503,9 @@ namespace BiofuelSouth.Models
 
         }
 
-        public static Double GetStorageLoss(int  storageMethod, CropType cropType = CropType.Switchgrass)
+        public static decimal GetStorageLoss(int  storageMethod, CropType cropType = CropType.Switchgrass)
         {
-            var result = 0.0;
+            var result = 0.0m;
            
 
             if (cropType == CropType.Switchgrass || cropType == CropType.Miscanthus)
@@ -514,42 +514,41 @@ namespace BiofuelSouth.Models
                 switch (storageMethod)
                 {
                     case 1:
-                        result = 1.0;
+                        result = 1.0m;
                         break;
                     case 2:
-                        result = 8.5;
+                        result = 8.5m;
                         break;
                     case 3:
-                        result = 7.0;
+                        result = 7.0m;
                         break;
                     case 4:
-                        result = 18.2;
+                        result = 18.2m;
                         break;
                     case 5:
-                        result = 16.6;
+                        result = 16.6m;
                         break;
                     case 6:
-                        result = 12.8;
+                        result = 12.8m;
                         break;
                     case 11:
-                        result = 13.7;
+                        result = 13.7m;
                         break;
                     case 12:
-                        result = 28.0;
+                        result = 28.0m;
                         break;
                     case 13:
-                        result = 48.0;
+                        result = 48.0m;
                         break;
                     case 14:
-                        result = 57.1;
+                        result = 57.1m;
                         break;
                     default:
-                        result = 0;
+                        result = 0m;
                         break;
                 }
 
             }
-
             return result;
         }
 
