@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
 using BiofuelSouth.Enum;
 
 namespace BiofuelSouth.ViewModels
@@ -68,9 +65,16 @@ namespace BiofuelSouth.ViewModels
         #endregion
 
         #region dss-result
+        public IList<decimal> GrossProductionList { get; set; }
         public List<decimal> ProductionList { get; set; }
+
+        public IList<decimal> ProductivityList { get; set; } 
+
         public List<decimal> RevenueList { get; set; }
         public List<decimal> CostList { get; set; }
+
+        public List<decimal> StorageLoss { get; set; } 
+
         public List<decimal> StorageCostList { get; set; }
         public List<decimal> LandCostList { get; set; }
         public List<decimal> ProductionCostList { get; set; }

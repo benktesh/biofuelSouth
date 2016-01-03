@@ -2,7 +2,6 @@
 using System.Data.Entity.SqlServer;
 using BiofuelSouth.Models.Entity;
 
-
 namespace BiofuelSouth.Models
 {
     class DatabaseContext : DbContext

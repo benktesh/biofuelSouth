@@ -29,6 +29,8 @@ namespace BiofuelSouth.Models
         private const decimal GravelSqFtPerStackRect = 180;
         private const decimal PalletSqFtPerStackRect = 180;
 
+        public static int ProjectLife => 10;
+
 
         public static IEnumerable<SelectListItem> GetCategory()
         {
@@ -141,7 +143,7 @@ namespace BiofuelSouth.Models
             IList<SelectListItem> items = new List<SelectListItem>
             {
                 new SelectListItem {Text = @"Yes", Value = "true"},
-                new SelectListItem {Text = @"No", Value = "false"},
+                new SelectListItem {Text = @"No", Value = "false"}
              };
             return items;
         }
@@ -288,7 +290,7 @@ namespace BiofuelSouth.Models
             var cropType = input.General.Category; 
             //Return null if crop types are not miscanthus or switchgrass
 
-            if (CropType.Switchgrass != cropType || CropType.Miscanthus != cropType)
+            if (CropType.Switchgrass != cropType && CropType.Miscanthus != cropType)
             {
                 return null;
             }
@@ -351,9 +353,9 @@ namespace BiofuelSouth.Models
             decimal stackRect = Math.Floor(baleCountRect / BalePerStack); //bale per stack is always 6.
             decimal partialRect = baleCountRect % BalePerStack;
 
-            decimal tarpSqFtCost = (decimal)input.Storage.TarpCost;
-            decimal gravelSqFtCost = (decimal)input.Storage.GravelCost;
-            decimal palletSqFtCost = (decimal)input.Storage.PalletCost;
+            decimal tarpSqFtCost = input.Storage.TarpCost;
+            decimal gravelSqFtCost = input.Storage.GravelCost;
+            decimal palletSqFtCost = input.Storage.PalletCost;
 
 
 
@@ -385,7 +387,7 @@ namespace BiofuelSouth.Models
 
                 for (int i = 0; i < annualizedStorageCost.Count(); i++)
                 {
-                    annualizedStorageCost[i] = (decimal) annualStorageCost;
+                    annualizedStorageCost[i] = annualStorageCost;
                 }
 
                 return annualizedStorageCost; 

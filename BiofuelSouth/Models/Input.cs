@@ -5,7 +5,6 @@ using System.Reflection;
 using BiofuelSouth.Enum;
 using BiofuelSouth.Services;
 using log4net;
-using LogManager = log4net.LogManager;
 
 namespace BiofuelSouth.Models
 {
@@ -78,7 +77,7 @@ namespace BiofuelSouth.Models
                         ProductionCost = (decimal) annualProductionCosts[i]
                     };
 
-                    expenditure.StorageCost = (decimal) (storageCost != null ? storageCost[i] : 0);
+                    expenditure.StorageCost = storageCost != null ? storageCost[i] : 0;
 
                     expenditure.TotalExpenses = expenditure.AdministrativeCost + expenditure.LandCost +
                                                 expenditure.ProductionCost;

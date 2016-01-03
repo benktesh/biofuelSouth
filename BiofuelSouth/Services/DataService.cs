@@ -9,7 +9,6 @@ using BiofuelSouth.Models;
 using BiofuelSouth.Models.Entity;
 using BiofuelSouth.ViewModels;
 
-
 namespace BiofuelSouth.Services
 {
     public static class DataService
@@ -82,16 +81,15 @@ namespace BiofuelSouth.Services
                 {
                     return 12.9; //Dickens (2011)
                 }
-                else if (cropType == CropType.Poplar)
+                if (cropType == CropType.Poplar)
                 {
                     return 7.6; 
                 }
-                else if (cropType == CropType.Willow)
+                if (cropType == CropType.Willow)
                 {
                     return 15.0; 
                 }
 
-                
 
                 var productivity = db.Productivities.Where(p => p.GeoId == intGeoid && p.CropType == cropType).Select(p => p.Yield).FirstOrDefault();
                 return productivity*0.446; //MG/ha -> t/acre
