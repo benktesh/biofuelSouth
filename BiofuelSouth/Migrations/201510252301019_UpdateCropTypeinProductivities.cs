@@ -1,7 +1,7 @@
+using System.Data.Entity.Migrations;
+
 namespace BiofuelSouth.Migrations
 {
-    using System.Data.Entity.Migrations;
-    
     public partial class UpdateCropTypeinProductivities : DbMigration
     {
         public override void Up()
@@ -17,7 +17,7 @@ namespace BiofuelSouth.Migrations
             Sql("Update Productivities Set CropType = 4 where CropType = 'Pine';");
 
 
-            AlterColumn("dbo.Productivities", "CropType", c => c.Int(nullable: false));
+            AlterColumn("dbo.Productivities", "CropType", c => c.Int(false));
         }
         
         public override void Down()

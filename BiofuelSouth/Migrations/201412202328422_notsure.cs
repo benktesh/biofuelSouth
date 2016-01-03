@@ -1,7 +1,7 @@
+using System.Data.Entity.Migrations;
+
 namespace BiofuelSouth.Migrations
 {
-    using System.Data.Entity.Migrations;
-    
     public partial class notsure : DbMigration
     {
         public override void Up()
@@ -13,7 +13,7 @@ namespace BiofuelSouth.Migrations
                         term = c.String(false, 128),
                         keywords = c.String(),
                         description = c.String(),
-                        counter = c.Int(),
+                        counter = c.Int()
                     })
                 .PrimaryKey(t => t.term);
 

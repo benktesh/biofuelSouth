@@ -1,7 +1,7 @@
+using System.Data.Entity.Migrations;
+
 namespace BiofuelSouth.Migrations
 {
-    using System.Data.Entity.Migrations;
-    
     public partial class CleanupGlossary : DbMigration
     {
         public override void Up()

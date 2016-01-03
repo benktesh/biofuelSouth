@@ -1,7 +1,7 @@
+using System.Data.Entity.Migrations;
+
 namespace BiofuelSouth.Migrations
 {
-    using System.Data.Entity.Migrations;
-    
     public partial class RemovesInputTableFromDB : DbMigration
     {
         public override void Up()
@@ -18,14 +18,14 @@ namespace BiofuelSouth.Migrations
                 "dbo.Generals",
                 c => new
                     {
-                        Id = c.Int(nullable: false, identity: true),
-                        State = c.String(nullable: false),
-                        County = c.String(nullable: false),
-                        Category = c.String(nullable: false),
-                        ProjectSize = c.Double(nullable: false),
-                        ProjectLife = c.Int(nullable: false),
-                        BiomassPriceAtFarmGate = c.Double(nullable: false),
-                        LandCost = c.Double(nullable: false),
+                        Id = c.Int(false, true),
+                        State = c.String(false),
+                        County = c.String(false),
+                        Category = c.String(false),
+                        ProjectSize = c.Double(false),
+                        ProjectLife = c.Int(false),
+                        BiomassPriceAtFarmGate = c.Double(false),
+                        LandCost = c.Double(false)
                     })
                 .PrimaryKey(t => t.Id);
             
@@ -33,29 +33,29 @@ namespace BiofuelSouth.Migrations
                 "dbo.Inputs",
                 c => new
                     {
-                        Id = c.Int(nullable: false, identity: true),
-                        Storage_RequireStorage = c.Boolean(nullable: false),
-                        Storage_StorageTime = c.Double(nullable: false),
-                        Storage_PercentDirectlyToPlantGate = c.Double(nullable: false),
-                        Storage_PercentStored = c.Double(nullable: false),
-                        Storage_StorageMethod = c.String(nullable: false),
-                        Storage_CostOption = c.Int(nullable: false),
+                        Id = c.Int(false, true),
+                        Storage_RequireStorage = c.Boolean(false),
+                        Storage_StorageTime = c.Double(false),
+                        Storage_PercentDirectlyToPlantGate = c.Double(false),
+                        Storage_PercentStored = c.Double(false),
+                        Storage_StorageMethod = c.String(false),
+                        Storage_CostOption = c.Int(false),
                         Storage_Description = c.String(),
-                        Storage_PalletCost = c.Decimal(nullable: false, precision: 18, scale: 2),
-                        Storage_TarpCost = c.Decimal(nullable: false, precision: 18, scale: 2),
-                        Storage_GravelCost = c.Decimal(nullable: false, precision: 18, scale: 2),
-                        Storage_LaborCost = c.Decimal(nullable: false, precision: 18, scale: 2),
-                        Storage_LandCost = c.Decimal(nullable: false, precision: 18, scale: 2),
-                        Storage_UserEstimatedCost = c.Decimal(nullable: false, precision: 18, scale: 2),
-                        Financial_RequireFinance = c.Boolean(nullable: false),
-                        Financial_InterestRate = c.Double(nullable: false),
-                        Financial_AdministrativeCost = c.Double(nullable: false),
-                        Financial_IncentivePayment = c.Double(nullable: false),
-                        Financial_YearsOfIncentivePayment = c.Int(nullable: false),
-                        Financial_AvailableEquity = c.Double(nullable: false),
-                        Financial_LoanAmount = c.Double(nullable: false),
-                        Financial_EquityLoanInterestRate = c.Double(nullable: false),
-                        General_Id = c.Int(),
+                        Storage_PalletCost = c.Decimal(false, 18, 2),
+                        Storage_TarpCost = c.Decimal(false, 18, 2),
+                        Storage_GravelCost = c.Decimal(false, 18, 2),
+                        Storage_LaborCost = c.Decimal(false, 18, 2),
+                        Storage_LandCost = c.Decimal(false, 18, 2),
+                        Storage_UserEstimatedCost = c.Decimal(false, 18, 2),
+                        Financial_RequireFinance = c.Boolean(false),
+                        Financial_InterestRate = c.Double(false),
+                        Financial_AdministrativeCost = c.Double(false),
+                        Financial_IncentivePayment = c.Double(false),
+                        Financial_YearsOfIncentivePayment = c.Int(false),
+                        Financial_AvailableEquity = c.Double(false),
+                        Financial_LoanAmount = c.Double(false),
+                        Financial_EquityLoanInterestRate = c.Double(false),
+                        General_Id = c.Int()
                     })
                 .PrimaryKey(t => t.Id);
             

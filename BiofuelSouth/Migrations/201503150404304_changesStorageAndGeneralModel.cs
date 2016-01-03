@@ -1,7 +1,7 @@
+using System.Data.Entity.Migrations;
+
 namespace BiofuelSouth.Migrations
 {
-    using System.Data.Entity.Migrations;
-    
     public partial class changesStorageAndGeneralModel : DbMigration
     {
         public override void Up()
@@ -10,23 +10,23 @@ namespace BiofuelSouth.Migrations
                 "dbo.Generals",
                 c => new
                     {
-                        Id = c.Int(nullable: false, identity: true),
-                        State = c.String(nullable: false),
-                        County = c.String(nullable: false),
-                        Category = c.String(nullable: false),
-                        ProjectSize = c.Double(nullable: false),
-                        ProjectLife = c.Int(nullable: false),
-                        BiomassPriceAtFarmGate = c.Double(nullable: false),
-                        LandCost = c.Double(nullable: false),
+                        Id = c.Int(false, true),
+                        State = c.String(false),
+                        County = c.String(false),
+                        Category = c.String(false),
+                        ProjectSize = c.Double(false),
+                        ProjectLife = c.Int(false),
+                        BiomassPriceAtFarmGate = c.Double(false),
+                        LandCost = c.Double(false)
                     })
                 .PrimaryKey(t => t.Id);
             
             AddColumn("dbo.Inputs", "ModelStorage", c => c.Boolean());
             AddColumn("dbo.Inputs", "ModelFinancial", c => c.Boolean());
-            AddColumn("dbo.Inputs", "Storage_RequireStorage", c => c.Boolean(nullable: false));
-            AddColumn("dbo.Inputs", "Storage_StorageTime", c => c.Double(nullable: false));
-            AddColumn("dbo.Inputs", "Storage_PercentDirectlyToPlantGate", c => c.Double(nullable: false));
-            AddColumn("dbo.Inputs", "Storage_PercentStored", c => c.Double(nullable: false));
+            AddColumn("dbo.Inputs", "Storage_RequireStorage", c => c.Boolean(false));
+            AddColumn("dbo.Inputs", "Storage_StorageTime", c => c.Double(false));
+            AddColumn("dbo.Inputs", "Storage_PercentDirectlyToPlantGate", c => c.Double(false));
+            AddColumn("dbo.Inputs", "Storage_PercentStored", c => c.Double(false));
             AddColumn("dbo.Inputs", "Storage_StorageMethod", c => c.String());
             AddColumn("dbo.Inputs", "General_Id", c => c.Int());
             CreateIndex("dbo.Inputs", "General_Id");
@@ -41,10 +41,10 @@ namespace BiofuelSouth.Migrations
         public override void Down()
         {
             AddColumn("dbo.Inputs", "StorageRequirement_StorageMethod", c => c.String());
-            AddColumn("dbo.Inputs", "StorageRequirement_PercentStored", c => c.Double(nullable: false));
-            AddColumn("dbo.Inputs", "StorageRequirement_PercentDirectlyToPlantGate", c => c.Double(nullable: false));
-            AddColumn("dbo.Inputs", "StorageRequirement_StorageTime", c => c.Double(nullable: false));
-            AddColumn("dbo.Inputs", "StorageRequirement_RequireStorage", c => c.Boolean(nullable: false));
+            AddColumn("dbo.Inputs", "StorageRequirement_PercentStored", c => c.Double(false));
+            AddColumn("dbo.Inputs", "StorageRequirement_PercentDirectlyToPlantGate", c => c.Double(false));
+            AddColumn("dbo.Inputs", "StorageRequirement_StorageTime", c => c.Double(false));
+            AddColumn("dbo.Inputs", "StorageRequirement_RequireStorage", c => c.Boolean(false));
             DropForeignKey("dbo.Inputs", "General_Id", "dbo.Generals");
             DropIndex("dbo.Inputs", new[] { "General_Id" });
             DropColumn("dbo.Inputs", "General_Id");

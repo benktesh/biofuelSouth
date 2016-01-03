@@ -1,7 +1,7 @@
+using System.Data.Entity.Migrations;
+
 namespace BiofuelSouth.Migrations
 {
-    using System.Data.Entity.Migrations;
-    
     public partial class AddsLookupTable : DbMigration
     {
         public override void Up()
@@ -10,16 +10,16 @@ namespace BiofuelSouth.Migrations
                 "dbo.LookUpEntities",
                 c => new
                     {
-                        Id = c.Guid(nullable: false),
-                        LookUpId = c.Int(nullable: false),
+                        Id = c.Guid(false),
+                        LookUpId = c.Int(false),
                         Name = c.String(),
                         Description = c.String(),
                         Source = c.String(),
                         Label = c.String(),
                         Value = c.String(),
                         LookUpGroup = c.String(),
-                        SortOrder = c.Int(nullable: false),
-                        System = c.Boolean(nullable: false),
+                        SortOrder = c.Int(false),
+                        System = c.Boolean(false)
                     })
                 .PrimaryKey(t => t.Id);
             

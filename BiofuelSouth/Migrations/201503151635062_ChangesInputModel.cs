@@ -1,7 +1,7 @@
+using System.Data.Entity.Migrations;
+
 namespace BiofuelSouth.Migrations
 {
-    using System.Data.Entity.Migrations;
-    
     public partial class ChangesInputModel : DbMigration
     {
         public override void Up()
@@ -21,13 +21,13 @@ namespace BiofuelSouth.Migrations
         {
             AddColumn("dbo.Inputs", "ModelFinancial", c => c.Boolean());
             AddColumn("dbo.Inputs", "ModelStorage", c => c.Boolean());
-            AddColumn("dbo.Inputs", "LandCost", c => c.Double(nullable: false));
-            AddColumn("dbo.Inputs", "BiomassPriceAtFarmGate", c => c.Double(nullable: false));
-            AddColumn("dbo.Inputs", "ProjectLife", c => c.Int(nullable: false));
-            AddColumn("dbo.Inputs", "ProjectSize", c => c.Double(nullable: false));
-            AddColumn("dbo.Inputs", "Category", c => c.String(nullable: false));
-            AddColumn("dbo.Inputs", "County", c => c.String(nullable: false));
-            AddColumn("dbo.Inputs", "State", c => c.String(nullable: false));
+            AddColumn("dbo.Inputs", "LandCost", c => c.Double(false));
+            AddColumn("dbo.Inputs", "BiomassPriceAtFarmGate", c => c.Double(false));
+            AddColumn("dbo.Inputs", "ProjectLife", c => c.Int(false));
+            AddColumn("dbo.Inputs", "ProjectSize", c => c.Double(false));
+            AddColumn("dbo.Inputs", "Category", c => c.String(false));
+            AddColumn("dbo.Inputs", "County", c => c.String(false));
+            AddColumn("dbo.Inputs", "State", c => c.String(false));
         }
     }
 }

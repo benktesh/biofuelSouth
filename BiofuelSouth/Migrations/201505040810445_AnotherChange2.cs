@@ -1,7 +1,7 @@
+using System.Data.Entity.Migrations;
+
 namespace BiofuelSouth.Migrations
 {
-    using System.Data.Entity.Migrations;
-    
     public partial class AnotherChange2 : DbMigration
     {
         public override void Up()
@@ -16,7 +16,7 @@ namespace BiofuelSouth.Migrations
         {
             DropPrimaryKey("dbo.Glossaries");
             AlterColumn("dbo.Glossaries", "Id", c => c.Guid());
-            AlterColumn("dbo.Glossaries", "Term", c => c.String(nullable: false, maxLength: 128));
+            AlterColumn("dbo.Glossaries", "Term", c => c.String(false, 128));
             AddPrimaryKey("dbo.Glossaries", "Term");
         }
     }

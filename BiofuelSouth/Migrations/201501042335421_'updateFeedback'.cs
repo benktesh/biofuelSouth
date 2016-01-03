@@ -1,7 +1,7 @@
+using System.Data.Entity.Migrations;
+
 namespace BiofuelSouth.Migrations
 {
-    using System.Data.Entity.Migrations;
-    
     public partial class updateFeedback : DbMigration
     {
         public override void Up()
@@ -15,7 +15,7 @@ namespace BiofuelSouth.Migrations
                         Name = c.String(),
                         Email = c.String(),
                         Phone = c.String(),
-                        Message = c.String(),
+                        Message = c.String()
                     })
                 .PrimaryKey(t => t.Id);
             

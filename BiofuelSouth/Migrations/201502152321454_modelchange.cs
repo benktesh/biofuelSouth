@@ -1,19 +1,19 @@
+using System.Data.Entity.Migrations;
+
 namespace BiofuelSouth.Migrations
 {
-    using System.Data.Entity.Migrations;
-    
     public partial class modelchange : DbMigration
     {
         public override void Up()
         {
-            AddColumn("dbo.Inputs", "Finance_InterestRate", c => c.Double(nullable: false));
-            AddColumn("dbo.Inputs", "Finance_LandCost", c => c.Double(nullable: false));
-            AddColumn("dbo.Inputs", "Finance_AdministrativeCost", c => c.Double(nullable: false));
-            AddColumn("dbo.Inputs", "Finance_IncentivePayment", c => c.Double(nullable: false));
-            AddColumn("dbo.Inputs", "Finance_YearsOfIncentivePayment", c => c.Int(nullable: false));
-            AddColumn("dbo.Inputs", "Finance_AvailableEquity", c => c.Double(nullable: false));
-            AddColumn("dbo.Inputs", "Finance_LoanAmount", c => c.Double(nullable: false));
-            AddColumn("dbo.Inputs", "Finance_EquityLoanInterestRate", c => c.Double(nullable: false));
+            AddColumn("dbo.Inputs", "Finance_InterestRate", c => c.Double(false));
+            AddColumn("dbo.Inputs", "Finance_LandCost", c => c.Double(false));
+            AddColumn("dbo.Inputs", "Finance_AdministrativeCost", c => c.Double(false));
+            AddColumn("dbo.Inputs", "Finance_IncentivePayment", c => c.Double(false));
+            AddColumn("dbo.Inputs", "Finance_YearsOfIncentivePayment", c => c.Int(false));
+            AddColumn("dbo.Inputs", "Finance_AvailableEquity", c => c.Double(false));
+            AddColumn("dbo.Inputs", "Finance_LoanAmount", c => c.Double(false));
+            AddColumn("dbo.Inputs", "Finance_EquityLoanInterestRate", c => c.Double(false));
             DropColumn("dbo.Inputs", "InterestRate");
             DropColumn("dbo.Inputs", "LandCost");
             DropColumn("dbo.Inputs", "AdministrativeCost");
@@ -26,14 +26,14 @@ namespace BiofuelSouth.Migrations
         
         public override void Down()
         {
-            AddColumn("dbo.Inputs", "EquityLoanInterestRate", c => c.Double(nullable: false));
-            AddColumn("dbo.Inputs", "LoanAmount", c => c.Double(nullable: false));
-            AddColumn("dbo.Inputs", "AvailableEquity", c => c.Double(nullable: false));
-            AddColumn("dbo.Inputs", "YearsOfIncentivePayment", c => c.Int(nullable: false));
-            AddColumn("dbo.Inputs", "IncentivePayment", c => c.Double(nullable: false));
-            AddColumn("dbo.Inputs", "AdministrativeCost", c => c.Double(nullable: false));
-            AddColumn("dbo.Inputs", "LandCost", c => c.Double(nullable: false));
-            AddColumn("dbo.Inputs", "InterestRate", c => c.Double(nullable: false));
+            AddColumn("dbo.Inputs", "EquityLoanInterestRate", c => c.Double(false));
+            AddColumn("dbo.Inputs", "LoanAmount", c => c.Double(false));
+            AddColumn("dbo.Inputs", "AvailableEquity", c => c.Double(false));
+            AddColumn("dbo.Inputs", "YearsOfIncentivePayment", c => c.Int(false));
+            AddColumn("dbo.Inputs", "IncentivePayment", c => c.Double(false));
+            AddColumn("dbo.Inputs", "AdministrativeCost", c => c.Double(false));
+            AddColumn("dbo.Inputs", "LandCost", c => c.Double(false));
+            AddColumn("dbo.Inputs", "InterestRate", c => c.Double(false));
             DropColumn("dbo.Inputs", "Finance_EquityLoanInterestRate");
             DropColumn("dbo.Inputs", "Finance_LoanAmount");
             DropColumn("dbo.Inputs", "Finance_AvailableEquity");
