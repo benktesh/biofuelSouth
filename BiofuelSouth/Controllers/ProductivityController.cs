@@ -3,12 +3,10 @@ using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
-
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
 using BiofuelSouth.Models;
-
 
 namespace BiofuelSouth.Controllers
 {
@@ -129,7 +127,7 @@ namespace BiofuelSouth.Controllers
         */
 
         // GET api/Productivity/5
-        [System.Web.Http.Route("{id:int}")]
+        [Route("{id:int}")]
         [ResponseType(typeof(Productivity))]
         public IEnumerable<Productivity> GetProductivity(int id)
             //Have not found async implemenation solution yet.

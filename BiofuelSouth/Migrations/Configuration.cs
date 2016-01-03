@@ -1,13 +1,12 @@
 
 using System;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using BiofuelSouth.Models;
 using BiofuelSouth.Models.Entity;
 
 namespace BiofuelSouth.Migrations
 {
-    using System.Data.Entity.Migrations;
-
     internal sealed class Configuration : DbMigrationsConfiguration<DatabaseContext>
     {
         public Configuration()

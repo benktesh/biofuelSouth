@@ -77,7 +77,7 @@ namespace BiofuelSouth.Controllers
             {
                 
 // ReSharper disable once PossibleInvalidOperationException
-                gvm.MId = (Guid) g.Id;
+                gvm.MId = g.Id;
                 gvm.Term = g.Term;
                 gvm.Description = g.Description;
                 gvm.Source = g.Source;

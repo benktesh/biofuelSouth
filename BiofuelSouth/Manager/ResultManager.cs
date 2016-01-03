@@ -1,16 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.EnterpriseServices.Internal;
 using System.Linq;
 using System.Reflection;
-using System.Web;
 using BiofuelSouth.Controllers;
 using BiofuelSouth.Enum;
 using BiofuelSouth.Models;
 using BiofuelSouth.Services;
 using BiofuelSouth.ViewModels;
 using log4net;
-using Microsoft.VisualBasic.Logging;
 
 namespace BiofuelSouth.Manager
 {
@@ -28,6 +25,12 @@ namespace BiofuelSouth.Manager
 
         private List<decimal> Productions { get; set; }
 
+        private IList<decimal> Productivity { get; set;  } 
+
+        private IList<decimal> GrossProductions { get; set;  }
+
+        private List<decimal> StorageLoss { get; set; } 
+
         private ResultViewModel vm { get; set; }
 
         private IList<Revenue> Revenues { get; set; }
@@ -36,10 +39,17 @@ namespace BiofuelSouth.Manager
 
         private decimal BiomassPriceAtFarmGate { get; set; }
 
+        private decimal NPV { get; set;  }
+
         public ResultManager(Input input)
         {
             Input = input;
             General = input.General;
+
+            if (General.ProjectLife == null)
+            {
+                General.ProjectLife = 10; 
+            }
             Storage = input.Storage;
             Financial = input.Financial;
             ProductionCost = input.ProductionCost; 
@@ -48,15 +58,25 @@ namespace BiofuelSouth.Manager
         // Set properties for calculations
 
             BiomassPriceAtFarmGate = GetBiomassPrice();
+            GrossProductions = GetGrossProductionList();
+            Productivity = GetAnnualProductionList(true); 
 
             Productions = GetAnnualProductionList();
             Revenues = GetRevenues();
-            Expenses = GetExpenditures();
-            Productions = GetAnnualProductionList();
+            Expenses = GetExpenditures(); 
+            StorageLoss = GetStorageLossList(); 
 
-        //set all view model properties
+            NPV = GetNpv();
+
+            //set all view model properties
         }
 
+        public Decimal GetNpv()
+        {
+            var cashFlow = GetCashFlow().Select(m=>(double) m).ToArray(); 
+            var npv = (decimal) Microsoft.VisualBasic.Financial.NPV(Financial.InterestRate, ref cashFlow);
+            return npv;
+        }
         private Double GetStorageLossFactor()
         {
             if (Storage == null)
@@ -68,7 +88,16 @@ namespace BiofuelSouth.Manager
             var storageLossValue = Constants.GetStorageLoss(storagemethod, General.Category);
             return days / 200 * (double) storageLossValue / 100;
         }
-        private List<decimal> GetYields(List<decimal> annualProductivity)
+
+        private List<Decimal> GetStorageLossList()
+        {
+            if (Productions == null || Productions.Count == 0)
+                return null;
+
+            return Productions.Select(m => m * (decimal)(GetStorageLossFactor()* Storage.StorageTime/200*Storage.PercentStored/100)).ToList();
+        
+         }
+        private List<decimal> GetYields(List<decimal> annualProductivity, bool isProductivity = false)
         {
             var rotation = CropAttribute.GetRoationYears(General.Category);
             //for annual crops return the original productivity
@@ -80,8 +109,11 @@ namespace BiofuelSouth.Manager
 
             if (General.ProjectLife <= rotation)
             {
-                return annualProductivity;
-
+                if (isProductivity) // do not send cummulative
+                {
+                    return annualProductivity;
+                }
+               return MakeCumulative(annualProductivity);
             }
 
             //get the lenght of harvst cycle and repeat
@@ -93,22 +125,47 @@ namespace BiofuelSouth.Manager
             for (int x = 0; x < projectLife; x = x + rotation)
             {
                 var trim = x + cycleYield.Count < projectLife ? cycleYield.Count : projectLife - x;
-                annualProductivity.AddRange(cycleYield.Take(trim));
+                if (isProductivity) // do not send cummulative
+                {
+                    annualProductivity.AddRange(cycleYield.Take(trim).ToList());
+                }
+                else
+                {
+                    if (trim == rotation)
+                    {
+                        //for rotation, cumulatively add the net annual
+                        annualProductivity.AddRange(MakeCumulative(cycleYield.Take(trim).ToList()));
+
+                    }
+                    else
+                    {
+                        //if this cycle is less than rotation, then set yeild to 0
+                        annualProductivity.AddRange(cycleYield.Take(trim).Select(m => 0m).ToList());
+                    }
+                }
             }
 
             return annualProductivity;
-
         }
-        private List<decimal> GetAnnualProductionList()
-        {
 
+        private List<decimal> MakeCumulative(List<decimal> annual)
+        {
+            var finalYield = annual.Sum();
+            var annualCopy = annual.Select(m => 0m).ToList();
+            annualCopy[annual.Count-1] = finalYield;
+            return annualCopy; 
+        } 
+
+        private List<decimal> GetAnnualProductionList( bool isProductivity = false)
+        {
             var taper = CropAttribute.GetProductivityTaper(General.Category);
             var annualProductivity = new List<decimal>();
             double storageLossFactor = 0;
             if (Storage != null && Storage.RequireStorage != null && (bool)Storage.RequireStorage)
                 storageLossFactor = GetStorageLossFactor() * Storage.PercentStored / 100;
 
-            var standardAnnualProduction = (decimal) (GetAnnualProductivity() * (1 - storageLossFactor)); //Annual Productivity is = Pruduction * (1 - loss factor)
+            var standardAnnualProduction = (decimal) (GetAnnualProductivity() * (1 - storageLossFactor)); 
+            //Annual Productivity is = Pruduction * (1 - loss factor)
             for (var i = 0; i < General.ProjectLife; i++)
             {
                 if (i < taper.Count)
@@ -122,9 +179,28 @@ namespace BiofuelSouth.Manager
                     annualProductivity.Add(standardAnnualProduction);
                 }
             }
+            return GetYields(annualProductivity, isProductivity);
+        }
 
-            return GetYields(annualProductivity);
-
+        public IList<decimal> GetGrossProductionList()
+        {
+            var taper = CropAttribute.GetProductivityTaper(General.Category).Select(m=>(Decimal)m).ToList();
+            var annualProductivity = new List<decimal>();
+            decimal standardAnnualProduction = (decimal) GetAnnualProductivity(); //Annual Productivity is = Pruduction * (1 - loss factor)
+            for (var i = 0; i < General.ProjectLife; i++)
+            {
+                if (i < taper.Count)
+                {
+                    var taperValue = taper.ElementAt(i);
+                    var delta = standardAnnualProduction * taperValue;
+                    annualProductivity.Add(delta);
+                }
+                else
+                {
+                    annualProductivity.Add((decimal)GetAnnualProductivity());
+                }
+            }
+            return annualProductivity;
 
         }
 
@@ -142,7 +218,7 @@ namespace BiofuelSouth.Manager
             {
                 General.BiomassPriceAtFarmGate = Constants.GetFarmGatePrice(General.Category);
             }
-            return (decimal) General.BiomassPriceAtFarmGate.GetValueOrDefault();
+            return General.BiomassPriceAtFarmGate.GetValueOrDefault();
         }
 
         private IList<Revenue> GetRevenues()
@@ -162,7 +238,7 @@ namespace BiofuelSouth.Manager
                     {
                         revenue.IncentivePayments = (Financial.IncentivePayment * (decimal) General.ProjectSize.GetValueOrDefault());
                     }
-                    revenue.BiomassPrice = (decimal) Productions[i] * BiomassPriceAtFarmGate;
+                    revenue.BiomassPrice = Productions[i] * BiomassPriceAtFarmGate;
                     revenue.TotalRevenue = (revenue.IncentivePayments + revenue.BiomassPrice);
 
                     revenues.Add(revenue);
@@ -178,17 +254,11 @@ namespace BiofuelSouth.Manager
         {
             var duration = General.ProjectLife;
             var cashFlow = new List<decimal>();  
-            //for each year
-            //estimate expesese
-            //var expenses = GetExpenditures();
-            //var revenues = GetRevenues();
-
-            //estimate reveneue
-            //get net and insert into cashflow
+            
             for (var i = 0; i < duration; i++)
             {
                var calc = -Expenses[i].TotalExpenses + Revenues[i].TotalRevenue;
-                cashFlow.Add((decimal) calc);
+                cashFlow.Add(calc);
             }
             return cashFlow;
 
@@ -209,7 +279,7 @@ namespace BiofuelSouth.Manager
             try
             {
                 var rotation = CropAttribute.GetRoationYears(General.Category);
-                var duration = General.ProjectLife ?? 10;
+                var duration = General.ProjectLife ?? Constants.ProjectLife;
                 var annualProductionCosts = GetAnnualProductionCosts();
                 for (var i = 0; i < duration; i++)
                 {
@@ -221,7 +291,7 @@ namespace BiofuelSouth.Manager
                         ProductionCost = (decimal) annualProductionCosts[i]
                     };
 
-                    expenditure.StorageCost = (decimal) (storageCost != null && storageCost.Any() ? storageCost[i] : 0);
+                    expenditure.StorageCost = storageCost != null && storageCost.Any() ? storageCost[i] : 0;
 
                     expenditure.TotalExpenses = expenditure.AdministrativeCost + expenditure.LandCost +
                                                 expenditure.ProductionCost;
@@ -255,13 +325,15 @@ namespace BiofuelSouth.Manager
                 annualProductionCost.Select(c => { c = standardAnnualCost; return c; }).ToList();
             }
 
-            decimal SitePlantationFactor = 0.38M;
-            decimal ThinningFactor = 0.10M;
-            decimal HarvestFactor = 0.50M;
-            decimal CustodialFactor = 0.02M;
+       
+                
+            decimal sitePlantationFactor = 0.38M;
+            decimal thinningFactor = 0.10M;
+            decimal harvestFactor = 0.50M;
+            decimal custodialFactor = 0.02M;
 
 
-            if (ProductionCost.UseCustom && ProductionCost.ProductionCosts.Any())
+            if (ProductionCost.CanCustomize && ProductionCost.ProductionCosts.Any())
             {
                 var total = ProductionCost.TotalProductionCost;
                 var o3 = ProductionCost.ProductionCosts.Where(
@@ -269,7 +341,7 @@ namespace BiofuelSouth.Manager
                         m.ProductionCostType == ProductionCostType.Planting ||
                         m.ProductionCostType == ProductionCostType.SitePreparation).Sum(m => m.Amount) / total;
                 if (o3 != null)
-                    SitePlantationFactor =
+                    sitePlantationFactor =
                         (decimal)o3;
 
                 var o2 = ProductionCost.ProductionCosts.Where(
@@ -277,14 +349,14 @@ namespace BiofuelSouth.Manager
                         m.ProductionCostType == ProductionCostType.CustodialManagement).Sum(m => m.Amount) / total;
                 if (o2 !=
                     null)
-                    ThinningFactor =
+                    thinningFactor =
                         (decimal)o2;
 
                 var o = ProductionCost.ProductionCosts.Where(
                     m =>
                         m.ProductionCostType == ProductionCostType.Harvesting).Sum(m => m.Amount) / total;
                 if (o != null)
-                    HarvestFactor =
+                    harvestFactor =
                         (decimal)o;
 
                 var o1 = ProductionCost.ProductionCosts.Where(
@@ -292,9 +364,16 @@ namespace BiofuelSouth.Manager
                         m.ProductionCostType == ProductionCostType.CustodialManagement).Sum(m => m.Amount) / total;
                 if (o1 !=
                     null)
-                    CustodialFactor =
+                    custodialFactor =
                         (decimal)o1;
                 Log.Info("Custom cost included");
+            }
+            else
+            {
+                sitePlantationFactor = 0.0M;
+                thinningFactor = 0.0M;
+                harvestFactor = 0.0M;
+                custodialFactor = 1.0M;
             }
 
             //user factor
@@ -303,23 +382,35 @@ namespace BiofuelSouth.Manager
             //.50 for harvesting
             //.02 custodial management
 
-            var thinningYear = (int)Math.Ceiling(rotation / 2.0);
+            var thinningYear = CropAttribute.GetThinningYear(General.Category);
 
             for (var i = 0; i < General.ProjectLife; i++)
             {
-                if (i % rotation == 0)
+               
+                if (i % rotation == 0) //plantation
                 {
-                    annualProductionCost.Add(standardAnnualCost * (double)(SitePlantationFactor + CustodialFactor));
+                    if (CropAttribute.CanCoppice(General.Category) && i > 0)
+                    {
+                        sitePlantationFactor = 0;
+                    }
+                    annualProductionCost.Add(standardAnnualCost * (double)(sitePlantationFactor + custodialFactor));
+
+
+                }
+                else if (i > 0 && (i + 1) % rotation == 0) //harvest
+                {
+                    annualProductionCost.Add(standardAnnualCost * (double)(harvestFactor + custodialFactor));
+
                 }
 
-                if (i > 0 && (i + 1) % rotation == 0)
+                else if (thinningYear != null && (i > 0 && ((i + 1) % thinningYear == 0) || ((i % rotation) + 1) % thinningYear == 0)) //thinning
                 {
-                    annualProductionCost.Add(standardAnnualCost * (double)(HarvestFactor + CustodialFactor));
-                }
+                    annualProductionCost.Add(standardAnnualCost * (double)(thinningFactor + custodialFactor));
 
-                if (i > 0 && (i + 1) % thinningYear == 0)
+                }
+                else //customdial
                 {
-                    annualProductionCost.Add(standardAnnualCost * (double)(ThinningFactor + CustodialFactor));
+                    annualProductionCost.Add(standardAnnualCost * (double)(custodialFactor));
                 }
             }
 
@@ -333,14 +424,21 @@ namespace BiofuelSouth.Manager
         public ResultViewModel GetResultViewModel()
         {
             vm.CashFlow = GetCashFlow();
-     
+
             vm.BiomassPriceAtFarmGate = $"{BiomassPriceAtFarmGate.ToString("C0")} per ton";
             vm.ProjectSize = $"{General.ProjectSize.GetValueOrDefault().ToString("##,###")} Acre";
             vm.LandCost = $"{General.LandCost.GetValueOrDefault().ToString("C0")} per Acre";
+            vm.ProjectLife = General.ProjectLife.GetValueOrDefault();
+            vm.NPV = $"{NPV.ToString("C")}";
 
             vm.ProductionList = Productions;
+            vm.GrossProductionList = GrossProductions;
+            vm.ProductivityList = Productivity; 
+
             vm.RevenueList = Revenues.Select(m=>m.TotalRevenue).ToList();
             vm.CostList = Expenses.Select(m => m.TotalExpenses).ToList();
+
+            vm.StorageLoss = StorageLoss;
             vm.StorageCostList = Expenses.Select(m => m.StorageCost).ToList(); 
 
             vm.CountyName = Constants.CountyName(General.County);
@@ -371,9 +469,15 @@ namespace BiofuelSouth.Manager
 
 
             var cc = new ChartController();
-  
+
             var cacheKey = Guid.NewGuid().ToString();
-            cc.GenerateChart(cacheKey, Productions.ToArray(), "Annual Production");
+            vm.Add(ChartType.CashFlow, cacheKey);
+            cc.GenerateColumnChart(cacheKey, GetCashFlow().ToArray(), "Cash Flow", "Year ", "$");
+
+
+
+            cacheKey = Guid.NewGuid().ToString();
+            cc.GenerateChart(cacheKey, Productions.ToArray(), "Yield");
             vm.Add(ChartType.Production, cacheKey);
 
            
@@ -381,14 +485,9 @@ namespace BiofuelSouth.Manager
             vm.Add(ChartType.CostRevenue, revenueCachekey);
             //cc.GenerateCostRevenueChart(cacheKey, ip, "Cost and Revenue");
             var costRevenueData = new List<List<decimal>>(); 
-            costRevenueData.Add(Revenues.Select(m=>(decimal)m.TotalRevenue).ToList());
-            costRevenueData.Add(Expenses.Select(m => (decimal) m.TotalExpenses).ToList());
+            costRevenueData.Add(Revenues.Select(m=>m.TotalRevenue).ToList());
+            costRevenueData.Add(Expenses.Select(m => m.TotalExpenses).ToList());
             cc.GenerateLineGraphs(revenueCachekey,costRevenueData, new List<string> {"Revenue", "Cost"}, "Cost and Revenue" );
-
-
-            cacheKey = Guid.NewGuid().ToString();
-            vm.Add(ChartType.CashFlow, cacheKey);
-            cc.GenerateColumnChart(cacheKey, GetCashFlow().ToArray(), "Cash Flow", "Year ", "$");
 
             return vm;
         }

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 
-
 namespace BiofuelSouth.Models
 {
     public class Cashflow

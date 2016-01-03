@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Web.Helpers;
 using System.Web.Mvc;
 using BiofuelSouth.Models;
-using Chart = System.Web.Helpers.Chart;
-
 
 namespace BiofuelSouth.Controllers
 {
@@ -27,7 +25,7 @@ namespace BiofuelSouth.Controllers
             chart.SaveToCache(cacheKey, ChartCacheMinute);
         }
 
-        public void GenerateColumnChart(string cacheKey, decimal[] data, String chartName, string xLabel, string yLabel)
+        public void GenerateColumnChart(string cacheKey, decimal[] data, String chartName, string xLabel = "Year", string yLabel = "$ ")
         {
             var xValues = Enumerable.Range(1, data.Length).ToArray();
             var chart = new Chart(600, 300);
@@ -42,7 +40,9 @@ namespace BiofuelSouth.Controllers
             chart.SetXAxis(xLabel + " ", 0, data.Length + .75);
 
             chart.AddTitle(chartName);
-            //chart.SetYAxis(yLabel + " ", Math.Round(data.Min(),0), Math.Round(data.Max(),0));
+            //chart.SetYAxis(yLabel + " ", Math.Round(data.Min(),0), Math.Round(data.Max(),0)
+            //chart.SetYAxis(yLabel);
+            //chart.SetYAxis("$", data.Max(a=>a)) * -1
             chart.SaveToCache(cacheKey, ChartCacheMinute);
         }
 

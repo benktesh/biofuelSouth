@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace BiofuelSouth.Enum
+﻿namespace BiofuelSouth.Enum
 {
     public enum ChartType
     {
         CashFlow,
         Production,
-        CostRevenue,
+        CostRevenue
     }
 }

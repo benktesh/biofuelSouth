@@ -45,7 +45,7 @@ namespace BiofuelSouth.Manager
             {
                 ProductionCostType = ProductionCostType.SitePreparation,
                 IsRequired = true,
-                Amount = 168,
+                Amount = 168
             });
 
             productionCostViewModel.ProductionCosts.Add(new ProductionCost
@@ -59,21 +59,21 @@ namespace BiofuelSouth.Manager
             {
                 ProductionCostType = ProductionCostType.Thinning,
                 IsRequired = true,
-                Amount = 50,
+                Amount = 50
             });
 
             productionCostViewModel.ProductionCosts.Add(new ProductionCost
             {
                 ProductionCostType = ProductionCostType.Harvesting,
                 IsRequired = true,
-                Amount = 350,
+                Amount = 350
             });
 
             productionCostViewModel.ProductionCosts.Add(new ProductionCost
             {
                 ProductionCostType = ProductionCostType.CustodialManagement,
                 IsRequired = true,
-                Amount = 6,
+                Amount = 6
             });
 
             productionCostViewModel.Amount = productionCostViewModel.ProductionCosts.Sum(m => m.Amount);
@@ -87,7 +87,7 @@ namespace BiofuelSouth.Manager
             {
                 ProductionCostType = ProductionCostType.SitePreparation,
                 IsRequired = true,
-                Amount = 168,
+                Amount = 168
             });
 
             productionCostViewModel.ProductionCosts.Add(new ProductionCost
@@ -104,7 +104,7 @@ namespace BiofuelSouth.Manager
                 ProductionCostType = ProductionCostType.Harvesting,
                 IsRequired = true,
                 ImplementationYearOnCycle = 3,
-                Amount = 350,
+                Amount = 350
             });
 
             productionCostViewModel.ProductionCosts.Add(new ProductionCost
@@ -112,7 +112,7 @@ namespace BiofuelSouth.Manager
                 ProductionCostType = ProductionCostType.CustodialManagement,
                 IsRequired = true,
                 ImplementationYearOnCycle = 0,
-                Amount = 6,
+                Amount = 6
             });
 
             productionCostViewModel.Amount = productionCostViewModel.ProductionCosts.Sum(m=>m.Amount);
@@ -131,7 +131,7 @@ namespace BiofuelSouth.Manager
             {
                 ProductionCostType = ProductionCostType.AnnualLumpsum,
                 IsRequired = true,
-                Amount = productionCostViewModel.Amount,
+                Amount = productionCostViewModel.Amount
             });
 
             return productionCostViewModel;
@@ -150,7 +150,7 @@ namespace BiofuelSouth.Manager
             {
                 ProductionCostType = ProductionCostType.AnnualLumpsum,
                 IsRequired = true,
-                Amount = productionCostViewModel.Amount,
+                Amount = productionCostViewModel.Amount
             });
 
             return productionCostViewModel;
@@ -163,7 +163,7 @@ namespace BiofuelSouth.Manager
             {
                 ProductionCostType = ProductionCostType.SitePreparation,
                 IsRequired = true,
-                Amount = 168,
+                Amount = 168
             });
 
             productionCostViewModel.ProductionCosts.Add(new ProductionCost
@@ -184,14 +184,14 @@ namespace BiofuelSouth.Manager
             {
                 ProductionCostType = ProductionCostType.Harvesting,
                 IsRequired = true,
-                Amount = 350,
+                Amount = 350
             });
 
             productionCostViewModel.ProductionCosts.Add(new ProductionCost
             {
                 ProductionCostType = ProductionCostType.CustodialManagement,
                 IsRequired = true,
-                Amount = 6,
+                Amount = 6
             });
 
             productionCostViewModel.Amount = productionCostViewModel.ProductionCosts.Sum(m => m.Amount);

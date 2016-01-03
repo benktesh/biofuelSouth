@@ -36,6 +36,9 @@
     <IncludeAppPool>false</IncludeAppPool>
     <PublishDatabaseSettings>
       <Objects>
+        <ObjectGroup Name="NewConnection1-Deployment" Order="1" xmlns="">
+          <Destination Path="" />
+        </ObjectGroup>
       </Objects>
     </PublishDatabaseSettings>
     <FilesToIncludeForPublish>OnlyFilesToRunTheApp</FilesToIncludeForPublish>

@@ -18,6 +18,6 @@ namespace BiofuelSouth.Enum
         [Display(Name = @"Custodial Management")]
         CustodialManagement,
         [Display(Name = @"Annual Lumpsum")]
-        AnnualLumpsum,
+        AnnualLumpsum
     }
 }

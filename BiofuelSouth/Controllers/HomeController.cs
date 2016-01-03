@@ -12,7 +12,7 @@ namespace BiofuelSouth.Controllers
 {
     public class HomeController : Controller
     {
-        private static readonly ILog Log = log4net.LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         // GET: Home
         public ActionResult Index()
         {

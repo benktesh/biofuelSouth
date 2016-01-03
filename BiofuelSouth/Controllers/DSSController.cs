@@ -111,13 +111,23 @@ namespace BiofuelSouth.Controllers
             }
 
             ModelState.Clear();
-            var ip = (Input)Session["Input"];
+            var ip = InputGet();
+            if (ip == null)
+            {
+                return RedirectToAction("General");
+            }
             ip.General = general;
             Session["Input"] = ip;
             return RedirectToAction("GetProductionCost");
 
         }
 
+
+        private Input InputGet()
+        {
+            var ip = Session["Input"];
+            return (Input) ip;  
+        }
 
         public ActionResult Storage(Storage storage = null)
         {
@@ -183,6 +193,12 @@ namespace BiofuelSouth.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult UpdateProductionCost(ProductionCostViewModel model)
         {
+
+            if (InputGet() == null)
+            {
+                return RedirectToAction("General");
+            }
+
             if (ModelState.IsValid)
             {
 
