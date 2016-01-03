@@ -22,8 +22,8 @@
         <div class="alert-success">
             <h3>Summary</h3>
             <p>
-                @if (Model.ProjectLife > 0)
-                {
+                
+                @{
                     <div>
                         Est. Annual Production:
                         @Math.Round(Model.ProductionList.Average(), 0).ToString("###,###.##") ton
@@ -78,7 +78,7 @@
             <thead>
                 <tr>
                     <th rowspan="2">Description</th>
-                    <th colspan="10">Year</th>
+                    <th colspan="@Model.ProjectLife" class="text-center">Year</th>
                 </tr>
                 <tr>
                     @{
@@ -99,36 +99,51 @@
                 </tr>
                 <tr>
                     <td>
-                        Gross Production (ton/year)
+                        Gross Yield (ton)
                     </td>
-                    @foreach (var a in Model.ProductionList)
+                    @foreach (var a in Model.GrossProductionList)
                     {
                         <td>@String.Format("{0:#,###,###}", Math.Round(a, 0))</td>
                     }
                 </tr>
 
-                <tr>
-                    @* ReSharper disable once UnknownCssClass *@
-                    <td colspan="@mergeCol" class="mergeCol">Storage</td>
-                </tr>
+               
+                    <tr>
+                        @* ReSharper disable once UnknownCssClass *@
+                        <td colspan="@mergeCol" class="mergeCol">Storage</td>
+                    </tr>
 
-                <tr>
-                    <td>
-                        Storage Loss (ton/year)
-                    </td>
-                    @foreach (var a in Model.ProductionList)
-                    {
-                        <td>@String.Format("{0:#,###,###}", Math.Round(a * (decimal) Model.StorageLossFactor * (decimal) Model.StorageTime / 200 * (decimal) Model.StoragePercent / 100, 0))</td>
-                    }
-                </tr>
 
-            }
+                     <tr>
+                         <td>
+                             Storage Loss (ton)
+                         </td>
+                         @foreach (var a in Model.StorageLoss)
+                         {
+                             <td>@String.Format("{0:#,###,###}", Math.Round(a, 0))</td>
+                         }
+                     </tr>
+                }
 
             <tr>
                 <td>
-                    Net Production (ton/year)
+                    Net Yield (ton)
                 </td>
                 @foreach (var a in Model.ProductionList)
+                {
+                    <td>@String.Format("{0:#,###,###}", Math.Round(a, 0))</td>
+                }
+            </tr>
+            <tr>
+                @* ReSharper disable UnknownCssClass *@
+                <td colspan="@mergeCol" class="mergeCol">Cost and Revenue</td>
+                @* ReSharper restore UnknownCssClass *@
+            </tr>
+            <tr>
+                <td>
+                    Annual Production (ton/year)
+                </td>
+                @foreach (var a in Model.ProductivityList)
                 {
                     <td>@String.Format("{0:#,###,###}", Math.Round(a, 0))</td>
                 }
@@ -160,7 +175,7 @@
                 }
 
             </tr>
-            @if (Model.RequireStorage)
+            @if(Model.RequireStorage)
             {
                 <tr>
                     <td>
@@ -169,7 +184,7 @@
                     @foreach (var a in Model.StorageCostList)
                     {
 
-                        <td>@String.Format("{0:#,###,###}", @Math.Round(a, 0))</td>
+                        <td>@String.Format("{0:#,###,###}", @Math.Round(a, 1))</td>
                     }
 
                 </tr>
@@ -191,7 +206,7 @@
 
         <div id="chartButton">
             <input type="checkbox" id="showCashFlow" name="showCashFlow" checked> Display CashFlow Chart
-            <input type="checkbox" id="showProductivity" name="showProductivity" checked> Display Productivity Chart
+            <input type="checkbox" id="showProductivity" name="showProductivity" checked> Display Yield Chart
             <input type="checkbox" id="showCostRevenue" name="showCostRevenue" checked> Display Cost/Revenue Chart
         </div>
 
