@@ -49,6 +49,17 @@ namespace BiofuelSouth.Services
             }
 
         }
+
+        public static bool RequireStorage(CropType cropType)
+        {
+            if (cropType == CropType.Miscanthus || cropType == CropType.Switchgrass)
+            {
+                return true; 
+            }
+            //if (cropType == CropType.Poplar || cropType == CropType.Pine || cropType == CropType.Willow)
+            
+            return false;
+        }
         public static IList<double> GetProductivityTaper(CropType cropType)
         {
             switch (cropType)

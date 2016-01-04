@@ -485,6 +485,67 @@ namespace BiofuelSouth.Manager
             cc.GenerateLineGraphs(revenueCachekey,costRevenueData, new List<string> {"Revenue", "Cost"}, "Cost and Revenue" );
 
             return vm;
+        }       
+    }
+
+    public class Simulator
+    {
+        private Input Input { get; set; }
+
+        public Simulator(Input input)
+        {
+            Input = input;
+        }
+        private IList<CropType> GetAlternativeCrops()
+        {
+            var alternative = new HashSet<CropType> { CropType.Switchgrass, CropType.Miscanthus, CropType.Willow, CropType.Poplar, CropType.Pine };
+            alternative.Remove(Input.General.Category);
+            return alternative.ToList();
+        }
+        public List<ResultViewModel> GetViewModels(bool simulateAlternatives = true)
+        {
+            var altCrops = GetAlternativeCrops();
+            var viewModels = new List<ResultViewModel>();
+
+            var rm = new ResultManager(Input);
+            viewModels.Add(rm.GetResultViewModel());
+
+            if (!simulateAlternatives)
+                return viewModels;
+
+            foreach (var alt in altCrops)
+            {
+                Input = GetInput(Input, alt);  
+                rm = new ResultManager(Input);
+                viewModels.Add(rm.GetResultViewModel());
+
+            }
+
+            return viewModels;
+
+        }
+
+        private Input GetInput(Input ip, CropType alt)
+        {
+            //Update General
+            Input input = ip; 
+            input.General.Category = alt;
+            input.General.BiomassPriceAtFarmGate = Constants.GetFarmGatePrice(alt);
+
+            ProductionCostManager pcm = new ProductionCostManager();
+            input.ProductionCost = pcm.GetProductionCost(new ProductionCostViewModel { CropType = input.General.Category, County = input.General.County, UseCustom = true });
+
+            //Update Storage. For woody, set storage to null
+            if (alt == CropType.Poplar || alt == CropType.Pine || alt == CropType.Willow)
+            {
+                input.Storage = new Storage {RequireStorage = false};
+            }
+
+
+            //Update Financial
+
+
+            return input;
         }
     }
 }

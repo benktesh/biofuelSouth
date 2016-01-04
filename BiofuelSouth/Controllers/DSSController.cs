@@ -4,6 +4,7 @@ using System.Web.Mvc;
 using BiofuelSouth.Enum;
 using BiofuelSouth.Manager;
 using BiofuelSouth.Models;
+using BiofuelSouth.Services;
 using BiofuelSouth.ViewModels;
 
 namespace BiofuelSouth.Controllers
@@ -144,7 +145,9 @@ namespace BiofuelSouth.Controllers
 
             //If storage is not null or storage is skipped then go to financial steps
 
-            if (ip.General.Category == CropType.Poplar)
+            //storage.RequireStorage = CropAttribute.RequireStorage(ip.General.Category);
+
+            if (ip.General.Category == CropType.Poplar || ip.General.Category == CropType.Pine || ip.General.Category == CropType.Willow)
             {
                 storage.RequireStorage = false;
             }
@@ -285,9 +288,8 @@ namespace BiofuelSouth.Controllers
             {
                 return RedirectToAction("General");
             }
-            var vm = new ResultManager(input);
-
-            return View("Results", vm.GetResultViewModel());
+            var vm = new Simulator(input);
+            return View("Results", vm.GetViewModels()[0]);
         }
 
         public ActionResult Result()
