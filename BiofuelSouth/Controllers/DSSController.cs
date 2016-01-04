@@ -280,11 +280,14 @@ namespace BiofuelSouth.Controllers
 
         public ActionResult Results()
         {
-            var vm = new ResultManager(Session["input"] as Input);
+            var input = InputGet(); 
+            if (input == null)
+            {
+                return RedirectToAction("General");
+            }
+            var vm = new ResultManager(input);
 
             return View("Results", vm.GetResultViewModel());
-            
-
         }
 
         public ActionResult Result()

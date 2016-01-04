@@ -466,20 +466,15 @@ namespace BiofuelSouth.Manager
             //  var  rev = Revenues.Select(rv => (double) rv.TotalRevenue).ToArray();
             //c.GenerateChart(revenueCachekey, rev, "Revenue");
 
-
-
             var cc = new ChartController();
 
             var cacheKey = Guid.NewGuid().ToString();
             vm.Add(ChartType.CashFlow, cacheKey);
             cc.GenerateColumnChart(cacheKey, GetCashFlow().ToArray(), "Cash Flow", "Year ", "$");
 
-
-
             cacheKey = Guid.NewGuid().ToString();
-            cc.GenerateChart(cacheKey, Productions.ToArray(), "Yield");
+            cc.GenerateChart(cacheKey, Productions.ToArray(), "Production", "Year", "Yield");
             vm.Add(ChartType.Production, cacheKey);
-
            
             var revenueCachekey = Guid.NewGuid().ToString();
             vm.Add(ChartType.CostRevenue, revenueCachekey);

@@ -10,18 +10,22 @@ namespace BiofuelSouth.Controllers
     public class ChartController : Controller
     {
         private int ChartCacheMinute = 5;
-        public void GenerateChart(string cacheKey, decimal[] data, String chartName)
+        public void GenerateChart(string cacheKey, decimal[] data, String chartName, string xLabel = "Year", string yLabel = "")
         {
             var xValues = Enumerable.Range(1, data.Length).ToArray();
+            if (string.IsNullOrEmpty(yLabel))
+            {
+                yLabel = chartName;
+            }
             var chart = new Chart(600, 300);
             chart.AddSeries(
                 chartType: "Column",
                 name: chartName,
                 xValue: xValues,
                 yValues: data);
-            chart.SetXAxis("Year", 0, data.Length + .75);
+            chart.SetXAxis(xLabel, 0, data.Length + .75);
             chart.AddTitle(chartName);
-            chart.SetYAxis("Annual Production (tons)");
+            chart.SetYAxis(yLabel);
             chart.SaveToCache(cacheKey, ChartCacheMinute);
         }
 
@@ -86,7 +90,7 @@ namespace BiofuelSouth.Controllers
         /// <param name="yLabel"></param>
         /// <param name="xLabel"></param>
         public void GenerateLineGraphs(String cacheKey, List<List<decimal>> dataMember, 
-            List<string> labels, string chartName, string yLabel = "$ ", string xLabel = "Year")
+            List<string> labels, string chartName, string yLabel = "$", string xLabel = "Year")
         {
             yLabel = yLabel + " ";
             var dataItems = dataMember.Count;
