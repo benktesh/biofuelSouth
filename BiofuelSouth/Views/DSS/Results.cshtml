@@ -10,6 +10,7 @@
 
 
 
+
 <div class="row">
     <div class="col-sm-12">
         <h2>Summary for @Model.CropType in @(Model.CountyName) , @Model.StateCode</h2>
@@ -201,7 +202,6 @@
                 }
 
             </tr>
-
         </table>
 
         <div id="chartButton">
@@ -215,23 +215,26 @@
             if (key.Key == ChartType.CashFlow)
             {
                 var urlcashflow = Url.Action("ShowChart", "Chart", new { @cacheKey = @key.Value });
-                <div id="CashFlowChart">
-                    <img src="@urlcashflow" class="img-responsive" alt="CashFlow Chart" />
+                <div id="CashFlowChart" class="table-bordered">
+                    <img src="@urlcashflow" class="img-responsive" alt="CashFlow Chart"/>
                 </div>
+                <br/>
             }
             else if (key.Key == ChartType.Production)
             {
                 var urlAnnualProduction = Url.Action("ShowChart", "Chart", new { @cacheKey = @key.Value });
-                <div id="AnnualProductionChart">
-                    <img src="@urlAnnualProduction" class="img-responsive" alt="Annual Production Chart" />
+                <div id="AnnualProductionChart" class="table-bordered">
+                    <img src="@urlAnnualProduction" class="img-responsive" alt="Annual Production Chart"/>
                 </div>
+                <br/>
             }
             else if (key.Key == ChartType.CostRevenue)
             {
                 var urlAnnualProduction1 = Url.Action("ShowChart", "Chart", new { @cacheKey = @key.Value });
-                <div id="CostRevenueChart">
-                    <img src="@urlAnnualProduction1" class="img-responsive" alt="Revenue Chart" />
+                <div id="CostRevenueChart" class="table-bordered">
+                    <img src="@urlAnnualProduction1" class="img-responsive " alt="Revenue Chart"/>
                 </div>
+                <br/>
             }
 
         }
