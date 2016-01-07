@@ -42,7 +42,7 @@ namespace BiofuelSouth.ViewModels
         #endregion
 
         #region Summary
-        public string NPV { get; set; }
+        public decimal NPV { get; set; }
         public string AnnualProduction { get { return ProductionList.Average().ToString("###,###.##"); } }
         public string AnnualCost { get { return CostList.Average().ToString("C0"); } }
 

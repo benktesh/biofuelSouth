@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using BiofuelSouth.Enum;
@@ -280,7 +281,37 @@ namespace BiofuelSouth.Controllers
 
         }
 
+        [HttpGet]
+        public ActionResult GetAlternative(CropType cropType)
+        {
 
+            //SwapCrop
+            //GEnerate results
+
+            return null;  
+
+        }
+
+
+        private CropType? GetPrimaryCrop()
+        {
+            var input = InputGet();
+
+            return input?.General.Category;
+
+        }
+
+        private void SwapCrops(CropType cropType)
+        {
+            var vms = Session["ViewModels"] as List<ResultViewModel>;
+            var current = vms[0];
+            var next = vms.FirstOrDefault(m => m.CropType == cropType);
+            vms.Remove(next);
+            vms.RemoveAt(0);
+            vms.Insert(0, next);
+            vms.Add(current);
+
+        }
         public ActionResult Results()
         {
             var input = InputGet(); 
@@ -289,7 +320,12 @@ namespace BiofuelSouth.Controllers
                 return RedirectToAction("General");
             }
             var vm = new Simulator(input);
-            return View("Results", vm.GetViewModels()[0]);
+            var vms = vm.GetViewModels();
+            Session["ViewModels"] = vms;
+
+
+
+            return View("Results", vms[0]);
         }
 
         public ActionResult Result()

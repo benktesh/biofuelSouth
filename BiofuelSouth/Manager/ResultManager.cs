@@ -15,6 +15,9 @@ namespace BiofuelSouth.Manager
     {
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
+        // ReSharper disable once InconsistentNaming
+        public ChartController cc { get; set; }
+
         private Input Input { get; }
 
         private General General { get; }
@@ -52,8 +55,9 @@ namespace BiofuelSouth.Manager
             }
             Storage = input.Storage;
             Financial = input.Financial;
-            ProductionCost = input.ProductionCost; 
+            ProductionCost = input.ProductionCost;
 
+            cc = new ChartController();
             vm = new ResultViewModel();
         // Set properties for calculations
 
@@ -429,7 +433,7 @@ namespace BiofuelSouth.Manager
             vm.ProjectSize = $"{General.ProjectSize.GetValueOrDefault().ToString("##,###")} Acre";
             vm.LandCost = $"{General.LandCost.GetValueOrDefault().ToString("C0")} per Acre";
             vm.ProjectLife = General.ProjectLife.GetValueOrDefault();
-            vm.NPV = $"{NPV.ToString("C")}";
+            vm.NPV = NPV;
 
             vm.ProductionList = Productions;
             vm.GrossProductionList = GrossProductions;
@@ -466,7 +470,7 @@ namespace BiofuelSouth.Manager
             //  var  rev = Revenues.Select(rv => (double) rv.TotalRevenue).ToArray();
             //c.GenerateChart(revenueCachekey, rev, "Revenue");
 
-            var cc = new ChartController();
+          
 
             var cacheKey = Guid.NewGuid().ToString();
             vm.Add(ChartType.CashFlow, cacheKey);
@@ -518,12 +522,27 @@ namespace BiofuelSouth.Manager
                 Input = GetInput(Input, alt);  
                 rm = new ResultManager(Input);
                 viewModels.Add(rm.GetResultViewModel());
-
             }
 
-            return viewModels;
+            var NPVs = viewModels.Select(m => m.NPV).ToArray();
+            var xLabel = viewModels.Select(m => m.CropType.ToString()).ToArray();
 
+            var cacheKey = Guid.NewGuid().ToString();
+            foreach (var v in viewModels)
+            {
+                v.ChartKeys.Add(ChartType.NPVCompare, cacheKey);
+            }
+
+            var cc = new ChartController();
+
+            cc.GenerateColumnChart(cacheKey, NPVs, xLabel, "NPV", "CropType ", "$");
+
+
+
+            return viewModels;
         }
+
+
 
         private Input GetInput(Input ip, CropType alt)
         {

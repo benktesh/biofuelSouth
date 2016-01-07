@@ -16,76 +16,24 @@
 </div>
 
 <div class="row">
-    <div class="col-md-2 col-lg-3 bg-info">
-        <div class="alert-success">
-            <h3>Summary</h3>
-            <p>
-                
-                @{
-                    <div>
-                        Est. Annual Production:
-                        @Math.Round(Model.ProductionList.Average(), 0).ToString("###,###.##") ton
-                    </div>
-                    <div>
-                        Est. Net Production: @Model.AnnualProduction ton
-                    </div>
-                    <div>
-                        Est. Annual Cost: @Model.AnnualCost
-                    </div>
-                    <div>
-                        Est. Annual Revenue: @Model.AnnualRevenue
-                    </div>
-
-                    <div>
-                        NPV: @Model.NPV
-                    </div>
-                }
-            </p>
-        </div>
-        <div class="alert-success">
-            <p>
-                <h3>Assumptions and Parameters</h3>
-
-                <div class="text-danger"> TBD state all the default values used. <br /> </div>
-                <div> Biomass Price: @Model.BiomassPriceAtFarmGate </div>
-                <div> Project Size: @Model.ProjectSize </div>
-                <div> Land Cost: @Model.LandCost </div>
-                <div>
-                    Average Cost Per Acre: @Model.AverageCostPerAcre
-                    @*@(Math.Round(Model.GetAnnualCost() / Model.General.ProjectSize.GetValueOrDefault(), 0).ToString("C0")) per acre*@
-                </div>
-                <div>
-                    Average Production Per Acre: @Model.AverageProdutivityPerAcre
-                    @*@Math.Round(Model.GetAnnualProductionList().Average() / Model.General.ProjectSize.GetValueOrDefault(), 0).ToString("###,###.##") ton/acre*@
-                </div>
-
-            </p>
-        </div>
-        <div class="alert-success">
-            <div id="moreinformation">
-                @Html.Partial("_moreinformation")
-            </div>
 
 
-        </div>
-    </div>
-
-    <div class="col-md-10 col-lg-9">
+    <div class="col-md-8">
         <strong>Estimated Production, Cost and Revenue</strong>
         <table class="table table-responsive table-bordered table-striped">
             <thead>
-                <tr>
-                    <th rowspan="2">Description</th>
-                    <th colspan="@Model.ProjectLife" class="text-center">Year</th>
-                </tr>
-                <tr>
-                    @{
-                        for (var i = 0; i < Model.ProjectLife; i++)
-                        {
-                            <th>@(i + 1)</th>
-                        }
+            <tr>
+                <th rowspan="2">Description</th>
+                <th colspan="@Model.ProjectLife" class="text-center">Year</th>
+            </tr>
+            <tr>
+                @{
+                    for (var i = 0; i < Model.ProjectLife; i++)
+                    {
+                        <th>@(i + 1)</th>
                     }
-                </tr>
+                }
+            </tr>
             </thead>
 
 
@@ -105,23 +53,23 @@
                     }
                 </tr>
 
-               
-                    <tr>
-                        @* ReSharper disable once UnknownCssClass *@
-                        <td colspan="@mergeCol" class="mergeCol">Storage</td>
-                    </tr>
+
+                <tr>
+                    @* ReSharper disable once UnknownCssClass *@
+                    <td colspan="@mergeCol" class="mergeCol">Storage</td>
+                </tr>
 
 
-                     <tr>
-                         <td>
-                             Storage Loss (ton)
-                         </td>
-                         @foreach (var a in Model.StorageLoss)
-                         {
-                             <td>@String.Format("{0:#,###,###}", Math.Round(a, 0))</td>
-                         }
-                     </tr>
-                }
+                <tr>
+                    <td>
+                        Storage Loss (ton)
+                    </td>
+                    @foreach (var a in Model.StorageLoss)
+                    {
+                        <td>@String.Format("{0:#,###,###}", Math.Round(a, 0))</td>
+                    }
+                </tr>
+            }
 
             <tr>
                 <td>
@@ -173,7 +121,7 @@
                 }
 
             </tr>
-            @if(Model.RequireStorage)
+            @if (Model.RequireStorage)
             {
                 <tr>
                     <td>
@@ -205,13 +153,14 @@
             <input type="checkbox" id="showCashFlow" name="showCashFlow" checked> Display CashFlow Chart
             <input type="checkbox" id="showProductivity" name="showProductivity" checked> Display Yield Chart
             <input type="checkbox" id="showCostRevenue" name="showCostRevenue" checked> Display Cost/Revenue Chart
+            <input type="checkbox" id="showNpvCompare" name="showNpvCompare" checked> Display NPV Chart/>
         </div>
 
         @foreach (var key in Model.ChartKeys)
         {
             if (key.Key == ChartType.CashFlow)
             {
-                var urlcashflow = Url.Action("ShowChart", "Chart", new { @cacheKey = @key.Value });
+                var urlcashflow = Url.Action("ShowChart", "Chart", new {@cacheKey = @key.Value});
                 <div id="CashFlowChart" class="table-bordered">
                     <img src="@urlcashflow" class="img-responsive" alt="CashFlow Chart"/>
                 </div>
@@ -219,7 +168,7 @@
             }
             else if (key.Key == ChartType.Production)
             {
-                var urlAnnualProduction = Url.Action("ShowChart", "Chart", new { @cacheKey = @key.Value });
+                var urlAnnualProduction = Url.Action("ShowChart", "Chart", new {@cacheKey = @key.Value});
                 <div id="AnnualProductionChart" class="table-bordered">
                     <img src="@urlAnnualProduction" class="img-responsive" alt="Annual Production Chart"/>
                 </div>
@@ -227,16 +176,79 @@
             }
             else if (key.Key == ChartType.CostRevenue)
             {
-                var urlAnnualProduction1 = Url.Action("ShowChart", "Chart", new { @cacheKey = @key.Value });
+                var urlAnnualProduction1 = Url.Action("ShowChart", "Chart", new {@cacheKey = @key.Value});
                 <div id="CostRevenueChart" class="table-bordered">
                     <img src="@urlAnnualProduction1" class="img-responsive " alt="Revenue Chart"/>
                 </div>
                 <br/>
             }
+            else if (key.Key == ChartType.NPVCompare)
+            {
+                var urlNpvCompare = Url.Action("ShowChart", "Chart", new { @cacheKey = @key.Value });
+                <div id="NpvCompareChart" class="table-bordered">
+                    <img src="@urlNpvCompare" class="img-responsive " alt="Revenue Chart" />
+                </div>
+                <br />
+
+            }
 
         }
 
+    </div>
+    <div class="col-md-4 bg-info">
+        <div class="alert-success">
+            <h3>Summary</h3>
+            <p>
+
+                @{
+                    <div>
+                        Est. Annual Production:
+                        @Math.Round(Model.ProductionList.Average(), 0).ToString("###,###.##") ton
+                    </div>
+                    <div>
+                        Est. Net Production: @Model.AnnualProduction ton
+                    </div>
+                    <div>
+                        Est. Annual Cost: @Model.AnnualCost
+                    </div>
+                    <div>
+                        Est. Annual Revenue: @Model.AnnualRevenue
+                    </div>
+
+                    <div>
+                        NPV: @Model.NPV.ToString("C0")
+                    </div>
+                }
+            </p>
         </div>
+        <div class="alert-success">
+            <p>
+                <h3>Assumptions and Parameters</h3>
+
+                <div class="text-danger"> TBD state all the default values used. <br /> </div>
+                <div> Biomass Price: @Model.BiomassPriceAtFarmGate </div>
+                <div> Project Size: @Model.ProjectSize </div>
+                <div> Land Cost: @Model.LandCost </div>
+                <div>
+                    Average Cost Per Acre: @Model.AverageCostPerAcre
+                    @*@(Math.Round(Model.GetAnnualCost() / Model.General.ProjectSize.GetValueOrDefault(), 0).ToString("C0")) per acre*@
+                </div>
+                <div>
+                    Average Production Per Acre: @Model.AverageProdutivityPerAcre
+                    @*@Math.Round(Model.GetAnnualProductionList().Average() / Model.General.ProjectSize.GetValueOrDefault(), 0).ToString("###,###.##") ton/acre*@
+                </div>
+
+            </p>
+        </div>
+        <div class="alert-success">
+            <div id="moreinformation">
+                @Html.Partial("_moreinformation")
+            </div>
+
+
+        </div>
+        @Html.Partial("_resultDashboard")
+    </div>
 
 </div>
 
@@ -268,6 +280,14 @@
                     $('#CostRevenueChart').show();
                 } else {
                     $('#CostRevenueChart').hide();
+                };
+            });
+
+            $('#showNpvCompare').change(function () {
+                if ($(this).is(':checked')) {
+                    $('#NpvCompareChart').show();
+                } else {
+                    $('#NpvCompareChart').hide();
                 };
             });
         });
