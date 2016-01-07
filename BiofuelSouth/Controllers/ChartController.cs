@@ -31,7 +31,8 @@ namespace BiofuelSouth.Controllers
 
         public void GenerateColumnChart(string cacheKey, decimal[] data, String chartName, string xLabel = "Year", string yLabel = "$ ")
         {
-            var xValues = Enumerable.Range(1, data.Length).ToArray();
+           var xValues = Enumerable.Range(1, data.Length).ToArray();
+            
             var chart = new Chart(600, 300);
             chart.AddSeries(
                 chartType: "Column",
@@ -47,6 +48,25 @@ namespace BiofuelSouth.Controllers
             //chart.SetYAxis(yLabel + " ", Math.Round(data.Min(),0), Math.Round(data.Max(),0)
             //chart.SetYAxis(yLabel);
             //chart.SetYAxis("$", data.Max(a=>a)) * -1
+            chart.SetYAxis(yLabel, Double.NaN, Double.NaN);
+            chart.SaveToCache(cacheKey, ChartCacheMinute);
+        }
+
+        public void GenerateColumnChart(string cacheKey, decimal[] yData, string[] xData, String chartName, string xLabel = "Year", string yLabel = "$ ")
+        {
+           
+            var chart = new Chart(600, 300);
+            chart.AddSeries(
+                chartType: "Column",
+                name: chartName,
+                xValue: xData,
+
+            yValues: yData);
+
+            chart.AddSeries(chartType: "line", yValues: Enumerable.Repeat(0, xData.Length).ToArray());
+            chart.SetXAxis(xLabel + " ", 0, xData.Length + .75);
+            chart.SetYAxis(yLabel, Double.NaN,Double.NaN);
+            chart.AddTitle(chartName);
             chart.SaveToCache(cacheKey, ChartCacheMinute);
         }
 
