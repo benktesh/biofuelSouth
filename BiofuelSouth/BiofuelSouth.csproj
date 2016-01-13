@@ -651,8 +651,10 @@
     </Compile>
     <Compile Include="Enum\ChartType.cs" />
     <Compile Include="Enum\ProductionCostType.cs" />
+    <Compile Include="Enum\ResultComparisionkey.cs" />
     <Compile Include="Enum\StorageMethod.cs" />
     <Compile Include="Helpers\EnumExtensions.cs" />
+    <Compile Include="Helpers\LinqExtensions.cs" />
     <Compile Include="Resources\GeneralResource.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -823,6 +825,7 @@
     <Compile Include="ViewModels\GlossaryViewModel.cs" />
     <Compile Include="ViewModels\ResultViewModel.cs" />
     <Compile Include="ViewModels\StorageCostModel.cs" />
+    <Compile Include="ViewModels\SummaryComparisionModel.cs" />
     <Compile Include="ViewModels\WizardViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -871,9 +874,11 @@
     <Content Include="Views\DSS\GetProductionCost.cshtml" />
     <Content Include="Views\DSS\Results.cshtml" />
     <Content Include="Views\DSS\_alternativeCrop.cshtml" />
+    <Content Include="Views\DSS\TabbedResult.cshtml" />
     <None Include="Views\DSS\_productionCost.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\ProductionCost.cshtml" />
     <Content Include="Views\DSS\_resultDashboard.cshtml" />
+    <Content Include="Views\DSS\_summaryOverView.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -110,9 +110,10 @@ namespace BiofuelSouth.Controllers
         /// <param name="yLabel"></param>
         /// <param name="xLabel"></param>
         public void GenerateLineGraphs(String cacheKey, List<List<decimal>> dataMember, 
-            List<string> labels, string chartName, string yLabel = "$", string xLabel = "Year")
+            IEnumerable<string> xlabels, string chartName = null, string yLabel = "$", string xLabel = "Year", IList<string> xValues = null)
         {
             yLabel = yLabel + " ";
+            var labels = xlabels.ToArray();
             var dataItems = dataMember.Count;
             if (dataItems == 0)
                 return; 
@@ -122,7 +123,10 @@ namespace BiofuelSouth.Controllers
                 return;
 
             var chart = new Chart(600, 300);
-            var xValues = Enumerable.Range(1, xAxisLength).ToArray();
+            if (xValues == null)
+            {
+                xValues = Enumerable.Range(1, xAxisLength).Select(m => m.ToString()).ToArray();
+            } 
             for (int i = 0; i < dataItems; i++)
             {
                 var data = dataMember[i].ToArray();
@@ -160,8 +164,14 @@ namespace BiofuelSouth.Controllers
 
         public void ShowChart(string cacheKey)
         {
+            if (cacheKey == null)
+            {
+                
+                return;
+            }
+                
             var chart = Chart.GetFromCache(cacheKey);
-            chart.Write();
+            chart?.Write();
         }
 
 

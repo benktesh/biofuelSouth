@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using BiofuelSouth.Controllers;
 using BiofuelSouth.Enum;
+using BiofuelSouth.Helpers;
 using BiofuelSouth.Models;
 using BiofuelSouth.Services;
 using BiofuelSouth.ViewModels;
@@ -434,6 +436,8 @@ namespace BiofuelSouth.Manager
             vm.LandCost = $"{General.LandCost.GetValueOrDefault().ToString("C0")} per Acre";
             vm.ProjectLife = General.ProjectLife.GetValueOrDefault();
             vm.NPV = NPV;
+            vm.InterestRate = Constants.GetAvgInterestRate(); 
+
 
             vm.ProductionList = Productions;
             vm.GrossProductionList = GrossProductions;
@@ -470,8 +474,6 @@ namespace BiofuelSouth.Manager
             //  var  rev = Revenues.Select(rv => (double) rv.TotalRevenue).ToArray();
             //c.GenerateChart(revenueCachekey, rev, "Revenue");
 
-          
-
             var cacheKey = Guid.NewGuid().ToString();
             vm.Add(ChartType.CashFlow, cacheKey);
             cc.GenerateColumnChart(cacheKey, GetCashFlow().ToArray(), "Cash Flow", "Year ", "$");
@@ -500,6 +502,8 @@ namespace BiofuelSouth.Manager
         {
             Input = input;
         }
+
+       
         private IList<CropType> GetAlternativeCrops()
         {
             var alternative = new HashSet<CropType> { CropType.Switchgrass, CropType.Miscanthus, CropType.Willow, CropType.Poplar, CropType.Pine };
@@ -524,20 +528,56 @@ namespace BiofuelSouth.Manager
                 viewModels.Add(rm.GetResultViewModel());
             }
 
-            var NPVs = viewModels.Select(m => m.NPV).ToArray();
+            var npVs = viewModels.Select(m => m.NPV).ToArray();
             var xLabel = viewModels.Select(m => m.CropType.ToString()).ToArray();
+            var npvCacheKey = Guid.NewGuid().ToString();
 
-            var cacheKey = Guid.NewGuid().ToString();
+            var cashFlows = new List<List<decimal>>();
+            var cashflowKey = Guid.NewGuid().ToString();
+
+            var productions = new List<List<decimal>>();
+            var productionCompareKey = Guid.NewGuid().ToString();
+            
             foreach (var v in viewModels)
             {
-                v.ChartKeys.Add(ChartType.NPVCompare, cacheKey);
+                cashFlows.Add(v.CashFlow);
+                productions.Add(new List<decimal>(v.ProductionList.CumulativeSum()));
+                v.ChartKeys.Add(ChartType.NPVCompare, npvCacheKey);
+                v.ChartKeys.Add(ChartType.CashFlowCompare, cashflowKey);
+                v.ChartKeys.Add(ChartType.ProductionCompare, productionCompareKey);
+
+
+                var highNpv = viewModels.OrderByDescending(m => m.NPV).FirstOrDefault();
+                var lowNpv = viewModels.OrderBy(m => m.NPV).FirstOrDefault();
+
+                if (highNpv != null)
+                {
+                    v.ComparisionData.Add(new SummaryComparisionModel
+                    {
+                        Key = ResultComparisionKey.HighNpv,
+                        Crop = highNpv.CropType,
+                        ComparisionValue = highNpv.NPV.ToString("C0")
+                    });
+                }
+
+                if (lowNpv != null)
+                {
+                    v.ComparisionData.Add(new SummaryComparisionModel
+                    {
+                        Key = ResultComparisionKey.LowNpv,
+                        Crop = lowNpv.CropType,
+                        ComparisionValue = lowNpv.NPV.ToString("C0")
+                    });
+                }
+
             }
+
 
             var cc = new ChartController();
 
-            cc.GenerateColumnChart(cacheKey, NPVs, xLabel, "NPV", "CropType ", "$");
-
-
+            cc.GenerateColumnChart(npvCacheKey, npVs, xLabel, "NPV", "Crop ", "$");
+            cc.GenerateLineGraphs(cashflowKey,cashFlows,xLabel.ToList(),"Cashflow Comparision");
+            cc.GenerateLineGraphs(productionCompareKey,productions,xLabel, "Total Production", "tons", "Year ", null );
 
             return viewModels;
         }

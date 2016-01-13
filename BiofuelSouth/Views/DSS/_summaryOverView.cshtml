@@ -1,0 +1,99 @@
+﻿@using System.Globalization
+@using BiofuelSouth.Enum
+@model BiofuelSouth.ViewModels.ResultViewModel
+
+<br />
+<div class="row">
+    <div class="col-md-6">
+        <p>
+            @*Move to template *@
+            Growing of
+            <strong>@Model.CropType</strong> for a duration of
+            <strong>@Model.ProjectLife</strong> over an area of
+            <strong>@Model.ProjectSize</strong> in
+            <strong>@Model.CountyName</strong> county of
+            <strong>@Model.StateCode</strong> is expected to produce an estimated
+            <strong>@Model.AnnualProduction</strong> tons of biomass annually.
+        </p>
+        <p>
+            The production comes at an expected annual cost of
+            <strong>@Model.AnnualCost</strong> and results in an annual revenue of
+            <strong>@Model.AnnualRevenue</strong>. The net present value of the project is estimated to be
+            <strong>@Model.NPV.ToString("C0")</strong> at assumed prevailing interest rate of
+            <strong>@Model.InterestRate.ToString(CultureInfo.InvariantCulture)</strong>.
+
+        </p>
+        @{
+            var highNPV = @Model.ComparisionData.FirstOrDefault(m => m.Key == ResultComparisionKey.HighNpv);
+            var lowNPV = @Model.ComparisionData.FirstOrDefault(m => m.Key == ResultComparisionKey.LowNpv);
+
+        }
+        @if (highNPV != null && lowNPV.Crop != Model.CropType)
+        {
+            <p>
+                It appears that growing
+                <strong>@highNPV.Crop.ToString()</strong> may likely result in highest NPV of
+                <strong>@highNPV.ComparisionValue</strong>.
+
+            </p>
+
+        }
+        else if (highNPV != null && lowNPV.Crop == @Model.CropType)
+        {
+            <p>
+                It appears that growing
+                <strong>@highNPV.Crop.ToString()</strong> may likely result in highest NPV compared to other crops.
+
+            </p>
+
+        }
+        @if (lowNPV != null && lowNPV.Crop != @Model.CropType)
+        {
+            <p>
+                It appears that growing
+                <strong>@lowNPV.Crop.ToString()</strong> may likely result in lowest NPV of
+                <strong>@lowNPV.ComparisionValue</strong>.
+
+            </p>
+
+        }
+        else if (lowNPV != null && lowNPV.Crop == @Model.CropType)
+        {
+            <p>
+                It appears that growing
+                <strong>@lowNPV.Crop.ToString()</strong> may result the lowest NPV compared to growing other crops.
+
+            </p>
+
+        }
+
+    </div>
+
+    <div class="col-md-6">
+        @if (Model.ChartKeys.Select(m => m.Key == ChartType.NPVCompare).Any())
+        {
+            var keyValue = Model.ChartKeys.FirstOrDefault(m => m.Key == ChartType.NPVCompare).Value;
+            var urlAnnualProduction = Url.Action("ShowChart", "Chart", new { @cacheKey = keyValue });
+            <figure>
+                <img src="@urlAnnualProduction" class="img-responsive" alt="NPV Compare Chart" />
+                <figcaption class="text-center">Comparision of NPV across various biofuel crops.</figcaption>
+            </figure>
+        }
+
+
+
+
+        @*<p>
+                    The following graph provides a comparision of NPV with other crops:
+
+                    @if (Model.ChartKeys.Select(m => m.Key == ChartType.NPVCompare).Any())
+                    {
+                       <div id="NPVCompareChart" class="table-bordered">
+                            <img src="@urlAnnualProduction" class="img-responsive" alt="NPV Compare Chart"/>
+                        </div>
+                        <br/>
+                    }
+            </p>
+        *@
+    </div>
+</div>

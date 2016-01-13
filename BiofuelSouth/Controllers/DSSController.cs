@@ -328,6 +328,41 @@ namespace BiofuelSouth.Controllers
             return View("Results", vms[0]);
         }
 
+        private Input GetDefaultInput()
+        {
+            var ip = new Input();
+            ip.General.Category = CropType.Willow;
+            ip.General.ProjectLife = 10;
+            ip.General.ProjectSize = 100;
+            ip.General.State = "AL";
+            ip.General.County = "01001";
+            ip.General.BiomassPriceAtFarmGate = Constants.GetFarmGatePrice(ip.General.Category);
+            ip.General.LandCost = 70;
+
+
+            Session["Input"] = ip;
+
+            ip.ProductionCost = GetProductionCostViewModel();
+            
+
+            return ip;
+
+
+
+        }
+        public ActionResult TabbedResult()
+        {
+            var input = GetDefaultInput();
+            
+            var vm = new Simulator(input);
+           
+            var vms = vm.GetViewModels();
+            Session["ViewModels"] = vms;
+
+            return View("TabbedResult",vms[0]);
+
+        }
+
         public ActionResult Result()
         {
             var vm = new ResultManager(Session["input"] as Input );

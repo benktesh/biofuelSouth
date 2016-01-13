@@ -16,13 +16,14 @@ namespace BiofuelSouth.ViewModels
             LandCostList = new List<decimal> { 0 };
             ProductionCostList = new List<decimal> { 0 };
             CashFlow = new List<decimal> { 0 };
+            ComparisionData = new List<SummaryComparisionModel>();
 
         }
 
         #region inputs
 
         public CropType CropType { get; set; }
-        public string CountyName { get; set; }
+        public string CountyName { get; set;} 
 
         public string StateCode { get; set; }
 
@@ -35,6 +36,8 @@ namespace BiofuelSouth.ViewModels
         public double StoragePercent { get; set; }
 
         public double StorageTime { get; set;  } //days
+
+        public double InterestRate { get; set; }
 
 
 
@@ -79,6 +82,8 @@ namespace BiofuelSouth.ViewModels
         public List<decimal> LandCostList { get; set; }
         public List<decimal> ProductionCostList { get; set; }
         public List<decimal> CashFlow { get; set; }
+
+        public List<SummaryComparisionModel> ComparisionData { get; set;}
 
         public Dictionary<ChartType, string> ChartKeys { get; set; }  //actualy string of guid is the value 
         #endregion
