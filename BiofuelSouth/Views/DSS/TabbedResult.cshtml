@@ -1,4 +1,5 @@
 ﻿@using System.Globalization
+@using System.Linq
 @using BiofuelSouth.Enum
 @model BiofuelSouth.ViewModels.ResultViewModel
 
@@ -8,89 +9,26 @@
     <title>Bootstrap Case</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    @Styles.Render("~/Content/custom.css")
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <style>
-             /*** PANEL PRIMARY ***/
-.with-nav-tabs.panel-primary .nav-tabs > li > a,
-.with-nav-tabs.panel-primary .nav-tabs > li > a:hover,
-.with-nav-tabs.panel-primary .nav-tabs > li > a:focus {
-    color: #fff;
-}
-.with-nav-tabs.panel-primary .nav-tabs > .open > a,
-.with-nav-tabs.panel-primary .nav-tabs > .open > a:hover,
-.with-nav-tabs.panel-primary .nav-tabs > .open > a:focus,
-.with-nav-tabs.panel-primary .nav-tabs > li > a:hover,
-.with-nav-tabs.panel-primary .nav-tabs > li > a:focus {
-	color: #fff;
-	background-color: #3071a9;
-	border-color: transparent;
-}
-.with-nav-tabs.panel-primary .nav-tabs > li.active > a,
-.with-nav-tabs.panel-primary .nav-tabs > li.active > a:hover,
-.with-nav-tabs.panel-primary .nav-tabs > li.active > a:focus {
-	color: #428bca;
-	background-color: #fff;
-	border-color: #428bca;
-	border-bottom-color: transparent;
-}
-.with-nav-tabs.panel-primary .nav-tabs > li.dropdown .dropdown-menu {
-    background-color: #428bca;
-    border-color: #3071a9;
-}
-.with-nav-tabs.panel-primary .nav-tabs > li.dropdown .dropdown-menu > li > a {
-    color: #fff;   
-}
-.with-nav-tabs.panel-primary .nav-tabs > li.dropdown .dropdown-menu > li > a:hover,
-.with-nav-tabs.panel-primary .nav-tabs > li.dropdown .dropdown-menu > li > a:focus {
-    background-color: #3071a9;
-}
-.with-nav-tabs.panel-primary .nav-tabs > li.dropdown .dropdown-menu > .active > a,
-.with-nav-tabs.panel-primary .nav-tabs > li.dropdown .dropdown-menu > .active > a:hover,
-.with-nav-tabs.panel-primary .nav-tabs > li.dropdown .dropdown-menu > .active > a:focus {
-    background-color: #4a9fe9;
-}
+   
+
     </style>
 </head>
 <body>
 
-
     <h2>Results for @Model.CropType in @Model.CountyName, @Model.StateCode</h2>
 
-@*
-    <div class="panel with-nav-tabs panel-primary">
-        <div class="panel-heading">
-            <ul class="nav nav-tabs">
-                <li class="active"><a href="#tab1primary" data-toggle="tab">Primary 1</a></li>
-                <li><a href="#tab2primary" data-toggle="tab">Primary 2</a></li>
-                <li><a href="#tab3primary" data-toggle="tab">Primary 3</a></li>
-                <li class="dropdown">
-                    <a href="#" data-toggle="dropdown">Dropdown <span class="caret"></span></a>
-                    <ul class="dropdown-menu" role="menu">
-                        <li><a href="#tab4primary" data-toggle="tab">Primary 4</a></li>
-                        <li><a href="#tab5primary" data-toggle="tab">Primary 5</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
-        <div class="panel-body">
-            <div class="tab-content">
-                <div class="tab-pane fade in active" id="tab1primary">Primary 1</div>
-                <div class="tab-pane fade" id="tab2primary">Primary 2</div>
-                <div class="tab-pane fade" id="tab3primary">Primary 3</div>
-                <div class="tab-pane fade" id="tab4primary">Primary 4</div>
-                <div class="tab-pane fade" id="tab5primary">Primary 5</div>
-            </div>
-        </div>
-    </div>
-*@
+
     <div class="panel with-nav-tabs panel-primary">
         <div class="panel-heading">
             <ul class="nav nav-tabs">
                 <li class="active"><a data-toggle="tab" href="#home">Summary</a></li>
                 <li><a data-toggle="tab" href="#menu1">Production</a></li>
-                <li><a data-toggle="tab" href="#menu2">Cost</a></li>
+                <li><a data-toggle="tab" href="#menu2">Cost & Revenue</a></li>
                 <li><a data-toggle="tab" href="#menu3">Inputs and Assumptions</a></li>
                 <li><a data-toggle="tab" href="#menu4">More Information</a></li>
             </ul>
@@ -102,88 +40,89 @@
                     @Html.Partial("_summaryOverView", @Model)
                 </div>
                 <div id="menu1" class="tab-pane fade">
-                    <h3>Production Results</h3>
-
-                    @if (Model.ChartKeys.Select(m => m.Key == ChartType.Production).Any())
-                    {
-                        var keyValue = Model.ChartKeys.FirstOrDefault(m => m.Key == ChartType.Production).Value;
-                        var urlAnnualProduction = Url.Action("ShowChart", "Chart", new { @cacheKey = keyValue });
-                        <div id="AnnualProductionChart" class="table-bordered">
-                            <img src="@urlAnnualProduction" class="img-responsive" alt="Annual Production Chart" />
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <h3>Production Results</h3>
                         </div>
-                        <br />
-                    }
 
-                    <p>Comparision with other crops</p>
+                        <div class="col-sm-6">
+                            @if (Model.ChartKeys.Select(m => m.Key == ChartType.Production).Any())
+                            {
+                                var keyValue = Model.ChartKeys.FirstOrDefault(m => m.Key == ChartType.Production).Value;
+                                var urlAnnualProduction = Url.Action("ShowChart", "Chart", new { @cacheKey = keyValue });
+                                <figure>
+                                    <img src="@urlAnnualProduction" class="img-responsive" alt="Annual Production Chart" />
+                                    <figcaption class="text-center">Biofuel Production</figcaption>
+                                </figure>
 
-                    @if (Model.ChartKeys.Select(m => m.Key == ChartType.ProductionCompare).Any())
-                    {
-                        var keyValue = Model.ChartKeys.FirstOrDefault(m => m.Key == ChartType.ProductionCompare).Value;
-                        var urlAnnualProduction = Url.Action("ShowChart", "Chart", new { @cacheKey = keyValue });
-                        <div id="ProductionCompareChart" class="table-bordered">
-                            <img src="@urlAnnualProduction" class="img-responsive" alt="Production Compare Chart" />
+                            }
+
+                            @if (Model.ChartKeys.Select(m => m.Key == ChartType.ProductionCompare).Any())
+                            {
+                                var keyValue = Model.ChartKeys.FirstOrDefault(m => m.Key == ChartType.ProductionCompare).Value;
+                                var urlAnnualProduction = Url.Action("ShowChart", "Chart", new { @cacheKey = keyValue });
+
+                                <figure>
+                                    <img src="@urlAnnualProduction" class="img-responsive" alt="Production Compare Chart"/>
+                                    <figcaption class="text-center">Comparision of production with other crops</figcaption>
+                                </figure>
+
+                            }
                         </div>
-                        <br />
-                    }
+                    </div>
+                   
+                   
+
+
+                
                 </div>
                 <div id="menu2" class="tab-pane fade">
-                    <h3>Cost And Revenue</h3>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <h3>Cost And Revenue</h3>
 
-                    <p>
-                        The graph below shows the cost and revenue information.
-                        @if (Model.ChartKeys.Select(m => m.Key == ChartType.CostRevenue).Any())
-                    {
-                        var keyValue = Model.ChartKeys.FirstOrDefault(m => m.Key == ChartType.CostRevenue).Value;
-                        var urlAnnualProduction1 = Url.Action("ShowChart", "Chart", new {@cacheKey = keyValue});
-                    <div id="CostRevenueChart" class="table-bordered">
-                        <img src="@urlAnnualProduction1" class="img-responsive " alt="Revenue Chart" />
+                        </div>
+                        <div class="col-sm-6">
+                            @if (Model.ChartKeys.Select(m => m.Key == ChartType.CostRevenue).Any())
+                            {
+                                var keyValue = Model.ChartKeys.FirstOrDefault(m => m.Key == ChartType.CostRevenue).Value;
+                                var urlAnnualProduction1 = Url.Action("ShowChart", "Chart", new { @cacheKey = keyValue });
+                             
+                                <figure>
+                                    <img src="@urlAnnualProduction1" class="img-responsive " alt="Revenue Chart" />
+                                    <figcaption class="text-center">Cost and revenue information</figcaption>
+                                </figure>
+
+                            }
+
+                            @if (Model.ChartKeys.Select(m => m.Key == ChartType.CashFlow).Any())
+                            {
+                                var keyValue = Model.ChartKeys.FirstOrDefault(m => m.Key == ChartType.CashFlow).Value;
+                                var urlcashflow = Url.Action("ShowChart", "Chart", new { @cacheKey = keyValue });
+                              
+
+                                <figure>
+                                    <img src="@urlcashflow" class="img-responsive" alt="CashFlow Chart" />
+                                    <figcaption class="text-center">cashflow information</figcaption>
+                                </figure>
+                            }
+
+                            @if (Model.ChartKeys.Select(m => m.Key == ChartType.CashFlowCompare).Any())
+                            {
+                                var keyValue = Model.ChartKeys.FirstOrDefault(m => m.Key == ChartType.CashFlowCompare).Value;
+                                var urlcashflow = Url.Action("ShowChart", "Chart", new { @cacheKey = keyValue });
+                                <figure id="CashFlowCompareChart" class="table-bordered">
+                                    <img src="@urlcashflow" class="img-responsive" alt="CashFlow Compare Chart"/>
+                                    <figcaption class="text=center">Comparision of cashflow information with other crops</figcaption>
+                                </figure>
+   
+                            }
+                        </div>
                     </div>
-                    <br />
-                    }
+                  
 
-                    </p>
+                   
 
-
-
-                    <p>
-                        The graphs below shows the cashflow information.
-                        @if (Model.ChartKeys.Select(m => m.Key == ChartType.CashFlow).Any())
-                    {
-                        var keyValue = Model.ChartKeys.FirstOrDefault(m => m.Key == ChartType.CashFlow).Value;
-                        var urlcashflow = Url.Action("ShowChart", "Chart", new {@cacheKey = keyValue});
-                    <div id="CashFlowChart" class="table-bordered">
-                        <img src="@urlcashflow" class="img-responsive" alt="CashFlow Chart" />
-                    </div>
-                    <br />
-                    }
-                    </p>
-
-
-                    <p>
-                        The following graph compares cashflow information with other crops.
-                        @if (Model.ChartKeys.Select(m => m.Key == ChartType.CashFlowCompare).Any())
-                    {
-                        var keyValue = Model.ChartKeys.FirstOrDefault(m => m.Key == ChartType.CashFlowCompare).Value;
-                        var urlcashflow = Url.Action("ShowChart", "Chart", new {@cacheKey = keyValue});
-                    <div id="CashFlowCompareChart" class="table-bordered">
-                        <img src="@urlcashflow" class="img-responsive" alt="CashFlow Compare Chart" />
-                    </div>
-                    <br />
-                    }
-                    </p>
-
-
-                    @*<p>Comparision with other crops
-                        @if (Model.ChartKeys.Select(m => m.Key == ChartType.RevenueCompare).Any())
-                        {
-                            var keyValue = Model.ChartKeys.FirstOrDefault(m => m.Key == ChartType.RevenueCompare).Value;
-                            var urlAnnualProduction1 = Url.Action("ShowChart", "Chart", new { @cacheKey = keyValue });
-                            <div id="CostRevenueCompareChart" class="table-bordered">
-                                <img src="@urlAnnualProduction1" class="img-responsive " alt="Revenue Compare Chart" />
-                            </div>
-                            <br />
-                        }
-                        </p>*@
                 </div>
                 <div id="menu3" class="tab-pane fade">
                     <h3>Input Data and Assumptions</h3>

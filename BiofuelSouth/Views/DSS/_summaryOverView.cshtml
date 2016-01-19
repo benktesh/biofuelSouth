@@ -1,4 +1,5 @@
 ﻿@using System.Globalization
+@using System.Linq
 @using BiofuelSouth.Enum
 @model BiofuelSouth.ViewModels.ResultViewModel
 
@@ -28,20 +29,20 @@
             var lowNPV = @Model.ComparisionData.FirstOrDefault(m => m.Key == ResultComparisionKey.LowNpv);
 
         }
-        @if (highNPV != null && lowNPV.Crop != Model.CropType)
-        {
+         @if (highNPV != null && lowNPV.Crop != Model.CropType)
+            {
             <p>
-                It appears that growing
+                It is anticipated that growing
                 <strong>@highNPV.Crop.ToString()</strong> may likely result in highest NPV of
                 <strong>@highNPV.ComparisionValue</strong>.
 
             </p>
 
-        }
-        else if (highNPV != null && lowNPV.Crop == @Model.CropType)
-        {
-            <p>
-                It appears that growing
+         }
+         else if (highNPV != null && lowNPV.Crop == @Model.CropType)
+         {
+<p>
+                Likewise, it is anticipated that growing
                 <strong>@highNPV.Crop.ToString()</strong> may likely result in highest NPV compared to other crops.
 
             </p>
@@ -50,7 +51,7 @@
         @if (lowNPV != null && lowNPV.Crop != @Model.CropType)
         {
             <p>
-                It appears that growing
+                Likewise, it is anticipated that growing
                 <strong>@lowNPV.Crop.ToString()</strong> may likely result in lowest NPV of
                 <strong>@lowNPV.ComparisionValue</strong>.
 
@@ -60,7 +61,7 @@
         else if (lowNPV != null && lowNPV.Crop == @Model.CropType)
         {
             <p>
-                It appears that growing
+                Likewise, it is anticipated that growing
                 <strong>@lowNPV.Crop.ToString()</strong> may result the lowest NPV compared to growing other crops.
 
             </p>
