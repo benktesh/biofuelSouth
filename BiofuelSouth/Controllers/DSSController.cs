@@ -96,7 +96,7 @@ namespace BiofuelSouth.Controllers
         [HttpGet]
         public ActionResult General()
         {
-            var ip = new Input();
+            var ip = InputGet();
             PopulateHelpers(ip);
             Session["Input"] = ip;
             return View(ip.General);
@@ -128,6 +128,10 @@ namespace BiofuelSouth.Controllers
         private Input InputGet()
         {
             var ip = Session["Input"];
+            if (ip == null)
+            {
+                ip = new Input();
+            }
             return (Input) ip;  
         }
 
@@ -255,11 +259,6 @@ namespace BiofuelSouth.Controllers
                 {
 
                     return RedirectToAction("Results");
-                    PostSubmit(ip);
-                    TempData["Input"] = ip;
-                    TempData.Keep();
-                    ViewBag.Results = true;
-                    return View("Result", ip);
                 }
 
                 return View(financial);
@@ -319,13 +318,24 @@ namespace BiofuelSouth.Controllers
             {
                 return RedirectToAction("General");
             }
+
             var vm = new Simulator(input);
+
             var vms = vm.GetViewModels();
             Session["ViewModels"] = vms;
 
+            return View("TabbedResult", vms[0]);
 
 
-            return View("Results", vms[0]);
+            //TODO the code below popuplates non-tabbed results;
+
+            //var vm = new Simulator(input);
+            //var vms = vm.GetViewModels();
+            //Session["ViewModels"] = vms;
+
+
+
+            //return View("Results", vms[0]);
         }
 
         private Input GetDefaultInput()
