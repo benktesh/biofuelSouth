@@ -59,7 +59,7 @@ namespace BiofuelSouth.ViewModels
         #endregion
 
         #region Assumption
-        public string BiomassPriceAtFarmGate { get; set; }
+        public decimal? BiomassPriceAtFarmGate { get; set; }
         public string ProjectSize { get; set; }
         public string LandCost { get; set; }
 

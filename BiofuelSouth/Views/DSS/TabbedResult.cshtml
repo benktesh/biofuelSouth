@@ -14,7 +14,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <style>
-   
+
 
     </style>
 </head>
@@ -43,7 +43,67 @@
                     <div class="row">
                         <div class="col-sm-6">
                             <h3>Production Results</h3>
+                            <p>
+
+
+                                Growing of
+                                <strong>@Model.CropType</strong> for a duration of
+                                <strong>@Model.ProjectLife</strong> over an area of
+                                <strong>@Model.ProjectSize</strong> in
+                                <strong>@Model.CountyName</strong> county of
+                                <strong>@Model.StateCode</strong> is expected to produce an estimated
+                                <strong>@Model.AnnualProduction</strong> tons of biomass annually.
+
+                            </p>
+
+                            @{
+                                var high = @Model.ComparisionData.FirstOrDefault(m => m.Key == ResultComparisionKey.HighProduction);
+                                var low = @Model.ComparisionData.FirstOrDefault(m => m.Key == ResultComparisionKey.LowProduction);
+
+                            }
+                            @if (high != null && high.Crop != Model.CropType)
+            {
+                                <p>
+                                    It is anticipated that growing
+                                    <strong>@high.Crop.ToString()</strong> may likely result in highest production of
+                                    <strong>@high.ComparisionValue tons</strong>.
+
+                                </p>
+
+                            }
+                            else if (high != null && high.Crop == @Model.CropType)
+                            {
+                                <p>
+                                    It is anticipated that growing
+                                    <strong>@high.Crop.ToString()</strong> may likely result in highest production of <strong>@high.Crop.ToString() tons</strong> compared to other crops.
+
+                                </p>
+
+                            }
+                            @if (low != null && low.Crop != @Model.CropType)
+                            {
+                                <p>
+                                    Likewise, it is anticipated that growing
+                                    <strong>@low.Crop.ToString()</strong> may likely result in lowest production of
+                                    <strong>@low.ComparisionValue tons</strong>.
+
+                                </p>
+
+                            }
+                            else if (low != null && low.Crop == @Model.CropType)
+                            {
+                                <p>
+                                    Likewise, it is anticipated that growing
+                                    <strong>@low.Crop.ToString()</strong> may result the lowest production of <strong>@low.ComparisionValue.ToString() tons</strong> compared to growing other crops.
+
+                                </p>
+
+                            }
+
                         </div>
+
+
+
 
                         <div class="col-sm-6">
                             @if (Model.ChartKeys.Select(m => m.Key == ChartType.Production).Any())
@@ -63,23 +123,87 @@
                                 var urlAnnualProduction = Url.Action("ShowChart", "Chart", new { @cacheKey = keyValue });
 
                                 <figure>
-                                    <img src="@urlAnnualProduction" class="img-responsive" alt="Production Compare Chart"/>
+                                    <img src="@urlAnnualProduction" class="img-responsive" alt="Production Compare Chart" />
                                     <figcaption class="text-center">Comparision of production with other crops</figcaption>
                                 </figure>
 
                             }
                         </div>
                     </div>
-                   
-                   
 
 
-                
+
+
+
                 </div>
                 <div id="menu2" class="tab-pane fade">
                     <div class="row">
                         <div class="col-sm-6">
                             <h3>Cost And Revenue</h3>
+
+                            <p>
+                                @*Move to template *@
+                                Growing of
+                                <strong>@Model.CropType</strong> for a duration of
+                                <strong>@Model.ProjectLife</strong> over an area of
+                                <strong>@Model.ProjectSize</strong> in
+                                <strong>@Model.CountyName</strong> county of
+                                <strong>@Model.StateCode</strong> is expected to produce an estimated
+                                <strong>@Model.AnnualProduction</strong> tons of biomass annually.
+                            </p>
+                            <p>
+                                The production comes at an expected annual cost of
+                                <strong>@Model.AnnualCost</strong> and results in an annual revenue of
+                                <strong>@Model.AnnualRevenue</strong>. The net present value of the project is estimated to be
+                                <strong>@Model.NPV.ToString("C0")</strong> at assumed prevailing interest rate of
+                                <strong>@Model.InterestRate.ToString(CultureInfo.InvariantCulture)</strong>.
+
+                            </p>
+
+
+
+                            @{
+                                var highPrice = @Model.ComparisionData.FirstOrDefault(m => m.Key == ResultComparisionKey.HighFarmGatePrice);
+                                var lowPrice = @Model.ComparisionData.FirstOrDefault(m => m.Key == ResultComparisionKey.LowFarmgatePrice);
+
+                            }
+                            @if (highPrice != null && highPrice.Crop != Model.CropType)
+                            {
+                                <p>
+                                    It is anticipated that growing
+                                    <strong>@highPrice.Crop.ToString()</strong> may likely result in highest farmgate price of
+                                    <strong>@highPrice.ComparisionValue  per ton</strong>.
+
+                                </p>
+
+                            }
+                            else if (highPrice != null && highPrice.Crop == @Model.CropType)
+                            {
+                                <p>
+                                    It is anticipated that growing
+                                    <strong>@highPrice.Crop.ToString()</strong> is the option that results in highest farmgate price of <strong>@highPrice.ComparisionValue per ton</strong> compared to other crops.
+
+                                </p>
+
+                            }
+                            @if (lowPrice != null && lowPrice.Crop != @Model.CropType)
+                            {
+                                <p>
+                                    Likewise, it is anticipated that growing
+                                    <strong>@lowPrice.Crop.ToString()</strong> may likely result in lowest farmgate price of
+                                    <strong>@lowPrice.ComparisionValue  per ton</strong>.
+
+                                </p>
+
+                            }
+                            else if (lowPrice != null && lowPrice.Crop == @Model.CropType)
+                            {
+                                <p>
+                                    Likewise, it is anticipated that growing
+                                    <strong>@lowPrice.Crop.ToString()</strong> may result in the lowest farmgate price of price of <strong>@lowPrice.ComparisionValue per ton</strong> compared to growing other crops.
+                                </p>
+
+                            }
 
                         </div>
                         <div class="col-sm-6">
@@ -87,7 +211,7 @@
                             {
                                 var keyValue = Model.ChartKeys.FirstOrDefault(m => m.Key == ChartType.CostRevenue).Value;
                                 var urlAnnualProduction1 = Url.Action("ShowChart", "Chart", new { @cacheKey = keyValue });
-                             
+
                                 <figure>
                                     <img src="@urlAnnualProduction1" class="img-responsive " alt="Revenue Chart" />
                                     <figcaption class="text-center">Cost and revenue information</figcaption>
@@ -99,7 +223,7 @@
                             {
                                 var keyValue = Model.ChartKeys.FirstOrDefault(m => m.Key == ChartType.CashFlow).Value;
                                 var urlcashflow = Url.Action("ShowChart", "Chart", new { @cacheKey = keyValue });
-                              
+
 
                                 <figure>
                                     <img src="@urlcashflow" class="img-responsive" alt="CashFlow Chart" />
@@ -112,16 +236,16 @@
                                 var keyValue = Model.ChartKeys.FirstOrDefault(m => m.Key == ChartType.CashFlowCompare).Value;
                                 var urlcashflow = Url.Action("ShowChart", "Chart", new { @cacheKey = keyValue });
                                 <figure id="CashFlowCompareChart" class="table-bordered">
-                                    <img src="@urlcashflow" class="img-responsive" alt="CashFlow Compare Chart"/>
+                                    <img src="@urlcashflow" class="img-responsive" alt="CashFlow Compare Chart" />
                                     <figcaption class="text=center">Comparision of cashflow information with other crops</figcaption>
                                 </figure>
-   
+
                             }
                         </div>
                     </div>
-                  
 
-                   
+
+
 
                 </div>
                 <div id="menu3" class="tab-pane fade">
@@ -129,9 +253,11 @@
 
                     <p>
                         The result presented here is based on the following parameters/assumptions. <br />
-                        <div> Biomass Price: @Model.BiomassPriceAtFarmGate </div>
-                        <div> Project Size: @Model.ProjectSize </div>
-                        <div> Land Cost: @Model.LandCost </div>
+                        <div> Biomass Price: @Model.BiomassPriceAtFarmGate.GetValueOrDefault().ToString("C0") per ton </div>
+                        <div> Project Size:  @Model.ProjectSize </div>
+                        <div> Land Cost:  @Model.LandCost</div>
+
+                        
                         <div>
                             Average Cost Per Acre: @Model.AverageCostPerAcre
                             @*@(Math.Round(Model.GetAnnualCost() / Model.General.ProjectSize.GetValueOrDefault(), 0).ToString("C0")) per acre*@

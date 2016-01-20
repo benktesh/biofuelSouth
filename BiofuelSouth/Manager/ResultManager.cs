@@ -431,7 +431,7 @@ namespace BiofuelSouth.Manager
         {
             vm.CashFlow = GetCashFlow();
 
-            vm.BiomassPriceAtFarmGate = $"{BiomassPriceAtFarmGate.ToString("C0")} per ton";
+            vm.BiomassPriceAtFarmGate = BiomassPriceAtFarmGate; 
             vm.ProjectSize = $"{General.ProjectSize.GetValueOrDefault().ToString("##,###")} Acre";
             vm.LandCost = $"{General.LandCost.GetValueOrDefault().ToString("C0")} per Acre";
             vm.ProjectLife = General.ProjectLife.GetValueOrDefault();
@@ -479,7 +479,7 @@ namespace BiofuelSouth.Manager
             cc.GenerateColumnChart(cacheKey, GetCashFlow().ToArray(), "Cash Flow", "Year ", "$");
 
             cacheKey = Guid.NewGuid().ToString();
-            cc.GenerateChart(cacheKey, Productions.ToArray(), "Production", "Year", "Yield");
+            cc.GenerateChart(cacheKey, Productions.ToArray(), "Production", "Year", "ton ");
             vm.Add(ChartType.Production, cacheKey);
            
             var revenueCachekey = Guid.NewGuid().ToString();
@@ -556,7 +556,7 @@ namespace BiofuelSouth.Manager
                     {
                         Key = ResultComparisionKey.HighNpv,
                         Crop = highNpv.CropType,
-                        ComparisionValue = highNpv.NPV.ToString("C0")
+                        ComparisionValue = highNpv.NPV.ToString()
                     });
                 }
 
@@ -566,10 +566,58 @@ namespace BiofuelSouth.Manager
                     {
                         Key = ResultComparisionKey.LowNpv,
                         Crop = lowNpv.CropType,
-                        ComparisionValue = lowNpv.NPV.ToString("C0")
+                        ComparisionValue = lowNpv.NPV.ToString()
                     });
                 }
 
+
+                var highFarmgatePrice = viewModels.OrderByDescending(m => m.BiomassPriceAtFarmGate).FirstOrDefault();
+                var lowFarmgatePrice = viewModels.OrderBy(m => m.BiomassPriceAtFarmGate).FirstOrDefault();
+
+                if (highFarmgatePrice != null)
+                {
+                    v.ComparisionData.Add(new SummaryComparisionModel
+                    {
+                        Key = ResultComparisionKey.HighFarmGatePrice,
+                        Crop = highFarmgatePrice.CropType,
+                        ComparisionValue = highFarmgatePrice.BiomassPriceAtFarmGate.GetValueOrDefault().ToString("C0")
+                    });
+                }
+
+
+                if (lowFarmgatePrice != null)
+                {
+                    v.ComparisionData.Add(new SummaryComparisionModel
+                    {
+                        Key = ResultComparisionKey.LowFarmgatePrice,
+                        Crop = lowFarmgatePrice.CropType,
+                        ComparisionValue = lowFarmgatePrice.BiomassPriceAtFarmGate.GetValueOrDefault().ToString("C0")
+                    });
+                }
+
+                var highProduction = viewModels.OrderByDescending(m => m.ProductivityList.Average()).FirstOrDefault();
+                var lowProduction = viewModels.OrderBy(m => m.ProductivityList.Average()).FirstOrDefault();
+
+                if (highProduction != null)
+                {
+                    v.ComparisionData.Add(new SummaryComparisionModel
+                    {
+                        Key = ResultComparisionKey.HighProduction,
+                        Crop = highProduction.CropType,
+                        ComparisionValue = highProduction.ProductionList.Sum().ToString()
+                    });
+                }
+
+
+                if (lowProduction != null)
+                {
+                    v.ComparisionData.Add(new SummaryComparisionModel
+                    {
+                        Key = ResultComparisionKey.LowProduction,
+                        Crop = lowProduction.CropType,
+                        ComparisionValue = lowProduction.ProductionList.Sum().ToString()
+                    });
+                }
             }
 
 
