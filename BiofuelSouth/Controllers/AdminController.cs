@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Net;
 using System.Threading.Tasks;
@@ -37,7 +38,7 @@ namespace BiofuelSouth.Controllers
         // GET: /Admin/
         public async Task<ActionResult> Index()
         {
-            return View(await db.Productivities.ToListAsync());
+            return View((List<Productivity>) await db.Productivities.ToListAsync());
         }
 
         // GET: /Admin/Details/5
