@@ -29,7 +29,16 @@ namespace BiofuelSouth
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+                      "~/Content/site.css",
+                      "~/Content/custom.css"
+                      
+                      ));
+
+
+
+
+
+
 
 
             // Set EnableOptimizations to false for debugging. For more information,
