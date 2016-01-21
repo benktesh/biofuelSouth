@@ -19,6 +19,10 @@ namespace BiofuelSouth.Models
             LaborCost = (double) StorageCostParameter.LaborCostHour;
         }
 
+        public WizardStep CurrentStep { get; set; }
+
+        public string PreviousAction { get; set; }
+
         [Required]
         [DisplayName(@"Require Storage?")]
         public bool? RequireStorage { get; set; } //true if storage is required, false if not.

@@ -118,6 +118,7 @@ namespace BiofuelSouth.Controllers
             {
                 return RedirectToAction("General");
             }
+            
             ip.General = general;
             Session["Input"] = ip;
             return RedirectToAction("GetProductionCost");
@@ -143,7 +144,12 @@ namespace BiofuelSouth.Controllers
                 return RedirectToAction("Index");
             }
             if (storage == null)
+            {
                 storage = new Storage();
+                storage.CurrentStep = WizardStep.Storage;
+                storage.PreviousAction = "GetProductionCost";
+            }
+                
 
             ip.Storage = storage;
             Session["Input"] = ip;
@@ -197,6 +203,13 @@ namespace BiofuelSouth.Controllers
             return View("_productionCost", model);
         }
 
+        public ActionResult NewDSS()
+        {
+            Session["Input"] = null;
+            Session.Remove("Input");
+            return RedirectToAction("General");
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult UpdateProductionCost(ProductionCostViewModel model)
@@ -241,6 +254,24 @@ namespace BiofuelSouth.Controllers
             {
                 return RedirectToAction("Index");
             }
+
+            if (financial == null)
+            {
+                financial = new Financial();
+                financial.CurrentStep = WizardStep.Financial;
+            }
+
+
+            if (ip.General.Category == CropType.Miscanthus || ip.General.Category == CropType.Switchgrass)
+            {
+
+                financial.PreviousAction = "Storage";
+            }
+            else
+            {
+                financial.PreviousAction = "GetProductionCost";
+            }
+
             ip.Financial = financial;
             Session["Input"] = ip;
 
@@ -257,24 +288,15 @@ namespace BiofuelSouth.Controllers
 
                 if ((!financial.RequireFinance.GetValueOrDefault()) || (financial.RequireFinance.GetValueOrDefault() && ModelState.IsValid))
                 {
-
+                    financial.CurrentStep = WizardStep.Result;
                     return RedirectToAction("Results");
                 }
-
+                financial.CurrentStep = WizardStep.Financial;
                 return View(financial);
             }
 
 
-            if (financial == null)
-            {
-                financial = new Financial();
-            }
-
-            if (ip.Financial == null)
-            {
-                ip.Financial = financial;
-            }
-
+           
             ModelState.Clear();
             return View(financial);
 

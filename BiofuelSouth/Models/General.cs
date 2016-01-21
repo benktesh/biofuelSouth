@@ -29,7 +29,7 @@ namespace BiofuelSouth.Models
         public double? ProjectSize { get; set; }
 
         [DisplayName(@"Years (Project Duration)")]
-        [Range(1,100)]
+        [Range(1, 100)]
         [Required]
         public int? ProjectLife { get; set; }  //years
 
@@ -40,16 +40,24 @@ namespace BiofuelSouth.Models
 
         [DisplayName(@"Cost of land ($/acre/year)")]
         [Required]
-        
+
         public decimal? LandCost { get; set; } //$/acre/year
 
-        public IEnumerable<SelectListItem> CountyList { get; set;  }
+        public IEnumerable<SelectListItem> CountyList { get; set; }
         public IEnumerable<SelectListItem> StateList { get; set; }
+
+        public WizardStep CurrentStep { get; set; }
+
+        public string PreviousActionn
+        {
+            get { return "General"; }
+        }
 
         public General()
         {
             ProjectLife = 10;
             LandCost = 80;
+
         }
     }
 }

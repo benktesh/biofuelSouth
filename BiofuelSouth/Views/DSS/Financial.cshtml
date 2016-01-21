@@ -135,9 +135,19 @@
                 <div class="row">
                     <div class="col-xs-6">
 
-                        <br />
-                        <button type="reset" value="Reset" class="btn btn-default">Reset</button>&nbsp;&nbsp;
-                        <input type="submit" value="Submit" class="btn btn-default" />
+                        <br/>
+                        @if (Model.PreviousAction == "Storage")
+                        {
+                            @Html.ActionLink("Previous", "Storage", "DSS", null, new { @class = "btn btn-default" })
+                        }
+                        else if (Model.PreviousAction == "GetProductionCost")
+                        {
+                            @Html.ActionLink("Previous", "GetProductionCost", "DSS", null, new { @class = "btn btn-default" })
+                        }
+                        &nbsp; &nbsp;
+
+                        <button type="reset" value="@UIText.ResetButtonLabel" class="btn btn-default">Reset</button>&nbsp;&nbsp;
+                        <input type="submit" value="@UIText.ProceedButtonLabel"  class="btn btn-default" />
                     </div>
                 </div>
             </div>

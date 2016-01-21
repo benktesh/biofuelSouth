@@ -52,6 +52,8 @@ namespace BiofuelSouth.Models
             }
         }
 
+        public WizardStep CurrentStep { get; set; }
+
         public List<ProductionCost> ProductionCosts { get; set; }
 
         public ProductionCostViewModel()

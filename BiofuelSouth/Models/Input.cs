@@ -20,8 +20,10 @@ namespace BiofuelSouth.Models
             Storage = new Storage();
             Financial = new Financial();
             ProductionCost = new ProductionCostViewModel();
+            CurrentStep = WizardStep.None;
         }
 
+        public WizardStep CurrentStep { get; set; }
 
         public General General { get; set; }
 

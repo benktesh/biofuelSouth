@@ -28,14 +28,4 @@ namespace BiofuelSouth.Enum
         Round,
         Rectangular
     }
-
-    public enum WizardStep
-    {
-        General,
-        ProductionCost,
-        StorageCost,
-        Financial,
-        Result,
-        PostResult
-    }
 }

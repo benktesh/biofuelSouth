@@ -5,6 +5,14 @@
        
     }
 
+    public static class UIText
+    {
+        public static string ProceedButtonLabel = "Proceed";
+        public static string PreviousButtonLabel = "Previous";
+        public static string SubmitButtonLabel = "Submmit";
+        public static string ResetButtonLabel = "Reset";
+
+    }
     public static class StorageCostParameter
     {
         public static decimal TarpCostSqFt = (decimal)   0.15;

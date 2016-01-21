@@ -1,10 +1,12 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using BiofuelSouth.Enum;
 
 namespace BiofuelSouth.Models
 {
     public class Financial
     {
+        public WizardStep CurrentStep { get; set; }
 
         [DisplayName(@"Require Finance (Select No to Skip)")]
         [Required]
@@ -38,5 +40,7 @@ namespace BiofuelSouth.Models
         [DisplayName(@"Equity Loan Interest Rate (%)")]
         [Required]
         public double EquityLoanInterestRate { get; set; } //% (decimal fraction)
+
+        public string PreviousAction { get; set; }
     }
 }
