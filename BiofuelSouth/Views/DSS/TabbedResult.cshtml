@@ -44,8 +44,6 @@
                         <div class="col-sm-6">
                             <h3>Production Results</h3>
                             <p>
-
-
                                 Growing of
                                 <strong>@Model.CropType</strong> for a duration of
                                 <strong>@Model.ProjectLife</strong> over an area of
@@ -53,7 +51,6 @@
                                 <strong>@Model.CountyName</strong> county of
                                 <strong>@Model.StateCode</strong> is expected to produce an estimated
                                 <strong>@Model.AnnualProduction</strong> tons of biomass annually.
-
                             </p>
 
                             @{
@@ -268,7 +265,13 @@
                         </div>
                     </p>
 
-                    <h4>To change input parameters, click @Html.ActionLink("Start Over", "General", "DSS").</h4>
+                    <p>You can change the inputs to analyze how such change may impact the result.
+                        To change input parameters, click @Html.ActionLink("Change Inputs", "General", "DSS").</p>
+
+                    <p>
+                        Alternatively, you can also start over with new information. To start over, 
+                        click @Html.ActionLink("Start Over", "NewDSS", "DSS").
+                    </p>
                 </div>
                 <div id="menu4" class="tab-pane fade">
 
