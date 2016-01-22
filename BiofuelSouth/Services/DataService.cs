@@ -171,7 +171,7 @@ namespace BiofuelSouth.Services
                
                 if (key == null || key.Equals("") || key.Equals("All"))
                 {
-                    return db.Glossaries.Select(p => p.Term).ToList();
+                    return db.Glossaries.Select(p => p.Term).OrderBy(p=>p.Trim()).ToList();
                 }
 
                 key = key.Replace("-", null);
@@ -180,7 +180,7 @@ namespace BiofuelSouth.Services
                 foreach (var element in key.ToCharArray())
                 {
                     var startWith = element.ToString(CultureInfo.InvariantCulture).ToLower();
-                    result.AddRange(db.Glossaries.Select(p => p.Term).Where(d => d.ToLower().StartsWith(startWith)));
+                    result.AddRange(db.Glossaries.Select(p => p.Term).Where(d => d.ToLower().StartsWith(startWith)).OrderBy(p => p.Trim()));
                 }
 
                 return result;
