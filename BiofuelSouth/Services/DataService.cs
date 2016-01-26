@@ -164,28 +164,77 @@ namespace BiofuelSouth.Services
             }
         }
 
-        public static IList<String> GetAllTerms(string key)
+        public static List<GlossaryTransferMmodel> GetAllTerms(string key)
         {
             using (var db = new DatabaseContext())
             {
+                var mx = db.Glossaries.Max(p => p.Counter);
+                var mn = db.Glossaries.Min(p => p.Counter);
+                if (mx - mn <= 0)
+                {
+                    mx = 1;
+                    mn = 0; 
+                }
                
                 if (key == null || key.Equals("") || key.Equals("All"))
                 {
-                    return db.Glossaries.Select(p => p.Term).OrderBy(p=>p.Trim()).ToList();
-                }
+                    
+                    var data = db.Glossaries.Select(p => new   { Key = p.Term, Value = p.Counter ?? 0})
+                        .OrderBy(m => m.Key)
+                        .ToList();
+
+                  
+                    return
+                        data.Select(
+                            pair =>
+                                new GlossaryTransferMmodel
+                                {
+                                    Key = pair.Key,
+                                    Value = Math.Min(300, (int)(1 + 2 * (pair.Value - mn) / (mx - mn)) * 100),
+                                }).ToList(); 
+                };
+                
 
                 key = key.Replace("-", null);
 
-                var result = new List<String>();
+                new Dictionary<string, int>();
+                var data1 = new List<GlossaryTransferMmodel>();
                 foreach (var element in key.ToCharArray())
                 {
+                    if (string.IsNullOrEmpty(element.ToString())) continue;
                     var startWith = element.ToString(CultureInfo.InvariantCulture).ToLower();
-                    result.AddRange(db.Glossaries.Select(p => p.Term).Where(d => d.ToLower().StartsWith(startWith)).OrderBy(p => p.Trim()));
+
+                    
+                    var resultList = db.Glossaries.Where(d => d.Term.ToLower().StartsWith(startWith))
+                        .Select(p => new GlossaryTransferMmodel { Key = p.Term, Value = p.Counter ?? 0 });
+
+                    data1.AddRange(resultList);
+                   
                 }
 
-                return result;
+                //mx = data1.Max(p => p.Value);
+                //mn = data1.Min(p => p.Value);
+                //if (mx - mn <= 0)
+                //{
+                //    mx = 1;
+                //    mn = 0;
+                //}
+
+                return data1.Select(
+                            pair =>
+                                new GlossaryTransferMmodel
+                                {
+                                    Key = pair.Key,
+                                    Value =Math.Min(300, (int)(1 + 2* (pair.Value - mn) / (mx - mn)) * 100),  
+                                }).ToList();
             }
 
+        }
+
+        public class GlossaryTransferMmodel
+        {
+            public int Value { get; set; }
+            public string Key { get; set; }
         }
 
         public static void SaveGlossary(Glossary gm)

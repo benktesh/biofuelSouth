@@ -129,10 +129,18 @@
                         var formattedResult = "";
                         foreach (var word in results)
                         {
-                            if (word.Length > 0)
+                            if (word.Key != null)
                             {
-                                <a href='@Url.Action("Search", new { term = @word })'>@word</a>
+                                <a href='@Url.Action("Search", new {term = @word.Key})'>
+
+                                    <SPAN STYLE="font-size: @(Math.Min(300L, word.Value))%">@word.Key</SPAN>
+                                </a>
                                 @:&nbsp;
+
+
+                                //'<SPAN STYLE="font-size: ' + results[i].Value + '%">' + results[i].Key + "</SPAN> </a>";
+
+
                             }
 
                         }
@@ -145,12 +153,14 @@
     <div class="col-lg-2 pull-right" id="glossaryDisplay">
         <strong>Top searches</strong>
         @{
-    var glossaries = (IList<Glossary>)ViewData["glossary"];
+            var glossaries = (IList<Glossary>)ViewData["glossary"];
             glossaries = glossaries.OrderByDescending(p => p.Counter).Take(20).ToList();
             foreach (var glossary in glossaries)
             {
                 <div>
-                    <a href='@Url.Action("Search", new { term = @glossary.Term })'>@glossary.Term</a>
+                    <a href='@Url.Action("Search", new {term = @glossary.Term})'>
+                        <SPAN STYLE="font-size: @(Math.Min(300L, glossary.Counter.GetValueOrDefault() + 100))%">@glossary.Term </span>
+                    </a>
                 </div>
             }
         }
@@ -172,7 +182,13 @@
             success: function (results) {
                 var formattedResult = "";
                 for (i = 0; i < results.length; i++) {
-                    formattedResult = formattedResult + '<a href="" ' + results[i] + '>' + results[i] + "</a> ";
+
+                    //alert(results[i].Value);
+                    formattedResult = formattedResult + '<a href="" ' + results[i].Key + '>' +
+                        '<SPAN STYLE="font-size: ' + results[i].Value + '%">' + results[i].Key + "</SPAN> </a>";
+
+
+                    //formattedResult = formattedResult + '<a href="" ' + results[i].Key + '>' + results[i].Key + "</a> " + results[i].Value + "%"; 
                 }
                 if (formattedResult.length == 0) {
                     formattedResult = "Not Found";
