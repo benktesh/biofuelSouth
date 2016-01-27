@@ -254,7 +254,7 @@ namespace BiofuelSouth.Controllers
                     return RedirectToAction("Storage");
                 return RedirectToAction("Financial");
             }
-            PopulateHelpers(model);
+
             return View("_productionCost", model);
         }
 
@@ -265,21 +265,20 @@ namespace BiofuelSouth.Controllers
             var input = (Input)Session["Input"];
             return pcm.GetProductionCost(new ProductionCostViewModel { CropType = input.General.Category, County = input.General.County, UseCustom = true});
         }
-        public ActionResult Financial(Financial financial = null)
+
+        [HttpGet]
+        public ActionResult Financial()
         {
-            var ip = (Input)Session["Input"];
+            var ip = InputGet();
             if (ip == null)
             {
                 return RedirectToAction("Index");
             }
 
-            if (financial == null)
-            {
-                financial = new Financial();
-                financial.CurrentStep = WizardStep.Financial;
-            }
+            var financial = ip.Financial ?? new Financial();
 
-
+            financial.CurrentStep = WizardStep.Financial;
+            
             if (ip.General.Category == CropType.Miscanthus || ip.General.Category == CropType.Switchgrass)
             {
 
@@ -292,6 +291,36 @@ namespace BiofuelSouth.Controllers
 
             ip.Financial = financial;
             Session["Input"] = ip;
+           
+            ModelState.Clear();
+            return View(financial);
+
+        }
+
+        [HttpPost]
+        public ActionResult Financial(Financial financial)
+        {
+            var ip = (Input)Session["Input"];
+            if (ip == null || financial == null)
+            {
+                return RedirectToAction("Index");
+            }
+
+
+            if (financial.RequireFinance.HasValue && !financial.RequireFinance.Value)
+            {
+                ModelState.Clear();
+            }
+
+            if (ModelState.IsValid)
+            {
+                financial.CurrentStep = WizardStep.Result;
+                ip.Financial = financial;
+                Session["Input"] = ip;
+                return RedirectToAction("Results");
+            }
+
+            return View("Financial", financial);
 
             //If finance is not null or finance is skipped then go to results
 
@@ -299,9 +328,9 @@ namespace BiofuelSouth.Controllers
             {
                 if (!financial.RequireFinance.GetValueOrDefault())
                 {
-                    
+
                     financial = new Financial();
-                    ip.Financial = financial; 
+                    ip.Financial = financial;
                 }
 
                 if ((!financial.RequireFinance.GetValueOrDefault()) || (financial.RequireFinance.GetValueOrDefault() && ModelState.IsValid))
@@ -314,7 +343,7 @@ namespace BiofuelSouth.Controllers
             }
 
 
-           
+
             ModelState.Clear();
             return View(financial);
 
@@ -462,10 +491,6 @@ namespace BiofuelSouth.Controllers
             model.BiomassPriceAtFarmGate = Constants.GetFarmGatePrice(model.Category);
         }
 
-        private void PopulateHelpers(ProductionCostViewModel model)
-        {
-
-        }
 
 
         #region newLogic
