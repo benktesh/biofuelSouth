@@ -136,64 +136,82 @@ namespace BiofuelSouth.Controllers
             return (Input) ip;  
         }
 
-        public ActionResult Storage(Storage storage = null)
+        [HttpGet]
+        public ActionResult Storage()
         {
             var ip = (Input)Session["Input"];
             if (ip == null)
             {
                 return RedirectToAction("Index");
             }
+            var storage = ip.Storage;
             if (storage == null)
             {
                 storage = new Storage();
-                storage.CurrentStep = WizardStep.Storage;
-                storage.PreviousAction = "GetProductionCost";
             }
-                
 
-            ip.Storage = storage;
-            Session["Input"] = ip;
+            storage.CurrentStep = WizardStep.Storage;
+            storage.PreviousAction = "GetProductionCost";
 
-            //If storage is not null or storage is skipped then go to financial steps
+           
 
-            //storage.RequireStorage = CropAttribute.RequireStorage(ip.General.Category);
+            
 
             if (ip.General.Category == CropType.Poplar || ip.General.Category == CropType.Pine || ip.General.Category == CropType.Willow)
             {
                 storage.RequireStorage = false;
-            }
-
-            if (storage.RequireStorage != null) //This is post back
-            {
-
-
-                if ((bool)!storage.RequireStorage)
-                {
-                    return RedirectToAction("Financial");
-                }
-
-                if ((bool)storage.RequireStorage && ModelState.IsValid)
-                {
-                    return RedirectToAction("Financial");
-                }
-
-
-                return View(storage);
-
-
-            }
-
-
-            storage = new Storage();
-
-
-            if (ip.Storage == null)
-            {
                 ip.Storage = storage;
+                Session["Input"] = ip;
+                return RedirectToAction("Financial");
             }
 
-            ModelState.Clear();
+            ip.Storage = storage;
+            Session["Input"] = ip;
             return View(storage);
+
+
+            
+
+        }
+
+        [HttpPost]
+        public ActionResult Storage(Storage storage)
+        {
+            
+            var ip = (Input)Session["Input"];
+            if (ip == null || storage == null) //if session input is null or storage is null, return to index
+            {
+                return RedirectToAction("Index");
+            }
+
+            if (!storage.RequireStorage.GetValueOrDefault()) //if storage is indicated as not required, clear the model state;  
+            {
+                ModelState.Clear();
+            }
+            //if (storage == null)
+            //{
+            //    storage = new Storage();
+            //    storage.CurrentStep = WizardStep.Storage;
+            //    storage.PreviousAction = "GetProductionCost";
+            //}
+
+            if (!ModelState.IsValid)
+            {
+                return View("Storage", storage);
+            }
+
+
+            if (ModelState.IsValid && ip.General.Category == CropType.Poplar || ip.General.Category == CropType.Pine || ip.General.Category == CropType.Willow)
+            {
+                storage.RequireStorage = false;
+            }
+
+
+            ip.Storage = storage;
+            Session["Input"] = ip;
+
+            return RedirectToAction("Financial");
+            
         }
 
         [HttpGet]

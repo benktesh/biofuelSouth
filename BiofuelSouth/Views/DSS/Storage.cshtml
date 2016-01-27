@@ -8,7 +8,7 @@
     ViewBag.Title = String.Format("{0}:{1}", pageMain, GeneralResource.DSS_Tittle_Display);
 }
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Storage", "DSS"))
 {
     @Html.AntiForgeryToken()
 

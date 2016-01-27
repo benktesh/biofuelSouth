@@ -50,13 +50,14 @@
         }
          @if (highNPV != null && highNPV.Crop != Model.CropType)
          {
+             var highNpv = Decimal.Parse(highNPV.ComparisionValue);
 
-             if (Convert.ToInt32(highNPV.ComparisionValue) >= 0)
+             if (highNpv  >= 0)
              {
                  <p>
                      It is anticipated that growing
                      <strong>@highNPV.Crop.ToString()</strong> may likely result in highest NPV
-                     resulting into net profit of <strong>@Convert.ToInt32(highNPV.ComparisionValue).ToString("C0")</strong>
+                     resulting into net profit of <strong>@highNpv.ToString("C0")</strong>
                  </p>
 
              }
@@ -64,8 +65,8 @@
              {
                 <p>
                     It is anticipated that growing
-                    <strong>@highNPV.Crop.ToString()</strong> may likely result in highest NPV 
-                    resulting into a net loss of <strong>@Convert.ToInt32(highNPV.ComparisionValue).ToString("C0")</strong>
+                    <strong>@highNPV.Crop.ToString()</strong> may likely result in highest NPV
+                    resulting into a net loss of <strong>@highNpv.ToString("C0")</strong>
                 </p>
              }
 
@@ -81,13 +82,15 @@
         }
         @if (lowNPV != null && lowNPV.Crop != @Model.CropType)
         {
+            var lowNpv = Decimal.Parse(lowNPV.ComparisionValue); 
 
-            if (Convert.ToInt32(lowNPV.ComparisionValue) >= 0)
+
+            if (lowNpv >= 0)
             {
                 <p>
                     It is anticipated that growing
                     <strong>@lowNPV.Crop.ToString()</strong> may likely result in lowest NPV
-                    resulting into net profit of <strong>@Convert.ToInt32(lowNPV.ComparisionValue).ToString("C0")</strong>
+                    resulting into net profit of <strong>@lowNpv.ToString("C0")</strong>
                 </p>
 
             }
@@ -96,7 +99,7 @@
                 <p>
                     It is anticipated that growing
                     <strong>@lowNPV.Crop.ToString()</strong> may likely result in lowest NPV
-                resulting into a net loss of <span class="text-danger"><strong>@Convert.ToInt32(lowNPV.ComparisionValue).ToString("C0")</strong></span>
+                resulting into a net loss of <span class="text-danger"><strong>@lowNpv.ToString("C0")</strong></span>
                 </p>
             }
 
