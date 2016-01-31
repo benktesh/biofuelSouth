@@ -26,7 +26,7 @@
             of the project is estimated to be
             <strong>@Model.NPV.ToString("C0")</strong> at assumed prevailing interest rate of
 
-            <strong>@Model.InterestRate.ToString(CultureInfo.InvariantCulture)</strong>.
+            <strong>@Model.InterestRate.ToString("P")</strong>.
            
 
             @if (Model.NPV < 0)
@@ -121,16 +121,20 @@
 
     </div>
 
-    <div class="col-md-6">
-        @if (Model.ChartKeys.Select(m => m.Key == ChartType.NPVCompare).Any())
-        {
-            var keyValue = Model.ChartKeys.FirstOrDefault(m => m.Key == ChartType.NPVCompare).Value;
-            var urlAnnualProduction = Url.Action("ShowChart", "Chart", new { @cacheKey = keyValue });
-            <figure>
-                <img src="@urlAnnualProduction" class="img-responsive" alt="NPV Compare Chart" />
-                <figcaption class="text-center">Comparision of NPV across various biofuel crops.</figcaption>
-            </figure>
-        }
+	<div class="col-md-6">
+		<figure>
+		<img src=@Model.ImageUrl.Item1 class="img-responsive"/>
+			<figcaption class="text-center">@Model.ImageUrl.Item2</figcaption
+		</figure>
+		@if (Model.ChartKeys.Select(m => m.Key == ChartType.NPVCompare).Any())
+		{
+			var keyValue = Model.ChartKeys.FirstOrDefault(m => m.Key == ChartType.NPVCompare).Value;
+			var urlAnnualProduction = Url.Action("ShowChart", "Chart", new {@cacheKey = keyValue});
+			<figure>
+				<img src="@urlAnnualProduction" class="img-responsive" alt="NPV Compare Chart"/>
+				<figcaption class="text-center">Comparision of NPV across various biofuel crops.</figcaption>
+			</figure>
+		}
 
 
 
@@ -147,6 +151,6 @@
                     }
             </p>
         *@
-    </div>
+	</div>
 </div>
 

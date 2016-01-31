@@ -148,6 +148,10 @@ namespace BiofuelSouth.Models
 			return items;
 		}
 
+		/// <summary>
+		/// Returns percent interest rate. For example a returned value of 1.84 is 184 %.
+		/// </summary>
+		/// <returns></returns>
 		public static double GetAvgInterestRate()
 		{
 			//TODO Call IRA Data to get this value here
@@ -693,5 +697,33 @@ WY	Wyoming	Cheyenne	July 10, 1890
 			return result;
 		}
 
+		public static Tuple<string, string> GetImageUrl(CropType category)
+		{
+			switch ( category )
+			{
+				case CropType.Switchgrass:
+					return new Tuple<string,string>("http://www.ars.usda.gov/is/graphics/photos/apr07/d750-1.jpg", "Bioenergy crop switchgrass. Photo by - Peggy Greb." );
+				case CropType.Miscanthus:
+					return new Tuple<string, string>( "http://www.ethanolproducer.com/uploads/posts/web/2014/10/UofIMiscanthus_14147108585304.jpg", "Bioenergy crop Miscanthus, Photo by - Brian Stauffer" );
+				case CropType.Poplar:
+					return new Tuple<string, string>( "http://learn.forestbioenergy.net/learning-modules/module-2/unit-3/large%20cottonwood.jpg",
+						"Poplar tree plantation. Photo by - Warren Gretz" );
+				case CropType.Willow:
+					return new Tuple<string, string>( "https://articles.extension.org//sites/default/files/Coppice%20Regrowth%20at%20Belleville%20299%20x%20200.jpg", "Willow biomass crops resprouting in the spring after being harvested the previous winter. This willow is about a month old above ground on a four year old root system. Photo By - T. Volk, SUNY ESF." );  
+				case CropType.Pine:
+					return new Tuple<string, string>( "http://www.srs.fs.usda.gov/compass/wp-content/uploads/2013/09/09.18.-Planted-lob-35yrs.jpg", "Planted loblolly pine stand. Photo by - David Stephens." );
+
+				default:
+                    return
+						new Tuple<string, string>(
+							"http://www.climatetechwiki.org/sites/climatetechwiki.org/files/imagecache/Illustration/images/teaser/agri_for_biofuel_teaser_image.jpg",
+							"");
+
+
+
+			}
+			
+
+		}
 	}
 }

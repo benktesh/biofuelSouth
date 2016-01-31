@@ -430,17 +430,12 @@ namespace BiofuelSouth.Controllers
             ip.General.County = "01001";
             ip.General.BiomassPriceAtFarmGate = Constants.GetFarmGatePrice(ip.General.Category);
             ip.General.LandCost = 70;
-
-
+			
             Session["Input"] = ip;
 
             ip.ProductionCost = GetProductionCostViewModel();
             
-
             return ip;
-
-
-
         }
         public ActionResult TabbedResult()
         {

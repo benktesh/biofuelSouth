@@ -61,7 +61,7 @@
                                 <p>
                                     It is anticipated that growing
                                     <strong>@high.Crop.ToString()</strong> may likely result in highest production of
-                                    <strong>@high.ComparisionValue tons</strong>.
+                                    <strong>@high.ComparisionValue</strong> tons.
 
                                 </p>
 
@@ -70,7 +70,7 @@
                             {
                                 <p>
                                     It is anticipated that growing
-                                    <strong>@high.Crop.ToString()</strong> may likely result in highest production of <strong>@high.Crop.ToString() tons</strong> compared to other crops.
+                                    <strong>@high.Crop.ToString()</strong> may likely result in highest production of <strong>@high.Crop.ToString()</strong> tons compared to other crops.
 
                                 </p>
 
@@ -80,7 +80,7 @@
                                 <p>
                                     Likewise, it is anticipated that growing
                                     <strong>@low.Crop.ToString()</strong> may likely result in lowest production of
-                                    <strong>@low.ComparisionValue tons</strong>.
+                                    <strong>@low.ComparisionValue</strong> tons.
 
                                 </p>
 
@@ -89,16 +89,13 @@
                             {
                                 <p>
                                     Likewise, it is anticipated that growing
-                                    <strong>@low.Crop.ToString()</strong> may result the lowest production of <strong>@low.ComparisionValue.ToString() tons</strong> compared to growing other crops.
+                                    <strong>@low.Crop.ToString()</strong> may result the lowest production of <strong>@low.ComparisionValue</strong> tons compared to growing other crops.
 
                                 </p>
 
                             }
 
                         </div>
-
-
-
 
                         <div class="col-sm-6">
                             @if (Model.ChartKeys.Select(m => m.Key == ChartType.Production).Any())
@@ -125,11 +122,6 @@
                             }
                         </div>
                     </div>
-
-
-
-
-
                 </div>
                 <div id="menu2" class="tab-pane fade">
                     <div class="row">
@@ -151,7 +143,7 @@
                                 <strong>@Model.AnnualCost</strong> and results in an annual revenue of
                                 <strong>@Model.AnnualRevenue</strong>. The net present value of the project is estimated to be
                                 <strong>@Model.NPV.ToString("C0")</strong> at assumed prevailing interest rate of
-                                <strong>@Model.InterestRate.ToString(CultureInfo.InvariantCulture)</strong>.
+                                <strong>@Model.InterestRate.ToString("P")</strong>.
 
                             </p>
 

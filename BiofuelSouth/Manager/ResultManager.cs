@@ -431,15 +431,12 @@ namespace BiofuelSouth.Manager
         {
             vm.CashFlow = GetCashFlow();
 
-
-	     
-
             vm.BiomassPriceAtFarmGate = BiomassPriceAtFarmGate; 
             vm.ProjectSize = $"{General.ProjectSize.GetValueOrDefault().ToString("##,###")} acre";
             vm.LandCost = $"{General.LandCost.GetValueOrDefault().ToString("C0")} per acre";
             vm.ProjectLife = General.ProjectLife.GetValueOrDefault();
             vm.NPV = NPV;
-            vm.InterestRate = Constants.GetAvgInterestRate(); 
+            vm.InterestRate = Constants.GetAvgInterestRate() / 100; //Interest rate as percent
 
 			vm.ProductionList = Productions;
             vm.GrossProductionList = GrossProductions;
@@ -455,6 +452,7 @@ namespace BiofuelSouth.Manager
             vm.CropType = General.Category;
             vm.StateCode = General.State;
 			vm.StateName = Constants.GetStateName( General.State);
+	        vm.ImageUrl = Constants.GetImageUrl(General.Category);
 
 			vm.RequireStorage = Storage.RequireStorage.GetValueOrDefault();
 
@@ -566,7 +564,7 @@ namespace BiofuelSouth.Manager
                     {
                         Key = ResultComparisionKey.HighNpv,
                         Crop = highNpv.CropType,
-                        ComparisionValue = highNpv.NPV.ToString()
+                        ComparisionValue = highNpv.NPV.ToString("##,###")
                     });
                 }
 
@@ -576,7 +574,7 @@ namespace BiofuelSouth.Manager
                     {
                         Key = ResultComparisionKey.LowNpv,
                         Crop = lowNpv.CropType,
-                        ComparisionValue = lowNpv.NPV.ToString()
+                        ComparisionValue = lowNpv.NPV.ToString( "##,###" )
                     });
                 }
 
@@ -614,7 +612,7 @@ namespace BiofuelSouth.Manager
                     {
                         Key = ResultComparisionKey.HighProduction,
                         Crop = highProduction.CropType,
-                        ComparisionValue = highProduction.ProductionList.Sum().ToString()
+                        ComparisionValue = highProduction.ProductionList.Sum().ToString("##,###")
                     });
                 }
 
@@ -625,7 +623,7 @@ namespace BiofuelSouth.Manager
                     {
                         Key = ResultComparisionKey.LowProduction,
                         Crop = lowProduction.CropType,
-                        ComparisionValue = lowProduction.ProductionList.Sum().ToString()
+                        ComparisionValue = lowProduction.ProductionList.Sum().ToString( "##,###" )
                     });
                 }
             }

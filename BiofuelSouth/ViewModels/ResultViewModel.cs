@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using BiofuelSouth.Enum;
 
@@ -55,6 +56,8 @@ namespace BiofuelSouth.ViewModels
         public string AverageProdutivityPerAcre { get; set; }
 
         public bool RequireStorage { get; set; }
+
+		public Tuple<string, string> ImageUrl { get; set; }
 
         #endregion
 
