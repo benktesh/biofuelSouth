@@ -128,12 +128,21 @@ namespace BiofuelSouth.Controllers
 
         private Input InputGet()
         {
+
             var ip = Session["Input"];
+
+
             if (ip == null)
             {
                 ip = new Input();
             }
             return (Input) ip;  
+        }
+
+        private Input InputSet(Input input)
+        {
+            Session["Input"] = input;
+            return InputGet(); 
         }
 
         [HttpGet]
@@ -382,7 +391,9 @@ namespace BiofuelSouth.Controllers
         }
         public ActionResult Results()
         {
-            var input = InputGet(); 
+            var input = InputGet();
+            
+            Session["NewInput"] = input; 
             if (input == null)
             {
                 return RedirectToAction("General");
@@ -392,7 +403,12 @@ namespace BiofuelSouth.Controllers
 
             var vms = vm.GetViewModels();
             Session["ViewModels"] = vms;
+            var x = InputGet();
 
+            Session["Input"] = null;
+            Session["Input"] = Session["NewInput"];
+
+            var y = InputGet();
             return View("TabbedResult", vms[0]);
 
 
@@ -401,9 +417,6 @@ namespace BiofuelSouth.Controllers
             //var vm = new Simulator(input);
             //var vms = vm.GetViewModels();
             //Session["ViewModels"] = vms;
-
-
-
             //return View("Results", vms[0]);
         }
 
@@ -440,14 +453,6 @@ namespace BiofuelSouth.Controllers
 
             return View("TabbedResult",vms[0]);
 
-        }
-
-        public ActionResult Result()
-        {
-            var vm = new ResultManager(Session["input"] as Input );
-            //TODO Replacethis with resultviewmodel
-           
-            return View(Session["input"] as Input);
         }
 
         private void PostSubmit(Input ip)

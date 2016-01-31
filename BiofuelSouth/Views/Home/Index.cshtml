@@ -96,7 +96,7 @@
 <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery-ui-map/3.0-rc1/jquery.ui.map.js"></script>
 <script type="text/javascript" src="http:///maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 <script>
-    var uri = "api/productivity";
+	var uri = ""; //TODO API CONTROLLER TO GET PRODUCTIVITY BY COUNTY ie.e, productivity/countyid
 
     $(document).ready(function () {
 
@@ -205,14 +205,9 @@
 
     }
 
-    function updateMap(value) {
-        var a = getLatLonByCountyId(value);
-        if ($('#map_canvas') !== 'undefined')
-            $('#map_canvas').gmap('option', 'center', new google.maps.LatLng(a[0], a[1]));
-    }
-
+   
     function getLatLonByCountyId(id) {
-        var result = []
+	    var result = [];
         $.each(counties, function (key, item) {
             if (item.CountyCode == id) {
                 var lat = item.Lat;
@@ -236,12 +231,12 @@
     }
 
 
-    $(function () {
-        // Also works with: var yourStartLatLng = '59.3426606750, 18.0736160278';
-        var yourStartLatLng = new google.maps.LatLng(36.1048456, -86.2200095796);
-        if ($('#map_canvas') !== 'undefined')
-            $('#map_canvas').gmap({ 'center': yourStartLatLng, 'zoom': 6 });
-    });
+    //$(function () {
+    //    // Also works with: var yourStartLatLng = '59.3426606750, 18.0736160278';
+    //    var yourStartLatLng = new google.maps.LatLng(36.1048456, -86.2200095796);
+    //    if ($('#map_canvas') !== 'undefined')
+    //    	$('#map_canvas').gmap({ 'center': yourStartLatLng, 'zoom': 6 });
+    //});
 
     /*<!-- Temporary Data Source fir counties. To be read from XML */
     var c1 = $.parseJSON('{"CountyCode": "1", "Name":"Anderson", "State": "TN", "Lat" : "36.1048456", "Lon" : "-84.195796"}')

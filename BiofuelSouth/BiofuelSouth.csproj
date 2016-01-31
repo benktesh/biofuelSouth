@@ -536,7 +536,6 @@
     <Content Include="images\usdahead.jpg" />
     <Content Include="images\uthead.jpg" />
     <Content Include="images\waste.jpg" />
-    <Content Include="index.html" />
     <Content Include="InstallationDummyFile.txt" />
     <Content Include="mapDemo.html" />
     <Content Include="Migrations\Readme.txt" />
@@ -561,6 +560,7 @@
     <Content Include="forum\Web.config" />
     <Content Include="forum\Web.config.orig" />
     <Content Include="bin\BiofuelSouth.dll.config" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <None Include="Properties\PublishProfiles\biofuelsouth - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\biofuelsouth - Web Deploy.pubxml" />
     <None Include="Properties\Settings.settings">
@@ -577,6 +577,7 @@
     <Content Include="Scripts\jquery-2.1.1.js" />
     <Content Include="Scripts\jquery-2.1.1.min.js" />
     <Content Include="Scripts\jquery-2.1.1.min.map" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -586,6 +587,7 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\nugetexample.js" />
     <Content Include="Scripts\respond.js" />
+    <Content Include="Scripts\response.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
