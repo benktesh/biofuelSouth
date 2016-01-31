@@ -431,15 +431,17 @@ namespace BiofuelSouth.Manager
         {
             vm.CashFlow = GetCashFlow();
 
+
+	     
+
             vm.BiomassPriceAtFarmGate = BiomassPriceAtFarmGate; 
-            vm.ProjectSize = $"{General.ProjectSize.GetValueOrDefault().ToString("##,###")} Acre";
-            vm.LandCost = $"{General.LandCost.GetValueOrDefault().ToString("C0")} per Acre";
+            vm.ProjectSize = $"{General.ProjectSize.GetValueOrDefault().ToString("##,###")} acre";
+            vm.LandCost = $"{General.LandCost.GetValueOrDefault().ToString("C0")} per acre";
             vm.ProjectLife = General.ProjectLife.GetValueOrDefault();
             vm.NPV = NPV;
             vm.InterestRate = Constants.GetAvgInterestRate(); 
 
-
-            vm.ProductionList = Productions;
+			vm.ProductionList = Productions;
             vm.GrossProductionList = GrossProductions;
             vm.ProductivityList = Productivity; 
 
@@ -452,9 +454,17 @@ namespace BiofuelSouth.Manager
             vm.CountyName = Constants.CountyName(General.County);
             vm.CropType = General.Category;
             vm.StateCode = General.State;
-            vm.RequireStorage = Storage.RequireStorage.GetValueOrDefault();
+			vm.StateName = Constants.GetStateName( General.State);
 
-            vm.ChartKeys = PrepareChart();
+			vm.RequireStorage = Storage.RequireStorage.GetValueOrDefault();
+
+	        var avgCost = Expenses.Select(m => m.TotalExpenses).Average()/(decimal) Math.Max(1,General.ProjectSize.GetValueOrDefault());
+			vm.AverageCostPerAcre = $"{avgCost.ToString( "C0" )} per acre";
+
+			var avgProductivity = Productivity.Average() / (decimal)Math.Max( 1, General.ProjectSize.GetValueOrDefault() );
+			vm.AverageProdutivityPerAcre = $"{avgProductivity.ToString("#.##")} tons per year";
+
+			vm.ChartKeys = PrepareChart();
 
             //populate values.
             //make chart

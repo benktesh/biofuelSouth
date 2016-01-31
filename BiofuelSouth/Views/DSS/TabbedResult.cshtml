@@ -20,9 +20,7 @@
 </head>
 <body>
 
-    <h2>Results for @Model.CropType in @Model.CountyName, @Model.StateCode</h2>
-
-
+<h2>Results for biofuel crop @Model.CropType in @Model.CountyName county of @Model.StateName (@Model.StateCode)</h2>
     <div class="panel with-nav-tabs panel-primary">
         <div class="panel-heading">
             <ul class="nav nav-tabs">
@@ -49,7 +47,7 @@
                                 <strong>@Model.ProjectLife</strong> over an area of
                                 <strong>@Model.ProjectSize</strong> in
                                 <strong>@Model.CountyName</strong> county of
-                                <strong>@Model.StateCode</strong> is expected to produce an estimated
+                                <strong>@Model.StateName</strong> is expected to produce an estimated
                                 <strong>@Model.AnnualProduction</strong> tons of biomass annually.
                             </p>
 
@@ -145,7 +143,7 @@
                                 <strong>@Model.ProjectLife</strong> over an area of
                                 <strong>@Model.ProjectSize</strong> in
                                 <strong>@Model.CountyName</strong> county of
-                                <strong>@Model.StateCode</strong> is expected to produce an estimated
+                                <strong>@Model.StateName</strong> is expected to produce an estimated
                                 <strong>@Model.AnnualProduction</strong> tons of biomass annually.
                             </p>
                             <p>
@@ -256,11 +254,11 @@
 
                         
                         <div>
-                            Average Cost Per Acre: @Model.AverageCostPerAcre
+                            Average Cost: @Model.AverageCostPerAcre
                             @*@(Math.Round(Model.GetAnnualCost() / Model.General.ProjectSize.GetValueOrDefault(), 0).ToString("C0")) per acre*@
                         </div>
                         <div>
-                            Average Production Per Acre: @Model.AverageProdutivityPerAcre
+                            Average Production: @Model.AverageProdutivityPerAcre
                             @*@Math.Round(Model.GetAnnualProductionList().Average() / Model.General.ProjectSize.GetValueOrDefault(), 0).ToString("###,###.##") ton/acre*@
                         </div>
                     </p>
