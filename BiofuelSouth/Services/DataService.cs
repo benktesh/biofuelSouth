@@ -144,14 +144,17 @@ namespace BiofuelSouth.Services
         }
 
 
-        public static List<Glossary> GetGlossary()
+        public static List<Glossary> GetGlossary(int? count = null)
         {
             using (var db = new DatabaseContext())
             {
                
-                var result = db.Glossaries.ToList();
-               return result;
-            }
+	            if (count != null)
+	            {
+		            return new List<Glossary>(db.Glossaries.OrderByDescending(p => p.Counter).Take(20));
+	            }
+				return db.Glossaries.ToList();
+			}
         }
 
         public static void SaveFeedback(FeedBack fb)

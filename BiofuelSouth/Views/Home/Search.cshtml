@@ -1,4 +1,20 @@
 ﻿@model IList<Glossary>
+
+@helper GetTopSearachedTerms()
+{
+	<strong>Top searches</strong>
+
+	var glossaries = (IList<Glossary>) ViewData["glossary"];
+	glossaries = glossaries.OrderByDescending(p => p.Counter).Take(20).OrderBy(p => p.Term).ToList();
+	foreach (var glossary in glossaries)
+	{
+		<div>
+			<a href='@Url.Action("Search", new {term = @glossary.Term})'>
+				<SPAN STYLE="font-size: @Math.Min(300L, glossary.Counter.GetValueOrDefault() + 100)%">@glossary.Term </span>
+			</a>
+		</div>
+	}
+}
 @using BiofuelSouth.Models
 @using BiofuelSouth.Services
 
@@ -151,19 +167,7 @@
         </div>
     </div>
     <div class="col-lg-2 pull-right" id="glossaryDisplay">
-        <strong>Top searches</strong>
-        @{
-            var glossaries = (IList<Glossary>)ViewData["glossary"];
-            glossaries = glossaries.OrderByDescending(p => p.Counter).Take(20).ToList();
-            foreach (var glossary in glossaries)
-            {
-                <div>
-                    <a href='@Url.Action("Search", new {term = @glossary.Term})'>
-                        <SPAN STYLE="font-size: @(Math.Min(300L, glossary.Counter.GetValueOrDefault() + 100))%">@glossary.Term </span>
-                    </a>
-                </div>
-            }
-        }
+	    @GetTopSearachedTerms()
 
     </div>
 </div>

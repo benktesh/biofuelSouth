@@ -17,8 +17,10 @@ namespace BiofuelSouth.Controllers
         public ActionResult Index()
         {
             Log.Info(Request.UserHostAddress);
+	        ViewData["glossary"] = GetTopSearches();
 
-            return View();
+
+			return View();
             //Response.Redirect("~/index.html");
             //RedirectToAction("index", "Input");
             //RedirectToAction("Index", "Input");
@@ -99,8 +101,13 @@ namespace BiofuelSouth.Controllers
                 ViewData["term"] = term;
             }
             return View(x);
-
         }
+
+	    public IList<Glossary> GetTopSearches(int count = 20)
+	    {
+		    var topSearches =  DataService.GetGlossary(count);
+		    return topSearches; 
+	    } 
 
         public JsonResult GetListOfWords(string key)
         {
