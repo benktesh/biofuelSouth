@@ -128,19 +128,16 @@ namespace BiofuelSouth.Controllers
 
         private Input InputGet()
         {
-
-            var ip = Session["Input"];
-
-
-            if (ip == null)
-            {
-                ip = new Input();
-            }
-            return (Input) ip;  
+            var ip = Session["Input"] ?? new Input();
+	        return (Input) ip;  
         }
 
-        private Input InputSet(Input input)
+        private Input InputSet(Input input = null)
         {
+	        if (input == null)
+	        {
+				Session.Remove( "Input" );
+			}
             Session["Input"] = input;
             return InputGet(); 
         }
@@ -372,28 +369,16 @@ namespace BiofuelSouth.Controllers
 
         private CropType? GetPrimaryCrop()
         {
+	        InputSet(null);
             var input = InputGet();
 
             return input?.General.Category;
-
         }
 
-        private void SwapCrops(CropType cropType)
-        {
-            var vms = Session["ViewModels"] as List<ResultViewModel>;
-            var current = vms[0];
-            var next = vms.FirstOrDefault(m => m.CropType == cropType);
-            vms.Remove(next);
-            vms.RemoveAt(0);
-            vms.Insert(0, next);
-            vms.Add(current);
-
-        }
+       
         public ActionResult Results()
         {
             var input = InputGet();
-            
-            Session["NewInput"] = input; 
             if (input == null)
             {
                 return RedirectToAction("General");
@@ -402,22 +387,7 @@ namespace BiofuelSouth.Controllers
             var vm = new Simulator(input);
 
             var vms = vm.GetViewModels();
-            Session["ViewModels"] = vms;
-            var x = InputGet();
-
-            Session["Input"] = null;
-            Session["Input"] = Session["NewInput"];
-
-            var y = InputGet();
             return View("TabbedResult", vms[0]);
-
-
-            //TODO the code below popuplates non-tabbed results;
-
-            //var vm = new Simulator(input);
-            //var vms = vm.GetViewModels();
-            //Session["ViewModels"] = vms;
-            //return View("Results", vms[0]);
         }
 
         private Input GetDefaultInput()
@@ -430,14 +400,13 @@ namespace BiofuelSouth.Controllers
             ip.General.County = "01001";
             ip.General.BiomassPriceAtFarmGate = Constants.GetFarmGatePrice(ip.General.Category);
             ip.General.LandCost = 70;
-			
-            Session["Input"] = ip;
-
             ip.ProductionCost = GetProductionCostViewModel();
             
             return ip;
         }
-        public ActionResult TabbedResult()
+
+		[HttpGet]
+        public ActionResult TestTabbedResult()
         {
             var input = GetDefaultInput();
             
@@ -491,34 +460,6 @@ namespace BiofuelSouth.Controllers
             model.BiomassPriceAtFarmGate = Constants.GetFarmGatePrice(model.Category);
         }
 
-
-
-        #region newLogic
-
-        [HttpGet]
-        public ActionResult GetStorage()
-        {
-            WizardViewModel cachedModel = (WizardViewModel)Session["WizardViewModel"];
-            if (cachedModel == null)
-            {
-                return Redirect("Index");
-            }
-
-            return View("_productionCost", cachedModel.ProductionCostView);
-        }
-
-        [HttpPost]
-        public ActionResult GetStorage(ProductionCostViewModel vm)
-        {
-            if (ModelState.IsValid)
-            {
-
-            }
-            return View("_productionCost", vm);
-
-        }
-
-        #endregion
 
     }
 

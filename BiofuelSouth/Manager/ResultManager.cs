@@ -656,10 +656,6 @@ namespace BiofuelSouth.Manager
                 input.Storage = new Storage {RequireStorage = false};
             }
 
-
-            //Update Financial
-
-
             return input;
         }
     }
