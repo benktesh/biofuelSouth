@@ -3,117 +3,129 @@
 @using BiofuelSouth.Enum
 @model BiofuelSouth.ViewModels.ResultViewModel
 
-<br />
 <div class="row">
-    <div class="col-md-6">
-        <p>
-            @*Move to template *@
-            Growing of
-            <strong>@Model.CropType</strong> for a duration of
-            <strong>@Model.ProjectLife</strong> over an area of
-            <strong>@Model.ProjectSize</strong> in
-            <strong>@Model.CountyName</strong> county of
-            <strong>@Model.StateName</strong> is expected to produce an estimated
-            <strong>@Model.AnnualProduction</strong> tons of biomass annually.
-        </p>
-        <p>
-            The production comes at an expected annual cost of
-            <strong>@Model.AnnualCost</strong> and results in an annual revenue of
-            <strong>@Model.AnnualRevenue</strong>.
-
-            The @Html.ActionLink("net present value (NPV)", "Search", "Home", new {term = "NPV"}, null)
-          
-            of the project is estimated to be
-            <strong>@Model.NPV.ToString("C0")</strong> at assumed prevailing interest rate of
-
-            <strong>@Model.InterestRate.ToString("P")</strong>.
-           
-
-            @if (Model.NPV < 0)
-            {
-                <div>
-
-                    This means there will be a net loss of <span class="text-danger"><strong>  @Model.NPV.ToString("C0") </strong></span> from this project during project's life.
-                </div>
-            }
-            else
-            {
-                <div>
-                    This means there will be a net profit of <strong>@Model.NPV.ToString("C0")</strong> from this project during project's life.
-                </div>
-            }
-        </p>
-        @{
-            var highNPV = @Model.ComparisionData.FirstOrDefault(m => m.Key == ResultComparisionKey.HighNpv);
-            var lowNPV = @Model.ComparisionData.FirstOrDefault(m => m.Key == ResultComparisionKey.LowNpv);
-
-        }
-         @if (highNPV != null && highNPV.Crop != Model.CropType)
-         {
-             var highNpv = Decimal.Parse(highNPV.ComparisionValue);
-
-             if (highNpv  >= 0)
-             {
-                 <p>
-                     It is anticipated that growing
-                     <strong>@highNPV.Crop.ToString()</strong> may likely result in highest NPV
-                     resulting into net profit of <strong>@highNpv.ToString("C0")</strong>
-                 </p>
-
-             }
-             else
-             {
-                <p>
-                    It is anticipated that growing
-                    <strong>@highNPV.Crop.ToString()</strong> may likely result in highest NPV
-                    resulting into a net loss of <strong>@highNpv.ToString("C0")</strong>
-                </p>
-             }
-
-         }
-         else if (highNPV != null && highNPV.Crop == @Model.CropType)
-         {
-            <p>
-                Likewise, it is anticipated that growing
-                <strong>@highNPV.Crop.ToString()</strong> may likely result in highest profit compared to other crops.
-
-            </p>
-
-        }
-        @if (lowNPV != null && lowNPV.Crop != @Model.CropType)
-        {
-            var lowNpv = Decimal.Parse(lowNPV.ComparisionValue); 
+	<div class="col-xs-8">
+		<h3>Overview</h3>
+		<p>
 
 
-            if (lowNpv >= 0)
-            {
-                <p>
-                    It is anticipated that growing
-                    <strong>@lowNPV.Crop.ToString()</strong> may likely result in lowest NPV
-                    resulting into net profit of <strong>@lowNpv.ToString("C0")</strong>
-                </p>
+			@*Move to template *@
+			Growing of
+			<strong>@Model.CropType</strong> for a duration of
+			<strong>@Model.ProjectLife</strong> over an area of
+			<strong>@Model.ProjectSize</strong> in
+			<strong>@Model.CountyName</strong> county of
+			<strong>@Model.StateName</strong> is expected to produce an estimated
+			<strong>@Model.AnnualProduction</strong> tons of biomass annually.
 
-            }
-            else
-            {
-                <p>
-                    It is anticipated that growing
-                    <strong>@lowNPV.Crop.ToString()</strong> may likely result in lowest NPV
-                resulting into a net loss of <span class="text-danger"><strong>@lowNpv.ToString("C0")</strong></span>
-                </p>
-            }
+			The production comes at an expected annual cost of
+			<strong>@Model.AnnualCost</strong> and results in an annual revenue of
+			<strong>@Model.AnnualRevenue</strong>.
 
-        }
-        else if (lowNPV != null && lowNPV.Crop == @Model.CropType)
-        {
-            <p>
-                Likewise, it is anticipated that growing
-                <strong>@lowNPV.Crop.ToString()</strong> may result the lowest profit compared to growing other crops.
+			The @Html.ActionLink("net present value (NPV)", "Search", "Home", new {term = "NPV"}, null)
+			of the project is estimated to be <strong>@Model.NPV.ToString("C0")</strong> at assumed
+			prevailing interest rate of <strong>@Model.InterestRate.ToString("P")</strong>.
 
-            </p>
 
-        }
+			@if (Model.NPV < 0)
+			{
+				<span>
+					This means there will be a net loss of <span class="text-danger"><strong>  @Model.NPV.ToString("C0") </strong></span> from this project during project's life.
+				</span>
+			}
+			else
+			{
+				<span>
+					This means there will be a net profit of <strong>@Model.NPV.ToString("C0")</strong> from this project during project's life.
+				</span>
+			}
+		</p>
+	</div>
+	<div class="col-xs-4">
+		<figure>
+			<img src=@Model.ImageUrl.Item1 class="img-responsive" style="max-height: 200px;"/>
+			<figcaption class="text-center">@Model.ImageUrl.Item2</figcaption>
+		</figure>
+	</div>
+	</div>
+	<div class="row">
+		<div class="col-xs-8">
+	
 
+		<h3>Comparison with other crops</h3>
+		<p>
+			@{
+				var highNPV = @Model.ComparisionData.FirstOrDefault( m => m.Key == ResultComparisionKey.HighNpv );
+				var lowNPV = @Model.ComparisionData.FirstOrDefault( m => m.Key == ResultComparisionKey.LowNpv );
+
+			}
+			@if ( highNPV != null && highNPV.Crop != Model.CropType )
+			{
+				var highNpv = Decimal.Parse( highNPV.ComparisionValue );
+
+				if ( highNpv >= 0 )
+				{
+					<span>
+						It is anticipated that growing
+						<strong>@highNPV.Crop.ToString()</strong> may likely result in highest NPV
+						resulting into net profit of <strong>@highNpv.ToString( "C0" )</strong>
+
+					</span>
+				}
+				else
+				{
+					<span>
+						It is anticipated that growing
+						<strong>@highNPV.Crop.ToString()</strong> may likely result in highest NPV
+						resulting into a net loss of <strong>@highNpv.ToString( "C0" )</strong>
+					</span>
+				}
+
+			}
+			else if ( highNPV != null && highNPV.Crop == @Model.CropType )
+			{
+				<span>
+					Likewise, it is anticipated that growing
+					<strong>@highNPV.Crop.ToString()</strong> may likely result in highest profit compared to other crops.
+
+				</span>
+
+			}
+			@if ( lowNPV != null && lowNPV.Crop != @Model.CropType )
+			{
+				var lowNpv = Decimal.Parse( lowNPV.ComparisionValue );
+
+
+				if ( lowNpv >= 0 )
+				{
+					<span>
+						It is anticipated that growing
+						<strong>@lowNPV.Crop.ToString()</strong> may likely result in lowest NPV
+						resulting into net profit of <strong>@lowNpv.ToString( "C0" )</strong>
+					</span>
+
+				}
+				else
+				{
+					<span>
+						It is anticipated that growing
+						<strong>@lowNPV.Crop.ToString()</strong> may likely result in lowest NPV
+						resulting into a net loss of <span class="text-danger"><strong>@lowNpv.ToString( "C0" )</strong></span>
+					</span>
+				}
+
+			}
+			else if ( lowNPV != null && lowNPV.Crop == @Model.CropType )
+			{
+				<span>
+					Likewise, it is anticipated that growing
+					<strong>@lowNPV.Crop.ToString()</strong> may result the lowest profit compared to growing other crops.
+
+				</span>
+
+			}
+		</p>
+			
         <p>
             You can change the inputs to analyze how such change may impact the result.
             To change input parameters, click @Html.ActionLink("Change Inputs", "General", "DSS").
@@ -121,36 +133,18 @@
 
     </div>
 
-	<div class="col-md-6">
-		<figure>
-		<img src=@Model.ImageUrl.Item1 class="img-responsive"/>
-			<figcaption class="text-center">@Model.ImageUrl.Item2</figcaption
-		</figure>
+	<div class="col-xs-4">
+
 		@if (Model.ChartKeys.Select(m => m.Key == ChartType.NPVCompare).Any())
 		{
 			var keyValue = Model.ChartKeys.FirstOrDefault(m => m.Key == ChartType.NPVCompare).Value;
 			var urlAnnualProduction = Url.Action("ShowChart", "Chart", new {@cacheKey = keyValue});
 			<figure>
-				<img src="@urlAnnualProduction" class="img-responsive" alt="NPV Compare Chart"/>
+				<img src="@urlAnnualProduction" class="img-responsive table-bordered" alt="NPV Compare Chart"/>
 				<figcaption class="text-center">Comparision of NPV across various biofuel crops.</figcaption>
 			</figure>
 		}
 
-
-
-
-        @*<p>
-                    The following graph provides a comparision of NPV with other crops:
-
-                    @if (Model.ChartKeys.Select(m => m.Key == ChartType.NPVCompare).Any())
-                    {
-                       <div id="NPVCompareChart" class="table-bordered">
-                            <img src="@urlAnnualProduction" class="img-responsive" alt="NPV Compare Chart"/>
-                        </div>
-                        <br/>
-                    }
-            </p>
-        *@
 	</div>
 </div>
 
