@@ -24,7 +24,7 @@ namespace BiofuelSouth.Controllers
                 xValue: xValues,
                 yValues: data);
             chart.SetXAxis(xLabel, 0, data.Length + .75);
-            chart.AddTitle(chartName);
+            //chart.AddTitle(chartName);
             chart.SetYAxis(yLabel);
             chart.SaveToCache(cacheKey, ChartCacheMinute);
         }
@@ -44,10 +44,7 @@ namespace BiofuelSouth.Controllers
             chart.AddSeries(chartType: "line", yValues: Enumerable.Repeat(0, data.Length).ToArray());
             chart.SetXAxis(xLabel + " ", 0, data.Length + .75);
 
-            chart.AddTitle(chartName);
-            //chart.SetYAxis(yLabel + " ", Math.Round(data.Min(),0), Math.Round(data.Max(),0)
-            //chart.SetYAxis(yLabel);
-            //chart.SetYAxis("$", data.Max(a=>a)) * -1
+           // chart.AddTitle(chartName);
             chart.SetYAxis(yLabel, Double.NaN, Double.NaN);
             chart.SaveToCache(cacheKey, ChartCacheMinute);
         }
@@ -66,7 +63,7 @@ namespace BiofuelSouth.Controllers
             chart.AddSeries(chartType: "line", yValues: Enumerable.Repeat(0, xData.Length).ToArray());
             chart.SetXAxis(xLabel + " ", 0, xData.Length + .75);
             chart.SetYAxis(yLabel, Double.NaN,Double.NaN);
-            chart.AddTitle(chartName);
+            //chart.AddTitle(chartName);
             chart.SaveToCache(cacheKey, ChartCacheMinute);
         }
 
@@ -95,7 +92,7 @@ namespace BiofuelSouth.Controllers
 
             chart.AddLegend("Legend");
             chart.SetXAxis("Year", 0, data.Length + .75);
-            chart.AddTitle(chartName);
+            //chart.AddTitle(chartName);
             chart.SetYAxis("$ ");
             chart.SaveToCache(cacheKey, ChartCacheMinute);
         }
@@ -139,7 +136,7 @@ namespace BiofuelSouth.Controllers
             
             chart.AddLegend("Legend");
             chart.SetXAxis(xLabel, 0, xAxisLength + .75);
-            chart.AddTitle(chartName);
+          //  chart.AddTitle(chartName);
             chart.SetYAxis(yLabel);
             chart.SaveToCache(cacheKey, ChartCacheMinute);
         }
@@ -157,7 +154,7 @@ namespace BiofuelSouth.Controllers
                 yValues: revenues);
 
             chart.SetXAxis("Year", 0, xValues.Length + .75);
-            chart.AddTitle(chartName);
+           // chart.AddTitle(chartName);
             chart.SetYAxis("Cost and Revenue (Actual $)");
             chart.SaveToCache(cachekey, ChartCacheMinute);
         }
