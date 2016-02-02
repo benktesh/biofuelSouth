@@ -250,7 +250,7 @@ WY	Wyoming	Cheyenne	July 10, 1890
 						new SelectListItem {Text = @"Round Tarp on Bare Ground", Value = "3"},
 						new SelectListItem {Text = @"Round Pallet No Tarp", Value = "4"},
 						new SelectListItem {Text = @"Round Gravel No Tarp", Value = "5"},
-						new SelectListItem {Text = @"Round Bare Ground No No Tarp", Value = "6"},
+						new SelectListItem {Text = @"Round Bare Ground No Tarp", Value = "6"},
                         //Rectangular
                         new SelectListItem {Text = @"Rectangular Bale - Tarp and Pallet", Value = "11"},
 						new SelectListItem {Text = @"Rectangular Bale - Tarp and Gravel", Value = "12"},
@@ -709,7 +709,7 @@ WY	Wyoming	Cheyenne	July 10, 1890
 					return new Tuple<string, string>( "http://learn.forestbioenergy.net/learning-modules/module-2/unit-3/large%20cottonwood.jpg",
 						"Poplar tree plantation. Photo by - Warren Gretz" );
 				case CropType.Willow:
-					return new Tuple<string, string>( "https://articles.extension.org//sites/default/files/Coppice%20Regrowth%20at%20Belleville%20299%20x%20200.jpg", "Willow biomass crops resprouting in the spring after being harvested the previous winter. This willow is about a month old above ground on a four year old root system. Photo By - T. Volk, SUNY ESF." );  
+					return new Tuple<string, string>( "https://articles.extension.org//sites/default/files/Coppice%20Regrowth%20at%20Belleville%20299%20x%20200.jpg", "Willow biomass crops, is about a month old above ground on a four year old root system. Photo By - T. Volk, SUNY ESF." );  
 				case CropType.Pine:
 					return new Tuple<string, string>( "http://www.srs.fs.usda.gov/compass/wp-content/uploads/2013/09/09.18.-Planted-lob-35yrs.jpg", "Planted loblolly pine stand. Photo by - David Stephens." );
 
