@@ -35,6 +35,32 @@ namespace BiofuelSouth.Services
             }
         }
 
+	    public static List<double?> GetLatLong(string countyid)
+	    {
+			using ( var db = new DatabaseContext() )
+			{
+
+				var county =  db.County.FirstOrDefault(p => p.GeoID == countyid);
+
+				if (county != null)
+				{
+					return new List<double?> {county.Lat, county.Lon};
+				}
+
+				return null; 
+			}
+		}
+
+	    public static County GetCountyById(string countyid) //or geoid
+	    {
+			using ( var db = new DatabaseContext() )
+			{
+
+				var county = db.County.FirstOrDefault( p => p.GeoID == countyid );
+				return county;
+			}
+		}
+
         //TODO 
         /// <summary>
         /// This method needs to call database. For now, a hardcoded value is used.

@@ -3,13 +3,12 @@
 @using BiofuelSouth.Enum
 @model BiofuelSouth.ViewModels.ResultViewModel
 
-<div class="row">
-	<div class="col-xs-8">
+
+	<div class="col-xs-7">
 		<h3>Overview</h3>
 		<p>
-
-
 			@*Move to template *@
+
 			Growing of
 			<strong>@Model.CropType</strong> for a duration of
 			<strong>@Model.ProjectLife</strong> over an area of
@@ -40,17 +39,6 @@
 				</span>
 			}
 		</p>
-	</div>
-	<div class="col-xs-4">
-		<figure>
-			<img src=@Model.ImageUrl.Item1 class="img-responsive" style="max-height: 200px;"/>
-			<figcaption class="text-center">@Model.ImageUrl.Item2</figcaption>
-		</figure>
-	</div>
-	</div>
-	<div class="row">
-		<div class="col-xs-8">
-	
 
 		<h3>Comparison with other crops</h3>
 		<p>
@@ -125,26 +113,82 @@
 
 			}
 		</p>
-			
-        <p>
-            You can change the inputs to analyze how such change may impact the result.
-            To change input parameters, click @Html.ActionLink("Change Inputs", "General", "DSS").
-        </p>
 
-    </div>
+		<p>
+			@if ( Model.County != null )
+			{
+				@Html.Partial( "_CountyMap", Model )
+			}
 
-	<div class="col-xs-4">
+		</p>
 
-		@if (Model.ChartKeys.Select(m => m.Key == ChartType.NPVCompare).Any())
+		@*<p>
+			You can change the inputs to analyze how such change may impact the result.
+
+		</p>*@
+
+		<p>
+			@Html.ActionLink("Change Inputs", "General", "DSS", new {@class = "btn btn-primary"}).
+			<a href="#menu1" data-toggle="tab" class="btn btn-success">See Production</a>
+		</p>
+
+	</div>
+	<div class="col-xs-5">
+		<figure>
+			<img src=@Model.ImageUrl.Item1 class="img-responsive" style="max-height: 200px;"/>
+			<figcaption class="figcaption text-center">@Model.ImageUrl.Item2</figcaption>
+		</figure>
+
+		@if ( Model.ChartKeys.Select( m => m.Key == ChartType.NPVCompare ).Any() )
 		{
-			var keyValue = Model.ChartKeys.FirstOrDefault(m => m.Key == ChartType.NPVCompare).Value;
-			var urlAnnualProduction = Url.Action("ShowChart", "Chart", new {@cacheKey = keyValue});
+			var keyValue = Model.ChartKeys.FirstOrDefault( m => m.Key == ChartType.NPVCompare ).Value;
+			var urlAnnualProduction = Url.Action( "ShowChart", "Chart", new { @cacheKey = keyValue } );
 			<figure>
-				<img src="@urlAnnualProduction" class="img-responsive table-bordered" alt="NPV Compare Chart"/>
+				<img src="@urlAnnualProduction" class="img-responsive img-chart" alt="NPV Compare Chart" />
 				<figcaption class="text-center">Comparision of NPV across various biofuel crops.</figcaption>
 			</figure>
 		}
 
+		@if ( Model.County != null )
+		{
+			@Html.Partial( "_CountyMap", Model )
+		}
 	</div>
-</div>
+
+
+
+@*<script>
+	function initialize() {
+		var latlng = new google.maps.LatLng(-34.397, 150.644);
+		var options =
+		{
+			zoom: 3,
+			center: new google.maps.LatLng(37.09, -95.71),
+			mapTypeId: google.maps.MapTypeId.ROADMAP,
+			mapTypeControl: true,
+			mapTypeControlOptions:
+			{
+				style: google.maps.MapTypeControlStyle.DROPDOWN_MENU,
+				poistion: google.maps.ControlPosition.TOP_RIGHT,
+				mapTypeIds: [google.maps.MapTypeId.ROADMAP,
+					google.maps.MapTypeId.TERRAIN,
+					google.maps.MapTypeId.HYBRID,
+					google.maps.MapTypeId.SATELLITE]
+			},
+			navigationControl: true,
+			navigationControlOptions:
+			{
+				style: google.maps.NavigationControlStyle.ZOOM_PAN
+			},
+			scaleControl: true,
+			disableDoubleClickZoom: true,
+			draggable: false,
+			streetViewControl: true,
+			draggableCursor: 'move'
+		};
+		var map = new google.maps.Map(document.getElementById("map"), options);
+	}
+	window.onload = initialize;
+</script>*@
+
 

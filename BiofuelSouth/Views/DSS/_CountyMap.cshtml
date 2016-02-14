@@ -1,0 +1,27 @@
+﻿@model BiofuelSouth.ViewModels.ResultViewModel
+<script type="text/javascript">
+    function Initialize() {
+        var latlng = new google.maps.LatLng(@Model.County.Lat, @Model.County.Lon);
+        var options = {
+            zoom: 8,
+            center: latlng,
+			
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+        var map = new google.maps.Map(document.getElementById("map_canvas"), options);
+    }
+
+    $(function () {
+        Initialize();
+    });
+</script>
+<script src="http://maps.google.com/maps/api/js?sensor=true" type="text/javascript"></script>
+
+@if (Model.County != null)
+{
+	<div id="map_canvas" style="width: 425px; height: 200px;"></div>
+}
+else
+{
+	<div id="map_canvas">Map cannot be rendered.</div>
+}

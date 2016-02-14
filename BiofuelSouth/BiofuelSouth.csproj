@@ -837,6 +837,7 @@
     <Content Include="Views\DSS\Results.cshtml" />
     <Content Include="Views\DSS\_alternativeCrop.cshtml" />
     <Content Include="Views\DSS\TabbedResult.cshtml" />
+    <Content Include="Views\DSS\_CountyMap.cshtml" />
     <None Include="Views\DSS\_productionCost.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\ProductionCost.cshtml" />
     <Content Include="Views\DSS\_resultDashboard.cshtml" />
