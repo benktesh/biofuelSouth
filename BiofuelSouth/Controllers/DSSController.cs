@@ -367,14 +367,6 @@ namespace BiofuelSouth.Controllers
         }
 
 
-        private CropType? GetPrimaryCrop()
-        {
-	        InputSet(null);
-            var input = InputGet();
-
-            return input?.General.Category;
-        }
-
        
         public ActionResult Results()
         {
@@ -400,8 +392,10 @@ namespace BiofuelSouth.Controllers
             ip.General.County = "01001";
             ip.General.BiomassPriceAtFarmGate = Constants.GetFarmGatePrice(ip.General.Category);
             ip.General.LandCost = 70;
-            ip.ProductionCost = GetProductionCostViewModel();
-            
+
+			ProductionCostManager pcm = new ProductionCostManager();
+			ip.ProductionCost = pcm.GetProductionCost( new ProductionCostViewModel { CropType = ip.General.Category, County = ip.General.County, UseCustom = true } );
+			
             return ip;
         }
 

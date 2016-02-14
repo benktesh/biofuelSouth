@@ -4,6 +4,7 @@
 @using BiofuelSouth.Resources
 @model General
 
+
 @{
 	ViewBag.Title = String.Format( "Project Information: {0}", GeneralResource.DSS_Tittle_Display );
 }
@@ -12,18 +13,15 @@
 	@Html.AntiForgeryToken()
 	@Html.ValidationSummary( true, "", new { @class = "text-danger" } )
 
-
 	<div class="row">
 		<div class="col-md-8">
-			<div class="form-horizontal">
-				<div class="row">
-					<div class="col-md-6 form-group">
-						<h4>DSS Input</h4>
-					</div>
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h4>DSS Input</h4>
 				</div>
-				<div class="row">
-					<div class="col-md-6 form-group">
+				<div class="panel-body">
 
+					<div class="col-md-6 form-group">
 						@Html.LabelFor( model => model.State, new { @class = "control-label" } )<span class="required">Required</span>
 						<a class="" data-content="<p>State of the production of biofuel crop.</p>" data-placement="center" data-toggle="popover" data-trigger="focus" href="#" rel="popover" tabindex="0" title="State">
 							<span class="glyphicon glyphicon-question-sign"></span>
@@ -40,8 +38,6 @@
 						@Html.DropDownListFor( model => model.County, Model.CountyList, "Select County", new { @class = "form-control", name = "county", id = "county" } )
 						@Html.ValidationMessageFor( model => model.County, "", new { @class = "text-danger" } )
 					</div>
-
-
 					<div class="col-md-6 form-group">
 						@Html.LabelFor( model => model.Category, new { @class = "control-label" } )<span class="required">Required</span>
 						<a href="#" rel="popover" class="" data-toggle="popover" tabindex="0" data-trigger="focus"
@@ -69,7 +65,7 @@
 						<a href="#" rel="popover" class="" data-toggle="popover" tabindex="0" data-trigger="focus"
 						   data-placement="left" title="Project Duration" data-content="<p>Duration of project expressed as total number of years
                     between first plantation and final harvest with intermediate harvests in between. The number must a whole number i.e. 1 or 2 or 10 for a year.</p>">
-                            <span class="glyphicon glyphicon-question-sign"></span></a>
+							<span class="glyphicon glyphicon-question-sign"></span></a>
 						@Html.TextBoxFor( model => model.ProjectLife, new { @class = "form-control", type = "number", min = "1" } )
 						@Html.ValidationMessageFor( model => model.ProjectLife, "", new { @class = "text-danger" } )
 					</div>
@@ -91,37 +87,41 @@
 						@Html.EditorFor( model => model.LandCost, new { htmlAttributes = new { @class = "form-control" } } )
 						@Html.ValidationMessageFor( model => model.LandCost, "", new { @class = "text-danger" } )
 					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-12 form-group pull-left">
+					<div class="col-md-12 form-group text-center">
 						<br />
-						@Html.ActionLink( "Previous", "NewDSS", "DSS", null, new { @class = "btn btn-default" } )&nbsp;&nbsp;
-						<button type="reset" value="Reset" class="btn btn-default">Reset</button>&nbsp;&nbsp;
-						<input type="submit" value="Proceed" class="btn btn-default" />
+						@Html.ActionLink( "Previous", "NewDSS", "DSS", null, new { @class = "btn btn-warning" } )&nbsp;&nbsp;
+						<button type="reset" value="Reset" class="btn btn-primary">Reset</button>&nbsp;&nbsp;
+						<input type="submit" value="Proceed" class="btn btn-success" />
 					</div>
 				</div>
 			</div>
 		</div>
 
-		<div class="col-md-4">
-			<h4>Instructions: Project parameters</h4>
-
-			<p>This step is the first step to run Biofuel Decision Support Step</p>
-			<p>Start with selecting a State. If one State is not listed, the BDSS is not available for that state. </p>
-			<p>
-				Upson State selection, available counties will be populated in the County. If one or more County is not avaialble, the BDSS currently does not have enough information for that county.
-				In such cases, selecting a neighboring county is suggested.
-			</p>
-			<p>Select crop category. BDSS can support a number of crops and new crop categories are added as need arises.</p>
-			<p>Years from plantation to harvest and farm gate price are provided with some default values. </p>
-			<p>The default values for years from plantation to harvest and farm gate price change if the crop type is changed. </p>
-			<p>The default values for cost of land is provided for reference.</p>
-			<p>Locally available accurate values can be used instead of defaults in all cases.</p>
-
+		<div class="col-md-4 form-group">
+			<div class="panel panel-default">
+				<div class="panel-heading instruction-panel-heading">
+					<h4>Instructions: Project parameters</h4>
+				</div>
+				<div class="panel-body Instruction-panel-body">
+					<p>This step is the first step to run Biofuel Decision Support Step</p>
+					<p>Start with selecting a State. If one State is not listed, the BDSS is not available for that state. </p>
+					<p>
+						Upson State selection, available counties will be populated in the County. If one or more County is not avaialble, the BDSS currently does not have enough information for that county.
+						In such cases, selecting a neighboring county is suggested.
+					</p>
+					<p>Select crop category. BDSS can support a number of crops and new crop categories are added as need arises.</p>
+					<p>Years from plantation to harvest and farm gate price are provided with some default values. </p>
+					<p>The default values for years from plantation to harvest and farm gate price change if the crop type is changed. </p>
+					<p>The default values for cost of land is provided for reference.</p>
+					<p>Locally available accurate values can be used instead of defaults in all cases.</p>
+				</div>
+			</div>
 		</div>
 	</div>
 
-}
+
+
+			}
 
 @section MyScripts {
 
@@ -175,7 +175,7 @@
 				}
 
 			}
-    );
+	);
 			//$("#summaryHead").html('<h2>Summay for Switchgrass in'+$('#county').val() + "," + $('#state').val() + '</h2>');
 
 		});

@@ -4,142 +4,146 @@
 @model BiofuelSouth.Models.ProductionCostViewModel
 
 @{
-    ViewBag.Title = string.Format("Production Costs: {0}", GeneralResource.Application_Title_Display);
+	ViewBag.Title = string.Format( "Production Costs: {0}", GeneralResource.Application_Title_Display );
 }
 
-@using (Html.BeginForm("UpdateProductionCost", "DSS"))
+@using ( Html.BeginForm( "UpdateProductionCost", "DSS" ) )
 {
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    @Html.AntiForgeryToken()
-    @Html.HiddenFor(m => m.CropType)
-    @Html.HiddenFor(m => m.County)
-    <div class="form-horizontal">
-        <div class="row">
-            <div class="col-md-8 form-group">
-                <div class="row">
-                    <div class="col-xs-6"><h4>Production Costs</h4>
-                    </div>
-                </div>
+	@Html.ValidationSummary( true, "", new { @class = "text-danger" } )
+	@Html.AntiForgeryToken()
+	@Html.HiddenFor( m => m.CropType )
+	@Html.HiddenFor( m => m.County )
+	
+		<div class="row">
+			<div class="col-md-8 form-group">
+				<div class="panel panel-default">
+					<div class="panel-heading"> <h4>Production Costs</h4></div>
+					<div class="panel-body">
+						@if ( !Model.CanCustomize )
+						{
+							<div class="row">
+								<!--- This is default cost-->
+								<div class="col-xs-12">
+									<div id="defaultProductionCost">
 
-                @if (!Model.CanCustomize)
-                {
-                    <div class="row">
-                        
-
-                            <!--- This is default cost-->
-                        <div class="col-xs-12">
-                            <div id="defaultProductionCost">
-
-                                @Html.LabelFor(model => model.Amount, new { @class = "control-label" })
-                                <a href="#" rel="popover" class="" data-toggle="popover" tabindex="0" data-trigger="focus"
-                                   data-placement="center" title="Cost" data-content="<p>Cost of production from planting to final harvest for one rotation. Includes costs for site preparation, plantation, intermediate treatments to harvesting.</p>">
-                                <span class="glyphicon glyphicon-question-sign"></span>
-                            </a>
-                                @Html.TextBoxFor(model => model.Amount, new { @class = "form-control" })
-                                @Html.ValidationMessageFor(model => model.Amount)
+										@Html.LabelFor( model => model.Amount, new { @class = "control-label" } )
+										<a href="#" rel="popover" class="" data-toggle="popover" tabindex="0" data-trigger="focus"
+										   data-placement="center" title="Cost" data-content="<p>Cost of production from planting to final harvest for one rotation. Includes costs for site preparation, plantation, intermediate treatments to harvesting.</p>">
+											<span class="glyphicon glyphicon-question-sign"></span>
+										</a>
+										@Html.TextBoxFor( model => model.Amount, new { @class = "form-control" } )
+										@Html.ValidationMessageFor( model => model.Amount )
 
 
-                                <br/>
-                            </div>
-                        </div>
-                    </div>
-                }
-                else
-                {
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <div id="CustomProductionCost">
-                                <table class="table table-striped">
-                                    <thead>
-                                        <tr>
-                                            <th>Production Cost Type</th>
-                                            <th>@Html.LabelFor(m => m.Amount)</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @for (var i = 0; i < Model.ProductionCosts.Count; i++)
-                                        {
-                                            @Html.EditorFor(m => Model.ProductionCosts[i])
-                                        }
-                                    </tbody>
-                                </table>
+										<br />
+									</div>
+								</div>
+							</div>
+				}
+				else
+				{
+							<div class="row">
+								<div class="col-xs-12">
+									<div id="CustomProductionCost">
+										<table class="table table-striped">
+											<thead>
+												<tr>
+													<th>Production Cost Type</th>
+													<th>@Html.LabelFor( m => m.Amount )</th>
+												</tr>
+											</thead>
+											<tbody>
+												@for ( var i = 0; i < Model.ProductionCosts.Count; i++ )
+												{
+													@Html.EditorFor( m => Model.ProductionCosts[i] )
+												}
+											</tbody>
+										</table>
 
-                            </div>
-                        </div>
-                    </div>
-                }
+									</div>
+								</div>
+							</div>
+				}
 
+						<div class="row">
+							<div class="col-xs-12 text-center">
+								@Html.ActionLink( @UIText.PreviousButtonLabel, "General", "DSS", null, new { @class = "btn btn-warning" } )&nbsp;&nbsp;
+								<button type="reset" value="@UIText.ResetButtonLabel" class="btn btn-primary">Reset</button>&nbsp;&nbsp;
+								<input type="submit" value="@UIText.ProceedButtonLabel" class="btn btn-success" />
 
-                <div class="row">
-                    <div class="col-xs-12 ">
-                        @Html.ActionLink(@UIText.PreviousButtonLabel, "General", "DSS", null, new { @class = "btn btn-default" })&nbsp;&nbsp;
-                        <button type="reset" value="@UIText.ResetButtonLabel" class="btn btn-default">Reset</button>&nbsp;&nbsp;
-                        <input type="submit" value="@UIText.ProceedButtonLabel" class="btn btn-default"/>
-                        
-                    </div>
-                </div>
-            </div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 
-            <div class="col-md-4 form-group">
-                <h4>Instructions: Production Cost</h4>
+			<div class="col-md-4 form-group">
+				<div class="panel panel-default">
+					<div class="panel-heading instruction-panel-heading">
+						<h4>Instructions: Production Cost</h4>
+					</div>
+					<div class="panel-body Instruction-panel-body">
+						<p>Default values for production cost include costs from planting to final harvest for one rotation for an acre </p>
+						<p>If crop is planted and harvested in 3 years, then production cost includes costs for the three years for an acre.</p>
 
-                <p>Default values for production cost include costs from planting to final harvest for one rotation for an acre </p>
-                <p>If crop is planted and harvested in 3 years, then production cost includes costs for the three years for an acre.</p>
+						@if ( Model.CanCustomize )
+						{
+							<p>For certain crops, the production cost can be customized by checking 'Customize Cost'.</p>
+							<p>Individual costs for site preparation planting, thinning, harvesting and custodial management can be entered during customization step.</p>
+							<p>Cost must be for one rotation. For example, if multiple thinning is conducted, then add up all the thinning costs for one roation. </p>
+							<p>Any cost not captured can be added to 'Custodial Management' cost. Example of such costs include cost of pesticide, cost of prescribed burning, cost of fertilization etc.</p>
+						}
 
-                @if (Model.CanCustomize)
-                {
-                    <p>For certain crops, the production cost can be customized by checking 'Customize Cost'.</p>
-                    <p>Individual costs for site preparation planting, thinning, harvesting and custodial management can be entered during customization step.</p>
-                    <p>Cost must be for one rotation. For example, if multiple thinning is conducted, then add up all the thinning costs for one roation. </p>
-                    <p>Any cost not captured can be added to 'Custodial Management' cost. Example of such costs include cost of pesticide, cost of prescribed burning, cost of fertilization etc.</p>
-                }
+						@{
+							var rotation = CropAttribute.GetRoationYears( Model.CropType );
+							var instructions = InstructionService.GetRotationYearInstruction( Model.CropType );
 
-                @{
-                    var rotation = CropAttribute.GetRoationYears(Model.CropType);
-                    var instructions = InstructionService.GetRotationYearInstruction(Model.CropType);
+							<p>Roation year for @Model.CropType is @rotation years.</p>
+							foreach ( var ins in instructions )
+							{
+								<p>@ins</p>
+							}
+						}
+						<p>Locally available accurate values can be used instead of defaults in all cases.</p>
 
-                    <p>Roation year for @Model.CropType is @rotation years.</p>
-                    foreach (var ins in instructions)
-                    {
-                        <p>@ins</p>
-                    }
-                }
-                <p>Locally available accurate values can be used instead of defaults in all cases.</p>
+					</div>
+				</div>
 
-            </div>
-        </div>
-    </div>
-                }
+			</div>
+		</div>
+	
+
+							}
 @section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-    <script>
+	@Scripts.Render( "~/bundles/jqueryval" )
+	<script>
 
 
-        function ShowHideCustom() {
-            if ($('#UseCustom').is(':checked')) {
-                $('#defaultProductionCost').hide();
-                $('#CustomProductionCost').show();
-            } else {
-                $('#defaultProductionCost').show();
-                $('#CustomProductionCost').hide();
-            };
-        }
+		function ShowHideCustom() {
+			if ($('#UseCustom').is(':checked')) {
+				$('#defaultProductionCost').hide();
+				$('#CustomProductionCost').show();
+			} else {
+				$('#defaultProductionCost').show();
+				$('#CustomProductionCost').hide();
+			};
+		}
 
-        $(function () {
+		$(function () {
 
-           // ShowHideCustom();
-            //$('#UseCustom').on('change', function () {
-              //  ShowHideCustom();
-                //return;
-                //if ($(this).is(':checked')) {
-                //    $('#defaultProductionCost').hide();
-                //    $('#CustomProductionCost').show();
-                //} else {
-                //    $('#defaultProductionCost').show();
-                //    $('#CustomProductionCost').hide();
-                //};
+			// ShowHideCustom();
+			//$('#UseCustom').on('change', function () {
+			//  ShowHideCustom();
+			//return;
+			//if ($(this).is(':checked')) {
+			//    $('#defaultProductionCost').hide();
+			//    $('#CustomProductionCost').show();
+			//} else {
+			//    $('#defaultProductionCost').show();
+			//    $('#CustomProductionCost').hide();
+			//};
 
-            //});
-        });
-    </script>
+			//});
+		});
+	</script>
 }

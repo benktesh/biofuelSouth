@@ -2,15 +2,15 @@
 
 @helper GetTopSearachedTerms()
 {
-	<strong>Top searches</strong>
 
-	var glossaries = (IList<Glossary>) ViewData["glossary"];
-	glossaries = glossaries.OrderByDescending(p => p.Counter).Take(20).OrderBy(p => p.Term).ToList();
-	foreach (var glossary in glossaries)
-	{
+
+var glossaries = (IList<Glossary>)ViewData["glossary"];
+glossaries = glossaries.OrderByDescending( p => p.Counter ).Take( 20 ).OrderBy( p => p.Term ).ToList();
+foreach ( var glossary in glossaries )
+{
 		<div>
 			<a href='@Url.Action("Search", new {term = @glossary.Term})'>
-				<SPAN STYLE="font-size: @Math.Min(300L, glossary.Counter.GetValueOrDefault() + 100)%">@glossary.Term </span>
+				<SPAN STYLE="font-size: @Math.Min(300L, glossary.Counter.GetValueOrDefault() + 100)%">@glossary.Term </SPAN>
 			</a>
 		</div>
 	}
@@ -20,138 +20,138 @@
 
 
 @{
-    ViewBag.Title = "Search";
+	ViewBag.Title = "Search";
 }
 
 <div class="row">
-    <div class="col-lg-9" id="searchDisplay">
-        
-        <div id="searchInstruction">
-            @{
-                if (ViewData["term"].Equals(""))
-                {
-                    
-                    <div>Please enter search term in the bar above or select a term from the list in the right.</div>
+	<div class="col-xs-9" id="searchDisplay">
+
+		<div id="searchInstruction">
+			@{
+				if ( ViewData["term"].Equals(""))
+				{
+
+			<div>Please enter search term in the bar above or select a term from the list in the right.</div>
                 }
 
-            }
-        </div>
+			}
+		</div>
 
-        <div id="searchResult">
-            @{
-                if (Model.Count > 0)
-                {
+		<div id="searchResult">
+			@{
+				if ( Model.Count > 0 )
+				{
 
-                    if (Model.First() != null && !Model.First().Description.Equals("TBI") && !ViewData["term"].Equals(""))
-                    {
+					if ( Model.First() != null && !Model.First().Description.Equals( "TBI" ) && !ViewData["term"].Equals( "" ) )
+					{
 
-                        var result = Model.First();
-                        <div class="resultTerm">@result.Term:</div>
-                        <div class="resultDescription">@result.Description.</div>
-                        <br />
-                        <div class="resultHirarchy">[@result.Counter]</div>
-                        <div class="resultSource">More Information: @result.Source</div>
-                        Model.RemoveAt(0);
-                    }
-                    else if (Model.First() != null && Model.First().Description.Equals("TBI") && !ViewData["term"].Equals(""))
-                    {
-                        var i = Model.First().Counter;
-                        if (i != null)
-                        {
-                            var counter = (int) i; 
-                        
-                            
-                        
-                            Model.RemoveAt(0);
-                            if (!ViewData["term"].Equals(""))
-                            {
-                                <div>No result was found for <strong>@ViewData["term"]</strong>.[@counter]</div>
+						var result = Model.First();
+						<div class="resultTerm">@result.Term:</div>
+						<div class="resultDescription">@result.Description.</div>
+						<br />
+						<div class="resultHirarchy">[@result.Counter]</div>
+						<div class="resultSource">More Information: @result.Source</div>
+						Model.RemoveAt( 0 );
+					}
+					else if ( Model.First() != null && Model.First().Description.Equals( "TBI" ) && !ViewData["term"].Equals( "" ) )
+					{
+						var i = Model.First().Counter;
+						if ( i != null )
+						{
+							var counter = (int)i;
 
 
-                            }
-                        }
-                    }
-                }
-                else
-                {
-                    if (!ViewData["term"].Equals(""))
-                    {
-                        <div>No result was found for <strong>@ViewData["term"]</strong>.</div>
+
+							Model.RemoveAt( 0 );
+							if ( !ViewData["term"].Equals( "" ) )
+							{
+								<div>No result was found for <strong>@ViewData["term"]</strong>.[@counter]</div>
 
 
-                    }
-                }
+							}
+						}
+					}
+				}
+				else
+				{
+					if ( !ViewData["term"].Equals( "" ) )
+					{
+						<div>No result was found for <strong>@ViewData["term"]</strong>.</div>
 
-}
-        </div>
 
-        <div id="relatedResults">
-            @{
+					}
+				}
 
-                if (Model.Any() && !ViewData["term"].Equals(""))
-                {
-                    <br />
-                    <div style="font-weight: bold;">
-                        Related Terms  
-                    </div>
-                    @:<div class="pull-left">
-  
+			}
+		</div>
+
+		<div id="relatedResults">
+			@{
+
+				if ( Model.Any() && !ViewData["term"].Equals(""))
+				{
+			<br />
+			<div style="font-weight: bold;">
+				Related Terms
+			</div>
+			@:<div class="pull-left">
+
+
                     foreach (var glossary in Model)
                     {
 
-                        <a href='@Url.Action("Search", new { term = @glossary.Term })'>@glossary.Term</a>
+			<a href='@Url.Action("Search", new { term = @glossary.Term })'>@glossary.Term</a>
 
                     }
-                    @:</div>
+			@:</div>
                 }
-            }
-        </div>
-        <br />
-        <hr />
-        <div id="GlossaryWords">
-            
-            @{
-                var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-                var result1 = new List<string>();
-                var breakPoint = 3;
-                result1.Add("All");
-                for (var i = 0; i < chars.Length; i = i + breakPoint)
-                {
-                    if (i + breakPoint >= chars.Length)
-                    {
-                        breakPoint = (chars.Length - i);
-                    }
+			}
+		</div>
+		<br />
+		<hr />
+		<div id="GlossaryWords">
+			@{
+				var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+				var result1 = new List<string>();
+				var breakPoint = 3;
+				result1.Add( "All" );
+				for ( var i = 0; i < chars.Length; i = i + breakPoint )
+				{
+					if ( i + breakPoint >= chars.Length )
+					{
+						breakPoint = ( chars.Length - i );
+					}
 
-                    var temp = chars.Substring(i, breakPoint);
+					var temp = chars.Substring( i, breakPoint );
 
-                    for (var j = temp.Length - 1; j > 0; j--)
-                    {
-                        temp = temp.Insert(j, "-");
-                    }
-                    result1.Add(temp);
-                }
+					for ( var j = temp.Length - 1; j > 0; j-- )
+					{
+						temp = temp.Insert( j, "-" );
+					}
+					result1.Add( temp );
+				}
 
-                result1.Add("0-9");
-                result1.Add("#*%&");
-                <div>
-                    @foreach (var temp in result1)
-                    {
-                        <a href="" onclick="GetWordList(event); return false;" class="btn btn-default" id='@temp'>@temp</a>
-                    }
-                </div>
-                <div id="listOfWord">
-                    @{
-                        var results = DataService.GetAllTerms("");
-                        var formattedResult = "";
-                        foreach (var word in results)
-                        {
-                            if (word.Key != null)
-                            {
-                                <a href='@Url.Action("Search", new {term = @word.Key})'>
+				result1.Add( "0-9" );
+				result1.Add( "#*%&" );
+				<div>
+					@foreach ( var temp in result1 )
+					{
+						<a href="" onclick="GetWordList(event); return false;" class="btn btn-default" id='@temp'>@temp</a>
+					}
+				</div>
+				<div id="listOfWord">
+					@{
+						var results = DataService.GetAllTerms("");
+						var formattedResult = "";
+						foreach (var word in results)
+						{
+							if (word.Key != null)
+							{
+					<a href='@Url.Action("Search", new {term = @word.Key})'>
 
-                                    <SPAN STYLE="font-size: @(Math.Min(300L, word.Value))%">@word.Key</SPAN>
-                                </a>
-                                @:&nbsp;
+						<SPAN STYLE="font-size: @(Math.Min(300L, word.Value))%">@word.Key</SPAN>
+					</a>
+					@:&nbsp;
 
 
                                 //'<SPAN STYLE="font-size: ' + results[i].Value + '%">' + results[i].Key + "</SPAN> </a>";
@@ -160,54 +160,60 @@
                             }
 
                         }
-                    }
-                </div>
-            }
+					}
+				</div>
+			}
 
-        </div>
-    </div>
-    <div class="col-lg-2 pull-right" id="glossaryDisplay">
-	    @GetTopSearachedTerms()
+		</div>
+	</div>
+	<div class="col-xs-3" id="glossaryDisplay">
+		<div class="panel panel-default">
+			<div class="panel-heading instruction-panel-heading">
+				<strong>Top searches</strong>
+			</div>
+			<div class="Instruction-panel-body" style="padding-left: 10px">
+					@GetTopSearachedTerms()
+			</div>
+		</div>
+	</div>
 
-    </div>
 </div>
+	<script>
+		function GetWordList(event) {
+			var sender = $(event.target).attr('id');
+			$.ajax({
+				async: true,
+				url: '@(Url.Action("GetListOfWords","Home"))',
+				data: {
+					key: sender
+				},
+				type: "get",
+				datatype: "json",
+				success: function (results) {
+					var formattedResult = "";
+					for (i = 0; i < results.length; i++) {
 
-<script>
-    function GetWordList(event) {
-        var sender = $(event.target).attr('id');
-        $.ajax({
-            async: true,
-            url: '@(Url.Action("GetListOfWords","Home"))',
-            data: {
-                key: sender
-            },
-            type: "get",
-            datatype: "json",
-            success: function (results) {
-                var formattedResult = "";
-                for (i = 0; i < results.length; i++) {
-
-                    //alert(results[i].Value);
-                    formattedResult = formattedResult + '<a href="" ' + results[i].Key + '>' +
-                        '<SPAN STYLE="font-size: ' + results[i].Value + '%">' + results[i].Key + "</SPAN> </a>";
+						//alert(results[i].Value);
+						formattedResult = formattedResult + '<a href="" ' + results[i].Key + '>' +
+							'<SPAN STYLE="font-size: ' + results[i].Value + '%">' + results[i].Key + "</SPAN> </a>";
 
 
-                    //formattedResult = formattedResult + '<a href="" ' + results[i].Key + '>' + results[i].Key + "</a> " + results[i].Value + "%"; 
-                }
-                if (formattedResult.length == 0) {
-                    formattedResult = "Not Found";
-                }
-                $('#listOfWord').html(formattedResult);
-            },
-            error: function () {
-                alert('Could not get result from our server. Please try again later.');
-            }
-        });
-
+						//formattedResult = formattedResult + '<a href="" ' + results[i].Key + '>' + results[i].Key + "</a> " + results[i].Value + "%";
+					}
+					if (formattedResult.length == 0) {
+						formattedResult = "Not Found";
+					}
+					$('#listOfWord').html(formattedResult);
+				},
+				error: function () {
+					alert('Could not get result from our server. Please try again later.');
+				}
+			});
 
 
 
 
-    }
 
-</script>
+		}
+
+	</script>

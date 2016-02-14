@@ -42,15 +42,14 @@
  
 
 </head>
-<body id="page-top">
+<body id="page-top" class="body-content">
     <!--Navigation-->
-    <nav class="navbar navbar-default navbar-fixed-top">
-     
+    <nav class="container container-nav navbar navbar-default navbar-fixed-top">
             <div class="navbar-inner">
                 <a href="http://www.nifa.usda.gov" target="_blank" title="USDA NIFA"><img src="~/images/funding.png" class="img-responsive img-rounded img-on-top"></a>
             </div>
 
-        <div class="">
+    
             <div class="container-fluid ">
                 <!-- Brand and toggle get grouped for better mobile display -->
 
@@ -71,31 +70,12 @@
                         <li><a href='@Url.Action("NewDSS", "DSS")'>DSS</a></li>
                         <li><a href="/map" id="dropDownButton">Maps</a></li>
                         <li><a id="glossaryButton" href='@Url.Action("Search", "Home")'>Glossary</a></li>
-
                         <li><a id="aboutButton" href='@Url.Action("About", "Home")'>About</a> </li>
-                        <li>
-                            <a id="contactButton" href='@Url.Action("FeedBack", "Home")'>Contact</a>
-                        </li>
-                        <li>
-                            <a id="helpButton" href='@Url.Action("help", "Home")'>Help</a>
-                        </li>
-                        @*<li>
-                            <a id="bugButton" href='@Url.Action("GetSotfwareLog", "Home")'>Bug&Enhancement</a>
-                        </li>*@
-                        <li>
-                            <a id="forumButton" href='/forum'>Forum</a>
-                        </li>
-                        <li>
-                            <a href='@Url.Action("AskExpert", "Home")'>Ask Expert</a>
-                        </li>
-
-
-                  
+                        <li><a id="contactButton" href='@Url.Action("FeedBack", "Home")'>Contact</a></li>
+                        <li><a id="helpButton" href='@Url.Action("help", "Home")'>Help</a></li>
+                   <li><a id="forumButton" href='/forum'>Forum</a></li>
+                        <li><a href='@Url.Action("AskExpert", "Home")'>Ask Expert</a></li>
                     </ul>
-
-
-                    @*<a href='@Url.Action("Index", "Home")'><img src="~/images/biomassbanner.jpg" alt="Banner Image Logo" class="img-responsive" /></a>*@
-
                    
                     <form class="navbar-form zero-right-margin" style="float:right; margin-top: 3px; margin-bottom:0; margin-left: 0; margin-right: 0; padding:0;" role="search" method="POST" action="@Url.Action("Search", "Home")">
                         <input type="text" class="input-sm" style="margin:2px; padding:0;" size="20" placeholder="Enter a term" name="term" id="term" />
@@ -104,15 +84,13 @@
 
                 </div><!-- /.navbar-collapse -->
             </div><!-- /.container-fluid -->
-        </div>
+
     </nav>
 
-    <div class="container body-content">
-
+    <div class="container">
         @RenderBody()
 
     </div>
-
 
 
     <div class="scroll-top page-scroll visible-xs visible sm">
@@ -121,43 +99,44 @@
         </a>
     </div>
 
-    <footer id="" class="footer">
-        <div class="navbar navbar-fixed-bottom navbar-collapse collapse" id="footer">
-            <div class="container">
-                <div class="img-responsive">
-                    <div class="row img-responsive" id="logoContainer">
 
-                        <div>
-                            <a href="http://www.nifa.usda.gov" target="_blank" title="University of Georgia"> <img src="~/images/usdahead.jpg" /></a>
-                        </div>
-                        <div>
-                            <a href="http://www.uga.edu/" target="_blank" title="University of Georgia"><img src="~/images/ugahead.jpg" /></a>
-                        </div>
-                        <div>
-                            <a href="http://www.auburn.edu/" target="_blank" title="Auburn University"><img src="~/images/auhead.jpg" /></a>
-                        </div>
-                        <div>
-                            <a href="http://www.ceres.net/" target="_blank" title="Ceres, Inc"><img src="~/images/cereshead.jpg" /></a>
-                        </div>
-                        <div>
-                            <a href="http://www.arborgen.com//" target="_blank" title="Arborgen, Inc"><img src="~/images/arborgenhead.png" /></a>
-                        </div>
-                        <div>
-                            <a href="http://www.ncsu.edu/" target="_blank" title="NCSU"><img src="~/images/ncsuhead.jpg" /></a>
-                        </div>
-                        <div>
-                            <a href="http://www.utk.edu/" target="_blank" title="University of Tennessee"><img src="~/images/uthead.jpg" /></a>
-                        </div>
-                    </div>
+			<footer id="" class="footer ">
+				<div class="navbar navbar-fixed-bottom navbar-collapse collapse" id="footer">
+					<div class="container">
+						<div class="img-responsive">
+							<div class="row img-responsive" id="logoContainer">
 
-
-                </div>
-
-            </div>
+								<div>
+									<a href="http://www.nifa.usda.gov" target="_blank" title="University of Georgia"> <img src="~/images/usdahead.jpg" /></a>
+								</div>
+								<div>
+									<a href="http://www.uga.edu/" target="_blank" title="University of Georgia"><img src="~/images/ugahead.jpg" /></a>
+								</div>
+								<div>
+									<a href="http://www.auburn.edu/" target="_blank" title="Auburn University"><img src="~/images/auhead.jpg" /></a>
+								</div>
+								<div>
+									<a href="http://www.ceres.net/" target="_blank" title="Ceres, Inc"><img src="~/images/cereshead.jpg" /></a>
+								</div>
+								<div>
+									<a href="http://www.arborgen.com//" target="_blank" title="Arborgen, Inc"><img src="~/images/arborgenhead.png" /></a>
+								</div>
+								<div>
+									<a href="http://www.ncsu.edu/" target="_blank" title="NCSU"><img src="~/images/ncsuhead.jpg" /></a>
+								</div>
+								<div>
+									<a href="http://www.utk.edu/" target="_blank" title="University of Tennessee"><img src="~/images/uthead.jpg" /></a>
+								</div>
+							</div>
 
 
-        </div>
-    </footer>
+						</div>
+
+					</div>
+
+
+				</div>
+			</footer>
 
 
 

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using BiofuelSouth.Enum;
+using BiofuelSouth.Models;
 
 namespace BiofuelSouth.ViewModels
 {
@@ -18,13 +19,14 @@ namespace BiofuelSouth.ViewModels
             ProductionCostList = new List<decimal> { 0 };
             CashFlow = new List<decimal> { 0 };
             ComparisionData = new List<SummaryComparisionModel>();
-
         }
 
         #region inputs
 
         public CropType CropType { get; set; }
         public string CountyName { get; set;} 
+
+		public County County { get; set;  }
 
         public string StateCode { get; set; }
 

@@ -17,7 +17,8 @@ namespace BiofuelSouth.Controllers
             {
                 yLabel = chartName;
             }
-            var chart = new Chart(600, 300);
+            var chart = new Chart(600, 300, ChartTheme.Green);
+			
             chart.AddSeries(
                 chartType: "Column",
                 name: chartName,
@@ -33,7 +34,7 @@ namespace BiofuelSouth.Controllers
         {
            var xValues = Enumerable.Range(1, data.Length).ToArray();
             
-            var chart = new Chart(600, 300);
+            var chart = new Chart(600, 300, ChartTheme.Green);
             chart.AddSeries(
                 chartType: "Column",
                 name: chartName,
@@ -52,14 +53,14 @@ namespace BiofuelSouth.Controllers
         public void GenerateColumnChart(string cacheKey, decimal[] yData, string[] xData, String chartName, string xLabel = "Year", string yLabel = "$ ")
         {
            
-            var chart = new Chart(600, 300);
+            var chart = new Chart(600, 300, ChartTheme.Green );
             chart.AddSeries(
                 chartType: "Column",
                 name: chartName,
                 xValue: xData,
 
             yValues: yData);
-
+			
             chart.AddSeries(chartType: "line", yValues: Enumerable.Repeat(0, xData.Length).ToArray());
             chart.SetXAxis(xLabel + " ", 0, xData.Length + .75);
             chart.SetYAxis(yLabel, Double.NaN,Double.NaN);
@@ -73,7 +74,7 @@ namespace BiofuelSouth.Controllers
             var data = ip.GetRevenues().Select(m => m.TotalRevenue).ToArray();
             var xValues = Enumerable.Range(1, data.Length).ToArray();
 
-            var chart = new Chart(600, 300);
+            var chart = new Chart(600, 300, ChartTheme.Green);
             chart.AddSeries(
                 chartType: "Line",
                 name: "Revenue",
@@ -94,7 +95,9 @@ namespace BiofuelSouth.Controllers
             chart.SetXAxis("Year", 0, data.Length + .75);
             //chart.AddTitle(chartName);
             chart.SetYAxis("$ ");
-            chart.SaveToCache(cacheKey, ChartCacheMinute);
+			
+
+			chart.SaveToCache(cacheKey, ChartCacheMinute);
         }
 
         /// <summary>
@@ -119,7 +122,7 @@ namespace BiofuelSouth.Controllers
             if (xAxisLength == 0)
                 return;
 
-            var chart = new Chart(600, 300);
+            var chart = new Chart(600, 300, ChartTheme.Green );
             if (xValues == null)
             {
                 xValues = Enumerable.Range(1, xAxisLength).Select(m => m.ToString()).ToArray();
@@ -133,6 +136,7 @@ namespace BiofuelSouth.Controllers
                     xValue: xValues,
                     yValues: data);
             }
+		
             
             chart.AddLegend("Legend");
             chart.SetXAxis(xLabel, 0, xAxisLength + .75);
@@ -146,7 +150,7 @@ namespace BiofuelSouth.Controllers
         {
             var xValues = Enumerable.Range(1, ip.General.ProjectLife.GetValueOrDefault()).ToArray();
             var revenues = ip.GetRevenues().Select(m => m.TotalRevenue).ToArray();
-            var chart = new Chart(600, 300);
+            var chart = new Chart(600, 300, ChartTheme.Green);
             chart.AddSeries(
                 chartType: "Line",
                 name: chartName,

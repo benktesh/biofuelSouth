@@ -191,11 +191,11 @@ textarea {
 
 
 
-
-
-
 .body-content {
     margin-bottom: 80px;
+	background-color: gainsboro;
+	margin-top: auto;
+		
 }
 
 
@@ -252,8 +252,8 @@ textarea {
 .img-on-top {
     position: absolute;
     z-index: 100;
-    right: 1px;
-    top: 5px;
+    right: 0px;
+    top: 0px;
     width: 15%;
 }
 
@@ -285,3 +285,46 @@ textarea {
      .strongrow {
         font-weight: bold;
     }
+.panel .panel-default > .Instruction-panel-body {
+	background-color: greenyellow;
+	border: none;
+
+}
+
+
+
+.panel-body {
+	background-color: ghostwhite;
+}
+
+.panel-body > .tab-pane {
+	background-color: greenyellow;
+
+}
+
+.panel-heading {
+	border: none;
+}
+.panel-default > .panel-heading {
+	background-color: green;
+	color: white;
+}
+
+.panel-default >.instruction-panel-heading {
+	background-image: none;
+    background-color: black;
+    color: white;
+}
+
+.container {
+    padding-right: 10px;
+    padding-left: 10px;
+	background-color: ghostwhite;
+}
+
+.container-nav {
+    padding-right: 0px;
+    padding-left: 0px;
+}
+/**/
+

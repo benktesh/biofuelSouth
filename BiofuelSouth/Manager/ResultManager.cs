@@ -429,6 +429,8 @@ namespace BiofuelSouth.Manager
 
         public ResultViewModel GetResultViewModel()
         {
+
+	        vm.County = DataService.GetCountyById(General.County);
             vm.CashFlow = GetCashFlow();
 
             vm.BiomassPriceAtFarmGate = BiomassPriceAtFarmGate; 

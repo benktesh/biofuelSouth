@@ -1,66 +1,49 @@
 ﻿@using BiofuelSouth.Models
-<div class="container">
-
-	<div class="row">
-		<div class="col-sm-10">
-			<div class="row">
-				<H1>Sustaining Biofuel</H1>
-
-				<div class="col-xs-12 col-sm-5 col-md-6 col-lg-6 pull-right">
-					@Html.Partial( "_Banner" )
-				</div>
-				<p>
-					Sustaining biofuel industry in the South will need adequate supply of biomass feedstock from private land. Considering a majority of forestlands in the region is controlled by millions of private landowners, this could be a challenge as it could mean convincing landowners to adopt new crops or modify their existing land use in favor of desirable feedstock.
-				</p>
 
 
-				<p>Studies have shown that landowners consider supplying biomass for energy production so that the nation’s energy dependence on foreign energy sources can be reduced. However, they do not know is what it involves to produce desirable feedstock on their own land, what crops are suitable or feasible, whether and how the financial return from feedstock production compares with their current land rent.</p>
+<div class="row">
+	<div class="col-sm-10">
+		<H1>Sustaining Biofuel</H1>
 
-				<H1>Biomass Decision Support System</H1>
-				<p>
-					Landowners make their land use decisions based on the expected financial return and therefore increasing
-					their confidence in feedstock production would involve providing credible information on the costs, benefits,
-					and logistics so they have the opportunity to evaluate what crops are feasible in their land, what logistics
-					might be needed, and how they could help meet their financial objective
-				</p>
-
-
-				<p>
-					The Biomass Decision Support System (BDSS) is a user-friendly, web-based system that provides a collection of tools to help biomass crop growers in their crop production decisions. Tools presented in this system combine scientific models with market data to show the expected costs and financial returns from growing alternative feedstock crops that are suggested feasible in landowners’ area of interest. The interactive tool allows landowners to manipulate Input variables (e.g. land area available, feed crop of choice) to analyze the sensitivity of cost and income in various decision scenarios. The BDSS also features local information on market risk and opportunities, government incentives regarding biomass cropping, and highlights extension/outreach contacts in landowners’ region to seek further assistance in biomass feedstock cropping.
-				</p>
-
-
-				@*<div class="col-xs-12 col-sm-9 col-md-8 col-lg-7 pull-right">
-						<img src="~/images/smallwood.jpg" class="img-responsive img-circle" />
-
-					</div>*@
-			</div>
+		<div class="col-xs-12 col-sm-5 col-md-6 col-lg-6 pull-right">
+			@Html.Partial( "_Banner" )
 		</div>
-		<div class="col-md-2 pull-right">
-			<div class="row">
-				<div id="projectUpdate"></div>
-				<div id="feedUSDA"></div>
-				<div id="feedJob"></div>
-				<div id="topsearch">
-					@*GetTopSearches(int count = 20)*@
-					@*<div class="col-lg-2 pull-right" id="glossaryDisplay">*@
-					@GetTopSearachedTerms()
+		<p>
+			Sustaining biofuel industry in the South will need adequate supply of biomass feedstock from private land. Considering a majority of forestlands in the region is controlled by millions of private landowners, this could be a challenge as it could mean convincing landowners to adopt new crops or modify their existing land use in favor of desirable feedstock.
+		</p>
 
-					@*</div>*@
-				</div>
-			</div>
 
-		</div> <!-- The Right -->
+		<p>Studies have shown that landowners consider supplying biomass for energy production so that the nation’s energy dependence on foreign energy sources can be reduced. However, they do not know is what it involves to produce desirable feedstock on their own land, what crops are suitable or feasible, whether and how the financial return from feedstock production compares with their current land rent.</p>
+
+		<H1>Biomass Decision Support System</H1>
+		<p>
+			Landowners make their land use decisions based on the expected financial return and therefore increasing
+			their confidence in feedstock production would involve providing credible information on the costs, benefits,
+			and logistics so they have the opportunity to evaluate what crops are feasible in their land, what logistics
+			might be needed, and how they could help meet their financial objective
+		</p>
+
+
+		<p>
+			The Biomass Decision Support System (BDSS) is a user-friendly, web-based system that provides a collection of tools to help biomass crop growers in their crop production decisions. Tools presented in this system combine scientific models with market data to show the expected costs and financial returns from growing alternative feedstock crops that are suggested feasible in landowners’ area of interest. The interactive tool allows landowners to manipulate Input variables (e.g. land area available, feed crop of choice) to analyze the sensitivity of cost and income in various decision scenarios. The BDSS also features local information on market risk and opportunities, government incentives regarding biomass cropping, and highlights extension/outreach contacts in landowners’ region to seek further assistance in biomass feedstock cropping.
+		</p>
 	</div>
-	<div class="row">
-		<div class="col-md-12 col-lg-12 col-sm-12">
-			@Html.Partial( "_Disclaimer" )
+	<div class="col-md-2 pull-right">
+
+		<div id="projectUpdate"></div>
+		<div id="feedUSDA"></div>
+		<div id="feedJob"></div>
+		<div id="topsearch">
+			@GetTopSearachedTerms()
 		</div>
-
 	</div>
-
-
 </div>
+<div class="row">
+	<div class="col-xs-12">
+		@Html.Partial( "_Disclaimer" )
+	</div>
+</div>
+
 <script type="text/javascript">
 
 	var feedInput = [['http://www.usda.gov/cgi-bin/usdarss.pl?navid=LATEST_RELEASES', "USDA Latest Release", "10"],
@@ -106,9 +89,9 @@
 <script>
 	var uri = ""; //TODO API CONTROLLER TO GET PRODUCTIVITY BY COUNTY ie.e, productivity/countyid
 
-	$(document).ready(function() {
+	$(document).ready(function () {
 
-		$('#StateID').change(function() {
+		$('#StateID').change(function () {
 			var selectedState = $('#StateID').select().val();
 			// alert(selectedState);
 			if (selectedState == "")
@@ -132,20 +115,20 @@
 
 				var countyHolder = "";
 				switch (selectedState) {
-				case 'AL':
-					countyHolder = AL;
-					break;
-				case 'FL':
-					countyHolder = FL;
-					break;
-				case 'FL':
-					countyHolder = GA;
-					break;
-				case 'FL':
-					countyHolder = KY;
-					break;
-				default:
-					countyHolder = Default;
+					case 'AL':
+						countyHolder = AL;
+						break;
+					case 'FL':
+						countyHolder = FL;
+						break;
+					case 'FL':
+						countyHolder = GA;
+						break;
+					case 'FL':
+						countyHolder = KY;
+						break;
+					default:
+						countyHolder = Default;
 
 				}
 				var option = "";
@@ -164,11 +147,11 @@
 		$('thead').css({ "color": "#fff" }).css({ "background-color": "#428bca", "border-color": "#357ebd" });
 
 		$.getJSON(uri)
-			.done(function(data) {
+			.done(function (data) {
 				// On success, 'data' contains a list of products.
 				console.log(data.toString());
 				var tbl = "";
-				$.each(data, function(key, item) {
+				$.each(data, function (key, item) {
 					// Add a list item for the product.
 					//   $('<li>', { text: formatItem(item) }).appendTo($('#allProductivity'));
 					tbl += getRow(item);
@@ -186,12 +169,12 @@
 		$('#countyProductivity').empty();
 		var id = $('#countyId').val();
 		$.getJSON(uri + '/' + id)
-			.done(function(data) {
+			.done(function (data) {
 
 				if (data.length == 0)
 					$('<li>', { text: "No informaiton is available for selected county" }).appendTo($("#countyProductivity"));
 				var tbl = "";
-				$.each(data, function(key, item) {
+				$.each(data, function (key, item) {
 					// Add a list item for the product.
 					//$('<li>', { text: formatItem(item) }).appendTo($('#countyProductivity'));
 					tbl += getRow(item);
@@ -216,7 +199,7 @@
 
 	function getLatLonByCountyId(id) {
 		var result = [];
-		$.each(counties, function(key, item) {
+		$.each(counties, function (key, item) {
 			if (item.CountyCode == id) {
 				var lat = item.Lat;
 				var lon = item.Lon;
