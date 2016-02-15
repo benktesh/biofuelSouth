@@ -32,10 +32,10 @@ foreach ( var glossary in glossaries )
 			<div class="panel-body">
 				<div id="searchInstruction">
 					@{
-						if (ViewData["term"].Equals(""))
+						if ( ViewData["term"].Equals(""))
 						{
 
-							<p>Please enter search term in the bar above or select a term from the list in the right.</p>
+					<p>Please enter search term in the bar above or select a term from the list in the right.</p>
 						}
 
 					}
@@ -50,11 +50,11 @@ foreach ( var glossary in glossaries )
 							{
 
 								var result = Model.First();
-								<div class="resultTerm">@result.Term:</div>
-								<div class="resultDescription">@result.Description.</div>
-								<br/>
-								<div class="resultHirarchy">[@result.Counter]</div>
-								<div class="resultSource">More Information: @result.Source</div>
+					<div class="resultTerm">@result.Term:</div>
+					<div class="resultDescription">@result.Description.</div>
+					<br />
+					<div class="resultHirarchy">[@result.Counter]</div>
+					<div class="resultSource">More Information: @result.Source</div>
 								Model.RemoveAt(0);
 							}
 							else if (Model.First() != null && Model.First().Description.Equals("TBI") && !ViewData["term"].Equals(""))
@@ -69,8 +69,9 @@ foreach ( var glossary in glossaries )
 									Model.RemoveAt(0);
 									if (!ViewData["term"].Equals(""))
 									{
-										<div>No result was found for <strong>@ViewData["term"]</strong>.[@counter]
-										</div>
+					<div>
+						No result was found for <strong>@ViewData["term"]</strong>.[@counter]
+					</div>
 
 
 									}
@@ -81,8 +82,9 @@ foreach ( var glossary in glossaries )
 						{
 							if (!ViewData["term"].Equals(""))
 							{
-								<div>No result was found for <strong>@ViewData["term"]</strong>.
-								</div>
+					<div>
+						No result was found for <strong>@ViewData["term"]</strong>.
+					</div>
 
 
 							}
@@ -96,25 +98,26 @@ foreach ( var glossary in glossaries )
 
 						if (Model.Any() && !ViewData["term"].Equals(""))
 						{
-							<br/>
-							<div style="font-weight: bold;">
-								Related Terms
-							</div>
-							<span> class="pull-left">
+					<br />
+					<div style="font-weight: bold;">
+						Related Terms
+					</div>
+					<span>
+						class="pull-left">
 
-								@foreach (var glossary in Model)
+						@foreach (var glossary in Model)
 								{
 
-								<a href='@Url.Action("Search", new {term = @glossary.Term})'>@glossary.Term</a>
+					<a href='@Url.Action("Search", new {term = @glossary.Term})'>@glossary.Term</a>
 
 								}
-								</span>
+					</span>
 
 						}
 					}
 				</div>
-				<br/>
-				<hr/>
+				<br />
+				<hr />
 				<div id="GlossaryWords">
 					@{
 						var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -139,25 +142,25 @@ foreach ( var glossary in glossaries )
 
 						result1.Add("0-9");
 						result1.Add("#*%&");
-						<div>
-							@foreach (var temp in result1)
+					<div>
+						@foreach (var temp in result1)
 							{
-								<a href="" onclick="GetWordList(event); return false;" class="btn btn-primary" id='@temp'>@temp</a>
+							<a href="" onclick="GetWordList(event); return false;" class="btn btn-primary" id='@temp'>@temp</a>
 							}
-						</div>
-						<div id="listOfWord">
-							@{
+					</div>
+					<div id="listOfWord">
+						@{
 								var results = DataService.GetAllTerms("");
 								var formattedResult = "";
 								foreach (var word in results)
 								{
 									if (word.Key != null)
 									{
-										<a href='@Url.Action("Search", new {term = @word.Key})'>
+							<a href='@Url.Action("Search", new {term = @word.Key})'>
 
-											<SPAN STYLE="font-size: @(Math.Min(300L, word.Value))%">@word.Key</SPAN>
-										</a>
-										@:&nbsp;
+								<SPAN STYLE="font-size: @(Math.Min(300L, word.Value))%">@word.Key</SPAN>
+							</a>
+							@:&nbsp;
 
 
 										//'<SPAN STYLE="font-size: ' + results[i].Value + '%">' + results[i].Key + "</SPAN> </a>";
@@ -166,62 +169,62 @@ foreach ( var glossary in glossaries )
 									}
 
 								}
-							}
-						</div>
+						}
+					</div>
 					}
 
 				</div>
 			</div>
+		</div>
+	</div>
+	<div class="col-xs-3" id="glossaryDisplay">
+		<div class="panel panel-default">
+			<div class="panel-heading instruction-panel-heading">
+				<strong>Top searches</strong>
+			</div>
+			<div class="Instruction-panel-body" style="padding-left: 10px">
+				@GetTopSearachedTerms()
 			</div>
 		</div>
-			<div class="col-xs-3" id="glossaryDisplay">
-				<div class="panel panel-default">
-					<div class="panel-heading instruction-panel-heading">
-						<strong>Top searches</strong>
-					</div>
-					<div class="Instruction-panel-body" style="padding-left: 10px">
-						@GetTopSearachedTerms()
-					</div>
-				</div>
-			</div>
+	</div>
 
-		</div>
-		<script>
-			function GetWordList(event) {
-				var sender = $(event.target).attr('id');
-				$.ajax({
-					async: true,
-					url: '@(Url.Action("GetListOfWords","Home"))',
-					data: {
-						key: sender
-					},
-					type: "get",
-					datatype: "json",
-					success: function (results) {
-						var formattedResult = "";
-						for (i = 0; i < results.length; i++) {
+</div>
+<script>
+	function GetWordList(event) {
+		var sender = $(event.target).attr('id');
+		$.ajax({
+			async: true,
+			url: '@(Url.Action("GetListOfWords","Home"))',
+			data: {
+				key: sender
+			},
+			type: "get",
+			datatype: "json",
+			success: function (results) {
+				var formattedResult = "";
+				for (i = 0; i < results.length; i++) {
 
-							//alert(results[i].Value);
-							formattedResult = formattedResult + '<a href="" ' + results[i].Key + '>' +
-								'<SPAN STYLE="font-size: ' + results[i].Value + '%">' + results[i].Key + "</SPAN> </a>";
+					//alert(results[i].Value);
+					formattedResult = formattedResult + '<a href="" ' + results[i].Key + '>' +
+						'<SPAN STYLE="font-size: ' + results[i].Value + '%">' + results[i].Key + "</SPAN> </a>";
 
 
-							//formattedResult = formattedResult + '<a href="" ' + results[i].Key + '>' + results[i].Key + "</a> " + results[i].Value + "%";
-						}
-						if (formattedResult.length == 0) {
-							formattedResult = "Not Found";
-						}
-						$('#listOfWord').html(formattedResult);
-					},
-					error: function () {
-						alert('Could not get result from our server. Please try again later.');
-					}
-				});
-
-
-
-
-
+					//formattedResult = formattedResult + '<a href="" ' + results[i].Key + '>' + results[i].Key + "</a> " + results[i].Value + "%";
+				}
+				if (formattedResult.length == 0) {
+					formattedResult = "Not Found";
+				}
+				$('#listOfWord').html(formattedResult);
+			},
+			error: function () {
+				alert('Could not get result from our server. Please try again later.');
 			}
+		});
 
-		</script>
+
+
+
+
+	}
+
+</script>
