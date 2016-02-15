@@ -132,10 +132,11 @@
 
 		$(document).ready(function () {
 
-			if ($('#state').val() !== "") {
-				$("#county").attr("disabled", false);
-				$('#county').attr('selectedIndex', 0);
+			if ($('#state').val() === "") {
+				
+				//$('#county').attr('selectedIndex', 0);
 				populateCounty();
+				$("#county").attr("disabled", true);
 			}
 
 
@@ -163,14 +164,15 @@
 				}
 			});
 
-			$('#state').change(function () {
-				if ($('#state').val() === "") {
-					$('#county').attr('selectedIndex', 0);
+		/*	$('#State').change(function () {
+
+				if ($('#State').val() === "") {
+					$('#County').attr('selectedIndex', 0);
 				}
 
-			});
+			}); */
 			$("#state").change(function () {
-				if ($("#state").val() !== "Select County") {
+				if ($("#County").val() !== "Select County") {
 					populateCounty();
 				}
 
@@ -181,19 +183,19 @@
 		});
 
 		function populateCounty() {
+			
 			var selectedValue = $('#county').val();
 
-
-			// return false;
-			//alert("getting couty");
 			var ddlCounty = $("#county");
 			var state = $("#state").val();
 
 			if (state === "") {
-				$('#county').attr('disabled', true);
-				$('#county'), attr('selectedIndex', 0);
+				$('#County').attr('disabled', true);
+				//$('#county'), attr('selectedIndex', 0);
 				state = "ALL";
 			}
+
+			
 			$.ajax({
 				url: "/data/CountiesForState",
 				cache: false,
