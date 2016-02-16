@@ -122,7 +122,7 @@
 
 
 			}
-
+@Scripts.Render("~/Scripts/custom.js"); 
 @section MyScripts {
 
 	@*@Scripts.Render("~/bundles/jquery")
@@ -130,60 +130,68 @@
 	<script type="text/javascript">
 		//http://www.codeproject.com/Articles/730953/Cascading-Dropdown-List-With-MVC-LINQ-to-SQL-and-A
 
-		$(document).ready(function () {
+
+		function AlertWoodyCrop(crop) {
+
+			if (crop === '@((int) CropType.Pine)' || crop === '@((int) CropType.Poplar)' || crop === '@((int) CropType.Willow)') {
+				alert("You selected woody crop for which DSS has limited county level information. Price and Cost information are based on regional/national average.", 'Limited Data Availablity');
+
+			}
+		}
+
+
+		$(document).ready(function() {
 
 			if ($('#state').val() === "") {
-				
+
 				//$('#county').attr('selectedIndex', 0);
 				populateCounty();
-				$("#county").attr("disabled", true);
+				//	$("#county").attr("disabled", true);
 			}
 
 
-			$('#Category').change(function () {
+			$('#Category').change(function() {
 				var selectedCrop = $('#Category').val();
+
+				AlertWoodyCrop(selectedCrop);
 
 				if (selectedCrop === '') {
 					$('#BiomassPriceAtFarmGate').val('');
 				}
 
-				if (selectedCrop === "@((int)CropType.Switchgrass)") {
+				if (selectedCrop === "@((int) CropType.Switchgrass)") {
 					$('#BiomassPriceAtFarmGate').val(@(Constants.GetFarmGatePrice(CropType.Switchgrass)));
-				}
-				else if (selectedCrop === "@((int)CropType.Miscanthus)") {
+				} else if (selectedCrop === "@((int) CropType.Miscanthus)") {
 					$('#BiomassPriceAtFarmGate').val(@(Constants.GetFarmGatePrice(CropType.Miscanthus)));
-				}
-				else if (selectedCrop === "@((int)CropType.Pine)") {
+				} else if (selectedCrop === "@((int) CropType.Pine)") {
 					$('#BiomassPriceAtFarmGate').val(@(Constants.GetFarmGatePrice(CropType.Pine)));
-				}
-				else if (selectedCrop === "@((int)CropType.Poplar)") {
+				} else if (selectedCrop === "@((int) CropType.Poplar)") {
 					$('#BiomassPriceAtFarmGate').val(@(Constants.GetFarmGatePrice(CropType.Poplar)));
-				}
-				else if (selectedCrop === "@((int)CropType.Willow)") {
+				} else if (selectedCrop === "@((int) CropType.Willow)") {
 					$('#BiomassPriceAtFarmGate').val(@(Constants.GetFarmGatePrice(CropType.Willow)));
 				}
 			});
 
-		/*	$('#State').change(function () {
+			/*	$('#State').change(function () {
+	
+					if ($('#State').val() === "") {
+						$('#County').attr('selectedIndex', 0);
+					}
+	
+				}); */
+			$("#state").change(function() {
+					if ($("#County").val() !== "Select County") {
+						populateCounty();
+					}
 
-				if ($('#State').val() === "") {
-					$('#County').attr('selectedIndex', 0);
 				}
-
-			}); */
-			$("#state").change(function () {
-				if ($("#County").val() !== "Select County") {
-					populateCounty();
-				}
-
-			}
-	);
+			);
 			//$("#summaryHead").html('<h2>Summay for Switchgrass in'+$('#county').val() + "," + $('#state').val() + '</h2>');
 
 		});
 
 		function populateCounty() {
-			
+
 			var selectedValue = $('#county').val();
 
 			var ddlCounty = $("#county");
@@ -195,24 +203,24 @@
 				state = "ALL";
 			}
 
-			
+
 			$.ajax({
 				url: "/data/CountiesForState",
 				cache: false,
 				type: "GET",
 				data: { state: state },
 
-				success: function (data) {
+				success: function(data) {
 					$("#county").empty();
 					ddlCounty.append($('<option></option>').val('').html("Select County"));
-					$.each(data, function (id, option) {
+					$.each(data, function(id, option) {
 						ddlCounty.append($('<option></option>').val(option.id).html(option.name));
 					});
 					$("#county").prop("disabled", false);
 					$('#county').val(selectedValue).change();
 				},
 
-				error: function () {
+				error: function() {
 					alert('Failed to retrieve county.');
 					$("#county").prop("disabled", true);
 				}

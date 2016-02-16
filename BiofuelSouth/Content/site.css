@@ -328,3 +328,8 @@ textarea {
 }
 /**/
 
+.modal-header {
+	background-color: green;
+	color: white;
+	font-weight: bold;
+}
