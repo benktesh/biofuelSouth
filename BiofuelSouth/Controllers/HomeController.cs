@@ -21,9 +21,7 @@ namespace BiofuelSouth.Controllers
 
 
 			return View();
-            //Response.Redirect("~/index.html");
-            //RedirectToAction("index", "Input");
-            //RedirectToAction("Index", "Input");
+
         }
 
         public ActionResult AskExpert()

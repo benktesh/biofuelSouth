@@ -1,43 +1,75 @@
 ﻿@using BiofuelSouth.Models
 
-
 <div class="row">
-	<div class="col-sm-10">
-		<H1>Sustaining Biofuel</H1>
+	<div class="col-sm-8">
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h4>Sustaining Biofuel</h4>
+					</div>
+					<div class="panel-body">
+						<div class="col-xs-12 col-sm-7 col-md-8 col-lg-8 pull-right">
+							@Html.Partial( "_Banner" )
+						</div>
+						<p>
+							Sustaining biofuel industry in the South will need adequate supply of biomass feedstock from private land. Considering a majority of forestlands in the region is controlled by millions of private landowners, this could be a challenge as it could mean convincing landowners to adopt new crops or modify their existing land use in favor of desirable feedstock.
+						</p>
+						<p>Studies have shown that landowners consider supplying biomass for energy production so that the nation’s energy dependence on foreign energy sources can be reduced. However, they do not know is what it involves to produce desirable feedstock on their own land, what crops are suitable or feasible, whether and how the financial return from feedstock production compares with their current land rent.</p>
+					</div>
+				</div>
 
-		<div class="col-xs-12 col-sm-5 col-md-6 col-lg-6 pull-right">
-			@Html.Partial( "_Banner" )
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h4>Biomass Decision Support System</h4>
+					</div>
+					<div class="panel-body">
+						<p>
+							Landowners make their land use decisions based on the expected financial return and therefore increasing
+							their confidence in feedstock production would involve providing credible information on the costs, benefits,
+							and logistics so they have the opportunity to evaluate what crops are feasible in their land, what logistics
+							might be needed, and how they could help meet their financial objective
+						</p>
+						<p>
+							The Biomass Decision Support System (BDSS) is a user-friendly, web-based system that provides a collection of tools to help biomass crop growers in their crop production decisions. Tools presented in this system combine scientific models with market data to show the expected costs and financial returns from growing alternative feedstock crops that are suggested feasible in landowners’ area of interest. The interactive tool allows landowners to manipulate Input variables (e.g. land area available, feed crop of choice) to analyze the sensitivity of cost and income in various decision scenarios. The BDSS also features local information on market risk and opportunities, government incentives regarding biomass cropping, and highlights extension/outreach contacts in landowners’ region to seek further assistance in biomass feedstock cropping.
+						</p>
+					</div>
+				</div>
+			</div>
 		</div>
-		<p>
-			Sustaining biofuel industry in the South will need adequate supply of biomass feedstock from private land. Considering a majority of forestlands in the region is controlled by millions of private landowners, this could be a challenge as it could mean convincing landowners to adopt new crops or modify their existing land use in favor of desirable feedstock.
-		</p>
-
-
-		<p>Studies have shown that landowners consider supplying biomass for energy production so that the nation’s energy dependence on foreign energy sources can be reduced. However, they do not know is what it involves to produce desirable feedstock on their own land, what crops are suitable or feasible, whether and how the financial return from feedstock production compares with their current land rent.</p>
-
-		<H1>Biomass Decision Support System</H1>
-		<p>
-			Landowners make their land use decisions based on the expected financial return and therefore increasing
-			their confidence in feedstock production would involve providing credible information on the costs, benefits,
-			and logistics so they have the opportunity to evaluate what crops are feasible in their land, what logistics
-			might be needed, and how they could help meet their financial objective
-		</p>
-
-
-		<p>
-			The Biomass Decision Support System (BDSS) is a user-friendly, web-based system that provides a collection of tools to help biomass crop growers in their crop production decisions. Tools presented in this system combine scientific models with market data to show the expected costs and financial returns from growing alternative feedstock crops that are suggested feasible in landowners’ area of interest. The interactive tool allows landowners to manipulate Input variables (e.g. land area available, feed crop of choice) to analyze the sensitivity of cost and income in various decision scenarios. The BDSS also features local information on market risk and opportunities, government incentives regarding biomass cropping, and highlights extension/outreach contacts in landowners’ region to seek further assistance in biomass feedstock cropping.
-		</p>
 	</div>
-	<div class="col-md-2 pull-right">
+	<div class="col-sm-4">
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="panel panel-default" id="usdaFeedPanel">
+					<div class="panel-heading">
+						<h4>USDA Latest Release</h4>
+					</div>
+					<div class="panel-body">
+						<div id="feedUSDA"></div>
 
-		<div id="projectUpdate"></div>
-		<div id="feedUSDA"></div>
-		<div id="feedJob"></div>
-		<div id="topsearch">
-			@GetTopSearachedTerms()
+					</div>
+				</div>
+
+				<div id="projectUpdate"></div>
+
+				<div id="feedJob"></div>
+				<div class="panel panel-default" id="usdaFeedPanel">
+					<div class="panel-heading">
+						<h4>Top Searched Terms</h4>
+					</div>
+					<div class="panel-body">
+						<div id="topsearch">@GetTopSearachedTerms()</div>
+
+					</div>
+				</div>
+
+			</div>
 		</div>
 	</div>
 </div>
+
+
 <div class="row">
 	<div class="col-xs-12">
 		@Html.Partial( "_Disclaimer" )
@@ -47,7 +79,7 @@
 <script type="text/javascript">
 
 	var feedInput = [['http://www.usda.gov/cgi-bin/usdarss.pl?navid=LATEST_RELEASES', "USDA Latest Release", "10"],
-        ['http://www.energy.gov/rss/eere-bioenergy/909946', "US DOE Bioenergy", "7"],
+		['http://www.energy.gov/rss/eere-bioenergy/909946', "US DOE Bioenergy", "7"],
 	];
 
 	var feedcontainer = document.getElementById("feedUSDA");
@@ -55,7 +87,7 @@
 	var feedurl = "http://www.usda.gov/cgi-bin/usdarss.pl?navid=LATEST_RELEASES";
 
 	var feedlimit = 5;
-	var rssoutput = "<h4>USDA Latest Release</h4>";
+	var rssoutput = '';
 
 	function rssfeedsetup() {
 		var feedpointer = new google.feeds.Feed(feedurl);
@@ -241,15 +273,14 @@
 </script>
 <!--end of container-->
 @helper GetTopSearachedTerms()
-{
-	<h4>Top Searched Terms</h4>
+		{
 	var glossaries = (IList<Glossary>)ViewData["glossary"];
 	glossaries = glossaries.OrderByDescending( p => p.Counter ).Take( 20 ).OrderBy( p => p.Term ).ToList();
 	foreach ( var glossary in glossaries )
 	{
 
 		<a href='@Url.Action("Search", new {term = @glossary.Term})'>
-			<SPAN STYLE="font-size: @Math.Min(200L, glossary.Counter.GetValueOrDefault() + 50)%">@glossary.Term </SPAN>
+			<SPAN STYLE="font-size: @Math.Min(200L, glossary.Counter.GetValueOrDefault() + 75)%">@glossary.Term </SPAN>
 		</a>
 	}
 }

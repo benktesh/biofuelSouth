@@ -333,3 +333,27 @@ textarea {
 	color: white;
 	font-weight: bold;
 }
+
+.navbar  {
+			border-bottom: none;
+		}
+
+.nav.navbar-nav li a {
+    color: Green;
+	font-weight: bold;
+}
+
+.glyphicon-search {
+	color: white;
+	background-color: green;
+	size: 5px;
+}
+
+.panel-heading {
+	padding: 5px;
+
+}
+
+.disclaimer {
+	color: orangered; 
+}
