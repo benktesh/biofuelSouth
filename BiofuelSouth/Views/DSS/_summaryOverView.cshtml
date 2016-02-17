@@ -5,7 +5,9 @@
 
 
 	<div class="col-xs-7">
-		<h3>Overview</h3>
+		<h3>
+			Overview @Model.CropType in @Model.CountyName (@Model.StateCode)
+		</h3>
 		<p>
 			@*Move to template *@
 
@@ -115,10 +117,17 @@
 		</p>
 
 		<p>
-			@if ( Model.County != null )
+
+			@if ( Model.ChartKeys.Select( m => m.Key == ChartType.NPVCompare ).Any() )
 			{
-				@Html.Partial( "_CountyMap", Model )
+				var keyValue = Model.ChartKeys.FirstOrDefault( m => m.Key == ChartType.NPVCompare ).Value;
+				var urlAnnualProduction = Url.Action( "ShowChart", "Chart", new { @cacheKey = keyValue } );
+				<figure>
+					<img src="@urlAnnualProduction" class="img-responsive img-chart" alt="NPV Compare Chart" />
+					<figcaption class="text-center">Comparision of NPV across various biofuel crops.</figcaption>
+				</figure>
 			}
+		
 
 		</p>
 
@@ -133,27 +142,25 @@
 		</p>
 
 	</div>
-	<div class="col-xs-5">
-		<figure>
-			<img src=@Model.ImageUrl.Item1 class="img-responsive" style="max-height: 200px;"/>
-			<figcaption class="figcaption text-center">@Model.ImageUrl.Item2</figcaption>
-		</figure>
+<div class="col-xs-5">
+	<br />
+	<figure>
+		<img src=@Model.ImageUrl.Item1 class="img-responsive" style="max-height: 200px;"/>
+		<figcaption class="figcaption text-center">@Model.ImageUrl.Item2</figcaption>
+	</figure>
 
-		@if ( Model.ChartKeys.Select( m => m.Key == ChartType.NPVCompare ).Any() )
+	<p>
+		<br/>
+		@if (Model.County != null)
 		{
-			var keyValue = Model.ChartKeys.FirstOrDefault( m => m.Key == ChartType.NPVCompare ).Value;
-			var urlAnnualProduction = Url.Action( "ShowChart", "Chart", new { @cacheKey = keyValue } );
-			<figure>
-				<img src="@urlAnnualProduction" class="img-responsive img-chart" alt="NPV Compare Chart" />
-				<figcaption class="text-center">Comparision of NPV across various biofuel crops.</figcaption>
-			</figure>
+			@Html.Partial("_CountyMap", Model)
 		}
+	</p>
 
-		@if ( Model.County != null )
-		{
-			@Html.Partial( "_CountyMap", Model )
-		}
-	</div>
+
+
+
+</div>
 
 
 

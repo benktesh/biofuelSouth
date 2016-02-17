@@ -9,8 +9,10 @@
 	<title>Bootstrap Case</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	@Styles.Render( "~/Content/custom.css" )
+		@Styles.Render( "~/Content/site.css" )
+
 	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+	<link href="~/Content/site.css" rel="stylesheet" />
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 	<style>
@@ -18,7 +20,6 @@
 </head>
 <body>
 
-	<h2>Results for biofuel crop @Model.CropType in @Model.CountyName county of @Model.StateName (@Model.StateCode)</h2>
 	<div class="panel with-nav-tabs panel-primary">
 		<div class="panel-heading">
 			<ul class="nav nav-tabs">
