@@ -17,18 +17,18 @@ namespace BiofuelSouth.Models
         public String State { get; set; }
 
         [Required]
-        [DisplayName(@"Name of County")]
+        [DisplayName(@"County")]
         public string County { get; set; }
 
         [Required]
-        [DisplayName(@"Biofuel Category")]
+        [DisplayName(@"Biomass Crop")]
         public CropType Category { get; set; }
 
-        [DisplayName(@"Size of Project (acre)")]
+        [DisplayName(@"Project Size (acre)")]
         [Required]
         public double? ProjectSize { get; set; }
 
-        [DisplayName(@"Years (Project Duration)")]
+        [DisplayName(@"Project Duration (Years)")]
         [Range(1, 100)]
         [Required]
         public int? ProjectLife { get; set; }  //years
@@ -38,7 +38,7 @@ namespace BiofuelSouth.Models
         public decimal? BiomassPriceAtFarmGate { get; set; } //$/ton
 
 
-        [DisplayName(@"Cost of land ($/acre/year)")]
+        [DisplayName(@"Land Cost ($/acre/year)")]
         [Required]
 
         public decimal? LandCost { get; set; } //$/acre/year
