@@ -339,8 +339,13 @@ textarea {
 		}
 
 .nav.navbar-nav li a {
-    color: Green;
+    color: black;
 	font-weight: bold;
+}
+
+.nav.navbar-nav li a:hover {
+    color: blue;
+
 }
 
 .glyphicon-search {
