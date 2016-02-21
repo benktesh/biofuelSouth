@@ -1,76 +1,49 @@
 ﻿@{
-    ViewBag.Title = "About";
+	ViewBag.Title = "About";
 }
 
 
-<div class="container">
-    @*<div class="row">
-        <div class="">
-
-
-            <p>
-                <legend>Biomass Decision Support System</legend>
-                <div class="col-xs-12 col-sm-4 col-md-4 col-lg-5 pull-right">
-                    <img src="~/images/bail.jpg" class="img-responsive col-xs-12 col-sm-9 col-md-8 col-lg-7 pull-right" />
-                </div>
-            <p>
-                The Biomass Decision Support System (BDSS) is a user-friendly, web-based system that provides a collection of tools to help biomass crop growers in their crop production decisions. Tools presented in this system combine scientific models with market data to show the expected costs and financial returns from growing alternative feedstock crops that are suggested feasible in landowners’ area of interest. The interactive tool allows landowners to manipulate input variables (e.g. land area available, feed crop of choice) to analyze the sensitivity of cost and income in various decision scenarios. The BDSS also features local information on market risk and opportunities, government incentives regarding biomass cropping, and highlights extension/outreach contacts in landowners’ region to seek further assistance in biomass feedstock cropping.
-            </p>
-            </p>
-        </div>
-    </div>*@
-
-
-
-
-
-    <div class="row">
-        <div class="">
-            <p>
-                <legend>The IBSS Partnership</legend>
-                <div class="col-xs-12 col-sm-4 col-md-4 col-lg-5 pull-right">
-                    <a href="http://www.se-ibss.org/"><img src="~/images/ibssparnershiplogo.png" class="img-responsive col-xs-12 col-sm-9 col-md-8 col-lg-7 pull-right" /></a>
-                </div>
-            <p>
-                The Southeastern Partnership for Integrated Biomass Supply System (The IBSS Partnership) is a collaborative program among major research universities and private sector working to deploy an infrastructure-compatible biofuels industry in the Southeastern United States. Funded by the US Department of Agriculture, through a highly competitive process as a Coordinated Agriculture Project, the IBSS partnership intends to help meet USDA goal of producing almost 50% of the next generation of biofuel in the region. In doing so, the IBSS partnership demonstrates real-world solutions towards economically and environmentally sustainable production of biofuel in the Southeastern United States.
-                The IBSS partnership organizes a powerful multidisciplinary team of skilled scientists, outreach specialists, and educators from four major research universities (University of Tennessee, Auburn University, North Carolina State University, University of Georgia) and two collaborators from private sector (ArborGen and Ceres) to address its three primary goals:
-
-                <ul>
-                    <li>Demonstrate real-world solutions to barriers limiting deployment of advanced biofuels in the Southeastern region</li>
-                    <li>Create, validate and use new metrics for improved decision-making for regional biorefinery development</li>
-                    <li>Provide credible and relevant programs to dispense new knowledge for the workforce and stakeholders</li>
-
-                </ul>
-
-            </p>
-            </p>
-        </div>
-
-    </div>
-
-
-
-    <div class="row text-center">
-
-        <p>
-            Southeastern Partnership for Integrated Biomass Supply Systems <br />
-            Center for Renewable Carbon, University of Tennessee<br />
-            2506 Jacob Drive, Knoxville, TN 37912 <br />
-            865-946-1130 <br />
-
-
-
-            Email:<a href="mailto:crc@utk.edu">crc@utk.edu</a>
-
-        </p>
-
-    </div>
-    
 <div class="row">
-    @Html.Partial("_Disclaimer");
-        
+	<div class="col-xs-12">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h4>The IBSS Partnership</h4>
+			</div>
+			<div class="panel-body">
+				<div class="col-xs-12 col-sm-4 col-md-4 col-lg-5 pull-right">
+					<a href="http://www.se-ibss.org/"><img src="~/images/ibssparnershiplogo.png" class="img-responsive col-xs-12 col-sm-9 col-md-8 col-lg-7 pull-right" /></a>
+				</div>
+				<p>
+					The Southeastern Partnership for Integrated Biomass Supply System (The IBSS Partnership) is a collaborative program among major research universities and private sector working to deploy an infrastructure-compatible biofuels industry in the Southeastern United States. Funded by the US Department of Agriculture, through a highly competitive process as a Coordinated Agriculture Project, the IBSS partnership intends to help meet USDA goal of producing almost 50% of the next generation of biofuel in the region. In doing so, the IBSS partnership demonstrates real-world solutions towards economically and environmentally sustainable production of biofuel in the Southeastern United States.
+					The IBSS partnership organizes a powerful multidisciplinary team of skilled scientists, outreach specialists, and educators from four major research universities (University of Tennessee, Auburn University, North Carolina State University, University of Georgia) and two collaborators from private sector (ArborGen and Ceres) to address its three primary goals:
+
+					<ul>
+						<li>Demonstrate real-world solutions to barriers limiting deployment of advanced biofuels in the Southeastern region</li>
+						<li>Create, validate and use new metrics for improved decision-making for regional biorefinery development</li>
+						<li>Provide credible and relevant programs to dispense new knowledge for the workforce and stakeholders</li>
+					</ul>
+				</p>
+				<div class="text-center">
+					<p>
+						Southeastern Partnership for Integrated Biomass Supply Systems <br />
+						Center for Renewable Carbon, University of Tennessee<br />
+						2506 Jacob Drive, Knoxville, TN 37912 <br />
+						865-946-1130 <br />
+
+						Email:<a href="mailto:crc@utk.edu">crc@utk.edu</a>
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
 
-</div>
-    
+
+	
+
+			<div class="row">
+				@Html.Partial("_Disclaimer");
+
+			</div>
+
 
