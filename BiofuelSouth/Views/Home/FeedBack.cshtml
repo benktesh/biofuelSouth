@@ -1,110 +1,138 @@
 ﻿@model BiofuelSouth.Models.FeedBack
-
 @{
-    ViewBag.Title = "FeedBack";
+	ViewBag.Title = "FeedBack";
+	Random rnd = new Random();
+	int dice = rnd.Next( 1, 5 ); //random variable to display iamges in contact page.
 }
-
 <div class="row">
-    <article class="col-lg-6 col-md-7">
-        <div class="row">
-            <div class="col-xs-6 ">
-                <div class="thumbnail">
-                    <img src="~/images/residue.jpg" alt="" class="img-responsive">
-                    <p class="caption">Unused  residues  can be an viable source of biofuel brining economic  benefits too.</p>
-                </div>
-            </div>
-            <div class="col-xs-6">
-                <div class="thumbnail">
-                    <img src="~/images/smallwood.jpg" alt="" class="img-responsive">
-                    <p class="caption">Otherwise unused small diameter is seeing market  again.</p>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-xs-6">
-                <div class="thumbnail">
-                    <img src="~/images/technology.jpg" alt="" class="img-responsive">
-                    <p class="caption">Biofuel technology is advancing.</p>
-                </div>
-            </div>
-            <div class="col-xs-6">
-                <div class="thumbnail">
-                    <img src="~/images/biofuel.jpg" alt="" class="img-responsive">
-                    <p class="caption">Scaling biofuel i.e., from bottle to gas station requires technology as well as raw materials.</p>
-                </div>
-            </div>
-        </div>
-    </article>
-    <aside class="col-lg-6 col-md-5">
-        @{
-            if (IsPost)
-            {
-                <p>Hello @Model.Name,</p>
-                <p>Thank you for contacting us. If your feedback requires response from us, you will be contacted by one of our team members.</p> 
-                <p>The Biofuel South DSS Team</p>
-            }
 
-            else
-            {
-                using (Html.BeginForm())
-                {
 
-                    @Html.AntiForgeryToken()
+	<div class="col-xs-8">
+		<div class="panel panel-default">
+			<div class="panel-heading ">
+				<h4>Feedback Form</h4>
+			</div>
+			<div class="panel-body">
+				@{
+					if ( IsPost )
+					{
+						<p>Hello @Model.Name,</p>
 
-                    <div class="form-horizontal">
-                        Please use the form below to contact us or to provide us with your comment.
-                        <hr />
-                        @Html.ValidationSummary(true, "", new {@class = "text-danger"})
-                        <div class="form-group hidden">
-                            @Html.LabelFor(model => model.Date, new {@class = "control-label col-md-2"})
-                            <div class="col-md-10">
-                                @Html.EditorFor(model => model.Date, new {htmlAttributes = new {@class = "form-control"}})
-                                @Html.ValidationMessageFor(model => model.Date, "", new {@class = "text-danger"})
-                            </div>
-                        </div>
 
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.Name, new {@class = "control-label col-md-2"})
-                            <div class="col-md-10">
-                                @Html.EditorFor(model => model.Name, new {htmlAttributes = new {@class = "form-control"}})
-                                @Html.ValidationMessageFor(model => model.Name, "", new {@class = "text-danger"})
-                            </div>
-                        </div>
+						<p>Thank you for contacting us. If your feedback requires response from us, you will be contacted by one of our team members.</p>
 
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.Email, new {@class = "control-label col-md-2"})
-                            <div class="col-md-10">
-                                @Html.EditorFor(model => model.Email, new {htmlAttributes = new {@class = "form-control"}})
-                                @Html.ValidationMessageFor(model => model.Email, "", new {@class = "text-danger"})
-                            </div>
-                        </div>
+						<p>The Biofuel South DSS Team</p>
+					}
 
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.Phone, new {@class = "control-label col-md-2"})
-                            <div class="col-md-10">
-                                @Html.EditorFor(model => model.Phone, new {htmlAttributes = new {@class = "form-control"}})
-                                @Html.ValidationMessageFor(model => model.Phone, "", new {@class = "text-danger"})
-                            </div>
-                        </div>
+					else
+					{
+						using ( Html.BeginForm() )
+						{
 
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.Message, new {@class = "control-label col-md-2"})
-                            <div class="col-md-10">
-                                @Html.TextAreaFor(model => model.Message, new {@class = "form-control", cols = "20", rows = "6"})
-                                @Html.ValidationMessageFor(model => model.Message, "", new {@class = "text-danger"})
-                            </div>
-                        </div>
+							@Html.AntiForgeryToken()
 
-                        <div class="form-group">
-                            <div class="col-md-offset-2 col-md-10 ">
-                                <input type="reset" value="Reset" class="btn btn-default" />
-                                <input type="submit" value="Send" class="btn btn-default" />
-                            </div>
-                        </div>
-                    </div>
 
-                }
-            }
-        }
-</aside>
+
+
+							<div class="form-horizontal">
+								<hr />
+								@Html.ValidationSummary( true, "", new { @class = "text-danger" } )
+								<div class="form-group hidden">
+									@Html.LabelFor( model => model.Date, new { @class = "control-label col-md-2" } )
+									<div class="col-md-10">
+										@Html.EditorFor( model => model.Date, new { htmlAttributes = new { @class = "form-control" } } )
+										@Html.ValidationMessageFor( model => model.Date, "", new { @class = "text-danger" } )
+									</div>
+								</div>
+								<div class="form-group">
+									@Html.LabelFor( model => model.Name, new { @class = "control-label col-md-2" } )
+									<div class="col-md-10">
+										@Html.EditorFor( model => model.Name, new { htmlAttributes = new { @class = "form-control" } } )
+										@Html.ValidationMessageFor( model => model.Name, "", new { @class = "text-danger" } )
+									</div>
+								</div>
+								<div class="form-group">
+									@Html.LabelFor( model => model.Email, new { @class = "control-label col-md-2" } )
+									<div class="col-md-10">
+										@Html.EditorFor( model => model.Email, new { htmlAttributes = new { @class = "form-control" } } )
+										@Html.ValidationMessageFor( model => model.Email, "", new { @class = "text-danger" } )
+									</div>
+								</div>
+								<div class="form-group">
+									@Html.LabelFor( model => model.Phone, new { @class = "control-label col-md-2" } )
+									<div class="col-md-10">
+										@Html.EditorFor( model => model.Phone, new { htmlAttributes = new { @class = "form-control" } } )
+										@Html.ValidationMessageFor( model => model.Phone, "", new { @class = "text-danger" } )
+									</div>
+								</div>
+								<div class="form-group">
+									@Html.LabelFor( model => model.Message, new { @class = "control-label col-md-2" } )
+									<div class="col-md-10">
+										@Html.TextAreaFor( model => model.Message, new { @class = "form-control", cols = "20", rows = "6" } )
+										@Html.ValidationMessageFor( model => model.Message, "", new { @class = "text-danger" } )
+									</div>
+								</div>
+								<div class="form-group">
+									<div class="col-md-offset-2 col-md-10 ">
+										<input type="reset" value="Reset" class="btn btn-default" />
+										<input type="submit" value="Send" class="btn btn-default" />
+									</div>
+								</div>
+							</div>
+
+
+
+						}
+					}
+				}
+			</div>
+		</div>
+	</div>
+	<div class="col-xs-4">
+		<div class="panel panel-default">
+			<div class="panel-heading instruction-panel-heading">
+				<h4>Contact</h4>
+			</div>
+			<div class="panel-body">
+				Please use the form below to contact us or to provide us with your comment. For direct contact information, please visit @Html.ActionLink( "About Page", "About", "Home" ).
+
+
+				<br />
+				<br />
+				<div>
+
+					<figure>
+						@if ( dice == 1 )
+						{
+
+							<img src="~/images/smallwood.jpg" class="img-responsive img-chart" alt="small wood" />
+							<figcaption class="text-center">Otherwise unused small diameter is seeing market again.</figcaption>
+
+
+						}
+
+						else if ( dice == 2 )
+						{
+							<img src="~/images/residue.jpg" alt="" class="img-responsive">
+							<figcaption class="caption">Unused residues can be an viable source of biofuel brining economic benefits too.</figcaption>
+						}
+						else if ( dice == 3 )
+						{
+							<img src="~/images/technology.jpg" alt="" class="img-responsive">
+							<figcaption class="caption">Biofuel technology is advancing.</figcaption>
+						}
+						else
+						{
+							<img src="~/images/biofuel.jpg" alt="" class="img-responsive">
+							<figcaption class="caption">Scaling biofuel i.e., from bottle to gas station requires technology as well as raw materials.</figcaption>
+						}
+					</figure>
+				</div>
+
+			</div>
+
+
+
+		</div>
+	</div>
 </div>
