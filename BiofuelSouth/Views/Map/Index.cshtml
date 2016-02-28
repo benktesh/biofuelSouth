@@ -43,8 +43,6 @@
 				</div>
 				<div class="panel-body Instruction-panel-body">
 
-					<h4>Instructions: Spatial Maps</h4>
-
 					<p>County level patial maps of cost and yields can be visualized for various crops by making appropriate selection for map type and crop.</p>
 					<p>The least cost map shows the type of crop that is least costly to be produced at a particular location.</p>
 					<p>
@@ -68,19 +66,43 @@
 
 	<script>
 			var switchgrassYieldFrame =
-				'<iframe width="700" height="500" scrolling="no" frameborder="no" src="https://www.google.com/fusiontables/embedviz?q=select+col11%3E%3E1+from+1kD5w9t0iW_iVftzLag5aBAWh3PCK3On9zKFKVi9n+where+col1%3E%3E0+in+(&#39;AL&#39;%2C+&#39;AR&#39;%2C+&#39;FL&#39;%2C+&#39;GA&#39;%2C+&#39;KY&#39;%2C+&#39;LA&#39;%2C+&#39;MS&#39;%2C+&#39;NC&#39;%2C+&#39;SC&#39;%2C+&#39;TN&#39;%2C+&#39;TX&#39;%2C+&#39;VA&#39;)&amp;viz=MAP&amp;h=false&amp;lat=31.995958181131257&amp;lng=-83.71763842302317&amp;t=1&amp;z=6&amp;l=col11%3E%3E1&amp;y=2&amp;tmplt=2&amp;hml=KML"></iframe>';
+				'<iframe width="700" height="500" scrolling="no" frameborder="no" src="https://www.google.com/fusiontables/embedviz?q=select+col6+from+1_jzVU7ayeB-X7RtcosniHgRN7a64cBynApYaCN9c+where+col2+in+(&#39;AL&#39;%2C+&#39;FL&#39;%2C+&#39;GA&#39;%2C+&#39;KY&#39;%2C+&#39;MS&#39;%2C+&#39;NC&#39;%2C+&#39;SC&#39;%2C+&#39;TN&#39;%2C+&#39;VA&#39;)&amp;viz=MAP&amp;h=false&amp;lat=31.995958181131257&amp;lng=-83.71763842302317&amp;t=1&amp;z=6&amp;l=col6&amp;y=7&amp;tmplt=11&amp;hml=KML"></iframe>';
+
+
+
 			var miscanthusYieldFrame =
-				'<iframe width="700" height="500" scrolling="no" frameborder="no" src="https://www.google.com/fusiontables/embedviz?q=select+col11%3E%3E1+from+1wQeB5JzUQRbGbw6di06YBYVH8akVQj6xIP3S9OCV+where+col1%3E%3E0+in+(&#39;AL&#39;%2C+&#39;AR&#39;%2C+&#39;FL&#39;%2C+&#39;GA&#39;%2C+&#39;KY&#39;%2C+&#39;LA&#39;%2C+&#39;MS&#39;%2C+&#39;NC&#39;%2C+&#39;SC&#39;%2C+&#39;TN&#39;%2C+&#39;TX&#39;%2C+&#39;VA&#39;)&amp;viz=MAP&amp;h=false&amp;lat=31.995958181131257&amp;lng=-83.71763842302317&amp;t=1&amp;z=6&amp;l=col11%3E%3E1&amp;y=2&amp;tmplt=2&amp;hml=KML"></iframe>';
+				'<iframe width="700" height="500" scrolling="no" frameborder="no" src="https://www.google.com/fusiontables/embedviz?q=select+col6+from+1_jzVU7ayeB-X7RtcosniHgRN7a64cBynApYaCN9c+where+col2+in+(&#39;AL&#39;%2C+&#39;FL&#39;%2C+&#39;GA&#39;%2C+&#39;KY&#39;%2C+&#39;MS&#39;%2C+&#39;NC&#39;%2C+&#39;SC&#39;%2C+&#39;TN&#39;%2C+&#39;VA&#39;)&amp;viz=MAP&amp;h=false&amp;lat=31.995958181131257&amp;lng=-83.71763842302317&amp;t=1&amp;z=6&amp;l=col6&amp;y=8&amp;tmplt=12&amp;hml=KML"></iframe>';
+
+
 			var poplarYieldFrame =
-				'<iframe width="700" height="500" scrolling="no" frameborder="no" src="https://www.google.com/fusiontables/embedviz?q=select+col11%3E%3E1+from+1wQeB5JzUQRbGbw6di06YBYVH8akVQj6xIP3S9OCV+where+col1%3E%3E0+in+(&#39;AL&#39;%2C+&#39;AR&#39;%2C+&#39;FL&#39;%2C+&#39;GA&#39;%2C+&#39;KY&#39;%2C+&#39;LA&#39;%2C+&#39;MS&#39;%2C+&#39;NC&#39;%2C+&#39;SC&#39;%2C+&#39;TN&#39;%2C+&#39;TX&#39;%2C+&#39;VA&#39;)&amp;viz=MAP&amp;h=false&amp;lat=31.995958181131257&amp;lng=-83.71763842302317&amp;t=1&amp;z=6&amp;l=col11%3E%3E1&amp;y=3&amp;tmplt=3&amp;hml=KML"></iframe>';
+				'<iframe width="700" height="500" scrolling="no" frameborder="no" src="https://www.google.com/fusiontables/embedviz?q=select+col6+from+1_jzVU7ayeB-X7RtcosniHgRN7a64cBynApYaCN9c+where+col2+in+(&#39;AL&#39;%2C+&#39;AR&#39;%2C+&#39;GA&#39;%2C+&#39;FL&#39;%2C+&#39;LA&#39;%2C+&#39;KY&#39;%2C+&#39;NC&#39;%2C+&#39;SC&#39;%2C+&#39;TN&#39;%2C+&#39;TX&#39;%2C+&#39;VA&#39;%2C+&#39;MS&#39;)&amp;viz=MAP&amp;h=false&amp;lat=31.995958181131257&amp;lng=-83.71763842302317&amp;t=1&amp;z=6&amp;l=col6&amp;y=3&amp;tmplt=3&amp;hml=KML"></iframe>';
+
+
 			var willowYieldFrame =
-				 '<iframe width="700" height="500" scrolling="no" frameborder="no" src="https://www.google.com/fusiontables/embedviz?q=select+col11%3E%3E1+from+1wQeB5JzUQRbGbw6di06YBYVH8akVQj6xIP3S9OCV+where+col1%3E%3E0+in+(&#39;AL&#39;%2C+&#39;AR&#39;%2C+&#39;FL&#39;%2C+&#39;GA&#39;%2C+&#39;KY&#39;%2C+&#39;LA&#39;%2C+&#39;MS&#39;%2C+&#39;NC&#39;%2C+&#39;SC&#39;%2C+&#39;TN&#39;%2C+&#39;TX&#39;%2C+&#39;VA&#39;)&amp;viz=MAP&amp;h=false&amp;lat=31.995958181131257&amp;lng=-83.71763842302317&amp;t=1&amp;z=6&amp;l=col11%3E%3E1&amp;y=4&amp;tmplt=4&amp;hml=KML"></iframe>';
+				 '<iframe width="700" height="500" scrolling="no" frameborder="no" src="https://www.google.com/fusiontables/embedviz?q=select+col6+from+1_jzVU7ayeB-X7RtcosniHgRN7a64cBynApYaCN9c+where+col2+in+(&#39;AL&#39;%2C+&#39;FL&#39;%2C+&#39;GA&#39;%2C+&#39;KY&#39;%2C+&#39;MS&#39;%2C+&#39;NC&#39;%2C+&#39;SC&#39;%2C+&#39;TN&#39;%2C+&#39;TX&#39;%2C+&#39;VA&#39;%2C+&#39;LA&#39;%2C+&#39;AR&#39;)&amp;viz=MAP&amp;h=false&amp;lat=31.995958181131257&amp;lng=-83.71763842302317&amp;t=1&amp;z=6&amp;l=col6&amp;y=4&amp;tmplt=4&amp;hml=KML"></iframe>';
+
 
 			var productyield = ['<iframe width="700" height="500" scrolling="no" frameborder="no" src="https://www.google.com/fusiontables/embedviz?q=select+col11+from+1dYCpUm_bwDqN4MybPQVjPmkHMPOsYw--Fau1IQZM&amp;viz=MAP&amp;h=false&amp;lat=36.10&amp;lng=-86.22055982637162&amp;t=1&amp;z=7&amp;l=col11&amp;y=2&amp;tmplt=2&amp;hml=KML"></iframe>', switchgrassYieldFrame, miscanthusYieldFrame, poplarYieldFrame, willowYieldFrame];
 
-			var productcost = ['<iframe width="700" height="500" scrolling="no" frameborder="no" src="https://www.google.com/fusiontables/embedviz?q=select+col11+from+1dYCpUm_bwDqN4MybPQVjPmkHMPOsYw--Fau1IQZM&amp;viz=MAP&amp;h=false&amp;lat=36.10&amp;lng=-86.22055982637162&amp;t=1&amp;z=7&amp;l=col11&amp;y=2&amp;tmplt=2&amp;hml=KML"></iframe>',
+			var productcostX = ['<iframe width="700" height="500" scrolling="no" frameborder="no" src="https://www.google.com/fusiontables/embedviz?q=select+col11+from+1dYCpUm_bwDqN4MybPQVjPmkHMPOsYw--Fau1IQZM&amp;viz=MAP&amp;h=false&amp;lat=36.10&amp;lng=-86.22055982637162&amp;t=1&amp;z=7&amp;l=col11&amp;y=2&amp;tmplt=2&amp;hml=KML"></iframe>',
 				'<iframe width="700" height="500" scrolling="no" frameborder="no"   src="https://www.google.com/fusiontables/embedviz?q=select+col11%3E%3E1+from+1tlr9ZXczB9JIz3gk9182vjGisXhUGkoh-PJyRq-v+where+col1%3E%3E0+in+(&#39;AL&#39;%2C+&#39;AR&#39;%2C+&#39;FL&#39;%2C+&#39;GA&#39;%2C+&#39;KY&#39;%2C+&#39;LA&#39;%2C+&#39;MS&#39;%2C+&#39;NC&#39;%2C+&#39;SC&#39;%2C+&#39;TN&#39;%2C+&#39;TX&#39;%2C+&#39;VA&#39;)&amp;viz=MAP&amp;h=false&amp;lat=31.995958181131257&amp;lng=-83.71763842302317&amp;t=1&amp;z=6&amp;l=col11%3E%3E1&amp;y=2&amp;tmplt=2&amp;hml=KML"></iframe>',
+
 				'<iframe width="700" height="500" scrolling="no" frameborder="no"   src="https://www.google.com/fusiontables/embedviz?q=select+col11%3E%3E1+from+1u0UNsOicvEJ7tyvKyRcXZ-jsH9Srcen9fqK8Y4xl+where+col1%3E%3E0+in+(&#39;AL&#39;%2C+&#39;AR&#39;%2C+&#39;FL&#39;%2C+&#39;GA&#39;%2C+&#39;KY&#39;%2C+&#39;LA&#39;%2C+&#39;MS&#39;%2C+&#39;NC&#39;%2C+&#39;SC&#39;%2C+&#39;TN&#39;%2C+&#39;TX&#39;%2C+&#39;VA&#39;)&amp;viz=MAP&amp;h=false&amp;lat=31.995958181131257&amp;lng=-83.71763842302317&amp;t=1&amp;z=6&amp;l=col11%3E%3E1&amp;y=2&amp;tmplt=2&amp;hml=KML"></iframe>'];
+
+			var defaultCost = '<iframe width="700" height="500" scrolling="no" frameborder="no" src="https://www.google.com/fusiontables/embedviz?q=select+col11+from+1dYCpUm_bwDqN4MybPQVjPmkHMPOsYw--Fau1IQZM&amp;viz=MAP&amp;h=false&amp;lat=36.10&amp;lng=-86.22055982637162&amp;t=1&amp;z=7&amp;l=col11&amp;y=2&amp;tmplt=2&amp;hml=KML"></iframe>';
+
+			var switchgrassCost = 
+				
+				'<iframe width="700" height="600" scrolling="no" frameborder="no" src="https://www.google.com/fusiontables/embedviz?q=select+col6+from+1_jzVU7ayeB-X7RtcosniHgRN7a64cBynApYaCN9c+where+col2+in+(&#39;AL&#39;%2C+&#39;FL&#39;%2C+&#39;GA&#39;%2C+&#39;KY&#39;%2C+&#39;MS&#39;%2C+&#39;NC&#39;%2C+&#39;SC&#39;%2C+&#39;TN&#39;%2C+&#39;VA&#39;)&amp;viz=MAP&amp;h=false&amp;lat=31.995958181131257&amp;lng=-83.71763842302317&amp;t=1&amp;z=6&amp;l=col6&amp;y=12&amp;tmplt=16&amp;hml=KML"></iframe>';
+
+		
+
+			var miscanthusCost = '<iframe width="700" height="500" scrolling="no" frameborder="no" src="https://www.google.com/fusiontables/embedviz?q=select+col6+from+1_jzVU7ayeB-X7RtcosniHgRN7a64cBynApYaCN9c+where+col2+in+(&#39;AL&#39;%2C+&#39;FL&#39;%2C+&#39;GA&#39;%2C+&#39;KY&#39;%2C+&#39;MS&#39;%2C+&#39;NC&#39;%2C+&#39;SC&#39;%2C+&#39;TN&#39;%2C+&#39;VA&#39;)&amp;viz=MAP&amp;h=false&amp;lat=31.995958181131257&amp;lng=-83.71763842302317&amp;t=1&amp;z=6&amp;l=col6&amp;y=11&amp;tmplt=15&amp;hml=KML"></iframe>';
+
+
+
+
+			var productcost = [ defaultCost, switchgrassCost, miscanthusCost];
 
 			var iframe = $('#mapelement');
 			$('#SelectedMapType').change(function () {

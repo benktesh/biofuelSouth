@@ -312,7 +312,7 @@ textarea {
 
 .panel-default >.instruction-panel-heading {
 	background-image: none;
-    background-color: black;
+    /*background-color: black;*/
     color: white;
 }
 
