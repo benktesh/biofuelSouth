@@ -11,56 +11,6 @@ namespace BiofuelSouth.Controllers
 {
     public class DSSController : Controller
     {
-        //private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
-
-
-        /*
-                private General GetGeneralTest()
-                {
-                    var g = new General();
-                    g.Category = "Switchgrass";
-                    g.State = "AL";
-                    g.County = "01001";
-                    g.ProjectSize = 100;
-                    g.ProjectLife = 10;
-                    g.BiomassPriceAtFarmGate = 100;
-                    g.LandCost = 20;
-                    return g;
-
-                }
-        */
-
-        /*
-                private Storage GetStorageTest()
-                {
-                    var g = new Storage();
-                    g.PercentStored = 100;  
-                    g.RequireStorage = true; 
-                    g.StorageTime = 200; 
-                    g.StorageMethod = "1"; 
-                    return g;
-
-                }
-        */
-
-        /*
-                private Financial GetFinancialTest()
-                {
-                    var f = new Financial();
-                    f.RequireFinance = true;
-                    f.LoanAmount = 1000;
-                    f.InterestRate = Constants.GetAvgInterestRate();
-                    f.EquityLoanInterestRate = 8;
-                    f.AdministrativeCost = 100;
-                    f.AvailableEquity = 1000;
-                    f.LoanAmount = 10000;
-                    f.IncentivePayment = 0; 
-                    f.YearsOfIncentivePayment = 0; 
-
-                    return f; 
-
-                }
-        */
 
         [HttpGet]
         public ActionResult Index()
