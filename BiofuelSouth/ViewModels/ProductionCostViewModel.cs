@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using BiofuelSouth.Enum;
@@ -6,7 +7,7 @@ using BiofuelSouth.Enum;
 namespace BiofuelSouth.Models
 {
 
-    public class ProductionCost
+    public class ProductionCost 
     {
         public ProductionCostType ProductionCostType { get; set; }
 
@@ -26,9 +27,10 @@ namespace BiofuelSouth.Models
             Unit = "$/acre";
         }
 
+	 
     }
-    public class ProductionCostViewModel
-    {
+    public class ProductionCostViewModel : ICloneable
+	{
         public CropType CropType { get; set; }
 
         public string County { get; set; }
@@ -78,5 +80,11 @@ namespace BiofuelSouth.Models
                 return 0;
             }
         }
-    }
+
+		public object Clone()
+		{
+			ProductionCostViewModel pcvm = (ProductionCostViewModel)this.MemberwiseClone();
+			return pcvm;
+		}
+	}
 }

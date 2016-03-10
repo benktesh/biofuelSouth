@@ -5,7 +5,7 @@ using BiofuelSouth.Enum;
 
 namespace BiofuelSouth.Models
 {
-    public class Storage
+    public class Storage : ICloneable
     {
         public Storage()
         {
@@ -70,5 +70,10 @@ namespace BiofuelSouth.Models
          [Display(Name = @"Enter estimated storage cost in $/ton/year")]
          public Decimal UserEstimatedCost { get; set; }
 
+	    public object Clone()
+	    {
+		    Storage newStorage = (Storage) this.MemberwiseClone();
+			return newStorage;
+	    }
     }
 }

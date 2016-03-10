@@ -1,10 +1,11 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using BiofuelSouth.Enum;
 
 namespace BiofuelSouth.Models
 {
-    public class Financial
+    public class Financial : ICloneable
     {
         public WizardStep CurrentStep { get; set; }
 
@@ -42,5 +43,10 @@ namespace BiofuelSouth.Models
         public double EquityLoanInterestRate { get; set; } //% (decimal fraction)
 
         public string PreviousAction { get; set; }
+	    public object Clone()
+	    {
+		    Financial newFinancial = (Financial) this.MemberwiseClone();
+		    return newFinancial; 
+	    }
     }
 }

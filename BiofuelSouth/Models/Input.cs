@@ -8,7 +8,7 @@ using log4net;
 
 namespace BiofuelSouth.Models
 {
-    public class Input
+    public class Input : ICloneable
     {
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
@@ -23,7 +23,8 @@ namespace BiofuelSouth.Models
             CurrentStep = WizardStep.None;
         }
 
-        public WizardStep CurrentStep { get; set; }
+		
+		public WizardStep CurrentStep { get; set; }
 
         public General General { get; set; }
 
@@ -398,5 +399,15 @@ namespace BiofuelSouth.Models
             return days / 200 * storageLossValue / 100;
         }
 
+	    public object Clone()
+	    {
+			Input newInput  = (Input)this.MemberwiseClone();
+			newInput.General = (General)this.General.Clone();
+		    newInput.Financial = (Financial) this.Financial.Clone();
+		    newInput.Storage = (Storage) this.Storage.Clone();
+			newInput.ProductionCost = (ProductionCostViewModel) this.ProductionCost.Clone();
+
+			return newInput;
+		}
     }
 }

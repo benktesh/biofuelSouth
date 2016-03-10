@@ -8,8 +8,8 @@ using BiofuelSouth.Resources;
 
 namespace BiofuelSouth.Models
 {
-    public class General
-    {
+    public class General : ICloneable
+	{
         public int Id { get; set; }
 
         [Required]
@@ -59,5 +59,11 @@ namespace BiofuelSouth.Models
             LandCost = 80;
 
         }
+
+	    public object Clone()
+	    {
+		    General newGeneral = (General) this.MemberwiseClone();
+		    return newGeneral; 
+	    }
     }
 }
