@@ -504,25 +504,21 @@ namespace BiofuelSouth.Manager
         }       
     }
 
-    public class Simulator
+    public static class Simulator
     {
-        private Input Input { get; set; }
+        private static Input Input { get; set; }
 
-        public Simulator(Input input)
+        
+        private static IList<CropType> GetAlternativeCrops(CropType current)
         {
-            Input = input;
-        }
-
-       
-        private IList<CropType> GetAlternativeCrops()
-        {
-            var alternative = new HashSet<CropType> { CropType.Switchgrass, CropType.Miscanthus, CropType.Willow, CropType.Poplar, CropType.Pine };
-            alternative.Remove(Input.General.Category);
+            var alternative = new HashSet<CropType> {CropType.Miscanthus, CropType.Willow, CropType.Poplar, CropType.Pine, CropType.Switchgrass };
+            alternative.Remove( current );
             return alternative.ToList();
         }
-        public List<ResultViewModel> GetViewModels(bool simulateAlternatives = true)
+        public static List<ResultViewModel> GetViewModels(Input input, bool simulateAlternatives = true)
         {
-            var altCrops = GetAlternativeCrops();
+	        Input = input; 
+            var altCrops = GetAlternativeCrops(input.General.Category);
             var viewModels = new List<ResultViewModel>();
 
             var rm = new ResultManager(Input);
@@ -533,8 +529,9 @@ namespace BiofuelSouth.Manager
 
             foreach (var alt in altCrops)
             {
-                Input = GetInput(Input, alt);  
-                rm = new ResultManager(Input);
+				
+                var x = GetInput(input, alt);  
+                rm = new ResultManager(x);
                 viewModels.Add(rm.GetResultViewModel());
             }
 
@@ -642,10 +639,9 @@ namespace BiofuelSouth.Manager
 
 
 
-        private Input GetInput(Input ip, CropType alt)
+        private static Input GetInput(Input ip, CropType alt)
         {
-            //Update General
-            Input input = ip; 
+	        var input = ip;
             input.General.Category = alt;
             input.General.BiomassPriceAtFarmGate = Constants.GetFarmGatePrice(alt);
 
