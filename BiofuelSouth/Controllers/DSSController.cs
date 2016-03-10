@@ -1,12 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using BiofuelSouth.Enum;
 using BiofuelSouth.Manager;
 using BiofuelSouth.Models;
-using BiofuelSouth.Services;
-using BiofuelSouth.ViewModels;
+
+
 
 namespace BiofuelSouth.Controllers
 {
@@ -67,9 +66,9 @@ namespace BiofuelSouth.Controllers
         public ActionResult Index()
         {
             Input ip = new Input();
-            Session["Input"] = ip;
-            PopulateHelpers(ip);
-            return RedirectToAction("General");
+	        PopulateHelpers(ip);
+			InputSet( ip );
+			return RedirectToAction("General");
         }
 
         [HttpPost]
@@ -82,11 +81,11 @@ namespace BiofuelSouth.Controllers
 
             if (ip == null)
             {
-                ip = new Input();
+	            return RedirectToAction("Index");
             }
-            Session["Input"] = ip;
-
+            
             PopulateHelpers(ip);
+	        InputSet(ip);
 
             ModelState.Clear();
             return RedirectToAction("General");
@@ -97,8 +96,9 @@ namespace BiofuelSouth.Controllers
         public ActionResult General()
         {
             var ip = InputGet();
+			
             PopulateHelpers(ip);
-            Session["Input"] = ip;
+	        InputSet(ip);
             return View(ip.General);
         }
 
@@ -120,24 +120,26 @@ namespace BiofuelSouth.Controllers
             }
             
             ip.General = general;
-            Session["Input"] = ip;
-            return RedirectToAction("GetProductionCost");
+			InputSet( ip );
+			return RedirectToAction("GetProductionCost");
 
         }
 
 
         private Input InputGet()
         {
-            var ip = Session["Input"] ?? new Input();
+            var ip = Session["Input"] as Input;
+	        if (ip == null)
+	        {
+				ip = new Input();
+				InputSet( ip );
+		        
+	        }
 	        return (Input) ip;  
         }
 
         private Input InputSet(Input input = null)
         {
-	        if (input == null)
-	        {
-				Session.Remove( "Input" );
-			}
             Session["Input"] = input;
             return InputGet(); 
         }
@@ -145,7 +147,7 @@ namespace BiofuelSouth.Controllers
         [HttpGet]
         public ActionResult Storage()
         {
-            var ip = (Input)Session["Input"];
+            var ip = InputGet();
             if (ip == null)
             {
                 return RedirectToAction("Index");
@@ -167,24 +169,19 @@ namespace BiofuelSouth.Controllers
             {
                 storage.RequireStorage = false;
                 ip.Storage = storage;
-                Session["Input"] = ip;
+	            InputSet(ip);
                 return RedirectToAction("Financial");
             }
 
             ip.Storage = storage;
-            Session["Input"] = ip;
-            return View(storage);
-
-
-            
-
+			InputSet( ip );
+			return View(storage);
         }
 
         [HttpPost]
         public ActionResult Storage(Storage storage)
         {
-            
-            var ip = (Input)Session["Input"];
+	        var ip = InputGet(); 
             if (ip == null || storage == null) //if session input is null or storage is null, return to index
             {
                 return RedirectToAction("Index");
@@ -194,12 +191,7 @@ namespace BiofuelSouth.Controllers
             {
                 ModelState.Clear();
             }
-            //if (storage == null)
-            //{
-            //    storage = new Storage();
-            //    storage.CurrentStep = WizardStep.Storage;
-            //    storage.PreviousAction = "GetProductionCost";
-            //}
+           
 
             if (!ModelState.IsValid)
             {
@@ -212,9 +204,8 @@ namespace BiofuelSouth.Controllers
                 storage.RequireStorage = false;
             }
 
-
             ip.Storage = storage;
-            Session["Input"] = ip;
+	        InputSet(ip); 
 
             return RedirectToAction("Financial");
             
@@ -229,32 +220,34 @@ namespace BiofuelSouth.Controllers
 
         public ActionResult NewDSS()
         {
-            Session["Input"] = null;
-            Session.Remove("Input");
+
+			Input ip = new Input();
+	        InputSet(ip);
             return RedirectToAction("General");
         }
 
+    
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult UpdateProductionCost(ProductionCostViewModel model)
         {
-
-            if (InputGet() == null)
+			
+	        var input = InputGet(); 
+            if ( input == null)
             {
                 return RedirectToAction("General");
             }
 
             if (ModelState.IsValid)
             {
-
                 model.UseCustom = true;
                 if (model.CropType == CropType.Miscanthus || model.CropType == CropType.Switchgrass)
                 {
                     model.UseCustom = false;
                 }
-                    var input = (Input)Session["Input"];
+                  
                 input.ProductionCost = model;
-                Session["Input"] = input;
+	            InputSet( input );
 
                 if (input.General.Category == CropType.Miscanthus || input.General.Category == CropType.Switchgrass)
                     return RedirectToAction("Storage");
@@ -268,7 +261,7 @@ namespace BiofuelSouth.Controllers
         {
             ProductionCostManager pcm = new ProductionCostManager();
 
-            var input = (Input)Session["Input"];
+	        var input = InputGet();
             return pcm.GetProductionCost(new ProductionCostViewModel { CropType = input.General.Category, County = input.General.County, UseCustom = true});
         }
 
@@ -296,7 +289,7 @@ namespace BiofuelSouth.Controllers
             }
 
             ip.Financial = financial;
-            Session["Input"] = ip;
+	        InputSet(ip);
            
             ModelState.Clear();
             return View(financial);
@@ -306,7 +299,7 @@ namespace BiofuelSouth.Controllers
         [HttpPost]
         public ActionResult Financial(Financial financial)
         {
-            var ip = (Input)Session["Input"];
+	        var ip = InputGet();
             if (ip == null || financial == null)
             {
                 return RedirectToAction("Index");
@@ -322,38 +315,12 @@ namespace BiofuelSouth.Controllers
             {
                 financial.CurrentStep = WizardStep.Result;
                 ip.Financial = financial;
-                Session["Input"] = ip;
+	            InputSet(ip);
                 return RedirectToAction("Results");
             }
 
             return View("Financial", financial);
-
-            //If finance is not null or finance is skipped then go to results
-
-            if (financial != null && (financial.RequireFinance != null)) //This is post back
-            {
-                if (!financial.RequireFinance.GetValueOrDefault())
-                {
-
-                    financial = new Financial();
-                    ip.Financial = financial;
-                }
-
-                if ((!financial.RequireFinance.GetValueOrDefault()) || (financial.RequireFinance.GetValueOrDefault() && ModelState.IsValid))
-                {
-                    financial.CurrentStep = WizardStep.Result;
-                    return RedirectToAction("Results");
-                }
-                financial.CurrentStep = WizardStep.Financial;
-                return View(financial);
-            }
-
-
-
-            ModelState.Clear();
-            return View(financial);
-
-        }
+  }
 
         [HttpGet]
         public ActionResult GetAlternative(CropType cropType)
@@ -367,19 +334,23 @@ namespace BiofuelSouth.Controllers
         }
 
 
-       
         public ActionResult Results()
         {
             var input = InputGet();
+
+	        Session["Prestine"] = input; 
             if (input == null)
             {
                 return RedirectToAction("General");
             }
+	        //var rm = new ResultManager((Input) input.Clone());
+	      //  var vm = rm.GetResultViewModel();
+	        var vms = Simulator.GetViewModels( (Input)input.Clone() );
 
-            var vm = new Simulator(input);
-
-            var vms = vm.GetViewModels();
-            return View("TabbedResult", vms[0]);
+			var temp = Session["Prestine"] as Input;
+			var vm = vms.FirstOrDefault(m => m.CropType == temp.General.Category);
+	      
+            return View("TabbedResult", vm);
         }
 
         private Input GetDefaultInput()
@@ -401,15 +372,9 @@ namespace BiofuelSouth.Controllers
 
 		[HttpGet]
         public ActionResult TestTabbedResult()
-        {
-            var input = GetDefaultInput();
-            
-            var vm = new Simulator(input);
+		{
+			return null;
            
-            var vms = vm.GetViewModels();
-            Session["ViewModels"] = vms;
-
-            return View("TabbedResult",vms[0]);
 
         }
 
@@ -444,7 +409,6 @@ namespace BiofuelSouth.Controllers
             model.General.CountyList = Constants.GetCountySelectList(model.General.State);
             model.General.StateList = Constants.GetState();
             model.General.BiomassPriceAtFarmGate = Constants.GetFarmGatePrice(model.General.Category);
-
         }
 
         private void PopulateHelpers(General model)
@@ -454,8 +418,63 @@ namespace BiofuelSouth.Controllers
             model.BiomassPriceAtFarmGate = Constants.GetFarmGatePrice(model.Category);
         }
 
+//	    [HttpGet]
+//	    public ActionResult GenerateReport()
+//	    {
+//		    var rvms = Session["ViewModels"] as List<ResultViewModel>;
+//		    if (rvms == null)
+//			    return null;
+//		    var rvm = rvms[0];
 
-    }
+//		    if (rvm == null)
+//			    return null;
+
+//		    var Title = String.Format("{0}-{1},{2}", rvm.CropType, rvm.CountyName, rvm.StateName);
+
+
+
+//		    string summaryText =
+//			    "Growing of " + rvm.CropType + " for a duration of " + rvm.ProjectLife +
+//			    " over an area of " + rvm.ProjectSize + " in " + rvm.CountyName + " county of " + rvm.StateName +
+//			    " is expected to produce an estimated " + rvm.AnnualProduction + " tons of biomass annually." + 
+//				" The production comes at an expected annual cost of " + rvm.AnnualCost + " and results in an annual revenue of " + rvm.AnnualRevenue +
+//				" The net present value (NPV) of the project is estimated to be " +
+//				rvm.NPV.ToString( "C0" ) + " at assumed prevailing interest rate of " + rvm.InterestRate.ToString( "P" ) + "."; 
+
+//	PdfDocument document = new PdfDocument();
+			
+//PdfPage page = document.AddPage();
+
+		
+
+//			using ( MemoryStream stream = new MemoryStream() )
+//			{
+//				PdfDocument pdf = new PdfDocument();
+//				pdf.Info.Title = Title;
+//				PdfPage pdfPage = pdf.AddPage();
+//			//	XGraphics graph = XGraphics.FromPdfPage( pdfPage );
+//				XFont font = new XFont( "Verdana", 12, XFontStyle.Regular );
+
+//				XGraphics gfx = XGraphics.FromPdfPage( pdfPage );
+//				XTextFormatter tf = new XTextFormatter( gfx );
+
+
+
+//				XRect rect = new XRect( 40, 100, 400, 220 );
+
+//				gfx.DrawRectangle( XBrushes.SeaShell, rect );
+
+//				//tf.Alignment = ParagraphAlignment.Left;
+
+//				tf.DrawString( summaryText, font, XBrushes.Black, rect, XStringFormats.TopLeft );
+//				//gfx.DrawString( "This is my first PDF document", font, XBrushes.Black, new XRect( 0, 0, pdfPage.Width.Point, pdfPage.Height.Point ), XStringFormats.Center );
+//				pdf.Save( stream, false );
+//				return File( stream.ToArray(), "application/pdf" );
+//			}
+//		}
+
+
+	}
 
 
 }
