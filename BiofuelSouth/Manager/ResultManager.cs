@@ -503,21 +503,21 @@ namespace BiofuelSouth.Manager
 		}
 	}
 
-	public static class Simulator
-	{
-		private static Input Input { get; set; }
+    public static class Simulator
+    {
+        private static Input Input { get; set; }
 
-
-		private static IList<CropType> GetAlternativeCrops( CropType current )
+        
+        private static IList<CropType> GetAlternativeCrops(CropType current)
 		{
-			var alternative = new HashSet<CropType> { CropType.Miscanthus, CropType.Willow, CropType.Poplar, CropType.Pine, CropType.Switchgrass };
-			alternative.Remove( current );
+            var alternative = new HashSet<CropType> {CropType.Miscanthus, CropType.Willow, CropType.Poplar, CropType.Pine, CropType.Switchgrass };
+            alternative.Remove( current );
 			return alternative.ToList();
 		}
-		public static List<ResultViewModel> GetViewModels( Input input, bool simulateAlternatives = true )
+        public static List<ResultViewModel> GetViewModels(Input input, bool simulateAlternatives = true)
 		{
-			Input = input;
-			var altCrops = GetAlternativeCrops( input.General.Category );
+	        Input = input; 
+            var altCrops = GetAlternativeCrops(input.General.Category);
 			var viewModels = new List<ResultViewModel>();
 
 			var rm = new ResultManager( Input );
@@ -528,9 +528,9 @@ namespace BiofuelSouth.Manager
 
 			foreach ( var alt in altCrops )
 			{
-
-				var x = GetInput( input, alt );
-				rm = new ResultManager( x );
+				
+                var x = GetInput(input, alt);  
+                rm = new ResultManager(x);
 				viewModels.Add( rm.GetResultViewModel() );
 			}
 
@@ -632,9 +632,9 @@ namespace BiofuelSouth.Manager
 
 
 
-		private static Input GetInput( Input ip, CropType alt )
+        private static Input GetInput(Input ip, CropType alt)
 		{
-			var input = ip;
+	        var input = ip;
 			input.General.Category = alt;
 			input.General.BiomassPriceAtFarmGate = Constants.GetFarmGatePrice( alt );
 
