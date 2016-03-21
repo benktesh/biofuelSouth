@@ -6,7 +6,9 @@ namespace BiofuelSouth.Migrations
     {
         public override void Up()
         {
- 
+
+            return;
+
             Sql(@"
 
 
