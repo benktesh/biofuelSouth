@@ -8,6 +8,7 @@ using BiofuelSouth.Enum;
 using BiofuelSouth.Models;
 using BiofuelSouth.Models.Entity;
 using BiofuelSouth.ViewModels;
+using GlossaryEntity = BiofuelSouth.Models.Entity.GlossaryEntity;
 
 namespace BiofuelSouth.Services
 {
@@ -40,7 +41,7 @@ namespace BiofuelSouth.Services
 			using ( var db = new DatabaseContext() )
 			{
 
-				var county =  db.County.FirstOrDefault(p => p.GeoID == countyid);
+				var county =  db.County.FirstOrDefault(p => p.GeoId == countyid);
 
 				if (county != null)
 				{
@@ -51,12 +52,12 @@ namespace BiofuelSouth.Services
 			}
 		}
 
-	    public static County GetCountyById(string countyid) //or geoid
+	    public static CountyEntity GetCountyById(string countyid) //or geoid
 	    {
 			using ( var db = new DatabaseContext() )
 			{
 
-				var county = db.County.FirstOrDefault( p => p.GeoID == countyid );
+				var county = db.County.FirstOrDefault( p => p.GeoId == countyid );
 				return county;
 			}
 		}
@@ -73,7 +74,7 @@ namespace BiofuelSouth.Services
                 
         }
 
-        public static List<County> GetCountyData(string selectedCategory = "ALL")
+        public static List<CountyEntity> GetCountyData(string selectedCategory = "ALL")
         {
             using (var db = new DatabaseContext())
             {
@@ -139,7 +140,7 @@ namespace BiofuelSouth.Services
         }
 
 
-        public static Glossary GetGlossary(String term)
+        public static GlossaryEntity GetGlossary(String term)
         {
             using (var db = new DatabaseContext())
             {
@@ -150,7 +151,7 @@ namespace BiofuelSouth.Services
             }
         }
 
-        public static Glossary GetGlossaryById(Guid id)
+        public static GlossaryEntity GetGlossaryById(Guid id)
         {
             using (var db = new DatabaseContext())
             {
@@ -170,20 +171,20 @@ namespace BiofuelSouth.Services
         }
 
 
-        public static List<Glossary> GetGlossary(int? count = null)
+        public static List<GlossaryEntity> GetGlossary(int? count = null)
         {
             using (var db = new DatabaseContext())
             {
                
 	            if (count != null)
 	            {
-		            return new List<Glossary>(db.Glossaries.OrderByDescending(p => p.Counter).Take(20));
+		            return new List<GlossaryEntity>(db.Glossaries.OrderByDescending(p => p.Counter).Take(20));
 	            }
 				return db.Glossaries.ToList();
 			}
         }
 
-        public static void SaveFeedback(FeedBack fb)
+        public static void SaveFeedback(FeedBackEntity fb)
         {
             
             using (var db = new DatabaseContext())
@@ -266,7 +267,7 @@ namespace BiofuelSouth.Services
             public string Key { get; set; }
         }
 
-        public static void SaveGlossary(Glossary gm)
+        public static void SaveGlossary(GlossaryEntity gm)
         {
 
             using (var db = new DatabaseContext())
@@ -312,18 +313,18 @@ namespace BiofuelSouth.Services
             }
         }
 
-        public static List<Glossary> Search(String term)
+        public static List<GlossaryEntity> Search(String term)
         {
             using (var db = new DatabaseContext())
             {
-                var resultList = new List<Glossary>();
+                var resultList = new List<GlossaryEntity>();
                 var result = db.Glossaries.FirstOrDefault(p => p.Term.Equals(term, StringComparison.InvariantCultureIgnoreCase));
-                IEnumerable<Glossary> moreResults = new List<Glossary>();
+                IEnumerable<GlossaryEntity> moreResults = new List<GlossaryEntity>();
                 if (result == null)
                 {
                     //Make a new logic
 
-                    result = new Glossary(term.ToLower(), "", "", "");
+                    result = new GlossaryEntity(term.ToLower(), "", "", "");
 
                     result.Counter = 1;
                     result.Description = "TBI";//TO BE IMPLEMENTED
@@ -362,7 +363,7 @@ namespace BiofuelSouth.Services
                     //add to more results
 
                     //1. find all the records where term is keyword
-                    IEnumerable<Glossary> evenMoreResults = db.Glossaries.Where(k => k.Keywords.ToLower().Contains(term.ToLower()));
+                    IEnumerable<GlossaryEntity> evenMoreResults = db.Glossaries.Where(k => k.Keywords.ToLower().Contains(term.ToLower()));
 
                     //Merge results
                     moreResults = moreResults.Union(evenMoreResults).OrderBy(x => x.Term);

@@ -1,5 +1,4 @@
-﻿@using System.Globalization
-@using System.Linq
+﻿@using System.Linq
 @using BiofuelSouth.Enum
 @model BiofuelSouth.ViewModels.ResultViewModel
 
@@ -145,7 +144,7 @@
 
 	<p>
 		<br />
-		@if ( Model.County != null )
+		@if ( Model.CountyEntity != null )
 		{
 			@Html.Partial( "_CountyMap", Model )
 		}

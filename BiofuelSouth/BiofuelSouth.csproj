@@ -88,16 +88,28 @@
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="MigraDoc.DocumentObjectModel, Version=1.32.4334.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PDFsharp-MigraDoc-GDI.1.32.4334.0\lib\net20\MigraDoc.DocumentObjectModel.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MigraDoc.Rendering, Version=1.32.4334.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PDFsharp-MigraDoc-GDI.1.32.4334.0\lib\net20\MigraDoc.Rendering.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MigraDoc.RtfRendering, Version=1.32.4334.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PDFsharp-MigraDoc-GDI.1.32.4334.0\lib\net20\MigraDoc.RtfRendering.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="PdfSharp, Version=1.32.3057.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
-      <HintPath>..\packages\PDFsharp.1.32.3057.0\lib\net20\PdfSharp.dll</HintPath>
+      <HintPath>..\packages\PDFsharp-MigraDoc-GDI.1.32.4334.0\lib\net20\PdfSharp.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="PdfSharp.Charting, Version=1.32.3057.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
-      <HintPath>..\packages\PDFsharp.1.32.3057.0\lib\net20\PdfSharp.Charting.dll</HintPath>
+      <HintPath>..\packages\PDFsharp-MigraDoc-GDI.1.32.4334.0\lib\net20\PdfSharp.Charting.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Drawing" />
@@ -645,93 +657,9 @@
     <Compile Include="Migrations\201412150342225_-updateCounties.Designer.cs">
       <DependentUpon>201412150342225_-updateCounties.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201412202328422_notsure.cs" />
-    <Compile Include="Migrations\201412202328422_notsure.Designer.cs">
-      <DependentUpon>201412202328422_notsure.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201412211422448_glossaryModelChange.cs" />
-    <Compile Include="Migrations\201412211422448_glossaryModelChange.Designer.cs">
-      <DependentUpon>201412211422448_glossaryModelChange.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201412211434572__glossaryUpdate.cs" />
-    <Compile Include="Migrations\201412211434572__glossaryUpdate.Designer.cs">
-      <DependentUpon>201412211434572__glossaryUpdate.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\201412281717306_-updateKW.cs" />
     <Compile Include="Migrations\201412281717306_-updateKW.Designer.cs">
       <DependentUpon>201412281717306_-updateKW.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201501042335421_%27updateFeedback%27.cs" />
-    <Compile Include="Migrations\201501042335421_%27updateFeedback%27.Designer.cs">
-      <DependentUpon>201501042335421_%27updateFeedback%27.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201501101459271_updateModel.cs" />
-    <Compile Include="Migrations\201501101459271_updateModel.Designer.cs">
-      <DependentUpon>201501101459271_updateModel.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201502152321454_modelchange.cs" />
-    <Compile Include="Migrations\201502152321454_modelchange.Designer.cs">
-      <DependentUpon>201502152321454_modelchange.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201502152328011_changeFinancialModel.cs" />
-    <Compile Include="Migrations\201502152328011_changeFinancialModel.Designer.cs">
-      <DependentUpon>201502152328011_changeFinancialModel.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201503150404304_changesStorageAndGeneralModel.cs" />
-    <Compile Include="Migrations\201503150404304_changesStorageAndGeneralModel.Designer.cs">
-      <DependentUpon>201503150404304_changesStorageAndGeneralModel.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201503151341382_UpdateFinancialModel.cs" />
-    <Compile Include="Migrations\201503151341382_UpdateFinancialModel.Designer.cs">
-      <DependentUpon>201503151341382_UpdateFinancialModel.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201503151354486_ChangesStorageRequirementVariable.cs" />
-    <Compile Include="Migrations\201503151354486_ChangesStorageRequirementVariable.Designer.cs">
-      <DependentUpon>201503151354486_ChangesStorageRequirementVariable.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201503151406348_dbChange.cs" />
-    <Compile Include="Migrations\201503151406348_dbChange.Designer.cs">
-      <DependentUpon>201503151406348_dbChange.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201503151446225_anotherModelChange.cs" />
-    <Compile Include="Migrations\201503151446225_anotherModelChange.Designer.cs">
-      <DependentUpon>201503151446225_anotherModelChange.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201503151519519_AnotherChange.cs" />
-    <Compile Include="Migrations\201503151519519_AnotherChange.Designer.cs">
-      <DependentUpon>201503151519519_AnotherChange.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201503151613539_AnotherChange1.cs" />
-    <Compile Include="Migrations\201503151613539_AnotherChange1.Designer.cs">
-      <DependentUpon>201503151613539_AnotherChange1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201503151635062_ChangesInputModel.cs" />
-    <Compile Include="Migrations\201503151635062_ChangesInputModel.Designer.cs">
-      <DependentUpon>201503151635062_ChangesInputModel.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201504251816083_ReviseGlossary.cs" />
-    <Compile Include="Migrations\201504251816083_ReviseGlossary.Designer.cs">
-      <DependentUpon>201504251816083_ReviseGlossary.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201504251958328_CleanupGlossary.cs" />
-    <Compile Include="Migrations\201504251958328_CleanupGlossary.Designer.cs">
-      <DependentUpon>201504251958328_CleanupGlossary.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201505040810445_AnotherChange2.cs" />
-    <Compile Include="Migrations\201505040810445_AnotherChange2.Designer.cs">
-      <DependentUpon>201505040810445_AnotherChange2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201506181215131_AddsStorageCost.cs" />
-    <Compile Include="Migrations\201506181215131_AddsStorageCost.Designer.cs">
-      <DependentUpon>201506181215131_AddsStorageCost.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201506190022078_AddsLookupTable.cs" />
-    <Compile Include="Migrations\201506190022078_AddsLookupTable.Designer.cs">
-      <DependentUpon>201506190022078_AddsLookupTable.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201506281329140_RemovesInputTableFromDB.cs" />
-    <Compile Include="Migrations\201506281329140_RemovesInputTableFromDB.Designer.cs">
-      <DependentUpon>201506281329140_RemovesInputTableFromDB.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\201510252301019_UpdateCropTypeinProductivities.cs" />
     <Compile Include="Migrations\201510252301019_UpdateCropTypeinProductivities.Designer.cs">
@@ -746,47 +674,27 @@
     <Compile Include="Migrations\201408040112136_InitialCreate.Designer.cs">
       <DependentUpon>201408040112136_InitialCreate.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201411221951139_updateCountyTable.cs" />
-    <Compile Include="Migrations\201411221951139_updateCountyTable.Designer.cs">
-      <DependentUpon>201411221951139_updateCountyTable.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201411222008322_updateGeoID.cs" />
-    <Compile Include="Migrations\201411222008322_updateGeoID.Designer.cs">
-      <DependentUpon>201411222008322_updateGeoID.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201411222039498_updateCountyCode.cs" />
-    <Compile Include="Migrations\201411222039498_updateCountyCode.Designer.cs">
-      <DependentUpon>201411222039498_updateCountyCode.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201411222117092_makesLatLonNullable.cs" />
-    <Compile Include="Migrations\201411222117092_makesLatLonNullable.Designer.cs">
-      <DependentUpon>201411222117092_makesLatLonNullable.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201411222211298_changeInputModel.cs" />
-    <Compile Include="Migrations\201411222211298_changeInputModel.Designer.cs">
-      <DependentUpon>201411222211298_changeInputModel.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Constants.cs" />
     <Compile Include="Controllers\ProductivityController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\County.cs" />
+    <Compile Include="Models\Entity\CountyEntity.cs" />
     <Compile Include="Models\Entity\LookUpEntity.cs" />
     <Compile Include="Enum\Enums.cs" />
     <Compile Include="Models\Entity\ProductionCost.cs" />
-    <Compile Include="Models\FeedBack.cs" />
+    <Compile Include="Models\Entity\FeedBackEntity.cs" />
     <Compile Include="Models\Financial.cs" />
     <Compile Include="Models\General.cs" />
-    <Compile Include="Models\Glossary.cs" />
+    <Compile Include="Models\Entity\GlossaryEntity.cs" />
     <Compile Include="Models\GlossaryEntity.cs" />
     <Compile Include="Models\Input.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Services\CropAttribute.cs" />
     <Compile Include="Services\InstructionService.cs" />
     <Compile Include="ViewModels\ProductionCostViewModel.cs" />
-    <Compile Include="Models\Productivity.cs" />
+    <Compile Include="Models\Entity\ProductivityEntity.cs" />
     <Compile Include="Models\Resources.cs" />
     <Compile Include="Models\Storage.cs" />
     <Compile Include="ProcessLogic\SwitchGrass.cs" />
@@ -1171,89 +1079,11 @@
     <EmbeddedResource Include="Migrations\201408040112136_InitialCreate.resx">
       <DependentUpon>201408040112136_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201411221951139_updateCountyTable.resx">
-      <DependentUpon>201411221951139_updateCountyTable.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201411222008322_updateGeoID.resx">
-      <DependentUpon>201411222008322_updateGeoID.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201411222039498_updateCountyCode.resx">
-      <DependentUpon>201411222039498_updateCountyCode.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201411222117092_makesLatLonNullable.resx">
-      <DependentUpon>201411222117092_makesLatLonNullable.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201411222211298_changeInputModel.resx">
-      <DependentUpon>201411222211298_changeInputModel.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201412150342225_-updateCounties.resx">
       <DependentUpon>201412150342225_-updateCounties.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201412202328422_notsure.resx">
-      <DependentUpon>201412202328422_notsure.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201412211422448_glossaryModelChange.resx">
-      <DependentUpon>201412211422448_glossaryModelChange.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201412211434572__glossaryUpdate.resx">
-      <DependentUpon>201412211434572__glossaryUpdate.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201412281717306_-updateKW.resx">
       <DependentUpon>201412281717306_-updateKW.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201501042335421_%27updateFeedback%27.resx">
-      <DependentUpon>201501042335421_%27updateFeedback%27.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201501101459271_updateModel.resx">
-      <DependentUpon>201501101459271_updateModel.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201502152321454_modelchange.resx">
-      <DependentUpon>201502152321454_modelchange.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201502152328011_changeFinancialModel.resx">
-      <DependentUpon>201502152328011_changeFinancialModel.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201503150404304_changesStorageAndGeneralModel.resx">
-      <DependentUpon>201503150404304_changesStorageAndGeneralModel.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201503151341382_UpdateFinancialModel.resx">
-      <DependentUpon>201503151341382_UpdateFinancialModel.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201503151354486_ChangesStorageRequirementVariable.resx">
-      <DependentUpon>201503151354486_ChangesStorageRequirementVariable.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201503151406348_dbChange.resx">
-      <DependentUpon>201503151406348_dbChange.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201503151446225_anotherModelChange.resx">
-      <DependentUpon>201503151446225_anotherModelChange.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201503151519519_AnotherChange.resx">
-      <DependentUpon>201503151519519_AnotherChange.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201503151613539_AnotherChange1.resx">
-      <DependentUpon>201503151613539_AnotherChange1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201503151635062_ChangesInputModel.resx">
-      <DependentUpon>201503151635062_ChangesInputModel.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201504251816083_ReviseGlossary.resx">
-      <DependentUpon>201504251816083_ReviseGlossary.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201504251958328_CleanupGlossary.resx">
-      <DependentUpon>201504251958328_CleanupGlossary.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201505040810445_AnotherChange2.resx">
-      <DependentUpon>201505040810445_AnotherChange2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201506181215131_AddsStorageCost.resx">
-      <DependentUpon>201506181215131_AddsStorageCost.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201506190022078_AddsLookupTable.resx">
-      <DependentUpon>201506190022078_AddsLookupTable.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201506281329140_RemovesInputTableFromDB.resx">
-      <DependentUpon>201506281329140_RemovesInputTableFromDB.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201510252301019_UpdateCropTypeinProductivities.resx">
       <DependentUpon>201510252301019_UpdateCropTypeinProductivities.cs</DependentUpon>

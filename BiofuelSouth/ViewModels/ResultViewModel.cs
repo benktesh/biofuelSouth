@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using BiofuelSouth.Enum;
-using BiofuelSouth.Models;
+using BiofuelSouth.Models.Entity;
 
 namespace BiofuelSouth.ViewModels
 {
@@ -26,7 +26,7 @@ namespace BiofuelSouth.ViewModels
         public CropType CropType { get; set; }
         public string CountyName { get; set;} 
 
-		public County County { get; set;  }
+		public CountyEntity CountyEntity { get; set;  }
 
         public string StateCode { get; set; }
 
