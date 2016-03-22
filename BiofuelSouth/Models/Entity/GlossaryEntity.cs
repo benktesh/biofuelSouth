@@ -1,10 +1,10 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace BiofuelSouth.Models
+namespace BiofuelSouth.Models.Entity
 {
 
-    public class Glossary
+    public class GlossaryEntity
     {
         
         public string Term { get; set; }
@@ -20,7 +20,7 @@ namespace BiofuelSouth.Models
         [Key]
         public Guid Id { get; set; }
 
-        public Glossary(String t, String k, String d, String s)
+        public GlossaryEntity(String t, String k, String d, String s)
         {
             Term = t;
             Keywords = k;
@@ -30,7 +30,7 @@ namespace BiofuelSouth.Models
             Id = Guid.NewGuid();
         }
 
-        public Glossary()
+        public GlossaryEntity()
         {
             Id = Guid.NewGuid();
         }

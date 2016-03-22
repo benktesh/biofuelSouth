@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace BiofuelSouth.Models
+namespace BiofuelSouth.Models.Entity
 {
-    public class FeedBack
+    public class FeedBackEntity
     {
         public int Id { get; set; }
         public DateTime? Date { get; set; }

@@ -3,6 +3,7 @@ using System.Linq;
 using System.Reflection;
 using System.Web.Mvc;
 using BiofuelSouth.Models;
+using BiofuelSouth.Models.Entity;
 using log4net;
 
 namespace BiofuelSouth.Controllers
@@ -21,7 +22,7 @@ namespace BiofuelSouth.Controllers
                 using (var db = new DatabaseContext())
                 {
 
-                    IQueryable<County> counties = db.County;
+                    IQueryable<CountyEntity> counties = db.County;
 
                     if (state != "ALL")
                     {

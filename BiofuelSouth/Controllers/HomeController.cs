@@ -4,9 +4,10 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Web.Mvc;
-using BiofuelSouth.Models;
+using BiofuelSouth.Models.Entity;
 using BiofuelSouth.Services;
 using log4net;
+using GlossaryEntity = BiofuelSouth.Models.Entity.GlossaryEntity;
 
 namespace BiofuelSouth.Controllers
 {
@@ -38,7 +39,7 @@ namespace BiofuelSouth.Controllers
         [HttpGet]
         public ActionResult FeedBack()
         {
-            var fb = new FeedBack();
+            var fb = new FeedBackEntity();
             //Save feedback
             //Send email to client acknowledging receipt of the feedback
             //Send email to Resource about the new Feedback
@@ -46,7 +47,7 @@ namespace BiofuelSouth.Controllers
         }
 
         [HttpPost]
-        public ActionResult FeedBack(FeedBack fb)
+        public ActionResult FeedBack(FeedBackEntity fb)
         {
             fb.Date = DateTime.UtcNow;
             DataService.SaveFeedback(fb);
@@ -92,7 +93,7 @@ namespace BiofuelSouth.Controllers
         {
             ViewData["glossary"] = DataService.GetGlossary();
             ViewData["term"] = "";
-            IList<Glossary> x = null;
+            IList<GlossaryEntity> x = null;
             if (term != null)
             {
                 x = DataService.Search(term);
@@ -101,7 +102,7 @@ namespace BiofuelSouth.Controllers
             return View(x);
         }
 
-	    public IList<Glossary> GetTopSearches(int count = 20)
+	    public IList<GlossaryEntity> GetTopSearches(int count = 20)
 	    {
 		    var topSearches =  DataService.GetGlossary(count);
 		    return topSearches; 
@@ -124,11 +125,11 @@ namespace BiofuelSouth.Controllers
 
         public ActionResult GetCountyData(string selectedCategory = "ALL")
         {
-            IList<County> countyList = DataService.GetCountyData(selectedCategory);
+            IList<CountyEntity> countyList = DataService.GetCountyData(selectedCategory);
             var data = countyList.Select(p => new
             {
                 p.Name,
-                p.GeoID,
+                GeoID = p.GeoId,
                 p.CountyCode,
                 p.Lat,
                 p.Lon

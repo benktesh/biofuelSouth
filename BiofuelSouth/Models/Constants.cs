@@ -4,6 +4,7 @@ using System.Configuration;
 using System.Linq;
 using System.Web.Mvc;
 using BiofuelSouth.Enum;
+using BiofuelSouth.Models.Entity;
 using BiofuelSouth.Services;
 
 namespace BiofuelSouth.Models
@@ -63,7 +64,7 @@ namespace BiofuelSouth.Models
 		{
 			using ( var db = new DatabaseContext() )
 			{
-				var county = db.County.Where( c => c.GeoID == geoId ).Select( a => a.Name ).FirstOrDefault();
+				var county = db.County.Where( c => c.GeoId == geoId ).Select( a => a.Name ).FirstOrDefault();
 				return county;
 			}
 
@@ -118,9 +119,9 @@ namespace BiofuelSouth.Models
 
 		public static IEnumerable<SelectListItem> GetCountySelectList( String state = null )
 		{
-			IList<County> countyList = DataService.GetCountyData( state ?? "ALL" );
+			IList<CountyEntity> countyList = DataService.GetCountyData( state ?? "ALL" );
 
-			return countyList.Select( c => new SelectListItem { Text = c.Name, Value = c.GeoID } );
+			return countyList.Select( c => new SelectListItem { Text = c.Name, Value = c.GeoId } );
 		}
 
 

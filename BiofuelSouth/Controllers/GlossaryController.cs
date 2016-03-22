@@ -2,7 +2,6 @@
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web.Mvc;
-using BiofuelSouth.Models;
 using BiofuelSouth.Services;
 using BiofuelSouth.ViewModels;
 

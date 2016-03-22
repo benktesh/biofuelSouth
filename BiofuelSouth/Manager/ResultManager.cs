@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Runtime.CompilerServices;
 using BiofuelSouth.Controllers;
 using BiofuelSouth.Enum;
 using BiofuelSouth.Helpers;
@@ -429,7 +428,7 @@ namespace BiofuelSouth.Manager
 		public ResultViewModel GetResultViewModel()
 		{
 
-			vm.County = DataService.GetCountyById( General.County );
+			vm.CountyEntity = DataService.GetCountyById( General.County );
 			vm.CashFlow = GetCashFlow();
 
 			vm.BiomassPriceAtFarmGate = BiomassPriceAtFarmGate;

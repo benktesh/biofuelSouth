@@ -1,9 +1,9 @@
 ﻿using System;
 using BiofuelSouth.Enum;
 
-namespace BiofuelSouth.Models
+namespace BiofuelSouth.Models.Entity
 {
-    public class Productivity
+    public class ProductivityEntity
     {
         public int Id { get; set; }
         public Int32 GeoId { get; set; }

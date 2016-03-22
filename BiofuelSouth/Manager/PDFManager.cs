@@ -1,12 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Web.SessionState;
 using BiofuelSouth.ViewModels;
-using PdfSharp;
 using PdfSharp.Drawing;
 using PdfSharp.Pdf;
 
