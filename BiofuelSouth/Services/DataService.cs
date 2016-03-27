@@ -118,7 +118,7 @@ namespace BiofuelSouth.Services
                 }
 
 
-                var productivity = db.Productivities.Where(p => p.GeoId == intGeoid && p.CropType == cropType).Select(p => p.Yield).FirstOrDefault();
+             var productivity = db.Productivities.Where(p => p.GeoId == intGeoid && p.CropType == cropType).Select(p => p.Yield).FirstOrDefault();
                 return productivity*0.446; //MG/ha -> t/acre
             }
         }
@@ -134,7 +134,9 @@ namespace BiofuelSouth.Services
                     return 30; //Dickens (2011)
                 }
 
-                var productivity = db.Productivities.Where(p => p.GeoId == intGeoid && p.CropType == cropType).Select(p => p.Cost).FirstOrDefault();
+                var productivity = db.Productivities
+                    .Where(p => p.GeoId == intGeoid && p.CropType == cropType)
+                    .Select(p => p.Cost).FirstOrDefault();
                 return productivity/2.471 ; //conver to $/ha -> $/acre
             }
         }
@@ -171,14 +173,14 @@ namespace BiofuelSouth.Services
         }
 
 
-        public static List<GlossaryEntity> GetGlossary(int? count = null)
+        public static IEnumerable<GlossaryEntity> GetGlossary(int? count = null)
         {
             using (var db = new DatabaseContext())
             {
                
 	            if (count != null)
 	            {
-		            return new List<GlossaryEntity>(db.Glossaries.OrderByDescending(p => p.Counter).Take(20));
+		            return new List<GlossaryEntity>(db.Glossaries.OrderByDescending(p => p.Counter).Take(count.Value)).ToList();
 	            }
 				return db.Glossaries.ToList();
 			}

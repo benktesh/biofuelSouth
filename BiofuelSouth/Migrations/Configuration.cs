@@ -115,8 +115,24 @@ namespace BiofuelSouth.Migrations
             context.LookUps.AddOrUpdate(x);
             context.SaveChanges();
 
+            context.Database.ExecuteSqlCommand(
+
+                @"
+
+
+DELETE FROM GLOSSARIES;
+
+SET IDENTITY_INSERT  [Glossaries] ON
+INSERT [dbo].[GlossaryEntities] ([term], [keywords], [description], [counter], [source], [ID]) VALUES (N'Test Alternative Fuels', N'Biofuel; Fuel; Fossil Fuel', N'Fuels that do not involve fossil fuels. Examples: solar power, wind power, and biomass', NULL, N'http://bioenergy-midlands.org/why-bioenergy/glossary-of-bioenergy-terms/', 1)
+INSERT [dbo].[GlossaryEntities] ([term], [keywords], [description], [counter], [source], [ID]) VALUES (N'Test Biochemical Conversion', N'Conversion; biofuel', N'The use of biological processes, usually microorganisms or enzymes, to convert organic materials into usable products such as biofuels', NULL, N'http://www.aig.com/ncglobalweb/internet/US/en/files/Chartis_BiofuelsGlossary_tcm295-179858.pdf', 2)
+"
+
+                );
+
 
         }
+
+        
 
         /*
         public void SeedGlossary()

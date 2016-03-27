@@ -91,7 +91,7 @@ namespace BiofuelSouth.Controllers
 
         public ActionResult Search(String term = "")
         {
-            ViewData["glossary"] = DataService.GetGlossary();
+            ViewData["glossary"] = DataService.GetGlossary().ToList();
             ViewData["term"] = "";
             IList<GlossaryEntity> x = null;
             if (term != null)
@@ -104,7 +104,7 @@ namespace BiofuelSouth.Controllers
 
 	    public IList<GlossaryEntity> GetTopSearches(int count = 20)
 	    {
-		    var topSearches =  DataService.GetGlossary(count);
+		    var topSearches =  DataService.GetGlossary(count).ToList();
 		    return topSearches; 
 	    } 
 

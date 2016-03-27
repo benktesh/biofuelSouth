@@ -1,10 +1,10 @@
-﻿@model IList<Glossary>
+﻿@model IList<BiofuelSouth.Models.Entity.GlossaryEntity>
 
 @helper GetTopSearachedTerms()
 {
 
 
-var glossaries = (IList<Glossary>)ViewData["glossary"];
+var glossaries = (IList<GlossaryEntity>)ViewData["glossary"];
 glossaries = glossaries.OrderByDescending( p => p.Counter ).Take( 20 ).OrderBy( p => p.Term ).ToList();
 foreach ( var glossary in glossaries )
 {
@@ -15,6 +15,7 @@ foreach ( var glossary in glossaries )
 		</div>
 	}
 }
+@using BiofuelSouth.Models.Entity
 @using BiofuelSouth.Services
 
 

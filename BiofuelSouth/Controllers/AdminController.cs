@@ -5,6 +5,7 @@ using System.Net;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using BiofuelSouth.Models;
+using BiofuelSouth.Models.Entity;
 using BiofuelSouth.Services;
 
 namespace BiofuelSouth.Controllers
@@ -38,24 +39,10 @@ namespace BiofuelSouth.Controllers
         // GET: /Admin/
         public async Task<ActionResult> Index()
         {
-            return View((List<Productivity>) await db.Productivities.ToListAsync());
+            return View((List<ProductivityEntity>) await db.Productivities.ToListAsync());
         }
 
-        // GET: /Admin/Details/5
-        public async Task<ActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            var productivity = await db.Productivities.FindAsync(id);
-            if (productivity == null)
-            {
-                return HttpNotFound();
-            }
-            return View(productivity);
-        }
-
+        
         // GET: /Admin/Create
         public ActionResult Create()
         {
@@ -67,31 +54,33 @@ namespace BiofuelSouth.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include="Id,CountyId,CropType,Yield")] Productivity productivity)
+        public async Task<ActionResult> Create([Bind(Include="Id,CountyId,CropType,Yield")] ProductivityEntity productivity)
         {
-            if (ModelState.IsValid)
-            {
-                db.Productivities.Add(productivity);
-                await db.SaveChangesAsync();
-                return RedirectToAction("Index");
-            }
+            throw new NotImplementedException();
+            //if (ModelState.IsValid)
+            //{
+            //    db.Productivities.Add(productivity);
+            //    await db.SaveChangesAsync();
+            //    return RedirectToAction("Index");
+            //}
 
-            return View(productivity);
+            //return View(productivity);
         }
 
         // GET: /Admin/Edit/5
         public async Task<ActionResult> Edit(int? id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            var productivity = await db.Productivities.FindAsync(id);
-            if (productivity == null)
-            {
-                return HttpNotFound();
-            }
-            return View(productivity);
+            throw new NotImplementedException();
+            //if (id == null)
+            //{
+            //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            //}
+            //var productivity = await db.Productivities.FindAsync(id);
+            //if (productivity == null)
+            //{
+            //    return HttpNotFound();
+            //}
+            //return View(productivity);
         }
 
         // POST: /Admin/Edit/5
@@ -99,30 +88,32 @@ namespace BiofuelSouth.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include="Id,CountyId,CropType,Yield")] Productivity productivity)
+        public async Task<ActionResult> Edit([Bind(Include="Id,CountyId,CropType,Yield")] ProductivityEntity productivity)
         {
-            if (ModelState.IsValid)
-            {
-                db.Entry(productivity).State = EntityState.Modified;
-                await db.SaveChangesAsync();
-                return RedirectToAction("Index");
-            }
-            return View(productivity);
+            throw new NotImplementedException();
+            //if (ModelState.IsValid)
+            //{
+            //    db.Entry(productivity).State = EntityState.Modified;
+            //    await db.SaveChangesAsync();
+            //    return RedirectToAction("Index");
+            //}
+            //return View(productivity);
         }
 
         // GET: /Admin/Delete/5
         public async Task<ActionResult> Delete(int? id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            var productivity = await db.Productivities.FindAsync(id);
-            if (productivity == null)
-            {
-                return HttpNotFound();
-            }
-            return View(productivity);
+            throw new NotImplementedException();
+            //if (id == null)
+            //{
+            //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            //}
+            //var productivity = await db.Productivities.FindAsync(id);
+            //if (productivity == null)
+            //{
+            //    return HttpNotFound();
+            //}
+            //return View(productivity);
         }
 
         // POST: /Admin/Delete/5
@@ -130,20 +121,13 @@ namespace BiofuelSouth.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            var productivity = await db.Productivities.FindAsync(id);
-            db.Productivities.Remove(productivity);
-            await db.SaveChangesAsync();
-            return RedirectToAction("Index");
+            throw new NotImplementedException();
+            //var productivity = await db.Productivities.FindAsync(id);
+            //db.Productivities.Remove(productivity);
+            //await db.SaveChangesAsync();
+            //return RedirectToAction("Index");
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
 
         public ActionResult Error(String msg)
         {

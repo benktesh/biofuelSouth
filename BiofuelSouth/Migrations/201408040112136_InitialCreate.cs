@@ -8,7 +8,7 @@ namespace BiofuelSouth.Migrations
         {
 
             CreateTable(
-                "dbo.Counties",
+                "dbo.CountyEntities",
                 c => new
                 {
                     Id = c.Int(nullable: false, identity: true),
@@ -23,7 +23,7 @@ namespace BiofuelSouth.Migrations
                 .PrimaryKey(t => t.Id);
 
             CreateTable(
-               "dbo.Glossaries",
+               "dbo.GlossaryEntities",
                c => new
                {
                    ID = c.Guid(nullable: false),
@@ -42,13 +42,14 @@ namespace BiofuelSouth.Migrations
                .PrimaryKey(t => t.term);
 
             CreateTable(
-                "dbo.Productivities",
+                "dbo.ProductivityEntities",
                 c => new
                 {
                     Id = c.Int(nullable: false, identity: true),
-                    CountyId = c.Int(nullable: false),
-                    CropType = c.String(),
-                    Yield = c.Decimal(nullable: false, precision: 18, scale: 2),
+                    GeoId = c.String(false, 5),
+                    CropType = c.Int(false),
+                    Yield = c.Double(false),
+                    Cost = c.Double(false)
                 })
                 .PrimaryKey(t => t.Id);
 
@@ -112,7 +113,7 @@ namespace BiofuelSouth.Migrations
             //   .PrimaryKey(t => t.Id);
 
             CreateTable(
-               "dbo.FeedBacks",
+               "dbo.FeedBackEntities",
                c => new
                {
                    Id = c.Int(false, true),
@@ -146,11 +147,11 @@ namespace BiofuelSouth.Migrations
 
         public override void Down()
         {
-            DropTable("dbo.Productivities");
-            DropTable("dbo.Counties");
-            DropTable("dbo.Glossaries");
+            DropTable("dbo.ProductivityEntities");
+            DropTable("dbo.CountyEntities");
+            DropTable("dbo.GlossaryEntities");
            // DropTable("dbo.Inputs");
-            DropTable("dbo.Feedbacks");
+            DropTable("dbo.FeedbackEntities");
            // DropTable("dbo.Generals");
             DropTable("dbo.LookUpEntities");
         }

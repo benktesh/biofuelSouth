@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using BiofuelSouth.Enum;
 using BiofuelSouth.Models.Entity;
@@ -59,7 +60,7 @@ namespace BiofuelSouth.ViewModels
 
         public bool RequireStorage { get; set; }
 
-		public Tuple<string, string> ImageUrl { get; set; }
+		public Tuple<string, string, string> ImageUrl { get; set; }
 
         #endregion
 
@@ -92,5 +93,15 @@ namespace BiofuelSouth.ViewModels
 
         public Dictionary<ChartType, string> ChartKeys { get; set; }  //actualy string of guid is the value 
         #endregion
+
+        public Boolean CanShowPDFLink {
+            get
+            {
+                var key = ConfigurationManager.AppSettings["ShowPDFLink"];
+                return (key != null && key.Equals("true", StringComparison.InvariantCultureIgnoreCase));
+
+            }
+
+        }
     }
 }

@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web.Mvc;
+using BiofuelSouth.Models.Entity;
 using BiofuelSouth.Services;
 using BiofuelSouth.ViewModels;
 
@@ -13,8 +15,8 @@ namespace BiofuelSouth.Controllers
         public ActionResult Index()
         {
             ViewBag.AdminToken = (Guid)Session["AdminToken"];
-            var glossaries = DataService.GetGlossary();
-            return View(glossaries.OrderBy(m=>m.Term));
+            var glossaries = DataService.GetGlossary().OrderBy(m=>m.Term) as IEnumerable<GlossaryEntity>;
+            return View(glossaries);
         }
 
         // GET: Glossary/Create
@@ -43,7 +45,7 @@ namespace BiofuelSouth.Controllers
                 }
 
                 //TODO - do some sanitization for input data
-                var gm = new Glossary();
+                var gm = new GlossaryEntity();
                 gm.Term = gvm.Term;
                 gm.Description = gvm.Description;
                 gm.Source = gvm.Source;
@@ -69,7 +71,7 @@ namespace BiofuelSouth.Controllers
         }
 
 
-        private GlossaryViewModel ToGlossaryViewModel(Glossary g)
+        private GlossaryViewModel ToGlossaryViewModel(GlossaryEntity g)
         {
             var gvm = new GlossaryViewModel();
            
@@ -88,9 +90,9 @@ namespace BiofuelSouth.Controllers
             return gvm;
         }
 
-        private Glossary ToGlossary(GlossaryViewModel gvm)
+        private GlossaryEntity ToGlossary(GlossaryViewModel gvm)
         {
-            var gm = new Glossary();
+            var gm = new GlossaryEntity();
             if (gvm.MId == null)
             {
                 gm.Id = Guid.NewGuid();

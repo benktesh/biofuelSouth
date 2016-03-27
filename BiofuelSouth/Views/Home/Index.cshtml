@@ -1,4 +1,5 @@
-﻿<div class="row">
+﻿@using BiofuelSouth.Models.Entity
+<div class="row">
 	<div class="col-sm-8">
 		<div class="row">
 			<div class="col-xs-12">
@@ -7,10 +8,10 @@
 						<h4>Sustaining Biofuel</h4>
 					</div>
 					<div class="panel-body">
-						<div class="col-xs-12 col-sm-7 col-md-8 col-lg-8 pull-right">
-							@Html.Partial( "_Banner" )
-						</div>
-						<p>
+					    <div class="col-xs-12 col-sm-7 col-md-8 col-lg-8 pull-right">
+					        @Html.Partial("_Banner")
+					    </div>
+					    <p>
 							Sustaining biofuel industry in the South will need adequate supply of biomass feedstock from private land. Considering a majority of forestlands in the region is controlled by millions of private landowners, this could be a challenge as it could mean convincing landowners to adopt new crops or modify their existing land use in favor of desirable feedstock.
 						</p>
 						<p>Studies have shown that landowners consider supplying biomass for energy production so that the nation’s energy dependence on foreign energy sources can be reduced. However, they do not know is what it involves to produce desirable feedstock on their own land, what crops are suitable or feasible, whether and how the financial return from feedstock production compares with their current land rent.</p>
@@ -279,7 +280,7 @@
 <!--end of container-->
 @helper GetTopSearachedTerms()
 		{
-	var glossaries = (IList<Glossary>)ViewData["glossary"];
+	var glossaries = (IList<GlossaryEntity>)ViewData["glossary"];
 	glossaries = glossaries.OrderByDescending( p => p.Counter ).Take( 20 ).OrderBy( p => p.Term ).ToList();
 	foreach ( var glossary in glossaries )
 	{
