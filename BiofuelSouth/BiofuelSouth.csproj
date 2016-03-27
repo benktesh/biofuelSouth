@@ -170,6 +170,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="admin.html" />
@@ -215,10 +216,13 @@
     <Content Include="contact.html" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\font-awesome.css" />
+    <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\site.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\custom.css" />
+    <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="forum\!!!README-asp-net-forum-software-guide.htm" />
     <Content Include="forum\!!folders.gif" />
@@ -549,6 +553,7 @@
     <Content Include="images\biofuel.jpg" />
     <Content Include="images\biomassbanner.jpg" />
     <Content Include="images\cereshead.jpg" />
+    <Content Include="images\CoppiceRegrowthAt_Belleville299x200.jpg" />
     <Content Include="images\funding.jpg" />
     <Content Include="images\funding.png" />
     <Content Include="images\ibssparnershiplogo.png" />
@@ -588,6 +593,11 @@
     <Content Include="forum\Web.config.orig" />
     <Content Include="bin\BiofuelSouth.dll.config" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="fonts\fontawesome-webfont.eot" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\fontawesome-webfont.woff2" />
+    <Content Include="fonts\FontAwesome.otf" />
     <None Include="Properties\PublishProfiles\biofuelsouth - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\biofuelsouth - Web Deploy.pubxml" />
     <None Include="Properties\Settings.settings">
@@ -688,7 +698,6 @@
     <Compile Include="Models\Financial.cs" />
     <Compile Include="Models\General.cs" />
     <Compile Include="Models\Entity\GlossaryEntity.cs" />
-    <Compile Include="Models\GlossaryEntity.cs" />
     <Compile Include="Models\Input.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Services\CropAttribute.cs" />
