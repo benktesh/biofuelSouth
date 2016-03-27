@@ -1,5 +1,4 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using System.Linq;
 using System.Web.Mvc;
 using BiofuelSouth.Enum;
@@ -8,10 +7,12 @@ using BiofuelSouth.Models;
 using BiofuelSouth.ViewModels;
 using MigraDoc.Rendering;
 using PdfSharp.Pdf;
+// ReSharper disable InconsistentNaming
 
 
 namespace BiofuelSouth.Controllers
 {
+	// ReSharper disable once InconsistentNaming
     public class DSSController : Controller
     {
 
@@ -88,13 +89,13 @@ namespace BiofuelSouth.Controllers
 				InputSet( ip );
 		        
 	        }
-	        return (Input) ip;  
+	        return ip;  
         }
 
-        private Input InputSet(Input input = null)
+        private void InputSet(Input input = null)
         {
             Session["Input"] = input;
-            return InputGet(); 
+	        InputGet();
         }
 
         [HttpGet]
@@ -173,7 +174,6 @@ namespace BiofuelSouth.Controllers
 
         public ActionResult NewDSS()
         {
-
 			Input ip = new Input();
 	        InputSet(ip);
             return RedirectToAction("General");
@@ -301,7 +301,7 @@ namespace BiofuelSouth.Controllers
 	        var vms = Simulator.GetViewModels( (Input)input.Clone() );
 
 			var temp = Session["Prestine"] as Input;
-			var vm = vms.FirstOrDefault(m => m.CropType == temp.General.Category);
+			var vm = vms.FirstOrDefault(m => temp != null && m.CropType == temp.General.Category);
             Session["CurrentResult"] = vm;
             return View("TabbedResult", vm);
         }
@@ -333,36 +333,11 @@ namespace BiofuelSouth.Controllers
             var vms = Simulator.GetViewModels((Input)input.Clone());
 
             var temp = Session["Prestine"] as Input;
-            var vm = vms.FirstOrDefault(m => m.CropType == temp.General.Category);
+            var vm = vms.FirstOrDefault(m => temp != null && m.CropType == temp.General.Category);
 
 		    Session["CurrentResult"] = vm; 
             return View("TabbedResult", vm);
 
-
-        }
-
-        private void PostSubmit(Input ip)
-        {
-            var c = new ChartController();
-            var revenueCachekey = Guid.NewGuid().ToString();
-            ViewBag.RevenueCachekey = revenueCachekey;
-            //c.GenerateCostRevenueChart(costRevenueCachekey, ip.GetRevenues().Select(m => m.TotalRevenue).ToArray(), "Cost and Revenue");
-            var rev = ip.GetRevenues().Select(m => m.TotalRevenue).ToArray();
-            c.GenerateChart(revenueCachekey, rev, "Revenue");
-
-            var AnnualProd = ip.GetAnnualProductionList().ToArray();
-            var cacheKey = Guid.NewGuid().ToString();
-            ViewBag.cacheKey = cacheKey;
-            var cc = new ChartController();
-            cc.GenerateChart(cacheKey, AnnualProd.Select(m=> (decimal)m).ToArray(), "Annual Production");
-
-            cacheKey = Guid.NewGuid().ToString();
-            ViewBag.cacheKey1 = cacheKey;
-            cc.GenerateCostRevenueChart(cacheKey, ip, "Cost and Revenue");
-
-            cacheKey = Guid.NewGuid().ToString();
-            ViewBag.cacheKey3 = cacheKey;
-            cc.GenerateColumnChart(cacheKey, ip.GetCashFlow().Select(m=>(decimal)m).ToArray(), "Cash Flow", "Year ", "$");
 
         }
 
@@ -389,7 +364,6 @@ namespace BiofuelSouth.Controllers
             if (vm == null)
                 RedirectToAction("Results");
             
-
             var document = (new PDFform(vm)).CreateDocument();
 
             // Create a renderer for the MigraDoc document.
@@ -403,73 +377,12 @@ namespace BiofuelSouth.Controllers
             pdfRenderer.RenderDocument();
             var pdf = pdfRenderer.PdfDocument;
 
-
             using (MemoryStream stream = new MemoryStream())
             {
                 pdf.Save(stream, false);
                 return File(stream.ToArray(), "application/pdf");
             }
-
-
-
         }
-
-        //	    [HttpGet]
-        //	    public ActionResult GenerateReport()
-        //	    {
-        //		    var rvms = Session["ViewModels"] as List<ResultViewModel>;
-        //		    if (rvms == null)
-        //			    return null;
-        //		    var rvm = rvms[0];
-
-        //		    if (rvm == null)
-        //			    return null;
-
-        //		    var Title = String.Format("{0}-{1},{2}", rvm.CropType, rvm.CountyName, rvm.StateName);
-
-
-
-        //		    string summaryText =
-        //			    "Growing of " + rvm.CropType + " for a duration of " + rvm.ProjectLife +
-        //			    " over an area of " + rvm.ProjectSize + " in " + rvm.CountyName + " county of " + rvm.StateName +
-        //			    " is expected to produce an estimated " + rvm.AnnualProduction + " tons of biomass annually." + 
-        //				" The production comes at an expected annual cost of " + rvm.AnnualCost + " and results in an annual revenue of " + rvm.AnnualRevenue +
-        //				" The net present value (NPV) of the project is estimated to be " +
-        //				rvm.NPV.ToString( "C0" ) + " at assumed prevailing interest rate of " + rvm.InterestRate.ToString( "P" ) + "."; 
-
-        //	PdfDocument document = new PdfDocument();
-
-        //PdfPage page = document.AddPage();
-
-
-
-        //			using ( MemoryStream stream = new MemoryStream() )
-        //			{
-        //				PdfDocument pdf = new PdfDocument();
-        //				pdf.Info.Title = Title;
-        //				PdfPage pdfPage = pdf.AddPage();
-        //			//	XGraphics graph = XGraphics.FromPdfPage( pdfPage );
-        //				XFont font = new XFont( "Verdana", 12, XFontStyle.Regular );
-
-        //				XGraphics gfx = XGraphics.FromPdfPage( pdfPage );
-        //				XTextFormatter tf = new XTextFormatter( gfx );
-
-
-
-        //				XRect rect = new XRect( 40, 100, 400, 220 );
-
-        //				gfx.DrawRectangle( XBrushes.SeaShell, rect );
-
-        //				//tf.Alignment = ParagraphAlignment.Left;
-
-        //				tf.DrawString( summaryText, font, XBrushes.Black, rect, XStringFormats.TopLeft );
-        //				//gfx.DrawString( "This is my first PDF document", font, XBrushes.Black, new XRect( 0, 0, pdfPage.Width.Point, pdfPage.Height.Point ), XStringFormats.Center );
-        //				pdf.Save( stream, false );
-        //				return File( stream.ToArray(), "application/pdf" );
-        //			}
-        //		}
-
-
     }
 
 
