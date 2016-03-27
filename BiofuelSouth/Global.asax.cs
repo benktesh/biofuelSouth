@@ -13,7 +13,9 @@ namespace BiofuelSouth
 
             Database.SetInitializer<DbContext>(null);
 
-        
-        }
+			//PdfSharp.Fonts.GlobalFontSettings.FontResolver = new MyFontResolver();
+
+
+		}
     }
 }
