@@ -667,27 +667,11 @@
     <Compile Include="Manager\PriceManager.cs" />
     <Compile Include="Manager\ProductionCostManager.cs" />
     <Compile Include="Manager\ResultManager.cs" />
-    <Compile Include="Migrations\201412150342225_-updateCounties.cs" />
-    <Compile Include="Migrations\201412150342225_-updateCounties.Designer.cs">
-      <DependentUpon>201412150342225_-updateCounties.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201412281717306_-updateKW.cs" />
-    <Compile Include="Migrations\201412281717306_-updateKW.Designer.cs">
-      <DependentUpon>201412281717306_-updateKW.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201510252301019_UpdateCropTypeinProductivities.cs" />
-    <Compile Include="Migrations\201510252301019_UpdateCropTypeinProductivities.Designer.cs">
-      <DependentUpon>201510252301019_UpdateCropTypeinProductivities.cs</DependentUpon>
-    </Compile>
     <Compile Include="Models\Cashflow.cs" />
     <Compile Include="Models\Cost.cs" />
     <Compile Include="Models\CountyData.cs" />
     <Compile Include="Models\DatabaseContext.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Migrations\201408040112136_InitialCreate.cs" />
-    <Compile Include="Migrations\201408040112136_InitialCreate.Designer.cs">
-      <DependentUpon>201408040112136_InitialCreate.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Constants.cs" />
     <Compile Include="Controllers\ProductivityController.cs" />
@@ -1088,18 +1072,6 @@
     <EmbeddedResource Include="Resources\GeneralResource.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>GeneralResource.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201408040112136_InitialCreate.resx">
-      <DependentUpon>201408040112136_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201412150342225_-updateCounties.resx">
-      <DependentUpon>201412150342225_-updateCounties.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201412281717306_-updateKW.resx">
-      <DependentUpon>201412281717306_-updateKW.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201510252301019_UpdateCropTypeinProductivities.resx">
-      <DependentUpon>201510252301019_UpdateCropTypeinProductivities.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

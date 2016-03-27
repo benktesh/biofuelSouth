@@ -11,8 +11,8 @@ namespace BiofuelSouth.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
-            ContextKey = "BiofuelSouth.Models.DatabaseContext";
+            AutomaticMigrationsEnabled = true;
+            //ContextKey = "BiofuelSouth.Models.DatabaseContext";
         }
 
         protected override void Seed(DatabaseContext context)
@@ -21,8 +21,6 @@ namespace BiofuelSouth.Migrations
             var allEmpty = context.Glossaries.Where(m => m.Term.Length == 0);
             context.Glossaries.RemoveRange(allEmpty);
             context.SaveChanges();
-
-            
 
             var glossaries = context.Glossaries.Where(m => m.Id == null);
             foreach (var g in glossaries)

@@ -6,7 +6,9 @@ namespace BiofuelSouth.Models.Entity
 
     public class GlossaryEntity
     {
-        
+
+        [Key]
+        public Guid Id { get; set; }
         public string Term { get; set; }
         public string Keywords { get; set; }
         public string Description { get; set; } 
@@ -17,8 +19,7 @@ namespace BiofuelSouth.Models.Entity
         public DateTime? Created { get; set; }
         public DateTime? Modified { get; set; }
         public int? IsDirty { get; set;  }
-        [Key]
-        public Guid Id { get; set; }
+      
 
         public GlossaryEntity(String t, String k, String d, String s)
         {

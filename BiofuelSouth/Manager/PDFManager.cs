@@ -354,17 +354,18 @@ namespace BiofuelSouth.Manager
             paragraph.AddFormattedText(rvm.NPV.ToString("C0"), TextFormat.Bold);
             paragraph.AddText(" at assumed prevailing interest rate of ");
             paragraph.AddFormattedText(rvm.InterestRate.ToString("P"), TextFormat.Bold);  
+            
 
 
             paragraph = section.AddParagraph();
             paragraph.Style = "Reference";
+            paragraph.Format.KeepTogether = true;
             paragraph.Format.Alignment = ParagraphAlignment.Center;
             var cropImage = paragraph.AddImage(System.Web.HttpContext.Current.Server.MapPath(rvm.ImageUrl.Item3));
             cropImage.Width = Unit.FromCentimeter(10);
             cropImage.LockAspectRatio = true; 
-            
             paragraph.AddLineBreak();
-            paragraph.AddFormattedText(rvm.ImageUrl.Item2, TextFormat.Bold);
+            var t = paragraph.AddFormattedText(rvm.ImageUrl.Item2, TextFormat.Bold);
 
 
 
