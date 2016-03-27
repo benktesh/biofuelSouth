@@ -1,10 +1,13 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
 using System.Web.Mvc;
 using BiofuelSouth.Enum;
 using BiofuelSouth.Manager;
 using BiofuelSouth.Models;
-
+using BiofuelSouth.ViewModels;
+using MigraDoc.Rendering;
+using PdfSharp.Pdf;
 
 
 namespace BiofuelSouth.Controllers
@@ -299,7 +302,7 @@ namespace BiofuelSouth.Controllers
 
 			var temp = Session["Prestine"] as Input;
 			var vm = vms.FirstOrDefault(m => m.CropType == temp.General.Category);
-	      
+            Session["CurrentResult"] = vm;
             return View("TabbedResult", vm);
         }
 
@@ -323,8 +326,18 @@ namespace BiofuelSouth.Controllers
 		[HttpGet]
         public ActionResult TestTabbedResult()
 		{
-			return null;
+		    var input = GetDefaultInput();
+
+            Session["Prestine"] = input;
            
+            var vms = Simulator.GetViewModels((Input)input.Clone());
+
+            var temp = Session["Prestine"] as Input;
+            var vm = vms.FirstOrDefault(m => m.CropType == temp.General.Category);
+
+		    Session["CurrentResult"] = vm; 
+            return View("TabbedResult", vm);
+
 
         }
 
@@ -368,63 +381,96 @@ namespace BiofuelSouth.Controllers
             model.BiomassPriceAtFarmGate = Constants.GetFarmGatePrice(model.Category);
         }
 
-//	    [HttpGet]
-//	    public ActionResult GenerateReport()
-//	    {
-//		    var rvms = Session["ViewModels"] as List<ResultViewModel>;
-//		    if (rvms == null)
-//			    return null;
-//		    var rvm = rvms[0];
+        [HttpGet]
+        public ActionResult GenerateReport()
+        {
 
-//		    if (rvm == null)
-//			    return null;
+           var vm = (ResultViewModel) Session["CurrentResult"];
+            if (vm == null)
+                RedirectToAction("Results");
+            
 
-//		    var Title = String.Format("{0}-{1},{2}", rvm.CropType, rvm.CountyName, rvm.StateName);
+            var document = (new PDFform(vm)).CreateDocument();
+
+            // Create a renderer for the MigraDoc document.
+            const bool unicode = false; //A flag indicating whether to create a Unicode PDF or a WinAnsi PDF file.
+            const PdfFontEmbedding embedding = PdfFontEmbedding.Always; // An enum indicating whether to embed fonts or not.
+
+            PdfDocumentRenderer pdfRenderer = new PdfDocumentRenderer(unicode, embedding);
+            // Associate the MigraDoc document with a renderer
+            pdfRenderer.Document = document;
+            // Layout and render document to PDF
+            pdfRenderer.RenderDocument();
+            var pdf = pdfRenderer.PdfDocument;
 
 
-
-//		    string summaryText =
-//			    "Growing of " + rvm.CropType + " for a duration of " + rvm.ProjectLife +
-//			    " over an area of " + rvm.ProjectSize + " in " + rvm.CountyName + " county of " + rvm.StateName +
-//			    " is expected to produce an estimated " + rvm.AnnualProduction + " tons of biomass annually." + 
-//				" The production comes at an expected annual cost of " + rvm.AnnualCost + " and results in an annual revenue of " + rvm.AnnualRevenue +
-//				" The net present value (NPV) of the project is estimated to be " +
-//				rvm.NPV.ToString( "C0" ) + " at assumed prevailing interest rate of " + rvm.InterestRate.ToString( "P" ) + "."; 
-
-//	PdfDocument document = new PdfDocument();
-			
-//PdfPage page = document.AddPage();
-
-		
-
-//			using ( MemoryStream stream = new MemoryStream() )
-//			{
-//				PdfDocument pdf = new PdfDocument();
-//				pdf.Info.Title = Title;
-//				PdfPage pdfPage = pdf.AddPage();
-//			//	XGraphics graph = XGraphics.FromPdfPage( pdfPage );
-//				XFont font = new XFont( "Verdana", 12, XFontStyle.Regular );
-
-//				XGraphics gfx = XGraphics.FromPdfPage( pdfPage );
-//				XTextFormatter tf = new XTextFormatter( gfx );
+            using (MemoryStream stream = new MemoryStream())
+            {
+                pdf.Save(stream, false);
+                return File(stream.ToArray(), "application/pdf");
+            }
 
 
 
-//				XRect rect = new XRect( 40, 100, 400, 220 );
+        }
 
-//				gfx.DrawRectangle( XBrushes.SeaShell, rect );
+        //	    [HttpGet]
+        //	    public ActionResult GenerateReport()
+        //	    {
+        //		    var rvms = Session["ViewModels"] as List<ResultViewModel>;
+        //		    if (rvms == null)
+        //			    return null;
+        //		    var rvm = rvms[0];
 
-//				//tf.Alignment = ParagraphAlignment.Left;
+        //		    if (rvm == null)
+        //			    return null;
 
-//				tf.DrawString( summaryText, font, XBrushes.Black, rect, XStringFormats.TopLeft );
-//				//gfx.DrawString( "This is my first PDF document", font, XBrushes.Black, new XRect( 0, 0, pdfPage.Width.Point, pdfPage.Height.Point ), XStringFormats.Center );
-//				pdf.Save( stream, false );
-//				return File( stream.ToArray(), "application/pdf" );
-//			}
-//		}
+        //		    var Title = String.Format("{0}-{1},{2}", rvm.CropType, rvm.CountyName, rvm.StateName);
 
 
-	}
+
+        //		    string summaryText =
+        //			    "Growing of " + rvm.CropType + " for a duration of " + rvm.ProjectLife +
+        //			    " over an area of " + rvm.ProjectSize + " in " + rvm.CountyName + " county of " + rvm.StateName +
+        //			    " is expected to produce an estimated " + rvm.AnnualProduction + " tons of biomass annually." + 
+        //				" The production comes at an expected annual cost of " + rvm.AnnualCost + " and results in an annual revenue of " + rvm.AnnualRevenue +
+        //				" The net present value (NPV) of the project is estimated to be " +
+        //				rvm.NPV.ToString( "C0" ) + " at assumed prevailing interest rate of " + rvm.InterestRate.ToString( "P" ) + "."; 
+
+        //	PdfDocument document = new PdfDocument();
+
+        //PdfPage page = document.AddPage();
+
+
+
+        //			using ( MemoryStream stream = new MemoryStream() )
+        //			{
+        //				PdfDocument pdf = new PdfDocument();
+        //				pdf.Info.Title = Title;
+        //				PdfPage pdfPage = pdf.AddPage();
+        //			//	XGraphics graph = XGraphics.FromPdfPage( pdfPage );
+        //				XFont font = new XFont( "Verdana", 12, XFontStyle.Regular );
+
+        //				XGraphics gfx = XGraphics.FromPdfPage( pdfPage );
+        //				XTextFormatter tf = new XTextFormatter( gfx );
+
+
+
+        //				XRect rect = new XRect( 40, 100, 400, 220 );
+
+        //				gfx.DrawRectangle( XBrushes.SeaShell, rect );
+
+        //				//tf.Alignment = ParagraphAlignment.Left;
+
+        //				tf.DrawString( summaryText, font, XBrushes.Black, rect, XStringFormats.TopLeft );
+        //				//gfx.DrawString( "This is my first PDF document", font, XBrushes.Black, new XRect( 0, 0, pdfPage.Width.Point, pdfPage.Height.Point ), XStringFormats.Center );
+        //				pdf.Save( stream, false );
+        //				return File( stream.ToArray(), "application/pdf" );
+        //			}
+        //		}
+
+
+    }
 
 
 }

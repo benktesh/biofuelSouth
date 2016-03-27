@@ -557,13 +557,17 @@
     <Content Include="images\funding.jpg" />
     <Content Include="images\funding.png" />
     <Content Include="images\ibssparnershiplogo.png" />
+    <Content Include="images\largecottonwood.jpg" />
     <Content Include="images\ncsuhead.jpg" />
     <Content Include="images\nifa.gif" />
+    <Content Include="images\Planted-lob-pine-35yrs.jpg" />
     <Content Include="images\residue.jpg" />
     <Content Include="images\smallwood.jpg" />
+    <Content Include="images\switchgrass_pdf.jpg" />
     <Content Include="images\technology.jpg" />
     <Content Include="images\testbanner.gif" />
     <Content Include="images\ugahead.jpg" />
+    <Content Include="images\UofIMiscanthus_14147108585304.jpg" />
     <Content Include="images\usdahead.png" />
     <Content Include="images\usdahead.jpg" />
     <Content Include="images\uthead.jpg" />
