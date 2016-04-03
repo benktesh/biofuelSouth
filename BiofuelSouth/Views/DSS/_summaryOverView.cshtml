@@ -2,10 +2,14 @@
 @using BiofuelSouth.Enum
 @model BiofuelSouth.ViewModels.ResultViewModel
 
+@{
+	var key = System.Configuration.ConfigurationManager.AppSettings["ShowPDFLink"];
 
+	var ShowPDFLink = ( key != null && key.Equals( "true", StringComparison.InvariantCultureIgnoreCase ) );
+}
 <div class="col-xs-7">
 	<h3>
-		Overview @Model.CropType in @Model.CountyName (@Model.StateCode)
+		Overview of @Model.CropType in @Model.CountyName (@Model.StateCode)
 	</h3>
 	<p>
 		@*Move to template *@
@@ -22,33 +26,33 @@
 		<strong>@Model.AnnualCost</strong> and results in an annual revenue of
 		<strong>@Model.AnnualRevenue</strong>.
 
-		The @Html.ActionLink("net present value (NPV)", "Search", "Home", new {term = "NPV"}, null)
-		of the project is estimated to be <strong>@Model.NPV.ToString("C0")</strong> at assumed
-		prevailing interest rate of <strong>@Model.InterestRate.ToString("P")</strong>.
+		The @Html.ActionLink( "net present value (NPV)", "Search", "Home", new { term = "NPV" }, null )
+		of the project is estimated to be <strong>@Model.NPV.ToString( "C0" )</strong> at assumed
+		prevailing interest rate of <strong>@Model.InterestRate.ToString( "P" )</strong>.
 
 
-		@if (Model.NPV < 0)
-			{
+		@if ( Model.NPV < 0 )
+		{
 			<span>
-				This means there will be a net loss of <span class="text-danger"><strong>  @Model.NPV.ToString("C0") </strong></span> from this project during project's life.
+				This means there will be a net loss of <span class="text-danger"><strong>  @Model.NPV.ToString( "C0" ) </strong></span> from this project during project's life.
 			</span>
 			}
 			else
 			{
 			<span>
-				This means there will be a net profit of <strong>@Model.NPV.ToString("C0")</strong> from this project during project's life.
+				This means there will be a net profit of <strong>@Model.NPV.ToString( "C0" )</strong> from this project during project's life.
 			</span>
 			}
 	</p>
 
 	<h3>Comparison with other crops</h3>
 
-		@{
-				var highNPV = @Model.ComparisionData.FirstOrDefault( m => m.Key == ResultComparisionKey.HighNpv );
-				var lowNPV = @Model.ComparisionData.FirstOrDefault( m => m.Key == ResultComparisionKey.LowNpv );
+	@{
+		var highNPV = @Model.ComparisionData.FirstOrDefault( m => m.Key == ResultComparisionKey.HighNpv );
+		var lowNPV = @Model.ComparisionData.FirstOrDefault( m => m.Key == ResultComparisionKey.LowNpv );
 
-		}
-		@if ( highNPV != null && highNPV.Crop != Model.CropType )
+	}
+	@if ( highNPV != null && highNPV.Crop != Model.CropType )
 			{
 				var highNpv = Decimal.Parse( highNPV.ComparisionValue );
 
@@ -73,14 +77,14 @@
 			}
 			else if ( highNPV != null && highNPV.Crop == @Model.CropType )
 			{
-			<span>
-				Likewise, it is anticipated that growing
-				<strong>@highNPV.Crop.ToString()</strong> may likely result in highest profit compared to other crops.
+		<span>
+			Likewise, it is anticipated that growing
+			<strong>@highNPV.Crop.ToString()</strong> may likely result in highest profit compared to other crops.
 
-			</span>
+		</span>
 
 			}
-		@if ( lowNPV != null && lowNPV.Crop != @Model.CropType )
+	@if ( lowNPV != null && lowNPV.Crop != @Model.CropType )
 			{
 				var lowNpv = Decimal.Parse( lowNPV.ComparisionValue );
 
@@ -106,11 +110,11 @@
 			}
 			else if ( lowNPV != null && lowNPV.Crop == @Model.CropType )
 			{
-			<span>
-				Likewise, it is anticipated that growing
-				<strong>@lowNPV.Crop.ToString()</strong> may result the lowest profit compared to growing other crops.
+		<span>
+			Likewise, it is anticipated that growing
+			<strong>@lowNPV.Crop.ToString()</strong> may result the lowest profit compared to growing other crops.
 
-			</span>
+		</span>
 
 			}
 
@@ -132,6 +136,10 @@
 	<div class="col-xs-12">
 		@Html.ActionLink( "Change Inputs", "General", "DSS", new { @class = "btn btn-primary" } ).
 		<a href="#menu1" data-toggle="tab" class="btn btn-success">See Production</a>
+		@if ( ShowPDFLink )
+		{
+			<a href="@Url.Action("GenerateReport", "DSS")" class="btn btn-dss"><i class="fa fa-file-pdf-o "> Downloadable Report</i></a>
+		}
 	</div>
 
 </div>
