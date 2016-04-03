@@ -2,9 +2,9 @@
 @using BiofuelSouth.Enum
 @model BiofuelSouth.ViewModels.ResultViewModel
 @{
-    var key = System.Configuration.ConfigurationManager.AppSettings["ShowPDFLink"];
-    
-    var ShowPDFLink = (key != null && key.Equals("true", StringComparison.InvariantCultureIgnoreCase));
+	var key = System.Configuration.ConfigurationManager.AppSettings["ShowPDFLink"];
+
+	var ShowPDFLink = ( key != null && key.Equals( "true", StringComparison.InvariantCultureIgnoreCase ) );
 }
 
 <!DOCTYPE html>
@@ -13,7 +13,7 @@
 	<title>Bootstrap Case</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-		@Styles.Render( "~/Content/site.css" )
+	@Styles.Render( "~/Content/site.css" )
 
 	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 	<link href="~/Content/site.css" rel="stylesheet" />
@@ -23,308 +23,319 @@
 	</style>
 </head>
 <body>
-@if (ShowPDFLink)
-{
-  
-        <div class="row">
-            <div class="col-xs-12 text-right">
-                <a href="@Url.Action("GenerateReport", "DSS")"><i class="fa fa-file-pdf-o">Report</i></a>
-            </div>
-        </div>
+	@*@if ( ShowPDFLink )
+		{
+
+			<div class="row">
+				<div class="col-xs-12 text-right">
+					<a href="@Url.Action("GenerateReport", "DSS")"><i class="fa fa-file-pdf-o"> Report</i></a>
+				</div>
+			</div>
 
 
-}
+		}*@
 
 
-<div class="row">
-    <div class="col-xs-12">
-        <div class="panel with-nav-tabs panel-primary">
-            <div class="panel-heading">
-                <ul class="nav nav-tabs">
-                    <li class="active"><a data-toggle="tab" href="#home">Summary</a></li>
-                    <li><a data-toggle="tab" href="#menu1">Production</a></li>
-                    <li><a data-toggle="tab" href="#menu2">Cost & Revenue</a></li>
-                    <li><a data-toggle="tab" href="#menu3">Inputs and Assumptions</a></li>
-                    <li><a data-toggle="tab" href="#menu4">More Information</a></li>
-                </ul>
-            </div>
-            <div class="panel-body">
-                <div class="tab-content">
-                    <div id="home" class="tab-pane fade in active">
-                        @*<h3>Summary of production and cost</h3>*@
-                        @Html.Partial("_summaryOverView", @Model)
-                    </div>
-                    <div id="menu1" class="tab-pane fade">
-                        <div class="row">
-                            <div class="col-xs-7">
-                                <h3>Production Results</h3>
-                                <p>
-                                    Growing of
-                                    <strong>@Model.CropType</strong> for a duration of
-                                    <strong>@Model.ProjectLife</strong> over an area of
-                                    <strong>@Model.ProjectSize</strong> in
-                                    <strong>@Model.CountyName</strong> county of
-                                    <strong>@Model.StateName</strong> is expected to produce an estimated
-                                    <strong>@Model.AnnualProduction</strong> tons of biomass annually.
-                                </p>
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="panel with-nav-tabs panel-primary">
+				<div class="panel-heading">
+					<ul class="nav nav-tabs">
+						<li class="active"><a data-toggle="tab" href="#home">Summary</a></li>
+						<li><a data-toggle="tab" href="#menu1">Production</a></li>
+						<li><a data-toggle="tab" href="#menu2">Cost & Revenue</a></li>
+						<li><a data-toggle="tab" href="#menu3">Inputs and Assumptions</a></li>
+						<li><a data-toggle="tab" href="#menu4">More Information</a></li>
+						@if ( ShowPDFLink )
+						{
+							<li>
+								<a data-toggle="" href="@Url.Action("GenerateReport", "DSS")"><i class="fa fa-file-pdf-o">&nbsp;PDF Report</i></a>
+							</li>
+						}
+					</ul>
+				</div>
+				<div class="panel-body">
+					<div class="tab-content">
+						<div id="home" class="tab-pane fade in active">
+							@Html.Partial( "_summaryOverView", @Model )
+						</div>
+						<div id="menu1" class="tab-pane fade">
+							<div class="row">
+								<div class="col-xs-7">
+									<h3>Production Results</h3>
+									<p>
+										Growing of
+										<strong>@Model.CropType</strong> for a duration of
+										<strong>@Model.ProjectLife</strong> over an area of
+										<strong>@Model.ProjectSize</strong> in
+										<strong>@Model.CountyName</strong> county of
+										<strong>@Model.StateName</strong> is expected to produce an estimated
+										<strong>@Model.AnnualProduction</strong> tons of biomass annually.
+									</p>
 
-                            </div>
-                            <div class="col-xs-5">
-                                @if (Model.ChartKeys.Select(m => m.Key == ChartType.Production).Any())
-                                {
-                                    var keyValue = Model.ChartKeys.FirstOrDefault(m => m.Key == ChartType.Production).Value;
-                                    var urlAnnualProduction = Url.Action("ShowChart", "Chart", new { @cacheKey = keyValue });
-                                    <figure>
-                                        <img src="@urlAnnualProduction" class="img-responsive img-chart" alt="Annual Production Chart" style="max-height: 200px" />
-                                        <figcaption class="text-center">Biofuel Production</figcaption>
-                                    </figure>
+								</div>
+								<div class="col-xs-5">
+									@if ( Model.ChartKeys.Select( m => m.Key == ChartType.Production ).Any() )
+									{
+										var keyValue = Model.ChartKeys.FirstOrDefault( m => m.Key == ChartType.Production ).Value;
+										var urlAnnualProduction = Url.Action( "ShowChart", "Chart", new { @cacheKey = keyValue } );
+										<figure>
+											<img src="@urlAnnualProduction" class="img-responsive img-chart" alt="Annual Production Chart" style="max-height: 200px" />
+											<figcaption class="text-center">Biofuel Production</figcaption>
+										</figure>
 
-                                }
+									}
+								</div>
+							</div>
 
+							<div class="row">
+								<div class="col-xs-7">
+									<h3>Comparison with other crops</h3>
+									<p>
+										@{
+											var high = @Model.ComparisionData.FirstOrDefault( m => m.Key == ResultComparisionKey.HighProduction );
+											var low = @Model.ComparisionData.FirstOrDefault( m => m.Key == ResultComparisionKey.LowProduction );
 
-                            </div>
+										}
+										@if ( high != null && high.Crop != Model.CropType )
+										{
+											<span>
+												It is anticipated that growing
+												<strong>@high.Crop.ToString()</strong> may likely result in highest production of
+												<strong>@high.ComparisionValue</strong> tons.
 
+											</span>
 
+										}
+										else if ( high != null && high.Crop == @Model.CropType )
+										{
+											<span>
+												It is anticipated that growing
+												<strong>@high.Crop.ToString()</strong> may likely result in highest production of <strong>@high.ComparisionValue</strong> tons compared to other crops.
 
+											</span>
 
-                        </div>
+										}
+										@if ( low != null && low.Crop != @Model.CropType )
+										{
+											<span>
+												It is anticipated that growing
+												<strong>@low.Crop.ToString()</strong> may likely result in lowest production of
+												<strong>@low.ComparisionValue</strong> tons.
 
-                        <div class="row">
-                            <div class="col-xs-7">
-                                <h3>Comparison with other crops</h3>
-                                <p>
-                                    @{
-                                        var high = @Model.ComparisionData.FirstOrDefault(m => m.Key == ResultComparisionKey.HighProduction);
-                                        var low = @Model.ComparisionData.FirstOrDefault(m => m.Key == ResultComparisionKey.LowProduction);
+											</span>
 
-                                    }
-                                    @if (high != null && high.Crop != Model.CropType)
-                                    {
-                                        <span>
-                                            It is anticipated that growing
-                                            <strong>@high.Crop.ToString()</strong> may likely result in highest production of
-                                            <strong>@high.ComparisionValue</strong> tons.
+										}
+										else if ( low != null && low.Crop == @Model.CropType )
+										{
+											<span>
+												It is anticipated that growing
+												<strong>@low.Crop.ToString()</strong> may result the lowest production of <strong>@low.ComparisionValue</strong> tons compared to growing other crops.
 
-                                        </span>
+											</span>
 
-                                    }
-                                    else if (high != null && high.Crop == @Model.CropType)
-                                    {
-                                        <span>
-                                            It is anticipated that growing
-                                            <strong>@high.Crop.ToString()</strong> may likely result in highest production of <strong>@high.ComparisionValue</strong> tons compared to other crops.
+										}
+									</p>
 
-                                        </span>
+									<a href="#home" data-toggle="tab" class="btn btn-warning">See Summary</a>&nbsp; &nbsp;
+									<a href="#menu2" data-toggle="tab" class="btn btn-success">See Cost/Revenue</a>
+									@if ( ShowPDFLink )
+									{
+										<a href="@Url.Action("GenerateReport", "DSS")" class="btn btn-dss"><i class="fa fa-file-pdf-o "> Downloadable Report</i></a>
+									}
+								</div>
+								<div class="col-xs-5">
+									@if ( Model.ChartKeys.Select( m => m.Key == ChartType.ProductionCompare ).Any() )
+									{
+										var keyValue = Model.ChartKeys.FirstOrDefault( m => m.Key == ChartType.ProductionCompare ).Value;
+										var urlAnnualProduction = Url.Action( "ShowChart", "Chart", new { @cacheKey = keyValue } );
 
-                                    }
-                                    @if (low != null && low.Crop != @Model.CropType)
-                                    {
-                                        <span>
-                                            It is anticipated that growing
-                                            <strong>@low.Crop.ToString()</strong> may likely result in lowest production of
-                                            <strong>@low.ComparisionValue</strong> tons.
+										<figure>
+											<img src="@urlAnnualProduction" class="img-responsive img-chart" alt="Production Compare Chart" style="max-height: 200px" />
+											<figcaption class="text-center">Comparision of production with other crops</figcaption>
+										</figure>
 
-                                        </span>
+									}
+								</div>
 
-                                    }
-                                    else if (low != null && low.Crop == @Model.CropType)
-                                    {
-                                        <span>
-                                            It is anticipated that growing
-                                            <strong>@low.Crop.ToString()</strong> may result the lowest production of <strong>@low.ComparisionValue</strong> tons compared to growing other crops.
+							</div>
 
-                                        </span>
+						</div>
+						<div id="menu2" class="tab-pane fade">
+							<div class="row">
+								<div class="col-xs-7">
+									<h3>Cost And Revenue</h3>
+									<p>
+										Growing of
+										<strong>@Model.CropType</strong> for a duration of
+										<strong>@Model.ProjectLife</strong> over an area of
+										<strong>@Model.ProjectSize</strong> in
+										<strong>@Model.CountyName</strong> county of
+										<strong>@Model.StateName</strong> is expected to produce an estimated
+										<strong>@Model.AnnualProduction</strong> tons of biomass annually.
 
-                                    }
-                                </p>
+										The production comes at an expected annual cost of
+										<strong>@Model.AnnualCost</strong> and results in an annual revenue of
+										<strong>@Model.AnnualRevenue</strong>. The net present value of the project is estimated to be
+										<strong>@Model.NPV.ToString( "C0" )</strong> at assumed prevailing interest rate of
+										<strong>@Model.InterestRate.ToString( "P" )</strong>.
 
-                                <a href="#home" data-toggle="tab" class="btn btn-warning">See Summary</a>&nbsp; &nbsp;
-                                <a href="#menu2" data-toggle="tab" class="btn btn-success">See Cost/Revenue</a>
-                            </div>
-                            <div class="col-xs-5">
-                                @if (Model.ChartKeys.Select(m => m.Key == ChartType.ProductionCompare).Any())
-                                {
-                                    var keyValue = Model.ChartKeys.FirstOrDefault(m => m.Key == ChartType.ProductionCompare).Value;
-                                    var urlAnnualProduction = Url.Action("ShowChart", "Chart", new { @cacheKey = keyValue });
-
-                                    <figure>
-                                        <img src="@urlAnnualProduction" class="img-responsive img-chart" alt="Production Compare Chart" style="max-height: 200px" />
-                                        <figcaption class="text-center">Comparision of production with other crops</figcaption>
-                                    </figure>
-
-                                }
-                            </div>
-
-                        </div>
-
-                    </div>
-                    <div id="menu2" class="tab-pane fade">
-                        <div class="row">
-                            <div class="col-xs-7">
-                                <h3>Cost And Revenue</h3>
-                                <p>
-                                    Growing of
-                                    <strong>@Model.CropType</strong> for a duration of
-                                    <strong>@Model.ProjectLife</strong> over an area of
-                                    <strong>@Model.ProjectSize</strong> in
-                                    <strong>@Model.CountyName</strong> county of
-                                    <strong>@Model.StateName</strong> is expected to produce an estimated
-                                    <strong>@Model.AnnualProduction</strong> tons of biomass annually.
-
-                                    The production comes at an expected annual cost of
-                                    <strong>@Model.AnnualCost</strong> and results in an annual revenue of
-                                    <strong>@Model.AnnualRevenue</strong>. The net present value of the project is estimated to be
-                                    <strong>@Model.NPV.ToString("C0")</strong> at assumed prevailing interest rate of
-                                    <strong>@Model.InterestRate.ToString("P")</strong>.
-
-                                </p>
-
-
-                            </div>
-
-                            <div class="col-xs-5">
-                                @if (Model.ChartKeys.Select(m => m.Key == ChartType.CostRevenue).Any())
-                                {
-                                    var keyValue = Model.ChartKeys.FirstOrDefault(m => m.Key == ChartType.CostRevenue).Value;
-                                    var urlAnnualProduction1 = Url.Action("ShowChart", "Chart", new { @cacheKey = keyValue });
-
-                                    <figure>
-                                        <img src="@urlAnnualProduction1" class="img-responsive img-chart" alt="Revenue Chart" />
-                                        <figcaption class="text-center">Cost and revenue information</figcaption>
-                                    </figure>
-
-                                }
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xs-7">
-                                <h3>Comparison with other crops</h3>
-                                <p>
-                                    @{
-                                        var highPrice = @Model.ComparisionData.FirstOrDefault(m => m.Key == ResultComparisionKey.HighFarmGatePrice);
-                                        var lowPrice = @Model.ComparisionData.FirstOrDefault(m => m.Key == ResultComparisionKey.LowFarmgatePrice);
-
-                                    }
-                                    @if (highPrice != null && highPrice.Crop != Model.CropType)
-                                    {
-                                        <span>
-                                            It is anticipated that growing
-                                            <strong>@highPrice.Crop.ToString()</strong> may likely result in highest farmgate price of
-                                            <strong>@highPrice.ComparisionValue  per ton</strong>.
-
-                                        </span>
-
-                                    }
-                                    else if (highPrice != null && highPrice.Crop == @Model.CropType)
-                                    {
-                                        <span>
-                                            It is anticipated that growing
-                                            <strong>@highPrice.Crop.ToString()</strong> is the option that results in highest farmgate price of <strong>@highPrice.ComparisionValue per ton</strong> compared to other crops.
-
-                                        </span>
-
-                                    }
-                                    @if (lowPrice != null && lowPrice.Crop != @Model.CropType)
-                                    {
-                                        <span>
-                                            Likewise, it is anticipated that growing
-                                            <strong>@lowPrice.Crop.ToString()</strong> may likely result in lowest farmgate price of
-                                            <strong>@lowPrice.ComparisionValue  per ton</strong>.
-
-                                        </span>
-
-                                    }
-                                    else if (lowPrice != null && lowPrice.Crop == @Model.CropType)
-                                    {
-                                        <span>
-                                            Likewise, it is anticipated that growing
-                                            <strong>@lowPrice.Crop.ToString()</strong> may result in the lowest farmgate price of price of <strong>@lowPrice.ComparisionValue per ton</strong> compared to growing other crops.
-                                        </span>
-
-                                    }
-                                </p>
-
-                                <a href="#menu1" data-toggle="tab" class="btn btn-warning">See Production</a>&nbsp; &nbsp;
-                                <a href="#menu3" data-toggle="tab" class="btn btn-success">See Inputs</a>
-
-                            </div>
-                            <div class="col-xs-5">
-
-                                @if (Model.ChartKeys.Select(m => m.Key == ChartType.CashFlow).Any())
-                                {
-                                    var keyValue = Model.ChartKeys.FirstOrDefault(m => m.Key == ChartType.CashFlow).Value;
-                                    var urlcashflow = Url.Action("ShowChart", "Chart", new { @cacheKey = keyValue });
+									</p>
 
 
-                                    <figure>
-                                        <img src="@urlcashflow" class="img-responsive img-chart" alt="CashFlow Chart" />
-                                        <figcaption class="text-center">Cashflow information</figcaption>
-                                    </figure>
-                                }
+								</div>
 
-                                @if (Model.ChartKeys.Select(m => m.Key == ChartType.CashFlowCompare).Any())
-                                {
-                                    var keyValue = Model.ChartKeys.FirstOrDefault(m => m.Key == ChartType.CashFlowCompare).Value;
-                                    var urlcashflow = Url.Action("ShowChart", "Chart", new { @cacheKey = keyValue });
-                                    <figure id="CashFlowCompareChart">
-                                        <img src="@urlcashflow" class="img-responsive img-chart" alt="CashFlow Compare Chart" />
-                                        <figcaption class="text-center">Cashflow comparision with other crops</figcaption>
-                                    </figure>
+								<div class="col-xs-5">
+									@if ( Model.ChartKeys.Select( m => m.Key == ChartType.CostRevenue ).Any() )
+									{
+										var keyValue = Model.ChartKeys.FirstOrDefault( m => m.Key == ChartType.CostRevenue ).Value;
+										var urlAnnualProduction1 = Url.Action( "ShowChart", "Chart", new { @cacheKey = keyValue } );
 
-                                }
-                            </div>
-                        </div>
+										<figure>
+											<img src="@urlAnnualProduction1" class="img-responsive img-chart" alt="Revenue Chart" />
+											<figcaption class="text-center">Cost and revenue information</figcaption>
+										</figure>
+
+									}
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-xs-7">
+									<h3>Comparison with other crops</h3>
+									<p>
+										@{
+											var highPrice = @Model.ComparisionData.FirstOrDefault( m => m.Key == ResultComparisionKey.HighFarmGatePrice );
+											var lowPrice = @Model.ComparisionData.FirstOrDefault( m => m.Key == ResultComparisionKey.LowFarmgatePrice );
+
+										}
+										@if ( highPrice != null && highPrice.Crop != Model.CropType )
+										{
+											<span>
+												It is anticipated that growing
+												<strong>@highPrice.Crop.ToString()</strong> may likely result in highest farmgate price of
+												<strong>@highPrice.ComparisionValue  per ton</strong>.
+
+											</span>
+
+										}
+										else if ( highPrice != null && highPrice.Crop == @Model.CropType )
+										{
+											<span>
+												It is anticipated that growing
+												<strong>@highPrice.Crop.ToString()</strong> is the option that results in highest farmgate price of <strong>@highPrice.ComparisionValue per ton</strong> compared to other crops.
+
+											</span>
+
+										}
+										@if ( lowPrice != null && lowPrice.Crop != @Model.CropType )
+										{
+											<span>
+												Likewise, it is anticipated that growing
+												<strong>@lowPrice.Crop.ToString()</strong> may likely result in lowest farmgate price of
+												<strong>@lowPrice.ComparisionValue  per ton</strong>.
+
+											</span>
+
+										}
+										else if ( lowPrice != null && lowPrice.Crop == @Model.CropType )
+										{
+											<span>
+												Likewise, it is anticipated that growing
+												<strong>@lowPrice.Crop.ToString()</strong> may result in the lowest farmgate price of price of <strong>@lowPrice.ComparisionValue per ton</strong> compared to growing other crops.
+											</span>
+
+										}
+									</p>
+
+									<a href="#menu1" data-toggle="tab" class="btn btn-warning">See Production</a>&nbsp; &nbsp;
+									<a href="#menu3" data-toggle="tab" class="btn btn-success">See Inputs</a>
+									@if ( ShowPDFLink )
+									{
+										<a href="@Url.Action("GenerateReport", "DSS")" class="btn btn-dss"><i class="fa fa-file-pdf-o "> Downloadable Report</i></a>
+									}
+
+								</div>
+								<div class="col-xs-5">
+
+									@if ( Model.ChartKeys.Select( m => m.Key == ChartType.CashFlow ).Any() )
+									{
+										var keyValue = Model.ChartKeys.FirstOrDefault( m => m.Key == ChartType.CashFlow ).Value;
+										var urlcashflow = Url.Action( "ShowChart", "Chart", new { @cacheKey = keyValue } );
 
 
+										<figure>
+											<img src="@urlcashflow" class="img-responsive img-chart" alt="CashFlow Chart" />
+											<figcaption class="text-center">Cashflow information</figcaption>
+										</figure>
+									}
+
+									@if ( Model.ChartKeys.Select( m => m.Key == ChartType.CashFlowCompare ).Any() )
+									{
+										var keyValue = Model.ChartKeys.FirstOrDefault( m => m.Key == ChartType.CashFlowCompare ).Value;
+										var urlcashflow = Url.Action( "ShowChart", "Chart", new { @cacheKey = keyValue } );
+										<figure id="CashFlowCompareChart">
+											<img src="@urlcashflow" class="img-responsive img-chart" alt="CashFlow Compare Chart" />
+											<figcaption class="text-center">Cashflow comparision with other crops</figcaption>
+										</figure>
+
+									}
+								</div>
+							</div>
+						</div>
+						<div id="menu3" class="tab-pane fade">
+							<h3>Input Data and Assumptions</h3>
+							<p>
+								The result presented here is based on the following parameters/assumptions. <br />
+								<div> Biomass Price: @Model.BiomassPriceAtFarmGate.GetValueOrDefault().ToString( "C0" ) per ton </div>
+								<div> Project Size: @Model.ProjectSize </div>
+								<div> Land Cost: @Model.LandCost</div>
 
 
-                    </div>
-                    <div id="menu3" class="tab-pane fade">
-                        <h3>Input Data and Assumptions</h3>
-                        <p>
-                            The result presented here is based on the following parameters/assumptions. <br />
-                            <div> Biomass Price: @Model.BiomassPriceAtFarmGate.GetValueOrDefault().ToString("C0") per ton </div>
-                            <div> Project Size: @Model.ProjectSize </div>
-                            <div> Land Cost: @Model.LandCost</div>
+								<div>
+									Average Cost: @Model.AverageCostPerAcre
+									@*@(Math.Round(Model.GetAnnualCost() / Model.General.ProjectSize.GetValueOrDefault(), 0).ToString("C0")) per acre*@
+								</div>
+								<div>
+									Average Production: @Model.AverageProdutivityPerAcre
+									@*@Math.Round(Model.GetAnnualProductionList().Average() / Model.General.ProjectSize.GetValueOrDefault(), 0).ToString("###,###.##") ton/acre*@
+								</div>
+							</p>
 
+							<p>
+								You can change the inputs to analyze how such change may impact the result.
+								To change input parameters, click @Html.ActionLink( "Change Inputs", "General", "DSS", new { @class = "btn btn-primary" } ).
+							</p>
 
-                            <div>
-                                Average Cost: @Model.AverageCostPerAcre
-                                @*@(Math.Round(Model.GetAnnualCost() / Model.General.ProjectSize.GetValueOrDefault(), 0).ToString("C0")) per acre*@
-                            </div>
-                            <div>
-                                Average Production: @Model.AverageProdutivityPerAcre
-                                @*@Math.Round(Model.GetAnnualProductionList().Average() / Model.General.ProjectSize.GetValueOrDefault(), 0).ToString("###,###.##") ton/acre*@
-                            </div>
-                        </p>
+							<p>
+								Alternatively, you can also start over with new information. To start over,
+								click @Html.ActionLink( "Start Over", "NewDSS", "DSS", new { @class = "btn btn-primary" } ).
+							</p>
 
-                        <p>
-                            You can change the inputs to analyze how such change may impact the result.
-                            To change input parameters, click @Html.ActionLink("Change Inputs", "General", "DSS", new { @class = "btn btn-primary" }).
-                        </p>
+							<a href="#menu2" data-toggle="tab" class="btn btn-warning">See Cost/Revenue</a>
+							<a href="#menu4" data-toggle="tab" class="btn btn-success">More Information</a>
+							@if ( ShowPDFLink )
+							{
+								<a href="@Url.Action("GenerateReport", "DSS")" class="btn btn-dss"><i class="fa fa-file-pdf-o "> Downloadable Report</i></a>
+							}
+						</div>
+						<div id="menu4" class="tab-pane fade">
+							<div id="moreinformation">
+								@Html.Partial( "_moreinformation" )
 
-                        <p>
-                            Alternatively, you can also start over with new information. To start over,
-                            click @Html.ActionLink("Start Over", "NewDSS", "DSS", new { @class = "btn btn-primary" }).
-                        </p>
-
-                        <a href="#menu2" data-toggle="tab" class="btn btn-warning">See Cost/Revenue</a>&nbsp; &nbsp;
-                        <a href="#menu4" data-toggle="tab" class="btn btn-success">More Information</a>
-                    </div>
-                    <div id="menu4" class="tab-pane fade">
-                        <div id="moreinformation">
-                            @Html.Partial("_moreinformation")
-
-                            <a href="#menu3" data-toggle="tab" class="btn btn-warning">See Inputs</a>
-                            <a href="#home" data-toggle="tab" class="btn btn-success">See Summary</a>&nbsp; &nbsp;
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        @Html.Partial("_Disclaimer")
-    </div>
-</div>
+								<a href="#menu3" data-toggle="tab" class="btn btn-warning">See Inputs</a>
+								<a href="#home" data-toggle="tab" class="btn btn-success">See Summary</a>&nbsp; &nbsp;
+								@if ( ShowPDFLink )
+								{
+									<a href="@Url.Action("GenerateReport", "DSS")" class="btn btn-dss"><i class="fa fa-file-pdf-o "> Downloadable Report</i></a>
+								}
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			@Html.Partial( "_Disclaimer" )
+		</div>
+	</div>
 
 
 

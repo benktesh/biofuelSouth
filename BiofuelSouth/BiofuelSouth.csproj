@@ -658,7 +658,7 @@
     <Compile Include="Enum\WizardStep.cs" />
     <Compile Include="Helpers\EnumExtensions.cs" />
     <Compile Include="Helpers\LinqExtensions.cs" />
-    <Compile Include="Manager\PDFManager.cs" />
+    <Compile Include="Manager\PDFform.cs" />
     <Compile Include="MyFontResolver.cs" />
     <Compile Include="Resources\GeneralResource.Designer.cs">
       <AutoGen>True</AutoGen>
