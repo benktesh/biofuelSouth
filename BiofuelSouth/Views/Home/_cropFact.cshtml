@@ -1,0 +1,16 @@
+﻿@model BiofuelSouth.Models.FactsheetViewModel
+
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <div id="CropFact">
+            @Model.CropType Fact Sheet
+        </div>
+    </div>
+    <div class="panel-body Instruction-panel-body">
+        <a data-toggle="" href="@Url.Action("GetPDFFact", "Home", new {cropType = Model.CropType})"><i class="fa fa-file-pdf-o">&nbsp;FactSheet File</i></a>
+
+        Add PDF Link 
+        TBD
+    </div>
+</div>
