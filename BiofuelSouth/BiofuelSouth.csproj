@@ -614,6 +614,10 @@
     <Content Include="fonts\fontawesome-webfont.woff" />
     <Content Include="fonts\fontawesome-webfont.woff2" />
     <Content Include="fonts\FontAwesome.otf" />
+    <Content Include="Files\switchgrass.docx" />
+    <Content Include="Files\switchgrass.pdf" />
+    <Content Include="Files\miscanthus.docx" />
+    <Content Include="Files\miscanthus.pdf" />
     <None Include="Properties\PublishProfiles\biofuelsouth - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\biofuelsouth - Web Deploy.pubxml" />
     <None Include="Properties\Settings.settings">
