@@ -746,23 +746,45 @@ namespace BiofuelSouth.Manager
 
 		private void AddHeaderAndFooter()
 		{
+
+			var hr = this.document.AddStyle( "HorizontalRule", "Normal" );
+			var hrBorder = new Border();
+			hrBorder.Width = "1pt";
+			hrBorder.Color = Colors.Black;
+			hr.ParagraphFormat.Borders.Bottom = hrBorder;
+			hr.ParagraphFormat.LineSpacing = 0;
+			hr.ParagraphFormat.SpaceBefore = 15;
+
 			Section section = document.LastSection; 
 			Paragraph paragraph;
 			var header = string.Format("{0} in {1}, {2}", rvm.CropType, rvm.CountyName, rvm.StateName);
 			paragraph = new Paragraph();
+			paragraph.Style = "HorizontalRule"; 
 			paragraph.AddTab();
 			paragraph.AddText(header);
 			paragraph.Format.Font.Size = 9;
 			paragraph.Format.Alignment = ParagraphAlignment.Right;
-			paragraph.Format.Font.Underline = Underline.Single;
 			section.Headers.Primary.Add(paragraph);
 			section.Headers.EvenPage.Add(paragraph.Clone());
 
+			var hrt = this.document.AddStyle( "HorizontalRuleTop", "Normal" );
+			hrBorder = new Border();
+			hrBorder.Width = "1pt";
+			hrBorder.Color = Colors.Black;
+			hrt.ParagraphFormat.Borders.Top = hrBorder;
+			hrt.ParagraphFormat.LineSpacing = 0;
+			hrt.ParagraphFormat.SpaceAfter = 5;
 
 			paragraph = new Paragraph();
+			paragraph.Style = "HorizontalRuleTop";
+
 			paragraph.AddTab();
+			paragraph.AddText("Page ");
 			paragraph.AddPageField();
+			paragraph.AddText( " of " );
+			paragraph.AddNumPagesField();
 			paragraph.Format.Font.Size = 9;
+			paragraph.Format.Alignment = ParagraphAlignment.Center;
 			section.Footers.Primary.Add(paragraph);
 			section.Footers.EvenPage.Add(paragraph.Clone());
 		}
