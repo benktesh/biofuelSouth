@@ -1,5 +1,6 @@
 ﻿@using System.Linq
 @using BiofuelSouth.Enum
+@using BiofuelSouth.Models
 @model BiofuelSouth.ViewModels.ResultViewModel
 @{
 	var key = System.Configuration.ConfigurationManager.AppSettings["ShowPDFLink"];
@@ -68,7 +69,7 @@
 										<strong>@Model.CropType</strong> for a duration of
 										<strong>@Model.ProjectLife</strong> over an area of
 										<strong>@Model.ProjectSize</strong> in
-										<strong>@Model.CountyName</strong> county of
+										<strong>@Model.CountyName</strong> County, 
 										<strong>@Model.StateName</strong> is expected to produce an estimated
 										<strong>@Model.AnnualProduction</strong> tons of biomass annually.
 									</p>
@@ -81,10 +82,10 @@
 										var urlAnnualProduction = Url.Action( "ShowChart", "Chart", new { @cacheKey = keyValue } );
 										<figure>
 											<img src="@urlAnnualProduction" class="img-responsive img-chart" alt="Annual Production Chart" style="max-height: 200px" />
-											<figcaption class="text-center">Biofuel Production</figcaption>
+                                            <figcaption class="text-center">@Constants.ProductionChartCaption(Model.CropType)</figcaption>
 										</figure>
 
-									}
+                                                }
 								</div>
 							</div>
 
@@ -101,7 +102,7 @@
 										{
 											<span>
 												It is anticipated that growing
-												<strong>@high.Crop.ToString()</strong> may likely result in highest production of
+												<strong>@high.Crop.ToString()</strong> may likely result in the highest production of
 												<strong>@high.ComparisionValue</strong> tons.
 
 											</span>
@@ -111,7 +112,8 @@
 										{
 											<span>
 												It is anticipated that growing
-												<strong>@high.Crop.ToString()</strong> may likely result in highest production of <strong>@high.ComparisionValue</strong> tons compared to other crops.
+												<strong>@high.Crop.ToString()</strong> may likely result in the highest 
+                                                production of <strong>@high.ComparisionValue</strong> tons compared to other crops.
 
 											</span>
 
@@ -120,7 +122,7 @@
 										{
 											<span>
 												It is anticipated that growing
-												<strong>@low.Crop.ToString()</strong> may likely result in lowest production of
+												<strong>@low.Crop.ToString()</strong> may likely result in the lowest production of
 												<strong>@low.ComparisionValue</strong> tons.
 
 											</span>
@@ -130,7 +132,8 @@
 										{
 											<span>
 												It is anticipated that growing
-												<strong>@low.Crop.ToString()</strong> may result the lowest production of <strong>@low.ComparisionValue</strong> tons compared to growing other crops.
+												<strong>@low.Crop.ToString()</strong> may result the the lowest production of 
+                                                <strong>@low.ComparisionValue</strong> tons compared to growing other crops.
 
 											</span>
 
@@ -152,7 +155,7 @@
 
 										<figure>
 											<img src="@urlAnnualProduction" class="img-responsive img-chart" alt="Production Compare Chart" style="max-height: 200px" />
-											<figcaption class="text-center">Comparision of production with other crops</figcaption>
+											<figcaption class="text-center">>@Constants.ProductionCompareChartCaption( Model.CropType )</figcaption>
 										</figure>
 
 									}
@@ -166,15 +169,7 @@
 								<div class="col-xs-7">
 									<h3>Cost And Revenue</h3>
 									<p>
-										Growing of
-										<strong>@Model.CropType</strong> for a duration of
-										<strong>@Model.ProjectLife</strong> over an area of
-										<strong>@Model.ProjectSize</strong> in
-										<strong>@Model.CountyName</strong> county of
-										<strong>@Model.StateName</strong> is expected to produce an estimated
-										<strong>@Model.AnnualProduction</strong> tons of biomass annually.
-
-										The production comes at an expected annual cost of
+									    The production comes at an expected annual cost of
 										<strong>@Model.AnnualCost</strong> and results in an annual revenue of
 										<strong>@Model.AnnualRevenue</strong>. The net present value of the project is estimated to be
 										<strong>@Model.NPV.ToString( "C0" )</strong> at assumed prevailing interest rate of
@@ -212,7 +207,7 @@
 										{
 											<span>
 												It is anticipated that growing
-												<strong>@highPrice.Crop.ToString()</strong> may likely result in highest farmgate price of
+												<strong>@highPrice.Crop.ToString()</strong> may likely result in the highest farmgate price of
 												<strong>@highPrice.ComparisionValue  per ton</strong>.
 
 											</span>
@@ -222,7 +217,7 @@
 										{
 											<span>
 												It is anticipated that growing
-												<strong>@highPrice.Crop.ToString()</strong> is the option that results in highest farmgate price of <strong>@highPrice.ComparisionValue per ton</strong> compared to other crops.
+												<strong>@highPrice.Crop.ToString()</strong> is the option that results in the highest farmgate price of <strong>@highPrice.ComparisionValue per ton</strong> compared to other crops.
 
 											</span>
 
@@ -231,7 +226,7 @@
 										{
 											<span>
 												Likewise, it is anticipated that growing
-												<strong>@lowPrice.Crop.ToString()</strong> may likely result in lowest farmgate price of
+												<strong>@lowPrice.Crop.ToString()</strong> may likely result in the lowest farmgate price of
 												<strong>@lowPrice.ComparisionValue  per ton</strong>.
 
 											</span>
@@ -241,7 +236,7 @@
 										{
 											<span>
 												Likewise, it is anticipated that growing
-												<strong>@lowPrice.Crop.ToString()</strong> may result in the lowest farmgate price of price of <strong>@lowPrice.ComparisionValue per ton</strong> compared to growing other crops.
+												<strong>@lowPrice.Crop.ToString()</strong> may result in the the lowest farmgate price of price of <strong>@lowPrice.ComparisionValue per ton</strong> compared to growing other crops.
 											</span>
 
 										}
@@ -265,7 +260,7 @@
 
 										<figure>
 											<img src="@urlcashflow" class="img-responsive img-chart" alt="CashFlow Chart" />
-											<figcaption class="text-center">Cashflow information</figcaption>
+											<figcaption class="text-center">@Constants.CashFlowChartCaption(Model.CropType)</figcaption>
 										</figure>
 									}
 
@@ -275,7 +270,7 @@
 										var urlcashflow = Url.Action( "ShowChart", "Chart", new { @cacheKey = keyValue } );
 										<figure id="CashFlowCompareChart">
 											<img src="@urlcashflow" class="img-responsive img-chart" alt="CashFlow Compare Chart" />
-											<figcaption class="text-center">Cashflow comparision with other crops</figcaption>
+											<figcaption class="text-center">@Constants.CashFlowCompareChartCaption( Model.CropType )</figcaption>
 										</figure>
 
 									}

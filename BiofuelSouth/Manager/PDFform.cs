@@ -26,6 +26,7 @@ using System.Threading.Tasks;
 using System.Web.Helpers;
 using System.Web.UI.WebControls;
 using BiofuelSouth.Enum;
+using BiofuelSouth.Models;
 using BorderStyle = MigraDoc.DocumentObjectModel.BorderStyle;
 using Unit = MigraDoc.DocumentObjectModel.Unit;
 
@@ -241,12 +242,13 @@ namespace BiofuelSouth.Manager
 			paragraph.AddLineBreak();
 			paragraph.AddText( "Date: " );
 			paragraph.AddDateField( "MM/dd/yyyy" );
+            paragraph.Format.Alignment = ParagraphAlignment.Center;
 
 
 			#region Summary 
 			paragraph = this.document.LastSection.AddParagraph();
 			paragraph.Style = "Reference";
-			var sectionHead = paragraph.AddFormattedText( "Summary Overview", TextFormat.Bold );
+			var sectionHead = paragraph.AddFormattedText( "Summary", TextFormat.Bold );
 			sectionHead.Font.Size = 13;
 
 			paragraph.AddLineBreak();
@@ -266,7 +268,7 @@ namespace BiofuelSouth.Manager
 			paragraph.AddText( " in " );
 			paragraph.AddFormattedText( rvm.CountyName, TextFormat.Bold );
 
-			paragraph.AddText( ", " );
+			paragraph.AddFormattedText("County, " , TextFormat.Bold);
 			paragraph.AddFormattedText( rvm.StateName, TextFormat.Bold );
 
 			paragraph.AddText( " is expected to produce an estimated " );
@@ -281,7 +283,7 @@ namespace BiofuelSouth.Manager
 			cropImage.Width = Unit.FromCentimeter( 8 );
 			cropImage.LockAspectRatio = true;
 			paragraph.AddLineBreak();
-			var t = paragraph.AddFormattedText( rvm.ImageUrl.Item2, TextFormat.Bold );
+			var t = paragraph.AddFormattedText( rvm.ImageUrl.Item2);
 
 			var lat = rvm.CountyEntity.Lat;
 			var lon = rvm.CountyEntity.Lon;
@@ -300,7 +302,7 @@ namespace BiofuelSouth.Manager
 				var map = paragraph.AddImage( imgfile );
 				map.Height = Unit.FromCentimeter( 6 );
 				paragraph.AddLineBreak();
-				paragraph.AddFormattedText( "Approximate Location of Assessment Area", TextFormat.Bold );
+				paragraph.AddFormattedText( "Approximate Location of Assessment Area");
 				paragraph.AddLineBreak();
 			}
 
@@ -334,8 +336,12 @@ namespace BiofuelSouth.Manager
 				paragraph.AddText( "This means there will be a net profit of " );
 				paragraph.AddFormattedText( rvm.NPV.ToString( "C0" ), TextFormat.Bold );
 			}
-			paragraph.AddText( " from this project during project's life." );
-			paragraph.AddLineBreak();
+			paragraph.AddText( " from this project during project's life (" );
+		    paragraph.AddFormattedText(rvm.ProjectLife.ToString(), TextFormat.Bold);
+            paragraph.AddText(" years).");
+
+
+            paragraph.AddLineBreak();
 
 
 
@@ -367,7 +373,7 @@ namespace BiofuelSouth.Manager
 					var txt = paragraph.AddFormattedText( highNpv.ToString( "C0" ), TextFormat.Bold );
 					txt.Color = Colors.Red;
 				}
-				paragraph.AddText( "." );
+				paragraph.AddText( " among crops considered in this particular anlaysis." );
 
 
 			}
@@ -410,7 +416,7 @@ namespace BiofuelSouth.Manager
 			if (rvm.ChartKeys.Select(m => m.Key == ChartType.NPVCompare).Any())
 			{
 				keyValue = rvm.ChartKeys.FirstOrDefault( m => m.Key == ChartType.NPVCompare ).Value;
-				GetImage(keyValue, "Comparision of NPV across various biofuel crops"); 
+				GetImage(keyValue, "Comparision of project NPV ($) across various biofuel crops"); 
 			}
 			
 
@@ -435,7 +441,7 @@ namespace BiofuelSouth.Manager
 			paragraph.AddText( " in " );
 			paragraph.AddFormattedText( rvm.CountyName, TextFormat.Bold );
 
-			paragraph.AddText( ", " );
+			paragraph.AddFormattedText( " County, ", TextFormat.Bold );
 			paragraph.AddFormattedText( rvm.StateName, TextFormat.Bold );
 
 			paragraph.AddText( " is expected to produce an estimated " );
@@ -445,9 +451,9 @@ namespace BiofuelSouth.Manager
 
 		
 			if ( rvm.ChartKeys.Select( m => m.Key == ChartType.Production ).Any() )
-			{
+            { 
 				keyValue = rvm.ChartKeys.FirstOrDefault( m => m.Key == ChartType.Production ).Value;
-				GetImage(keyValue, "Biofuel Production"); 
+				GetImage(keyValue, Constants.ProductionChartCaption( rvm.CropType ) ); 
 			}
 
 			#region production comparision
@@ -461,7 +467,7 @@ namespace BiofuelSouth.Manager
 			paragraph.AddLineBreak();
 			paragraph.AddText( "It is anticipated that growing " );
 			paragraph.AddFormattedText( high.Crop.ToString(), TextFormat.Bold );
-			paragraph.AddText( " may likely result in highest production of " );
+			paragraph.AddText( " may likely result in the highest production of " );
 			paragraph.AddFormattedText( high.ComparisionValue, TextFormat.Bold );
 
 			if ( high != null && high.Crop != rvm.CropType )
@@ -478,7 +484,7 @@ namespace BiofuelSouth.Manager
 
 			paragraph.AddText( "It is anticipated that growing " );
 			paragraph.AddFormattedText( low.Crop.ToString(), TextFormat.Bold );
-			paragraph.AddText( " may likely result in highest production of " );
+			paragraph.AddText( " may likely result in the highest production of " );
 			paragraph.AddFormattedText( low.ComparisionValue, TextFormat.Bold );
 			if ( low != null && low.Crop != rvm.CropType )
 			{
@@ -492,11 +498,11 @@ namespace BiofuelSouth.Manager
 			if ( rvm.ChartKeys.Select( m => m.Key == ChartType.ProductionCompare ).Any() )
 			{
 				keyValue = rvm.ChartKeys.FirstOrDefault( m => m.Key == ChartType.ProductionCompare ).Value;
-				GetImage( keyValue, "Comparision of production with other crops" );
+				GetImage( keyValue, Constants.ProductionCompareChartCaption(rvm.CropType) );
 			}
 			#endregion production comparision
 
-			#region 
+			#region Cost and revenue
 			paragraph = document.LastSection.AddParagraph();
 			paragraph.AddLineBreak();
 			paragraph.Format.Alignment = ParagraphAlignment.Left;
@@ -504,34 +510,13 @@ namespace BiofuelSouth.Manager
 			sectionHead.Font.Size = 13;
 			paragraph.AddLineBreak();
 
-			paragraph.AddText( "Growing of " );
-			paragraph.AddFormattedText( rvm.CropType.ToString(), TextFormat.Bold );
-			paragraph.AddText( " for a duration of " );
-			paragraph.AddFormattedText( rvm.ProjectLife.ToString(), TextFormat.Bold );
-			paragraph.AddText( "  years over an area of " );
-			paragraph.AddFormattedText( rvm.ProjectSize.ToString(), TextFormat.Bold );
-			paragraph.AddText( "  in " );
-			paragraph.AddText( " year(s) over an area of " );
-			paragraph.AddFormattedText( rvm.ProjectSize, TextFormat.Bold );
-
-			paragraph.AddText( " in " );
-			paragraph.AddFormattedText( rvm.CountyName, TextFormat.Bold );
-
-			paragraph.AddText( ", " );
-			paragraph.AddFormattedText( rvm.StateName, TextFormat.Bold );
-
-			paragraph.AddText( " is expected to produce an estimated " );
-			paragraph.AddFormattedText( rvm.AnnualProduction, TextFormat.Bold );
-
-			paragraph.AddText( " tons of biomass annually. " );
-
 			paragraph.AddText( "The production comes at an expected annual cost of " );
 			paragraph.AddFormattedText( @rvm.AnnualCost, TextFormat.Bold );
 
 			paragraph.AddText( " and results in an annual revenue of " );
 			paragraph.AddFormattedText( @rvm.AnnualRevenue, TextFormat.Bold );
 
-			paragraph.AddText( " The net present value of the project is estimated to be " );
+			paragraph.AddText( ". The net present value of the project is estimated to be " );
 			paragraph.AddFormattedText( @rvm.NPV.ToString( "C0" ), TextFormat.Bold );
 
 			paragraph.AddText( "at assumed prevailing interest rate of " );
@@ -551,18 +536,19 @@ namespace BiofuelSouth.Manager
 			var highPrice = rvm.ComparisionData.FirstOrDefault( m => m.Key == ResultComparisionKey.HighFarmGatePrice );
 			var lowPrice = rvm.ComparisionData.FirstOrDefault( m => m.Key == ResultComparisionKey.LowFarmgatePrice );
 
-			paragraph.AddText( "It is anticipated that growing " );
+			paragraph.AddText( "Among the biomass crops considered in this particular analysis, " +
+			                   "it is anticipated that growing " );
 			paragraph.AddFormattedText( highPrice.Crop.ToString(), TextFormat.Bold );
 
 			if ( highPrice != null && highPrice.Crop != rvm.CropType )
 			{
-				paragraph.AddText( " may likely result in highest farmgate price of " );
+				paragraph.AddText( " may likely result in the highest farmgate price of " );
 				paragraph.AddFormattedText( highPrice.ComparisionValue, TextFormat.Bold );
 				paragraph.AddText( " per ton." );
 			}
 			else if ( highPrice != null && highPrice.Crop == rvm.CropType )
 			{
-				paragraph.AddText( " is the option that results in highest farmgate price of " );
+				paragraph.AddText( " is the option that results in the highest farmgate price of " );
 				paragraph.AddFormattedText( highPrice.ComparisionValue, TextFormat.Bold );
 				paragraph.AddText( " per ton compared to other crops." );
 			}
@@ -590,7 +576,7 @@ namespace BiofuelSouth.Manager
 			if ( rvm.ChartKeys.Select( m => m.Key == ChartType.CashFlow ).Any() )
 			{
 				keyValue = rvm.ChartKeys.FirstOrDefault( m => m.Key == ChartType.CashFlow ).Value;
-				GetImage( keyValue, "Cashflow information" );
+				GetImage( keyValue, Constants.CashFlowChartCaption( rvm.CropType ) );
 
 
 			}
@@ -599,7 +585,7 @@ namespace BiofuelSouth.Manager
 			{
 				keyValue = rvm.ChartKeys.FirstOrDefault( m => m.Key == ChartType.CashFlowCompare ).Value;
 
-				GetImage( keyValue, "Cashflow comparision with other crops" );
+				GetImage( keyValue, @Constants.CashFlowCompareChartCaption( rvm.CropType ) );
 			}
 
 			#endregion
@@ -652,34 +638,34 @@ namespace BiofuelSouth.Manager
 			row.Format.Font.Bold = true;
 			row.Cells[0].AddParagraph("Data/Parameter");
 			row.Cells[1].AddParagraph("Value/Assumption");
-			row.Cells[1].AddParagraph("Remarks");
+			row.Cells[2].AddParagraph("Source/Remarks");
 
 			row = this.table.AddRow();
 			row.Cells[0].AddParagraph("Biomass Price At Farm Gate");
 			row.Cells[1].AddParagraph(string.Format("{0} per ton", rvm.BiomassPriceAtFarmGate.GetValueOrDefault().ToString("C0")));
-			row.Cells[1].AddParagraph(String.Empty);
+			row.Cells[2].AddParagraph(String.Empty);
 
 
 			row = this.table.AddRow();
 			row.Cells[0].AddParagraph("Project Size");
-			row.Cells[1].AddParagraph(string.Format("{0} acres", rvm.ProjectSize));
-			row.Cells[1].AddParagraph(String.Empty);
+			row.Cells[1].AddParagraph(string.Format("{0} ", rvm.ProjectSize));
+			row.Cells[2].AddParagraph(String.Empty);
 
 
 			row = this.table.AddRow();
 			row.Cells[0].AddParagraph("Land Cost");
-			row.Cells[1].AddParagraph(string.Format("{0} per acre", rvm.LandCost));
-			row.Cells[1].AddParagraph(String.Empty);
+			row.Cells[1].AddParagraph(string.Format("{0}", rvm.LandCost));
+			row.Cells[2].AddParagraph(String.Empty);
 
 			row = this.table.AddRow();
 			row.Cells[0].AddParagraph("Average Cost");
 			row.Cells[1].AddParagraph(string.Format("{0}", rvm.AverageCostPerAcre));
-			row.Cells[1].AddParagraph(String.Empty);
+			row.Cells[2].AddParagraph(String.Empty);
 
 			row = this.table.AddRow();
 			row.Cells[0].AddParagraph("Average Production");
 			row.Cells[1].AddParagraph(string.Format("{0} per acre", rvm.AverageProdutivityPerAcre));
-			row.Cells[1].AddParagraph(String.Empty);
+			row.Cells[2].AddParagraph(String.Empty);
 
 			paragraph.AddLineBreak();
 			paragraph.AddFormattedText("Users can change the inputs to analyze how such change may impact the result",
@@ -700,7 +686,9 @@ namespace BiofuelSouth.Manager
 			sectionHead.Font.Size = 13;
 			paragraph.AddLineBreak();
 
-			paragraph.AddFormattedText("Relevant Contacts", TextFormat.Bold);
+			paragraph.AddFormattedText("Additional information about " +
+			                           "growing biomass crops may be obtained from county and university extension professionals and USDA " +
+			                           "Farm Service Agents in your area. The following contacts may be useful:");
 			paragraph.AddLineBreak();
 
 			/* TODO  -Add Relevant Contat */
@@ -741,7 +729,11 @@ namespace BiofuelSouth.Manager
 			paragraph.AddFormattedText("Disclaimer", TextFormat.Bold);
 			paragraph.AddLineBreak();
 			paragraph.AddText(
-				"The Biomass Decision Support System (BDSS) is provided on an 'as is' basis. The University of Tennessee and the developer of BDSS make no warranty that any part of BDSS and including the results generated by this website is suitable for any particular purpose or is error - free.Use of the BDSS, its result and the content of this website at user's sole risk.");
+				"The Biomass Decision Support System (BDSS) is provided on an 'as is' basis. " +
+				"The University of Tennessee and the developer of BDSS make no warranty that any " +
+				"part of BDSS and including the results generated by this website is suitable for " +
+				"any particular purpose or is error - free.Use of the BDSS, its result and the " +
+				"content of this website at user's sole risk.");
 		}
 
 		private void AddHeaderAndFooter()
@@ -804,7 +796,7 @@ namespace BiofuelSouth.Manager
 				paragraph.AddLineBreak();
 				if ( imageCaption != null )
 				{
-					paragraph.AddFormattedText( imageCaption, TextFormat.Bold );
+					paragraph.AddFormattedText( imageCaption);
 					paragraph.AddLineBreak();
 				}
 
