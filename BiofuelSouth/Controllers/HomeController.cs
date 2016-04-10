@@ -1,9 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net.Mime;
 using System.Reflection;
 using System.Text;
 using System.Web.Mvc;
+using BiofuelSouth.Enum;
+using BiofuelSouth.Models;
 using BiofuelSouth.Models.Entity;
 using BiofuelSouth.Services;
 using log4net;
@@ -76,7 +80,29 @@ namespace BiofuelSouth.Controllers
 
         public ActionResult Factsheet()
         {
-            return View();
+            var model = new FactsheetViewModel();
+            return View(model);
+        }
+
+        public ActionResult GetFact(CropType cropType)
+        {
+            var model = DataService.GetFactsheetViewModel(cropType);
+            return PartialView("_cropFact", model);
+        }
+
+        public ActionResult GetPDFFact(CropType cropType)
+        {
+
+            var fileName = string.Format("{0}.pdf", cropType.ToString()).ToLower();
+            var path = Path.Combine(Server.MapPath("~/Files"), fileName);
+
+            if (!System.IO.File.Exists(path))
+            {
+                return HttpNotFound();
+            }
+
+            return File(path, MediaTypeNames.Application.Pdf);
+
         }
 
         public ActionResult Contact()

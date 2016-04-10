@@ -88,9 +88,17 @@
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="MigraDoc.DocumentObjectModel, Version=1.32.4334.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\PDFsharp-MigraDoc-GDI.1.32.4334.0\lib\net20\MigraDoc.DocumentObjectModel.dll</HintPath>
+    </Reference>
     <Reference Include="MigraDoc.DocumentObjectModel-wpf, Version=1.50.3915.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
       <HintPath>..\packages\PDFsharp-MigraDoc-wpf.1.50.3915-beta2\lib\net30\MigraDoc.DocumentObjectModel-wpf.dll</HintPath>
       <Private>True</Private>
+    </Reference>
+    <Reference Include="MigraDoc.Rendering, Version=1.32.4334.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\PDFsharp-MigraDoc-GDI.1.32.4334.0\lib\net20\MigraDoc.Rendering.dll</HintPath>
     </Reference>
     <Reference Include="MigraDoc.Rendering-wpf, Version=1.50.3915.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
       <HintPath>..\packages\PDFsharp-MigraDoc-wpf.1.50.3915-beta2\lib\net30\MigraDoc.Rendering-wpf.dll</HintPath>
@@ -103,6 +111,10 @@
     <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
+    </Reference>
+    <Reference Include="PdfSharp, Version=1.32.3057.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\PDFsharp-MigraDoc-GDI.1.32.4334.0\lib\net20\PdfSharp.dll</HintPath>
     </Reference>
     <Reference Include="PdfSharp-wpf, Version=1.50.3915.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
       <HintPath>..\packages\PDFsharp-MigraDoc-wpf.1.50.3915-beta2\lib\net30\PdfSharp-wpf.dll</HintPath>
@@ -602,6 +614,10 @@
     <Content Include="fonts\fontawesome-webfont.woff" />
     <Content Include="fonts\fontawesome-webfont.woff2" />
     <Content Include="fonts\FontAwesome.otf" />
+    <Content Include="Files\switchgrass.docx" />
+    <Content Include="Files\switchgrass.pdf" />
+    <Content Include="Files\miscanthus.docx" />
+    <Content Include="Files\miscanthus.pdf" />
     <None Include="Properties\PublishProfiles\biofuelsouth - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\biofuelsouth - Web Deploy.pubxml" />
     <None Include="Properties\Settings.settings">
@@ -619,6 +635,8 @@
     <Content Include="Scripts\jquery-2.1.1.min.js" />
     <Content Include="Scripts\jquery-2.1.1.min.map" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -659,7 +677,7 @@
     <Compile Include="Helpers\EnumExtensions.cs" />
     <Compile Include="Helpers\LinqExtensions.cs" />
     <Compile Include="Manager\PDFform.cs" />
-    <Compile Include="MyFontResolver.cs" />
+    <Compile Include="Models\FactsheetViewModel.cs" />
     <Compile Include="Resources\GeneralResource.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -764,6 +782,7 @@
     <Content Include="Views\Shared\EditorTemplates\ProductionCost.cshtml" />
     <Content Include="Views\DSS\_resultDashboard.cshtml" />
     <Content Include="Views\DSS\_summaryOverView.cshtml" />
+    <Content Include="Views\Home\_cropFact.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

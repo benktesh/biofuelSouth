@@ -1,0 +1,130 @@
+﻿@model BiofuelSouth.Models.FactsheetViewModel
+
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <div id="CropFact">
+            @Model.CropType Factsheet
+        </div>
+    </div>
+    <div class="panel-body Instruction-panel-body">
+
+        @if (Model.CanPDFFactsheet)
+        {
+
+            <a data-toggle="" class="pull-right" href="@Url.Action("GetPDFFact", "Home", new {cropType = Model.CropType})"><i class="fa fa-file-pdf-o">&nbsp;Download Factsheet</i></a>
+        }
+        <h3>@Model.Title <span>(<i>@Model.SubTitle</i>)</span></h3>
+        @*<h4>@Html.LabelFor(m => m.Description)</h4>*@
+
+
+        @if (Model.Description != null)
+        {
+
+            @Html.Raw(Model.Description)
+        }
+        @if (Model.GeographicDistribution != null)
+        {
+            <h4>@Html.LabelFor(m => m.GeographicDistribution)</h4>
+            @Html.Raw(Model.GeographicDistribution)
+        }
+
+
+
+        @if (Model.ProductionProcess != null)
+        {
+            <h4>@Html.LabelFor(m => m.ProductionProcess)</h4>
+            @Html.Raw(Model.ProductionProcess)
+        }
+
+        @if (Model.GrowthRate != null)
+        {
+            <h4>@Html.LabelFor(m => m.GrowthRate)</h4>
+            @Model.GrowthRate
+
+        }
+
+        @if (Model.Yield != null)
+        {
+            <h4>@Html.LabelFor(m => m.Yield)</h4>
+            @Model.Yield
+
+        }
+
+        @if (Model.FactsForQuickReference != null)
+        {
+
+            <h4>
+
+                @Html.Label(Model.CropType + " Facts for Quick Reference")
+
+            </h4>
+            <table class="table table-bordered table-responsive">
+                @foreach (var item in Model.FactsForQuickReference.ToList())
+                {
+                    <tr>
+                        <td>@Html.Raw(item.Key)</td>
+                        <td>@Html.Raw(item.Value)</td>
+                    </tr>
+
+                }
+
+            </table>
+
+
+        }
+        @if (Model.Conclusion != null)
+        {
+            <h4>@Html.LabelFor(m => m.Conclusion)</h4>
+            @Model.Conclusion
+
+        }
+
+
+        @if (Model.PreparedBy != null)
+        {
+            <h4>@Html.LabelFor(m => m.PreparedBy)</h4>
+            @Html.Raw(Model.PreparedBy)
+
+        }
+
+        @if (Model.AdaptedFrom != null)
+        {
+            <h4>@Html.LabelFor(m => m.AdaptedFrom)</h4>
+            @Html.Raw(Model.AdaptedFrom)
+
+        }
+
+
+        @if (Model.OtherSources != null)
+        {
+            <h4>@Html.LabelFor(m => m.OtherSources)</h4>
+            <ul>
+                @foreach (var r in Model.OtherSources.OrderBy(m => m))
+                {
+                    <li>@Html.Raw(r)</li>
+                }
+            </ul>
+
+        }
+
+        @if (Model.References != null)
+        {
+            <h4>@Html.LabelFor(m => m.References)</h4>
+            <ul>
+                @foreach (var r in Model.References.OrderBy(m => m))
+                {
+                    <li>@Html.Raw(r)</li>
+                }
+            </ul>
+
+        }
+
+
+
+
+
+
+
+    </div>
+</div>
