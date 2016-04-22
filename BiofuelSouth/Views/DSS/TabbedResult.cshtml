@@ -1,5 +1,6 @@
 ﻿@using System.Linq
 @using BiofuelSouth.Enum
+@using BiofuelSouth.Helpers
 @using BiofuelSouth.Models
 @model BiofuelSouth.ViewModels.ResultViewModel
 @{
@@ -280,20 +281,119 @@
 						<div id="menu3" class="tab-pane fade">
 							<h3>Input Data and Assumptions</h3>
 							<p>
-								The result presented here is based on the following parameters/assumptions. <br />
-								<div> Biomass Price: @Model.BiomassPriceAtFarmGate.GetValueOrDefault().ToString( "C0" ) per ton </div>
-								<div> Project Size: @Model.ProjectSize </div>
-								<div> Land Cost: @Model.LandCost</div>
+							    The result presented here is based on the following parameters/assumptions. <br/>
 
+							    <table class="table table-responsive">
+							        <tr>
+							            <th>Parameter</th>
+							            <th>value</th>
+							            <th>Source/Assumption</th>
+							        </tr>
+                                    <!-- /* Template
+							        <tr>
+							            <td></td>
+							            <td></td>
+							            <td></td>
+							        </tr>
+                                    -->
 
-								<div>
-									Average Cost: @Model.AverageCostPerAcre
-									@*@(Math.Round(Model.GetAnnualCost() / Model.General.ProjectSize.GetValueOrDefault(), 0).ToString("C0")) per acre*@
-								</div>
-								<div>
-									Average Production: @Model.AverageProdutivityPerAcre
-									@*@Math.Round(Model.GetAnnualProductionList().Average() / Model.General.ProjectSize.GetValueOrDefault(), 0).ToString("###,###.##") ton/acre*@
-								</div>
+							        @*<tr>
+							            <td colspan="3"></td>
+							        </tr>*@
+                                    <tr>
+                                        <td>Crop</td>
+                                        <td>@Model.CropType</td>
+                                        <td></td>
+                                    </tr>
+							        <tr>
+							            <td>County, State</td>
+							            <td>@Model.CountyName, @Model.StateName</td>
+							            <td></td>
+							        </tr>
+							        <tr>
+							            <td>@Html.GetDisplayName(m => Model.ProjectLife)</td>
+							            <td>@Model.ProjectLife</td>
+							            <td></td>
+							        </tr>
+
+							        <tr>
+							            <td>@Html.GetDisplayName(m => Model.ProjectSize)</td>
+							            <td>@Model.ProjectSize</td>
+							            <td></td>
+							        </tr>
+                                    <tr>
+                                        <td>@Html.GetDisplayName( m => Model.InterestRate )</td>
+                                        <td>@Model.InterestRate.ToString("N")</td>
+                                        <td></td>
+                                    </tr>
+							        <tr>
+							            <td>Biomass Price</td>
+							            <td> @Model.BiomassPriceAtFarmGate.GetValueOrDefault().ToString("C0") per ton </td>
+							            <td></td>
+							        </tr>
+							        <tr>
+							            <td> Project Size: </td>
+							            <td> @Model.ProjectSize </td>
+							            <td></td>
+							        </tr>
+							        <tr>
+							            <td>Land Cost</td>
+							            <td>@Model.LandCost</td>
+							            <td></td>
+							        </tr>
+							        @*<tr>
+							            <td colpan="3">Production Cost</td>
+							        </tr>*@
+
+                                    <tr>
+                                        <td>@Html.GetDisplayName(m=>Model.AnnualProduction)</td>
+                                        <td>@Model.AnnualProduction</td>
+                                        <td></td>
+                                    </tr>
+
+							        @*<tr>
+                                        <td colspan='3'></td>
+                                    </tr>*@
+                                    @if (!Model.RequireStorage)
+                                    {
+                                        <tr>
+                                            <td>Crop Storage</td>
+                                            <td>Not Required/Not Applicable</td>
+                                            <td></td>
+                                        </tr>}
+                                    else
+                                    {
+                                        <tr>
+                                            <td>@Html.GetDisplayName(m => Model.StorageTime)</td>
+                                            <td>@Model.StorageTime</td>
+                                            <td></td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>@Html.GetDisplayName(m => Model.StoragePercent)</td>
+                                            <td>@Model.StoragePercent</td>
+                                            <td></td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>@Html.GetDisplayName(m => Model.StorageLossFactor)</td>
+                                            <td>@Model.StorageLossFactor</td>
+                                            <td></td>
+                                        </tr>
+}
+							        <tr>
+							            <td>Average Cost</td>
+							            <td>@Model.AverageCostPerAcre</td>
+							            <td></td>
+							        </tr>
+                                    <tr>
+                                        <td>Average Production</td>
+                                        <td>@Model.AverageProdutivityPerAcre</td>
+                                        <td></td>
+                                    </tr>
+
+							    </table>
+							    
 							</p>
 
 							<p>
