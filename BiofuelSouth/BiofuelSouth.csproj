@@ -675,6 +675,7 @@
     <Compile Include="Enum\StorageMethod.cs" />
     <Compile Include="Enum\WizardStep.cs" />
     <Compile Include="Helpers\EnumExtensions.cs" />
+    <Compile Include="Helpers\HtmlExtensions.cs" />
     <Compile Include="Helpers\LinqExtensions.cs" />
     <Compile Include="Manager\PDFform.cs" />
     <Compile Include="Models\FactsheetViewModel.cs" />
