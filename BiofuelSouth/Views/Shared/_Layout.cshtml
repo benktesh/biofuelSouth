@@ -77,14 +77,15 @@
 						<li><a id="glossaryButton" href='@Url.Action("Search", "Home")'>Glossary</a></li>
 	                    <li><a href="/map" id="dropDownButton">Maps</a></li>
 						<li><a id="helpButton" href='@Url.Action("Factsheet", "Home")'>Factsheet</a></li>
-						<li><a href='@Url.Action("NewDSS", "DSS")'>DSS</a></li>
+                        <li><a href='@Url.Action("NewDSS", "DSS")'>DSS</a></li>
+                        <li><a href='@Url.Action("Index", "Biosim")'>Simulator</a></li>
 						<li><a href='@Url.Action("AskExpert", "Home")'>Ask Expert</a></li>
 						<li><a id="forumButton" href='/forum'>Forum</a></li>
 						<li><a id="contactButton" href='@Url.Action("FeedBack", "Home")'>Contact</a></li>
                     </ul>
                    
                     <form class="navbar-form zero-right-margin" style="float:right; margin-top: 3px; margin-bottom:0; margin-left: 0; margin-right: 0; padding:0;" role="search" method="POST" action="@Url.Action("Search", "Home")">
-                        <input type="text" class="input-sm" style="margin:2px; padding:0;" size="20" placeholder="Enter a term" name="term" id="term" />
+                        <input type="text" class="input-sm" style="margin:1px; padding:0;" size="10" placeholder="Enter a term" name="term" id="term" />
                         <button class="btn btn-default glyphicon glyphicon-search zero-right-margin" id="searchButton " name="searchButton" type="submit"></button>
                     </form>
 

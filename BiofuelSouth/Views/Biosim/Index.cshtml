@@ -1,0 +1,149 @@
+﻿@using BiofuelSouth.Enum
+@model BiofuelSouth.ViewModels.SimulatorViewModel
+
+@Scripts.Render("~/Scripts/custom.js")
+@Scripts.Render("~/bundles/jquery")
+@using (Html.BeginForm( new {id="biosumInput"}))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new {@class = "text-danger"})
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4>BioSim 0.1 - Biomass Simulator</h4>
+                    </div>
+                    <div class="panel-body">
+
+                        <div class="col-sm-4">
+
+                            <div class="col-xs-12  form-group">
+                                @Html.LabelFor(model => model.General.State, new {@class = "control-label"})<span>:&nbsp;</span>
+                                
+                                @Html.DropDownListFor(model => model.General.State, Model.General.StateList, "Select State", new { @class = "", id = "state" })
+                                <a class="" data-content="<p>State of the production of biofuel crop.</p>" data-placement="center" data-toggle="popover" data-trigger="focus" href="#" rel="popover" tabindex="0" title="State">
+                                    <span class="glyphicon glyphicon-question-sign"></span>
+                                </a>
+                                @Html.ValidationMessageFor(model => model.General.State, "", new { @class = "text-danger" })
+
+                            </div>
+                            <div class="col-xs-12 form-group">
+                                @Html.LabelFor(model => model.General.County, new { @class = "control-label" }):&nbsp; 
+                                
+                                @Html.DropDownListFor(model => model.General.County, Model.General.CountyList, "Select County", new { @class = "", name = "county", id = "county" })
+                                <a href="#" rel="popover" class="" data-toggle="popover" tabindex="0" data-trigger="focus"
+                                   data-placement="center" title="County" data-content="<p>County of production.</p>">
+                                    <span class="glyphicon glyphicon-question-sign"></span>
+                                </a>
+                                @Html.ValidationMessageFor(model => model.General.County, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-xs-12 form-group">
+                                @Html.LabelFor(model => model.General.Category, new { @class = "control-label" }):&nbsp;
+                                
+                                @Html.DropDownListFor(model => model.General.Category, EnumHelper.GetSelectList(typeof(CropType)), "Select Crop", new { @class = "" })
+                                <a href="#" rel="popover" class="" data-toggle="popover" tabindex="0" data-trigger="focus"
+                                   data-placement="center" title="Crop category" data-content="<p>Select the type of biofuel crops. If you do not find a crop in the list, please contact us.</p>">
+                                    <span class="glyphicon glyphicon-question-sign"></span>
+                                </a>
+
+                                @Html.ValidationMessageFor(model => model.General.Category, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-sm-12 form-group text-center">
+
+                                @{
+                                    if (!Model.General.ProjectSize.HasValue)
+                                    {
+                                        Model.General.ProjectSize = 100;}
+                                        }
+
+                                <div id="projectSize" class="text-center">@Model.General.ProjectSize &nbsp;Acres</div>
+
+                                
+                                @Html.TextBoxFor(model => model.General.ProjectSize, new {type = "range", min = "100", @class = "", max="10000", step="100"})
+                                <a href="#" rel="popover" class="" data-toggle="popover" tabindex="0" data-trigger="focus"
+                                   data-placement="center" title="Help" data-content="<p>Enter size of the potential project. The area must be in acres. If you do not yet know the size, use any reasonable acre.</p>">
+                                    <span class="glyphicon glyphicon-question-sign"></span>
+                                </a>
+                                @Html.LabelFor(model => model.General.ProjectSize, new { @class = "control-label" })
+
+
+                                @Html.ValidationMessageFor(model => model.General.ProjectSize, "", new {@class = "text-danger"})
+                            </div>
+
+
+                            <div class="col-sm-12 form-group text-center">
+                                <div id="projectLife" class="text-center">@Model.General.ProjectLife &nbsp;Years</div>
+                                @Html.TextBoxFor(model => model.General.ProjectLife, new {@class = "", type = "range", min = "1", max = "10", step = "1" })
+                                @Html.LabelFor(model => model.General.ProjectLife, new {@class = "control-label center"})
+                                <a href="#" rel="popover" class="" data-toggle="popover" tabindex="0" data-trigger="focus"
+                                   data-placement="left" title="Project Duration" data-content="<p>Duration of project expressed as total number of years
+                    between first plantation and final harvest with intermediate harvests in between. The number must a whole number i.e. 1 or 2 or 10 for a year.</p>">
+                                    <span class="glyphicon glyphicon-question-sign"></span></a>
+                                @Html.ValidationMessageFor(model => model.General.ProjectLife, "", new {@class = "text-danger"})
+                            </div>
+                            <div class="col-md-12 form-group">
+                                @Html.LabelFor(model => model.General.BiomassPriceAtFarmGate, new { @class = "control-label" })
+                                <a href="#" rel="popover" class="" data-toggle="popover" tabindex="0" data-trigger="focus"
+                                   data-placement="left" title="Farm Gate Price" data-content="<p>The price of the product at which it is sold by the farm (the farm gate price).</p>">
+                                    <span class="glyphicon glyphicon-question-sign"></span>
+                                </a>
+                                @Html.EditorFor(model => model.General.BiomassPriceAtFarmGate, new { htmlAttributes = new { @class = "" } })
+                                @Html.ValidationMessageFor(model => model.General.BiomassPriceAtFarmGate, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-12 form-group">
+                                @Html.LabelFor(model => model.General.LandCost, new { @class = "control-label" })
+                                <a href="#" rel="popover" class="" data-toggle="popover" tabindex="0" data-trigger="focus"
+                                   data-placement="left" title="Land Cost" data-content="<p>Annual cost of land expressed as  $/acre/year.</p>">
+                                    <span class="glyphicon glyphicon-question-sign"></span>
+                                </a>
+                                @Html.EditorFor(model => model.General.LandCost, new { htmlAttributes = new { @class = "" } })
+                                @Html.ValidationMessageFor(model => model.General.LandCost, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-12 form-group text-center">
+                                <br />
+                              
+                                <button type="reset" value="Reset" class="btn btn-primary">Reset</button>&nbsp;&nbsp;
+                                <input type="submit" value="Run" class="btn btn-success" />
+                            </div>
+
+
+                        </div>
+                        <div class="col-xs-8">Outputs/instructions</div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+}
+
+<script>
+    $(document).ready(function () {
+
+
+
+    });
+
+    $('#@Html.IdFor(m=>Model.General.ProjectLife)').change(function () {
+        
+        var currentValue = $('#@Html.IdFor(m=>Model.General.ProjectLife)').val();
+       // alert(currentValue);
+        $('#projectLife').html(currentValue + ' Years');
+    });
+
+    $('#@Html.IdFor(m=>Model.General.ProjectSize)').change(function () {
+
+        var currentValue = $('#@Html.IdFor(m=>Model.General.ProjectSize)').val();
+        // alert(currentValue);
+        $('#projectSize').html(currentValue + ' Acres');
+    });
+
+    $("#biosumInput").submit(function (event) {
+        alert("Run function is still under development.");
+        event.preventDefault();
+    });
+
+</script>
