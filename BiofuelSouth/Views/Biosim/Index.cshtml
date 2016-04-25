@@ -3,7 +3,7 @@
 
 @Scripts.Render("~/Scripts/custom.js")
 @Scripts.Render("~/bundles/jquery")
-@using (Html.BeginForm( new {id="biosumInput"}))
+@using (Html.BeginForm( "Index", "BioSim", FormMethod.Post, new { @id = "formSsimulatorInput" } ) )
 {
     @Html.AntiForgeryToken()
 
@@ -141,7 +141,7 @@
         $('#projectSize').html(currentValue + ' Acres');
     });
 
-    $("#biosumInput").submit(function (event) {
+    $("#formSsimulatorInput").submit(function (event) {
         alert("Run function is still under development.");
         event.preventDefault();
     });
