@@ -656,6 +656,7 @@
     <Content Include="Files\switchgrass.pdf" />
     <Content Include="Files\miscanthus.docx" />
     <Content Include="Files\miscanthus.pdf" />
+    <Content Include="Files\poplar.pdf" />
     <None Include="Properties\PublishProfiles\biofuelsouth - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\biofuelsouth - Web Deploy.pubxml" />
     <None Include="Properties\Settings.settings">
