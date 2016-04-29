@@ -527,10 +527,10 @@ black cottonwood (<i>Populus trichocarpa</i>), and Japanese poplar
 (<i>Populus maximowiczii</i>) are also used in various hybrid polar crosses.
 
 <br /><br />
-Hybrid poplars are often grown as short rotation woody crop (SRWC) systems (Table 2). For SRWC plantings, trees are planted in rows
+Hybrid poplars are often grown as short rotation woody crop (SRWC) systems (<a href='#Table2'>Table 2</a>). For SRWC plantings, trees are planted in rows
 and given treatment typical of agriculture, including weed and pest control, fertilization, and sometimes irrigation. Hybrid poplars in SRWC
 plantings in the southeastern United States can usually be harvested for pulp, or sometimes lumber, in 10-12 years. Hybrid poplars are
-also grown in coppice systems (Table 2). In coppice systems, the trees are grown for a few years, usually between 4 and 6, and then the
+also grown in coppice systems (<a href='#Table2'>Table 2</a>). In coppice systems, the trees are grown for a few years, usually between 4 and 6, and then the
 stems are removed at the stump. The stumps re-sprout with multiple new stems that can match the size and form of the original stem. This
 cycle is then repeated every three to four years, providing landowners with regular income from sales of this material.
 
@@ -546,7 +546,7 @@ can negatively impact air quality in the surrounding areas, this lower sulfur
 content makes hybrid poplar one of the more environmentally-friendly biofuel
 feedstock candidates. Hybrid poplar has a heating value of 8332 BTU per
 pound, which is superior to the heating values of many other feedstocks
-(Table 3).
+(<a href='#Table3'>Table 3</a>).
 ";
 
 				model.GlossaryOfCommonTerms = new Dictionary<string, string>();
@@ -572,36 +572,8 @@ inches in length, depending on soil moisture availability, and are planted durin
 with one or two buds exposed above the ground surface.These cuttings are rejuvenated
 with water prior to planting and produce trees
 that are genetically identical to the parent tree.
-<br /> <br />
-A soil pH between 5.0 and 8.0 is recommended
-for favorable survival and growth rates. In the
-southeastern United States, available water
-can often be the most limiting factor for hybrid
-poplar growth. Nitrogen fertilization helps
-poplar stands reach maximum production
-much earlier than non-fertilized stands and can
-significantly increase the amount of biomass
-produced at end of a rotation. For instance,
-nitrogen fertilization at a rate of 107 pounds
-per acre per year increased the volume yielded by eastern cottonwood varieties
-by about 330% over a 9-year rotation. The additional costs of fertilization can
-often be unfeasible for lower-revenue pursuits such as biomass production.
-
-<br /><br />
-Hybrid poplars have been successfully planted on reclaimed mine sites that
-had biosolids (solid, organic materials removed from municipal wastewater)
-implanted underground. These biosolids raised the pH of the soil and introduced
-additional nutrients for the trees to utilize. At the mine sites, the soil was disked
-after the biosolids were buried 1.5 feet below the ground surface in order to
-evenly distribute them throughout the test area. This method was able to match
-the yields of poplars grown on less degraded sites while remediating some of the
-damage caused by prior mining activities.
-
-
-
-
-
-";
+<br /> <br /> A soil pH between 5.0 and 8.0 is recommended for favorable survival and growth rates. In the southeastern United States, available water can often be the most limiting factor for hybrid poplar growth. Nitrogen fertilization helps poplar stands reach maximum production much earlier than non-fertilized stands and can significantly increase the amount of biomass produced at end of a rotation. For instance, nitrogen fertilization at a rate of 107 pounds per acre per year increased the volume yielded by eastern cottonwood varieties by about 330% over a 9-year rotation. The additional costs of fertilization can often be unfeasible for lower-revenue pursuits such as biomass production.
+<br /><br /> Hybrid poplars have been successfully planted on reclaimed mine sites that ad biosolids (solid, organic materials removed from municipal wastewater) implanted underground. These biosolids raised the pH of the soil and introduced additional nutrients for the trees to utilize. At the mine sites, the soil was disked after the biosolids were buried 1.5 feet below the ground surface in order to evenly distribute them throughout the test area. This method was able to match the yields of poplars grown on less degraded sites while remediating some of the damage caused by prior mining activities. ";
 
 				model.GrowthRate = @"Hybrid poplars stands reach maturity and begin to experience
 increased mortality between fifteen and twenty years of age;
@@ -627,6 +599,31 @@ of markets for biomass.There is still a need for proper infrastructure to transp
 returns for planting it as a feedstock will be greatly diminished.Despite these challenges, there is great potential in the future for hybrid
 poplar as a biofuel feedstock.";
 
+				model.FactsForQuickReference = new Dictionary<string, string>();
+
+				model.FactsForQuickReference.Add("Growing cycle", "Coppice System");
+				model.FactsForQuickReference.Add("Planting stock",
+					"Commercially grown from clonal cuttings 10 - 18 inches in length");
+				model.FactsForQuickReference.Add("Age at first harvest", "3-6 years");
+				model.FactsForQuickReference.Add("Average Total Yield per Acre( non - irrigated, non fertilized )",
+					"0.9 dry tons/ac at 3 years <br />1.7 dry tons/ac at 4 years<br />, 2.8 dry tons/ac at 6 years <br />3.5 dry tons/ac at 9 years");
+				model.FactsForQuickReference.Add("Average Total Yield per Acre( irrigated, fertilized )",
+					"3.1 tons/ac at 3 years <br />5.2 dry tons/ac at at 4 years, <br />9.0 dry tons/ac at 6 years <br />13.1 dry tons/ac at 9 years");
+
+				model.FactsForQuickReferenceTitle = "<a name='Table2'></a>Table 2. Hybrid Poplar Statistics Based on Regional Data";
+
+
+				model.HeatingValueSummaryTitle = "<a name='Table3'></a>Table 3.Heating Values of Biofuel Feedstocks";
+
+				model.Heatingvaluesummary = new Dictionary<string, string>
+				{
+					{"Feedstock", "Heating Value (BTU per pound)"},
+					{"Hybrid poplar", "8,332" },
+					{"Switchgrass", "8,014" },
+					{ "Wheatstraw", "7,528"},
+					{ "Eastern cottonwood", "6,991"},
+					{ "Black cottonwood", "6,449"},
+				};
 				model.References = new List<string>();
 
 				model.References.AddRange(

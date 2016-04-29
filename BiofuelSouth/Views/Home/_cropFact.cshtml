@@ -1,5 +1,6 @@
 ﻿@model BiofuelSouth.Models.FactsheetViewModel
 
+@{ int i = -1; }
 
 <div class="panel panel-default">
     <div class="panel-heading">
@@ -49,7 +50,7 @@
 
                 <table class="table table-striped table-responsive table-bordered">
 
-                    @{ int i = -1; }
+                    
                     @foreach ( var item in Model.GlossaryOfCommonTerms.ToList() )
                     {
                         i++;
@@ -106,25 +107,41 @@
         @if ( Model.FactsForQuickReference != null )
         {
 
-            <h4>
-
-                @Html.Label( Model.CropType + " Facts for Quick Reference" )
-
-            </h4>
-            <table class="table table-bordered table-responsive">
+            <h5>
+                @if ( Model.FactsForQuickReferenceTitle != null )
+                {
+                    <label>
+                        @Html.Raw( Model.FactsForQuickReferenceTitle )
+                    </label>
+}
+                else
+                {
+                    @Html.Label( Model.CropType + " Facts for Quick Reference" )
+}
+            </h5>
+            <table class="table table-striped table-responsive table-bordered">
+                @{ i = -1;}
                 @foreach ( var item in Model.FactsForQuickReference.ToList() )
                 {
+                    i++;
+                    if ( i == 0 )
+                    {
+                        <thead>
+                            <tr>
+                                <td>@Html.Raw( item.Key )</td>
+                                <td>@Html.Raw( item.Value )</td>
+                            </tr>
+                        </thead>
+}
+
+
                     <tr>
                         <td>@Html.Raw( item.Key )</td>
                         <td>@Html.Raw( item.Value )</td>
                     </tr>
 
                 }
-
-            </table>
-
-
-        }
+            </table>  }
         @if ( Model.Conclusion != null )
         {
             <h4>@Html.LabelFor( m => m.Conclusion )</h4>
@@ -132,6 +149,48 @@
 
         }
 
+
+        @if ( Model.Heatingvaluesummary != null )
+        {
+
+            <h5>
+                @if ( Model.HeatingValueSummaryTitle != null )
+                {
+                    <label>
+                        @Html.Raw( Model.HeatingValueSummaryTitle )
+                    </label>
+}
+                else
+                {
+                    @Html.Label( "Summary of Heating Value of Biomass Feedstock" )
+}
+            </h5>
+            <table class="table table-striped table-responsive table-bordered">
+                @{ i = -1; }
+                @foreach (var item in Model.Heatingvaluesummary.ToList())
+                {
+                    if (i == 0)
+                    {
+                        <thead>
+                        <tr>
+                            <td>@Html.Raw(item.Key)</td>
+                            <td>@Html.Raw(item.Value)</td>
+
+                        </tr>
+                        </thead>
+}
+                    else
+                    {
+                        <tr>
+                            <td>@Html.Raw( item.Key )</td>
+                            <td>@Html.Raw( item.Value )</td>
+                        </tr>
+}
+
+
+                }
+            </table>
+        }
 
         @if ( Model.PreparedBy != null )
         {

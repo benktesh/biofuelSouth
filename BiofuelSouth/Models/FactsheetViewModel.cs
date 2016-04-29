@@ -39,6 +39,10 @@ namespace BiofuelSouth.Models
 
         [Display(Name= @"Facts For Quick Reference")]
         public Dictionary<string, string> FactsForQuickReference { get; set; }
+		public string FactsForQuickReferenceTitle { get; set;  }
+
+		public Dictionary<string, string> Heatingvaluesummary { get; set;  }
+		public string HeatingValueSummaryTitle { get; set;  }
 
 
 		[Display( Name = @"Glossary of Common Terms" )]
