@@ -9,7 +9,7 @@
     </div>
     <div class="panel-body Instruction-panel-body">
 
-        @if (Model.CanPDFFactsheet)
+        @if ( Model.CanPDFFactsheet )
         {
 
             <a data-toggle="" class="pull-right" href="@Url.Action("GetPDFFact", "Home", new {cropType = Model.CropType})"><i class="fa fa-file-pdf-o">&nbsp;Download Factsheet</i></a>
@@ -18,53 +18,105 @@
         @*<h4>@Html.LabelFor(m => m.Description)</h4>*@
 
 
-        @if (Model.Description != null)
+        @if ( Model.Description != null )
         {
 
-            @Html.Raw(Model.Description)
-        }
-        @if (Model.GeographicDistribution != null)
-        {
-            <h4>@Html.LabelFor(m => m.GeographicDistribution)</h4>
-            @Html.Raw(Model.GeographicDistribution)
+            @Html.Raw( Model.Description )
         }
 
 
-
-        @if (Model.ProductionProcess != null)
+        @if ( Model.SpeciesDescription != null )
         {
-            <h4>@Html.LabelFor(m => m.ProductionProcess)</h4>
-            @Html.Raw(Model.ProductionProcess)
+            <h4>@Html.LabelFor( m => m.SpeciesDescription )</h4>
+            @Html.Raw( Model.SpeciesDescription )
+        }
+        @if ( Model.GeographicDistribution != null )
+        {
+            <h4>@Html.LabelFor( m => m.GeographicDistribution )</h4>
+            @Html.Raw( Model.GeographicDistribution )
         }
 
-        @if (Model.GrowthRate != null)
+        @if ( Model.GlossaryOfCommonTerms != null )
         {
-            <h4>@Html.LabelFor(m => m.GrowthRate)</h4>
+            <h5>
+                <Label>
+
+                    @Html.Raw( Model.GlossaryOfCommontermsTitle )
+
+                </Label>
+            </h5>
+       
+
+                <table class="table table-striped table-responsive table-bordered">
+
+                    @{ int i = -1; }
+                    @foreach ( var item in Model.GlossaryOfCommonTerms.ToList() )
+                    {
+                        i++;
+                        if ( i == 0 )
+                        {
+                            <thead>
+                                <tr>
+                                    <th width="30%">@Html.Raw( item.Key )</th>
+                                    <th width="70%">@Html.Raw( item.Value )</th>
+                                </tr>
+                            </thead>
+}
+                        else
+                        {
+                            <tr>
+                                <td col-sm-4>@Html.Raw( item.Key )</td>
+                                <td col-sm-8>@Html.Raw( item.Value )</td>
+                            </tr>
+}
+
+
+
+
+                    }
+
+
+                </table>
+
+
+
+                        }
+
+
+        @if ( Model.ProductionProcess != null )
+        {
+            <h4>@Html.LabelFor( m => m.ProductionProcess )</h4>
+            @Html.Raw( Model.ProductionProcess )
+        }
+
+        @if ( Model.GrowthRate != null )
+        {
+            <h4>@Html.LabelFor( m => m.GrowthRate )</h4>
             @Model.GrowthRate
 
         }
 
-        @if (Model.Yield != null)
+        @if ( Model.Yield != null )
         {
-            <h4>@Html.LabelFor(m => m.Yield)</h4>
+            <h4>@Html.LabelFor( m => m.Yield )</h4>
             @Model.Yield
 
         }
 
-        @if (Model.FactsForQuickReference != null)
+        @if ( Model.FactsForQuickReference != null )
         {
 
             <h4>
 
-                @Html.Label(Model.CropType + " Facts for Quick Reference")
+                @Html.Label( Model.CropType + " Facts for Quick Reference" )
 
             </h4>
             <table class="table table-bordered table-responsive">
-                @foreach (var item in Model.FactsForQuickReference.ToList())
+                @foreach ( var item in Model.FactsForQuickReference.ToList() )
                 {
                     <tr>
-                        <td>@Html.Raw(item.Key)</td>
-                        <td>@Html.Raw(item.Value)</td>
+                        <td>@Html.Raw( item.Key )</td>
+                        <td>@Html.Raw( item.Value )</td>
                     </tr>
 
                 }
@@ -73,49 +125,49 @@
 
 
         }
-        @if (Model.Conclusion != null)
+        @if ( Model.Conclusion != null )
         {
-            <h4>@Html.LabelFor(m => m.Conclusion)</h4>
+            <h4>@Html.LabelFor( m => m.Conclusion )</h4>
             @Model.Conclusion
 
         }
 
 
-        @if (Model.PreparedBy != null)
+        @if ( Model.PreparedBy != null )
         {
-            <h4>@Html.LabelFor(m => m.PreparedBy)</h4>
-            @Html.Raw(Model.PreparedBy)
+            <h4>@Html.LabelFor( m => m.PreparedBy )</h4>
+            @Html.Raw( Model.PreparedBy )
 
         }
 
-        @if (Model.AdaptedFrom != null)
+        @if ( Model.AdaptedFrom != null )
         {
-            <h4>@Html.LabelFor(m => m.AdaptedFrom)</h4>
-            @Html.Raw(Model.AdaptedFrom)
+            <h4>@Html.LabelFor( m => m.AdaptedFrom )</h4>
+            @Html.Raw( Model.AdaptedFrom )
 
         }
 
 
-        @if (Model.OtherSources != null)
+        @if ( Model.OtherSources != null )
         {
-            <h4>@Html.LabelFor(m => m.OtherSources)</h4>
+            <h4>@Html.LabelFor( m => m.OtherSources )</h4>
             <ul>
-                @foreach (var r in Model.OtherSources.OrderBy(m => m))
+                @foreach ( var r in Model.OtherSources.OrderBy( m => m ) )
                 {
-                    <li>@Html.Raw(r)</li>
-                }
+                    <li>@Html.Raw( r )</li>
+}
             </ul>
 
         }
 
-        @if (Model.References != null)
+        @if ( Model.References != null )
         {
-            <h4>@Html.LabelFor(m => m.References)</h4>
+            <h4>@Html.LabelFor( m => m.References )</h4>
             <ul>
-                @foreach (var r in Model.References.OrderBy(m => m))
+                @foreach ( var r in Model.References.OrderBy( m => m ) )
                 {
-                    <li>@Html.Raw(r)</li>
-                }
+                    <li>@Html.Raw( r )</li>
+}
             </ul>
 
         }

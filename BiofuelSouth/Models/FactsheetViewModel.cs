@@ -23,8 +23,12 @@ namespace BiofuelSouth.Models
 
         public bool CanPDFFactsheet { get; set; }
 
-       
-        [Display(Name = @"Geographic Distribution")]
+
+		[Display( Name = @"Species Distribution" )]
+		public string SpeciesDescription { get; set; }
+
+
+		[Display(Name = @"Geographic Distribution")]
         public string GeographicDistribution { get; set;  }
 
         [Display(Name = @"Available Crops")]
@@ -35,7 +39,16 @@ namespace BiofuelSouth.Models
 
         [Display(Name= @"Facts For Quick Reference")]
         public Dictionary<string, string> FactsForQuickReference { get; set; }
-        [Display(Name = @"Prepared By")]
+
+
+		[Display( Name = @"Glossary of Common Terms" )]
+		public Dictionary<string, string> GlossaryOfCommonTerms { get; set; }
+	    public string GlossaryOfCommontermsTitle { get; set; }
+		public bool ContainsGlossaryHeading { get; set; }
+
+
+
+		[Display(Name = @"Prepared By")]
         public string PreparedBy { get; set; }
 
         public string Conclusion { get; set; }
