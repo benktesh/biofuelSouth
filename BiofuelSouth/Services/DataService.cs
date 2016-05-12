@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Data.Entity;
 using System.Data.Entity.Migrations;
 using System.Globalization;
@@ -12,6 +13,7 @@ using BiofuelSouth.Enum;
 using BiofuelSouth.Models;
 using BiofuelSouth.Models.Entity;
 using BiofuelSouth.ViewModels;
+using DataType = BiofuelSouth.Models.DataType;
 using GlossaryEntity = BiofuelSouth.Models.Entity.GlossaryEntity;
 
 namespace BiofuelSouth.Services
@@ -382,12 +384,161 @@ namespace BiofuelSouth.Services
 
 			}
 		}
-
 		#region Factsheet
+
+		public enum FactSheetKey
+		{
+			Title, SubTitle, Introduction, Table1, Table2, Table3, Table4, Table5, Table6, Table7, Table8, Table9, Table10,
+			[Display( Name = "Species Distribution" )]
+			SpeciesDistribution
+		}
+
+		//this is for making factsheet to be of type content editor
+		public static FactSheetItem GetFactSheet( CropType crop )
+		{
+			var factSheetItem = new FactSheetItem();
+
+			if ( CropType.Poplar == crop )
+			{
+
+				var fsc = new FactSheetContent {
+					DataType = DataType.HtmlString,
+					Order = 0,
+					Key = 0,
+					Description = "Title",
+					Data = "<div class='col-sm-12'><h3>Poplar<span> (<i>Poplar sp.</i>)</span></h3></div>",
+					HideKeyAsSectionHead = true,
+				};
+
+				factSheetItem.ContentKeys.Add( fsc );
+				
+
+
+
+				fsc = new FactSheetContent {
+					DataType = DataType.HtmlString,
+					Key = 1,
+					Description = "<div class='col-sm-12'><h4>Introduction</h4></div>",
+					Data = @"<div class='col-sm-7'>As the U.S. continues to explore alternatives to fossil fuels to fulfill its energy demands, biofuels have emerged as a " +
+@"promising option.Biofuels are created from converting the biomass of various plants and trees into liquid fuels and can be used for many of" +
+@"the same applications as fossil fuels.Hybrid poplars are one potential feedstock, or plant cultivated specifically for use in biofuel production. " +
+@"Hybrid poplars can produce a large amount of biomass over relatively short rotations and can resprout from stumps after harvest. " +
+@"Hybrid poplars are bred from multiple tree species, including eastern cottonwood(<i> Populus deltoides </i>), a tree native to the Southeast that" +
+@"also has high biomass productivity.In the Southeast, the focus of this" +
+@"fact sheet, several research trials have been conducted to ascertain" +
+@"the feasibility of hybrid poplar as a feedstock.These trials have" +
+@"shown promising biomass production levels, but hybrid poplar’s need" +
+@"for ample amounts of water and susceptibility to disease may reduce its viability for large - scale adoption." +
+@"</div><div class='col-sm-4'><img class='img-responsive' src='../images/factsheet_poplar_1.jpg' alt='Poplar image 1' width='300'><h5><label><a name='Image1'></a>Hybrid poplar produces a considerable amount of biomass</Label></h5></div>",
+
+				};
+
+				factSheetItem.ContentKeys.Add( fsc );
+
+				//add the first table
+				var tableData = new TableData {
+					Caption =
+						"",
+					Data = @"<div class='col-sm-12'><h5><Label><a name='Table1'></a>Table 1: Glossary of Common Terms in Hybrid Poplar Production</Label></h5><table class='table table-striped table-responsive table-bordered'>" +
+						   @"<thead><tr><th>Term</th><th>Definition</th></tr></thead>" +
+						   @"<tbody>" +
+						   @"<tr><td>short rotation woody crops (SRWC)</td><td>Biomass management on a short rotation of anything less than 10 years, with high stem density and more intensive management than normal for pulpwood or sawtimber plantations</td></tr>" +
+						   @"<tr><td>Coppice</td><td>A biomass management regime in which above ground tree biomass is harvested, and new stems sprout from the remaining stump.If the rotation is short enough, coppiced stands can also be considered SRWCs.</td></tr>" +
+						   @"<tr><td>Populus</td><td>A genus of trees (<i>Populus</i>) that includes cottonwoods, aspens, and hybrid poplars.</td></tr>" +
+						   @"<tr><td>Poplar</td><td>A common name given to trees in the genus Populus, as well as yellow poplar( Liriodendron tulipifera ).</td></tr>" +
+						   @"<tr><td>Cottonwood</td><td>Common name for eastern cottonwood (<i>Populus deltoides</i>) in the Southeast.This native species grows throughout the eastern U.S.Also used to describe black cottonwood (<i>P.trichocarpa</i>) and Fremont’s cottonwood (<i>P.fremontii</i>) in the western U.S.</td></tr>" +
+						   @"<tr><td>Hybrid poplar</td><td>A term that refers to Populus trees that have parents from different species.Species commonly used to create hybrid poplars are eastern cottonwood (<i>Populus deltoides</i>), black poplar (<i>Populus nigra</i>), Japanese poplar( Populus maximowitzii ), and black cottonwood (<i>Populus trichocarpa</i>).</td></tr>" +
+						   @"</tbody>" +
+						   @"</table>" +
+						   @"</div>"
+				};
+				fsc = new FactSheetContent {
+					DataType = DataType.Table,
+					Order = 3,
+					Key = 3,
+					HideKeyAsSectionHead = true,
+					Data = tableData,
+				};
+
+				factSheetItem.ContentKeys.Add( fsc );
+
+				fsc = new FactSheetContent {
+					DataType = DataType.HtmlString,
+					Order = 4,
+					Key = 4,
+					Description = "<div class='col-sm-12'><h4>Species Distribution</h4></div>",
+					HideKeyAsSectionHead = true,
+					Data = @"<div class='col-sm-12'><p>Tree species in the genus <i> Populus </i>, which includes poplar, aspen and cottonwood, are among the fastest growing deciduous trees in temperate climate zones.The term" +
+@"'poplar' can cause some confusion, as it is used in several different ways.It can refer to true poplars, those found in the genus <i> Populus </i>, " +
+@"or to tulip / yellow poplars(<i> Liriodendron tulipifera </i>), which have very different growth and wood characteristics.For the purposes of this" +
+@"paper, the term “poplar” will refer to hybrid poplars( see <a href= '#Table1' > Table 1 </a>). Hybrid poplars, which are crosses of multiple <i> Populus </i> species from " +
+	  @"across the United States, Europe, and Asia, are prime candidates for biofuel feedstocks because they grow faster than many native tree species, with some hybrid poplars growing up to 10 feet in height per year. </p>" +
+	  @"<div class='col-sm-4'><img class='img-responsive' src='../images/factsheet_poplar_2.jpg' alt='Poplar image 2' width = '300px'><h5><label><a name = 'Image2' ></a> Hybrid poplar grown in a plantation for bioenergy research( Credit: Leslie Boby )</Label></h5></div>" +
+	  @"<br /> <br /> Eastern cottonwood(<i> Populus deltoides </i>), a species found across" +
+	  @"much of the eastern Unitd States, is used in a majority of the hybrid crosses grown for biofuel production. Black poplar(<i> Populus nigra </i>), " +
+	  @"black cottonwood(<i> Populus trichocarpa </i>), and Japanese poplar (<i> Populus maximowiczii </i>) are also used in various hybrid polar crosses." +
+	
+
+	  @"<br /><br />
+	  Hybrid poplars are often grown as short rotation woody crop( SRWC ) systems(<a href='#Table2'> Table 2 </a>).For SRWC plantings, trees are planted in rows
+	  and given treatment typical of agriculture, including weed and pest control, fertilization, and sometimes irrigation.Hybrid poplars in SRWC
+	  plantings in the southeastern United States can usually be harvested for pulp, or sometimes lumber, in 10 - 12 years.Hybrid poplars are
+	  also grown in coppice systems(<a href= '#Table2'> Table 2 </a>).In coppice systems, the trees are grown for a few years, usually between 4 and 6, and then the
+			stems are removed at the stump.The stumps re - sprout with multiple new stems that can match the size and form of the original stem.This
+			cycle is then repeated every three to four years, providing landowners with regular income from sales of this material.
+			
+
+			<br /><br />
+			The composition of hybrid poplar wood also contributes to its potential as
+			a feedstock.Hybrid poplar wood is made up of a relatively high proportion of cellulose, the component of wood that can be converted into the biofuel
+			ethanol, and a low proportion of lignin, the other major component of wood, which cannot be converted readily into ethanol.Wood from hybrid poplar
+		   has lower sulfur content than other leading biofuel feedstock candidates, such as wheatstraw and switchgrass.Given that the combustion of sulfur
+			can negatively impact air quality in the surrounding areas, this lower sulfur content makes hybrid poplar one of the more environmentally - friendly biofuel
+			feedstock candidates.Hybrid poplar has a heating value of 8332 BTU per pound, which is superior to the heating values of many other feedstocks (<a href='#Table3'>Table 3 </a>).
+
+
+</div>
+
+"
+				};
+
+				factSheetItem.ContentKeys.Add( fsc );
+							
+
+				fsc = new FactSheetContent {
+					DataType = DataType.HtmlString,
+					Key = 6,
+					Description = "<div class='col-sm-12'><h4>Geographic Distribution</h4><div>",
+					Data  = @"<div class='col-sm-12'><div class='col-sm-4'><img src='../images/factsheet_poplar_3.jpg' alt='Poplar image 3' width='300'><h5><label><a name='Image3'></a>Poplar seedling planted from stick cutting. (Credit: Leslie Boby)</Label></h5></div>" +
+@"Native poplars grow readily across the temperate and sub-polar climate zones of North America; however, there are some challenges specific to growing hybrid poplar in the southeastern U.S. Hybrid poplar can only reach viable production levels on soils with both ample available moisture and sufficient drainage. This type of site is rare in the Southeast, making it difficult to find areas suitable for hybrid poplar plantations. Eastern cottonwood is found throughout the southeastern U.S. and commonly occurs on alluvial soils and bottomland areas. Hybrid poplars that can grow in this region, including <i>Populus trichocarpa</i> x <i>Populus deltoides</i>, <i>P.deltoides</i> x <i>P. maximowiczii</i>, and <i>P. deltoides</i> x <i>P. nigra</i>, grow well on the same types of sites as native cottonwoods, but some hybrids have faster growth rates during the first three years after planting or higher resilience to pest damage.</div>" +
+					@"",
+			};
+				factSheetItem.ContentKeys.Add( fsc );
+
+
+				//geographic
+
+	
+			
+
+
+
+			}
+
+			factSheetItem.CropType = crop;
+			var fileName = string.Format( "{0}.pdf", crop.ToString() ).ToLower();
+			var path = Path.Combine( System.Web.HttpContext.Current.Server.MapPath( "~/Files" ), fileName );
+
+			factSheetItem.CanPDFFactsheet = System.IO.File.Exists( path );
+			return factSheetItem;
+
+		}
+
 
 		public static FactsheetViewModel GetFactsheetViewModel( CropType crop )
 		{
 			var model = new FactsheetViewModel { CropType = crop };
+			#region switchgrass
 			if ( crop == CropType.Switchgrass )
 			{
 				model.Title = "Switchgrass";
@@ -417,6 +568,8 @@ namespace BiofuelSouth.Services
 				model.References.Add( "Jacobson, M. 2013.Penn State Extension, Renewable and Alternative Energy Fact Sheet - NewBio Energy Crop Profile: Switchgrass.<a href='http://extension.psu.edu/publications/ee0080'>http://extension.psu.edu/publications/ee0080.</a>" );
 				model.References.Add( "USDA - NRCS. Planting and Managing Switchgrass as a Biomass Energy Crop. <a href='www.nrcs.usda.gov/Internet/FSE_DOCUMENTS/stelprdb1042293.pdf'>www.nrcs.usda.gov/Internet/FSE_DOCUMENTS/stelprdb1042293.pdf.</a>" );
 			}
+			#endregion
+			#region miscanthus
 			else if ( crop == CropType.Miscanthus )
 			{
 				model.Title = "Miscanthus";
@@ -485,6 +638,7 @@ namespace BiofuelSouth.Services
 
 
 			}
+			#endregion
 			else if ( CropType.Willow == crop )
 			{
 				model.Title = "Willow";
@@ -560,8 +714,7 @@ pound, which is superior to the heating values of many other feedstocks
 				model.GlossaryOfCommonTerms.Add( "Cottonwood", "Common name for eastern cottonwood (<i>Populus deltoides</i>) in the Southeast.This native species grows throughout the eastern U.S.Also used to describe black cottonwood (<i>P.trichocarpa</i>) and Fremont’s cottonwood (<i>P.fremontii</i>) in the western U.S." );
 				model.GlossaryOfCommonTerms.Add( "Hybrid poplar", "A term that refers to Populus trees that have parents from different species.Species commonly used to create hybrid poplars are eastern cottonwood (<i>Populus deltoides</i>), black poplar (<i>Populus nigra</i>), Japanese poplar( Populus maximowitzii ), and black cottonwood (<i>Populus trichocarpa</i>)." );
 
-				model.GeographicDistribution = @"Native poplars grow readily across the temperate and sub-polar climate zones of North America; however, there are some challenges specific to growing hybrid poplar in the southeastern U.S. Hybrid poplar can only reach viable production levels on soils with both ample available moisture and sufficient drainage. This type of site is rare in the Southeast, making it difficult to find areas suitable for hybrid poplar plantations. Eastern cottonwood is found throughout the southeastern U.S. and commonly occurs on alluvial soils and bottomland areas. Hybrid poplars that can grow in this region, including <i>Populus trichocarpa</i> x <i>Populus deltoides</i>, <i>P.deltoides</i> x <i>P. maximowiczii</i>, and <i>P. deltoides</i> x <i>P. nigra</i>, grow well on the same types of sites as native cottonwoods, but some hybrids have faster growth rates during the first three years after planting or higher resilience to pest damage.";
-
+				
 				model.ProductionProcess = @"Numerous research trials have yielded insights into optimally
 managing hybrid poplar in the Lake States and the Pacific Northwest, but fewer trials have
 been conducted in the Southeast. Hybrid poplars are cultivated from crosses between
@@ -601,14 +754,14 @@ poplar as a biofuel feedstock.";
 
 				model.FactsForQuickReference = new Dictionary<string, string>();
 
-				model.FactsForQuickReference.Add("Growing cycle", "Coppice System");
-				model.FactsForQuickReference.Add("Planting stock",
-					"Commercially grown from clonal cuttings 10 - 18 inches in length");
-				model.FactsForQuickReference.Add("Age at first harvest", "3-6 years");
-				model.FactsForQuickReference.Add("Average Total Yield per Acre( non - irrigated, non fertilized )",
-					"0.9 dry tons/ac at 3 years <br />1.7 dry tons/ac at 4 years<br />, 2.8 dry tons/ac at 6 years <br />3.5 dry tons/ac at 9 years");
-				model.FactsForQuickReference.Add("Average Total Yield per Acre( irrigated, fertilized )",
-					"3.1 tons/ac at 3 years <br />5.2 dry tons/ac at at 4 years, <br />9.0 dry tons/ac at 6 years <br />13.1 dry tons/ac at 9 years");
+				model.FactsForQuickReference.Add( "Growing cycle", "Coppice System" );
+				model.FactsForQuickReference.Add( "Planting stock",
+					"Commercially grown from clonal cuttings 10 - 18 inches in length" );
+				model.FactsForQuickReference.Add( "Age at first harvest", "3-6 years" );
+				model.FactsForQuickReference.Add( "Average Total Yield per Acre( non - irrigated, non fertilized )",
+					"0.9 dry tons/ac at 3 years <br />1.7 dry tons/ac at 4 years<br />, 2.8 dry tons/ac at 6 years <br />3.5 dry tons/ac at 9 years" );
+				model.FactsForQuickReference.Add( "Average Total Yield per Acre( irrigated, fertilized )",
+					"3.1 tons/ac at 3 years <br />5.2 dry tons/ac at at 4 years, <br />9.0 dry tons/ac at 6 years <br />13.1 dry tons/ac at 9 years" );
 
 				model.FactsForQuickReferenceTitle = "<a name='Table2'></a>Table 2. Hybrid Poplar Statistics Based on Regional Data";
 
