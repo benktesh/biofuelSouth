@@ -604,6 +604,17 @@
     <Content Include="images\biomassbanner.jpg" />
     <Content Include="images\cereshead.jpg" />
     <Content Include="images\CoppiceRegrowthAt_Belleville299x200.jpg" />
+    <Content Include="images\factsheet_miscanthus_1.jpg" />
+    <Content Include="images\factsheet_miscanthus_2.jpg" />
+    <Content Include="images\factsheet_miscanthus_3.jpg" />
+    <Content Include="images\factsheet_poplar_1.jpg" />
+    <Content Include="images\factsheet_poplar_2.jpg" />
+    <Content Include="images\factsheet_poplar_3.jpg" />
+    <Content Include="images\factsheet_poplar_4.jpg" />
+    <Content Include="images\factsheet_switchgrass_1.jpg" />
+    <Content Include="images\factsheet_switchgrass_2.jpg" />
+    <Content Include="images\factsheet_switchgrass_3.jpg" />
+    <Content Include="images\factsheet_switchgrass_4.jpg" />
     <Content Include="images\funding.jpg" />
     <Content Include="images\funding.png" />
     <Content Include="images\ibssparnershiplogo.png" />
