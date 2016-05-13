@@ -42,20 +42,29 @@
         </div>
     </div>
     <div class="col-md-9 nopadding">
-        <div id="CropFact">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <div id="CropFact">
-                        Crop Fact
-                    </div>
-                </div>
-                <div class="panel-body Instruction-panel-body">
-                    At present, fact sheets for the crops listed in the list to the left are available. Please click the crop on the left.
-                    <br/>
-                    You can also download factsheet for certain crops from this page. Please note that PDF copy of factsheets are not available for all the crops.
-                </div>
-            </div>
-        </div>
+	    <div id="CropFact">
+		    @if (Model.CropType == null)
+		    {
+
+
+			    <div class="panel panel-default">
+				    <div class="panel-heading">
+					    <div id="CropFacts">
+						    Crop Fact
+					    </div>
+				    </div>
+				    <div class="panel-body Instruction-panel-body">
+					    At present, fact sheets for the crops listed in the list to the left are available. Please click the crop on the left.
+					    <br/>
+					    You can also download factsheet for certain crops from this page. Please note that PDF copy of factsheets are not available for all the crops.
+				    </div>
+			    </div>
+		    }
+		    else
+		    {
+			    @Html.Partial("_cropFact", Model.FactItem)
+		    }
+	    </div>
     </div>
 </div>
 

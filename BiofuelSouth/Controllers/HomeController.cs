@@ -81,20 +81,25 @@ namespace BiofuelSouth.Controllers
         public ActionResult Factsheet()
         {
             var model = new FactsheetViewModel();
+	        
             return View(model);
         }
 
-        public ActionResult GetFact1(CropType cropType)
-        {
-            var model = DataService.GetFactsheetViewModel(cropType);
-            return PartialView("_cropFact1", model);
-        }
-
+        
 		public ActionResult GetFact( CropType cropType )
 		{
 			var model = DataService.GetFactSheet( cropType );
 			//var model = DataService.GetFactsheetViewModel( cropType );
-			return PartialView( "_cropFact", model );
+			if (Request.IsAjaxRequest())
+			{
+				return PartialView("_cropFact", model);
+			}
+			else
+			{
+				var fsvm = new FactsheetViewModel {CropType = cropType, FactItem = model};
+				return View("Factsheet", fsvm);
+			}
+			
 		}
 
 		public ActionResult GetPDFFact(CropType cropType)

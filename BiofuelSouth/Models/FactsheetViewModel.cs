@@ -13,9 +13,11 @@ namespace BiofuelSouth.Models
     public class FactsheetViewModel
     {
 
-        public CropType CropType { get; set;  }
+        public CropType? CropType { get; set;  }
 
-        public string Title { get; set; }
+		public FactSheetItem FactItem { get; set; }
+
+		public string Title { get; set; }
 
         public string SubTitle { get; set; }
 
@@ -72,7 +74,8 @@ namespace BiofuelSouth.Models
         public FactsheetViewModel()
         {
             AvailableCrops = System.Enum.GetValues(typeof (CropType)).Cast<CropType>().ToList();
-            
+	        FactItem = new FactSheetItem(); 
+
         }
     }
 }

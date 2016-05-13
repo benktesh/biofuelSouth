@@ -732,6 +732,7 @@
     <Compile Include="Helpers\HtmlExtensions.cs" />
     <Compile Include="Helpers\LinqExtensions.cs" />
     <Compile Include="Manager\PDFform.cs" />
+    <Compile Include="Models\FactSheetItem.cs" />
     <Compile Include="Models\FactsheetViewModel.cs" />
     <Compile Include="Resources\GeneralResource.Designer.cs">
       <AutoGen>True</AutoGen>
