@@ -9,17 +9,17 @@
 }
 <div class="col-xs-7">
     <h3>
-        Overview of @Model.CropType in @Model.CountyName (@Model.StateCode)
+        Overview of @Model.CropType in @Model.CountyName, @Model.StateName
     </h3>
     <p>
         @*Move to template *@
 
         Growing of
         <strong>@Model.CropType</strong> for a duration of
-        <strong>@Model.ProjectLife</strong> over an area of
+        <strong>@Model.ProjectLife</strong> @(Model.ProjectLife == 1 ? "year" : "years") over an area of
         <strong>@Model.ProjectSize</strong> in
-        <strong>@Model.CountyName</strong> County, 
-        <strong>@Model.StateName</strong> is expected to produce an estimated
+        <strong>@Model.CountyName</strong> County,
+        <strong>@Model.StateName</strong> (see <strong>Map 1</strong>) is expected to produce an estimated
         <strong>@Model.AnnualProduction</strong> tons of biomass annually.
 
         The production comes at an expected annual cost of
@@ -27,14 +27,14 @@
         <strong>@Model.AnnualRevenue</strong>.
 
         The @Html.ActionLink( "net present value (NPV)", "Search", "Home", new { term = "NPV" }, null )
-        of the project is estimated to be <strong>@Model.NPV.ToString( "C0" )</strong> at assumed
+        of the project is estimated to be @(GetFormattedStringNegative(Model.NPV)) at assumed
         prevailing interest rate of <strong>@Model.InterestRate.ToString( "P" )</strong>.
 
 
         @if ( Model.NPV < 0 )
         {
             <span>
-                This means there will be a net loss of <span class="text-danger"><strong>  @Model.NPV.ToString( "C0" ) </strong></span> from this project during project's life.
+                This means there will be a net loss of <span class='text-danger'><strong>  @Model.NPV.ToString( "C0" ) </strong></span> from this project during project's life.
             </span>}
         else
         {
@@ -77,9 +77,8 @@
     else if ( highNPV != null && highNPV.Crop == @Model.CropType )
     {
         <span>
-            Likewise, it is anticipated that growing
-            <strong>@highNPV.Crop.ToString()</strong> may likely result in the highest profit compared
-            to other crops.
+            Compared among the select crops in this BDSS, it is anticipated that growing
+            <strong>@highNPV.Crop.ToString()</strong> may likely result in the best return to investment compared to other crops.
 
         </span>
 
@@ -114,12 +113,12 @@
     {
         <span>
             Likewise, it is anticipated that growing
-            <strong>@lowNPV.Crop.ToString()</strong> may result the lowest profit compared to growing other crops.
+            <strong>@lowNPV.Crop.ToString()</strong> may result the lowest return to investement compared to growing other crops.
 
         </span>
 
     }
-
+    Graph 1 shows comparision of <strong>@Model.CropType</strong> with other crops.
 
     <div class="col-xs-9 pull-right">
 
@@ -129,7 +128,7 @@
             var urlAnnualProduction = Url.Action( "ShowChart", "Chart", new { @cacheKey = keyValue } );
             <figure>
                 <img src="@urlAnnualProduction" class="img-responsive img-chart" alt="NPV Compare Chart" />
-                <figcaption class="text-center">Comparision of project NPV ($) across various biofuel crops.</figcaption>
+                <figcaption class="text-center">Graph 1. Comparision of project NPV ($) across various biofuel crops.</figcaption>
             </figure>}
 
     </div>
@@ -147,15 +146,12 @@
     <br />
     <figure>
         <img src=@Model.ImageUrl.Item1 class="img-responsive" style="max-height: 200px;" />
-        <figcaption class="figcaption text-center">@Model.ImageUrl.Item2</figcaption>
+        <figcaption class="figcaption text-center">Photo 1. @Model.ImageUrl.Item2</figcaption>
     </figure>
 
     <p>
         <br />
-        @if ( Model.CountyEntity != null )
-        {
-            @Html.Partial( "_CountyMap", Model )
-        }
+         @Html.Partial( "_CountyMap", Model )
     </p>
 
 
@@ -199,4 +195,26 @@
         window.onload = initialize;
     </script>*@
 
+@functions {
 
+    MvcHtmlString GetFormattedStringNegative(decimal value, string format = "C0")
+    {
+        var val = value.ToString(format);
+        var formattted = string.Format("<strong>{0}</strong>", val);
+        if (value < 0)
+        {
+
+            formattted = string.Format("<span class='text-danger'><strong>{0}</strong></span>", val);
+
+        }
+        return new MvcHtmlString(formattted);
+
+
+
+    }
+
+    string GetYearOrYears(decimal value)
+    {
+        return value == 1 ? "year" : "years";
+    }
+}

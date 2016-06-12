@@ -17,17 +17,17 @@
 		<div class="col-md-8 form-group">
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					<h4>@pageMain</h4>
+					@pageMain
 				</div>
 				<div class="panel-body">
 					@Html.ValidationSummary( true, "", new { @class = "text-danger" } )
 
 					<div class="row">
-						<div class="col-xs-6">
+						<div class="col-xs-12">
 							@Html.LabelFor(model => model.RequireStorage, new {@class = "control-label"})
 							<a href="#" rel="popover" class="" data-toggle="popover" tabindex="0" data-trigger="focus"
 							   data-placement="center" title="Require Finance" data-content="<p>If the project require
-                            storage, select Yes. Or select No if storage is not required. </p>">
+                            storage, select Yes. </p>">
 									<span class="glyphicon glyphicon-question-sign"></span></a>
 							<span class="required">Required </span>
 
@@ -112,13 +112,13 @@
 		<div class="col-md-4 form-group">
 			<div class="panel panel-default">
 				<div class="panel-heading instruction-panel-heading">
-					<h4>Instructions: @pageMain</h4>
+					Instructions: @pageMain
 				</div>
 				<div class="panel-body Instruction-panel-body">
-					<h4>Instructions: @pageMain</h4>
+					Instructions: @pageMain
 
 					<p>
-						Storage of crop may not be always necessary. For example, woody crops may not require storage.
+						Storage of crop may not be always necessary. For example, not all woody crops may necessarily require storage.
 					</p>
 					<p>
 						For storage, methods applicable for agricultural crop storage are used for non-woody crops.
@@ -129,7 +129,8 @@
 						Please specify if storage is needed or not.
 					</p>
 					<p>
-						If it is needed, then enter number of days of storage, percent of total harvest requiring storage and storage method.
+					    If it is needed, then enter number of days of storage, estimated percent of total harvest requiring storage and storage 
+                        method to be used.
 					</p>
 
 					<p> A system generated cost can be accepted, or a lump sum storage cost can be entered or materials costs can be entered to derive the storage cost for a selected method. </p>

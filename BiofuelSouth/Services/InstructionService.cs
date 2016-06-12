@@ -46,21 +46,19 @@ namespace BiofuelSouth.Services
         {
             var resultString = new List<string>();
             resultString.Add(
-                       "If financing (such as loan or assistance) is not required or not applicable to the project," +
-                       "this step can be skipped");
+                       "If financing (such as loan or assistance) is not required or not applicable to the project, this step can be skipped");
 
             resultString.Add(
-                "When a loan is applicable, the project cost is likely to increase due to interest on payment. On the " +
-                "other hand, when assistance is avialable, the project cost may decrease depending on type of assistance" +
-                "available.");
+                "When a loan is applicable, the project cost is likely to increase due to interest on payment. On the other hand, " +
+                "when assistance is available, the project cost may decrease depending on type of assistance available.");
 
             resultString.Add(
                "Loan may be for entire project cost or the part of the project cost.");
 
 
             resultString.Add(
-                "Any cost related the project that has not been covered in previous steps can be added to 'Administrative Cost'. This cost" +
-                "may include costs like loan charge (but not the interest), management costs, extension cost, marketting cost etc");
+                "Any cost related the project that has not been covered in previous steps can be added to 'Administrative Cost'. This cost " +
+                "may include costs like loan charge (but not the interest), management costs, extension cost, marketing cost etc.");
 
             return resultString;
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Configuration;
 using System.Linq;
 using BiofuelSouth.Enum;
@@ -33,14 +34,21 @@ namespace BiofuelSouth.ViewModels
 
         public string StateName { get; set; }
 
+        [DisplayName(@"Project Duration (Years)")]
         public int ProjectLife { get; set; }
 
+
+        [DisplayName(@"Storage Loss Factor")]
         public double StorageLossFactor { get; set;  }
-        
+
+
+        [DisplayName(@"Storage Percent")]
         public double StoragePercent { get; set; }
 
+        [DisplayName(@"Storage Time")]
         public double StorageTime { get; set;  } //days
 
+        [DisplayName(@"Interest Rate (%)")]
         public double InterestRate { get; set; }
 
 
@@ -50,6 +58,8 @@ namespace BiofuelSouth.ViewModels
 
         #region Summary
         public decimal NPV { get; set; }
+
+        [DisplayName(@"Annual Production (tons)")]
         public string AnnualProduction { get { return ProductionList.Average().ToString("###,###.##"); } }
         public string AnnualCost { get { return CostList.Average().ToString("C0"); } }
 
@@ -66,6 +76,7 @@ namespace BiofuelSouth.ViewModels
 
         #region Assumption
         public decimal? BiomassPriceAtFarmGate { get; set; }
+        [DisplayName(@"Project Size (Acres)")]
         public string ProjectSize { get; set; }
         public string LandCost { get; set; }
 

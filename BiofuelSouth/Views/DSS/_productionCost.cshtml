@@ -17,7 +17,7 @@
 		<div class="row">
 			<div class="col-md-8 form-group">
 				<div class="panel panel-default">
-					<div class="panel-heading"> <h4>Production Costs</h4></div>
+					<div class="panel-heading"> Production Costs</div>
 					<div class="panel-body">
 						@if ( !Model.CanCustomize )
 						{
@@ -80,10 +80,13 @@
 			<div class="col-md-4 form-group">
 				<div class="panel panel-default">
 					<div class="panel-heading instruction-panel-heading">
-						<h4>Instructions: Production Cost</h4>
+						Instructions: Production Cost
 					</div>
 					<div class="panel-body Instruction-panel-body">
-						<p>Default values for production cost include costs from planting to final harvest for one rotation for an acre </p>
+					    <p>
+					        Default values represent the estimated production cost for one rotation of an acre, and include costs from planting to
+					        final harvest. These values are taken from published literatures. The source of such default values will be available at results stage.
+					    </p>
 						<p>If crop is planted and harvested in 3 years, then production cost includes costs for the three years for an acre.</p>
 
 						@if ( Model.CanCustomize )
@@ -98,7 +101,7 @@
 							var rotation = CropAttribute.GetRoationYears( Model.CropType );
 							var instructions = InstructionService.GetRotationYearInstruction( Model.CropType );
 
-							<p>Roation year for @Model.CropType is @rotation years.</p>
+							<p>Rotation for @Model.CropType is @rotation @(rotation == 1 ? "year." : "years.")</p>
 							foreach ( var ins in instructions )
 							{
 								<p>@ins</p>

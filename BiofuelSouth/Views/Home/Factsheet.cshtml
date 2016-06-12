@@ -14,8 +14,8 @@
 <div class="row">
     <div class="col-sm-3 form-group nopadding">
         <div class="panel panel-default">
-            <div class="panel-heading instruction-panel-heading">
-                Available Crops
+            <div class="panel-heading">
+                Crops
             </div>
             <div class="panel-body Instruction-panel-body">
                 <ul>
@@ -32,9 +32,7 @@
                      InsertionMode = InsertionMode.Replace, // <-- Replace the content of DOM element
                      HttpMethod = "GET" // <-- HTTP method
                  })
-                            
                         </li>
-
                     }
                 </ul>
 
@@ -42,29 +40,31 @@
         </div>
     </div>
     <div class="col-md-9 nopadding">
-	    <div id="CropFact">
-		    @if (Model.CropType == null)
-		    {
+        <div id="CropFact">
+            @if (Model.CropType == null)
+            {
 
 
-			    <div class="panel panel-default">
-				    <div class="panel-heading">
-					    <div id="CropFacts">
-						    Crop Fact
-					    </div>
-				    </div>
-				    <div class="panel-body Instruction-panel-body">
-					    At present, fact sheets for the crops listed in the list to the left are available. Please click the crop on the left.
-					    <br/>
-					    You can also download factsheet for certain crops from this page. Please note that PDF copy of factsheets are not available for all the crops.
-				    </div>
-			    </div>
-		    }
-		    else
-		    {
-			    @Html.Partial("_cropFact", Model.FactItem)
-		    }
-	    </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <div id="CropFacts">
+                            Crop Fact
+                        </div>
+                    </div>
+                    <div class="panel-body Instruction-panel-body">
+                        At present, fact sheets for the crops listed in the list to the left are available. Please click on link to crop of your
+                        choice.
+                        <br/>
+                        You will also be able to download a PDF copy of factsheet for certain crops.
+                        s
+                    </div>
+                </div>
+            }
+            else
+            {
+                @Html.Partial("_cropFact", Model.FactItem)
+            }
+        </div>
     </div>
 </div>
 

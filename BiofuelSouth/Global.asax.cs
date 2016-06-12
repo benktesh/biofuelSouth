@@ -1,5 +1,6 @@
 ﻿using System.Data.Entity;
 using System.Web;
+using System.Web.Helpers;
 using System.Web.Optimization;
 using System.Web.Routing;
 
@@ -17,6 +18,8 @@ namespace BiofuelSouth
             //PdfSharp.Fonts.GlobalFontSettings.FontResolver = new MyFontResolver();
 
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            AntiForgeryConfig.SuppressXFrameOptionsHeader = true;
 
         }
     }

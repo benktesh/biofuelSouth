@@ -16,17 +16,17 @@
 			<div class="col-md-8 form-group">
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						<h4>Financial Information</h4>
+						Financial Information
 					</div>
 					<div class="panel-body">
 
 						@Html.ValidationSummary(true, "", new {@class = "text-danger"})
 						<div class="row">
-							<div class="col-xs-6">
+							<div class="col-xs-12">
 								@Html.LabelFor(model => model.RequireFinance, new {@class = "control-label"})
 								<a href="#" rel="popover" class="" data-toggle="popover" tabindex="0" data-trigger="focus"
 								   data-placement="center" title="Require Finance" data-content="<p>If the project require
-                            finance, enter select Yes. It can be skipped if financial model is not applicable. </p>">
+                            finance, select Yes.</p>">
 									<span class="glyphicon glyphicon-question-sign"></span></a>
 								<span class="required">Required </span>
 
@@ -58,7 +58,8 @@
 								<div class="col-xs-6">
 									@Html.LabelFor(model => model.AdministrativeCost, new {@class = "control-label"})
 									<a href="#" rel="popover" class="" data-toggle="popover" tabindex="0" data-trigger="focus"
-									   data-placement="left" title="Administrative Cost" data-content="<p>Recurring administrative cost. The default is shown in the fom if avaialble.</p>">
+									   data-placement="left" title="Administrative Cost" data-content="<p>Recurring administrative cost. 
+                                        For example, compliance, insurance, incentive paperwordk cost.</p>">
 										<span class="glyphicon glyphicon-question-sign"></span>
 									</a>
 
@@ -70,7 +71,9 @@
 
 									@Html.LabelFor(model => model.IncentivePayment, new {@class = "control-label"})
 									<a href="#" rel="popover" class="" data-toggle="popover" tabindex="0" data-trigger="focus"
-									   data-placement="left" title="Incentive Payment" data-content="<p>Any incentive payment rate.</p>">
+									   data-placement="left" title="Incentive Payment" data-content="<p>Any monetary compensation or incentives provided to 
+                                        landowners for growing biomass or maintaining this particular landuse option. Example includes incentives from Conservation 
+                                    Reserve Program, Biomass Crop Assistance Program etc.</p>">
 										<span class="glyphicon glyphicon-question-sign"></span>
 									</a>
 
@@ -83,7 +86,7 @@
 
 									@Html.LabelFor(model => model.YearsOfIncentivePayment, new {@class = "control-label"})
 									<a href="#" rel="popover" class="" data-toggle="popover" tabindex="0" data-trigger="focus"
-									   data-placement="left" title="Years of Incentive Payment" data-content="<p>Years of incentive paymement.</p>">
+									   data-placement="left" title="Years of Incentive Payment" data-content="<p>Total Number of years the incentive is anticipated for.</p>">
 										<span class="glyphicon glyphicon-question-sign"></span>
 									</a>
 
@@ -163,7 +166,7 @@
 			<div class="col-md-4 form-group">
 				<div class="panel panel-default">
 					<div class="panel-heading instruction-panel-heading">
-						<h4>Instructions: Financial Information</h4>
+						Instructions: Financial Information
 					</div>
 					<div class="panel-body Instruction-panel-body">
 						@{
@@ -191,21 +194,19 @@
 @section MyScripts {
 	<script>
 
-		$('document').ready(function () {
-			$('#RequireFinance').change();
-		})
-		$('#RequireFinance').change(function () {
+	    $('document').ready(function() {
+	        $('#RequireFinance').change();
+	    });
+	    $('#RequireFinance').change(function() {
 
-			// alert($('#RequireFinance').val());
-			if ($('#RequireFinance').val() == 'true') {
-				//alert($('#RequireFinance').val());
-				$('#financialParameter').show();
-			}
-
-			else {
-				$('#financialParameter').hide();
-			}
-		})
+	        // alert($('#RequireFinance').val());
+	        if ($('#RequireFinance').val() === 'true') {
+	            //alert($('#RequireFinance').val());
+	            $('#financialParameter').show();
+	        } else {
+	            $('#financialParameter').hide();
+	        }
+	    });
 	</script>
 }
 

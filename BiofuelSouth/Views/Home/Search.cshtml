@@ -27,29 +27,34 @@ foreach ( var glossary in glossaries )
 	<div class="col-xs-8" id="searchDisplay">
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				<h4>Glossary Search</h4>
+				Glossary Search
 			</div>
 			<div class="panel-body">
-				<div id="searchInstruction">
-					@{
-						if ( ViewData["term"].Equals( "" ) )
-						{
+			    <div id="searchInstruction">
+                  
+                        @{
+                            if (ViewData["term"].Equals(""))
+                            {
+                                <form method="POST" action="@Url.Action("Search", "Home")">
 
-							<p>Please enter search term in the bar above or select a term from the list in the right.</p>
-						}
+                                    <input type="text" class="input-sm" style="margin: 1px; padding: 0;" size="30" placeholder="Enter a term" name="term" id="term" />
+                                    <button class="btn btn-default glyphicon glyphicon-search zero-right-margin" id="searchButton1" name="searchButton1" type="submit"></button>
 
-					}
-				</div>
+                                    <br />
+
+                                    <p>Please enter search term in the box above or select a term from the list in the right.</p>
+                                </form>
+                            }
+                        }
+			    </div>
 
 				<div id="searchResult">
 					@{
 						if ( Model.Count > 0 )
 						{
-
 							if ( Model.First() != null && !Model.First().Description.Equals( "TBI" ) && !ViewData["term"].Equals( "" ) )
 							{
-
-								var result = Model.First();
+                                var result = Model.First();
 								<div class="resultTerm">@result.Term:</div>
 								<div class="resultDescription">@result.Description.</div>
 								<br />
@@ -63,17 +68,12 @@ foreach ( var glossary in glossaries )
 								if ( i != null )
 								{
 									var counter = (int)i;
-
-
-
-									Model.RemoveAt( 0 );
+                                    Model.RemoveAt( 0 );
 									if ( !ViewData["term"].Equals( "" ) )
 									{
 										<div>
 											No result was found for <strong>@ViewData["term"]</strong>.[@counter]
 										</div>
-
-
 									}
 								}
 							}
@@ -85,8 +85,6 @@ foreach ( var glossary in glossaries )
 								<div>
 									No result was found for <strong>@ViewData["term"]</strong>.
 								</div>
-
-
 							}
 						}
 
@@ -95,7 +93,6 @@ foreach ( var glossary in glossaries )
 
 				<div id="relatedResults">
 					@{
-
 						if ( Model.Any() && !ViewData["term"].Equals( "" ) )
 						{
 							<br />
@@ -107,12 +104,9 @@ foreach ( var glossary in glossaries )
 
 								@foreach ( var glossary in Model )
 								{
-
 									<a href='@Url.Action("Search", new {term = @glossary.Term})'>@glossary.Term</a>
-
 								}
 							</span>
-
 						}
 					}
 				</div>
@@ -161,18 +155,11 @@ foreach ( var glossary in glossaries )
 											<SPAN STYLE="font-size: @(Math.Min(300L, word.Value))%">@word.Key</SPAN>
 										</a>
 										@:&nbsp;
-
-
-										//'<SPAN STYLE="font-size: ' + results[i].Value + '%">' + results[i].Key + "</SPAN> </a>";
-
-
 									}
-
 								}
 							}
 						</div>
 					}
-
 				</div>
 			</div>
 		</div>
@@ -190,42 +177,43 @@ foreach ( var glossary in glossaries )
 		</div>
 
 	</div>
-	<script>
-	function GetWordList(event) {
-		var sender = $(event.target).attr('id');
-		$.ajax({
-			async: true,
-			url: '@(Url.Action("GetListOfWords","Home"))',
-			data: {
-				key: sender
-			},
-			type: "get",
-			datatype: "json",
-			success: function (results) {
-				var formattedResult = "";
-				for (i = 0; i < results.length; i++) {
+<script>
 
-					//alert(results[i].Value);
-					formattedResult = formattedResult + '<a href="" ' + results[i].Key + '>' +
-						'<SPAN STYLE="font-size: ' + results[i].Value + '%">' + results[i].Key + "</SPAN> </a>";
+    document.getElementById('searchbar').style.display = 'none';
+    function GetWordList(event) {
+        var sender = $(event.target).attr('id');
+        $.ajax({
+            async: true,
+            url: '@(Url.Action("GetListOfWords","Home"))',
+            data: {
+                key: sender
+            },
+            type: "get",
+            datatype: "json",
+            success: function (results) {
+                var formattedResult = "";
+                for (i = 0; i < results.length; i++) {
 
-
-					//formattedResult = formattedResult + '<a href="" ' + results[i].Key + '>' + results[i].Key + "</a> " + results[i].Value + "%";
-				}
-				if (formattedResult.length == 0) {
-					formattedResult = "Not Found";
-				}
-				$('#listOfWord').html(formattedResult);
-			},
-			error: function () {
-				alert('Could not get result from our server. Please try again later.');
-			}
-		});
+                    //alert(results[i].Value);
+                    formattedResult = formattedResult + '<a href="" ' + results[i].Key + '>' +
+                        '<SPAN STYLE="font-size: ' + results[i].Value + '%">' + results[i].Key + "</SPAN> </a>";
 
 
+                    //formattedResult = formattedResult + '<a href="" ' + results[i].Key + '>' + results[i].Key + "</a> " + results[i].Value + "%";
+                }
+                if (formattedResult.length == 0) {
+                    formattedResult = "Not Found";
+                }
+                $('#listOfWord').html(formattedResult);
+            },
+            error: function () {
+                alert('Could not get result from our server. Please try again later.');
+            }
+        });
+
+	    
+
+    }
 
 
-
-	}
-
-	</script>
+</script>

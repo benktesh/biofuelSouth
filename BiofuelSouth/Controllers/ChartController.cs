@@ -9,7 +9,7 @@ namespace BiofuelSouth.Controllers
 {
     public class ChartController : Controller
     {
-        private int ChartCacheMinute = 5;
+        private int ChartCacheMinute = 25;
         public void GenerateChart(string cacheKey, decimal[] data, String chartName, string xLabel = "Year", string yLabel = "")
         {
             var xValues = Enumerable.Range(1, data.Length).ToArray();
