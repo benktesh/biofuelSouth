@@ -1,4 +1,5 @@
 ﻿using System.Web.Mvc;
+using BiofuelSouth.Attributes;
 
 namespace BiofuelSouth.Controllers
 {
@@ -10,7 +11,8 @@ namespace BiofuelSouth.Controllers
         //ID 3 = Energy Cane
         //ID 4 = Poplar
         //ID 5 = Willow
-
+        
+            [NoCache]
         public ActionResult Index()
         {
             return View();
