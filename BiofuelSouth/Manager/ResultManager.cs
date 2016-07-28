@@ -79,7 +79,7 @@ namespace BiofuelSouth.Manager
 		public Decimal GetNpv()
 		{
 			var cashFlow = GetCashFlow().Select( m => (double)m ).ToArray();
-			var npv = (decimal)Microsoft.VisualBasic.Financial.NPV( Financial.InterestRate, ref cashFlow );
+			var npv = (decimal)Microsoft.VisualBasic.Financial.NPV( Financial.InterestRate/100, ref cashFlow );
 			return npv;
 		}
 		private Double GetStorageLossFactor()

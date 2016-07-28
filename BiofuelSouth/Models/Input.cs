@@ -57,7 +57,7 @@ namespace BiofuelSouth.Models
         public Double GetNpv()
         {
             var cashFlow = GetCashFlow();
-            var npv = Microsoft.VisualBasic.Financial.NPV(Financial.InterestRate, ref cashFlow);
+            var npv = Microsoft.VisualBasic.Financial.NPV(Financial.InterestRate/100, ref cashFlow);
             return npv;
         }
 
