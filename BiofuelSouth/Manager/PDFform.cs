@@ -268,7 +268,7 @@ namespace BiofuelSouth.Manager
 			paragraph.AddText( " in " );
 			paragraph.AddFormattedText( rvm.CountyName, TextFormat.Bold );
 
-			paragraph.AddFormattedText("County, " , TextFormat.Bold);
+			paragraph.AddFormattedText(" County, " , TextFormat.Bold);
 			paragraph.AddFormattedText( rvm.StateName, TextFormat.Bold );
 
 			paragraph.AddText( " is expected to produce an estimated " );
@@ -435,10 +435,7 @@ namespace BiofuelSouth.Manager
 			paragraph.AddText( "  years over an area of " );
 			paragraph.AddFormattedText( rvm.ProjectSize.ToString(), TextFormat.Bold );
 			paragraph.AddText( "  in " );
-			paragraph.AddText( " year(s) over an area of " );
-			paragraph.AddFormattedText( rvm.ProjectSize, TextFormat.Bold );
-
-			paragraph.AddText( " in " );
+			
 			paragraph.AddFormattedText( rvm.CountyName, TextFormat.Bold );
 
 			paragraph.AddFormattedText( " County, ", TextFormat.Bold );
