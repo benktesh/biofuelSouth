@@ -38,20 +38,20 @@ namespace BiofuelSouth.ViewModels
         public int ProjectLife { get; set; }
 
 
-        [DisplayName(@"Storage Loss Factor")]
+        [DisplayName(@"Storage Loss Factor (%)")]
         public double StorageLossFactor { get; set;  }
 
 
-        [DisplayName(@"Storage Percent")]
+        [DisplayName(@"Storage Percent (%)")]
         public double StoragePercent { get; set; }
 
-        [DisplayName(@"Storage Time")]
+        [DisplayName(@"Storage Time (days)")]
         public double StorageTime { get; set;  } //days
 
 		[DisplayName( @"Storage Method" )]
 		public String StorageMethod { get; set;  }
 
-		[DisplayName( @"Storage Cost Method" )]
+		[DisplayName( @"Storage Cost Assessment Method" )]
 		public String StorageCostmethod { get; set;  }
 
         [DisplayName(@"Interest Rate (%)")]

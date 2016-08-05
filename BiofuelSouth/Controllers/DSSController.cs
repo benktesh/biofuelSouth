@@ -15,7 +15,7 @@ namespace BiofuelSouth.Controllers
 	// ReSharper disable once InconsistentNaming
     public class DSSController : Controller
     {
-
+		
         [HttpGet]
         public ActionResult Index()
         {
@@ -291,9 +291,11 @@ namespace BiofuelSouth.Controllers
             {
                 return RedirectToAction("General");
             }
-	        //var rm = new ResultManager((Input) input.Clone());
-	      //  var vm = rm.GetResultViewModel();
-	        var vms = Simulator.GetViewModels( (Input)input.Clone() );
+			//var rm = new ResultManager((Input) input.Clone());
+			//  var vm = rm.GetResultViewModel();
+
+
+			var vms = Simulator.GetViewModels( (Input)input.Clone() );
 
 			var temp = Session["Prestine"] as Input;
 			var vm = vms.FirstOrDefault(m => temp != null && m.CropType == temp.General.Category);

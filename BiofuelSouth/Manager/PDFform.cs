@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Configuration;
 using System.Data;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web;
+using System.Web.Compilation;
 using System.Web.Helpers;
 using BiofuelSouth.Enum;
 using BiofuelSouth.Models;
@@ -25,6 +27,10 @@ namespace BiofuelSouth.Manager
 			GetTable();
 		}
 
+		readonly string _baseUrl = ConfigurationManager.AppSettings["baseUrl"] ?? "http://biofuelsouth.azurewebsites.net/";
+		readonly string _farmserviceContactUrl = ConfigurationManager.AppSettings["farmserviceContactUrl"] ??
+			"http://www.fsa.usda.gov/state-offices/index";
+		
 		Document _document;
 
 		TextFrame _addressFrame;
@@ -201,7 +207,7 @@ namespace BiofuelSouth.Manager
 			paragraph.AddText( ". " );
 
 			paragraph.AddText( "The " );
-			var h = paragraph.AddHyperlink( "/Home/Search?term=NPV", HyperlinkType.Url );
+			var h = paragraph.AddHyperlink( $"{_baseUrl}Home/Search?term=NPV", HyperlinkType.Url );
 			h.AddFormattedText( "net present value (NPV) ", TextFormat.Underline );
 			paragraph.AddText( "of the project is estimated to be " );
 			paragraph.AddFormattedText( Rvm.NPV.ToString( "C0" ), TextFormat.Bold );
@@ -210,14 +216,12 @@ namespace BiofuelSouth.Manager
 
 			if ( Rvm.NPV < 0 )
 			{
-
 				paragraph.AddText( "This means there will be a net loss of " );
 				var formatted = paragraph.AddFormattedText( Rvm.NPV.ToString( "C0" ), TextFormat.Bold );
 				formatted.Color = Colors.Red;
 			}
 			else
 			{
-
 				paragraph.AddText( "This means there will be a net profit of " );
 				paragraph.AddFormattedText( Rvm.NPV.ToString( "C0" ), TextFormat.Bold );
 			}
@@ -567,14 +571,19 @@ namespace BiofuelSouth.Manager
 			sectionHead.Font.Size = 13;
 			paragraph.AddLineBreak();
 
-			paragraph.AddFormattedText( "Additional information about " +
-									   "growing biomass crops may be obtained from county and university extension professionals and USDA " +
-									   "Farm Service Agents in your area. The following contacts may be useful:" );
+			paragraph.AddFormattedText("Additional information about " +
+			                           "growing biomass crops may be obtained from county and " +
+									   "university extension professionals and USDA Farm Service Agents " +
+			                           "in your by visiting " );
+									   
 			paragraph.AddLineBreak();
 
-			/* TODO  -Add Relevant Contat */
-			paragraph.AddText( "N/A" );
-
+			
+			
+			var h = paragraph.AddHyperlink( $" {_farmserviceContactUrl}", HyperlinkType.Url );
+			h.AddFormattedText( $"{_farmserviceContactUrl}", TextFormat.Underline );
+			h.AddText(".");
+				
 
 			paragraph.AddLineBreak();
 
@@ -586,14 +595,15 @@ namespace BiofuelSouth.Manager
 			paragraph.AddLineBreak();
 
 			paragraph.AddText( "If you still have questions, you may " );
-			var h = paragraph.AddHyperlink( "/Home/AskExpert", HyperlinkType.Url );
-			h.AddFormattedText( "Ask an Expert ", TextFormat.Underline );
+			h = paragraph.AddHyperlink($"{_baseUrl}Home/AskExpert", HyperlinkType.Url );
+			h.AddFormattedText($"Ask an Expert ({_baseUrl}Home/AskExpert)", TextFormat.Underline );
 			paragraph.AddText( "." );
+			paragraph.AddLineBreak();
 			paragraph.AddLineBreak();
 
 			paragraph.AddText( "In addition, you may also participate in " );
-			h = paragraph.AddHyperlink( "/forum", HyperlinkType.Url );
-			h.AddFormattedText( "the discussion forum", TextFormat.Underline );
+			h = paragraph.AddHyperlink( $"{_baseUrl}forum", HyperlinkType.Url );
+			h.AddFormattedText( $"the discussion forum ({_baseUrl}forum)", TextFormat.Underline );
 			paragraph.AddText( "." );
 			paragraph.AddLineBreak();
 		}
@@ -752,71 +762,3 @@ namespace BiofuelSouth.Manager
 #endif
 	}
 }
-
-
-
-
-
-
-/*
-
-    Use Sample
-    
-    public ActionResult MakePDF()
-        {
-            var document = (new PDFform()).CreateDocument();
-
-            // Create a renderer for the MigraDoc document.
-            const bool unicode = false; //A flag indicating whether to create a Unicode PDF or a WinAnsi PDF file.
-            const PdfFontEmbedding embedding = PdfFontEmbedding.Always; // An enum indicating whether to embed fonts or not.
-
-            PdfDocumentRenderer pdfRenderer = new PdfDocumentRenderer( unicode, embedding );
-            // Associate the MigraDoc document with a renderer
-            pdfRenderer.Document = document;
-           // Layout and render document to PDF
-            pdfRenderer.RenderDocument();
-            var pdf = pdfRenderer.PdfDocument;
-
-
-            using ( MemoryStream stream = new MemoryStream() )
-            {
-                pdf.Save(stream, false);
-                return File( stream.ToArray(), "application/pdf" );
-            }
-
-
-        }
-
-    */
-
-
-
-/*  Table based approach on test */
-
-/*
-//Define a table and attach to a section
-this.table = this.document.LastSection.AddTable();
-this.table.Borders.Color = Colors.Transparent;
-this.table.Borders.Width = 0.25;
-this.table.Rows.LeftIndent = 0;
-this.table.Borders.Left.Width = 0.50;
-this.table.Borders.Right.Width = 0.50;
-
-Paragraph paragraphInput = new Paragraph();
-paragraph.AddFormattedText("Input and Assumpmtion", TextFormat.Bold);
-
-//Define column
-Column column;
-column = this.table.AddColumn( "9cm" );
-column = this.table.AddColumn( "8cm" );
-
-Row row = this.table.AddRow();
-row.TopPadding = 1.5;
-row.Cells[0].AddParagraph( summary );
-
-var p =  row.Cells[1].AddParagraph();
-p.AddFormattedText("Input and Assumpmtion", TextFormat.Bold);
-p.AddLineBreak();
-p.AddText("Map goes here");
-
-*/

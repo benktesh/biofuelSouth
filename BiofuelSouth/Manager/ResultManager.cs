@@ -527,7 +527,8 @@ namespace BiofuelSouth.Manager
 		}
         public static List<ResultViewModel> GetViewModels(Input input, bool simulateAlternatives = true)
 		{
-	        Input = input; 
+
+			Input = input; 
             var altCrops = GetAlternativeCrops(input.General.Category);
 			var viewModels = new List<ResultViewModel>();
 
