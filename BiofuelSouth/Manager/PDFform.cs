@@ -1,68 +1,46 @@
 ﻿using System;
-using System.Diagnostics;
-using BiofuelSouth.ViewModels;
-using MigraDoc.DocumentObjectModel;
-using MigraDoc.DocumentObjectModel.Tables;
-using PdfSharp.Drawing;
-using PdfSharp.Pdf;
-
-using System;
-using System.Collections.Specialized;
-using System.Globalization;
-using System.Xml;
-// using System.Xml.XPath;
-using MigraDoc.DocumentObjectModel;
-using MigraDoc.DocumentObjectModel.Tables;
-using MigraDoc.DocumentObjectModel.Shapes;
-using MigraDoc.Rendering;
-using System.Diagnostics;
 using System.Data;
-using System.IO;
 using System.Linq;
 using System.Net.Http;
-using System.Security.Policy;
-using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 using System.Web.Helpers;
-using System.Web.UI.WebControls;
 using BiofuelSouth.Enum;
 using BiofuelSouth.Models;
-using BorderStyle = MigraDoc.DocumentObjectModel.BorderStyle;
-using Unit = MigraDoc.DocumentObjectModel.Unit;
+using BiofuelSouth.ViewModels;
+using MigraDoc.DocumentObjectModel;
+using MigraDoc.DocumentObjectModel.Shapes;
+using MigraDoc.DocumentObjectModel.Tables;
+// using System.Xml.XPath;
 
 namespace BiofuelSouth.Manager
 {
+	// ReSharper disable once InconsistentNaming
 	public class PDFform
 	{
-		ResultViewModel rvm { get; set; }
+		ResultViewModel Rvm { get; }
 		public PDFform( ResultViewModel rv )
 		{
-			rvm = rv;
-			dt = GetTable();
-			keyValue = null; 
-
+			Rvm = rv;
+			GetTable();
 		}
 
-		private DataTable dt;
-		Document document;
+		Document _document;
 
-		private string keyValue { get; set;  }
+		TextFrame _addressFrame;
 
-		TextFrame addressFrame;
-
-		private String path;
+		private String _path;
 
 		/// <summary>
 		/// The table of the MigraDoc document that contains the invoice items.
 		/// </summary>
-		MigraDoc.DocumentObjectModel.Tables.Table table;
-
+		Table _table;
 
 
 		/// <summary>
 		/// This example method generates a DataTable.
 		/// </summary>
-		private DataTable GetTable()
+		private void GetTable()
 		{
 			// Here we create a DataTable with four columns.
 			DataTable table = new DataTable();
@@ -77,7 +55,6 @@ namespace BiofuelSouth.Manager
 			table.Rows.Add( 10, "Hydralazine", "Christoff", DateTime.Now );
 			table.Rows.Add( 21, "Combivent", "Janet", DateTime.Now );
 			table.Rows.Add( 100, "Dilantin", "Melanie", DateTime.Now );
-			return table;
 		}
 
 		/// <summary>
@@ -86,12 +63,12 @@ namespace BiofuelSouth.Manager
 		public Document CreateDocument()
 		{
 			// Create a new MigraDoc document
-			this.document = new Document();
-			document.DefaultPageSetup.PageFormat = PageFormat.Letter;
+			_document = new Document();
+			_document.DefaultPageSetup.PageFormat = PageFormat.Letter;
 
-			this.document.Info.Title = "DSS Results";
-			this.document.Info.Subject = "Report";
-			this.document.Info.Author = "Biomass Decision Support System";
+			_document.Info.Title = "DSS Results";
+			_document.Info.Subject = "Report";
+			_document.Info.Author = "Biomass Decision Support System";
 
 			DefineStyles();
 			CreateResultSummaryPage();
@@ -99,7 +76,7 @@ namespace BiofuelSouth.Manager
 
 
 
-			return this.document;
+			return _document;
 		}
 
 		/// <summary>
@@ -108,127 +85,36 @@ namespace BiofuelSouth.Manager
 		void DefineStyles()
 		{
 			// Get the predefined style Normal.
-			MigraDoc.DocumentObjectModel.Style style = this.document.Styles["Normal"];
+			Style style = _document.Styles["Normal"];
 			// Because all styles are derived from Normal, the next line changes the 
 			// font of the whole document. Or, more exactly, it changes the font of
 			// all styles and paragraphs that do not redefine the font.
 			style.Font.Name = "Verdana";
 
-			style = this.document.Styles[StyleNames.Header];
+			style = _document.Styles[StyleNames.Header];
 			style.ParagraphFormat.AddTabStop( "16cm", TabAlignment.Right );
 
-			style = this.document.Styles[StyleNames.Footer];
+			style = _document.Styles[StyleNames.Footer];
 			style.ParagraphFormat.AddTabStop( "8cm", TabAlignment.Center );
 
 			// Create a new style called Table based on style Normal
-			style = this.document.Styles.AddStyle( "Table", "Normal" );
+			style = _document.Styles.AddStyle( "Table", "Normal" );
 			style.Font.Name = "Verdana";
 			style.Font.Name = "Times New Roman";
 			style.Font.Size = 9;
 
 			// Create a new style called Reference based on style Normal
-			style = this.document.Styles.AddStyle( "Reference", "Normal" );
+			style = _document.Styles.AddStyle( "Reference", "Normal" );
 			style.ParagraphFormat.SpaceBefore = "5mm";
 			style.ParagraphFormat.SpaceAfter = "5mm";
 			style.ParagraphFormat.TabStops.AddTabStop( "16cm", TabAlignment.Right );
-		}
-
-		/// <summary>
-		/// Creates the static parts of the invoice.
-		/// </summary>
-
-		void CreatePage()
-		{
-			// Each MigraDoc document needs at least one section.
-			var section = this.document.AddSection();
-
-			// Put a logo in the header
-			var image = section.AddImage( path );
-
-			image.Top = ShapePosition.Top;
-			image.Left = ShapePosition.Left;
-			image.WrapFormat.Style = WrapStyle.Through;
-
-			// Create footer
-			Paragraph paragraph = section.Footers.Primary.AddParagraph();
-			paragraph.AddText( "Health And Social Services." );
-			paragraph.Format.Font.Size = 9;
-			paragraph.Format.Alignment = ParagraphAlignment.Center;
-
-			// Create the text frame for the address
-			this.addressFrame = section.AddTextFrame();
-			this.addressFrame.Height = "3.0cm";
-			this.addressFrame.Width = "7.0cm";
-			this.addressFrame.Left = ShapePosition.Left;
-			this.addressFrame.RelativeHorizontal = RelativeHorizontal.Margin;
-			this.addressFrame.Top = "5.0cm";
-			this.addressFrame.RelativeVertical = RelativeVertical.Page;
-
-
-			// Add the print date field
-			paragraph = section.AddParagraph();
-			paragraph.Format.SpaceBefore = "6cm";
-			paragraph.Style = "Reference";
-			paragraph.AddFormattedText( "Result Summary", TextFormat.Bold );
-			paragraph.AddTab();
-			paragraph.AddText( "Date, " );
-			paragraph.AddDateField( "MM.dd.yyyy" );
-
-
-			// Put sender in address frame
-			paragraph = this.addressFrame.AddParagraph( "Some info" );
-			paragraph.Format.Font.Name = "Times New Roman";
-			paragraph.Format.Font.Size = 7;
-			paragraph.Format.SpaceAfter = 3;
-
-			// Create the item table
-			this.table = section.AddTable();
-			this.table.Style = "Table";
-			table.Borders.Color = TableBorder;
-			this.table.Borders.Width = 0.25;
-			this.table.Borders.Left.Width = 0.5;
-			this.table.Borders.Right.Width = 0.5;
-			this.table.Rows.LeftIndent = 0;
-
-
-			// Before you can add a row, you must define the columns
-			Column column;
-			foreach ( DataColumn col in dt.Columns )
-			{
-
-				column = this.table.AddColumn( Unit.FromCentimeter( 3 ) );
-				column.Format.Alignment = ParagraphAlignment.Center;
-
-			}
-
-			// Create the header of the table
-			Row row = table.AddRow();
-			row.HeadingFormat = true;
-			row.Format.Alignment = ParagraphAlignment.Center;
-			row.Format.Font.Bold = true;
-			row.Shading.Color = TableBlue;
-
-
-			for ( int i = 0; i < dt.Columns.Count; i++ )
-			{
-
-				row.Cells[i].AddParagraph( dt.Columns[i].ColumnName );
-				row.Cells[i].Format.Font.Bold = false;
-				row.Cells[i].Format.Alignment = ParagraphAlignment.Left;
-				row.Cells[i].VerticalAlignment = VerticalAlignment.Bottom;
-
-			}
-
-			this.table.SetEdge( 0, 0, dt.Columns.Count, 1, Edge.Box, BorderStyle.Single, 0.75, Color.Empty );
-
-
 		}
 
 
 		void CreateResultSummaryPage()
 		{
 			// Each MigraDoc document needs at least one section.
-			var section = this.document.AddSection();
+			var section = _document.AddSection();
 
 
 			// Add the print date field
@@ -237,16 +123,16 @@ namespace BiofuelSouth.Manager
 			paragraph.Style = "Reference";
 			paragraph.AddFormattedText( "Biomass Decision Support System" );
 			paragraph.AddLineBreak();
-			var cropMsg = string.Format( "Results for {0} in {1}, {2}", rvm.CropType, rvm.CountyName, rvm.StateName );
+			var cropMsg = $"Results for {Rvm.CropType} in {Rvm.CountyName}, {Rvm.StateName}";
 			paragraph.AddFormattedText( cropMsg, TextFormat.Bold );
 			paragraph.AddLineBreak();
 			paragraph.AddText( "Date: " );
 			paragraph.AddDateField( "MM/dd/yyyy" );
-            paragraph.Format.Alignment = ParagraphAlignment.Center;
+			paragraph.Format.Alignment = ParagraphAlignment.Center;
 
 
 			#region Summary 
-			paragraph = this.document.LastSection.AddParagraph();
+			paragraph = _document.LastSection.AddParagraph();
 			paragraph.Style = "Reference";
 			var sectionHead = paragraph.AddFormattedText( "Summary", TextFormat.Bold );
 			sectionHead.Font.Size = 13;
@@ -256,43 +142,42 @@ namespace BiofuelSouth.Manager
 			//paragraph.AddText( summary );
 
 			paragraph.AddText( "Growing of " );
-			paragraph.AddFormattedText( rvm.CropType.ToString(), TextFormat.Bold );
+			paragraph.AddFormattedText( Rvm.CropType.ToString(), TextFormat.Bold );
 
 			paragraph.AddText( " for a duration of " );
-			paragraph.AddFormattedText( rvm.ProjectLife.ToString(), TextFormat.Bold );
+			paragraph.AddFormattedText( Rvm.ProjectLife.ToString(), TextFormat.Bold );
 
 
 			paragraph.AddText( " year(s) over an area of " );
-			paragraph.AddFormattedText( rvm.ProjectSize, TextFormat.Bold );
+			paragraph.AddFormattedText( Rvm.ProjectSize, TextFormat.Bold );
 
 			paragraph.AddText( " in " );
-			paragraph.AddFormattedText( rvm.CountyName, TextFormat.Bold );
+			paragraph.AddFormattedText( Rvm.CountyName, TextFormat.Bold );
 
-			paragraph.AddFormattedText(" County, " , TextFormat.Bold);
-			paragraph.AddFormattedText( rvm.StateName, TextFormat.Bold );
+			paragraph.AddFormattedText( " County, ", TextFormat.Bold );
+			paragraph.AddFormattedText( Rvm.StateName, TextFormat.Bold );
 
 			paragraph.AddText( " is expected to produce an estimated " );
-			paragraph.AddFormattedText( rvm.AnnualProduction, TextFormat.Bold );
+			paragraph.AddFormattedText( Rvm.AnnualProduction, TextFormat.Bold );
 
 			paragraph.AddText( " tons of biomass annually." );
 
-			paragraph = document.LastSection.AddParagraph();
+			paragraph = _document.LastSection.AddParagraph();
 			paragraph.Style = "Reference";
 			paragraph.Format.Alignment = ParagraphAlignment.Center;
-			var cropImage = paragraph.AddImage( System.Web.HttpContext.Current.Server.MapPath( rvm.ImageUrl.Item3 ) );
+			var cropImage = paragraph.AddImage( HttpContext.Current.Server.MapPath( Rvm.ImageUrl.Item3 ) );
 			cropImage.Width = Unit.FromCentimeter( 8 );
 			cropImage.LockAspectRatio = true;
 			paragraph.AddLineBreak();
-			var t = paragraph.AddFormattedText( rvm.ImageUrl.Item2);
+			paragraph.AddFormattedText( Rvm.ImageUrl.Item2 );
 
-			var lat = rvm.CountyEntity.Lat;
-			var lon = rvm.CountyEntity.Lon;
-			var location = string.Format( "center={0},{1}", lat, lon );
+			var lat = Rvm.CountyEntity.Lat;
+			var lon = Rvm.CountyEntity.Lon;
+			var location = $"center={lat},{lon}";
 			Task<byte[]> result = GetStaticMap( location, "400x300" );
 
-			if ( result != null )
 			{
-				paragraph = document.LastSection.AddParagraph();
+				paragraph = _document.LastSection.AddParagraph();
 				paragraph.AddLineBreak();
 				paragraph.Format.Alignment = ParagraphAlignment.Center;
 				var file = result.Result;
@@ -302,7 +187,7 @@ namespace BiofuelSouth.Manager
 				var map = paragraph.AddImage( imgfile );
 				map.Height = Unit.FromCentimeter( 6 );
 				paragraph.AddLineBreak();
-				paragraph.AddFormattedText( "Approximate Location of Assessment Area");
+				paragraph.AddFormattedText( "Approximate Location of Assessment Area" );
 				paragraph.AddLineBreak();
 			}
 
@@ -310,52 +195,54 @@ namespace BiofuelSouth.Manager
 			paragraph = section.AddParagraph();
 			paragraph.Style = "Reference";
 			paragraph.AddText( "The production comes at an expected annual cost of " );
-			paragraph.AddFormattedText( rvm.AnnualCost, TextFormat.Bold );
+			paragraph.AddFormattedText( Rvm.AnnualCost, TextFormat.Bold );
 			paragraph.AddText( " and results in an annual revenue of " );
-			paragraph.AddFormattedText( rvm.AnnualRevenue, TextFormat.Bold );
+			paragraph.AddFormattedText( Rvm.AnnualRevenue, TextFormat.Bold );
 			paragraph.AddText( ". " );
 
 			paragraph.AddText( "The " );
 			var h = paragraph.AddHyperlink( "/Home/Search?term=NPV", HyperlinkType.Url );
 			h.AddFormattedText( "net present value (NPV) ", TextFormat.Underline );
 			paragraph.AddText( "of the project is estimated to be " );
-			paragraph.AddFormattedText( rvm.NPV.ToString( "C0" ), TextFormat.Bold );
+			paragraph.AddFormattedText( Rvm.NPV.ToString( "C0" ), TextFormat.Bold );
 			paragraph.AddText( " at assumed prevailing interest rate of " );
-			paragraph.AddFormattedText( rvm.InterestRate.ToString( "P" ), TextFormat.Bold );
-			
-			if ( rvm.NPV < 0 )
+			paragraph.AddFormattedText( Rvm.InterestRate.ToString( "P" ), TextFormat.Bold );
+
+			if ( Rvm.NPV < 0 )
 			{
 
 				paragraph.AddText( "This means there will be a net loss of " );
-				var formatted = paragraph.AddFormattedText( rvm.NPV.ToString( "C0" ), TextFormat.Bold );
+				var formatted = paragraph.AddFormattedText( Rvm.NPV.ToString( "C0" ), TextFormat.Bold );
 				formatted.Color = Colors.Red;
 			}
 			else
 			{
 
 				paragraph.AddText( "This means there will be a net profit of " );
-				paragraph.AddFormattedText( rvm.NPV.ToString( "C0" ), TextFormat.Bold );
+				paragraph.AddFormattedText( Rvm.NPV.ToString( "C0" ), TextFormat.Bold );
 			}
 			paragraph.AddText( " from this project during project's life (" );
-		    paragraph.AddFormattedText(rvm.ProjectLife.ToString(), TextFormat.Bold);
-            paragraph.AddText(" years).");
+			paragraph.AddFormattedText( Rvm.ProjectLife.ToString(), TextFormat.Bold );
+			paragraph.AddText( " years)." );
 
 
-            paragraph.AddLineBreak();
+			paragraph.AddLineBreak();
 
 
 
 			//comparision with other crops
-			paragraph = document.LastSection.AddParagraph();
+			paragraph = _document.LastSection.AddParagraph();
 			paragraph.Format.Alignment = ParagraphAlignment.Left;
 			paragraph.AddLineBreak();
 			paragraph.AddFormattedText( "Comparison with other crops", TextFormat.Bold );
 			paragraph.AddLineBreak();
 
-			var highNPV = rvm.ComparisionData.FirstOrDefault( m => m.Key == ResultComparisionKey.HighNpv );
-			var lowNPV = rvm.ComparisionData.FirstOrDefault( m => m.Key == ResultComparisionKey.LowNpv );
+			// ReSharper disable once InconsistentNaming
+			var highNPV = Rvm.ComparisionData.FirstOrDefault( m => m.Key == ResultComparisionKey.HighNpv );
+			// ReSharper disable once InconsistentNaming
+			var lowNPV = Rvm.ComparisionData.FirstOrDefault( m => m.Key == ResultComparisionKey.LowNpv );
 
-			if ( highNPV != null && highNPV.Crop != rvm.CropType )
+			if ( highNPV != null && highNPV.Crop != Rvm.CropType )
 			{
 				var highNpv = Decimal.Parse( highNPV.ComparisionValue );
 				paragraph.AddText( "It is anticipated that growing " );
@@ -377,14 +264,14 @@ namespace BiofuelSouth.Manager
 
 
 			}
-			else if ( highNPV != null && highNPV.Crop == rvm.CropType )
+			else if ( highNPV != null && highNPV.Crop == Rvm.CropType )
 			{
 				paragraph.AddText( "It is anticipated that growing " );
 				paragraph.AddFormattedText( highNPV.Crop.ToString(), TextFormat.Bold );
 				paragraph.AddText( " may likely result in highest profit compared to other crops." );
 
 			}
-			if ( lowNPV != null && lowNPV.Crop != rvm.CropType )
+			if ( lowNPV != null && lowNPV.Crop != Rvm.CropType )
 			{
 				//paragraph.AddLineBreak();
 				paragraph.AddText( "It is anticipated that growing " );
@@ -405,102 +292,108 @@ namespace BiofuelSouth.Manager
 				}
 				paragraph.AddText( "." );
 			}
-			else if ( lowNPV != null && lowNPV.Crop == rvm.CropType )
+			else if ( lowNPV != null && lowNPV.Crop == Rvm.CropType )
 			{
 				//paragraph.AddLineBreak();
 				paragraph.AddText( "Likewise, it is anticipated that growing " );
 				paragraph.AddFormattedText( lowNPV.Crop.ToString(), TextFormat.Bold );
 				paragraph.AddText( " may result the lowest profit compared to growing other crops." );
 			}
-			string keyValue = null; 
-			if (rvm.ChartKeys.Select(m => m.Key == ChartType.NPVCompare).Any())
+			string keyValue;
+			if ( Rvm.ChartKeys.Select( m => m.Key == ChartType.NPVCompare ).Any() )
 			{
-				keyValue = rvm.ChartKeys.FirstOrDefault( m => m.Key == ChartType.NPVCompare ).Value;
-				GetImage(keyValue, "Comparision of project NPV ($) across various biofuel crops"); 
+				keyValue = Rvm.ChartKeys.FirstOrDefault( m => m.Key == ChartType.NPVCompare ).Value;
+				GetImage( keyValue, "Comparision of project NPV ($) across various biofuel crops" );
 			}
-			
+
 
 			#endregion Summary
 			//Production Results:
-			paragraph = document.LastSection.AddParagraph();
+			paragraph = _document.LastSection.AddParagraph();
 			paragraph.AddLineBreak();
 			sectionHead = paragraph.AddFormattedText( "Production Results", TextFormat.Bold );
 			sectionHead.Font.Size = 13;
 
-			paragraph.AddLineBreak(); 
+			paragraph.AddLineBreak();
 			paragraph.AddText( "Growing of " );
-			paragraph.AddFormattedText( rvm.CropType.ToString(), TextFormat.Bold );
+			paragraph.AddFormattedText( Rvm.CropType.ToString(), TextFormat.Bold );
 			paragraph.AddText( " for a duration of " );
-			paragraph.AddFormattedText( rvm.ProjectLife.ToString(), TextFormat.Bold );
+			paragraph.AddFormattedText( Rvm.ProjectLife.ToString(), TextFormat.Bold );
 			paragraph.AddText( "  years over an area of " );
-			paragraph.AddFormattedText( rvm.ProjectSize.ToString(), TextFormat.Bold );
+			paragraph.AddFormattedText( Rvm.ProjectSize, TextFormat.Bold );
 			paragraph.AddText( "  in " );
-			
-			paragraph.AddFormattedText( rvm.CountyName, TextFormat.Bold );
+
+			paragraph.AddFormattedText( Rvm.CountyName, TextFormat.Bold );
 
 			paragraph.AddFormattedText( " County, ", TextFormat.Bold );
-			paragraph.AddFormattedText( rvm.StateName, TextFormat.Bold );
+			paragraph.AddFormattedText( Rvm.StateName, TextFormat.Bold );
 
 			paragraph.AddText( " is expected to produce an estimated " );
-			paragraph.AddFormattedText( rvm.AnnualProduction, TextFormat.Bold );
+			paragraph.AddFormattedText( Rvm.AnnualProduction, TextFormat.Bold );
 
 			paragraph.AddText( " tons of biomass annually." );
 
-		
-			if ( rvm.ChartKeys.Select( m => m.Key == ChartType.Production ).Any() )
-            { 
-				keyValue = rvm.ChartKeys.FirstOrDefault( m => m.Key == ChartType.Production ).Value;
-				GetImage(keyValue, Constants.ProductionChartCaption( rvm.CropType ) ); 
+
+			if ( Rvm.ChartKeys.Select( m => m.Key == ChartType.Production ).Any() )
+			{
+				keyValue = Rvm.ChartKeys.FirstOrDefault( m => m.Key == ChartType.Production ).Value;
+				GetImage( keyValue, Constants.ProductionChartCaption( Rvm.CropType ) );
 			}
 
 			#region production comparision
-			paragraph = document.LastSection.AddParagraph();
+			paragraph = _document.LastSection.AddParagraph();
 			paragraph.AddLineBreak();
 			paragraph.Format.Alignment = ParagraphAlignment.Left;
 			paragraph.AddFormattedText( "Comparison with other crops", TextFormat.Bold );
-			var high = rvm.ComparisionData.FirstOrDefault( m => m.Key == ResultComparisionKey.HighProduction );
-			var low = rvm.ComparisionData.FirstOrDefault( m => m.Key == ResultComparisionKey.LowProduction );
+			var high = Rvm.ComparisionData.FirstOrDefault( m => m.Key == ResultComparisionKey.HighProduction );
+			var low = Rvm.ComparisionData.FirstOrDefault( m => m.Key == ResultComparisionKey.LowProduction );
 
-			paragraph.AddLineBreak();
-			paragraph.AddText( "It is anticipated that growing " );
-			paragraph.AddFormattedText( high.Crop.ToString(), TextFormat.Bold );
-			paragraph.AddText( " may likely result in the highest production of " );
-			paragraph.AddFormattedText( high.ComparisionValue, TextFormat.Bold );
-
-			if ( high != null && high.Crop != rvm.CropType )
+			if ( high != null )
 			{
+				paragraph.AddLineBreak();
+				paragraph.AddText( "It is anticipated that growing " );
+				paragraph.AddFormattedText( high.Crop.ToString(), TextFormat.Bold );
+				paragraph.AddText( " may likely result in the highest production of " );
+				paragraph.AddFormattedText( high.ComparisionValue, TextFormat.Bold );
 
-				paragraph.AddText( " tons." );
+				if ( high.Crop != Rvm.CropType )
+				{
+
+					paragraph.AddText( " tons." );
+				}
+
+				else if ( high.Crop == Rvm.CropType )
+				{
+					paragraph.AddText( " tons compared to other crops." );
+				}
 			}
 
-			else if ( high != null && high.Crop == rvm.CropType )
-			{
-				paragraph.AddText( " tons compared to other crops." );
 
+			if ( low != null )
+			{
+				paragraph.AddText( "It is anticipated that growing " );
+				paragraph.AddFormattedText( low.Crop.ToString(), TextFormat.Bold );
+				paragraph.AddText( " may likely result in the highest production of " );
+				paragraph.AddFormattedText( low.ComparisionValue, TextFormat.Bold );
+				if ( low.Crop != Rvm.CropType )
+				{
+					paragraph.AddText( " tons." );
+				}
+				else if ( low.Crop == Rvm.CropType )
+				{
+					paragraph.AddText( " tons compared to other crops." );
+				}
 			}
 
-			paragraph.AddText( "It is anticipated that growing " );
-			paragraph.AddFormattedText( low.Crop.ToString(), TextFormat.Bold );
-			paragraph.AddText( " may likely result in the highest production of " );
-			paragraph.AddFormattedText( low.ComparisionValue, TextFormat.Bold );
-			if ( low != null && low.Crop != rvm.CropType )
+			if ( Rvm.ChartKeys.Select( m => m.Key == ChartType.ProductionCompare ).Any() )
 			{
-				paragraph.AddText( " tons." );
-			}
-			else if ( low != null && low.Crop == rvm.CropType )
-			{
-				paragraph.AddText( " tons compared to other crops." );
-			}
-
-			if ( rvm.ChartKeys.Select( m => m.Key == ChartType.ProductionCompare ).Any() )
-			{
-				keyValue = rvm.ChartKeys.FirstOrDefault( m => m.Key == ChartType.ProductionCompare ).Value;
-				GetImage( keyValue, Constants.ProductionCompareChartCaption(rvm.CropType) );
+				keyValue = Rvm.ChartKeys.FirstOrDefault( m => m.Key == ChartType.ProductionCompare ).Value;
+				GetImage( keyValue, Constants.ProductionCompareChartCaption( Rvm.CropType ) );
 			}
 			#endregion production comparision
 
 			#region Cost and revenue
-			paragraph = document.LastSection.AddParagraph();
+			paragraph = _document.LastSection.AddParagraph();
 			paragraph.AddLineBreak();
 			paragraph.Format.Alignment = ParagraphAlignment.Left;
 			sectionHead = paragraph.AddFormattedText( "Cost And Revenue", TextFormat.Bold );
@@ -508,281 +401,272 @@ namespace BiofuelSouth.Manager
 			paragraph.AddLineBreak();
 
 			paragraph.AddText( "The production comes at an expected annual cost of " );
-			paragraph.AddFormattedText( @rvm.AnnualCost, TextFormat.Bold );
+			paragraph.AddFormattedText( Rvm.AnnualCost, TextFormat.Bold );
 
 			paragraph.AddText( " and results in an annual revenue of " );
-			paragraph.AddFormattedText( @rvm.AnnualRevenue, TextFormat.Bold );
+			paragraph.AddFormattedText( Rvm.AnnualRevenue, TextFormat.Bold );
 
 			paragraph.AddText( ". The net present value of the project is estimated to be " );
-			paragraph.AddFormattedText( @rvm.NPV.ToString( "C0" ), TextFormat.Bold );
+			paragraph.AddFormattedText( Rvm.NPV.ToString( "C0" ), TextFormat.Bold );
 
 			paragraph.AddText( "at assumed prevailing interest rate of " );
-			paragraph.AddFormattedText( @rvm.InterestRate.ToString( "P" ), TextFormat.Bold );
+			paragraph.AddFormattedText( Rvm.InterestRate.ToString( "P" ), TextFormat.Bold );
 			paragraph.AddText( "." );
 
-			if ( rvm.ChartKeys.Select( m => m.Key == ChartType.CostRevenue ).Any() )
+			if ( Rvm.ChartKeys.Select( m => m.Key == ChartType.CostRevenue ).Any() )
 			{
-				keyValue = rvm.ChartKeys.FirstOrDefault( m => m.Key == ChartType.CostRevenue ).Value;
+				keyValue = Rvm.ChartKeys.FirstOrDefault( m => m.Key == ChartType.CostRevenue ).Value;
 				GetImage( keyValue, "Cost and revenue information" );
 			}
 
-			paragraph = document.LastSection.AddParagraph();
+			paragraph = _document.LastSection.AddParagraph();
 			paragraph.AddLineBreak();
 			paragraph.AddFormattedText( "Comparison with other crops", TextFormat.Bold );
 			paragraph.AddLineBreak();
-			var highPrice = rvm.ComparisionData.FirstOrDefault( m => m.Key == ResultComparisionKey.HighFarmGatePrice );
-			var lowPrice = rvm.ComparisionData.FirstOrDefault( m => m.Key == ResultComparisionKey.LowFarmgatePrice );
 
-			paragraph.AddText( "Among the biomass crops considered in this particular analysis, " +
-			                   "it is anticipated that growing " );
-			paragraph.AddFormattedText( highPrice.Crop.ToString(), TextFormat.Bold );
+			var highPrice = Rvm.ComparisionData.FirstOrDefault( m => m.Key == ResultComparisionKey.HighFarmGatePrice );
+			var lowPrice = Rvm.ComparisionData.FirstOrDefault( m => m.Key == ResultComparisionKey.LowFarmgatePrice );
 
-			if ( highPrice != null && highPrice.Crop != rvm.CropType )
+			if ( highPrice != null )
 			{
-				paragraph.AddText( " may likely result in the highest farmgate price of " );
-				paragraph.AddFormattedText( highPrice.ComparisionValue, TextFormat.Bold );
-				paragraph.AddText( " per ton." );
-			}
-			else if ( highPrice != null && highPrice.Crop == rvm.CropType )
-			{
-				paragraph.AddText( " is the option that results in the highest farmgate price of " );
-				paragraph.AddFormattedText( highPrice.ComparisionValue, TextFormat.Bold );
-				paragraph.AddText( " per ton compared to other crops." );
-			}
+				paragraph.AddText( "Among the biomass crops considered in this particular analysis, " +
+								   "it is anticipated that growing " );
+				paragraph.AddFormattedText( highPrice.Crop.ToString(), TextFormat.Bold );
 
-			paragraph.AddText( " Likewise, it is anticipated that growing " );
-			paragraph.AddFormattedText( @lowPrice.Crop.ToString(), TextFormat.Bold );
-			paragraph.AddText( " may likely result in the lowest farmgate price of " );
-			paragraph.AddFormattedText( lowPrice.ComparisionValue, TextFormat.Bold );
-
-
-			if ( lowPrice != null && lowPrice.Crop != rvm.CropType )
-			{
-
-
-				paragraph.AddText( " per ton." );
-
-			}
-			else if ( lowPrice != null && lowPrice.Crop == rvm.CropType )
-			{
-				paragraph.AddText( " per ton compared to growing other crops." );
-
-			}
-			paragraph.AddLineBreak(); 
-
-			if ( rvm.ChartKeys.Select( m => m.Key == ChartType.CashFlow ).Any() )
-			{
-				keyValue = rvm.ChartKeys.FirstOrDefault( m => m.Key == ChartType.CashFlow ).Value;
-				GetImage( keyValue, Constants.CashFlowChartCaption( rvm.CropType ) );
-
-
+				if ( highPrice.Crop != Rvm.CropType )
+				{
+					paragraph.AddText( " may likely result in the highest farmgate price of " );
+					paragraph.AddFormattedText( highPrice.ComparisionValue, TextFormat.Bold );
+					paragraph.AddText( " per ton." );
+				}
+				else if ( highPrice.Crop == Rvm.CropType )
+				{
+					paragraph.AddText( " is the option that results in the highest farmgate price of " );
+					paragraph.AddFormattedText( highPrice.ComparisionValue, TextFormat.Bold );
+					paragraph.AddText( " per ton compared to other crops." );
+				}
 			}
 
-			if ( rvm.ChartKeys.Select( m => m.Key == ChartType.CashFlowCompare ).Any() )
+			if ( lowPrice != null )
 			{
-				keyValue = rvm.ChartKeys.FirstOrDefault( m => m.Key == ChartType.CashFlowCompare ).Value;
+				paragraph.AddText( " Likewise, it is anticipated that growing " );
+				paragraph.AddFormattedText( lowPrice.Crop.ToString(), TextFormat.Bold );
+				paragraph.AddText( " may likely result in the lowest farmgate price of " );
+				paragraph.AddFormattedText( lowPrice.ComparisionValue, TextFormat.Bold );
+				
+				if ( lowPrice.Crop != Rvm.CropType )
+				{
+					paragraph.AddText( " per ton." );
+				}
+				else if ( lowPrice.Crop == Rvm.CropType )
+				{
+					paragraph.AddText( " per ton compared to growing other crops." );
+				}
+				paragraph.AddLineBreak();
+			}
 
-				GetImage( keyValue, @Constants.CashFlowCompareChartCaption( rvm.CropType ) );
+			if ( Rvm.ChartKeys.Select( m => m.Key == ChartType.CashFlow ).Any() )
+			{
+				keyValue = Rvm.ChartKeys.FirstOrDefault( m => m.Key == ChartType.CashFlow ).Value;
+				GetImage( keyValue, Constants.CashFlowChartCaption( Rvm.CropType ) );
+
+			}
+
+			if ( Rvm.ChartKeys.Select( m => m.Key == ChartType.CashFlowCompare ).Any() )
+			{
+				keyValue = Rvm.ChartKeys.FirstOrDefault( m => m.Key == ChartType.CashFlowCompare ).Value;
+
+				GetImage( keyValue, Constants.CashFlowCompareChartCaption( Rvm.CropType ) );
 			}
 
 			#endregion
-
-
 			RenderInputAndAssumption();
-
 			RenderMoreInformation();
-
 			RenderDisclaimer();
 		}
 
 		private void RenderInputAndAssumption()
 		{
-			Paragraph paragraph;
-			FormattedText sectionHead;
-			document.LastSection.AddPageBreak();
-			paragraph = document.LastSection.AddParagraph();
+			_document.LastSection.AddPageBreak();
+			var paragraph = _document.LastSection.AddParagraph();
 			paragraph.AddLineBreak();
 			paragraph.Format.Alignment = ParagraphAlignment.Left;
-			sectionHead = paragraph.AddFormattedText("Input Data and Assumptions ", TextFormat.Bold);
+			var sectionHead = paragraph.AddFormattedText( "Input Data and Assumptions ", TextFormat.Bold );
 			sectionHead.Font.Size = 13;
 			paragraph.AddLineBreak();
 
-			paragraph.AddText("The result presented here is based on the following parameters/ assumptions: ");
+			paragraph.AddText( "The result presented here is based on the following parameters/ assumptions: " );
 
 			//Define a table and attach to a section
-			this.table = this.document.LastSection.AddTable();
-			this.table.Borders.Color = TableBorder;
-			this.table.Borders.Width = 0.25;
-			this.table.Rows.LeftIndent = 0;
-			this.table.Borders.Left.Width = 0.50;
-			this.table.Borders.Right.Width = 0.50;
+			_table = _document.LastSection.AddTable();
+			_table.Borders.Color = TableBorder;
+			_table.Borders.Width = 0.25;
+			_table.Rows.LeftIndent = 0;
+			_table.Borders.Left.Width = 0.50;
+			_table.Borders.Right.Width = 0.50;
 
 			paragraph = new Paragraph();
-			paragraph.AddFormattedText("Input and Assumpmtion", TextFormat.Bold);
+			paragraph.AddFormattedText( "Input and Assumpmtion", TextFormat.Bold );
 			paragraph.AddLineBreak();
 
 			//Define column
-			Column column;
-			column = this.table.AddColumn("6cm");
-			column = this.table.AddColumn("6cm");
-			column = this.table.AddColumn("6cm");
+			_table.AddColumn( "6cm" );
+			_table.AddColumn( "6cm" );
+			_table.AddColumn( "6cm" );
 
-			Row row = this.table.AddRow();
+			Row row = _table.AddRow();
 			row.TopPadding = 1.5;
 			row.HeadingFormat = true;
 			row.Format.Alignment = ParagraphAlignment.Center;
 			row.VerticalAlignment = VerticalAlignment.Bottom;
 			row.Format.Font.Bold = true;
-			row.Cells[0].AddParagraph("Data/Parameter");
-			row.Cells[1].AddParagraph("Value/Assumption");
-			row.Cells[2].AddParagraph("Source/Remarks");
+			row.Cells[0].AddParagraph( "Data/Parameter" );
+			row.Cells[1].AddParagraph( "Value/Assumption" );
+			row.Cells[2].AddParagraph( "Source/Remarks" );
 
-			row = this.table.AddRow();
-			row.Cells[0].AddParagraph("Biomass Price At Farm Gate");
-			row.Cells[1].AddParagraph(string.Format("{0} per ton", rvm.BiomassPriceAtFarmGate.GetValueOrDefault().ToString("C0")));
-			row.Cells[2].AddParagraph(String.Empty);
-
-
-			row = this.table.AddRow();
-			row.Cells[0].AddParagraph("Project Size");
-			row.Cells[1].AddParagraph(string.Format("{0} ", rvm.ProjectSize));
-			row.Cells[2].AddParagraph(String.Empty);
+			row = _table.AddRow();
+			row.Cells[0].AddParagraph( "Biomass Price At Farm Gate" );
+			row.Cells[1].AddParagraph($"{Rvm.BiomassPriceAtFarmGate.GetValueOrDefault().ToString("C0")} per ton");
+			row.Cells[2].AddParagraph( String.Empty );
 
 
-			row = this.table.AddRow();
-			row.Cells[0].AddParagraph("Land Cost");
-			row.Cells[1].AddParagraph(string.Format("{0}", rvm.LandCost));
-			row.Cells[2].AddParagraph(String.Empty);
+			row = _table.AddRow();
+			row.Cells[0].AddParagraph( "Project Size" );
+			row.Cells[1].AddParagraph($"{Rvm.ProjectSize} ");
+			row.Cells[2].AddParagraph( String.Empty );
 
-			row = this.table.AddRow();
-			row.Cells[0].AddParagraph("Average Cost");
-			row.Cells[1].AddParagraph(string.Format("{0}", rvm.AverageCostPerAcre));
-			row.Cells[2].AddParagraph(String.Empty);
 
-			row = this.table.AddRow();
-			row.Cells[0].AddParagraph("Average Production");
-			row.Cells[1].AddParagraph(string.Format("{0} per acre", rvm.AverageProdutivityPerAcre));
-			row.Cells[2].AddParagraph(String.Empty);
+			row = _table.AddRow();
+			row.Cells[0].AddParagraph( "Land Cost" );
+			row.Cells[1].AddParagraph($"{Rvm.LandCost}");
+			row.Cells[2].AddParagraph( String.Empty );
+
+			row = _table.AddRow();
+			row.Cells[0].AddParagraph( "Average Cost" );
+			row.Cells[1].AddParagraph($"{Rvm.AverageCostPerAcre}");
+			row.Cells[2].AddParagraph( String.Empty );
+
+			row = _table.AddRow();
+			row.Cells[0].AddParagraph( "Average Production" );
+			row.Cells[1].AddParagraph($"{Rvm.AverageProdutivityPerAcre} per acre");
+			row.Cells[2].AddParagraph( String.Empty );
 
 			paragraph.AddLineBreak();
-			paragraph.AddFormattedText("Users can change the inputs to analyze how such change may impact the result",
-				TextFormat.Bold);
+			paragraph.AddFormattedText( "Users can change the inputs to analyze how such change may impact the result",
+				TextFormat.Bold );
 			paragraph.AddLineBreak();
 		}
 
 		private void RenderMoreInformation()
 		{
-			Paragraph paragraph;
-			FormattedText sectionHead;
-			Hyperlink h;
-			document.LastSection.AddPageBreak();
-			paragraph = document.LastSection.AddParagraph();
+			_document.LastSection.AddPageBreak();
+			var paragraph = _document.LastSection.AddParagraph();
 			paragraph.AddLineBreak();
 			paragraph.Format.Alignment = ParagraphAlignment.Left;
-			sectionHead = paragraph.AddFormattedText("More Information ", TextFormat.Bold);
+			var sectionHead = paragraph.AddFormattedText( "More Information ", TextFormat.Bold );
 			sectionHead.Font.Size = 13;
 			paragraph.AddLineBreak();
 
-			paragraph.AddFormattedText("Additional information about " +
-			                           "growing biomass crops may be obtained from county and university extension professionals and USDA " +
-			                           "Farm Service Agents in your area. The following contacts may be useful:");
+			paragraph.AddFormattedText( "Additional information about " +
+									   "growing biomass crops may be obtained from county and university extension professionals and USDA " +
+									   "Farm Service Agents in your area. The following contacts may be useful:" );
 			paragraph.AddLineBreak();
 
 			/* TODO  -Add Relevant Contat */
-			paragraph.AddText("N/A");
+			paragraph.AddText( "N/A" );
+
+
 			paragraph.AddLineBreak();
 
 			paragraph.AddLineBreak();
-			paragraph.AddFormattedText("Questions", TextFormat.Bold);
+			paragraph.AddFormattedText( "Questions", TextFormat.Bold );
 			paragraph.AddLineBreak();
 
 			/* TODO  -Add Questions */
 			paragraph.AddLineBreak();
 
-			paragraph.AddText("If you still have questions, you may ");
-			h = paragraph.AddHyperlink("/Home/AskExpert", HyperlinkType.Url);
-			h.AddFormattedText("Ask an Expert ", TextFormat.Underline);
-			paragraph.AddText(".");
+			paragraph.AddText( "If you still have questions, you may " );
+			var h = paragraph.AddHyperlink( "/Home/AskExpert", HyperlinkType.Url );
+			h.AddFormattedText( "Ask an Expert ", TextFormat.Underline );
+			paragraph.AddText( "." );
 			paragraph.AddLineBreak();
 
-			paragraph.AddText("In addition, you may also participate in ");
-			h = paragraph.AddHyperlink("/forum", HyperlinkType.Url);
-			h.AddFormattedText("the discussion forum", TextFormat.Underline);
-			paragraph.AddText(".");
+			paragraph.AddText( "In addition, you may also participate in " );
+			h = paragraph.AddHyperlink( "/forum", HyperlinkType.Url );
+			h.AddFormattedText( "the discussion forum", TextFormat.Underline );
+			paragraph.AddText( "." );
 			paragraph.AddLineBreak();
 		}
 
 		private void RenderDisclaimer()
 		{
-			Paragraph paragraph;
-			paragraph = this.document.LastSection.AddParagraph();
+			var paragraph = _document.LastSection.AddParagraph();
 			paragraph.Format.SpaceBefore = "1cm";
 			paragraph.Format.Borders.Width = 0.75;
 			paragraph.Format.Borders.Distance = 3;
 			paragraph.Format.Borders.Color = TableBorder;
 			paragraph.Format.Shading.Color = TableGray;
-			paragraph.Format.Font.Color = Color.Parse("red");
+			paragraph.Format.Font.Color = Color.Parse( "red" );
 
-			paragraph.AddFormattedText("Disclaimer", TextFormat.Bold);
+			paragraph.AddFormattedText( "Disclaimer", TextFormat.Bold );
 			paragraph.AddLineBreak();
 			paragraph.AddText( @"The Biomass Decision Support System (BDSS) is provided on an ""as is"" basis. While steps have been taken to ensure that the input data behind it, the algorithms which operate within it and its overall functionality are accurate and reliable, the University of Tennessee and the developer of BDSS make no warranty that any part of BDSS and including the results generated by this website is suitable for any particular purpose or is error-free. IBSS along with its partner institutions and funding agency, and the developer of BDSS give no warranty and make no representation as to its accuracy and accept no liability in any way whatsoever for any omissions or errors contained within it nor for any losses incurred (either direct or indirect) as a result of its use. Use of the BDSS, its result and the content of this website at user's sole risk and it is the responsibility of individual or organization using this tool to satisfy themselves as to the validity of any outputs derived from BDSS." );
 
-	
+
 		}
 
 		private void AddHeaderAndFooter()
 		{
 
-			var hr = this.document.AddStyle( "HorizontalRule", "Normal" );
-			var hrBorder = new Border();
-			hrBorder.Width = "1pt";
-			hrBorder.Color = Colors.Black;
+			var hr = _document.AddStyle( "HorizontalRule", "Normal" );
+			var hrBorder = new Border
+			{
+				Width = "1pt",
+				Color = Colors.Black
+			};
 			hr.ParagraphFormat.Borders.Bottom = hrBorder;
 			hr.ParagraphFormat.LineSpacing = 0;
 			hr.ParagraphFormat.SpaceBefore = 15;
 
-			Section section = document.LastSection; 
-			Paragraph paragraph;
-			var header = string.Format("{0} in {1}, {2}", rvm.CropType, rvm.CountyName, rvm.StateName);
-			paragraph = new Paragraph();
-			paragraph.Style = "HorizontalRule"; 
+			Section section = _document.LastSection;
+			var header = $"{Rvm.CropType} in {Rvm.CountyName}, {Rvm.StateName}";
+			var paragraph = new Paragraph {Style = "HorizontalRule"};
 			paragraph.AddTab();
-			paragraph.AddText(header);
+			paragraph.AddText( header );
 			paragraph.Format.Font.Size = 9;
 			paragraph.Format.Alignment = ParagraphAlignment.Right;
-			section.Headers.Primary.Add(paragraph);
-			section.Headers.EvenPage.Add(paragraph.Clone());
+			section.Headers.Primary.Add( paragraph );
+			section.Headers.EvenPage.Add( paragraph.Clone() );
 
-			var hrt = this.document.AddStyle( "HorizontalRuleTop", "Normal" );
-			hrBorder = new Border();
-			hrBorder.Width = "1pt";
-			hrBorder.Color = Colors.Black;
+			var hrt = _document.AddStyle( "HorizontalRuleTop", "Normal" );
+			hrBorder = new Border
+			{
+				Width = "1pt",
+				Color = Colors.Black
+			};
 			hrt.ParagraphFormat.Borders.Top = hrBorder;
 			hrt.ParagraphFormat.LineSpacing = 0;
 			hrt.ParagraphFormat.SpaceAfter = 5;
 
-			paragraph = new Paragraph();
-			paragraph.Style = "HorizontalRuleTop";
+			paragraph = new Paragraph {Style = "HorizontalRuleTop"};
 
 			paragraph.AddTab();
-			paragraph.AddText("Page ");
+			paragraph.AddText( "Page " );
 			paragraph.AddPageField();
 			paragraph.AddText( " of " );
 			paragraph.AddNumPagesField();
 			paragraph.Format.Font.Size = 9;
 			paragraph.Format.Alignment = ParagraphAlignment.Center;
-			section.Footers.Primary.Add(paragraph);
-			section.Footers.EvenPage.Add(paragraph.Clone());
+			section.Footers.Primary.Add( paragraph );
+			section.Footers.EvenPage.Add( paragraph.Clone() );
 		}
 
 		private void GetImage( string keyValue, string imageCaption = null )
 		{
-			string img;
-			Paragraph paragraph;
-			img = GetChart( keyValue );
+			var img = GetChart( keyValue );
 			if ( img != null )
 			{
-				paragraph = document.LastSection.AddParagraph();
+				var paragraph = _document.LastSection.AddParagraph();
 				paragraph.AddLineBreak();
 				paragraph.Format.Alignment = ParagraphAlignment.Center;
 				var map = paragraph.AddImage( img );
@@ -790,21 +674,18 @@ namespace BiofuelSouth.Manager
 				paragraph.AddLineBreak();
 				if ( imageCaption != null )
 				{
-					paragraph.AddFormattedText( imageCaption);
+					paragraph.AddFormattedText( imageCaption );
 					paragraph.AddLineBreak();
 				}
-
 			}
 		}
 
 		private static string GetChart( string keyValue )
 		{
-
 			var chart = Chart.GetFromCache( keyValue );
 			var bytes = chart.GetBytes();
 			var img = FileFromBytes( bytes );
 			return img;
-
 		}
 		private static string FileFromBytes( byte[] image )
 		{
@@ -839,7 +720,8 @@ namespace BiofuelSouth.Manager
 			{
 				//var stasticMapApiUrl = "http://maps.googleapis.com/maps/api/staticmap?&markers=color:navy%7Clabel:R%7C62.107733," + location + "&zoom=12&maptype=hybrid&sensor=false";
 				var stasticMapApiUrl = "http://maps.googleapis.com/maps/api/staticmap?" + location + "&zoom=9&maptype=" + maptype + "&sensor=false";
-				var formattedImageUrl = string.Format( "{0}&size={1}", string.Format( "{0}&center={1}", stasticMapApiUrl, location ), size );
+				var formattedImageUrl =
+					$"{string.Format($"{stasticMapApiUrl}&center={location}", stasticMapApiUrl, location)}&size={size}";
 				var httpClient = new HttpClient();
 
 				var imageTask = httpClient.GetAsync( formattedImageUrl );
@@ -851,65 +733,17 @@ namespace BiofuelSouth.Manager
 
 				return data;
 			}
-			catch ( Exception exception )
+			catch (Exception)
 			{
 				return null;
 			}
 		}
 
-		/// <summary>
-		/// Creates the dynamic parts of the invoice.
-		/// </summary>
-		void FillContent()
-		{
-			// Fill address in address text frame
-
-			Paragraph paragraph = this.addressFrame.AddParagraph();
-			paragraph.AddText( "Dr. Anwar Ali" );
-			paragraph.AddLineBreak();
-			paragraph.AddText( "Health And Social Services " );
-			paragraph.AddLineBreak();
-			paragraph.AddText( "Karachi" );
-
-			Row row1;
-			for ( int i = 0; i < dt.Rows.Count; i++ )
-			{
-				row1 = this.table.AddRow();
-
-
-				row1.TopPadding = 1.5;
-
-
-				for ( int j = 0; j < dt.Columns.Count; j++ )
-				{
-					row1.Cells[j].Shading.Color = TableGray;
-					row1.Cells[j].VerticalAlignment = VerticalAlignment.Center;
-					row1.Cells[j].Format.Alignment = ParagraphAlignment.Left;
-					row1.Cells[j].Format.FirstLineIndent = 1;
-					row1.Cells[j].AddParagraph( dt.Rows[i][j].ToString() );
-					this.table.SetEdge( 0, this.table.Rows.Count - 2, dt.Columns.Count, 1, Edge.Box, BorderStyle.Single, 0.75 );
-				}
-			}
-
-
-			// Add the notes paragraph
-			paragraph = this.document.LastSection.AddParagraph();
-			paragraph.Format.SpaceBefore = "1cm";
-			paragraph.Format.Borders.Width = 0.75;
-			paragraph.Format.Borders.Distance = 3;
-			paragraph.Format.Borders.Color = TableBorder;
-			paragraph.Format.Shading.Color = TableGray;
-			paragraph.AddText( "Note: For any complain please contact us in 24 hours from the issuance of bill" );
-
-
-		}
-
 		// Some pre-defined colors
 #if true
 		// RGB colors
-		readonly static Color TableBorder = new Color( 81, 125, 192 );
-		readonly static Color TableBlue = new Color( 235, 240, 249 );
-		readonly static Color TableGray = new Color( 242, 242, 242 );
+		static readonly Color TableBorder = new Color( 81, 125, 192 );
+		static readonly Color TableGray = new Color( 242, 242, 242 );
 #else
     // CMYK colors
     readonly static Color tableBorder = Color.FromCmyk(100, 50, 0, 30);
