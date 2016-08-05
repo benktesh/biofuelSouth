@@ -401,11 +401,11 @@ namespace BiofuelSouth.Models
 
 	    public object Clone()
 	    {
-			Input newInput  = (Input)this.MemberwiseClone();
-			newInput.General = (General)this.General.Clone();
-		    newInput.Financial = (Financial) this.Financial.Clone();
-		    newInput.Storage = (Storage) this.Storage.Clone();
-			newInput.ProductionCost = (ProductionCostViewModel) this.ProductionCost.Clone();
+			Input newInput  = (Input)MemberwiseClone();
+			newInput.General = (General)General.Clone();
+		    newInput.Financial = (Financial) Financial.Clone();
+		    newInput.Storage = (Storage) Storage.Clone();
+			newInput.ProductionCost = (ProductionCostViewModel) ProductionCost.Clone();
 
 			return newInput;
 		}
