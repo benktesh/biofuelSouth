@@ -83,7 +83,7 @@
 							<div class="col-xs-6">
 
 								@Html.LabelFor( m => m.CostOption, new { @class = "control-label" } ) <span class="required">Required</span>
-								@Html.DropDownListFor( m => m.CostOption, EnumHelper.GetSelectList( typeof( CostEstimationOption ) ), "Select", new { @class = "form-control" } )
+								@Html.DropDownListFor( m => m.CostOption, EnumHelper.GetSelectList( typeof( StorageCostEstimationOption ) ), "Select", new { @class = "form-control" } )
 								@Html.ValidationMessageFor( m => m.CostOption, "", new { @class = "text-danger" } )
 
 							</div>

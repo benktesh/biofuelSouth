@@ -9,19 +9,23 @@ namespace BiofuelSouth.Helpers
     {
         public static string GetDisplayName(this System.Enum enumValue)
         {
-            var attrs = enumValue.GetType()
+            var val = enumValue.GetType()
                 .GetMember(enumValue.ToString())
-                .FirstOrDefault().GetCustomAttributes<DisplayAttribute>().FirstOrDefault();
+                .FirstOrDefault();
 
-            if (attrs == null)
-            {
-                return enumValue.ToString();
-            }
+	        if (val != null)
+	        {
+		        var attrs = val.GetCustomAttributes<DisplayAttribute>().FirstOrDefault();
+				if ( attrs == null )
+				{
+					return enumValue.ToString();
+				}
 
-            return attrs
-                .GetName();
+				return attrs
+					.GetName();
+			}
 
-    
+	        return enumValue.ToString(); //could not find the enum value
 
         }
 

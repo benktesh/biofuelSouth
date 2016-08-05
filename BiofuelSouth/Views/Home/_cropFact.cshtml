@@ -17,7 +17,7 @@
 			@if ( Model.CanPDFFactsheet )
 			{
 
-				<a data-toggle="" class="pull-right" href="@Url.Action("GetPDFFact", "Home", new {cropType = Model.CropType})"><i class="fa fa-file-pdf-o">&nbsp;Download Factsheet</i></a>
+				<a data-toggle="" class="pull-right" href="@Url.Action("GetPdfFact", "Home", new {cropType = Model.CropType})"><i class="fa fa-file-pdf-o">&nbsp;Download Factsheet</i></a>
 			}
 			@if ( Model.CropType == CropType.Switchgrass )
 			{

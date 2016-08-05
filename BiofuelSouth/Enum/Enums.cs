@@ -12,13 +12,12 @@ namespace BiofuelSouth.Enum
            
     }
 
-    public enum CostEstimationOption
+    public enum StorageCostEstimationOption
     {
         [Display(Name=@"Default")]
         Default = 0,
         [Display(Name = @"Use Lumpsum Storage Cost")]
         UserSupplyStorageCost = 1,
-
         [Display(Name = @"Derive from Supplied Materials Cost")]
         UserSupplyMaterialCost = 2
     }

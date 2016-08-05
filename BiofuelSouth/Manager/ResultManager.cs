@@ -35,7 +35,7 @@ namespace BiofuelSouth.Manager
 
 		private List<decimal> StorageLoss { get; set; }
 
-		private ResultViewModel vm { get; set; }
+		private ResultViewModel Vm { get; set; }
 
 		private IList<Revenue> Revenues { get; set; }
 
@@ -43,7 +43,7 @@ namespace BiofuelSouth.Manager
 
 		private decimal BiomassPriceAtFarmGate { get; set; }
 
-		private decimal NPV { get; set; }
+		private decimal Npv { get; set; }
 
 		public ResultManager( Input input )
 		{
@@ -59,7 +59,7 @@ namespace BiofuelSouth.Manager
 			ProductionCost = input.ProductionCost;
 
 			cc = new ChartController();
-			vm = new ResultViewModel();
+			Vm = new ResultViewModel();
 			// Set properties for calculations
 
 			BiomassPriceAtFarmGate = GetBiomassPrice();
@@ -71,7 +71,7 @@ namespace BiofuelSouth.Manager
 			Expenses = GetExpenditures();
 			StorageLoss = GetStorageLossList();
 
-			NPV = GetNpv();
+			Npv = GetNpv();
 
 			//set all view model properties
 		}
@@ -283,7 +283,7 @@ namespace BiofuelSouth.Manager
 
 			try
 			{
-				var rotation = CropAttribute.GetRoationYears( General.Category );
+				CropAttribute.GetRoationYears( General.Category );
 				var duration = General.ProjectLife ?? Constants.ProjectLife;
 				var annualProductionCosts = GetAnnualProductionCosts();
 				for ( var i = 0; i < duration; i++ )
@@ -326,6 +326,8 @@ namespace BiofuelSouth.Manager
 
 			if ( rotation == 1 )
 			{
+				// ReSharper disable once RedundantAssignment
+				// ReSharper disable once ReturnValueOfPureMethodIsNotUsed
 				annualProductionCost.Select( c => { c = standardAnnualCost; return c; } ).ToList();
 			}
 
@@ -428,52 +430,60 @@ namespace BiofuelSouth.Manager
 		public ResultViewModel GetResultViewModel()
 		{
 
-			vm.CountyEntity = DataService.GetCountyById( General.County );
-			vm.CashFlow = GetCashFlow();
+			Vm.CountyEntity = DataService.GetCountyById( General.County );
+			Vm.CashFlow = GetCashFlow();
 
-			vm.BiomassPriceAtFarmGate = BiomassPriceAtFarmGate;
-			vm.ProjectSize = $"{General.ProjectSize.GetValueOrDefault().ToString( "##,###" )} acre";
-			vm.LandCost = $"{General.LandCost.GetValueOrDefault().ToString( "C0" )} per acre";
-			vm.ProjectLife = General.ProjectLife.GetValueOrDefault();
-			vm.NPV = NPV;
-			vm.InterestRate = Constants.GetAvgInterestRate() / 100; //Interest rate as percent
+			Vm.BiomassPriceAtFarmGate = BiomassPriceAtFarmGate;
+			Vm.ProjectSize = $"{General.ProjectSize.GetValueOrDefault().ToString( "##,###" )} acre";
+			Vm.LandCost = $"{General.LandCost.GetValueOrDefault().ToString( "C0" )} per acre";
+			Vm.ProjectLife = General.ProjectLife.GetValueOrDefault();
+			Vm.NPV = Npv;
+			Vm.InterestRate = Constants.GetAvgInterestRate() / 100; //Interest rate as percent
 
-			vm.ProductionList = Productions;
-			vm.GrossProductionList = GrossProductions;
-			vm.ProductivityList = Productivity;
+			Vm.ProductionList = Productions;
+			Vm.GrossProductionList = GrossProductions;
+			Vm.ProductivityList = Productivity;
 
-			vm.RevenueList = Revenues.Select( m => m.TotalRevenue ).ToList();
-			vm.CostList = Expenses.Select( m => m.TotalExpenses ).ToList();
+			Vm.RevenueList = Revenues.Select( m => m.TotalRevenue ).ToList();
+			Vm.CostList = Expenses.Select( m => m.TotalExpenses ).ToList();
 
-			vm.StorageLoss = StorageLoss;
-			vm.StorageCostList = Expenses.Select( m => m.StorageCost ).ToList();
+			Vm.CountyName = Constants.CountyName( General.County );
+			Vm.CropType = General.Category;
+			Vm.StateCode = General.State;
+			Vm.StateName = Constants.GetStateName( General.State );
+			Vm.ImageUrl = Constants.GetImageUrl( General.Category );
 
-			vm.CountyName = Constants.CountyName( General.County );
-			vm.CropType = General.Category;
-			vm.StateCode = General.State;
-			vm.StateName = Constants.GetStateName( General.State );
-			vm.ImageUrl = Constants.GetImageUrl( General.Category );
+			Vm.RequireStorage = Storage.RequireStorage.GetValueOrDefault();
+			Vm.StoragePercent = Storage.PercentStored;
+			Vm.StorageTime = Storage.StorageTime;
+			Vm.StorageMethod = Storage.StorageMethod.GetDisplayName(); 
+			Vm.StorageCostmethod = ((StorageCostEstimationOption) Storage.CostOption).GetDisplayName();
 
-			vm.RequireStorage = Storage.RequireStorage.GetValueOrDefault();
+			Vm.StorageLoss = StorageLoss;
+			Vm.StorageCostList = Expenses.Select( m => m.StorageCost ).ToList();
+
+
 
 			var avgCost = Expenses.Select( m => m.TotalExpenses ).Average() / (decimal)Math.Max( 1, General.ProjectSize.GetValueOrDefault() );
-			vm.AverageCostPerAcre = $"{avgCost.ToString( "C0" )} per acre";
+			Vm.AverageCostPerAcre = $"{avgCost.ToString( "C0" )} per acre";
 
 			var avgProductivity = Productivity.Average() / (decimal)Math.Max( 1, General.ProjectSize.GetValueOrDefault() );
-			vm.AverageProdutivityPerAcre = $"{avgProductivity.ToString( "#.##" )} tons per year";
+			Vm.AverageProdutivityPerAcre = $"{avgProductivity.ToString( "#.##" )} tons per year";
 
-			vm.ChartKeys = PrepareChart();
+			Vm.ChartKeys = PrepareChart();
+
+			
 
 			//populate values.
 			//make chart
 
-			return vm;
+			return Vm;
 		}
 
 		public Dictionary<ChartType, string> PrepareChart()
 		{
 
-			Dictionary<ChartType, string> vm = new Dictionary<ChartType, string>();
+			Dictionary<ChartType, string> prepareChart = new Dictionary<ChartType, string>();
 			//make cachekey and load to viewmodel
 			//var c = new ChartController();
 
@@ -483,22 +493,24 @@ namespace BiofuelSouth.Manager
 			//c.GenerateChart(revenueCachekey, rev, "Revenue");
 
 			var cacheKey = Guid.NewGuid().ToString();
-			vm.Add( ChartType.CashFlow, cacheKey );
+			prepareChart.Add( ChartType.CashFlow, cacheKey );
 			cc.GenerateColumnChart( cacheKey, GetCashFlow().ToArray(), "Cash Flow", "Year ", "$" );
 
 			cacheKey = Guid.NewGuid().ToString();
 			cc.GenerateChart( cacheKey, Productions.ToArray(), "Production", "Year", "ton " );
-			vm.Add( ChartType.Production, cacheKey );
+			prepareChart.Add( ChartType.Production, cacheKey );
 
 			var revenueCachekey = Guid.NewGuid().ToString();
-			vm.Add( ChartType.CostRevenue, revenueCachekey );
+			prepareChart.Add( ChartType.CostRevenue, revenueCachekey );
 			//cc.GenerateCostRevenueChart(cacheKey, ip, "Cost and Revenue");
-			var costRevenueData = new List<List<decimal>>();
-			costRevenueData.Add( Revenues.Select( m => m.TotalRevenue ).ToList() );
-			costRevenueData.Add( Expenses.Select( m => m.TotalExpenses ).ToList() );
+			var costRevenueData = new List<List<decimal>>
+			{
+				Revenues.Select(m => m.TotalRevenue).ToList(),
+				Expenses.Select(m => m.TotalExpenses).ToList()
+			};
 			cc.GenerateLineGraphs( revenueCachekey, costRevenueData, new List<string> { "Revenue", "Cost" }, "Cost and Revenue" );
 
-			return vm;
+			return prepareChart;
 		}
 	}
 
@@ -624,7 +636,7 @@ namespace BiofuelSouth.Manager
 
 			cc.GenerateColumnChart( npvCacheKey, npVs, xLabel, "NPV", "Crop ", "$" );
 			cc.GenerateLineGraphs( cashflowKey, cashFlows, xLabel.ToList(), "Cashflow Comparision" );
-			cc.GenerateLineGraphs( productionCompareKey, productions, xLabel, "Total Production", "tons", "Year ", null );
+			cc.GenerateLineGraphs( productionCompareKey, productions, xLabel, "Total Production", "tons", "Year " );
 
 			return viewModels;
 		}

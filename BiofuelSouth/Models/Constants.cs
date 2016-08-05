@@ -490,7 +490,7 @@ WY	Wyoming	Cheyenne	July 10, 1890
 			else
 				annualizedStorageCost = new decimal[10];
 			//If user has supplied flat cost, then storage cost per year from user is used.
-			if ( input.Storage.CostOption == (int)CostEstimationOption.UserSupplyStorageCost )
+			if ( input.Storage.CostOption == (int)StorageCostEstimationOption.UserSupplyStorageCost )
 			{
 				annualStorageCost = input.Storage.UserEstimatedCost;
 
@@ -502,7 +502,7 @@ WY	Wyoming	Cheyenne	July 10, 1890
 				return annualizedStorageCost;
 			}
 
-			if ( input.Storage.CostOption == (int)CostEstimationOption.Default || input.Storage.CostOption == (int)CostEstimationOption.UserSupplyMaterialCost )
+			if ( input.Storage.CostOption == (int)StorageCostEstimationOption.Default || input.Storage.CostOption == (int)StorageCostEstimationOption.UserSupplyMaterialCost )
 			{
 
 				if ( ( CropType.Switchgrass == cropType ) || ( CropType.Miscanthus == cropType ) )
@@ -522,7 +522,7 @@ WY	Wyoming	Cheyenne	July 10, 1890
 							requiresTarp = true;
 							requiresPallet = true;
 							break;
-						case StorageMethod.RoundTarpBareGroud:
+						case StorageMethod.RoundTarpBareGround:
 							oneTimeCost = tarpCostRound;
 							requiresTarp = true;
 							requiresPallet = false;

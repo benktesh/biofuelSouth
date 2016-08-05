@@ -278,12 +278,7 @@ namespace BiofuelSouth.Controllers
         [HttpGet]
         public ActionResult GetAlternative(CropType cropType)
         {
-
-            //SwapCrop
-            //GEnerate results
-
             return null;  
-
         }
 
 

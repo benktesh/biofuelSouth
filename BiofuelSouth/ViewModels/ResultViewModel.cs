@@ -48,6 +48,12 @@ namespace BiofuelSouth.ViewModels
         [DisplayName(@"Storage Time")]
         public double StorageTime { get; set;  } //days
 
+		[DisplayName( @"Storage Method" )]
+		public String StorageMethod { get; set;  }
+
+		[DisplayName( @"Storage Cost Method" )]
+		public String StorageCostmethod { get; set;  }
+
         [DisplayName(@"Interest Rate (%)")]
         public double InterestRate { get; set; }
 

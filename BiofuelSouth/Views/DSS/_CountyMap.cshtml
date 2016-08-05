@@ -1,14 +1,15 @@
 ﻿@model BiofuelSouth.ViewModels.ResultViewModel
 <script type="text/javascript">
     function Initialize() {
-        var latlng = new google.maps.LatLng(@Model.CountyEntity.Lat, @Model.CountyEntity.Lon);
+        var latlng = new window.google.maps.LatLng(@Model.CountyEntity.Lat, @Model.CountyEntity.Lon);
         var options = {
             zoom: 8,
             center: latlng,
 			
-            mapTypeId: google.maps.MapTypeId.ROADMAP
+            mapTypeId: window.google.maps.MapTypeId.ROADMAP
         };
-        var map = new google.maps.Map(document.getElementById("map_canvas"), options);
+// ReSharper disable once UnusedLocals
+        var map = new window.google.maps.Map(document.getElementById("map_canvas"), options);
     }
 
     $(function () {
