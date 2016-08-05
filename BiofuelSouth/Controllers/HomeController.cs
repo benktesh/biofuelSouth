@@ -102,7 +102,7 @@ namespace BiofuelSouth.Controllers
 			
 		}
 
-		public ActionResult GetPDFFact(CropType cropType)
+		public ActionResult GetPdfFact(CropType cropType)
         {
 
             var fileName = string.Format("{0}.pdf", cropType.ToString()).ToLower();
