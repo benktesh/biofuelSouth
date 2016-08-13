@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Configuration;
 using System.Data;
+using System.Globalization;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -127,8 +128,17 @@ namespace BiofuelSouth.Manager
 			var paragraph = section.AddParagraph();
 			paragraph.Format.SpaceBefore = "0cm";
 			paragraph.Style = "Reference";
+
+
+			var cropImage = paragraph.AddImage( HttpContext.Current.Server.MapPath( "~/images/ibssparnershiplogo.png" ) );
+			cropImage.Width = Unit.FromCentimeter( 6);
+			cropImage.LockAspectRatio = true;
+			paragraph.AddLineBreak();
+
+
 			paragraph.AddFormattedText( "Biomass Decision Support System" );
 			paragraph.AddLineBreak();
+
 			var cropMsg = $"Results for {Rvm.CropType} in {Rvm.CountyName}, {Rvm.StateName}";
 			paragraph.AddFormattedText( cropMsg, TextFormat.Bold );
 			paragraph.AddLineBreak();
@@ -171,7 +181,7 @@ namespace BiofuelSouth.Manager
 			paragraph = _document.LastSection.AddParagraph();
 			paragraph.Style = "Reference";
 			paragraph.Format.Alignment = ParagraphAlignment.Center;
-			var cropImage = paragraph.AddImage( HttpContext.Current.Server.MapPath( Rvm.ImageUrl.Item3 ) );
+			cropImage = paragraph.AddImage( HttpContext.Current.Server.MapPath( Rvm.ImageUrl.Item3 ) );
 			cropImage.Width = Unit.FromCentimeter( 8 );
 			cropImage.LockAspectRatio = true;
 			paragraph.AddLineBreak();
@@ -180,7 +190,7 @@ namespace BiofuelSouth.Manager
 			var lat = Rvm.CountyEntity.Lat;
 			var lon = Rvm.CountyEntity.Lon;
 			var location = $"center={lat},{lon}";
-			Task<byte[]> result = GetStaticMap( location, "400x300" );
+			Task<byte[]> result = GetStaticMap( location, "400x280" );
 
 			{
 				paragraph = _document.LastSection.AddParagraph();
@@ -191,7 +201,7 @@ namespace BiofuelSouth.Manager
 
 				paragraph.AddLineBreak();
 				var map = paragraph.AddImage( imgfile );
-				map.Height = Unit.FromCentimeter( 6 );
+				map.Height = Unit.FromCentimeter( 5 );
 				paragraph.AddLineBreak();
 				paragraph.AddFormattedText( "Approximate Location of Assessment Area" );
 				paragraph.AddLineBreak();
@@ -529,21 +539,71 @@ namespace BiofuelSouth.Manager
 			row.Cells[2].AddParagraph( "Source/Remarks" );
 
 			row = _table.AddRow();
+			row.Cells[0].AddParagraph( "County, State" );
+			row.Cells[1].AddParagraph(Rvm.CountyName + "county, " + Rvm.StateName + " ");
+			row.Cells[2].AddParagraph( String.Empty );
+
+			row = _table.AddRow();
+			row.Cells[0].AddParagraph( "Project Duration" );
+			row.Cells[1].AddParagraph( $"{Rvm.ProjectLife} " );
+			row.Cells[2].AddParagraph( String.Empty );
+
+			row = _table.AddRow();
+			row.Cells[0].AddParagraph( "Project Size" );
+			row.Cells[1].AddParagraph( $"{Rvm.ProjectSize} " );
+			row.Cells[2].AddParagraph( String.Empty );
+
+			row = _table.AddRow();
+			row.Cells[0].AddParagraph( "Interest Rate" );
+			row.Cells[1].AddParagraph( $"{Rvm.InterestRate.ToString("P")} " );
+			row.Cells[2].AddParagraph( String.Empty );
+
+			row = _table.AddRow();
 			row.Cells[0].AddParagraph( "Biomass Price At Farm Gate" );
 			row.Cells[1].AddParagraph($"{Rvm.BiomassPriceAtFarmGate.GetValueOrDefault().ToString("C0")} per ton");
 			row.Cells[2].AddParagraph( String.Empty );
 
-
-			row = _table.AddRow();
-			row.Cells[0].AddParagraph( "Project Size" );
-			row.Cells[1].AddParagraph($"{Rvm.ProjectSize} ");
-			row.Cells[2].AddParagraph( String.Empty );
-
-
 			row = _table.AddRow();
 			row.Cells[0].AddParagraph( "Land Cost" );
-			row.Cells[1].AddParagraph($"{Rvm.LandCost}");
+			row.Cells[1].AddParagraph( $"{Rvm.LandCost}" );
 			row.Cells[2].AddParagraph( String.Empty );
+
+			row = _table.AddRow();
+			row.Cells[0].AddParagraph( "Annual Production" );
+			row.Cells[1].AddParagraph( $"{Rvm.AnnualProduction}" );
+			row.Cells[2].AddParagraph( String.Empty );
+
+			if (!Rvm.RequireStorage)
+			{
+				row = _table.AddRow();
+				row.Cells[0].AddParagraph( "Crop Storage" );
+				row.Cells[1].AddParagraph( "Not Required/Not Applicable" );
+				row.Cells[2].AddParagraph( String.Empty );
+
+			}
+			else
+			{
+				row = _table.AddRow();
+				row.Cells[0].AddParagraph( "Storage Time" );
+				row.Cells[1].AddParagraph( Rvm.StorageTime.ToString(CultureInfo.InvariantCulture) + " (days)");
+				row.Cells[2].AddParagraph( String.Empty );
+
+				row = _table.AddRow();
+				row.Cells[0].AddParagraph( "Storage Percent" );
+				row.Cells[1].AddParagraph( Rvm.StoragePercent.ToString( "P"));
+				row.Cells[2].AddParagraph( String.Empty );
+
+				row = _table.AddRow();
+				row.Cells[0].AddParagraph( "Storage Method" );
+				row.Cells[1].AddParagraph( Rvm.StorageMethod);
+				row.Cells[2].AddParagraph( String.Empty );
+
+				row = _table.AddRow();
+				row.Cells[0].AddParagraph( "Storage Cost Assessment Method" );
+				row.Cells[1].AddParagraph( Rvm.StorageCostmethod);
+				row.Cells[2].AddParagraph( String.Empty );
+
+			}
 
 			row = _table.AddRow();
 			row.Cells[0].AddParagraph( "Average Cost" );
@@ -638,9 +698,13 @@ namespace BiofuelSouth.Manager
 			hr.ParagraphFormat.LineSpacing = 0;
 			hr.ParagraphFormat.SpaceBefore = 15;
 
+			
+
 			Section section = _document.LastSection;
 			var header = $"{Rvm.CropType} in {Rvm.CountyName}, {Rvm.StateName}";
 			var paragraph = new Paragraph {Style = "HorizontalRule"};
+
+
 			paragraph.AddTab();
 			paragraph.AddText( header );
 			paragraph.Format.Font.Size = 9;
@@ -656,7 +720,7 @@ namespace BiofuelSouth.Manager
 			};
 			hrt.ParagraphFormat.Borders.Top = hrBorder;
 			hrt.ParagraphFormat.LineSpacing = 0;
-			hrt.ParagraphFormat.SpaceAfter = 5;
+			hrt.ParagraphFormat.SpaceAfter = 9;
 
 			paragraph = new Paragraph {Style = "HorizontalRuleTop"};
 
