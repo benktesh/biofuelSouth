@@ -310,37 +310,32 @@
 									</tr>
 									<tr>
 										<td>@Html.GetDisplayName( m => Model.InterestRate )</td>
-										<td>@Model.InterestRate.ToString( "N" )</td>
+										<td>@Model.InterestRate.ToString( "P1" )</td>
 										<td></td>
 									</tr>
 									<tr>
-										<td>Biomass Price</td>
-										<td> @Model.BiomassPriceAtFarmGate.GetValueOrDefault().ToString( "C0" ) per ton </td>
+										<td>Biomass Price at Farm Gate ($/ton)</td>
+										<td> @Model.BiomassPriceAtFarmGate.GetValueOrDefault().ToString( "###" )</td>
 										<td></td>
 									</tr>
+
 									<tr>
-										<td> Project Size: </td>
-										<td> @Model.ProjectSize </td>
-										<td></td>
-									</tr>
-									<tr>
-										<td>Land Cost</td>
+										<td>@Html.GetDisplayName(m => Model.LandCost)"</td>
 										<td>@Model.LandCost</td>
 										<td></td>
 									</tr>
-									@*<tr>
-											<td colpan="3">Production Cost</td>
-										</tr>*@
 
 									<tr>
-										<td>@Html.GetDisplayName( m => Model.AnnualProduction )</td>
-										<td>@Model.AnnualProduction</td>
+										<td>@Html.GetDisplayName( m => Model.AverageCostPerAcre )</td>
+										<td>@Model.AverageCostPerAcre</td>
+										<td></td>
+									</tr>
+									<tr>
+										<td>@Html.GetDisplayName( m => Model.AverageProdutivityPerAcre )</td>
+										<td>@Model.AverageProdutivityPerAcre</td>
 										<td></td>
 									</tr>
 
-									@*<tr>
-											<td colspan='3'></td>
-										</tr>*@
 									@if ( !Model.RequireStorage )
 									{
 										<tr>
@@ -380,14 +375,59 @@
 											<td></td>
 										</tr>
 									}
+								
+
+									@if ( !Model.RequireFinance )
+									{
+										<tr>
+											<td>Financing</td>
+											<td>Not Required/Not Applicable</td>
+											<td></td>
+										</tr>
+									}
+									else
+									{
+
+										<tr>
+											<td>@Html.GetDisplayName( m => Model.AdministrativeCost )</td>
+											<td>@Model.AdministrativeCost.ToString( "##,###" )</td>
+											<td></td>
+										</tr>
+										<tr>
+											<td>@Html.GetDisplayName( m => Model.IncentivePayment )</td>
+											<td>@Model.IncentivePayment.ToString( "##,###" )</td>
+											<td></td>
+										</tr>
+										
+										<tr>
+											<td>@Html.GetDisplayName( m => Model.YearsOfIncentivePayment )</td>
+											<td>@Model.YearsOfIncentivePayment.ToString( "##,###" )</td>
+											<td></td>
+										</tr>
+										
+										<tr>
+											<td>@Html.GetDisplayName( m => Model.AvailableEquity )</td>
+											<td>@Model.AvailableEquity.ToString( "##,###" )</td>
+											<td></td>
+										</tr>
+										
+										<tr>
+											<td>@Html.GetDisplayName( m => Model.LoanAmount )</td>
+											<td>@Model.LoanAmount.ToString( "##,###" )</td>
+											<td></td>
+										</tr>
+										
+										<tr>
+											<td>@Html.GetDisplayName( m => Model.EquityLoanInterestRate )</td>
+											<td>@Model.EquityLoanInterestRate.ToString("##.##")</td>
+											<td></td>
+										</tr>
+
+
+									}
 									<tr>
-										<td>Average Cost</td>
-										<td>@Model.AverageCostPerAcre</td>
 										<td></td>
-									</tr>
-									<tr>
-										<td>Average Production</td>
-										<td>@Model.AverageProdutivityPerAcre</td>
+										<td></td>
 										<td></td>
 									</tr>
 

@@ -434,8 +434,8 @@ namespace BiofuelSouth.Manager
 			Vm.CashFlow = GetCashFlow();
 
 			Vm.BiomassPriceAtFarmGate = BiomassPriceAtFarmGate;
-			Vm.ProjectSize = $"{General.ProjectSize.GetValueOrDefault().ToString( "##,###" )} acre";
-			Vm.LandCost = $"{General.LandCost.GetValueOrDefault().ToString( "C0" )} per acre";
+			Vm.ProjectSize = $"{General.ProjectSize.GetValueOrDefault().ToString( "##,###" )} ";
+			Vm.LandCost = $"{General.LandCost.GetValueOrDefault().ToString( "##,###" )}";
 			Vm.ProjectLife = General.ProjectLife.GetValueOrDefault();
 			Vm.NPV = Npv;
 			Vm.InterestRate = Constants.GetAvgInterestRate() / 100; //Interest rate as percent
@@ -462,13 +462,22 @@ namespace BiofuelSouth.Manager
 			Vm.StorageLoss = StorageLoss;
 			Vm.StorageCostList = Expenses.Select( m => m.StorageCost ).ToList();
 
+			Vm.RequireFinance = Financial.RequireFinance.GetValueOrDefault();
+			Vm.AdministrativeCost = Financial.AdministrativeCost;
+			Vm.IncentivePayment = Financial.IncentivePayment;
+			Vm.YearsOfIncentivePayment = Financial.YearsOfIncentivePayment;
+			Vm.AvailableEquity = Financial.AvailableEquity;
+			Vm.LoanAmount = Financial.LoanAmount;
+			Vm.EquityLoanInterestRate = Financial.EquityLoanInterestRate; 
+			
+
 
 
 			var avgCost = Expenses.Select( m => m.TotalExpenses ).Average() / (decimal)Math.Max( 1, General.ProjectSize.GetValueOrDefault() );
-			Vm.AverageCostPerAcre = $"{avgCost.ToString( "C0" )} per acre";
+			Vm.AverageCostPerAcre = $"{avgCost.ToString( "C0" )}";
 
 			var avgProductivity = Productivity.Average() / (decimal)Math.Max( 1, General.ProjectSize.GetValueOrDefault() );
-			Vm.AverageProdutivityPerAcre = $"{avgProductivity.ToString( "#.##" )} tons per year";
+			Vm.AverageProdutivityPerAcre = $"{avgProductivity.ToString( "#.##" )}";
 
 			Vm.ChartKeys = PrepareChart();
 

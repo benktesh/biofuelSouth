@@ -540,12 +540,12 @@ namespace BiofuelSouth.Manager
 
 			row = _table.AddRow();
 			row.Cells[0].AddParagraph( "County, State" );
-			row.Cells[1].AddParagraph(Rvm.CountyName + "county, " + Rvm.StateName + " ");
+			row.Cells[1].AddParagraph(Rvm.CountyName + " county, " + Rvm.StateName + " ");
 			row.Cells[2].AddParagraph( String.Empty );
 
 			row = _table.AddRow();
 			row.Cells[0].AddParagraph( "Project Duration" );
-			row.Cells[1].AddParagraph( $"{Rvm.ProjectLife} " );
+			row.Cells[1].AddParagraph( $"{Rvm.ProjectLife} years" );
 			row.Cells[2].AddParagraph( String.Empty );
 
 			row = _table.AddRow();
@@ -568,12 +568,22 @@ namespace BiofuelSouth.Manager
 			row.Cells[1].AddParagraph( $"{Rvm.LandCost}" );
 			row.Cells[2].AddParagraph( String.Empty );
 
+
 			row = _table.AddRow();
-			row.Cells[0].AddParagraph( "Annual Production" );
-			row.Cells[1].AddParagraph( $"{Rvm.AnnualProduction}" );
+			row.Cells[0].AddParagraph( "Average Cost" );
+			row.Cells[1].AddParagraph( $"{Rvm.AverageCostPerAcre}" );
 			row.Cells[2].AddParagraph( String.Empty );
 
-			if (!Rvm.RequireStorage)
+			row = _table.AddRow();
+			row.Cells[0].AddParagraph( "Average Production" );
+			row.Cells[1].AddParagraph( $"{Rvm.AverageProdutivityPerAcre} per acre" );
+			row.Cells[2].AddParagraph( String.Empty );
+
+
+
+
+
+			if ( !Rvm.RequireStorage)
 			{
 				row = _table.AddRow();
 				row.Cells[0].AddParagraph( "Crop Storage" );
@@ -605,15 +615,49 @@ namespace BiofuelSouth.Manager
 
 			}
 
-			row = _table.AddRow();
-			row.Cells[0].AddParagraph( "Average Cost" );
-			row.Cells[1].AddParagraph($"{Rvm.AverageCostPerAcre}");
-			row.Cells[2].AddParagraph( String.Empty );
 
-			row = _table.AddRow();
-			row.Cells[0].AddParagraph( "Average Production" );
-			row.Cells[1].AddParagraph($"{Rvm.AverageProdutivityPerAcre} per acre");
-			row.Cells[2].AddParagraph( String.Empty );
+			if ( !Rvm.RequireFinance )
+			{
+				row = _table.AddRow();
+				row.Cells[0].AddParagraph( "Financing" );
+				row.Cells[1].AddParagraph( "Not Required/Not Applicable" );
+				row.Cells[2].AddParagraph( String.Empty );
+
+			}
+			else
+			{
+				row = _table.AddRow();
+				row.Cells[0].AddParagraph( "Administrative Cost" );
+				row.Cells[1].AddParagraph( Rvm.AdministrativeCost.ToString( "C0" ) + "/acre/year" );
+				row.Cells[2].AddParagraph( String.Empty );
+
+				row = _table.AddRow();
+				row.Cells[0].AddParagraph( "Incentive Payment" );
+				row.Cells[1].AddParagraph( Rvm.IncentivePayment.ToString( "C0" ) + "/acre/year" );
+				row.Cells[2].AddParagraph( String.Empty );
+
+				row = _table.AddRow();
+				row.Cells[0].AddParagraph( "Number of years of incentive payment" );
+				row.Cells[1].AddParagraph( Rvm.IncentivePayment.ToString("##,###")  + " years" );
+				row.Cells[2].AddParagraph( String.Empty );
+
+				row = _table.AddRow();
+				row.Cells[0].AddParagraph( "Available Equity" );
+				row.Cells[1].AddParagraph( Rvm.AvailableEquity.ToString("C0") );
+				row.Cells[2].AddParagraph( String.Empty );
+
+				row = _table.AddRow();
+				row.Cells[0].AddParagraph( "Loan Amount" );
+				row.Cells[1].AddParagraph( (Rvm.LoanAmount/100).ToString( "C0" ) );
+				row.Cells[2].AddParagraph( String.Empty );
+
+				row = _table.AddRow();
+				row.Cells[0].AddParagraph( "Equity Loan Interest Rate" );
+				row.Cells[1].AddParagraph( Rvm.EquityLoanInterestRate.ToString( "P" ) );
+				row.Cells[2].AddParagraph( String.Empty );
+
+			}
+
 
 			paragraph.AddLineBreak();
 			paragraph.AddFormattedText( "Users can change the inputs to analyze how such change may impact the result",

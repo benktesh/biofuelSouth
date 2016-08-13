@@ -57,13 +57,34 @@ namespace BiofuelSouth.ViewModels
         [DisplayName(@"Interest Rate (%)")]
         public double InterestRate { get; set; }
 
+		[DisplayName( @"Require Finance (Select No to Skip)" )]
+		public bool RequireFinance { get; set; }
+
+		[DisplayName( @"Administrative Cost($/acre/year)" )]
+		public decimal AdministrativeCost { get; set; } //$/acre/year
+
+		[DisplayName( @"Incentive Payment($/acre/year)" )]
+		public decimal IncentivePayment { get; set; } //$/acre/year
+
+		[DisplayName( @"No. of Years of Payment" )]
+		public int YearsOfIncentivePayment { get; set; } //$acres/yearC:\Users\Benktesh\Documents\Visual Studio 2013\Projects\BiofuelSouthSolution\BiofuelSouth\Models\Input.cs
+
+		[DisplayName( @"Available Equity ($)" )]
+		public double AvailableEquity { get; set; } //$
+
+		[DisplayName( @"Loan Amount ($)" )]
+		public decimal LoanAmount { get; set; } //$
+
+		[DisplayName( @"Equity Loan Interest Rate (%)" )]
+		public double EquityLoanInterestRate { get; set; } //% (decimal fraction)
 
 
 
-        #endregion
 
-        #region Summary
-        public decimal NPV { get; set; }
+		#endregion
+
+		#region Summary
+		public decimal NPV { get; set; }
 
         [DisplayName(@"Annual Production (tons)")]
         public string AnnualProduction { get { return ProductionList.Average().ToString("###,###.##"); } }
@@ -71,10 +92,14 @@ namespace BiofuelSouth.ViewModels
 
         public string AnnualRevenue => RevenueList.Average().ToString("C0");
 
-        public string AverageCostPerAcre { get; set; }
-        public string AverageProdutivityPerAcre { get; set; }
+		[DisplayName( @"Average Cost ($/per ton)")]
+		public string AverageCostPerAcre { get; set; }
 
-        public bool RequireStorage { get; set; }
+		[DisplayName( @"Average Production (ton/acre/year)" )]
+		public string AverageProdutivityPerAcre { get; set; }
+
+		[DisplayName( @"Storage" )]
+		public bool RequireStorage { get; set; }
 
 		public Tuple<string, string, string> ImageUrl { get; set; }
 
@@ -84,7 +109,9 @@ namespace BiofuelSouth.ViewModels
         public decimal? BiomassPriceAtFarmGate { get; set; }
         [DisplayName(@"Project Size (Acres)")]
         public string ProjectSize { get; set; }
-        public string LandCost { get; set; }
+
+		[DisplayName( @"Land Cost ($/acre/year)" )]
+		public string LandCost { get; set; }
 
         public double AverageAnnualCost { get; set; }
         public double AverageAnnualYield { get; set; }
