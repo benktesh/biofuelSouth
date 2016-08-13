@@ -5,6 +5,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Mvc;
+using System.Web.Mvc.Ajax;
 
 namespace BiofuelSouth.Helpers
 {
@@ -26,6 +27,12 @@ namespace BiofuelSouth.Helpers
 			var metaData = ModelMetadata.FromLambdaExpression<TModel, TProperty>( expression, htmlHelper.ViewData );
 			string value = metaData.DisplayName ?? ( metaData.PropertyName ?? ExpressionHelper.GetExpressionText( expression ) );
 			return MvcHtmlString.Create( value );
+		}
+
+		public static MvcHtmlString HtmlActionLink( this AjaxHelper helper, string html, string actionName, string controllerName, object routeValues, AjaxOptions ajaxOptions, object htmlAttributes )
+		{
+			var link = helper.ActionLink( "[replace]", actionName, controllerName, routeValues, ajaxOptions, htmlAttributes ).ToHtmlString();
+			return new MvcHtmlString( link.Replace( "[replace]", html ) );
 		}
 	}
 }

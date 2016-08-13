@@ -8,716 +8,722 @@
 <div class="panel panel-default">
 	<div class="panel-heading">
 		<div id="CropFact">
+			
 			@Model.CropType Factsheet
 		</div>
 	</div>
 	<div class="panel-body Instruction-panel-body">
 
-		<div class='row'>
-			@if ( Model.CanPDFFactsheet )
-			{
-
-				<a data-toggle="" class="pull-right" href="@Url.Action("GetPdfFact", "Home", new {cropType = Model.CropType})"><i class="fa fa-file-pdf-o">&nbsp;Download Factsheet</i></a>
-			}
-			@if ( Model.CropType == CropType.Switchgrass )
-			{
-				<div class="col-sm-12">
-					<h3>Switchgrass<span> (<i>Panicum virgatum</i>)</span></h3>
-				</div>
-				<div class='col-sm-12'>
-					<h4>Introduction</h4>
-					<div class='col-sm-6 pull-right'>
-						<img class='img img-responsive' src='../images/factsheet_switchgrass_1.jpg' alt='Switchgrass image 1'>
-						<h5><label><a name='Image1'></a>Switchgrass Field (Credit: Leslie Boby)</label></h5>
-
-						<h5><Label><a name='Table1'></a>Table 1. Switchgrass Facts for Quick Reference</Label></h5>
-						<table class='table table-striped table-responsive table-bordered'>
-							<tbody>
-								<tr>
-									<td width="40%">
-										Growing cycle
-									</td>
-									<td>
-										Grows as a perennial grass, harvested at minimum height of six inches,
-										then regrows from root crown
-									</td>
-								</tr>
-								<tr>
-									<td>Planting stock</td>
-									<td>Commercially available seed</td>
-								</tr>
-								<tr><td>Age at first harvest</td><td>Harvesting is recommended after the third year</td></tr>
-								<tr>
-									<td>Yield per Acre</td>
-									<td>7 to 12 tons per acre (after the third year)</td>
-								</tr>
-								<tr>
-									<td>Heating Value</td>
-									<td>8,014 BTU/pound</td>
-								</tr>
-							</tbody>
-						</table>
-
-					</div>
+	<div class='row'>
+	<div class="col-sm-12">
+		<a class="btn btn-warning" href='@Url.Action("Factsheet", "Home")'>Back</a>
+		@if ( Model.CanPDFFactsheet )
+		{
 
 
-					<p>
-						Switchgrass has strong potential to be grown as
-						a biomass feedstock for use as a biofuel across the southeastern
-						United States. As the bioenergy industry continues to grow, this
-						grass will provide another option in the biomass to bioenergy
-						profile. This factsheet covers basic details regarding switchgrass
-						growth, production and yield for bioenergy in the southeast.
+			<a data-toggle="" class="btn btn-success" href="@Url.Action("GetPdfFact", "Home", new {cropType = Model.CropType})"><i class="fa fa-file-pdf-o">&nbsp;Download Factsheet</i></a>
+		}
+	</div>
+		
+	@if (Model.CropType == CropType.Switchgrass)
+	{
+		<div class="col-sm-12">
+			<h3>Switchgrass<span> (<i>Panicum virgatum</i>)</span></h3>
+		</div>
+		<div class='col-sm-12'>
+			<h4>Introduction</h4>
+			<div class='col-sm-6 pull-right'>
+				<img class='img img-responsive' src='../images/factsheet_switchgrass_1.jpg' alt='Switchgrass image 1'>
+				<h5><label><a name='Image1'></a>Switchgrass Field (Credit: Leslie Boby)</label></h5>
 
-					</p>
-					<h4>Species Distribution</h4>
+				<h5><Label><a name='Table1'></a>Table 1. Switchgrass Facts for Quick Reference</Label></h5>
+				<table class='table table-striped table-responsive table-bordered'>
+					<tbody>
+					<tr>
+						<td width="40%">
+							Growing cycle
+						</td>
+						<td>
+							Grows as a perennial grass, harvested at minimum height of six inches,
+							then regrows from root crown
+						</td>
+					</tr>
+					<tr>
+						<td>Planting stock</td>
+						<td>Commercially available seed</td>
+					</tr>
+					<tr><td>Age at first harvest</td><td>Harvesting is recommended after the third year</td></tr>
+					<tr>
+						<td>Yield per Acre</td>
+						<td>7 to 12 tons per acre (after the third year)</td>
+					</tr>
+					<tr>
+						<td>Heating Value</td>
+						<td>8,014 BTU/pound</td>
+					</tr>
+					</tbody>
+				</table>
 
-					<p>
-						Switchgrass(<i>Panicum virgatum</i>) is a
-						warm - season perennial grass native to the United States. Its rapid growth rate, abundant biomass
-						and adaptation to different sites varieties have made it a prime candidate for development as a
-						biofuel feedstock (<a href='#Table1'>Table 1</a>).Switchgrass can grow up to 10 feet in height and creates root networks
-						that on can extend between 3 - 10 feet belowground.Most of its growth occurs between April and
-						October, and it produces a new flush of tillers every spring.Tolerant of drought,
-						low soil pH, and low nutrient levels, switchgrass has proven to be both hardy and low - maintenance,
-						and can grow on more marginal lands
-					</p>
-					<h4>Geographic Distribution</h4>
-					<p>
-						Switchgrass can be found
-						natively in almost all regions of the United States. It is most
-						abundant in the tallgrass prairies of the Great Plains regions east
-						of the Rocky Mountains and extends north to Canada and south
-						to Mexico. Although switchgrass is more common east of the
-						Rocky Mountains, it can be found in the western U.S. in all states
-						except for California, Washington, and Oregon.
-					</p>
-					<p>
-						Switchgrass has a number of cultivars that each thrive in different
-						climatic regions and altitudes, with some varieties characterized
-						as upland or lowland. Alamo and Kanlo cultivars are lowland
-						varieties, which are more suitable for the South. Lowland cultivars
-						grow taller with heights of 9-10 feet (vs. upland cultivar heights
-						of 5-6 feet). These lowland varieties produce more biomass
-						per acre then the upland varieties as well. These cultivars are
-						able to produce superior yields in areas with milder winters and
-						high annual rainfall, most notably across much of the Southeast.
-						Switchgrass can grow on a variety of soil types and can thrive
-						even on soil that is too erodible for the production of traditional
-						crops, such as corn.
-					</p>
-					<div class="col-sm-6 pull-right">
-						<img class='img img-responsive' src='../images/factsheet_switchgrass_2.jpg' alt='Switchgrass Seedling'>
-						<h5><label><a name='Image1'></a>Switchgrass Seedling (Credit: Sam Jackson)</label></h5>
-					</div>
-
-					<h4>Production Process</h4>
-					<p>
-						Managing for switchgrass is a
-						relatively simple process given the low degree of maintenance
-						required and the ability to use common farm equipment for site
-						preparation and harvest. Switch grass does well on moderately
-						well- to well-drained soils with a soil pH at 5.0 or above and
-						moderate fertility levels. Switchgrass can be planted using no-till
-						or conventional tillage methods. Planting should begin when soil
-						temperatures are consistently above 65°F, as early as mid-March
-						and up to mid-June for the Southeast. Seed should be spread
-						at a rate of 5-6 pounds of pure live seed per acre onto firmed
-						seedbeds using either seed drills or broadcast spreaders. If a
-						soil test shows low levels of phosphorous and potassium, then
-						fertilizer containing phosphorus, potassium, and micronutrients
-						(but not nitrogen) can aid in the establishment and early growth
-						of switchgrass stands. Nitrogen fertilizer can later be added after
-						successful establishment of the plants to further supplement
-						growth; if nitrogen is added too early, it can stimulate weed growth
-						and hinder the establishment of the switchgrass. Because the
-						risk of weeds outcompeting the switchgrass seedlings is so high,
-						herbicides should be applied both before and after planting, and
-						the site should be monitored often to identify any weed issues.
-					</p>
-
-					<p>
-						The establishment of switchgrass can often take several months,
-						and peak production may not be reached until the third year
-						after planting, which is when it reaches maturity. After becoming
-						completely established, switchgrass stands can produce consistent
-						yields throughout its ten to twentyyear lifespan. Switchgrass should
-						typically be harvested in the fall from as early as October (for a
-						poorly drained field) through mid-February in the South. Typically, the
-						switchgrass is mowed in the first part of the harvest period and allowed
-						to “cure,” to a desirable moisture content before being baled.
-						Managing moisture content is a key component of switchgrass harvesting.
-						It is recommended to cut switchgrass to a minimum height of six inches,
-						and within the range of 6-10 inches, in order to maintain stand density and
-						prevent damage to the crown of the plant.
-					</p>
-					<div class="col-sm-6 pull-right">
-						<img class='img img-responsive' src='../images/factsheet_switchgrass_3.jpg' alt='Switchgrass Bale'>
-						<h5><label><a name='Image3'></a>Bales of Switchgrass at a field day in Tennessee (Credit: Leslie Boby)</label></h5>
-
-						<img class='img img-responsive' src='../images/factsheet_switchgrass_4.jpg' alt='Switchgrass Harvesting'>
-						<h5><label><a name='Image4'></a>Harvesting Switchgrass using common farm equipment (Credit: Leslie Boby)</label></h5>
-
-					</div>
-					<h4>Yield</h4>
-					<p>
-						Switchgrass yields are dependent on both climate and
-						management intensity. Optimum yields can be reached after three
-						years, as the first year of growth includes stand establishment and
-						controlling weeds. Within the first year, a 30% yield is expected,
-						rising to a 70% yield in the second year and a 100% yield in the
-						third year. Choosing the right cultivar plant in any given region is
-						also very important in maximizing yields. Information on where to
-						find the right cultivar can be found by contacting county extension
-						agents or state cooperative extension offices. Switchgrass seeds
-						of various cultivars, including Alamo, are available commercially
-						from numerous agriculture supply companies.
-					</p>
-
-					<h4>Conclusion</h4>
-					<p>
-
-						Switchgrass has excellent potential as a feedstock
-						for bioenergy. Its fast growth and harvest rate, abundant biomass
-						and ability to grown on a wide range of sites make it a desirable
-						crop for bioenergy. For more information on growing switchgrass
-						in the Southeastern United States, please refer to the Guidebook
-						for Sustainable Production Practices of Switchgrass in the
-						Southeastern U.S.
-					</p>
-					<h4>References</h4>
-					<ul>
-						<li>
-							Drinnon, D., McCord, J., Goddard, K.and Walton, J. 2012.
-							Guidebook for the Sustainable Production Practices of Switchgrass in the Southeastern U.S.
-						</li>
-						<li>
-							Jacobson, M. 2013.Penn State Extension, Renewable and Alternative Energy Fact Sheet-NewBio
-							Energy Crop Profile: Switchgrass. <a href='http://extension.psu.edu/publications/ee0080'>http://extension.psu.edu/publications/ee0080.</a>
-						</li>
-						<li>
-							USDA - NRCS. Planting and Managing Switchgrass as a Biomass Energy Crop.
-							<a href='http://www.nrcs.usda.gov/Internet/FSE_DOCUMENTS/stelprdb1042293.pdf'>http://www.nrcs.usda.gov/Internet/FSE_DOCUMENTS/stelprdb1042293.pdf.</a>
-						</li>
-					</ul>
-					<h4>Prepared By</h4>
-					<p>
-						Connor McDonald, Leslie Boby and Bill Hubbard
-					</p>
-				</div>
-
-			}
-			@if ( Model.CropType == CropType.Miscanthus )
-			{
-				<div class='col-sm-12'>
-					<h3>Miscanthus<span> (<i>Miscanthus sp.</i>)</span></h3>
-
-				</div>
-				<div class="col-sm-12">
-					<h4>Introduction</h4>
-					<p>
-						<div class='col-sm-6 pull-right'>
-							<div>
-								<img class='img img-responsive' src='../images/factsheet_miscanthus_1.jpg' alt='Miscanthus image 1'>
-								<h5><label><a name='Image1'></a>A field of miscanthus after 3 years of growth (Credit: David Morrison)</label></h5>
-							</div>
+			</div>
 
 
-							<h5><Label><a name='Table1'></a>Table 1. Switchgrass Facts for Quick Reference</Label></h5>
-							<table class='table table-striped table-responsive table-bordered'>
-								<tbody>
-									<tr>
-										<td width="40%">
-											Growing cycle
-										</td>
-										<td>
-											Grows as a perennial grass that cann be harvested
-											once per year and regrows from rhizomes after harvest
-										</td>
-									</tr>
-									<tr>
-										<td>Planting stock</td>
-										<td>Vegetative progagation fromm rhizomes (root growths)</td>
-									</tr>
-									<tr>
-										<td>Age at first harvest</td>
-										<td>
-											Can be harveste as soon as the second year, a full
-											crop can be expected by teh second or third growinng season
-										</td>
-									</tr>
-									<tr>
-										<td>Yield per Acre</td>
-										<td>8 to 12 tons per acre</td>
-									</tr>
-									<tr>
-										<td>Heating Value</td>
-										<td>8,105 BTU/pound</td>
-									</tr>
-								</tbody>
-							</table>
+			<p>
+				Switchgrass has strong potential to be grown as
+				a biomass feedstock for use as a biofuel across the southeastern
+				United States. As the bioenergy industry continues to grow, this
+				grass will provide another option in the biomass to bioenergy
+				profile. This factsheet covers basic details regarding switchgrass
+				growth, production and yield for bioenergy in the southeast.
 
-							<div>
-								<img class='img img-responsive' src='../images/factsheet_miscanthus_3.jpg' alt='Miscanthus image 3'>
-								<h5><label><a name='Image3'></a>Miscanthus rhizome bundles can be fairly large (Credit: David Morrison)</label></h5>
-							</div>
+			</p>
+			<h4>Species Distribution</h4>
 
-							<div>
-								<img class='img img-responsive' src='../images/factsheet_miscanthus_2.jpg' alt='Miscanthus image 3'>
-								<h5><label><a name='Image2'></a>Miscanthus at 2 year growth level in field (Credit: David Morrison)</label></h5>
-							</div>
-						</div>
-						Giant miscanthus has strong potential to be
-						grown as a biomass feedstock for use as a biofuel across the
-						southeastern United States. As the bioenergy industry continues
-						to grow, this grass will provide another option in the biomass to
-						bioenergy profile. This factsheet covers basic details regarding
-						giant miscanthus growth, production and yield for bioenergy in
-						the southeast.
-					</p>
-					<h4>Species Distribution</h4>
-					<p>
-						Miscanthus is a genus which includes twelve perennial grass species that
-						are native to Asia and were introduced to the United States as ornamental plants in the
-						nineteenth century. This tall reed, or canelike plant, a relative to
-						sugarcane, can withstand both cold conditions and poor soils. Its growth potential
-						and high yield make it a prime candidate for biomass production.
-						Giant miscanthus (<i>Miscanthus giganteus</i>), the species most commonly used for bioenergy,
-						is actually a sterile hybrid of two species, Miscanthus sinensis and Miscanthus
-						sacchariflorus. Giant miscanthus can be used directly as a
-						feedstock for cellulosic biofuel production. It can also be pressed
-						into pellets or biomass logs for combustion. Additionally, it has
-						high lignocellulose yields in comparison to other biomass crops,
-						which makes it desirable as a biomass feedstock. The plant is
-						drought-tolerant but fares better under wetter conditions, and it
-						is actually a good fit for soils that are too wet for other crops,
-						such as corn or soybeans. Giant miscanthus’s roots can grow
-						deep below the ground surface, as far as eight feet, and they
-						break up hard soils and improve drainage. The hybridized giant
-						miscanthus is sterile; therefore, invasiveness from seeds is not an
-						issue. However, some other miscanthus varieties can be invasive,
-						so it is important to ensure that the giant miscanthus species is
-						selected when looking for planting stock
-					</p>
-					<H4>Geographic Distribution</H4>
-					<p>
-						Currently, giant miscanthus
-						is not widely found across the United States. It has been used
-						occasionally as an ornamental plant since the 1930s in the United
-						States; however, it has been planted more widely in Europe.
-						Based on how well it does in Europe (from Italy in the south to
-						Denmark in the north), it is likely that giant miscanthus will be
-						productive over a wide range of temperate regions including the
-						southern U.S. It has been grown successfully in Europe at similar
-						latitudes to the southern U.S. It does not fare well in arid climates.
-					</p>
-					<p>
+			<p>
+				Switchgrass(<i>Panicum virgatum</i>) is a
+				warm - season perennial grass native to the United States. Its rapid growth rate, abundant biomass
+				and adaptation to different sites varieties have made it a prime candidate for development as a
+				biofuel feedstock (<a href='#Table1'>Table 1</a>).Switchgrass can grow up to 10 feet in height and creates root networks
+				that on can extend between 3 - 10 feet belowground.Most of its growth occurs between April and
+				October, and it produces a new flush of tillers every spring.Tolerant of drought,
+				low soil pH, and low nutrient levels, switchgrass has proven to be both hardy and low - maintenance,
+				and can grow on more marginal lands
+			</p>
+			<h4>Geographic Distribution</h4>
+			<p>
+				Switchgrass can be found
+				natively in almost all regions of the United States. It is most
+				abundant in the tallgrass prairies of the Great Plains regions east
+				of the Rocky Mountains and extends north to Canada and south
+				to Mexico. Although switchgrass is more common east of the
+				Rocky Mountains, it can be found in the western U.S. in all states
+				except for California, Washington, and Oregon.
+			</p>
+			<p>
+				Switchgrass has a number of cultivars that each thrive in different
+				climatic regions and altitudes, with some varieties characterized
+				as upland or lowland. Alamo and Kanlo cultivars are lowland
+				varieties, which are more suitable for the South. Lowland cultivars
+				grow taller with heights of 9-10 feet (vs. upland cultivar heights
+				of 5-6 feet). These lowland varieties produce more biomass
+				per acre then the upland varieties as well. These cultivars are
+				able to produce superior yields in areas with milder winters and
+				high annual rainfall, most notably across much of the Southeast.
+				Switchgrass can grow on a variety of soil types and can thrive
+				even on soil that is too erodible for the production of traditional
+				crops, such as corn.
+			</p>
+			<div class="col-sm-6 pull-right">
+				<img class='img img-responsive' src='../images/factsheet_switchgrass_2.jpg' alt='Switchgrass Seedling'>
+				<h5><label><a name='Image1'></a>Switchgrass Seedling (Credit: Sam Jackson)</label></h5>
+			</div>
 
-						The plant is drought-tolerant but fares better under wetter conditions and is actually ideal for soils that
-						are too wet for other crops, such as corn or soybeans. Giant miscanthus’s roots can grow deep below the ground
-						surface, reaching down to 8 feet, and they break up hard soils and improve drainage. The hybridized giant miscanthus
-						is sterile, so there are no concerns about invasiveness from seed. However, some other varieties of miscanthus can be invasive,
-						so it is important to ensure that the giant miscanthus species is selected when looking for planting stock.
-					</p>
+			<h4>Production Process</h4>
+			<p>
+				Managing for switchgrass is a
+				relatively simple process given the low degree of maintenance
+				required and the ability to use common farm equipment for site
+				preparation and harvest. Switch grass does well on moderately
+				well- to well-drained soils with a soil pH at 5.0 or above and
+				moderate fertility levels. Switchgrass can be planted using no-till
+				or conventional tillage methods. Planting should begin when soil
+				temperatures are consistently above 65°F, as early as mid-March
+				and up to mid-June for the Southeast. Seed should be spread
+				at a rate of 5-6 pounds of pure live seed per acre onto firmed
+				seedbeds using either seed drills or broadcast spreaders. If a
+				soil test shows low levels of phosphorous and potassium, then
+				fertilizer containing phosphorus, potassium, and micronutrients
+				(but not nitrogen) can aid in the establishment and early growth
+				of switchgrass stands. Nitrogen fertilizer can later be added after
+				successful establishment of the plants to further supplement
+				growth; if nitrogen is added too early, it can stimulate weed growth
+				and hinder the establishment of the switchgrass. Because the
+				risk of weeds outcompeting the switchgrass seedlings is so high,
+				herbicides should be applied both before and after planting, and
+				the site should be monitored often to identify any weed issues.
+			</p>
 
-					<h4>Production Process</h4>
-					<p>
-						Giant miscanthus is grown from
-						rhizomes (or root growths), rather then seed, and requires
-						specialized equipment for planting them. These planting costs
-						make it significantly more expensive to establish than other
-						energy crops. Rhizomes can be hard to find, but are becoming
-						more widely available. Soils should be tested prior to planting; a
-						pH between 6 to 8 is desirable. Typically, 6,000 plants per acre
-						are planted in the late spring once there is no chance of another
-						frost occurring. However, it is not recommended to plant too late in
-						the spring or early summer as establishment would be negatively
-						affected. Weed control is essential within the first year and may be
-						needed in the second year. Once giant miscanthus is established,
-						stands will usually be weed-free as it crowds out all other plants
-						in the field. Frost can kill the plants, especially in the first year;
-						however, once a stand survives through the first winter, it will
-						usually survive subsequent winters. Frost kill is less of a risk in the
-						southern United States because of milder winter temperatures.
-						Nitrogen fertilizers are not recommended as giant miscanthus
-						has low nutrient requirements during establishment and does not
-						show much response to nitrogen fertilization. Some studies have
-						shown that nitrogen can be counterproductive to giant miscanthus
-						establishment as it encourages greater weed growth.
-					</p>
-					<h4>Growth Rate</h4>
-					<p>
-						A full crop can be expected after two to three
-						growing seasons, and the first harvest can occur as soon as the
-						second year. Unlike during planting, no new equipment is needed
-						to harvest giant miscanthus because conventional hay or silage
-						equipment can be used. Giant miscanthus can be harvested annually for approximately 15 to 20 years. The plant reaches
-						heights of up to 12 feet and can regrow from the rhizome each
-						year. Giant miscanthus is typically harvested in the late winter or
-						early spring to allow nutrients to move from the above ground
-						portion of the plant, into the crown and rhizomes. These nutrients
-						can then be used by the plant the following year.
-					</p>
-					<h4>Yield</h4>
-					<p>
-						Biomass yields for giant miscanthus average as
-						much as 8 to 12 tons per acre per year, making it among the
-						highest-yielding perennial energy crops. However, there is not 
-						very much published data on giant miscanthus yields that are specific to the United
-						States. Stalks can be as long as nine feet at harvest, which makes for abundant
-						biomass. The relationship between harvestable yields and fertilization 
-						is not clear. Productivity is typically higher on more fertile soils, but sites
-						with poorer soils can still produce high yields if other environmental conditions,
-						such as temperature, are favorable. Giant miscanthus will grow on marginal sites,
-						but, as with most crops, yields will be reduced on nutrientpoor lands; however, overall
-						production can still be considered high in comparison to other
-						perennial grasses. Some small research trials in the Midwestern
-						United States suggest that giant miscanthus could yield more
-						than twice the amount of biomass as switchgrass grown in the
-						same area.
-					</p>
-					<h4>Conclusion</h4>
-					<p>
-						Giant miscanthus has great potential in the
-						southeastern United States as a biomass feedstock. In the South,
-						there is little risk for frost kill, unlike in more northerly regions.
-						Its fast growth rate and abundant biomass growth on all types
-						of land make it a desirable bioenergy crop. There are some
-						limitations for its establishment, such as difficulties in sourcing
-						planting materials and significant costs for planting the rhizomes.
-						Despite these challenges, the economic potential returns for
-						giant miscanthus over 20 years are favorable compared to other
-						energy crops.
-					</p>
-					<h4>Prepared By</h4>
-					<p>Mike Jacobson, Leslie Boby, Bill Hubbard and Connor McDonald</p>
-					<h4>Adapted From</h4>
-					<p>
-						Jacobson, M. 2013.Renewable and Alternative Energy Fact Sheet: NewBio Energy Crop Profile: Giant Miscanthus.
-						<a href='http://extension.psu.edu/publications/ee0079/view'>http://extension.psu.edu/publications/ee0079/view.</a>
-					</p>
-					<h4>Other Sources</h4>
-					<ul>
-						<li>
-							Jacobson, M. Harrison, D, Helsel, Z, Rak, D, Forgeng, B. and Heil, N.
-							Miscanthus Budget for Biomass Production. <a href='http://extension.psu.edu/publications/ee0081'>http://extension.psu.edu/publications/ee0081 </a>
-						</li>
-						<li>
-							Heaton, E., Boersma, N., Caveny, J., Voigt, T. and F. Dohleman. 2014.
-							eXtension Farm Energy COP.“Miscanthus (Miscanthus x gigan- teus) for Biofuel Production. 
-							<a href='http://www.extension.org/pages/26625/miscanthus-miscanthus-x-giganteus-for-biofuel-production'> http://www.extension.org/pages/26625/miscanthus-miscanthus-x-giganteus-for-biofuel-production. </a>
-						</li>
-						<li>
-							Williams, M.J.and Douglas, J.July 2011.Planting and Managing Giant Miscanthus as a Biomass Energy Crop.USDA NRCS
-							Plant Materials Program, Technical Note No. 4.
-						</li>
+			<p>
+				The establishment of switchgrass can often take several months,
+				and peak production may not be reached until the third year
+				after planting, which is when it reaches maturity. After becoming
+				completely established, switchgrass stands can produce consistent
+				yields throughout its ten to twentyyear lifespan. Switchgrass should
+				typically be harvested in the fall from as early as October (for a
+				poorly drained field) through mid-February in the South. Typically, the
+				switchgrass is mowed in the first part of the harvest period and allowed
+				to “cure,” to a desirable moisture content before being baled.
+				Managing moisture content is a key component of switchgrass harvesting.
+				It is recommended to cut switchgrass to a minimum height of six inches,
+				and within the range of 6-10 inches, in order to maintain stand density and
+				prevent damage to the crown of the plant.
+			</p>
+			<div class="col-sm-6 pull-right">
+				<img class='img img-responsive' src='../images/factsheet_switchgrass_3.jpg' alt='Switchgrass Bale'>
+				<h5><label><a name='Image3'></a>Bales of Switchgrass at a field day in Tennessee (Credit: Leslie Boby)</label></h5>
 
-					</ul>
+				<img class='img img-responsive' src='../images/factsheet_switchgrass_4.jpg' alt='Switchgrass Harvesting'>
+				<h5><label><a name='Image4'></a>Harvesting Switchgrass using common farm equipment (Credit: Leslie Boby)</label></h5>
 
+			</div>
+			<h4>Yield</h4>
+			<p>
+				Switchgrass yields are dependent on both climate and
+				management intensity. Optimum yields can be reached after three
+				years, as the first year of growth includes stand establishment and
+				controlling weeds. Within the first year, a 30% yield is expected,
+				rising to a 70% yield in the second year and a 100% yield in the
+				third year. Choosing the right cultivar plant in any given region is
+				also very important in maximizing yields. Information on where to
+				find the right cultivar can be found by contacting county extension
+				agents or state cooperative extension offices. Switchgrass seeds
+				of various cultivars, including Alamo, are available commercially
+				from numerous agriculture supply companies.
+			</p>
 
+			<h4>Conclusion</h4>
+			<p>
 
+				Switchgrass has excellent potential as a feedstock
+				for bioenergy. Its fast growth and harvest rate, abundant biomass
+				and ability to grown on a wide range of sites make it a desirable
+				crop for bioenergy. For more information on growing switchgrass
+				in the Southeastern United States, please refer to the Guidebook
+				for Sustainable Production Practices of Switchgrass in the
+				Southeastern U.S.
+			</p>
+			<h4>References</h4>
+			<ul>
+				<li>
+					Drinnon, D., McCord, J., Goddard, K.and Walton, J. 2012.
+					Guidebook for the Sustainable Production Practices of Switchgrass in the Southeastern U.S.
+				</li>
+				<li>
+					Jacobson, M. 2013.Penn State Extension, Renewable and Alternative Energy Fact Sheet-NewBio
+					Energy Crop Profile: Switchgrass. <a href='http://extension.psu.edu/publications/ee0080'>http://extension.psu.edu/publications/ee0080.</a>
+				</li>
+				<li>
+					USDA - NRCS. Planting and Managing Switchgrass as a Biomass Energy Crop.
+					<a href='http://www.nrcs.usda.gov/Internet/FSE_DOCUMENTS/stelprdb1042293.pdf'>http://www.nrcs.usda.gov/Internet/FSE_DOCUMENTS/stelprdb1042293.pdf.</a>
+				</li>
+			</ul>
+			<h4>Prepared By</h4>
+			<p>
+				Connor McDonald, Leslie Boby and Bill Hubbard
+			</p>
+		</div>
+
+	}
+	@if (Model.CropType == CropType.Miscanthus)
+	{
+		<div class='col-sm-12'>
+			<h3>Miscanthus<span> (<i>Miscanthus sp.</i>)</span></h3>
+
+		</div>
+		<div class="col-sm-12">
+		<h4>Introduction</h4>
+		<p>
+			<div class='col-sm-6 pull-right'>
+				<div>
+					<img class='img img-responsive' src='../images/factsheet_miscanthus_1.jpg' alt='Miscanthus image 1'>
+					<h5><label><a name='Image1'></a>A field of miscanthus after 3 years of growth (Credit: David Morrison)</label></h5>
 				</div>
 
 
-			}
+				<h5><Label><a name='Table1'></a>Table 1. Switchgrass Facts for Quick Reference</Label></h5>
+				<table class='table table-striped table-responsive table-bordered'>
+					<tbody>
+					<tr>
+						<td width="40%">
+							Growing cycle
+						</td>
+						<td>
+							Grows as a perennial grass that cann be harvested
+							once per year and regrows from rhizomes after harvest
+						</td>
+					</tr>
+					<tr>
+						<td>Planting stock</td>
+						<td>Vegetative progagation fromm rhizomes (root growths)</td>
+					</tr>
+					<tr>
+						<td>Age at first harvest</td>
+						<td>
+							Can be harveste as soon as the second year, a full
+							crop can be expected by teh second or third growinng season
+						</td>
+					</tr>
+					<tr>
+						<td>Yield per Acre</td>
+						<td>8 to 12 tons per acre</td>
+					</tr>
+					<tr>
+						<td>Heating Value</td>
+						<td>8,105 BTU/pound</td>
+					</tr>
+					</tbody>
+				</table>
 
-			@if ( Model.CropType == CropType.Poplar )
-			{
-				<div class='col-sm-12'>
-					<h3>Poplar<span> (<i>Poplar sp.</i>)</span></h3>
+				<div>
+					<img class='img img-responsive' src='../images/factsheet_miscanthus_3.jpg' alt='Miscanthus image 3'>
+					<h5><label><a name='Image3'></a>Miscanthus rhizome bundles can be fairly large (Credit: David Morrison)</label></h5>
 				</div>
 
+				<div>
+					<img class='img img-responsive' src='../images/factsheet_miscanthus_2.jpg' alt='Miscanthus image 3'>
+					<h5><label><a name='Image2'></a>Miscanthus at 2 year growth level in field (Credit: David Morrison)</label></h5>
+				</div>
+			</div>
+			Giant miscanthus has strong potential to be
+			grown as a biomass feedstock for use as a biofuel across the
+			southeastern United States. As the bioenergy industry continues
+			to grow, this grass will provide another option in the biomass to
+			bioenergy profile. This factsheet covers basic details regarding
+			giant miscanthus growth, production and yield for bioenergy in
+			the southeast.
+		</p>
+		<h4>Species Distribution</h4>
+		<p>
+			Miscanthus is a genus which includes twelve perennial grass species that
+			are native to Asia and were introduced to the United States as ornamental plants in the
+			nineteenth century. This tall reed, or canelike plant, a relative to
+			sugarcane, can withstand both cold conditions and poor soils. Its growth potential
+			and high yield make it a prime candidate for biomass production.
+			Giant miscanthus (<i>Miscanthus giganteus</i>), the species most commonly used for bioenergy,
+			is actually a sterile hybrid of two species, Miscanthus sinensis and Miscanthus
+			sacchariflorus. Giant miscanthus can be used directly as a
+			feedstock for cellulosic biofuel production. It can also be pressed
+			into pellets or biomass logs for combustion. Additionally, it has
+			high lignocellulose yields in comparison to other biomass crops,
+			which makes it desirable as a biomass feedstock. The plant is
+			drought-tolerant but fares better under wetter conditions, and it
+			is actually a good fit for soils that are too wet for other crops,
+			such as corn or soybeans. Giant miscanthus’s roots can grow
+			deep below the ground surface, as far as eight feet, and they
+			break up hard soils and improve drainage. The hybridized giant
+			miscanthus is sterile; therefore, invasiveness from seeds is not an
+			issue. However, some other miscanthus varieties can be invasive,
+			so it is important to ensure that the giant miscanthus species is
+			selected when looking for planting stock
+		</p>
+		<H4>Geographic Distribution</H4>
+		<p>
+			Currently, giant miscanthus
+			is not widely found across the United States. It has been used
+			occasionally as an ornamental plant since the 1930s in the United
+			States; however, it has been planted more widely in Europe.
+			Based on how well it does in Europe (from Italy in the south to
+			Denmark in the north), it is likely that giant miscanthus will be
+			productive over a wide range of temperate regions including the
+			southern U.S. It has been grown successfully in Europe at similar
+			latitudes to the southern U.S. It does not fare well in arid climates.
+		</p>
+		<p>
+
+			The plant is drought-tolerant but fares better under wetter conditions and is actually ideal for soils that
+			are too wet for other crops, such as corn or soybeans. Giant miscanthus’s roots can grow deep below the ground
+			surface, reaching down to 8 feet, and they break up hard soils and improve drainage. The hybridized giant miscanthus
+			is sterile, so there are no concerns about invasiveness from seed. However, some other varieties of miscanthus can be invasive,
+			so it is important to ensure that the giant miscanthus species is selected when looking for planting stock.
+		</p>
+
+		<h4>Production Process</h4>
+		<p>
+			Giant miscanthus is grown from
+			rhizomes (or root growths), rather then seed, and requires
+			specialized equipment for planting them. These planting costs
+			make it significantly more expensive to establish than other
+			energy crops. Rhizomes can be hard to find, but are becoming
+			more widely available. Soils should be tested prior to planting; a
+			pH between 6 to 8 is desirable. Typically, 6,000 plants per acre
+			are planted in the late spring once there is no chance of another
+			frost occurring. However, it is not recommended to plant too late in
+			the spring or early summer as establishment would be negatively
+			affected. Weed control is essential within the first year and may be
+			needed in the second year. Once giant miscanthus is established,
+			stands will usually be weed-free as it crowds out all other plants
+			in the field. Frost can kill the plants, especially in the first year;
+			however, once a stand survives through the first winter, it will
+			usually survive subsequent winters. Frost kill is less of a risk in the
+			southern United States because of milder winter temperatures.
+			Nitrogen fertilizers are not recommended as giant miscanthus
+			has low nutrient requirements during establishment and does not
+			show much response to nitrogen fertilization. Some studies have
+			shown that nitrogen can be counterproductive to giant miscanthus
+			establishment as it encourages greater weed growth.
+		</p>
+		<h4>Growth Rate</h4>
+		<p>
+			A full crop can be expected after two to three
+			growing seasons, and the first harvest can occur as soon as the
+			second year. Unlike during planting, no new equipment is needed
+			to harvest giant miscanthus because conventional hay or silage
+			equipment can be used. Giant miscanthus can be harvested annually for approximately 15 to 20 years. The plant reaches
+			heights of up to 12 feet and can regrow from the rhizome each
+			year. Giant miscanthus is typically harvested in the late winter or
+			early spring to allow nutrients to move from the above ground
+			portion of the plant, into the crown and rhizomes. These nutrients
+			can then be used by the plant the following year.
+		</p>
+		<h4>Yield</h4>
+		<p>
+			Biomass yields for giant miscanthus average as
+			much as 8 to 12 tons per acre per year, making it among the
+			highest-yielding perennial energy crops. However, there is not
+			very much published data on giant miscanthus yields that are specific to the United
+			States. Stalks can be as long as nine feet at harvest, which makes for abundant
+			biomass. The relationship between harvestable yields and fertilization
+			is not clear. Productivity is typically higher on more fertile soils, but sites
+			with poorer soils can still produce high yields if other environmental conditions,
+			such as temperature, are favorable. Giant miscanthus will grow on marginal sites,
+			but, as with most crops, yields will be reduced on nutrientpoor lands; however, overall
+			production can still be considered high in comparison to other
+			perennial grasses. Some small research trials in the Midwestern
+			United States suggest that giant miscanthus could yield more
+			than twice the amount of biomass as switchgrass grown in the
+			same area.
+		</p>
+		<h4>Conclusion</h4>
+		<p>
+			Giant miscanthus has great potential in the
+			southeastern United States as a biomass feedstock. In the South,
+			there is little risk for frost kill, unlike in more northerly regions.
+			Its fast growth rate and abundant biomass growth on all types
+			of land make it a desirable bioenergy crop. There are some
+			limitations for its establishment, such as difficulties in sourcing
+			planting materials and significant costs for planting the rhizomes.
+			Despite these challenges, the economic potential returns for
+			giant miscanthus over 20 years are favorable compared to other
+			energy crops.
+		</p>
+		<h4>Prepared By</h4>
+		<p>Mike Jacobson, Leslie Boby, Bill Hubbard and Connor McDonald</p>
+		<h4>Adapted From</h4>
+		<p>
+			Jacobson, M. 2013.Renewable and Alternative Energy Fact Sheet: NewBio Energy Crop Profile: Giant Miscanthus.
+			<a href='http://extension.psu.edu/publications/ee0079/view'>http://extension.psu.edu/publications/ee0079/view.</a>
+		</p>
+		<h4>Other Sources</h4>
+		<ul>
+			<li>
+				Jacobson, M. Harrison, D, Helsel, Z, Rak, D, Forgeng, B. and Heil, N.
+				Miscanthus Budget for Biomass Production. <a href='http://extension.psu.edu/publications/ee0081'>http://extension.psu.edu/publications/ee0081 </a>
+			</li>
+			<li>
+				Heaton, E., Boersma, N., Caveny, J., Voigt, T. and F. Dohleman. 2014.
+				eXtension Farm Energy COP.“Miscanthus (Miscanthus x gigan- teus) for Biofuel Production.
+				<a href='http://www.extension.org/pages/26625/miscanthus-miscanthus-x-giganteus-for-biofuel-production'> http://www.extension.org/pages/26625/miscanthus-miscanthus-x-giganteus-for-biofuel-production. </a>
+			</li>
+			<li>
+				Williams, M.J.and Douglas, J.July 2011.Planting and Managing Giant Miscanthus as a Biomass Energy Crop.USDA NRCS
+				Plant Materials Program, Technical Note No. 4.
+			</li>
+
+		</ul>
 
 
-				<div class='col-sm-12'>
-					<p>
-						<h4>Introduction</h4>
-						<div class="col-sm-6 pull-right">
-							<img class='img img-responsive' src='../images/factsheet_poplar_1.jpg' alt='Poplar image 1'>
-							<h5><label><a name='Image1'></a>Hybrid poplar produces a considerable amount of biomass</label></h5>
-						</div>
-						As the U.S. continues to explore alternatives to fossil fuels to fulfill
-						its energy demands, biofuels have emerged as a promising option.Biofuels are created from converting
-						the biomass of various plants and trees into liquid fuels and can be used for many of the same
-						applications as fossil fuels.Hybrid poplars are one potential feedstock, or plant cultivated specifically
-						for use in biofuel production. Hybrid poplars can produce a large amount of biomass over relatively short
-						rotations and can resprout from stumps after harvest. Hybrid poplars are bred from multiple tree species,
-						including eastern cottonwood(<i> Populus deltoides </i>), a tree native to the Southeast that also has high biomass
-						productivity.In the Southeast, the focus of this fact sheet, several research trials have been conducted to ascertain
-						the feasibility of hybrid poplar as a feedstock.These trials have shown promising biomass production levels,
-						but hybrid poplar’s need for ample amounts of water and susceptibility to disease may reduce its viability
-						for large - scale adoption.
-					</p>
 
+		</div>
+
+
+	}
+
+	@if (Model.CropType == CropType.Poplar)
+	{
+		<div class='col-sm-12'>
+			<h3>Poplar<span> (<i>Poplar sp.</i>)</span></h3>
+		</div>
+
+
+
+		<div class='col-sm-12'>
+			<p>
+				<h4>Introduction</h4>
+				<div class="col-sm-6 pull-right">
+					<img class='img img-responsive' src='../images/factsheet_poplar_1.jpg' alt='Poplar image 1'>
+					<h5><label><a name='Image1'></a>Hybrid poplar produces a considerable amount of biomass</label></h5>
+				</div>
+				As the U.S. continues to explore alternatives to fossil fuels to fulfill
+				its energy demands, biofuels have emerged as a promising option.Biofuels are created from converting
+				the biomass of various plants and trees into liquid fuels and can be used for many of the same
+				applications as fossil fuels.Hybrid poplars are one potential feedstock, or plant cultivated specifically
+				for use in biofuel production. Hybrid poplars can produce a large amount of biomass over relatively short
+				rotations and can resprout from stumps after harvest. Hybrid poplars are bred from multiple tree species,
+				including eastern cottonwood(<i> Populus deltoides </i>), a tree native to the Southeast that also has high biomass
+				productivity.In the Southeast, the focus of this fact sheet, several research trials have been conducted to ascertain
+				the feasibility of hybrid poplar as a feedstock.These trials have shown promising biomass production levels,
+				but hybrid poplar’s need for ample amounts of water and susceptibility to disease may reduce its viability
+				for large - scale adoption.
+			</p>
+
+		</div>
+
+		<div class='col-sm-12'>
+			<h4>Species Distribution</h4>
+		</div>
+
+
+
+
+		<div class='col-sm-12'>
+
+			<p>
+				<div class='col-sm-6 pull-right'>
+					<h5><Label><a name='Table1'></a>Table 1: Glossary of Common Terms in Hybrid Poplar Production</Label></h5>
+					<table class='table table-striped table-responsive table-bordered'>
+						<thead>
+						<tr><th width="20%">Term</th><th>Definition</th></tr>
+						</thead>
+						<tbody>
+						<tr><td>short rotation woody crops (SRWC)</td><td>Biomass management on a short rotation of anything less than 10 years, with high stem density and more intensive management than normal for pulpwood or sawtimber plantations</td></tr>
+						<tr><td>Coppice</td><td>A biomass management regime in which above ground tree biomass is harvested, and new stems sprout from the remaining stump.If the rotation is short enough, coppiced stands can also be considered SRWCs.</td></tr>
+						<tr><td>Populus</td><td>A genus of trees (<i>Populus</i>) that includes cottonwoods, aspens, and hybrid poplars.</td></tr>
+						<tr><td>Poplar</td><td>A common name given to trees in the genus Populus, as well as yellow poplar( Liriodendron tulipifera ).</td></tr>
+						<tr><td>Cottonwood</td><td>Common name for eastern cottonwood (<i>Populus deltoides</i>) in the Southeast.This native species grows throughout the eastern U.S.Also used to describe black cottonwood (<i>P.trichocarpa</i>) and Fremont’s cottonwood (<i>P.fremontii</i>) in the western U.S.</td></tr>
+						<tr><td>Hybrid poplar</td><td>A term that refers to Populus trees that have parents from different species.Species commonly used to create hybrid poplars are eastern cottonwood (<i>Populus deltoides</i>), black poplar (<i>Populus nigra</i>), Japanese poplar( Populus maximowitzii ), and black cottonwood (<i>Populus trichocarpa</i>).</td></tr>
+						</tbody>
+					</table>
 				</div>
 
-				<div class='col-sm-12'>
-					<h4>Species Distribution</h4>
+				Tree species in the genus <i> Populus </i>, which includes poplar, aspen and cottonwood, are among the fastest
+				growing deciduous trees in temperate climate zones.The term 'poplar' can cause some confusion, as it is used in
+				several different ways.It can refer to true poplars, those found in the genus <i> Populus </i>,
+				or to tulip/yellow poplars(<i> Liriodendron tulipifera </i>), which have very different growth and wood characteristics.
+				For the purposes of this paper, the term “poplar” will refer to hybrid poplars( see <a href='#Table1'> Table 1 </a>). Hybrid poplars,
+				which are crosses of multiple <i> Populus </i> species from across the United States, Europe, and Asia, are prime candidates
+				for biofuel feedstocks because they grow faster than many native tree species, with some hybrid poplars growing up to 10 feet in height per year.
+
+			</p>
+			<p>
+				<div class='col-sm-6 pull-left nopadding'>
+					<img class='img img-responsive' src='../images/factsheet_poplar_2.jpg' alt='Poplar image 2' width='300'><h5><label><a name='Image2'></a> Hybrid poplar grown in a plantation for bioenergy research( Credit: Leslie Boby )</label></h5>
 				</div>
+				Eastern cottonwood(<i> Populus deltoides </i>), a species found across much of the eastern Unitd States,
+				is used in a majority of the hybrid crosses grown for biofuel production. Black poplar(<i> Populus nigra </i>),
+				black cottonwood(<i> Populus trichocarpa </i>), and Japanese poplar (<i> Populus maximowiczii </i>) are also used in various hybrid polar crosses.
+
+
+			</p>
+			<p>
+
+				Hybrid poplars are often grown as short rotation woody crop( SRWC ) systems(<a href='#Table2'> Table 2 </a>).For SRWC plantings, trees are planted in rows
+				and given treatment typical of agriculture, including weed and pest control, fertilization, and sometimes irrigation.Hybrid poplars in SRWC
+				plantings in the southeastern United States can usually be harvested for pulp, or sometimes lumber, in 10 - 12 years.Hybrid poplars are
+				also grown in coppice systems(<a href='#Table2'> Table 2 </a>).In coppice systems, the trees are grown for a few years, usually between 4 and 6, and then the
+				stems are removed at the stump.The stumps re - sprout with multiple new stems that can match the size and form of the original stem.This
+				cycle is then repeated every three to four years, providing landowners with regular income from sales of this material.
+			</p>
+			<p>
+
+				The composition of hybrid poplar wood also contributes to its potential as a feedstock.Hybrid poplar wood is made up
+				of a relatively high proportion of cellulose, the component of wood that can be converted into the biofuel
+				ethanol, and a low proportion of lignin, the other major component of wood, which cannot be converted readily into ethanol.Wood from hybrid poplar
+				has lower sulfur content than other leading biofuel feedstock candidates, such as wheatstraw and switchgrass.Given that the combustion of sulfur
+				can negatively impact air quality in the surrounding areas, this lower sulfur content makes hybrid poplar one of the more environmentally - friendly biofuel
+				feedstock candidates.Hybrid poplar has a heating value of 8332 BTU per pound, which is superior to the heating values of many other feedstocks (<a href='#Table3'>Table 3 </a>).
 
 
 
+			</p>
+		</div>
 
-				<div class='col-sm-12'>
-
-					<p>
-						<div class='col-sm-6 pull-right'>
-							<h5><Label><a name='Table1'></a>Table 1: Glossary of Common Terms in Hybrid Poplar Production</Label></h5>
-							<table class='table table-striped table-responsive table-bordered'>
-								<thead>
-									<tr><th width="20%">Term</th><th>Definition</th></tr>
-								</thead>
-								<tbody>
-									<tr><td>short rotation woody crops (SRWC)</td><td>Biomass management on a short rotation of anything less than 10 years, with high stem density and more intensive management than normal for pulpwood or sawtimber plantations</td></tr>
-									<tr><td>Coppice</td><td>A biomass management regime in which above ground tree biomass is harvested, and new stems sprout from the remaining stump.If the rotation is short enough, coppiced stands can also be considered SRWCs.</td></tr>
-									<tr><td>Populus</td><td>A genus of trees (<i>Populus</i>) that includes cottonwoods, aspens, and hybrid poplars.</td></tr>
-									<tr><td>Poplar</td><td>A common name given to trees in the genus Populus, as well as yellow poplar( Liriodendron tulipifera ).</td></tr>
-									<tr><td>Cottonwood</td><td>Common name for eastern cottonwood (<i>Populus deltoides</i>) in the Southeast.This native species grows throughout the eastern U.S.Also used to describe black cottonwood (<i>P.trichocarpa</i>) and Fremont’s cottonwood (<i>P.fremontii</i>) in the western U.S.</td></tr>
-									<tr><td>Hybrid poplar</td><td>A term that refers to Populus trees that have parents from different species.Species commonly used to create hybrid poplars are eastern cottonwood (<i>Populus deltoides</i>), black poplar (<i>Populus nigra</i>), Japanese poplar( Populus maximowitzii ), and black cottonwood (<i>Populus trichocarpa</i>).</td></tr>
-								</tbody>
-							</table>
-						</div>
-
-						Tree species in the genus <i> Populus </i>, which includes poplar, aspen and cottonwood, are among the fastest
-						growing deciduous trees in temperate climate zones.The term 'poplar' can cause some confusion, as it is used in
-						several different ways.It can refer to true poplars, those found in the genus <i> Populus </i>,
-						or to tulip/yellow poplars(<i> Liriodendron tulipifera </i>), which have very different growth and wood characteristics.
-						For the purposes of this paper, the term “poplar” will refer to hybrid poplars( see <a href='#Table1'> Table 1 </a>). Hybrid poplars,
-						which are crosses of multiple <i> Populus </i> species from across the United States, Europe, and Asia, are prime candidates
-						for biofuel feedstocks because they grow faster than many native tree species, with some hybrid poplars growing up to 10 feet in height per year.
-
-					</p>
-					<p>
-						<div class='col-sm-6 pull-left nopadding'>
-							<img class='img img-responsive' src='../images/factsheet_poplar_2.jpg' alt='Poplar image 2' width='300'><h5><label><a name='Image2'></a> Hybrid poplar grown in a plantation for bioenergy research( Credit: Leslie Boby )</label></h5>
-						</div>
-						Eastern cottonwood(<i> Populus deltoides </i>), a species found across much of the eastern Unitd States,
-						is used in a majority of the hybrid crosses grown for biofuel production. Black poplar(<i> Populus nigra </i>),
-						black cottonwood(<i> Populus trichocarpa </i>), and Japanese poplar (<i> Populus maximowiczii </i>) are also used in various hybrid polar crosses.
-
-
-					</p>
-					<p>
-
-						Hybrid poplars are often grown as short rotation woody crop( SRWC ) systems(<a href='#Table2'> Table 2 </a>).For SRWC plantings, trees are planted in rows
-						and given treatment typical of agriculture, including weed and pest control, fertilization, and sometimes irrigation.Hybrid poplars in SRWC
-						plantings in the southeastern United States can usually be harvested for pulp, or sometimes lumber, in 10 - 12 years.Hybrid poplars are
-						also grown in coppice systems(<a href='#Table2'> Table 2 </a>).In coppice systems, the trees are grown for a few years, usually between 4 and 6, and then the
-						stems are removed at the stump.The stumps re - sprout with multiple new stems that can match the size and form of the original stem.This
-						cycle is then repeated every three to four years, providing landowners with regular income from sales of this material.
-					</p>
-					<p>
-
-						The composition of hybrid poplar wood also contributes to its potential as a feedstock.Hybrid poplar wood is made up
-						of a relatively high proportion of cellulose, the component of wood that can be converted into the biofuel
-						ethanol, and a low proportion of lignin, the other major component of wood, which cannot be converted readily into ethanol.Wood from hybrid poplar
-						has lower sulfur content than other leading biofuel feedstock candidates, such as wheatstraw and switchgrass.Given that the combustion of sulfur
-						can negatively impact air quality in the surrounding areas, this lower sulfur content makes hybrid poplar one of the more environmentally - friendly biofuel
-						feedstock candidates.Hybrid poplar has a heating value of 8332 BTU per pound, which is superior to the heating values of many other feedstocks (<a href='#Table3'>Table 3 </a>).
-
-
-
-					</p>
+		<div class="col-sm-12">
+			<h4>Geographic Distribution</h4>
+			<div class='col-sm-6 pull-right'>
+				<h5><Label><a name='Table2'></a>Table 2. Hybrid Poplar Statistics Based on Regional Data</Label></h5>
+				<table class='table table-striped table-responsive table-bordered'>
+					<tbody>
+					<tr><td width="40%">Growing cycle</td><td>Coppice System</td></tr>
+					<tr><td>Planting stock</td><td>Commercially grown from clonal cuttings 10 - 18 inches in length</td></tr>
+					<tr><td>Age at first harvest</td><td>3-6 years</td></tr>
+					<tr>
+						<td>Average Total Yield per Acre( non - irrigated, non fertilized </td>
+						<td>0.9 dry tons/ac at 3 years, <br/>1.7 dry tons/ac at 4 years,<br/> 2.8 dry tons/ac at 6 years,<br/>3.5 dry tons/ac at 9 years</td>
+					</tr>
+					<tr>
+						<td>Average Total Yield per Acre( irrigated, fertilized )</td>
+						<td>3.1 tons/ac at 3 years,<br/>5.2 dry tons/ac at at 4 years,<br/>9.0 dry tons/ac at 6 years,<br/>13.1 dry tons/ac at 9 years</td>
+					</tr>
+					</tbody>
+				</table>
+				<div>
+					<img src='../images/factsheet_poplar_3.jpg' alt='Poplar image 3' class="img img-responsive" width='300'>
+					<h5><label><a name='Image3'></a>Poplar seedling planted from stick cutting. (Credit: Leslie Boby)</label></h5>
 				</div>
-
-				<div class="col-sm-12">
-					<h4>Geographic Distribution</h4>
-					<div class='col-sm-6 pull-right'>
-						<h5><Label><a name='Table2'></a>Table 2. Hybrid Poplar Statistics Based on Regional Data</Label></h5>
-						<table class='table table-striped table-responsive table-bordered'>
-							<tbody>
-								<tr><td width="40%">Growing cycle</td><td>Coppice System</td></tr>
-								<tr><td>Planting stock</td><td>Commercially grown from clonal cuttings 10 - 18 inches in length</td></tr>
-								<tr><td>Age at first harvest</td><td>3-6 years</td></tr>
-								<tr>
-									<td>Average Total Yield per Acre( non - irrigated, non fertilized </td>
-									<td>0.9 dry tons/ac at 3 years, <br />1.7 dry tons/ac at 4 years,<br /> 2.8 dry tons/ac at 6 years,<br />3.5 dry tons/ac at 9 years</td>
-								</tr>
-								<tr>
-									<td>Average Total Yield per Acre( irrigated, fertilized )</td>
-									<td>3.1 tons/ac at 3 years,<br />5.2 dry tons/ac at at 4 years,<br />9.0 dry tons/ac at 6 years,<br />13.1 dry tons/ac at 9 years</td>
-								</tr>
-							</tbody>
-						</table>
-						<div>
-							<img src='../images/factsheet_poplar_3.jpg' alt='Poplar image 3' class="img img-responsive" width='300'>
-							<h5><label><a name='Image3'></a>Poplar seedling planted from stick cutting. (Credit: Leslie Boby)</label></h5>
-						</div>
-					</div>
-					<p>
-						Native poplars grow readily across the temperate and sub - polar climate zones of North America;
-						however, there are some challenges specific to growing hybrid poplar in the southeastern U.S.Hybrid poplar can
-						only reach viable production levels on soils with both ample available moisture and sufficient drainage.
-						This type of site is rare in the Southeast, making it difficult to find areas suitable for hybrid poplar
-						plantations.Eastern cottonwood is found throughout the southeastern U.S.and commonly occurs on alluvial
-						soils and bottomland areas.Hybrid poplars that can grow in this region, including <i> Populus trichocarpa </i> X <i> Populus deltoides </i>,
-						<i> P.deltoides </i> X <i> P.maximowiczii </i>, and <i> P.deltoides </i> X <i> P.nigra </i>, grow well on the same types of sites as native cottonwoods, but some hybrids have faster growth rates during the first three years after planting or higher resilience to pest damage.
-					</p>
-					<p>
-						Numerous research trials have yielded insights into optimally
-						managing hybrid poplar in the Lake States and the Pacific Northwest, but fewer trials have
-						been conducted in the Southeast. Hybrid poplars are cultivated from crosses between
-						<i>Populus</i> species to create specimens with desirable characteristics.These are then
-						vegetatively propagated in clonal orchards from which cuttings are collected and stored
-						for planting in other areas.These dormant, unrooted cuttings are typically ten to eighteen
-						inches in length, depending on soil moisture availability, and are planted during the spring
-						with one or two buds exposed above the ground surface.These cuttings are rejuvenated
-						with water prior to planting and produce trees
-						that are genetically identical to the parent tree.
-					</p>
-					<p>
-						A soil pH between 5.0 and 8.0 is recommended for favorable survival and growth rates. In the
-						southeastern United States, available water can often be the most limiting factor for hybrid poplar growth.
-						Nitrogen fertilization helps poplar stands reach maximum production much earlier than non-fertilized stands and
-						can significantly increase the amount of biomass produced at end of a rotation. For instance, nitrogen fertilization
-						at a rate of 107 pounds per acre per year increased the volume yielded by eastern cottonwood varieties by about 330% over
-						a 9-year rotation. The additional costs of fertilization can often be unfeasible for lower-revenue pursuits such as biomass production.
-						<br /><br /> Hybrid poplars have been successfully planted on reclaimed mine sites that ad biosolids (solid,
-						organic materials removed from municipal wastewater) implanted underground. These biosolids raised the pH of the
-						soil and introduced additional nutrients for the trees to utilize. At the mine sites, the soil was disked after the
-						biosolids were buried 1.5 feet below the ground surface in order to evenly distribute them throughout the test area.
-						This method was able to match the yields of poplars grown on less degraded sites while remediating some of the damage
-						caused by prior mining activities.
-					</p>
+			</div>
+			<p>
+				Native poplars grow readily across the temperate and sub - polar climate zones of North America;
+				however, there are some challenges specific to growing hybrid poplar in the southeastern U.S.Hybrid poplar can
+				only reach viable production levels on soils with both ample available moisture and sufficient drainage.
+				This type of site is rare in the Southeast, making it difficult to find areas suitable for hybrid poplar
+				plantations.Eastern cottonwood is found throughout the southeastern U.S.and commonly occurs on alluvial
+				soils and bottomland areas.Hybrid poplars that can grow in this region, including <i> Populus trichocarpa </i> X <i> Populus deltoides </i>,
+				<i> P.deltoides </i> X <i> P.maximowiczii </i>, and <i> P.deltoides </i> X <i> P.nigra </i>, grow well on the same types of sites as native cottonwoods, but some hybrids have faster growth rates during the first three years after planting or higher resilience to pest damage.
+			</p>
+			<p>
+				Numerous research trials have yielded insights into optimally
+				managing hybrid poplar in the Lake States and the Pacific Northwest, but fewer trials have
+				been conducted in the Southeast. Hybrid poplars are cultivated from crosses between
+				<i>Populus</i> species to create specimens with desirable characteristics.These are then
+				vegetatively propagated in clonal orchards from which cuttings are collected and stored
+				for planting in other areas.These dormant, unrooted cuttings are typically ten to eighteen
+				inches in length, depending on soil moisture availability, and are planted during the spring
+				with one or two buds exposed above the ground surface.These cuttings are rejuvenated
+				with water prior to planting and produce trees
+				that are genetically identical to the parent tree.
+			</p>
+			<p>
+				A soil pH between 5.0 and 8.0 is recommended for favorable survival and growth rates. In the
+				southeastern United States, available water can often be the most limiting factor for hybrid poplar growth.
+				Nitrogen fertilization helps poplar stands reach maximum production much earlier than non-fertilized stands and
+				can significantly increase the amount of biomass produced at end of a rotation. For instance, nitrogen fertilization
+				at a rate of 107 pounds per acre per year increased the volume yielded by eastern cottonwood varieties by about 330% over
+				a 9-year rotation. The additional costs of fertilization can often be unfeasible for lower-revenue pursuits such as biomass production.
+				<br/><br/> Hybrid poplars have been successfully planted on reclaimed mine sites that ad biosolids (solid,
+				organic materials removed from municipal wastewater) implanted underground. These biosolids raised the pH of the
+				soil and introduced additional nutrients for the trees to utilize. At the mine sites, the soil was disked after the
+				biosolids were buried 1.5 feet below the ground surface in order to evenly distribute them throughout the test area.
+				This method was able to match the yields of poplars grown on less degraded sites while remediating some of the damage
+				caused by prior mining activities.
+			</p>
 
 
-				</div>
-				<div class="col-sm-12">
-					<h4>Growth Rate</h4>
-					<div class='col-sm-6 pull-right'>
-						<h5><Label><a name='Table3'></a>Table 3.Heating Values of Biofuel Feedstocks</Label></h5>
-						<table class='table table-striped table-responsive table-bordered'>
-							<thead>
-								<tr><th width="20%">Feedstock</th><th width="30%">Heating Value (BTU per pound)</th></tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td>Hybrid poplar</td>
-									<td>8,332</td>
-								</tr>
-								<tr>
-									<td>Switchgrass</td>
-									<td>8,014</td>
-								</tr>
-								<tr>
-									<td>Wheatstraw</td>
-									<td>7,528</td>
-								</tr>
-								<tr>
-									<td>Eastern cottonwood</td>
-									<td>6,991</td>
-								</tr>
-							</tbody>
-						</table>
-						<img src='../images/factsheet_poplar_4.jpg' alt='Poplar image 3' class="img img-responsive"><h5>
-							<label>
-								<a name='Image4'>
-								</a>A pile of poplar pulpwood logs, ready for processing (Credit: David Coyle)
-							</label>
-						</h5>
-					</div>
+		</div>
+		<div class="col-sm-12">
+			<h4>Growth Rate</h4>
+			<div class='col-sm-6 pull-right'>
+				<h5><Label><a name='Table3'></a>Table 3.Heating Values of Biofuel Feedstocks</Label></h5>
+				<table class='table table-striped table-responsive table-bordered'>
+					<thead>
+					<tr><th width="20%">Feedstock</th><th width="30%">Heating Value (BTU per pound)</th></tr>
+					</thead>
+					<tbody>
+					<tr>
+						<td>Hybrid poplar</td>
+						<td>8,332</td>
+					</tr>
+					<tr>
+						<td>Switchgrass</td>
+						<td>8,014</td>
+					</tr>
+					<tr>
+						<td>Wheatstraw</td>
+						<td>7,528</td>
+					</tr>
+					<tr>
+						<td>Eastern cottonwood</td>
+						<td>6,991</td>
+					</tr>
+					</tbody>
+				</table>
+				<img src='../images/factsheet_poplar_4.jpg' alt='Poplar image 3' class="img img-responsive"><h5>
+					<label>
+						<a name='Image4'>
+						</a>A pile of poplar pulpwood logs, ready for processing (Credit: David Coyle)
+					</label>
+				</h5>
+			</div>
 
 
 
 
-					<p>
+			<p>
 
-						Hybrid poplars stands reach maturity and begin to experience
-						increased mortality between fifteen and twenty years of age;
-						however, stands
-						are often harvested years before reaching maturity, even as early as three years
-						after planting.In a study conducted by researchers at North Carolina State
-						University, the growth rates of hybrid poplars proved to be two to three times as
-						fast as those of green ash or sweetgum grown on similar sites.
-					</p>
-
-
-					<h4>Yield</h4>
-					<p>
-
-						Hybrid poplars grown in short-rotation or coppice systems can be harvested as
-						early as 3 years after planting.The age at first harvest can be influenced by a
-						number of factors, including the site quality and the landowner’s desired rate of
-						return.Hybrid poplar test plots installed by researchers from the USDA Forest
-						Service in the Upper Coastal Plain of South Carolina yielded 3.1 dry tons of
-						biomass per acre three years after planting. Delaying harvest until six years after planting increased yields to up to 9 dry tons per acre.
-						Other research from the University of Tennessee suggested an average 7 - 9 dry tons per acre on a 3 - 5 year rotation. These yields were
-						produced by ST66 and S7C15 eastern cottonwood clones produced by Crown Vantage Corp. It is important to always keep in mind that
-						hybrid poplar plantation yields are variable and are highly dependent on climate, site quality, and management intensity.
-
-						<h4>Conclusion</h4>
-
-						Hybrid poplar has great potential in the southeastern United States as a biomass feedstock. Its fast growth rate and
-						abundant biomass growth make it a desirable bioenergy crop. There are some constraints for its establishment, including the current lack
-						of markets for biomass.There is still a need for proper infrastructure to transport and process the biomass, without which the economic
-						returns for planting it as a feedstock will be greatly diminished.Despite these challenges, there is great potential in the future for hybrid
-						poplar as a biofuel feedstock.
-					</p>
+				Hybrid poplars stands reach maturity and begin to experience
+				increased mortality between fifteen and twenty years of age;
+				however, stands
+				are often harvested years before reaching maturity, even as early as three years
+				after planting.In a study conducted by researchers at North Carolina State
+				University, the growth rates of hybrid poplars proved to be two to three times as
+				fast as those of green ash or sweetgum grown on similar sites.
+			</p>
 
 
-				</div>
+			<h4>Yield</h4>
+			<p>
+
+				Hybrid poplars grown in short-rotation or coppice systems can be harvested as
+				early as 3 years after planting.The age at first harvest can be influenced by a
+				number of factors, including the site quality and the landowner’s desired rate of
+				return.Hybrid poplar test plots installed by researchers from the USDA Forest
+				Service in the Upper Coastal Plain of South Carolina yielded 3.1 dry tons of
+				biomass per acre three years after planting. Delaying harvest until six years after planting increased yields to up to 9 dry tons per acre.
+				Other research from the University of Tennessee suggested an average 7 - 9 dry tons per acre on a 3 - 5 year rotation. These yields were
+				produced by ST66 and S7C15 eastern cottonwood clones produced by Crown Vantage Corp. It is important to always keep in mind that
+				hybrid poplar plantation yields are variable and are highly dependent on climate, site quality, and management intensity.
+
+				<h4>Conclusion</h4>
+
+				Hybrid poplar has great potential in the southeastern United States as a biomass feedstock. Its fast growth rate and
+				abundant biomass growth make it a desirable bioenergy crop. There are some constraints for its establishment, including the current lack
+				of markets for biomass.There is still a need for proper infrastructure to transport and process the biomass, without which the economic
+				returns for planting it as a feedstock will be greatly diminished.Despite these challenges, there is great potential in the future for hybrid
+				poplar as a biofuel feedstock.
+			</p>
 
 
-				<div class="col-sm-12">
-					<h4>References</h4>
-					<ul>
-						<li>
-							Amichev, B.Y., M.Johnston, and K.C.J.Van Rees. 2010.Hybrid poplar growth in bioenergy production
-							systems: Biomass prediction with a simple process - based model( 3PG ).Biomass and Bioenergy 34: 687 - 702.
-						</li>
-						<li>
-							Brunner, A., J.Munsell, J.Gagnon, H.Burkhart, C.Zipper, C.Jackson, A. Fannon, B.Stanton, and R.Shuren. 2009.
-							Hybrid Poplar for Bioenergy and Biomaterials Feedstock Production on Appalachian Reclaimed Mine Land.
-							Virginia Tech, Blacksburg, VA.Powell River Project Research and Education Program Progress Reports.
-						</li>
-						<li>
-							Coyle, D.R., D.P.Aubrey, and M.D.Coleman. 2016.Growth responses of narrow or broad site adapted tree species
-							to a range of resource availability treatments after a full harvest rotation.Forest Ecology and Management 362: 107 - 119.
-						</li>
-						<li>
-							Davis, M., J.Wright, and T.Gallagher. 2015.Sustainable Production Practices of Short Rotation Woody Crops
-							in the Southeastern United States: A Guidebook for Cottonwood and Poplar.University of Tennessee Institute of Agriculture. 38 p.
-						</li>
-						<li>
-							Felix, E., D.R.Tilley, G.Felton, and E.Flamino. 2007.Biomass production of hybrid poplar (<i>Populus sp.</i>) grown
-							on deep - trenched municipal biosolids.Ecological Engineering 33: 8 - 14.
-						</li>
-						<li>
-							Nichols, E.and D.Hazel.Hybrid Poplars for Bioenergy.North Carolina Cooperative Extension.Available at
-							<a href='http://www.ncsu-feop.org/BioField-Day/Materials/Hazel_Nichols_Poplar.pdf'>
-								http://www.ncsu-feop.org/BioField-Day/Materials/Hazel_Nichols_Poplar.pdf
-							</a>.
-						</li>
-						<li>
-							Sannigrahi, P.and A.J.Ragauskas. 2010.Poplar as a feedstock for biofuels: A review of compositional
-							characteristics.Biofuels, Bioproducts,and Biorefining 4: 209 - 226.
-						</li>
-						<li>
-							Townsend, P.A., S.P. Kar, and R.O. Miller. 2014. Poplar (<i>Populus spp.</i>) Trees for Biofuel Production.
-							<a href='http://articles.extension.org/pages/70456/poplar-populus-spp-trees-for-biofuel-production/'>
-								http://articles.extension.org/pages/70456/poplar-populus-spp-trees-for-biofuel-production/
-							</a> accessed February 2016.
-						</li>
-						<li>
-							Yemshanov, D. and D. McKenney. 2007. Fast-growing poplar plantations as a bioenergy supply source for Canada. Biomass and Bioenergy. 32: 185-197.
-						</li>
-
-					</ul>
-					<h4>Prepared By</h4>
-					<p>Connor McDonald, David Coyle, William Hubbard and Leslie Boby</p>
-				</div>
+		</div>
 
 
+		<div class="col-sm-12">
+			<h4>References</h4>
+			<ul>
+				<li>
+					Amichev, B.Y., M.Johnston, and K.C.J.Van Rees. 2010.Hybrid poplar growth in bioenergy production
+					systems: Biomass prediction with a simple process - based model( 3PG ).Biomass and Bioenergy 34: 687 - 702.
+				</li>
+				<li>
+					Brunner, A., J.Munsell, J.Gagnon, H.Burkhart, C.Zipper, C.Jackson, A. Fannon, B.Stanton, and R.Shuren. 2009.
+					Hybrid Poplar for Bioenergy and Biomaterials Feedstock Production on Appalachian Reclaimed Mine Land.
+					Virginia Tech, Blacksburg, VA.Powell River Project Research and Education Program Progress Reports.
+				</li>
+				<li>
+					Coyle, D.R., D.P.Aubrey, and M.D.Coleman. 2016.Growth responses of narrow or broad site adapted tree species
+					to a range of resource availability treatments after a full harvest rotation.Forest Ecology and Management 362: 107 - 119.
+				</li>
+				<li>
+					Davis, M., J.Wright, and T.Gallagher. 2015.Sustainable Production Practices of Short Rotation Woody Crops
+					in the Southeastern United States: A Guidebook for Cottonwood and Poplar.University of Tennessee Institute of Agriculture. 38 p.
+				</li>
+				<li>
+					Felix, E., D.R.Tilley, G.Felton, and E.Flamino. 2007.Biomass production of hybrid poplar (<i>Populus sp.</i>) grown
+					on deep - trenched municipal biosolids.Ecological Engineering 33: 8 - 14.
+				</li>
+				<li>
+					Nichols, E.and D.Hazel.Hybrid Poplars for Bioenergy.North Carolina Cooperative Extension.Available at
+					<a href='http://www.ncsu-feop.org/BioField-Day/Materials/Hazel_Nichols_Poplar.pdf'>
+						http://www.ncsu-feop.org/BioField-Day/Materials/Hazel_Nichols_Poplar.pdf
+					</a>.
+				</li>
+				<li>
+					Sannigrahi, P.and A.J.Ragauskas. 2010.Poplar as a feedstock for biofuels: A review of compositional
+					characteristics.Biofuels, Bioproducts,and Biorefining 4: 209 - 226.
+				</li>
+				<li>
+					Townsend, P.A., S.P. Kar, and R.O. Miller. 2014. Poplar (<i>Populus spp.</i>) Trees for Biofuel Production.
+					<a href='http://articles.extension.org/pages/70456/poplar-populus-spp-trees-for-biofuel-production/'>
+						http://articles.extension.org/pages/70456/poplar-populus-spp-trees-for-biofuel-production/
+					</a> accessed February 2016.
+				</li>
+				<li>
+					Yemshanov, D. and D. McKenney. 2007. Fast-growing poplar plantations as a bioenergy supply source for Canada. Biomass and Bioenergy. 32: 185-197.
+				</li>
 
-			}
-			@if ( Model.CropType == CropType.Pine )
-			{
+			</ul>
+			<h4>Prepared By</h4>
+			<p>Connor McDonald, David Coyle, William Hubbard and Leslie Boby</p>
+		</div>
 
-			}
-			@if ( Model.CropType == CropType.Willow )
-			{
 
-			}
+
+	}
+	@if (Model.CropType == CropType.Pine)
+	{
+
+	}
+	@if (Model.CropType == CropType.Willow)
+	{
+
+	}
 
 
 			@*@foreach ( var item in Model.ContentKeys.ToList().OrderBy( m => m.Key ) )
@@ -754,6 +760,6 @@
 
 					}
 				}*@
-		</div>
+	</div>
 	</div>
 </div>

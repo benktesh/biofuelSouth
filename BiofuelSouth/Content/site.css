@@ -423,3 +423,8 @@ textarea {
     background-color: green;
     border-color: green;
 }
+
+.thumbnails  img {
+	width: 220px;
+	height: 220px;
+}
