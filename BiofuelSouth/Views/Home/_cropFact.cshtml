@@ -19,8 +19,6 @@
 		<a class="btn btn-warning" href='@Url.Action("Factsheet", "Home")'>Back</a>
 		@if ( Model.CanPDFFactsheet )
 		{
-
-
 			<a data-toggle="" class="btn btn-success" href="@Url.Action("GetPdfFact", "Home", new {cropType = Model.CropType})"><i class="fa fa-file-pdf-o">&nbsp;Download Factsheet</i></a>
 		}
 	</div>

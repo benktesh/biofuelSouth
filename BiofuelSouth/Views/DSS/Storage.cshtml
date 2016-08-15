@@ -25,7 +25,7 @@
 					<div class="row">
 						<div class="col-xs-12">
 							@Html.LabelFor(model => model.RequireStorage, new {@class = "control-label"})
-							<a href="#" rel="popover" class="" data-toggle="popover" tabindex="0" data-trigger="focus"
+							<a href="#" rel="popover" class="" data-toggle="popover" tabindex="-1" data-trigger="focus"
 							   data-placement="center" title="Require Finance" data-content="<p>If the project require
                             storage, select Yes. </p>">
 									<span class="glyphicon glyphicon-question-sign"></span></a>
@@ -45,7 +45,7 @@
 
 
 								@Html.LabelFor( model => model.StorageTime, new { @class = "control-label" } )<span class="required">Required</span>
-								<a href="#" rel="popover" class="" data-toggle="popover" tabindex="0" data-trigger="focus"
+								<a href="#" rel="popover" class="" data-toggle="popover" tabindex="-1" data-trigger="focus"
 								   data-placement="left" title="Storage Time" data-content="<p>Number of days harvested biomass crop require storage facility.
                     The maximum number of days for storage is 200 days. </p>">
 											<span class="glyphicon glyphicon-question-sign"></span></a>
@@ -57,7 +57,7 @@
 
 
 								@Html.LabelFor( model => model.PercentStored, new { @class = "control-label" } )<span class="required">Required</span>
-								<a href="#" rel="popover" class="" data-toggle="popover" tabindex="0" data-trigger="focus"
+								<a href="#" rel="popover" class="" data-toggle="popover" tabindex="-1" data-trigger="focus"
 								   data-placement="left" title="Storage Percent" data-content="<p>Proportion of harvested crop requiring storage.
                        For example, out of the 100 tons of crop harvested, if only 20 tons require storage while rest of the 80 tons are sold at the time of harvest, then
                     proportion requiring storage can be calculated as 20/100*100% = 20%.</p>"><span class="glyphicon glyphicon-question-sign"></span></a>
@@ -71,7 +71,7 @@
 
 
 								@Html.LabelFor( model => model.StorageMethod, new { @class = "control-label" } )<span class="required">Required</span>
-								<a href="#" rel="popover" class="" data-toggle="popover" tabindex="0" data-trigger="focus"
+								<a href="#" rel="popover" class="" data-toggle="popover" tabindex="-1" data-trigger="focus"
 								   data-placement="left" title="Storage Percent" data-content="<p>After-harvest storage methods of switchgrass and other perennial grasses grown for biofuel have a significant effect on the profitability and success of an enterprise. Depending on how it's harvested, feedstock can be stored as round or square dry bales, or as a moist product in bunkers or silo bags.</p>">
 									<span class="glyphicon glyphicon-question-sign"></span>
 								</a>
