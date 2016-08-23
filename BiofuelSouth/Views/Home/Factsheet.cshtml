@@ -93,8 +93,8 @@
 					@foreach ( var m in Model.AvailableCrops )
 					{
 						var img = Constants.GetImageUrl( m );
-						var imgUrl = String.Format( "<img src='{0}' alt='' class='img-responsive' >{1}", img.Item3, m ).Replace( "~", ".." );
-						<div class="col-md-3 text-center thumbnails">
+						var imgUrl = String.Format( "<img src='{0}' alt='' class='img img-responsive' >{1}", img.Item3, m ).Replace( "~", ".." );
+						<div class="col-xs-2 text-center thumbnails">
 							@Ajax.HtmlActionLink( imgUrl,
 
 								"GetFact",
@@ -104,7 +104,7 @@
 									UpdateTargetId = "CropFact", // <-- DOM element ID to update
 									InsertionMode = InsertionMode.Replace, // <-- Replace the content of DOM element
 									HttpMethod = "GET" // <-- HTTP method
-								}, new { } )
+								}, new {@class="text-center" } )
 						</div>
 					}
 
