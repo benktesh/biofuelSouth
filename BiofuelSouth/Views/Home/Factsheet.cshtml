@@ -12,80 +12,20 @@
 @Html.ValidationSummary( true, "", new { @class = "text-danger" } )
 
 
-
-@*<div class="col-sm-3 form-group nopadding">
-		<div class="panel panel-default">
-			<div class="panel-heading">
-				Crops
-			</div>
-
-			<div class="row">
-
-				@foreach ( var m in Model.AvailableCrops )
-				{
-					var img = Constants.GetImageUrl( m );
-					var imgUrl = String.Format( "<img src='{0}' alt='' class='img-responsive' >{1}", img.Item3, m ).Replace( "~", ".." );
-					<div class="col-lg-6 text-center">
-						@Ajax.HtmlActionLink( imgUrl,
-
-									"GetFact",
-									"Home",
-									new { cropType = m },
-										new AjaxOptions {
-											UpdateTargetId = "CropFact", // <-- DOM element ID to update
-											InsertionMode = InsertionMode.Replace, // <-- Replace the content of DOM element
-											HttpMethod = "GET" // <-- HTTP method
-										}, new { })
-					</div>
-				}
-
-			</div>
-
-			<div class="panel-body Instruction-panel-body">
-
-				<ul>
-					@foreach (var m in Model.AvailableCrops)
-					{
-						<li>
-
-							@Ajax.ActionLink(m.GetDisplayName(), // <-- Text to display
-								"GetFact", // <-- Action Method Name
-								new {cropType = m},
-								new AjaxOptions
-								{
-									UpdateTargetId = "CropFact", // <-- DOM element ID to update
-									InsertionMode = InsertionMode.Replace, // <-- Replace the content of DOM element
-									HttpMethod = "GET" // <-- HTTP method
-								})
-						</li>
-					}
-
-
-
-
-
-				</ul>
-
-			</div>
-		</div>
-	</div>*@
-
 <div id="CropFact">
 	@if ( Model.CropType == null )
-			{
-
-
+	{
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<div id="CropFacts">
-					Crop Fact
+					Crop Factsheets
 				</div>
 			</div>
 			<div class="panel-body Instruction-panel-body">
 				@*At present, fact sheets for the crops listed in the list to the left are available. Please click on link to crop of your
-				choice.
-				<br />
-				You will also be able to download a PDF copy of factsheet for certain crops.*@
+					choice.
+					<br />
+					You will also be able to download a PDF copy of factsheet for certain crops.*@
 
 
 				<div class="row text-center">
@@ -104,7 +44,7 @@
 									UpdateTargetId = "CropFact", // <-- DOM element ID to update
 									InsertionMode = InsertionMode.Replace, // <-- Replace the content of DOM element
 									HttpMethod = "GET" // <-- HTTP method
-								}, new {@class="text-center" } )
+								}, new { @class = "text-center" } )
 						</div>
 					}
 
@@ -115,7 +55,7 @@
 			}
 			else
 			{
-				@Html.Partial( "_cropFact", Model.FactItem )
+		@Html.Partial( "_cropFact", Model.FactItem )
 			}
 </div>
 

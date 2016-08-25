@@ -54,11 +54,8 @@
             <div class="navbar-inner">
                 <a href="http://www.nifa.usda.gov" target="_blank" title="USDA NIFA"><img src="~/images/funding.png" class="img-responsive img-rounded img-on-top"></a>
             </div>
-
-    
             <div class="container-fluid">
                 <!-- Brand and toggle get grouped for better mobile display -->
-
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
                         <span class="sr-only">Toggle navigation</span>
@@ -71,20 +68,22 @@
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                    <ul class="nav navbar-nav">
-                        <li><a href='@Url.Action("Index", "Home")'>Home</a></li>
-						<li><a id="aboutButton" href='@Url.Action("About", "Home")'>About</a> </li>
-						<li><a id="glossaryButton" href='@Url.Action("Search", "Home")'>Glossary</a></li>
-	                    <li><a href="/map" id="dropDownButton">Maps</a></li>
-						<li><a id="helpButton" href='@Url.Action("Factsheet", "Home")'>Factsheet</a></li>
-                        <li><a href='@Url.Action("NewDSS", "DSS")'>DSS</a></li>
-                        <li><a href='@Url.Action("Index", "Biosim")'>Simulator</a></li>
-						<li><a href='@Url.Action("AskExpert", "Home")'>Ask Expert</a></li>
-						<li><a id="forumButton" href='/forum'>Forum</a></li>
-						<li><a id="contactButton" href='@Url.Action("FeedBack", "Home")'>Contact</a></li>
-                    </ul>
-                   
-                    <form id ="searchbar"class="navbar-form zero-right-margin" style="float:right; margin-top: 3px; margin-bottom:0; margin-left: 0; margin-right: 0; padding:0;" role="search" method="POST" action="@Url.Action("Search", "Home")">
+	                <ul class="nav navbar-nav">
+		                <li><a href='@Url.Action("Index", "Home")'>Home</a></li>
+		                <li><a id="aboutButton" href='@Url.Action("About", "Home")'>About</a> </li>
+		                <li><a id="glossaryButton" href='@Url.Action("Search", "Home")'>Glossary</a></li>
+		                <li><a href="/map" id="dropDownButton">Maps</a></li>
+		                <li><a id="helpButton" href='@Url.Action("Factsheet", "Home")'>Factsheet</a></li>
+		                <li><a href='@Url.Action("NewDSS", "DSS")'>DSS</a></li>
+		                <li><a href='@Url.Action("Index", "Biosim")'>Simulator</a></li>
+		                <li><a href='@Url.Action("AskExpert", "Home")'>Ask Expert</a></li>
+		                <li><a id="forumButton" href='/forum'>Forum</a></li>
+		                <li><a id="contactButton" href='@Url.Action("FeedBack", "Home")'>Contact</a></li>
+	                </ul>
+
+				
+
+	                <form id ="searchbar"class="navbar-form zero-right-margin" style="float:right; margin-top: 3px; margin-bottom:0; margin-left: 0; margin-right: 0; padding:0;" role="search" method="POST" action="@Url.Action("Search", "Home")">
                         <input type="text" class="input-sm" style="margin:1px; padding:0;" size="10" placeholder="Enter a term" name="term" id="term" />
                         <button class="btn btn-default glyphicon glyphicon-search zero-right-margin" id="searchButton " name="searchButton" type="submit"></button>
                     </form>
@@ -93,11 +92,10 @@
             </div><!-- /.container-fluid -->
 
     </nav>
-
+	
     <div class="container">
-        @RenderBody()
-
-    </div>
+	   @RenderBody()
+	</div>
 
 
     <div class="scroll-top page-scroll visible-xs visible sm">
@@ -144,10 +142,6 @@
 
 				</div>
 			</footer>
-
-
-
-
     <script src="~/Scripts/jquery-2.1.1.min.js"></script>
     <script src="~/Scripts/jquery.validate.js"></script>
     <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
@@ -156,7 +150,6 @@
     <script src="~/Scripts/bootstrap.js"></script>
     <script src="~/Scripts/response.js"></script>
 	<script src="~/Scripts/biofuelSouth.js"></script>
-
     @RenderSection("scripts", false)
     @RenderSection("MyScripts", false)
 </body>

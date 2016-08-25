@@ -428,10 +428,8 @@
 	@if (Model.CropType == CropType.Poplar)
 	{
 		<div class='col-sm-12'>
-			<h3>Poplar<span> (<i>Poplar sp.</i>)</span></h3>
+			<h3>Poplar<span> (<i>Populus sp.</i>)</span></h3>
 		</div>
-
-
 
 		<div class='col-sm-12'>
 			<p>
@@ -459,11 +457,7 @@
 			<h4>Species Distribution</h4>
 		</div>
 
-
-
-
 		<div class='col-sm-12'>
-
 			<p>
 				<div class='col-sm-6 pull-right'>
 					<h5><Label><a name='Table1'></a>Table 1: Glossary of Common Terms in Hybrid Poplar Production</Label></h5>
@@ -621,11 +615,7 @@
 				</h5>
 			</div>
 
-
-
-
 			<p>
-
 				Hybrid poplars stands reach maturity and begin to experience
 				increased mortality between fifteen and twenty years of age;
 				however, stands
@@ -635,10 +625,8 @@
 				fast as those of green ash or sweetgum grown on similar sites.
 			</p>
 
-
 			<h4>Yield</h4>
 			<p>
-
 				Hybrid poplars grown in short-rotation or coppice systems can be harvested as
 				early as 3 years after planting.The age at first harvest can be influenced by a
 				number of factors, including the site quality and the landowner’s desired rate of
@@ -716,11 +704,27 @@
 	}
 	@if (Model.CropType == CropType.Pine)
 	{
+		<div class='col-sm-12'>
+			<h3>Pine<span> (<i>Pinus sp.</i>)</span></h3>
+		</div>
+
+		<div class='col-sm-12'>
+			Crop fact for @Model.CropType is not currently available.
+		</div>
 
 	}
-	@if (Model.CropType == CropType.Willow)
+	else
 	{
+		
+			<div class='col-sm-12'>
+				<h3>@Model.CropType</h3>
+			</div>
 
+			<div class='col-sm-12'>
+				Crop fact for @Model.CropType is not currently available.
+			</div>
+
+		
 	}
 
 
@@ -758,6 +762,6 @@
 
 					}
 				}*@
-	</div>
+		</div>
 	</div>
 </div>
