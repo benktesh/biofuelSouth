@@ -55,11 +55,11 @@ foreach ( var glossary in glossaries )
 							if ( Model.First() != null && !Model.First().Description.Equals( "TBI" ) && !ViewData["term"].Equals( "" ) )
 							{
                                 var result = Model.First();
-								<div class="resultTerm">@result.Term:</div>
+								<div class="resultTerm">@result.Term <span class="resultHirarchy">[@result.Counter]</span>:</div>
 								<div class="resultDescription">@result.Description.</div>
 								<br />
-								<div class="resultHirarchy">[@result.Counter]</div>
-								<div class="resultSource">More Information: @result.Source</div>
+								
+								<div class="resultSource">More Information: <a href="@result.Source">@result.Source</a></div>
 								Model.RemoveAt( 0 );
 							}
 							else if ( Model.First() != null && Model.First().Description.Equals( "TBI" ) && !ViewData["term"].Equals( "" ) )
@@ -72,7 +72,7 @@ foreach ( var glossary in glossaries )
 									if ( !ViewData["term"].Equals( "" ) )
 									{
 										<div>
-											No result was found for <strong>@ViewData["term"]</strong>.[@counter]
+											No result was found for <strong>@ViewData["term"]</strong>[@counter].
 										</div>
 									}
 								}
@@ -83,7 +83,7 @@ foreach ( var glossary in glossaries )
 							if ( !ViewData["term"].Equals( "" ) )
 							{
 								<div>
-									No result was found for <strong>@ViewData["term"]</strong>.
+									No result found for <strong>@ViewData["term"]</strong>.
 								</div>
 							}
 						}
@@ -99,9 +99,7 @@ foreach ( var glossary in glossaries )
 							<div style="font-weight: bold;">
 								Related Terms
 							</div>
-							<span>
-								class="pull-left">
-
+							<span class="pull-left">
 								@foreach ( var glossary in Model )
 								{
 									<a href='@Url.Action("Search", new {term = @glossary.Term})'>@glossary.Term</a>
