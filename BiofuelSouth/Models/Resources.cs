@@ -7,9 +7,9 @@
 
     public static class UIText
     {
-        public static string ProceedButtonLabel = "Proceed";
+        public static string ProceedButtonLabel = "Next";
         public static string PreviousButtonLabel = "Previous";
-        public static string SubmitButtonLabel = "Submmit";
+        public static string SubmitButtonLabel = "Submit";
         public static string ResetButtonLabel = "Reset";
 
     }
