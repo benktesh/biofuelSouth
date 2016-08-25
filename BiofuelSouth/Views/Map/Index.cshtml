@@ -15,7 +15,7 @@
 						<select id="SelectedMapType" class="form-control" name="SelectedMapType">
 							<option value="yieldmap">Yield Map</option>
 							<option value="costmap">Cost Map</option>
-							<option value="leastcostcropmap" disabled>Least Cost Crop Map</option>
+							@*<option value="leastcostcropmap" disabled>Least Cost Crop Map</option>*@
 						</select>
 					</div>
 					<div class="col-xs-4">
@@ -118,9 +118,9 @@
 				//the prop method retrieves the selected index. Adding 1 to that index increment the value by 1
 				//This index can then be used in retrivieing links for maps where a blank map lives at index '0'
 
-
-
-
+				$("#SelectedCrop option[value='willow']").removeAttr("disabled").show();
+				$("#SelectedCrop option[value='poplar']").removeAttr("disabled").show();
+				$("#SelectedCrop option[value='Pine']").removeAttr("disabled").show();
 
 				var cropIndex = $('#SelectedCrop').prop("selectedIndex") + 1;
 				var selectedMapType = $('#SelectedMapType').val();
@@ -128,19 +128,14 @@
 				iframe.html("");
 				if (selectedMapType === "yieldmap") {
 					iframe.html(productyield[cropIndex]);
+					$("#SelectedCrop option[value='Pine']").attr("disabled", "disabled").hide();
 
-					$("#SelectedCrop option[value='Pine']").attr("disabled", "disabled");
 				} else if (selectedMapType === "costmap") {
 					iframe.html(productcost[cropIndex]);
 
-					$("#SelectedCrop option[value='willow']").attr("disabled", "disabled");
-					$("#SelectedCrop option[value='poplar']").attr("disabled", "disabled");
-
-					$("#SelectedCrop option[value='Pine']").attr("disabled", "disabled");
-
-
-
-
+					$("#SelectedCrop option[value='willow']").attr("disabled", "disabled").hide();
+					$("#SelectedCrop option[value='poplar']").attr("disabled", "disabled").hide();
+					$("#SelectedCrop option[value='Pine']").attr("disabled", "disabled").hide();
 				}
 
 			});
