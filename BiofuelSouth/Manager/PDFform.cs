@@ -34,9 +34,9 @@ namespace BiofuelSouth.Manager
 		
 		Document _document;
 
+/*
 		TextFrame _addressFrame;
-
-		private String _path;
+*/
 
 		/// <summary>
 		/// The table of the MigraDoc document that contains the invoice items.
