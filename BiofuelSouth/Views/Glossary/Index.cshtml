@@ -2,7 +2,7 @@
 
 @{
     ViewBag.Title = "Index";
-    var AdminToken = (Guid)@ViewBag.AdminToken;
+    var AdminToken = (Guid)ViewBag.AdminToken;
     Html.EnableClientValidation();
     Html.EnableUnobtrusiveJavaScript();
 }
@@ -81,12 +81,12 @@
                     </td>*@
             <td class="col-md-2">
                     
-                <a href="@Url.Action("Edit", new { id = item.Id, adminToken = @AdminToken })">
+                <a href="@Url.Action("Edit", new { id = item.Id, adminToken = AdminToken })">
                     <i class="glyphicon glyphicon glyphicon-edit"></i>
                     Edit
                 </a> |
                     
-                <a href="@Url.Action("Delete", new { id = item.Id, adminToken = @AdminToken })">
+                <a href="@Url.Action("Delete", new { id = item.Id, adminToken = AdminToken })">
                     <i class="glyphicon glyphicon glyphicon-floppy-remove"></i>
                     Delete
                 </a> 

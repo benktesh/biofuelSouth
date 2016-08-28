@@ -47,8 +47,8 @@
     <h3>Comparison with other crops</h3>
 
     @{
-        var highNPV = @Model.ComparisionData.FirstOrDefault( m => m.Key == ResultComparisionKey.HighNpv );
-        var lowNPV = @Model.ComparisionData.FirstOrDefault( m => m.Key == ResultComparisionKey.LowNpv );
+        var highNPV = Model.ComparisionData.FirstOrDefault( m => m.Key == ResultComparisionKey.HighNpv );
+        var lowNPV = Model.ComparisionData.FirstOrDefault( m => m.Key == ResultComparisionKey.LowNpv );
 
     }
     @if ( highNPV != null && highNPV.Crop != Model.CropType )
@@ -74,7 +74,7 @@
         }
 
     }
-    else if ( highNPV != null && highNPV.Crop == @Model.CropType )
+    else if ( highNPV != null && highNPV.Crop == Model.CropType )
     {
         <span>
             Compared among the select crops in this BDSS, it is anticipated that growing
@@ -83,7 +83,7 @@
         </span>
 
     }
-    @if ( lowNPV != null && lowNPV.Crop != @Model.CropType )
+    @if ( lowNPV != null && lowNPV.Crop != Model.CropType )
     {
         var lowNpv = Decimal.Parse( lowNPV.ComparisionValue );
 
@@ -109,7 +109,7 @@
         }
 
     }
-    else if ( lowNPV != null && lowNPV.Crop == @Model.CropType )
+    else if ( lowNPV != null && lowNPV.Crop == Model.CropType )
     {
         <span>
             Likewise, it is anticipated that growing
@@ -125,7 +125,7 @@
         @if ( Model.ChartKeys.Select( m => m.Key == ChartType.NPVCompare ).Any() )
         {
             var keyValue = Model.ChartKeys.FirstOrDefault( m => m.Key == ChartType.NPVCompare ).Value;
-            var urlAnnualProduction = Url.Action( "ShowChart", "Chart", new { @cacheKey = keyValue } );
+            var urlAnnualProduction = Url.Action( "ShowChart", "Chart", new { cacheKey = keyValue } );
             <figure>
                 <img src="@urlAnnualProduction" class="img-responsive img-chart" alt="NPV Compare Chart" />
                 <figcaption class="text-center">Graph 1. Comparision of project NPV ($) across various biofuel crops.</figcaption>

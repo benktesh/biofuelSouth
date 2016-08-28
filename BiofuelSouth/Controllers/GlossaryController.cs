@@ -90,6 +90,7 @@ namespace BiofuelSouth.Controllers
             return gvm;
         }
 
+	    // ReSharper disable once UnusedMember.Local
         private GlossaryEntity ToGlossary(GlossaryViewModel gvm)
         {
             var gm = new GlossaryEntity();

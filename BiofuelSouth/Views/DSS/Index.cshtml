@@ -33,7 +33,7 @@
                     @{
     var state = Model.General.State;
                     }
-                    @Html.DropDownListFor(model => model.General.County, Constants.GetCountySelectList(@state), "Select County", new { @class = "form-control", name = "county", id = "county" })
+                    @Html.DropDownListFor(model => model.General.County, Constants.GetCountySelectList(state), "Select County", new { @class = "form-control", name = "county", id = "county" })
                     @Html.ValidationMessageFor(model => model.General.County, "", new { @class = "text-danger" })
                 </div>
 

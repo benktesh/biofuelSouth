@@ -4,7 +4,7 @@
 
 @{
     ViewBag.Title = string.Format("Results: {0}", GeneralResource.DSS_Tittle_Display); 
-    var mergeCol = @Model.General.ProjectLife + 1;
+    var mergeCol = Model.General.ProjectLife + 1;
 
 }
 
@@ -172,7 +172,7 @@
                 @foreach (var a in Model.GetExpenditures())
                 {
 
-                    <td>@String.Format("{0:#,###,###}", @Math.Round(a.TotalExpenses, 0))</td>
+                    <td>@String.Format("{0:#,###,###}", Math.Round(a.TotalExpenses, 0))</td>
                 }
 
             </tr>
@@ -185,7 +185,7 @@
                     @foreach (var a in Model.GetExpenditures())
                     {
 
-                        <td>@String.Format("{0:#,###,###}", @Math.Round(a.StorageCost, 0))</td>
+                        <td>@String.Format("{0:#,###,###}", Math.Round(a.StorageCost, 0))</td>
                     }
 
                 </tr>
@@ -198,7 +198,7 @@
                 </td>
                 @foreach (var a in Model.GetCashFlow())
                 {
-                    <td> @String.Format("{0:#,###,###}", @Math.Round(a, 0))</td>
+                    <td> @String.Format("{0:#,###,###}", Math.Round(a, 0))</td>
                 }
 
             </tr>
@@ -215,7 +215,7 @@
             @{
                 
 
-                var urlcashflow = Url.Action("ShowChart", "Chart", new { @cacheKey = ViewBag.cacheKey3 });
+                var urlcashflow = Url.Action("ShowChart", "Chart", new { cacheKey = ViewBag.cacheKey3 });
                 <img src="@urlcashflow" class="img-responsive" alt="CashFlow Chart" />
 
             }
@@ -232,7 +232,7 @@
         </div>
         <div id="CostRevenueChart">
             @{
-                var urlAnnualProduction1 = Url.Action("ShowChart", "Chart", new { @cacheKey = ViewBag.cacheKey1 });
+                var urlAnnualProduction1 = Url.Action("ShowChart", "Chart", new { cacheKey = ViewBag.cacheKey1 });
                 <img src="@urlAnnualProduction1" class="img-responsive" alt="Revenue Chart" />
             }
 

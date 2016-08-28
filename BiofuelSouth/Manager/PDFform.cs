@@ -6,13 +6,11 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web;
-using System.Web.Compilation;
 using System.Web.Helpers;
 using BiofuelSouth.Enum;
 using BiofuelSouth.Models;
 using BiofuelSouth.ViewModels;
 using MigraDoc.DocumentObjectModel;
-using MigraDoc.DocumentObjectModel.Shapes;
 using MigraDoc.DocumentObjectModel.Tables;
 // using System.Xml.XPath;
 

@@ -3,7 +3,7 @@
 
 @{
     ViewBag.Title = "BDSS: Biomass Decision Support System";
-    var mergeCol = @Model.ProjectLife + 1;
+    var mergeCol = Model.ProjectLife + 1;
 
 }
 
@@ -108,7 +108,7 @@
                 @foreach (var a in Model.CostList)
                 {
 
-                    <td>@String.Format("{0:#,###,###}", @Math.Round(a, 0))</td>
+                    <td>@String.Format("{0:#,###,###}", Math.Round(a, 0))</td>
                 }
 
             </tr>
@@ -121,7 +121,7 @@
                     @foreach (var a in Model.StorageCostList)
                     {
 
-                        <td>@String.Format("{0:#,###,###}", @Math.Round(a, 1))</td>
+                        <td>@String.Format("{0:#,###,###}", Math.Round(a, 1))</td>
                     }
 
                 </tr>
@@ -134,7 +134,7 @@
                 </td>
                 @foreach (var a in Model.CashFlow)
                 {
-                    <td> @String.Format("{0:#,###,###}", @Math.Round(a, 0))</td>
+                    <td> @String.Format("{0:#,###,###}", Math.Round(a, 0))</td>
                 }
 
             </tr>
@@ -151,7 +151,7 @@
         {
             if (key.Key == ChartType.CashFlow)
             {
-                var urlcashflow = Url.Action("ShowChart", "Chart", new {@cacheKey = @key.Value});
+                var urlcashflow = Url.Action("ShowChart", "Chart", new {cacheKey = key.Value});
                 <div id="CashFlowChart" class="table-bordered">
                     <img src="@urlcashflow" class="img-responsive" alt="CashFlow Chart"/>
                 </div>
@@ -159,7 +159,7 @@
             }
             else if (key.Key == ChartType.Production)
             {
-                var urlAnnualProduction = Url.Action("ShowChart", "Chart", new {@cacheKey = @key.Value});
+                var urlAnnualProduction = Url.Action("ShowChart", "Chart", new {cacheKey = key.Value});
                 <div id="AnnualProductionChart" class="table-bordered">
                     <img src="@urlAnnualProduction" class="img-responsive" alt="Annual Production Chart"/>
                 </div>
@@ -167,7 +167,7 @@
             }
             else if (key.Key == ChartType.CostRevenue)
             {
-                var urlAnnualProduction1 = Url.Action("ShowChart", "Chart", new {@cacheKey = @key.Value});
+                var urlAnnualProduction1 = Url.Action("ShowChart", "Chart", new {cacheKey = key.Value});
                 <div id="CostRevenueChart" class="table-bordered">
                     <img src="@urlAnnualProduction1" class="img-responsive " alt="Revenue Chart"/>
                 </div>
@@ -175,7 +175,7 @@
             }
             else if (key.Key == ChartType.NPVCompare)
             {
-                var urlNpvCompare = Url.Action("ShowChart", "Chart", new { @cacheKey = @key.Value });
+                var urlNpvCompare = Url.Action("ShowChart", "Chart", new { cacheKey = key.Value });
                 <div id="NpvCompareChart" class="table-bordered">
                     <img src="@urlNpvCompare" class="img-responsive " alt="Revenue Chart" />
                 </div>

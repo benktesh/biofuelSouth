@@ -6,7 +6,7 @@ using BiofuelSouth.Manager;
 using BiofuelSouth.Models;
 using BiofuelSouth.ViewModels;
 using MigraDoc.Rendering;
-using PdfSharp.Pdf;
+
 // ReSharper disable InconsistentNaming
 
 
@@ -364,10 +364,10 @@ namespace BiofuelSouth.Controllers
             var document = (new PDFform(vm)).CreateDocument();
 
             // Create a renderer for the MigraDoc document.
-            const bool unicode = false; //A flag indicating whether to create a Unicode PDF or a WinAnsi PDF file.
-            const PdfFontEmbedding embedding = PdfFontEmbedding.Always; // An enum indicating whether to embed fonts or not.
+            //const bool unicode = false; //A flag indicating whether to create a Unicode PDF or a WinAnsi PDF file.
+            //const PdfFontEmbedding embedding = PdfFontEmbedding.Always; // An enum indicating whether to embed fonts or not.
 
-            PdfDocumentRenderer pdfRenderer = new PdfDocumentRenderer(unicode, embedding);
+            PdfDocumentRenderer pdfRenderer = new PdfDocumentRenderer();
             // Associate the MigraDoc document with a renderer
             pdfRenderer.Document = document;
             // Layout and render document to PDF

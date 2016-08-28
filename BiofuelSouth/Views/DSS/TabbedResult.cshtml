@@ -59,7 +59,7 @@
 				<div class="panel-body">
 					<div class="tab-content">
 						<div id="home" class="tab-pane fade in active">
-							@Html.Partial( "_summaryOverView", @Model )
+							@Html.Partial( "_summaryOverView", Model )
 						</div>
 						<div id="menu1" class="tab-pane fade">
 							<div class="row">
@@ -80,7 +80,7 @@
 									@if ( Model.ChartKeys.Select( m => m.Key == ChartType.Production ).Any() )
 									{
 										var keyValue = Model.ChartKeys.FirstOrDefault( m => m.Key == ChartType.Production ).Value;
-										var urlAnnualProduction = Url.Action( "ShowChart", "Chart", new { @cacheKey = keyValue } );
+										var urlAnnualProduction = Url.Action( "ShowChart", "Chart", new { cacheKey = keyValue } );
 										<figure>
 											<img src="@urlAnnualProduction" class="img-responsive img-chart" alt="Annual Production Chart" style="max-height: 200px" />
 											<figcaption class="text-center">@Constants.ProductionChartCaption( Model.CropType )</figcaption>
@@ -95,8 +95,8 @@
 									<h3>Comparison with other crops</h3>
 									<p>
 										@{
-											var high = @Model.ComparisionData.FirstOrDefault( m => m.Key == ResultComparisionKey.HighProduction );
-											var low = @Model.ComparisionData.FirstOrDefault( m => m.Key == ResultComparisionKey.LowProduction );
+											var high = Model.ComparisionData.FirstOrDefault( m => m.Key == ResultComparisionKey.HighProduction );
+											var low = Model.ComparisionData.FirstOrDefault( m => m.Key == ResultComparisionKey.LowProduction );
 
 										}
 										@if ( high != null && high.Crop != Model.CropType )
@@ -108,7 +108,7 @@
 											</span>
 
 										}
-										else if ( high != null && high.Crop == @Model.CropType )
+										else if ( high != null && high.Crop == Model.CropType )
 										{
 											<span>
 												Growing <strong>@high.Crop.ToString()</strong> may likely result in the highest
@@ -117,7 +117,7 @@
 											</span>
 
 										}
-										@if ( low != null && low.Crop != @Model.CropType )
+										@if ( low != null && low.Crop != Model.CropType )
 										{
 											<span>
 												Growing <strong>@low.Crop.ToString()</strong> may likely result in the lowest production of
@@ -126,7 +126,7 @@
 											</span>
 
 										}
-										else if ( low != null && low.Crop == @Model.CropType )
+										else if ( low != null && low.Crop == Model.CropType )
 										{
 											<span>
 												Growing <strong>@low.Crop.ToString()</strong> may result the the lowest production of
@@ -148,7 +148,7 @@
 									@if ( Model.ChartKeys.Select( m => m.Key == ChartType.ProductionCompare ).Any() )
 									{
 										var keyValue = Model.ChartKeys.FirstOrDefault( m => m.Key == ChartType.ProductionCompare ).Value;
-										var urlAnnualProduction = Url.Action( "ShowChart", "Chart", new { @cacheKey = keyValue } );
+										var urlAnnualProduction = Url.Action( "ShowChart", "Chart", new { cacheKey = keyValue } );
 
 										<figure>
 											<img src="@urlAnnualProduction" class="img-responsive img-chart" alt="Production Compare Chart" style="max-height: 200px" />
@@ -181,7 +181,7 @@
 									@if ( Model.ChartKeys.Select( m => m.Key == ChartType.CostRevenue ).Any() )
 									{
 										var keyValue = Model.ChartKeys.FirstOrDefault( m => m.Key == ChartType.CostRevenue ).Value;
-										var urlAnnualProduction1 = Url.Action( "ShowChart", "Chart", new { @cacheKey = keyValue } );
+										var urlAnnualProduction1 = Url.Action( "ShowChart", "Chart", new { cacheKey = keyValue } );
 
 										<figure>
 											<img src="@urlAnnualProduction1" class="img-responsive img-chart" alt="Revenue Chart" />
@@ -196,8 +196,8 @@
 									<h3>Comparison with other crops</h3>
 									<p>
 										@{
-											var highPrice = @Model.ComparisionData.FirstOrDefault( m => m.Key == ResultComparisionKey.HighFarmGatePrice );
-											var lowPrice = @Model.ComparisionData.FirstOrDefault( m => m.Key == ResultComparisionKey.LowFarmgatePrice );
+											var highPrice = Model.ComparisionData.FirstOrDefault( m => m.Key == ResultComparisionKey.HighFarmGatePrice );
+											var lowPrice = Model.ComparisionData.FirstOrDefault( m => m.Key == ResultComparisionKey.LowFarmgatePrice );
 
 										}
 										@if ( highPrice != null && highPrice.Crop != Model.CropType )
@@ -210,7 +210,7 @@
 											</span>
 
 										}
-										else if ( highPrice != null && highPrice.Crop == @Model.CropType )
+										else if ( highPrice != null && highPrice.Crop == Model.CropType )
 										{
 											<span>
 												It is anticipated that growing
@@ -220,7 +220,7 @@
 											</span>
 
 										}
-										@if ( lowPrice != null && lowPrice.Crop != @Model.CropType )
+										@if ( lowPrice != null && lowPrice.Crop != Model.CropType )
 										{
 											<span>
 												Likewise, it is anticipated that growing
@@ -230,7 +230,7 @@
 											</span>
 
 										}
-										else if ( lowPrice != null && lowPrice.Crop == @Model.CropType )
+										else if ( lowPrice != null && lowPrice.Crop == Model.CropType )
 										{
 											<span>
 												Likewise, it is anticipated that growing
@@ -254,7 +254,7 @@
 									@if ( Model.ChartKeys.Select( m => m.Key == ChartType.CashFlow ).Any() )
 									{
 										var keyValue = Model.ChartKeys.FirstOrDefault( m => m.Key == ChartType.CashFlow ).Value;
-										var urlcashflow = Url.Action( "ShowChart", "Chart", new { @cacheKey = keyValue } );
+										var urlcashflow = Url.Action( "ShowChart", "Chart", new { cacheKey = keyValue } );
 
 
 										<figure>
@@ -266,7 +266,7 @@
 									@if ( Model.ChartKeys.Select( m => m.Key == ChartType.CashFlowCompare ).Any() )
 									{
 										var keyValue = Model.ChartKeys.FirstOrDefault( m => m.Key == ChartType.CashFlowCompare ).Value;
-										var urlcashflow = Url.Action( "ShowChart", "Chart", new { @cacheKey = keyValue } );
+										var urlcashflow = Url.Action( "ShowChart", "Chart", new { cacheKey = keyValue } );
 										<figure id="CashFlowCompareChart">
 											<img src="@urlcashflow" class="img-responsive img-chart" alt="CashFlow Compare Chart" />
 											<figcaption class="text-center">@Constants.CashFlowCompareChartCaption( Model.CropType )</figcaption>

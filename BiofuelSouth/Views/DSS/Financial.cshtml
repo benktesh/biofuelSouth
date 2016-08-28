@@ -51,7 +51,7 @@
                     Read more: http://www.investorwords.com/2539/interest_rate.html#ixzz3NsD6A9ff </p>">
 										<span class="glyphicon glyphicon-question-sign"></span></a>
 
-									@Html.TextBoxFor(model => model.InterestRate, new {min = "0", step = "any", @class = "form-control", @Value = @Constants.GetAvgInterestRate()})
+									@Html.TextBoxFor(model => model.InterestRate, new {min = "0", step = "any", @class = "form-control", Value = Constants.GetAvgInterestRate()})
 									@Html.ValidationMessageFor(model => model.InterestRate, "", new {@class = "text-danger"})
 								</div>
 

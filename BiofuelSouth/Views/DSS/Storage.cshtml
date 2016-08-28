@@ -49,7 +49,7 @@
 								   data-placement="left" title="Storage Time" data-content="<p>Number of days harvested biomass crop require storage facility.
                     The maximum number of days for storage is 200 days. </p>">
 											<span class="glyphicon glyphicon-question-sign"></span></a>
-								@Html.TextBoxFor( model => model.StorageTime, new { @class = "form-control", @Value = "" } )
+								@Html.TextBoxFor( model => model.StorageTime, new { @class = "form-control", Value = "" } )
 								@Html.ValidationMessageFor( model => model.StorageTime, "", new { @class = "text-danger" } )
 
 							</div>
@@ -62,7 +62,7 @@
                        For example, out of the 100 tons of crop harvested, if only 20 tons require storage while rest of the 80 tons are sold at the time of harvest, then
                     proportion requiring storage can be calculated as 20/100*100% = 20%.</p>"><span class="glyphicon glyphicon-question-sign"></span></a>
 
-								@Html.TextBoxFor( model => model.PercentStored, new { @class = "form-control", @Value = "" } )
+								@Html.TextBoxFor( model => model.PercentStored, new { @class = "form-control", Value = "" } )
 								@Html.ValidationMessageFor( model => model.PercentStored, "", new { @class = "text-danger" } )
 
 							</div>

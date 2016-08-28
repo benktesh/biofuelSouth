@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data.Entity;
-using System.Net;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using BiofuelSouth.Models;
@@ -39,7 +37,7 @@ namespace BiofuelSouth.Controllers
         // GET: /Admin/
         public async Task<ActionResult> Index()
         {
-            return View((List<ProductivityEntity>) await db.Productivities.ToListAsync());
+            return View(await db.Productivities.ToListAsync());
         }
 
         

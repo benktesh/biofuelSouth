@@ -68,7 +68,7 @@
   <ItemGroup>
     <Reference Include="Antlr3.Runtime">
       <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
-      <Private>True</Private>
+      <Private>False</Private>
     </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
@@ -88,17 +88,9 @@
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="MigraDoc.DocumentObjectModel, Version=1.32.4334.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\PDFsharp-MigraDoc-GDI.1.32.4334.0\lib\net20\MigraDoc.DocumentObjectModel.dll</HintPath>
-    </Reference>
     <Reference Include="MigraDoc.DocumentObjectModel-wpf, Version=1.50.3915.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
       <HintPath>..\packages\PDFsharp-MigraDoc-wpf.1.50.3915-beta2\lib\net30\MigraDoc.DocumentObjectModel-wpf.dll</HintPath>
       <Private>True</Private>
-    </Reference>
-    <Reference Include="MigraDoc.Rendering, Version=1.32.4334.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\PDFsharp-MigraDoc-GDI.1.32.4334.0\lib\net20\MigraDoc.Rendering.dll</HintPath>
     </Reference>
     <Reference Include="MigraDoc.Rendering-wpf, Version=1.50.3915.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
       <HintPath>..\packages\PDFsharp-MigraDoc-wpf.1.50.3915-beta2\lib\net30\MigraDoc.Rendering-wpf.dll</HintPath>
@@ -111,10 +103,6 @@
     <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
-    </Reference>
-    <Reference Include="PdfSharp, Version=1.32.3057.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\PDFsharp-MigraDoc-GDI.1.32.4334.0\lib\net20\PdfSharp.dll</HintPath>
     </Reference>
     <Reference Include="PdfSharp-wpf, Version=1.50.3915.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
       <HintPath>..\packages\PDFsharp-MigraDoc-wpf.1.50.3915-beta2\lib\net30\PdfSharp-wpf.dll</HintPath>
@@ -669,7 +657,7 @@
     <Content Include="Files\miscanthus.docx" />
     <Content Include="Files\miscanthus.pdf" />
     <Content Include="Files\poplar.pdf" />
-    <None Include="Properties\PublishProfiles\biofuelsouth - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\biofuelsouth - File.pubxml" />
     <None Include="Properties\PublishProfiles\biofuelsouth - Web Deploy.pubxml" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -862,7 +850,9 @@
   <ItemGroup>
     <Content Include="forum\App_LocalResources\ar-SA\adminsettings.aspx.ar-SA.resx" />
     <Content Include="forum\App_LocalResources\ar-SA\adminusergroups.aspx.ar-SA.resx" />
-    <Content Include="forum\App_LocalResources\ar-SA\editforum.aspx.ar-SA.resx" />
+    <Content Include="forum\App_LocalResources\ar-SA\editforum.aspx.ar-SA.resx">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="forum\App_LocalResources\ar-SA\editprofile.aspx.ar-SA.resx" />
     <Content Include="forum\App_LocalResources\ar-SA\editsubforums.aspx.ar-SA.resx" />
     <Content Include="forum\App_LocalResources\ar-SA\editusergroup.aspx.ar-SA.resx" />
