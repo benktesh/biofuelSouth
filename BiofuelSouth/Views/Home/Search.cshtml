@@ -10,7 +10,7 @@ foreach ( var glossary in glossaries )
 {
 		<div>
 			<a href='@Url.Action("Search", new {term = glossary.Term})'>
-				<SPAN STYLE="font-size: @Math.Min(300L, glossary.Counter.GetValueOrDefault() + 100)%">glossary.Term </SPAN>
+				<SPAN STYLE="font-size: @Math.Min(300L, glossary.Counter.GetValueOrDefault() + 100)%">@glossary.Term </SPAN>
 			</a>
 		</div>
 	}
@@ -176,12 +176,12 @@ foreach ( var glossary in glossaries )
 		</div>
 	</div>
 
-	<div class="col-xs-4 form-group">
+	<div class="col-xs-4">
 		<div class="panel panel-default">
-			<div class="panel-heading instruction-panel-heading">
-				<h4>Top searches</h4>
+			<div class="panel-heading">
+				Top searches
 			</div>
-			<div class="panel-body Instruction-panel-body">
+			<div class="panel-body">
 					@GetTopSearachedTerms()
 				</div>
 			</div>
