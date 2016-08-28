@@ -33,28 +33,41 @@ foreach ( var glossary in glossaries )
 			    <div id="searchInstruction">
                   
                         @{
-                            if (ViewData["term"].Equals(""))
-                            {
-                                <form method="POST" action="@Url.Action("Search", "Home")">
-
-                                    <input type="text" class="input-sm" style="margin: 1px; padding: 0;" size="30" placeholder="Enter a term" name="term" id="term" />
-                                    <button class="btn btn-default glyphicon glyphicon-search zero-right-margin" id="searchButton1" name="searchButton1" type="submit"></button>
-
-                                    <br />
-
-                                    <p>Please enter search term in the box above or select a term from the list in the right.</p>
-                                </form>
-                            }
+                           
                         }
 			    </div>
 
 				<div id="searchResult">
 					@{
+						if (ViewData["term"].Equals(""))
+						{
+							<form method="POST" action="@Url.Action("Search", "Home")">
+
+								<input type="text" class="input-sm" style="margin: 1px; padding: 0;" size="30" placeholder="Enter a term" name="term" id="term"/>
+								<button class="btn btn-default glyphicon glyphicon-search zero-right-margin" id="searchButton1" name="searchButton1" type="submit"></button>
+
+								<br/>
+								<p>Please enter search term in the box above or select a term from the list in the right.</p>
+							</form>
+						}
+						else
+						{
+							<form method="POST" action="@Url.Action("Search", "Home")">
+								<span class="row">
+									<input type="text" class="input-sm" size="30" placeholder="Enter a term" name="term" id="term" />
+									<button class="btn glyphicon glyphicon-search" style="margin: 1px;" id="searchButton1" name="searchButton1" type="submit"></button>
+								</span>
+									<br/>
+							</form>
+
+						}
+
+
 						if ( Model.Count > 0 )
 						{
 							if ( Model.First() != null && !Model.First().Description.Equals( "TBI" ) && !ViewData["term"].Equals( "" ) )
 							{
-                                var result = Model.First();
+								var result = Model.First();
 								<div class="resultTerm">@result.Term <span class="resultHirarchy">[@result.Counter]</span>:</div>
 								<div class="resultDescription">@result.Description.</div>
 								<br />
