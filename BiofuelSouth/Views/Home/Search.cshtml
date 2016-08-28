@@ -115,7 +115,7 @@ foreach ( var glossary in glossaries )
 							<span class="pull-left">
 								@foreach ( var glossary in Model )
 								{
-									<a href='@Url.Action("Search", new {term = glossary.Term})'>glossary.Term</a>
+									<a href='@Url.Action("Search", new {term = glossary.Term})'>@glossary.Term</a>
 								}
 							</span>
 						}
@@ -161,7 +161,7 @@ foreach ( var glossary in glossaries )
 								{
 									if ( word.Key != null )
 									{
-										<a href='@Url.Action("Search", new {term = word.Key})'>
+										<a href='@Url.Action("Search", new {term = @word.Key})'>
 
 											<SPAN STYLE="font-size: @(Math.Min(300L, word.Value))%">@word.Key</SPAN>
 										</a>
