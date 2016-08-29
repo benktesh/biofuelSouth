@@ -345,7 +345,7 @@
 	{
 
 		<a href='@Url.Action("Search", new {term = glossary.Term})'>
-			<SPAN STYLE="font-size: @Math.Min(200L, glossary.Counter.GetValueOrDefault() + 75)%">glossary.Term </SPAN>
+			<SPAN STYLE="font-size: @Math.Min(200L, glossary.Counter.GetValueOrDefault() + 75)%">@glossary.Term </SPAN>
 		</a>
 	}
 }
