@@ -10,9 +10,12 @@ namespace BiofuelSouth
 
 
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/jquery-{version}.js",
-                         "~/Scripts/biofuelSouth.js"
+                        "~/Scripts/jquery-2.1.1.min.js"
                         ));
+
+			bundles.Add(new ScriptBundle( "~/bundles/custom").Include(
+				"~/Scripts/biofuelSouth.js"
+				));
 
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
             // ready for production, use the build tool at http://modernizr.com to pick only the tests you need.
@@ -30,10 +33,9 @@ namespace BiofuelSouth
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css",
-                      "~/Content/custom.css",
-                      "~/Content/font-awesome.css"
-                      
-                      ));
+					  "~/Content/font-awesome.min.css"
+
+					  ) );
 
 
 
@@ -42,9 +44,9 @@ namespace BiofuelSouth
 
 
 
-            // Set EnableOptimizations to false for debugging. For more information,
-            // visit http://go.microsoft.com/fwlink/?LinkId=301862
-            BundleTable.EnableOptimizations = false;
+					 // Set EnableOptimizations to false for debugging. For more information,
+					 // visit http://go.microsoft.com/fwlink/?LinkId=301862
+					 BundleTable.EnableOptimizations = false;
         }
     }
 }

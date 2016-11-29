@@ -1,169 +1,142 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>@ViewBag.Title Biofuel Decision Support System</title>
-    <link href="~/Content/bootstrap.css" rel="stylesheet" />
-    <link href="~/Content/site.css" rel="stylesheet"/>
-    <link href="~/Content/font-awesome.min.css" rel="stylesheet"/>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<title>@ViewBag.Title Biofuel Decision Support System</title>
+	@Scripts.Render( "~/bundles/jquery", "~/bundles/jqueryval", "~/bundles/bootstrap", "~/bundles/custom" )
+	<script src="~/Scripts/modernizr-2.6.2.js"></script>
+	@Styles.Render( "~/Content/css" )
 
-
-	<style>
-		
-	</style>
-
-	@*@Styles.Render("~/Content/css")*@
-    <script src="~/Scripts/modernizr-2.6.2.js"></script>
-
-    <!-- RSS FEED Set Up ----->
-    <script type="text/javascript" src="http://www.google.com/jsapi"></script>
-    <script type="text/javascript">google.load("feeds", "1")</script>
-    <!-- End RSS FEED Set Up-->
-    @* ReSharper disable once InconsistentNaming *@
-    @* ReSharper disable once UnusedParameter *@
-    @* ReSharper disable once UnusedParameter *@
+	<!-- RSS FEED Set Up ----->
+	<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+	<script type="text/javascript">google.load("feeds", "1")</script>
+	<!-- End RSS FEED Set Up-->
 	@* ReSharper disable once InconsistentNaming *@
-    <script>
-	    function getRootWebSitePath() {
-		    var _location = document.location.toString();
-		    var applicationNameIndex = _location.indexOf('/', _location.indexOf('://') + 3);
-		    var applicationName = _location.substring(0, applicationNameIndex) + '/';
-		    var webFolderIndex = _location.indexOf('/', _location.indexOf(applicationName) + applicationName.length);
-		    var webFolderFullPath = _location.substring(0, webFolderIndex);
+	@* ReSharper disable once UnusedParameter *@
+	@* ReSharper disable once UnusedParameter *@
+	@* ReSharper disable once InconsistentNaming *@
+	<script>
+		function getRootWebSitePath() {
+			var _location = document.location.toString();
+			var applicationNameIndex = _location.indexOf('/', _location.indexOf('://') + 3);
+			var applicationName = _location.substring(0, applicationNameIndex) + '/';
+			var webFolderIndex = _location.indexOf('/', _location.indexOf(applicationName) + applicationName.length);
+			var webFolderFullPath = _location.substring(0, webFolderIndex);
+			return webFolderFullPath;
+		}
 
-		    return webFolderFullPath;
-	    }
-
-// ReSharper disable once UnusedParameter
-// ReSharper disable once UnusedParameter
-// ReSharper disable once UnusedParameter
-// ReSharper disable once UnusedParameter
-// ReSharper disable UnusedParameter
-	    (function (i, s, o, g, r, a, m) {
-// ReSharper restore UnusedParameter
-		    i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
-			    (i[r].q = i[r].q || []).push(arguments);
-		    }, i[r].l = 1 * new Date(); a = s.createElement(o),
+		// ReSharper disable once UnusedParameter
+		// ReSharper disable once UnusedParameter
+		// ReSharper disable once UnusedParameter
+		// ReSharper disable once UnusedParameter
+		// ReSharper disable UnusedParameter
+		(function (i, s, o, g, r, a, m) {
+			// ReSharper restore UnusedParameter
+			i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+				(i[r].q = i[r].q || []).push(arguments);
+			}, i[r].l = 1 * new Date(); a = s.createElement(o),
 			    m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m);
-	    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+		})(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
 
-	    ga('create', 'UA-58510159-2', 'auto');
-	    ga('send', 'pageview');
-    </script>
- 
-
+		ga('create', 'UA-58510159-2', 'auto');
+		ga('send', 'pageview');
+	</script>
 </head>
 <body id="page-top" class="body-content">
-    <!--Navigation-->
-    <nav class="container container-nav navbar navbar-default navbar-fixed-top">
-            <div class="navbar-inner">
-                <a href="http://www.nifa.usda.gov" target="_blank" title="USDA NIFA"><img src="~/images/funding.png" class="img-responsive img-rounded img-on-top"></a>
-            </div>
-            <div class="container-fluid">
-                <!-- Brand and toggle get grouped for better mobile display -->
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                   
-                </div>
+	<!--Navigation-->
+	<nav class="container container-nav navbar navbar-default navbar-fixed-top">
+		<div class="navbar-inner">
+			<a href="http://www.nifa.usda.gov" target="_blank" title="USDA NIFA"><img src="~/images/funding.png" class="img-responsive img-rounded img-on-top"></a>
+		</div>
+		<div class="container-fluid">
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+			</div>
 
-                <!-- Collect the nav links, forms, and other content for toggling -->
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-	                <ul class="nav navbar-nav">
-		                <li><a href='@Url.Action("Index", "Home")'>Home</a></li>
-		                <li><a id="aboutButton" href='@Url.Action("About", "Home")'>About</a> </li>
-		                <li><a id="glossaryButton" href='@Url.Action("Search", "Home")'>Glossary</a></li>
-		                @* ReSharper disable once Html.PathError *@
-		                <li><a href="/map" id="dropDownButton">Maps</a></li>
-		                <li><a id="helpButton" href='@Url.Action("Factsheet", "Home")'>Factsheet</a></li>
-		                <li><a href='@Url.Action("NewDSS", "DSS")'>DSS</a></li>
-		                @*<li><a href='@Url.Action("Index", "Biosim")'>Simulator</a></li>*@
-		                <li><a href='@Url.Action("AskExpert", "Home")'>Ask Expert</a></li>
-		                @* ReSharper disable once Html.AttributesQuotes *@
-		                @* ReSharper disable once Html.PathError *@
-		                <li><a id="forumButton" href='/forum'>Forum</a></li>
-		                <li><a id="contactButton" href='@Url.Action("FeedBack", "Home")'>Contact</a></li>
-		                <li><form id="searchbar" class="" style="margin-top: 3px;" role="search" method="POST" action="@Url.Action("Search", "Home")">
-	<input type="text" class="input-sm"  size="10" placeholder="Enter a term" name="term" id="term" />
-	<button class="btn btn-default glyphicon glyphicon-search" id="searchButton " name="searchButton" type="submit"></button>
-</form></li>
-	                </ul>
-					
-	            </div><!-- /.navbar-collapse -->
-		
-            </div><!-- /.container-fluid -->
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav">
+					<li><a href='@Url.Action("Index", "Home")'>Home</a></li>
+					<li><a id="aboutButton" href='@Url.Action("About", "Home")'>About</a> </li>
+					<li><a id="glossaryButton" href='@Url.Action("Search", "Home")'>Glossary</a></li>
+					@* ReSharper disable once Html.PathError *@
+					<li><a href="@Url.Action("Index", "Map")" id="dropDownButton">Maps</a></li>
+					<li><a id="helpButton" href='@Url.Action("Factsheet", "Home")'>Factsheet</a></li>
+					<li><a href='@Url.Action("NewDSS", "DSS")'>DSS</a></li>
+					@*<li><a href='@Url.Action("Index", "Biosim")'>Simulator</a></li>*@
+					<li><a href='@Url.Action("AskExpert", "Home")'>Ask Expert</a></li>
+					@* ReSharper disable once Html.AttributesQuotes *@
+					@* ReSharper disable once Html.PathError *@
+					<li><a id="forumButton" href='../forum'>Forum</a></li>
+					<li><a id="contactButton" href='@Url.Action("FeedBack", "Home")'>Contact</a></li>
+					<li>
+						<form id="searchbar" class="" style="margin-top: 3px;" role="search" method="POST" action="@Url.Action("Search", "Home")">
+							<input type="text" class="input-sm" size="10" placeholder="Enter a term" name="term" id="term" />
+							<button class="btn btn-default glyphicon glyphicon-search" id="searchButton " name="searchButton" type="submit"></button>
+						</form>
+					</li>
+				</ul>
+			</div><!-- /.navbar-collapse -->
+		</div><!-- /.container-fluid -->
+	</nav>
 
-    </nav>
-	
-    <div class="container">
-	   @RenderBody()
+	<div class="container">
+		@RenderBody()
 	</div>
 
-
-    <div class="scroll-top page-scroll visible-xs visible sm">
-        <a class="btn btn-primary" href="#page-top">
-            <i class="glyphicon-circle-arrow-up"></i>
-        </a>
-    </div>
-
-
-			<footer id="" class="footer ">
-				<div class="navbar navbar-fixed-bottom navbar-collapse collapse" id="footer">
-					<div class="container">
-						<div class="img-responsive">
-							<div class="row img-responsive" id="logoContainer">
-
-								<div>
-									<a href="http://www.nifa.usda.gov" target="_blank" title="University of Georgia"> <img src="~/images/usdahead.jpg" /></a>
-								</div>
-								<div>
-									<a href="http://www.uga.edu/" target="_blank" title="University of Georgia"><img src="~/images/ugahead.jpg" /></a>
-								</div>
-								<div>
-									<a href="http://www.auburn.edu/" target="_blank" title="Auburn University"><img src="~/images/auhead.jpg" /></a>
-								</div>
-								<div>
-									<a href="http://www.ceres.net/" target="_blank" title="Ceres, Inc"><img src="~/images/cereshead.jpg" /></a>
-								</div>
-								<div>
-									<a href="http://www.arborgen.com//" target="_blank" title="Arborgen, Inc"><img src="~/images/arborgenhead.png" /></a>
-								</div>
-								<div>
-									<a href="http://www.ncsu.edu/" target="_blank" title="NCSU"><img src="~/images/ncsuhead.jpg" /></a>
-								</div>
-								<div>
-									<a href="http://www.utk.edu/" target="_blank" title="University of Tennessee"><img src="~/images/uthead.jpg" /></a>
-								</div>
-							</div>
-
-
+	<div class="scroll-top page-scroll visible-xs visible sm">
+		<a class="btn btn-primary" href="#page-top">
+			<i class="glyphicon-circle-arrow-up"></i>
+		</a>
+	</div>
+	<footer id="" class="footer ">
+		<div class="navbar navbar-fixed-bottom navbar-collapse collapse" id="footer">
+			<div class="container">
+				<div class="img-responsive">
+					<div class="row img-responsive" id="logoContainer">
+						<div>
+							<a href="http://www.nifa.usda.gov" target="_blank" title="University of Georgia"> <img src="~/images/usdahead.jpg" /></a>
 						</div>
-
+						<div>
+							<a href="http://www.uga.edu/" target="_blank" title="University of Georgia"><img src="~/images/ugahead.jpg" /></a>
+						</div>
+						<div>
+							<a href="http://www.auburn.edu/" target="_blank" title="Auburn University"><img src="~/images/auhead.jpg" /></a>
+						</div>
+						<div>
+							<a href="http://www.ceres.net/" target="_blank" title="Ceres, Inc"><img src="~/images/cereshead.jpg" /></a>
+						</div>
+						<div>
+							<a href="http://www.arborgen.com//" target="_blank" title="Arborgen, Inc"><img src="~/images/arborgenhead.png" /></a>
+						</div>
+						<div>
+							<a href="http://www.ncsu.edu/" target="_blank" title="NCSU"><img src="~/images/ncsuhead.jpg" /></a>
+						</div>
+						<div>
+							<a href="http://www.utk.edu/" target="_blank" title="University of Tennessee"><img src="~/images/uthead.jpg" /></a>
+						</div>
 					</div>
-
-
 				</div>
-			</footer>
-    <script src="~/Scripts/jquery-2.1.1.min.js"></script>
-    <script src="~/Scripts/jquery.validate.js"></script>
-    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
-    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
-    <script src="~/Scripts/jquery.validate-vsdoc.js"></script>
-    <script src="~/Scripts/bootstrap.js"></script>
-    <script src="~/Scripts/response.js"></script>
-    <script src="~/Scripts/biofuelSouth.js"></script>
-    @*<script type="text/javascript" src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.0.3.min.js"></script>*@
-    <script type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=true"></script>
-    @*<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>*@
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ui-map/3.0-rc1/jquery.ui.map.js"></script>
-    @*<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>*@
-    @RenderSection("scripts", false)
-    @RenderSection("MyScripts", false)
+			</div>
+		</div>
+	</footer>
+
+
+	@*            Bundle and remove *@
+	<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+	<script src="~/Scripts/jquery.validate-vsdoc.js"></script>
+	<script src="http://maps.google.com/maps/api/js?key=AIzaSyCN_yKKJIZ0pOhUHYm9OmP_uwI6arcwUPc" type="text/javascript"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ui-map/3.0-rc1/jquery.ui.map.js"></script>
+
+	@RenderSection( "scripts", false )
+	@RenderSection( "MyScripts", false )
 </body>
 </html>
