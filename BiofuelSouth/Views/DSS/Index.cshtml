@@ -140,14 +140,6 @@
         $(document).ready(function () {
 
 
-            //State and county selection logic:
-            /*
-
-            If state selected is null, then disable the country.
-            */
-
-            //  $("#county").attr("disabled", true);
-
             if ($('#state').val() != "") {
                 $("#county").attr("disabled", false);
                 $('#county').attr('selectedIndex', 0);
@@ -192,7 +184,7 @@
 
             }
             $.ajax({
-                url: "/data/CountiesForState",
+                url: "../data/CountiesForState",
                 cache: false,
                 type: "GET",
                 data: { state: state },

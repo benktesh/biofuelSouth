@@ -175,7 +175,7 @@
 		function populateCounty() {
 			var ddlCounty = $("#county");
 			$.ajax({
-				url: "/data/CountiesForState",
+				url: "../data/CountiesForState",
 				cache: false,
 				type: "GET",
 				data: { state: $("#state").val() },

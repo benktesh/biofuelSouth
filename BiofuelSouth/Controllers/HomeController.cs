@@ -6,6 +6,7 @@ using System.Net.Mime;
 using System.Reflection;
 using System.Text;
 using System.Web.Mvc;
+using System.Web.Routing;
 using BiofuelSouth.Enum;
 using BiofuelSouth.Models;
 using BiofuelSouth.Models.Entity;
@@ -86,6 +87,7 @@ namespace BiofuelSouth.Controllers
         }
 
         
+		[Route("Cropfacts/{cropType}")]
 		public ActionResult GetFact( CropType cropType )
 		{
 			var model = DataService.GetFactSheet( cropType );

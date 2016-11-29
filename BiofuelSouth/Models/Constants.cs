@@ -724,25 +724,25 @@ WY	Wyoming	Cheyenne	July 10, 1890
 				case CropType.Switchgrass:
 					return new Tuple<string,string, string>("http://www.ars.usda.gov/is/graphics/photos/apr07/d750-1.jpg", 
                         "Bioenergy crop switchgrass (Photo by: Peggy Greb).",
-                        "~/images/switchgrass_pdf.jpg");
+                        "../images/switchgrass_pdf.jpg");
 				case CropType.Miscanthus:
 					return new Tuple<string, string, string>( "http://www.ethanolproducer.com/uploads/posts/web/2014/10/UofIMiscanthus_14147108585304.jpg", 
                         "Bioenergy crop Miscanthus (Photo by: Brian Stauffer)" ,
-                        "~/images/UofIMiscanthus_14147108585304.jpg");
+                        "../images/UofIMiscanthus_14147108585304.jpg");
 
                 case CropType.Poplar:
 					return new Tuple<string, string, string>( "http://learn.forestbioenergy.net/learning-modules/module-2/unit-3/large%20cottonwood.jpg",
 						"Poplar tree plantation (Photo by: Warren Gretz)",
-                        "~/images/largecottonwood.jpg");
+                        "../images/largecottonwood.jpg");
 				case CropType.Willow:
 					return new Tuple<string, string, string>( "https://articles.extension.org//sites/default/files/Coppice%20Regrowth%20at%20Belleville%20299%20x%20200.jpg", 
                         "Willow biomass crops, is about a month old above ground on a four year old root system. " +
                         "(Photo By:  T. Volk).",
-                        "~/images/CoppiceRegrowthAt_Belleville299x200.jpg");  
+                        "../images/CoppiceRegrowthAt_Belleville299x200.jpg");  
 				case CropType.Pine:
 					return new Tuple<string, string, string>( "http://www.srs.fs.usda.gov/compass/wp-content/uploads/2013/09/09.18.-Planted-lob-35yrs.jpg", 
                         "Planted loblolly pine stand (Photo by: David Stephens)" ,
-                        "~/images/Planted-lob-pine-35yrs.jpg");
+                        "../images/Planted-lob-pine-35yrs.jpg");
 
 				default:
                     return
